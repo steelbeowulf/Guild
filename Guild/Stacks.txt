@@ -1,0 +1,23 @@
+-INIMIGO  - dano tank -aoe -dano aoe0
+-DPS - dano - desvio
+-TANK -atencao -atencao
+-INIMIGO - AOE -dano aoe 0
+-DPS - -desvia - desvia
+-HEALER - cura -desvia 
+
+
+
+
+
+inimigo-dano -aoe -dano aoe 0
+inimigo-aoe -dano aoe0
+
+
+aliados
+tank dano - dano
+dps desvia -desvia
+dps desvia -desvia
+healer dano -desvia
+
+
+

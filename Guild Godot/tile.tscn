@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tileset.png" type="Texture" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Lane" type="Sprite" parent="."]
+position = Vector2( 299.823, 271.026 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 304, 16, 16 )
+
+[node name="Lane17" type="Sprite" parent="."]
+position = Vector2( 221.609, 251.473 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 288, 16, 16 )
+
+[node name="Lane18" type="Sprite" parent="."]
+position = Vector2( 284.459, 224.237 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 288, 16, 16 )
+
+[node name="Lane2" type="Sprite" parent="."]
+position = Vector2( 476.502, 230.522 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 304, 16, 16 )
+
+[node name="Lane3" type="Sprite" parent="."]
+position = Vector2( 335.438, 215.159 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 336, 16, 16 )
+
+[node name="Lane4" type="Sprite" parent="."]
+position = Vector2( 588.236, 234.014 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 336, 16, 16 )
+
+[node name="Lane5" type="Sprite" parent="."]
+position = Vector2( 168.535, 218.651 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 352, 16, 16 )
+
+[node name="Lane6" type="Sprite" parent="."]
+position = Vector2( 275.381, 150.912 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 352, 16, 16 )
+
+[node name="Lane7" type="Sprite" parent="."]
+position = Vector2( 399.685, 174.655 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 400, 16, 16 )
+
+[node name="Lane8" type="Sprite" parent="."]
+position = Vector2( 489.072, 171.862 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 400, 16, 16 )
+
+[node name="Lane9" type="Sprite" parent="."]
+position = Vector2( 612.678, 171.862 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 416, 16, 16 )
+
+[node name="Lane10" type="Sprite" parent="."]
+position = Vector2( 535.861, 134.152 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 416, 16, 16 )
+
+[node name="Lane11" type="Sprite" parent="."]
+position = Vector2( 634.326, 130.66 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 432, 16, 16 )
+
+[node name="Lane12" type="Sprite" parent="."]
+position = Vector2( 536.559, 187.924 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 432, 16, 16 )
+
+[node name="Lane13" type="Sprite" parent="."]
+position = Vector2( 545.637, 307.34 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 464, 16, 16 )
+
+[node name="Lane14" type="Sprite" parent="."]
+position = Vector2( 429.713, 287.786 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 464, 16, 16 )
+
+[node name="Lane15" type="Sprite" parent="."]
+position = Vector2( 373.846, 287.088 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 480, 16, 16 )
+
+[node name="Lane16" type="Sprite" parent="."]
+position = Vector2( 461.837, 333.178 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 480, 16, 16 )
+

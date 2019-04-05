@@ -1,0 +1,48 @@
+Ideas for Guild:
+
+MMO party comp style: tank, 2 dps and a healer. not locked but optimal.
+
+Battle Lanes: -Front row: Does extra aggro and regular damage
+	      -Mid row: Regular damage and less aggro generation when has someone on front and back rows(In the case of a pincer attack- still not sure if will be done)
+	      -Back row: Generates way less aggro when have party members on the mid and front row. Works like a mid lane when only has people on 2 rows
+
+AoE moves can target one or more lanes. party members can switch lanes but that consume a turn
+
+Class system: multiple classes avaliable and more unlockable. Maxing a class gives extra stats and skills to classes on the same role.
+
+Especific dungeons that are not part of the main story can be run multiple times for drops and resources for the guild
+
+Permadeath is an option at the start of the game and how the guild works will be changed slightly to adjust
+
+The guild is a hub where you can interact with recruited party members inside and outside the story. You can buy itens, equipment etc.
+Needs some resources to be kept running at an optimal level and to allow recruited members to stay on it.
+Trainers can also be recuited to teach members new skills and even new classes.
+
+Third of forth boss idea: Scramble formation(An non damage attack that scramble the party lane formation, in order to test if the player
+already know how the lane system works)
+Probably will be done on a behemoth-like monster for a fear attack
+
+If permadeath is turned off, defeat will make your party members that went on the misson stay on the medbay for a set amount of time. Getting a single party member K.O.ed on a fight
+doesnt take them to the medbay immediatly. using items to revive them makes them continue on said dungeon but the time needed to stay on the medbay stays the same
+
+Fleeing from dungeons is avaliable but has a chance of failing and it has an negative impact on the guild status(Other penalties are still being considered)
+
+Multiple defeats can make party members resign from the guild
+
+Andre's suggestion: Talent tree to allow skill customization, so char with the smae role wont end up being the same;
+		    Some classes have bonuses for staying on a specific lane (Some ranged dps gets extra bonus for staying on a back row etc.)
+
+Recruitment ideas: -Guild members not on the party can enter dungeons for leveling up and get resources automatically, so the player wouldn't need to go back on low lv dgs to grind
+		   	-Have an minimal level for automatic dungeon crawling for each dungeon. Having a greater level generate more resources
+		   -Members can be unlocked via story; Via the guild when it gets notoriety, new members can enlist to it at random
+		   -Have a cap on how many members you can have at an time on the guild, if permadeath is turned off, and the option to resign a member, so it doesnt get too overcumbered
+
+Weapon system: Classes can wield multiple weapons...(Tied up on the skill tree)
+
+Reminders for later: skill training and some more use to lanes(skills tied to lanes);
+		     Evasion tank - Capoeira(?)
+		     Start with the combat system- it will be the focus of the game(just the barebones of it for starters)
+		     Idea for Monk class skill tree:
+			-Patience tree: low speed, enough to be the last to act on a turn, but with very powerful style moves, but very low utility
+			-(?) tree: Mid speed and mid damage and additional utility skills on battle (Reduce armor, more crit etc.)
+			-Rushdown tree: high speed and low-to-mid damage, with combo skills and a chance to have double turns
