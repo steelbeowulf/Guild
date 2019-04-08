@@ -1,16 +1,9 @@
-extends Node
-
-var nome
-var stats
-var buffs
-var alive
-var health
-var position
-var classe
+extends "res://Entity.gd"
 
 func _init(valores, vida, pos, identificacao):
-	stats = valores
-	alive = true
-	health = vida
-	position = pos
-	nome = identificacao
+	self.stats = valores
+	self.alive = true
+	self.health = vida
+	self.position = pos
+	self.nome = identificacao
+	self.multiplier = 1

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://S.png" type="Texture" id=2]
 [ext_resource path="res://e.png" type="Texture" id=3]
 [ext_resource path="res://h.png" type="Texture" id=4]
 [ext_resource path="res://double gun.jpg" type="Texture" id=5]
+[ext_resource path="res://ActionMenu.gd" type="Script" id=6]
+[ext_resource path="res://ActionButton.tscn" type="PackedScene" id=7]
 
 [node name="Node" type="Node"]
 
@@ -80,56 +82,14 @@ scale = Vector2( 0.287898, 0.412853 )
 texture = ExtResource( 5 )
 
 [node name="Menu" type="VBoxContainer" parent="Battle"]
-visible = false
 margin_left = 96.0336
 margin_top = 414.811
 margin_right = 278.034
 margin_bottom = 530.811
+script = ExtResource( 6 )
 
-[node name="Attack" type="Button" parent="Battle/Menu"]
-margin_right = 182.0
-margin_bottom = 20.0
+[node name="Attack" parent="Battle/Menu" instance=ExtResource( 7 )]
 text = "Attack"
-
-[node name="Targets" type="MenuButton" parent="Battle/Menu/Attack"]
-visible = false
-margin_left = 180.805
-margin_top = -0.70752
-margin_right = 369.805
-margin_bottom = 19.2925
-
-[node name="Enemy0" type="Button" parent="Battle/Menu/Attack/Targets"]
-visible = false
-margin_right = 194.0
-margin_bottom = 20.0
-
-[node name="Enemy1" type="Button" parent="Battle/Menu/Attack/Targets"]
-visible = false
-margin_left = 0.39566
-margin_top = 24.8379
-margin_right = 194.396
-margin_bottom = 44.8379
-
-[node name="Enemy2" type="Button" parent="Battle/Menu/Attack/Targets"]
-visible = false
-margin_left = 0.266876
-margin_top = 49.0051
-margin_right = 194.267
-margin_bottom = 69.0051
-
-[node name="Enemy3" type="Button" parent="Battle/Menu/Attack/Targets"]
-visible = false
-margin_left = 1.24222
-margin_top = 72.7942
-margin_right = 195.242
-margin_bottom = 92.7942
-
-[node name="Enemy4" type="Button" parent="Battle/Menu/Attack/Targets"]
-visible = false
-margin_left = 1.24222
-margin_top = 97.0304
-margin_right = 195.242
-margin_bottom = 117.03
 
 [node name="Lane" type="Button" parent="Battle/Menu"]
 margin_top = 24.0
@@ -137,23 +97,22 @@ margin_right = 182.0
 margin_bottom = 44.0
 text = "Lane"
 
-[node name="Button2" type="Button" parent="Battle/Menu"]
+[node name="Skill" type="Button" parent="Battle/Menu"]
 margin_top = 48.0
 margin_right = 182.0
 margin_bottom = 68.0
 text = "Skill"
 
-[node name="Button3" type="Button" parent="Battle/Menu"]
+[node name="Itens" type="Button" parent="Battle/Menu"]
 margin_top = 72.0
 margin_right = 182.0
 margin_bottom = 92.0
 text = "Itens"
 
-[node name="Button4" type="Button" parent="Battle/Menu"]
+[node name="Run" type="Button" parent="Battle/Menu"]
 margin_top = 96.0
 margin_right = 182.0
 margin_bottom = 116.0
 text = "Run"
 
-[connection signal="pressed" from="Battle/Menu/Attack" to="Battle" method="_on_Attack_pressed"]
 [connection signal="pressed" from="Battle/Menu/Lane" to="Battle" method="_on_Lane_pressed"]
