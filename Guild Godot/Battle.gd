@@ -1,4 +1,5 @@
 extends "res://stats.gd"
+
 var cenaplayer = preload("res://Player.gd")
 var cenaenemy = preload("res://Enemy.gd")
 var Players
@@ -14,13 +15,14 @@ signal round_finished
 
 func InitBattle(Players, Enemies, Normal, Boss, Fboss):
 	var lane
+	var player = LOADER.players_from_file("res://Test.json")
 	for i in range(Players.size()):
 		lane = Players[i].position
 		get_node("P"+str(i)+str(lane)).show()
 	for i in range(Enemies.size()):
 		lane = Enemies[i].position
 		get_node("E"+str(i)+str(lane)).show()
-		
+
 func _ready():
 	over = false
 	Enemies = []
