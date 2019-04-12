@@ -1,46 +1,88 @@
-extends Node2D
+extends "res://stats.gd"
+
 var cenaplayer = preload("res://Player.gd")
 var cenaenemy = preload("res://Enemy.gd")
 var Players
 var Enemies
+var over
+var current_entity
+var current_action
+var current_target
+var dead_enemies = 0
+var dead_allies = 0
+
+signal round_finished
+
 func InitBattle(Players, Enemies, Normal, Boss, Fboss):
 	var lane
+	var player = LOADER.players_from_file("res://Test.json")
 	for i in range(Players.size()):
 		lane = Players[i].position
 		get_node("P"+str(i)+str(lane)).show()
 	for i in range(Enemies.size()):
 		lane = Enemies[i].position
 		get_node("E"+str(i)+str(lane)).show()
-		
+
 func _ready():
+	over = false
 	Enemies = []
 	Players = []
-	Enemies.append(cenaenemy.new([10,10,10,10,9,10], 10, 0, "hold up partner"))
-	Enemies.append(cenaenemy.new([10,10,10,10,9,10], 10, 0, "DELET THIS"))
+	Enemies.append(cenaenemy.new([10,10,5,10,9,10], 25, 0, "hold up partner"))
 	Players.append(cenaplayer.new([10,10,10,10,11,10], 100, 0, "beefy boi"))
 	Players.append(cenaplayer.new([10,10,10,10,22,10], 100, 0, "stabby boi"))
 	Players.append(cenaplayer.new([10,10,10,10,5,10], 100, 0, "arrow boi"))
 	Players.append(cenaplayer.new([10,10,10,10,0,10], 100, 0, "holy boi"))
 	InitBattle(Players, Enemies,0,0,0)
-	rounds()
-	
+	while (not over):
+		rounds()
+		yield(self, "round_finished")
+	print("FIM DE JOGO")
+
 func rounds():
 	var turnorder
-	var current
 	turnorder = []
 	turnorder = Players + Enemies
 	turnorder.sort_custom(self, "stackagility")
 	for i in range(turnorder.size()):
-		current = turnorder[i]
-		if current.classe == "boss":
+		current_entity = turnorder[i]
+		if current_entity.get_health() == 0:
+			continue
+		elif current_entity.classe == "boss":
 			print("ooga booga")
-			get_node("Menu").hide()
+			#current.AI()
 		else:
-			print(current.nome, "'s turn!")
 			get_node("Menu").show()
+			yield($Menu, "turn_finished")
+			execute_action(current_action, current_target)
+			if check_game_over() or check_win_battle():
+				over = true
+				break
+	emit_signal("round_finished")
+
+func check_game_over():
+	return dead_enemies == Enemies.size()
+
+func check_win_battle():
+	return dead_allies == Players.size()
 
 func stackagility(a,b):
-	return a.stats[4] > b.stats[4]
+	return a.get_agi() > b.get_agi()
+
+func execute_action(action, target):
+	if action == "Attack":
+		var atk = current_entity.get_atk()
+		var alvo = Enemies[int(target)]
+		print(current_entity.get_name()+" EXECUTOU A ACTION "+action+" NO TARGET "+alvo.get_name())
+		alvo.take_damage(PHYSIC, atk)
+		if alvo.get_health() <= 0:
+			dead_enemies += 1
+			get_node("E"+target+"0").hide()
+
+func set_current_action(action):
+	current_action = action
+	
+func set_current_target(target):
+	current_target = target
 
 func _on_Attack_pressed():
 	get_node("Menu/Attack/Targets").show()
@@ -49,63 +91,5 @@ func _on_Attack_pressed():
 		get_node("Menu/Attack/Targets/Enemy"+str(i)).set_text(Enemies[i].nome)
 
 
-
 func _on_Lane_pressed():
 	pass # Replace with function body.
-
-
-func _on_Enemy0_pressed():
-	get_node("Menu/Attack/Targets").hide()
-	print("ouch!")
-	Enemies[0].health = Enemies[0].health - 1
-	print(Enemies[0].health)
-	if Enemies[0].health < 1:
-		get_node("E00").hide()
-		Enemies.remove(0)
-
-
-func _on_Enemy1_pressed():
-	get_node("Menu/Attack/Targets").hide()
-	print("ouch!")
-	Enemies[1].health = Enemies[1].health - 1
-	print(Enemies[1].health)
-	if Enemies[1].health < 1:
-		get_node("E10").hide()
-		Enemies.remove(1)
-
-
-func _on_Enemy2_pressed():
-	get_node("Menu/Attack/Targets").hide()
-	print("ouch!")
-	Enemies[2].health = Enemies[2].health - 1
-	print(Enemies[2].health)
-	if Enemies[2].health < 1:
-		get_node("E20").hide()
-		Enemies.remove(2)
-
-
-func _on_Enemy3_pressed():
-	get_node("Menu/Attack/Targets").hide()
-	print("ouch!")
-	Enemies[3].health = Enemies[3].health - 1
-	print(Enemies[3].health)
-	if Enemies[3].health < 1:
-		get_node("E01").hide()
-		Enemies.remove(3)
-
-
-func _on_Enemy4_pressed():
-	get_node("Menu/Attack/Targets").hide()
-	print("ouch!")
-	Enemies[4].health = Enemies[4].health - 1
-	print(Enemies[4].health)
-	if Enemies[4].health < 1:
-		get_node("E02").hide()
-		Enemies.remove(4)
-
-func _process(delta):
-	for i in range(Enemies.size()):
-		get_node("Menu/Attack/Targets/Enemy"+str(i)).hide()
-	for i in range(Enemies.size()):
-		get_node("Menu/Attack/Targets/Enemy"+str(i)).show()
-		get_node("Menu/Attack/Targets/Enemy"+str(i)).set_text(Enemies[i].nome)
