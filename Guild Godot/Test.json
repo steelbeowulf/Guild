@@ -1,0 +1,20 @@
+[
+	{"ATK":10, 
+	"ATKM":10, 
+	"DEF":10, 
+	"DEFM":10, 
+	"AGI":10, 
+	"LCK":10,
+	"HEALTH":642,
+	"LANE":2,
+	"NAME":"Papu"},
+	{"ATK":100, 
+	"ATKM":35, 
+	"DEF":20, 
+	"DEFM":15, 
+	"AGI":12, 
+	"LCK":16,
+	"HEALTH":650,
+	"LANE":3,
+	"NAME":"Kweh"}
+]
