@@ -8,20 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "LOADER",
-"language": "GDScript",
-"path": "res://loader.gd"
-}, {
-"base": "Node",
-"class": "STATS",
-"language": "GDScript",
-"path": "res://stats.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"LOADER": "",
-"STATS": ""
+
 }
 
 [application]
@@ -29,11 +18,6 @@ _global_script_class_icons={
 config/name="Guild"
 run/main_scene="res://battle.tscn"
 config/icon="res://icon.png"
-
-[autoload]
-
-STATS="*res://stats.gd"
-LOADER="*res://loader.gd"
 
 [rendering]
 

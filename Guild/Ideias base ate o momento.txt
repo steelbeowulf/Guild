@@ -46,3 +46,5 @@ Reminders for later: skill training and some more use to lanes(skills tied to la
 			-Patience tree: low speed, enough to be the last to act on a turn, but with very powerful style moves, but very low utility
 			-(?) tree: Mid speed and mid damage and additional utility skills on battle (Reduce armor, more crit etc.)
 			-Rushdown tree: high speed and low-to-mid damage, with combo skills and a chance to have double turns
+		     AoE for players, being able to hit multiple enemies, sometimes based or not on their positioning(a wind move would hit horizontally, and an fire explosion would hit anyone despite of positioning etc.)
+		     Attack and skill menu: enemies are always show on the 3x3 grid, even if only one or two enemies are shown
