@@ -1,9 +1,11 @@
 extends "res://Entity.gd"
 
-func _init(valores, vida, pos, identificacao):
+func _init(valores,  pos, identificacao, habilidades):
 	self.stats = valores
 	self.alive = true
-	self.health = vida
 	self.position = pos
 	self.nome = identificacao
-	self.multiplier = 1
+	self.skills = habilidades
+
+func get_skills():
+	return self.skills

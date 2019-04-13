@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Battle.gd" type="Script" id=1]
 [ext_resource path="res://S.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://double gun.jpg" type="Texture" id=5]
 [ext_resource path="res://ActionMenu.gd" type="Script" id=6]
 [ext_resource path="res://ActionButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://BigActionButton.tscn" type="PackedScene" id=8]
 
 [node name="Node" type="Node"]
 
@@ -75,44 +76,50 @@ position = Vector2( 525.826, 244.523 )
 texture = ExtResource( 4 )
 
 [node name="E00" type="Sprite" parent="Battle"]
-visible = false
 position = Vector2( 703.273, 262.085 )
 rotation = -0.0055467
 scale = Vector2( 0.287898, 0.412853 )
 texture = ExtResource( 5 )
 
+[node name="E10" type="Sprite" parent="Battle"]
+position = Vector2( 700.337, 373.665 )
+rotation = -0.0055467
+scale = Vector2( 0.287898, 0.412853 )
+texture = ExtResource( 5 )
+
 [node name="Menu" type="VBoxContainer" parent="Battle"]
-margin_left = 96.0336
-margin_top = 414.811
-margin_right = 278.034
-margin_bottom = 530.811
+margin_left = 9.51617
+margin_top = 347.968
+margin_right = 305.516
+margin_bottom = 586.968
 script = ExtResource( 6 )
 
 [node name="Attack" parent="Battle/Menu" instance=ExtResource( 7 )]
 text = "Attack"
 
-[node name="Lane" type="Button" parent="Battle/Menu"]
-margin_top = 24.0
-margin_right = 182.0
-margin_bottom = 44.0
+[node name="Lane" parent="Battle/Menu" instance=ExtResource( 7 )]
+margin_top = 48.0
+margin_bottom = 92.0
 text = "Lane"
 
-[node name="Skill" type="Button" parent="Battle/Menu"]
-margin_top = 48.0
-margin_right = 182.0
-margin_bottom = 68.0
-text = "Skill"
+[node name="Skills" parent="Battle/Menu" instance=ExtResource( 8 )]
+margin_top = 96.0
+margin_bottom = 140.0
+text = "Skills"
 
-[node name="Itens" type="Button" parent="Battle/Menu"]
-margin_top = 72.0
-margin_right = 182.0
-margin_bottom = 92.0
-text = "Itens"
+[node name="Itens" parent="Battle/Menu" instance=ExtResource( 8 )]
+margin_top = 144.0
+margin_bottom = 188.0
+text = "Item"
 
 [node name="Run" type="Button" parent="Battle/Menu"]
-margin_top = 96.0
-margin_right = 182.0
-margin_bottom = 116.0
+margin_top = 192.0
+margin_right = 296.0
+margin_bottom = 239.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Run"
 
-[connection signal="pressed" from="Battle/Menu/Lane" to="Battle" method="_on_Lane_pressed"]
+[connection signal="button_down" from="Battle/Menu/Lane" to="Battle" method="_on_Lane_button_down"]
+[connection signal="button_down" from="Battle/Menu/Skills" to="Battle" method="_on_Skills_button_down"]
+[connection signal="button_down" from="Battle/Menu/Itens" to="Battle" method="_on_Itens_button_down"]

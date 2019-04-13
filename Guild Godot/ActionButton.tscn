@@ -4,51 +4,54 @@
 [ext_resource path="res://TargetButton.tscn" type="PackedScene" id=2]
 
 [node name="Action" type="Button"]
-margin_right = 182.0
-margin_bottom = 20.0
+margin_right = 296.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Action"
 script = ExtResource( 1 )
 
-[node name="Targets" type="MenuButton" parent="."]
+[node name="Targets" type="VBoxContainer" parent="."]
 visible = false
-margin_left = 180.805
-margin_top = -0.70752
-margin_right = 369.805
-margin_bottom = 19.2925
+margin_left = 300.0
+margin_top = 4.0
+margin_right = 550.0
+margin_bottom = 594.0
 
-[node name="Target0" parent="Targets" instance=ExtResource( 2 )]
-margin_left = 3.74615
-margin_top = 1.02167
-margin_right = 197.746
-margin_bottom = 21.0217
+[node name="0" parent="Targets" instance=ExtResource( 2 )]
+visible = false
+margin_right = 250.0
+size_flags_horizontal = 3
 text = "0"
 
-[node name="Target1" parent="Targets" instance=ExtResource( 2 )]
-margin_left = 5.12036
-margin_top = 24.0065
-margin_right = 199.12
-margin_bottom = 44.0065
+[node name="1" parent="Targets" instance=ExtResource( 2 )]
+visible = false
+margin_right = 250.0
+size_flags_horizontal = 3
 text = "1"
 
-[node name="Target2" parent="Targets" instance=ExtResource( 2 )]
-margin_left = 5.80148
-margin_top = 48.1864
-margin_right = 199.801
-margin_bottom = 68.1864
+[node name="2" parent="Targets" instance=ExtResource( 2 )]
+visible = false
+margin_top = 24.0
+margin_right = 250.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
 text = "2"
 
-[node name="Target3" parent="Targets" instance=ExtResource( 2 )]
-margin_left = 5.80148
-margin_top = 72.1359
-margin_right = 199.801
-margin_bottom = 92.1359
+[node name="3" parent="Targets" instance=ExtResource( 2 )]
+visible = false
+margin_top = 24.0
+margin_right = 250.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
 text = "3"
 
-[node name="Target4" parent="Targets" instance=ExtResource( 2 )]
-margin_left = 7.06198
-margin_top = 96.0853
-margin_right = 201.062
-margin_bottom = 116.085
+[node name="4" parent="Targets" instance=ExtResource( 2 )]
+visible = false
+margin_top = 48.0
+margin_right = 250.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
 text = "4"
 
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]
