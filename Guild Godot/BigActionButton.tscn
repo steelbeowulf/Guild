@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://BigActionButton.gd" type="Script" id=1]
+[ext_resource path="res://TargetButton.tscn" type="PackedScene" id=2]
+
+[node name="Action" type="Button"]
+margin_right = 296.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Action"
+script = ExtResource( 1 )
+
+[node name="Targets" type="Node2D" parent="."]
+z_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Targets"]
+light_mask = 2
+margin_right = 1022.0
+margin_bottom = 240.0
+
+[node name="Itens" type="VBoxContainer" parent="Targets/HBoxContainer"]
+margin_right = 338.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+
+[node name="0" parent="Targets/HBoxContainer/Itens" instance=ExtResource( 2 )]
+visible = false
+margin_right = 338.0
+margin_bottom = 77.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0"
+
+[node name="1" parent="Targets/HBoxContainer/Itens" instance=ExtResource( 2 )]
+visible = false
+margin_top = 81.0
+margin_right = 338.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "1"
+
+[node name="2" parent="Targets/HBoxContainer/Itens" instance=ExtResource( 2 )]
+visible = false
+margin_top = 162.0
+margin_right = 338.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "2"
+
+[node name="3" parent="Targets/HBoxContainer/Itens" instance=ExtResource( 2 )]
+visible = false
+margin_top = 144.0
+margin_right = 338.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3"
+
+[node name="4" parent="Targets/HBoxContainer/Itens" instance=ExtResource( 2 )]
+visible = false
+margin_top = 192.0
+margin_right = 338.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "4"
+
+[node name="Players" type="VBoxContainer" parent="Targets/HBoxContainer"]
+margin_left = 342.0
+margin_right = 680.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+
+[node name="1" parent="Targets/HBoxContainer/Players" instance=ExtResource( 2 )]
+visible = false
+margin_top = 48.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "1"
+
+[node name="2" parent="Targets/HBoxContainer/Players" instance=ExtResource( 2 )]
+visible = false
+margin_top = 96.0
+margin_right = 338.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "2"
+
+[node name="3" parent="Targets/HBoxContainer/Players" instance=ExtResource( 2 )]
+visible = false
+margin_top = 144.0
+margin_right = 338.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3"
+
+[node name="4" parent="Targets/HBoxContainer/Players" instance=ExtResource( 2 )]
+visible = false
+margin_top = 192.0
+margin_right = 338.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "4"
+
+[node name="Enemies" type="VBoxContainer" parent="Targets/HBoxContainer"]
+margin_left = 684.0
+margin_right = 1022.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+
+[node name="-1" parent="Targets/HBoxContainer/Enemies" instance=ExtResource( 2 )]
+visible = false
+margin_top = 48.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-1"
+
+[node name="-2" parent="Targets/HBoxContainer/Enemies" instance=ExtResource( 2 )]
+visible = false
+margin_top = 96.0
+margin_right = 338.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-2"
+
+[node name="-3" parent="Targets/HBoxContainer/Enemies" instance=ExtResource( 2 )]
+visible = false
+margin_top = 144.0
+margin_right = 338.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-3"
+
+[node name="-4" parent="Targets/HBoxContainer/Enemies" instance=ExtResource( 2 )]
+visible = false
+margin_top = 192.0
+margin_right = 338.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-4"
+
+[node name="-5" parent="Targets/HBoxContainer/Enemies" instance=ExtResource( 2 )]
+visible = false
+margin_top = 192.0
+margin_right = 338.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-5"
+
+[connection signal="pressed" from="." to="." method="_on_Action_pressed"]

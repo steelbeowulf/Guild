@@ -7,7 +7,7 @@ var alive
 var health
 var position
 var classe
-var multiplier
+var skills
 
 #func _init(valores, vida, pos, identificacao):
 #	stats = valores
@@ -20,19 +20,34 @@ var multiplier
 func take_damage(type, damage):
 	print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
 	if type == PHYSIC:
-		self.health -= multiplier * (damage - stats[DEF])
+		self.stats[HP] -= damage - stats[DEF]
 	elif type == MAGIC:
-		self.health -= multiplier * (damage - stats[DEFM])
-	print(nome+ " AGORA TEM "+str(health)+" DE VIDA!")
+		self.stats[HP] -= damage - stats[DEFM]
+	print(nome+ " AGORA TEM "+str(stats[HP])+" DE VIDA!")
 
-func set_multiplier(buff):
-	multiplier *= buff
+func set_stats(stat, value):
+	self.stats[stat] = value
+
+func get_skills():
+	return self.skills
 
 func get_name():
 	return self.nome
 
+func get_pos():
+	return self.position
+	
+func set_pos(pos):
+	self.position = pos
+
+func get_stats(stat):
+	return self.stats[stat]
+
 func get_health():
-	return self.health
+	return self.stats[HP]
+
+func get_mp():
+	return self.stats[MP]
 
 func get_atk():
 	return self.stats[ATK]
