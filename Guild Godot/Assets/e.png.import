@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/double gun.jpg-e83ddd9d36bfc64ab823d7014d66a0e1.stex"
+path="res://.import/e.png-ab4d7e4016ee88df67b90094d51a5d99.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://double gun.jpg"
-dest_files=[ "res://.import/double gun.jpg-e83ddd9d36bfc64ab823d7014d66a0e1.stex" ]
+source_file="res://Assets/e.png"
+dest_files=[ "res://.import/e.png-ab4d7e4016ee88df67b90094d51a5d99.stex" ]
 
 [params]
 

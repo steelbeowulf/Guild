@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "LOADER",
 "language": "GDScript",
-"path": "res://loader.gd"
+"path": "res://Classes/Loader.gd"
 }, {
 "base": "Node",
 "class": "STATS",
 "language": "GDScript",
-"path": "res://stats.gd"
+"path": "res://Classes/Stats.gd"
 } ]
 _global_script_class_icons={
 "LOADER": "",
@@ -27,13 +27,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Guild"
-run/main_scene="res://battle.tscn"
+run/main_scene="res://Battle/Battle.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-STATS="*res://stats.gd"
-LOADER="*res://loader.gd"
+STATS="*res://Classes/Stats.gd"
+LOADER="*res://Classes/Loader.gd"
 
 [rendering]
 

@@ -1,0 +1,10 @@
+[
+	{"NAME":"POTION",
+	"QUANT":10,
+	"EFFECTS":[{"STAT":"HP", "VALUE":10, "TYPE":"", "TURNS":1}],
+	"STATUS":[]},
+	{"NAME":"ETHER",
+	"QUANT":10,
+	"EFFECTS":[{"STAT":"MP", "VALUE":10, "TYPE":"", "TURNS":1}],
+	"STATUS":[]},
+]

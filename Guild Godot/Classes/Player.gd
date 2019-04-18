@@ -1,4 +1,4 @@
-extends "res://Entity.gd"
+extends "Entity.gd"
 
 func _init(valores,  pos, identificacao, habilidades):
 	self.stats = valores

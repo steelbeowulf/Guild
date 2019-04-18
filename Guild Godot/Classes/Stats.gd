@@ -1,4 +1,4 @@
-extends "Apply.gd"
+extends "res://Battle/Apply.gd"
 class_name STATS
 
 # Stats

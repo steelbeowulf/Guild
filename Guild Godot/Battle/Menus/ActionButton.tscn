@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Attack.gd" type="Script" id=1]
-[ext_resource path="res://TargetButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Battle/Menus/ActionButton.gd" type="Script" id=1]
+[ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=2]
+
+
 
 [node name="Action" type="Button"]
 margin_right = 296.0

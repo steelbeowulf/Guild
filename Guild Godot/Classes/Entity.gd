@@ -1,4 +1,4 @@
-extends "res://stats.gd"
+extends "Stats.gd"
 
 var nome
 var stats
