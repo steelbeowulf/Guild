@@ -1,8 +1,9 @@
-extends "res://stats.gd"
+extends "res://Classes/Stats.gd"
 
-var cenaplayer = preload("res://Player.gd")
-var cenaenemy = preload("res://Enemy.gd")
-var cenaitem = preload("res://Itens.gd")
+var cenaplayer = preload("res://Classes/Player.gd")
+var cenaenemy = preload("res://Classes/Enemy.gd")
+var cenaitem = preload("res://Classes/Itens.gd")
+
 var Players
 var Enemies
 var Inventory
@@ -17,7 +18,11 @@ signal round_finished
 
 func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 	var lane
-	#var player = LOADER.players_from_file("res://Test.json")
+	#var player = LOADER.players_from_file("res://Testes/Players.json")
+	#var ite = LOADER.items_from_file("res://Item.json")
+	#print(ite)
+	var sk = LOADER.items_from_file("res://Testes/Skills.json")
+	print(sk)
 	for i in range(Players.size()):
 		lane = Players[i].get_pos()
 		get_node("P"+str(i)+str(lane)).show()
@@ -29,10 +34,10 @@ func _ready():
 	over = false
 	Enemies = []
 	Players = []
-	Inventory = []
-	var skill1 = cenaitem.new("Stab", 10, [[HP, -10, PHYSIC, 1]], [[true, POISON]])
-	var skill2 = cenaitem.new("Double Stab", 15, [[HP, -20, PHYSIC, 1]], [[]])
-	var Skills = [skill1, skill2]
+	Inventory = LOADER.items_from_file("res://Testes/Inventory.json")#[]
+	#var skill1 = cenaitem.new("Stab", 10, [[HP, -10, PHYSIC, 1]], [[true, POISON]])
+	#var skill2 = cenaitem.new("Double Stab", 15, [[HP, -20, PHYSIC, 1]], [[]])
+	var Skills = LOADER.items_from_file("res://Testes/Skills.json")#[skill1, skill2]
 	Enemies.append(cenaenemy.new([25,1000,10,10,5,10,9,10], 0, "hold up partner", []))
 	Enemies.append(cenaenemy.new([25,1000,10,10,5,10,9,10], 0, "hold up partner2", []))
 	Players.append(cenaplayer.new([100,50, 10,10,10,10,11,10], 0, "beefy boi", []))
@@ -54,22 +59,20 @@ func rounds():
 	turnorder.sort_custom(self, "stackagility")
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
-		if current_entity.get_health() == 0:
-			continue
-		elif current_entity.classe == "boss":
+		if current_entity.classe == "boss":
 			print("ooga booga")
 			#current.AI()
 		else:
 			get_node("Menu").show()
 			yield($Menu, "turn_finished")
 			execute_action(current_action, current_target)
-			if check_game_over() or check_win_battle():
-				over = true
-				break
+		if check_game_over() or check_win_battle():
+			over = true
+			break
 	emit_signal("round_finished")
 
 func check_game_over():
-	return dead_enemies == Enemies.size()
+	return Enemies == []
 
 func check_win_battle():
 	return dead_allies == Players.size()
@@ -85,7 +88,6 @@ func execute_action(action, target):
 		print(current_entity.get_name()+" EXECUTOU A ACTION "+action+" NO TARGET "+alvo.get_name())
 		alvo.take_damage(PHYSIC, atk)
 		if alvo.get_health() <= 0:
-			dead_enemies += 1
 			Enemies.remove(int(target))
 			get_node("E"+target+"0").hide()
 	elif action == "Lane":
@@ -153,7 +155,6 @@ func execute_action(action, target):
 		get_node("Menu/Itens").show()
 		get_node("Menu/Run").show()
 		if alvo.get_health() <= 0:
-			dead_enemies += 1
 			Enemies.remove(int(target[1]))
 			get_node("E"+str(target[1])+"0").hide()
 

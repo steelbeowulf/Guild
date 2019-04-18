@@ -1,0 +1,14 @@
+[
+	{"NAME":"STAB",
+	"QUANT":10,
+	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[]},
+	{"NAME":"POISON STAB",
+	"QUANT":20,
+	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":3}],
+	"STATUS":[{"BOOL":true, "STATUS":"POISON"}]},
+	{"NAME":"HEAL",
+	"QUANT":20,
+	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
+	"STATUS":[]},
+]

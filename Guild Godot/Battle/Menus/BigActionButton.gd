@@ -8,8 +8,10 @@ func _ready():
 		c.connect("target_picked", self, "_on_Item_Picked")
 	for c in $Targets/HBoxContainer/Players.get_children():
 		c.connect("target_picked", self, "_on_Target_Picked")
+		c.disabled = true
 	for c in $Targets/HBoxContainer/Enemies.get_children():
 		c.connect("target_picked", self, "_on_Target_Picked")
+		c.disabled = true
 
 func _on_Target_Picked(target):
 	if item_picked != null:
@@ -23,3 +25,7 @@ func _on_Action_pressed():
 
 func _on_Item_Picked(item):
 	item_picked = item
+	for e in $Targets/HBoxContainer/Enemies.get_children():
+		e.disabled = false
+	for p in $Targets/HBoxContainer/Players.get_children():
+		p.disabled = false
