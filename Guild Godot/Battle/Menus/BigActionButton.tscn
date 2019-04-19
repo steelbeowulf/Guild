@@ -3,7 +3,6 @@
 [ext_resource path="res://Battle/Menus/BigActionButton.gd" type="Script" id=1]
 [ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=2]
 
-
 [node name="Action" type="Button"]
 margin_right = 296.0
 margin_bottom = 44.0
@@ -38,6 +37,8 @@ visible = false
 margin_top = 81.0
 margin_right = 338.0
 margin_bottom = 158.0
+focus_neighbour_top = NodePath("../0")
+focus_neighbour_bottom = NodePath("../2")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "1"
@@ -80,6 +81,7 @@ visible = false
 margin_top = 48.0
 margin_right = 338.0
 margin_bottom = 92.0
+focus_neighbour_left = NodePath("../../Itens/0")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "1"
