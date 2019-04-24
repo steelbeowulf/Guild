@@ -1,13 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
-[ext_resource path="res://Assets/S.png" type="Texture" id=2]
-[ext_resource path="res://Assets/e.png" type="Texture" id=3]
-[ext_resource path="res://Assets/h.png" type="Texture" id=4]
-[ext_resource path="res://Assets/double gun.jpg" type="Texture" id=5]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=6]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://warrior spritesheet calciumtrice.png" type="Texture" id=2]
+[ext_resource path="res://rogue spritesheet calciumtrice.png" type="Texture" id=3]
+[ext_resource path="res://ranger spritesheet calciumtrice.png" type="Texture" id=4]
+[ext_resource path="res://cleric spritesheet calciumtrice.png" type="Texture" id=5]
+[ext_resource path="res://slime spritesheet calciumtrice.png" type="Texture" id=6]
+[ext_resource path="res://minotaur spritesheet calciumtrice.png" type="Texture" id=7]
+[ext_resource path="res://environment_forest_alt1.png" type="Texture" id=8]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=9]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=11]
 
 [node name="Node" type="Node"]
 
@@ -17,105 +20,119 @@ script = ExtResource( 1 )
 
 [node name="P00" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 136.883, 100.307 )
+position = Vector2( 117.55, 190 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="P01" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 196.768, 94.7194 )
+position = Vector2( 256.883, 190 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="P02" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 524.601, 101.207 )
+position = Vector2( 398.216, 190 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="P10" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 138.204, 147.033 )
+position = Vector2( 117.55, 260 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="P11" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 196.148, 142.722 )
+position = Vector2( 256.883, 260 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="P12" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 524.967, 148.493 )
+position = Vector2( 398.216, 260 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="P20" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 138.104, 195.375 )
-texture = ExtResource( 3 )
+position = Vector2( 123.91, 330 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
 [node name="P21" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 195.831, 191.494 )
-texture = ExtResource( 3 )
+position = Vector2( 261.213, 330 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
 [node name="P22" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 525.75, 197.449 )
-texture = ExtResource( 3 )
+position = Vector2( 401.606, 330 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
 [node name="P30" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 138.104, 242.615 )
-texture = ExtResource( 4 )
+position = Vector2( 118.744, 400 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
 
 [node name="P31" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 195.521, 239.417 )
-texture = ExtResource( 4 )
+position = Vector2( 255.601, 400 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
 
 [node name="P32" type="Sprite" parent="Battle"]
 visible = false
-position = Vector2( 525.826, 244.523 )
-texture = ExtResource( 4 )
+position = Vector2( 396.247, 400 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
 
 [node name="E00" type="Sprite" parent="Battle"]
-position = Vector2( 703.273, 262.085 )
+position = Vector2( 725.773, 350 )
 rotation = -0.0055467
-scale = Vector2( 0.287898, 0.412853 )
-texture = ExtResource( 5 )
+scale = Vector2( 3.2, 3.2 )
+texture = ExtResource( 6 )
 
 [node name="E10" type="Sprite" parent="Battle"]
-position = Vector2( 700.337, 373.665 )
+position = Vector2( 727.004, 211.165 )
 rotation = -0.0055467
-scale = Vector2( 0.287898, 0.412853 )
-texture = ExtResource( 5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="Battle"]
+position = Vector2( 509.005, 236.088 )
+scale = Vector2( 1.0022, 0.935547 )
+z_index = -1
+texture = ExtResource( 8 )
 
 [node name="Menu" type="VBoxContainer" parent="Battle"]
-margin_left = 9.51617
-margin_top = 347.968
-margin_right = 305.516
-margin_bottom = 586.968
-script = ExtResource( 6 )
+margin_left = 10.0
+margin_top = 467.0
+margin_right = 306.0
+margin_bottom = 587.0
+script = ExtResource( 9 )
 
-[node name="Attack" parent="Battle/Menu" instance=ExtResource( 7 )]
-margin_right = 295.0
-margin_bottom = 56.0
+[node name="Attack" parent="Battle/Menu" instance=ExtResource( 10 )]
+margin_bottom = 27.0
 focus_neighbour_top = NodePath("../Itens")
 text = "Attack"
 
-[node name="Lane" parent="Battle/Menu" instance=ExtResource( 7 )]
-margin_top = 60.0
-margin_right = 295.0
-margin_bottom = 116.0
+[node name="Lane" parent="Battle/Menu" instance=ExtResource( 10 )]
+margin_top = 31.0
+margin_bottom = 58.0
 text = "Lane"
 
-[node name="Skills" parent="Battle/Menu" instance=ExtResource( 8 )]
-margin_top = 120.0
-margin_right = 295.0
-margin_bottom = 176.0
+[node name="Skills" parent="Battle/Menu" instance=ExtResource( 11 )]
+margin_top = 62.0
+margin_bottom = 89.0
 text = "Skills"
 
-[node name="Itens" parent="Battle/Menu" instance=ExtResource( 8 )]
-margin_top = 180.0
-margin_right = 295.0
-margin_bottom = 239.0
+[node name="Itens" parent="Battle/Menu" instance=ExtResource( 11 )]
+margin_top = 93.0
+margin_bottom = 120.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Item"
 
