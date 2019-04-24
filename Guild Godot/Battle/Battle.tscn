@@ -96,34 +96,31 @@ script = ExtResource( 6 )
 
 [node name="Attack" parent="Battle/Menu" instance=ExtResource( 7 )]
 margin_right = 295.0
+margin_bottom = 56.0
+focus_neighbour_top = NodePath("../Itens")
 text = "Attack"
 
 [node name="Lane" parent="Battle/Menu" instance=ExtResource( 7 )]
-margin_top = 48.0
+margin_top = 60.0
 margin_right = 295.0
-margin_bottom = 92.0
+margin_bottom = 116.0
 text = "Lane"
 
 [node name="Skills" parent="Battle/Menu" instance=ExtResource( 8 )]
-margin_top = 96.0
+margin_top = 120.0
 margin_right = 295.0
-margin_bottom = 140.0
+margin_bottom = 176.0
 text = "Skills"
 
 [node name="Itens" parent="Battle/Menu" instance=ExtResource( 8 )]
-margin_top = 144.0
-margin_right = 295.0
-margin_bottom = 188.0
-text = "Item"
-
-[node name="Run" type="Button" parent="Battle/Menu"]
-margin_top = 192.0
+margin_top = 180.0
 margin_right = 295.0
 margin_bottom = 239.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Run"
+focus_neighbour_bottom = NodePath("../Attack")
+text = "Item"
 
+[connection signal="gui_input" from="Battle/Menu" to="Battle" method="_on_Menu_gui_input"]
+[connection signal="button_down" from="Battle/Menu/Attack" to="Battle" method="_on_Attack_button_down"]
 [connection signal="button_down" from="Battle/Menu/Lane" to="Battle" method="_on_Lane_button_down"]
 [connection signal="button_down" from="Battle/Menu/Skills" to="Battle" method="_on_Skills_button_down"]
 [connection signal="button_down" from="Battle/Menu/Itens" to="Battle" method="_on_Itens_button_down"]

@@ -3,11 +3,10 @@
 [ext_resource path="res://Battle/Menus/ActionButton.gd" type="Script" id=1]
 [ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=2]
 
-
-
 [node name="Action" type="Button"]
 margin_right = 296.0
 margin_bottom = 44.0
+focus_next = NodePath("Targets/0")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Action"
@@ -23,6 +22,7 @@ margin_bottom = 594.0
 [node name="0" parent="Targets" instance=ExtResource( 2 )]
 visible = false
 margin_right = 250.0
+focus_previous = NodePath("../..")
 size_flags_horizontal = 3
 text = "0"
 

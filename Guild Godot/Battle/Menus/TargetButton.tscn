@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=1]
 
-
 [node name="Target" type="Button"]
 margin_right = 194.0
 margin_bottom = 20.0

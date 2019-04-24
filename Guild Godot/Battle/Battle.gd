@@ -13,6 +13,8 @@ var current_action
 var current_target
 var dead_enemies = 0
 var dead_allies = 0
+var total_enemies
+var state = "Attack"
 
 signal round_finished
 
@@ -29,6 +31,7 @@ func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 	for i in range(Enemies.size()):
 		lane = Enemies[i].get_pos()
 		get_node("E"+str(i)+str(lane)).show()
+	total_enemies = Enemies.size()
 
 func _ready():
 	over = false
@@ -45,6 +48,9 @@ func _ready():
 	Players.append(cenaplayer.new([100,50, 10,10,10,10,5,10], 0, "arrow boi", []))
 	Players.append(cenaplayer.new([100,50, 10,10,10,10,0,10], 0, "holy boi", []))
 	Inventory.append(cenaitem.new("Potion", 3, [[HP, +10, 1]], [[]]))
+
+	for c in get_node("Menu").get_children():
+		c.focus_previous = NodePath("Menu/Attack")
 
 	InitBattle(Players, Enemies, Inventory, 0,0,0)
 	while (not over):
@@ -63,7 +69,17 @@ func rounds():
 			print("ooga booga")
 			#current.AI()
 		else:
+			#print("skilss")
+			#print("do "+current_entity.get_name())
+			#print(current_entity.skills)
+			if not current_entity.skills:
+				get_node("Menu/Skills").disabled = true
+			else:
+				get_node("Menu/Skills").disabled = false
+			if Inventory.size() == 0:
+				get_node("Menu/Itens").disabled = true
 			get_node("Menu").show()
+			$Menu/Attack.grab_focus()
 			yield($Menu, "turn_finished")
 			execute_action(current_action, current_target)
 		if check_game_over() or check_win_battle():
@@ -124,7 +140,7 @@ func execute_action(action, target):
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Skills").show()
-		get_node("Menu/Run").show()
+#		get_node("Menu/Run").show()
 		if alvo.get_health() <= 0:
 			dead_enemies += 1
 			Enemies.remove(int(target[1]))
@@ -153,7 +169,7 @@ func execute_action(action, target):
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Itens").show()
-		get_node("Menu/Run").show()
+#		get_node("Menu/Run").show()
 		if alvo.get_health() <= 0:
 			Enemies.remove(int(target[1]))
 			get_node("E"+str(target[1])+"0").hide()
@@ -163,39 +179,37 @@ func set_current_action(action):
 func set_current_target(target):
 	current_target = target
 
-func _process(delta):
-	if Inventory.size() == 0:
-		get_node("Menu/Itens").disabled = true
-	if current_entity.skills.size() == 0:
-		get_node("Menu/Skills").disabled = true
-	else:
-		get_node("Menu/Skills").disabled = false
-	for i in range(Enemies.size()):
-		get_node("Menu/Attack/Targets/"+str(i)).hide()
-	for i in range(Enemies.size()):
-		get_node("Menu/Attack/Targets/"+str(i)).show()
-		get_node("Menu/Attack/Targets/"+str(i)).set_text(Enemies[i].nome)
+func _process(delta):	
+	if Input.is_action_pressed("ui_cancel") or (Input.is_action_pressed("ui_left") and (state == "Attack" or state == "Lane")):
+		for c in $Menu.get_children():
+			c.hide_stuff()
+		get_node("Menu/"+str(state)).grab_focus()
 
 func _on_Lane_button_down():
+	state = "Lane"
 	for i in range(3):
 		get_node("Menu/Lane/Targets/"+str(i)).hide()
 	get_node("Menu/Lane/Targets").show()
-	if current_entity.get_pos() != 0: 
-		get_node("Menu/Lane/Targets/0").show()
-		get_node("Menu/Lane/Targets/0").set_text("BACK")
-	if current_entity.get_pos() != 1: 
-		get_node("Menu/Lane/Targets/1").show()
-		get_node("Menu/Lane/Targets/1").set_text("MID")
 	if current_entity.get_pos() != 2: 
 		get_node("Menu/Lane/Targets/2").show()
+		get_node("Menu/Lane/Targets/2").grab_focus()
 		get_node("Menu/Lane/Targets/2").set_text("FRONT")
-
+	if current_entity.get_pos() != 1: 
+		get_node("Menu/Lane/Targets/1").show()
+		get_node("Menu/Lane/Targets/1").grab_focus()
+		get_node("Menu/Lane/Targets/1").set_text("MID")
+	if current_entity.get_pos() != 0: 
+		get_node("Menu/Lane/Targets/0").show()
+		get_node("Menu/Lane/Targets/0").grab_focus()
+		get_node("Menu/Lane/Targets/0").set_text("BACK")
+	get_node("Menu/Lane/")._on_Action_pressed()
 
 func _on_Itens_button_down():
+	state = "Itens"
 	get_node("Menu/Attack").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Skills").hide()
-	get_node("Menu/Run").hide()
+#	get_node("Menu/Run").hide()
 	var itens = get_node("Menu/Itens/Targets/HBoxContainer/Itens")
 	var players = get_node("Menu/Itens/Targets/HBoxContainer/Players")
 	var enemies = get_node("Menu/Itens/Targets/HBoxContainer/Enemies")
@@ -214,13 +228,15 @@ func _on_Itens_button_down():
 	for i in range(1, Enemies.size()+1):
 		enemies.get_node(str(-i)).show()
 		enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
-
+	itens.get_node("0").grab_focus()
+	get_node("Menu/Itens/")._on_Action_pressed()
 
 func _on_Skills_button_down():
+	state = "Skills"
 	get_node("Menu/Attack").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Itens").hide()
-	get_node("Menu/Run").hide()
+#	get_node("Menu/Run").hide()
 	var skills = current_entity.get_skills()
 	print(skills)
 	var itens = get_node("Menu/Skills/Targets/HBoxContainer/Itens")
@@ -243,4 +259,14 @@ func _on_Skills_button_down():
 	for i in range(1, Enemies.size()+1):
 		enemies.get_node(str(-i)).show()
 		enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
+	itens.get_node("0").grab_focus()
+	get_node("Menu/Skills/")._on_Action_pressed()
 
+func _on_Attack_button_down():
+	state = "Attack"
+	for i in range(total_enemies):
+		get_node("Menu/Attack/Targets/"+str(i)).hide()
+	for i in range(Enemies.size()):
+		get_node("Menu/Attack/Targets/"+str(i)).show()
+		get_node("Menu/Attack/Targets/"+str(i)).set_text(Enemies[i].nome)
+	get_node("Menu/Attack/")._on_Action_pressed()

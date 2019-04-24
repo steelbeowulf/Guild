@@ -13,6 +13,11 @@ func _ready():
 		c.connect("target_picked", self, "_on_Target_Picked")
 		c.disabled = true
 
+func hide_stuff():
+	for c in get_parent().get_children():
+		c.show()
+	$Targets.hide()
+
 func _on_Target_Picked(target):
 	if item_picked != null:
 		target = [item_picked, target]
@@ -21,7 +26,9 @@ func _on_Target_Picked(target):
 		#self.disabled = false
 
 func _on_Action_pressed():
+	$Targets.show()
 	$Targets/HBoxContainer.show()
+	get_node("Targets/HBoxContainer/Itens/0").grab_focus()
 
 func _on_Item_Picked(item):
 	item_picked = item
@@ -29,3 +36,4 @@ func _on_Item_Picked(item):
 		e.disabled = false
 	for p in $Targets/HBoxContainer/Players.get_children():
 		p.disabled = false
+	$Targets/HBoxContainer/Players/"1".grab_focus()
