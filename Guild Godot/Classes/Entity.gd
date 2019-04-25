@@ -19,11 +19,14 @@ var skills
 
 func take_damage(type, damage):
 	print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
+	var dmg = 0
 	if type == PHYSIC:
-		self.stats[HP] -= damage - stats[DEF]
+		dmg = damage - stats[DEF]
 	elif type == MAGIC:
-		self.stats[HP] -= damage - stats[DEFM]
+		dmg = damage - stats[DEFM]
+	self.stats[HP] -= dmg
 	print(nome+ " AGORA TEM "+str(stats[HP])+" DE VIDA!")
+	return dmg
 
 func set_stats(stat, value):
 	self.stats[stat] = value
@@ -45,6 +48,12 @@ func get_stats(stat):
 
 func get_health():
 	return self.stats[HP]
+
+func get_max_health():
+	return self.stats[HP_MAX]
+
+func get_max_mp():
+	return self.stats[MP_MAX]
 
 func get_mp():
 	return self.stats[MP]

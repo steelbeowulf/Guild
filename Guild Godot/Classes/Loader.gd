@@ -11,7 +11,8 @@ static func players_from_file(path):
 	if result_json.error == OK:  # If parse OK
 		var datas = result_json.result
 		for data in datas:
-			players.append(cenaplayer.new([data["HP"], data["MP"], 
+			players.append(cenaplayer.new([data["HP"], data["HP_MAX"], 
+			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
 			data["AGI"], data["LCK"]],
@@ -30,7 +31,7 @@ static func items_from_file(path):
 	"CONTROL":20, "CHARM":21, "HP_CRITICAL":22, "CURSE":23, "STOP":24, 
 	"HIDDEN":25, "FREEZE":26, "IMMOBILIZE":27, "KO":28, "VEIL":29, "TRAPPED":30}
 	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1}
-	var STAT = {"HP":0, "MP":1, "ATK":2, "ATKM":3, "DEF":4, "DEFM":5, "AGI":6, "LCK":7}
+	var STAT = {"HP":0, "HP_MAX":1, "MP":2, "MP_MAX":3, "ATK":4, "ATKM":5, "DEF":6, "DEFM":7, "AGI":8, "LCK":9}
 	var cenaitem = load("res://Classes/Itens.gd")
 	var file = File.new()
 	file.open(path, file.READ)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/S.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=6]
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=9]
 
 [node name="Node" type="Node"]
 
@@ -88,36 +89,34 @@ scale = Vector2( 0.287898, 0.412853 )
 texture = ExtResource( 5 )
 
 [node name="Menu" type="VBoxContainer" parent="Battle"]
-margin_left = 9.51617
-margin_top = 347.968
-margin_right = 305.516
-margin_bottom = 586.968
+margin_left = 10.0
+margin_top = 455.0
+margin_right = 306.0
+margin_bottom = 587.0
 script = ExtResource( 6 )
 
 [node name="Attack" parent="Battle/Menu" instance=ExtResource( 7 )]
-margin_right = 295.0
-margin_bottom = 56.0
+margin_bottom = 30.0
 focus_neighbour_top = NodePath("../Itens")
 text = "Attack"
 
 [node name="Lane" parent="Battle/Menu" instance=ExtResource( 7 )]
-margin_top = 60.0
-margin_right = 295.0
-margin_bottom = 116.0
+margin_top = 34.0
+margin_bottom = 64.0
 text = "Lane"
 
 [node name="Skills" parent="Battle/Menu" instance=ExtResource( 8 )]
-margin_top = 120.0
-margin_right = 295.0
-margin_bottom = 176.0
+margin_top = 68.0
+margin_bottom = 98.0
 text = "Skills"
 
 [node name="Itens" parent="Battle/Menu" instance=ExtResource( 8 )]
-margin_top = 180.0
-margin_right = 295.0
-margin_bottom = 239.0
+margin_top = 102.0
+margin_bottom = 132.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Item"
+
+[node name="Log" parent="Battle" instance=ExtResource( 9 )]
 
 [connection signal="gui_input" from="Battle/Menu" to="Battle" method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Battle/Menu/Attack" to="Battle" method="_on_Attack_button_down"]

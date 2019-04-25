@@ -1,8 +1,8 @@
 extends "res://Classes/Stats.gd"
 
-var cenaplayer = preload("res://Classes/Player.gd")
-var cenaenemy = preload("res://Classes/Enemy.gd")
-var cenaitem = preload("res://Classes/Itens.gd")
+var cenaplayer = load("res://Classes/Player.gd")
+var cenaenemy = load("res://Classes/Enemy.gd")
+var cenaitem = load("res://Classes/Itens.gd")
 
 var Players
 var Enemies
@@ -41,13 +41,12 @@ func _ready():
 	#var skill1 = cenaitem.new("Stab", 10, [[HP, -10, PHYSIC, 1]], [[true, POISON]])
 	#var skill2 = cenaitem.new("Double Stab", 15, [[HP, -20, PHYSIC, 1]], [[]])
 	var Skills = LOADER.items_from_file("res://Testes/Skills.json")#[skill1, skill2]
-	Enemies.append(cenaenemy.new([25,1000,10,10,5,10,9,10], 0, "hold up partner", []))
-	Enemies.append(cenaenemy.new([25,1000,10,10,5,10,9,10], 0, "hold up partner2", []))
-	Players.append(cenaplayer.new([100,50, 10,10,10,10,11,10], 0, "beefy boi", []))
-	Players.append(cenaplayer.new([100,50, 10,10,10,10,22,10], 0, "stabby boi", Skills))
-	Players.append(cenaplayer.new([100,50, 10,10,10,10,5,10], 0, "arrow boi", []))
-	Players.append(cenaplayer.new([100,50, 10,10,10,10,0,10], 0, "holy boi", []))
-	Inventory.append(cenaitem.new("Potion", 3, [[HP, +10, 1]], [[]]))
+	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Slime", []))
+	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Minotauro", []))
+	Players.append(cenaplayer.new([100,200,50,50, 10,10,10,10,11,10], 0, "beefy boi", []))
+	Players.append(cenaplayer.new([100,150,50,50, 10,10,10,10,22,10], 0, "stabby boi", Skills))
+	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,5,10], 0, "arrow boi", []))
+	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,0,10], 0, "holy boi", []))
 
 	for c in get_node("Menu").get_children():
 		c.focus_previous = NodePath("Menu/Attack")
@@ -56,6 +55,7 @@ func _ready():
 	while (not over):
 		rounds()
 		yield(self, "round_finished")
+	$Log.display_text("Fim de jogo!")
 	print("FIM DE JOGO")
 
 func rounds():
@@ -102,16 +102,18 @@ func execute_action(action, target):
 		var alvo = Enemies[int(target)]
 		print("TARGET IS"+target)
 		print(current_entity.get_name()+" EXECUTOU A ACTION "+action+" NO TARGET "+alvo.get_name())
-		alvo.take_damage(PHYSIC, atk)
+		var dmg = alvo.take_damage(PHYSIC, atk)
+		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
 		if alvo.get_health() <= 0:
-			Enemies.remove(int(target))
 			get_node("E"+target+"0").hide()
+			Enemies.remove(int(target))
 	elif action == "Lane":
 		for i in range(Players.size()):
 			if Players[i].get_name() == current_entity.get_name():
 				var lane = current_entity.get_pos()
 				current_entity.set_pos(int(target))
 				print("P"+str(i)+str(target))
+				$Log.display_text(current_entity.get_name()+" se moveu para a lane "+dlanes[int(target)])
 				get_node("P"+str(i)+str(lane)).hide()
 				get_node("P"+str(i)+str(target)).show()
 	elif action == "Item":
@@ -128,13 +130,14 @@ func execute_action(action, target):
 		print("inventory"+str(Inventory[0].nome))
 		var item = Inventory[int(target[0])]
 		print(current_entity.get_name()+" USOU O ITEM "+item.nome+" NO TARGET "+alvo.get_name())
+		$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
 		item.quantity = item.quantity - 1
 		if (item.effect != []):
 			for eff in item.effect:
-				apply_effect(eff, alvo)
+				apply_effect(eff, alvo, $Log)
 		if (item.status != []):
 			for st in item.status:
-				apply_status(st, alvo)
+				apply_status(st, alvo, $Log)
 		if item.quantity == 0:
 			Inventory.remove(int(target[0]))
 		get_node("Menu/Attack").show()
@@ -157,13 +160,14 @@ func execute_action(action, target):
 		var alvo = entities[target[1]]
 		var skill = current_entity.get_skills()[int(target[0])]
 		print(current_entity.get_name()+" USOU O SKILL "+skill.nome+" NO TARGET "+alvo.get_name())
+		$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
 		if (skill.effect != []):
 			for eff in skill.effect:
 				print(eff)
-				apply_effect(eff, alvo)
+				apply_effect(eff, alvo, $Log)
 		if (skill.status != []):
 			for st in skill.status:
-				apply_status(st, alvo)
+				apply_status(st, alvo, $Log)
 		var mp = current_entity.get_mp()
 		current_entity.set_stats(MP, mp-skill.quantity)
 		get_node("Menu/Attack").show()
@@ -171,15 +175,18 @@ func execute_action(action, target):
 		get_node("Menu/Itens").show()
 #		get_node("Menu/Run").show()
 		if alvo.get_health() <= 0:
-			Enemies.remove(int(target[1]))
 			get_node("E"+str(target[1])+"0").hide()
+			Enemies.remove(int(target[1]))
 
 func set_current_action(action):
 	current_action = action
 func set_current_target(target):
 	current_target = target
 
-func _process(delta):	
+func _process(delta):
+	if over:
+		$E00.hide()
+		$E10.hide()
 	if Input.is_action_pressed("ui_cancel") or (Input.is_action_pressed("ui_left") and (state == "Attack" or state == "Lane")):
 		for c in $Menu.get_children():
 			c.hide_stuff()
@@ -224,7 +231,7 @@ func _on_Itens_button_down():
 		itens.get_node(str(i)).set_text(Inventory[i].nome+" 	x"+str(Inventory[i].quantity))
 	for i in range(1, Players.size()+1):
 		players.get_node(str(i)).show()
-		players.get_node(str(i)).set_text(Players[i-1].get_name()+" "+str(Players[i-1].get_health()))
+		players.get_node(str(i)).set_text(Players[i-1].get_name()+"   HP:"+str(Players[i-1].get_health())+"/"+str(Players[i-1].get_max_health())+"        MP: "+str(Players[i-1].get_mp())+"/"+str(Players[i-1].get_max_mp()))
 	for i in range(1, Enemies.size()+1):
 		enemies.get_node(str(-i)).show()
 		enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
@@ -255,7 +262,7 @@ func _on_Skills_button_down():
 		itens.get_node(str(i)).set_text(skills[i].nome)
 	for i in range(1, Players.size()+1):
 		players.get_node(str(i)).show()
-		players.get_node(str(i)).set_text(Players[i-1].get_name()+" "+str(Players[i-1].get_health()))
+		players.get_node(str(i)).set_text(Players[i-1].get_name()+"   HP:"+str(Players[i-1].get_health())+"/"+str(Players[i-1].get_max_health())+"        MP: "+str(Players[i-1].get_mp())+"/"+str(Players[i-1].get_max_mp()))
 	for i in range(1, Enemies.size()+1):
 		enemies.get_node(str(-i)).show()
 		enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
