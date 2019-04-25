@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://warrior spritesheet calciumtrice.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=9]
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=12]
 
 [node name="Node" type="Node"]
 
@@ -136,7 +137,7 @@ margin_bottom = 120.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Item"
 
-[node name="Log" parent="Battle" instance=ExtResource( 9 )]
+[node name="Log" parent="Battle" instance=ExtResource( 12 )]
 
 [connection signal="gui_input" from="Battle/Menu" to="Battle" method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Battle/Menu/Attack" to="Battle" method="_on_Attack_button_down"]

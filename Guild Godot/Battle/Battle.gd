@@ -1,4 +1,4 @@
-extends "res://Classes/Stats.gd"
+extends "Apply.gd"
 
 var cenaplayer = load("res://Classes/Player.gd")
 var cenaenemy = load("res://Classes/Enemy.gd")
