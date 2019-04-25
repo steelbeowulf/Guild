@@ -29,6 +29,10 @@ func _on_Action_pressed():
 	$Targets.show()
 	$Targets/HBoxContainer.show()
 	get_node("Targets/HBoxContainer/Itens/0").grab_focus()
+	for e in $Targets/HBoxContainer/Enemies.get_children():
+		e.disabled = true
+	for p in $Targets/HBoxContainer/Players.get_children():
+		p.disabled = true
 
 func _on_Item_Picked(item):
 	item_picked = item

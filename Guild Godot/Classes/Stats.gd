@@ -1,11 +1,6 @@
 extends "res://Battle/Apply.gd"
 class_name STATS
 
-# Stats
-enum {HP, MP, ATK, ATKM, DEF, DEFM, AGI, LCK}
-
-# Attack type
-enum {PHYSIC, MAGIC}
 
 # Status effects
 enum{CONFUSION, POISON, BURN, SLOW, HASTE, BERSERK, 
