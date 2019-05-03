@@ -1,6 +1,8 @@
 extends Node
 class_name LOADER
 
+var List = []
+
 static func players_from_file(path):
 	var cenaplayer = load("res://Classes/Player.gd")
 	var file = File.new()
@@ -15,7 +17,7 @@ static func players_from_file(path):
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
-			data["AGI"], data["LCK"]],
+			data["AGI"], data["ACC"], data["LCK"]],
 			data["LANE"], data["NAME"], []))
 	else:  # If parse has errors
 		print("Error: ", result_json.error)
@@ -49,10 +51,11 @@ static func items_from_file(path):
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATUS[st["STATUS"]]])
-			itens.append(cenaitem.new(data["NAME"], data["QUANT"], 
+			itens.append(cenaitem.new(data["NAME"], data["QUANT"], data["TARGET"],
 			effects, status))
 	else:  # If parse has errors
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)
 	return itens
+
