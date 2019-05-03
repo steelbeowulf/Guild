@@ -66,15 +66,9 @@ func rounds():
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
 		if current_entity.classe == "boss":
-			for i in range(Players.size()):
-				var alvo = Players[i]
-				alvo.take_damage(PHYSIC, 11)
-				print("ooga booga")
+			print("ooga booga")
 			#current.AI()
 		else:
-			#print("skilss")
-			#print("do "+current_entity.get_name())
-			#print(current_entity.skills)
 			if not current_entity.skills:
 				get_node("Menu/Skills").disabled = true
 			else:
@@ -143,6 +137,7 @@ func execute_action(action, target):
 				apply_status(st, alvo, $Log)
 		if item.quantity == 0:
 			Inventory.remove(int(target[0]))
+		
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Skills").show()
@@ -261,6 +256,8 @@ func _on_Skills_button_down():
 	for i in range(skills.size()):
 		if current_entity.get_mp() < skills[i].quantity:
 			itens.get_node(str(i)).disabled = true
+		else:
+			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(skills[i].nome)
 	for i in range(1, Players.size()+1):

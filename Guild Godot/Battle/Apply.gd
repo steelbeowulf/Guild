@@ -2,7 +2,7 @@ extends Node
 
 var dstats = {HP:"HP", HP_MAX:"HP máximo",MP:"MP", MP_MAX:"MP máximo", ATK:"ATK", ATKM:"ATKM", DEF:"DEF", DEFM:"DEFM", AGI:"AGI", LCK:"LCK"}
 # Stats
-enum {HP, HP_MAX, MP_MAX, MP, ATK, ATKM, DEF, DEFM, AGI, LCK}
+enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, LCK}
 
 var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW", 
 	4:"HASTE", 5:"BERSERK", 6:"REGEN", 7:"UNDEAD", 8:"PETRIFY", 9:"SILENCE", 
