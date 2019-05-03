@@ -18,14 +18,17 @@ var skills
 #	set_multiplier(pos, 0, 0)
 
 func take_damage(type, damage):
-	print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
+	#print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
 	var dmg = 0
 	if type == PHYSIC:
 		dmg = damage - stats[DEF]
 	elif type == MAGIC:
 		dmg = damage - stats[DEFM]
-	self.stats[HP] -= dmg
-	print(nome+ " AGORA TEM "+str(stats[HP])+" DE VIDA!")
+	print("dmg is "+str(dmg))
+	print("stats[def] is"+str(stats[DEF]))
+	print("value is"+str(damage))
+	set_stats(HP, get_health()-dmg)
+	#print(nome+ " AGORA TEM "+str(get_health())+" DE VIDA!")
 	return dmg
 
 func set_stats(stat, value):
@@ -72,6 +75,9 @@ func get_defm():
 
 func get_agi():
 	return self.stats[AGI]
+
+func get_acc():
+	return self.stats[ACC] 
 
 func get_lck():
 	return self.stats[LCK]

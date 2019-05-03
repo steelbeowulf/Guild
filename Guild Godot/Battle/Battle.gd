@@ -7,14 +7,14 @@ var cenaitem = load("res://Classes/Itens.gd")
 var Players
 var Enemies
 var Inventory
-var over
 var current_entity
+var state
+var over
 var current_action
 var current_target
 var dead_enemies = 0
 var dead_allies = 0
 var total_enemies
-var state = "Attack"
 
 signal round_finished
 
@@ -28,6 +28,8 @@ func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 	for i in range(Players.size()):
 		lane = Players[i].get_pos()
 		get_node("P"+str(i)+str(lane)).show()
+		for j in range(Enemies.size()):
+			Players[i].hate.append(0)
 	for i in range(Enemies.size()):
 		lane = Enemies[i].get_pos()
 		get_node("E"+str(i)+str(lane)).show()
@@ -46,19 +48,24 @@ func _ready():
 	Players.append(cenaplayer.new([100,200,50,50, 10,10,10,10,11,10], 0, "beefy boi", []))
 	Players.append(cenaplayer.new([100,150,50,50, 10,10,10,10,22,10], 0, "stabby boi", Skills))
 	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,5,10], 0, "arrow boi", []))
-	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,0,10], 0, "holy boi", []))
+	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,0,10], 0, "holy boi", [Skills[-1]]))
 
 	for c in get_node("Menu").get_children():
 		c.focus_previous = NodePath("Menu/Attack")
 
 	InitBattle(Players, Enemies, Inventory, 0,0,0)
 	while (not over):
+		for p in Players:
+			print(p.get_name()+" hate matrix is ")
+			print(p.hate)
 		rounds()
 		yield(self, "round_finished")
 	$Log.display_text("Fim de jogo!")
 	print("FIM DE JOGO")
 
 func rounds():
+	print("HP SLIME")
+	print(Enemies[0].get_health())
 	var turnorder
 	turnorder = []
 	turnorder = Players + Enemies
@@ -103,6 +110,7 @@ func execute_action(action, target):
 		print("TARGET IS"+target)
 		print(current_entity.get_name()+" EXECUTOU A ACTION "+action+" NO TARGET "+alvo.get_name())
 		var dmg = alvo.take_damage(PHYSIC, atk)
+		current_entity.update_hate(dmg, int(target))
 		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
 		if alvo.get_health() <= 0:
 			get_node("E"+target+"0").hide()
@@ -112,7 +120,6 @@ func execute_action(action, target):
 			if Players[i].get_name() == current_entity.get_name():
 				var lane = current_entity.get_pos()
 				current_entity.set_pos(int(target))
-				print("P"+str(i)+str(target))
 				$Log.display_text(current_entity.get_name()+" se moveu para a lane "+dlanes[int(target)])
 				get_node("P"+str(i)+str(lane)).hide()
 				get_node("P"+str(i)+str(target)).show()
@@ -126,18 +133,29 @@ func execute_action(action, target):
 			entities = Enemies
 			target[1] = abs(target[1])-1
 		var alvo = entities[target[1]]
-		print("TARGET[0]"+target[0])
-		print("inventory"+str(Inventory[0].nome))
 		var item = Inventory[int(target[0])]
-		print(current_entity.get_name()+" USOU O ITEM "+item.nome+" NO TARGET "+alvo.get_name())
-		$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
-		item.quantity = item.quantity - 1
-		if (item.effect != []):
-			for eff in item.effect:
-				apply_effect(eff, alvo, $Log)
-		if (item.status != []):
-			for st in item.status:
-				apply_status(st, alvo, $Log)
+		
+		var affected = []
+		if item.get_target() == "ONE":
+			affected.append(alvo)
+		elif item.get_target() == "LANE":
+			var affected_lane = alvo.get_pos()
+			for p in entities:
+				if p.get_pos() == affected_lane:
+					affected.append(p)
+		elif item.get_target() == "ALL":
+			for p in entities:
+				affected.append(p)
+		for alvo in affected:
+			print(current_entity.get_name()+" USOU O ITEM "+item.nome+" NO TARGET "+alvo.get_name())
+			$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
+			item.quantity = item.quantity - 1
+			if (item.effect != []):
+				for eff in item.effect:
+					apply_effect(current_entity, eff, alvo,  int(target[1]), $Log)
+			if (item.status != []):
+				for st in item.status:
+					apply_status(st, alvo, $Log)
 		if item.quantity == 0:
 			Inventory.remove(int(target[0]))
 		get_node("Menu/Attack").show()
@@ -159,15 +177,28 @@ func execute_action(action, target):
 			target[1] = abs(target[1])-1
 		var alvo = entities[target[1]]
 		var skill = current_entity.get_skills()[int(target[0])]
-		print(current_entity.get_name()+" USOU O SKILL "+skill.nome+" NO TARGET "+alvo.get_name())
-		$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
-		if (skill.effect != []):
-			for eff in skill.effect:
-				print(eff)
-				apply_effect(eff, alvo, $Log)
-		if (skill.status != []):
-			for st in skill.status:
-				apply_status(st, alvo, $Log)
+		
+		var affected = []
+		if skill.get_target() == "ONE":
+			affected.append(alvo)
+		elif skill.get_target() == "LANE":
+			var affected_lane = alvo.get_pos()
+			for p in entities:
+				if p.get_pos() == affected_lane:
+					affected.append(p)
+		elif skill.get_target() == "ALL":
+			for p in entities:
+				affected.append(p)
+		for alvo in affected:
+			print(current_entity.get_name()+" USOU O SKILL "+skill.nome+" NO TARGET "+alvo.get_name())
+			$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
+			if (skill.effect != []):
+				for eff in skill.effect:
+					print(eff)
+					apply_effect(current_entity, eff, alvo, int(target[1]), $Log)
+			if (skill.status != []):
+				for st in skill.status:
+					apply_status(st, alvo, $Log)
 		var mp = current_entity.get_mp()
 		current_entity.set_stats(MP, mp-skill.quantity)
 		get_node("Menu/Attack").show()
@@ -213,6 +244,7 @@ func _on_Lane_button_down():
 
 func _on_Itens_button_down():
 	state = "Itens"
+	LOADER.List = Inventory
 	get_node("Menu/Attack").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Skills").hide()
@@ -240,6 +272,7 @@ func _on_Itens_button_down():
 
 func _on_Skills_button_down():
 	state = "Skills"
+	LOADER.List = current_entity.skills
 	get_node("Menu/Attack").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Itens").hide()
@@ -258,6 +291,8 @@ func _on_Skills_button_down():
 	for i in range(skills.size()):
 		if current_entity.get_mp() < skills[i].quantity:
 			itens.get_node(str(i)).disabled = true
+		else:
+			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(skills[i].nome)
 	for i in range(1, Players.size()+1):
@@ -271,6 +306,7 @@ func _on_Skills_button_down():
 
 func _on_Attack_button_down():
 	state = "Attack"
+	print(state)
 	for i in range(total_enemies):
 		get_node("Menu/Attack/Targets/"+str(i)).hide()
 	for i in range(Enemies.size()):

@@ -1,8 +1,8 @@
-extends Node
+extends LOADER
 
-var dstats = {HP:"HP", HP_MAX:"HP máximo",MP:"MP", MP_MAX:"MP máximo", ATK:"ATK", ATKM:"ATKM", DEF:"DEF", DEFM:"DEFM", AGI:"AGI", LCK:"LCK"}
+var dstats = {HP:"HP", HP_MAX:"HP máximo",MP:"MP", MP_MAX:"MP máximo", ATK:"ATK", ATKM:"ATKM", DEF:"DEF", DEFM:"DEFM", AGI:"AGI", ACC:"ACC", LCK:"LCK"}
 # Stats
-enum {HP, HP_MAX, MP_MAX, MP, ATK, ATKM, DEF, DEFM, AGI, LCK}
+enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK}
 
 var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW", 
 	4:"HASTE", 5:"BERSERK", 6:"REGEN", 7:"UNDEAD", 8:"PETRIFY", 9:"SILENCE", 
@@ -16,20 +16,26 @@ enum {PHYSIC, MAGIC}
 var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
-
-func apply_effect(effect, target, logs):
+func apply_effect(who, effect, target, t_id, logs):
 	var stat = effect[0]
 	var value = effect[1]
+	var type = effect[2]
+	var times = effect[3]
 	var TargetStat = target.get_stats(stat)
 	var finalval = TargetStat + value
 	var valmax = 9999
-	if stat == HP:
-		valmax = target.get_stats(HP_MAX)
-	elif stat == MP:
-		valmax = target.get_stats(MP_MAX)
-	if TargetStat + value > valmax:
-		finalval = valmax
-	target.set_stats(stat, finalval)
+	for i in range(times):
+		print(i)
+		if stat == HP and value < 0:
+			var dmg = target.take_damage(type, abs(value))
+			who.update_hate(dmg, t_id)
+		elif stat == HP:
+			valmax = target.get_stats(HP_MAX)
+		elif stat == MP:
+			valmax = target.get_stats(MP_MAX)
+		if TargetStat + value > valmax:
+			finalval = valmax
+		target.set_stats(stat, finalval)
 	logs.display_text(target.get_name()+" agora tem "+str(target.get_stats(stat))+" de "+dstats[stat])
 
 func apply_status(status, target, logs):
@@ -38,4 +44,4 @@ func apply_status(status, target, logs):
 	if value:
 		logs.display_text(target.get_name()+" agora está sob o efeito de "+sstats[type])
 	else:
-				logs.display_text(target.get_name()+" não está mais sob o efeito de "+sstats[type])
+		logs.display_text(target.get_name()+" não está mais sob o efeito de "+sstats[type])
