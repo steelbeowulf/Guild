@@ -43,8 +43,8 @@ func _ready():
 	var Skills = LOADER.items_from_file("res://Testes/Skills.json")#[skill1, skill2]
 	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Slime", []))
 	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Minotauro", []))
-	Players.append(cenaplayer.new([100,200,50,50, 10,10,10,10,11,10], 0, "beefy boi", []))
-	Players.append(cenaplayer.new([100,150,50,50, 10,10,10,10,22,10], 0, "stabby boi", Skills))
+	Players.append(cenaplayer.new([200,200,50,50, 10,10,10,10,11,10], 0, "beefy boi", []))
+	Players.append(cenaplayer.new([150,150,50,50, 10,10,10,10,22,10], 0, "stabby boi", Skills))
 	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,5,10], 0, "arrow boi", []))
 	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,0,10], 0, "holy boi", []))
 
@@ -66,7 +66,10 @@ func rounds():
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
 		if current_entity.classe == "boss":
-			print("ooga booga")
+			for i in range(Players.size()):
+				var alvo = Players[i]
+				alvo.take_damage(PHYSIC, 11)
+				print("ooga booga")
 			#current.AI()
 		else:
 			#print("skilss")
