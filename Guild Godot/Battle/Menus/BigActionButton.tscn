@@ -27,7 +27,7 @@ size_flags_horizontal = 3
 [node name="0" parent="Targets/HBoxContainer/Itens" instance=ExtResource( 2 )]
 visible = false
 margin_right = 338.0
-margin_bottom = 25.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "0"

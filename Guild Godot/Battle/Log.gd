@@ -21,7 +21,6 @@ func display_text(text):
 
 func _on_Timer_timeout():
 	$Label.set_text("")
-	print("timeot")
 	if buf:
 		var txt = buf[0]
 		buf.remove(0)
