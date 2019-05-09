@@ -20,11 +20,7 @@ signal round_finished
 
 func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 	var lane
-	#var player = LOADER.players_from_file("res://Testes/Players.json")
-	#var ite = LOADER.items_from_file("res://Item.json")
-	#print(ite)
 	var sk = LOADER.items_from_file("res://Testes/Skills.json")
-	print(sk)
 	for i in range(Players.size()):
 		lane = Players[i].get_pos()
 		get_node("P"+str(i)+str(lane)).show()
@@ -39,10 +35,8 @@ func _ready():
 	over = false
 	Enemies = []
 	Players = []
-	Inventory = LOADER.items_from_file("res://Testes/Inventory.json")#[]
-	#var skill1 = cenaitem.new("Stab", 10, [[HP, -10, PHYSIC, 1]], [[true, POISON]])
-	#var skill2 = cenaitem.new("Double Stab", 15, [[HP, -20, PHYSIC, 1]], [[]])
-	var Skills = LOADER.items_from_file("res://Testes/Skills.json")#[skill1, skill2]
+	Inventory = LOADER.items_from_file("res://Testes/Inventory.json")
+	var Skills = LOADER.items_from_file("res://Testes/Skills.json")
 	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Slime", []))
 	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Minotauro", []))
 	Players.append(cenaplayer.new([100,200,50,50, 10,10,10,10,11,10], 0, "beefy boi", []))
@@ -54,6 +48,8 @@ func _ready():
 		c.focus_previous = NodePath("Menu/Attack")
 
 	InitBattle(Players, Enemies, Inventory, 0,0,0)
+	
+	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
 		for p in Players:
 			print(p.get_name()+" hate matrix is ")
@@ -63,67 +59,86 @@ func _ready():
 	$Log.display_text("Fim de jogo!")
 	print("FIM DE JOGO")
 
+# A round is comprised of the turns of all entities participating in battle
 func rounds():
-	print("HP SLIME")
-	print(Enemies[0].get_health())
-	var turnorder
-	turnorder = []
-	turnorder = Players + Enemies
+	# The status "AGILITY" is used to determine the turn order
+	var turnorder = Players + Enemies
 	turnorder.sort_custom(self, "stackagility")
+	
+	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
+		
+		# If the entity is currently affected by a status, apply its effect
+		var status = current_entity.get_status()
+		if status:
+			for st in status.keys():
+				result_status(st, current_entity, $Log)
+			current_entity.decrement_turns()
+		
+		# If the entity is an enemy, leave it to the AI
 		if current_entity.classe == "boss":
 			print("ooga booga")
 			#current.AI()
+		# If it's a player, check valid actions (has itens, has MP)
 		else:
-			#print("skilss")
-			#print("do "+current_entity.get_name())
-			#print(current_entity.skills)
-			if not current_entity.skills:
+			if not current_entity.skills or current_entity.get_mp() == 0:
 				get_node("Menu/Skills").disabled = true
 			else:
 				get_node("Menu/Skills").disabled = false
 			if Inventory.size() == 0:
 				get_node("Menu/Itens").disabled = true
+			
+			# Show the Menu and wait until action is selected
 			get_node("Menu").show()
 			$Menu/Attack.grab_focus()
 			yield($Menu, "turn_finished")
 			execute_action(current_action, current_target)
+		# Check if all players or enemies are dead
 		if check_game_over() or check_win_battle():
 			over = true
 			break
 	emit_signal("round_finished")
 
+# All players are dead: Defeat!
 func check_game_over():
-	return Enemies == []
-
-func check_win_battle():
 	return dead_allies == Players.size()
 
+# All players are dead: Victory!
+func check_win_battle():
+	return Enemies == []
+
+# Auxiliary function to sort the turnorder vector
 func stackagility(a,b):
 	return a.get_agi() > b.get_agi()
 
+# Executes an action on a given target
 func execute_action(action, target):
+	
+	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
 		var atk = current_entity.get_atk()
 		var alvo = Enemies[int(target)]
-		print("TARGET IS"+target)
-		print(current_entity.get_name()+" EXECUTOU A ACTION "+action+" NO TARGET "+alvo.get_name())
 		var dmg = alvo.take_damage(PHYSIC, atk)
 		current_entity.update_hate(dmg, int(target))
 		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
 		if alvo.get_health() <= 0:
 			get_node("E"+target+"0").hide()
 			Enemies.remove(int(target))
+	
+	# Lane: only the player characters may change lanes
 	elif action == "Lane":
 		for i in range(Players.size()):
-			if Players[i].get_name() == current_entity.get_name():
+			if Players[i] == current_entity:
 				var lane = current_entity.get_pos()
 				current_entity.set_pos(int(target))
 				$Log.display_text(current_entity.get_name()+" se moveu para a lane "+dlanes[int(target)])
 				get_node("P"+str(i)+str(lane)).hide()
 				get_node("P"+str(i)+str(target)).show()
+	
+	# Item: only the player characters may use items
 	elif action == "Item":
+		# Quick trick to identify if target is friend or foe
 		var entities = []
 		target[1] = int(target[1])
 		if target[1] > 0:
@@ -135,6 +150,7 @@ func execute_action(action, target):
 		var alvo = entities[target[1]]
 		var item = Inventory[int(target[0])]
 		
+		# Itens may target entities, lanes or everyone
 		var affected = []
 		if item.get_target() == "ONE":
 			affected.append(alvo)
@@ -146,8 +162,9 @@ func execute_action(action, target):
 		elif item.get_target() == "ALL":
 			for p in entities:
 				affected.append(p)
+		
+		# Apply the effect on all affected
 		for alvo in affected:
-			print(current_entity.get_name()+" USOU O ITEM "+item.nome+" NO TARGET "+alvo.get_name())
 			$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
 			item.quantity = item.quantity - 1
 			if (item.effect != []):
@@ -156,6 +173,8 @@ func execute_action(action, target):
 			if (item.status != []):
 				for st in item.status:
 					apply_status(st, alvo, $Log)
+		
+		# No more of the item used
 		if item.quantity == 0:
 			Inventory.remove(int(target[0]))
 		get_node("Menu/Attack").show()
@@ -209,8 +228,10 @@ func execute_action(action, target):
 			get_node("E"+str(target[1])+"0").hide()
 			Enemies.remove(int(target[1]))
 
+# Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action
+	
 func set_current_target(target):
 	current_target = target
 

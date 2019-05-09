@@ -8,14 +8,22 @@ var health
 var position
 var classe
 var skills
+var status = {}
 
-#func _init(valores, vida, pos, identificacao):
-#	stats = valores
-#	alive = true
-#	health = vida
-#	position = pos
-#	nome = identificacao
-#	set_multiplier(pos, 0, 0)
+func get_status():
+	return status
+
+func remove_status(effect):
+	stats.erase(effect)
+
+func add_status(effect, turns):
+	status[effect] = turns
+
+func decrement_turns():
+	for st in status:
+		status[st] -= 1
+		if status[st] == 0:
+			status.erase(st)
 
 func take_damage(type, damage):
 	#print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")

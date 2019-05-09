@@ -43,5 +43,13 @@ func apply_status(status, target, logs):
 	var value = status[0]
 	if value:
 		logs.display_text(target.get_name()+" agora está sob o efeito de "+sstats[type])
+		target.add_status(sstats[type], 3)
 	else:
 		logs.display_text(target.get_name()+" não está mais sob o efeito de "+sstats[type])
+		target.remove_status(sstats[type])
+
+func result_status(status, target, logs):
+	if status == "POISON":
+		var hp = target.get_health()
+		target.set_stats(HP, hp-10)
+		logs.display_text(target.get_name()+" levou 10 de dano de Poison")
