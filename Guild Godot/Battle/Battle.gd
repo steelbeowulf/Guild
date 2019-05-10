@@ -34,15 +34,9 @@ func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 func _ready():
 	over = false
 	Enemies = []
-	Players = []
+	Players = LOADER.players_from_file("res://Testes/Players.json")
 	Inventory = LOADER.items_from_file("res://Testes/Inventory.json")
-	var Skills = LOADER.items_from_file("res://Testes/Skills.json")
-	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Slime", []))
-	Enemies.append(cenaenemy.new([25,25,100,100,10,10,5,10,9,10], 0, "Minotauro", []))
-	Players.append(cenaplayer.new([100,200,50,50, 10,10,10,10,11,10], 0, "beefy boi", []))
-	Players.append(cenaplayer.new([100,150,50,50, 10,10,10,10,22,10], 0, "stabby boi", Skills))
-	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,5,10], 0, "arrow boi", []))
-	Players.append(cenaplayer.new([100,100,50,50, 10,10,10,10,0,10], 0, "holy boi", [Skills[-1]]))
+	Enemies = LOADER.enemies_from_file("res://Testes/Enemies.json")
 
 	for c in get_node("Menu").get_children():
 		c.focus_previous = NodePath("Menu/Attack")
@@ -78,8 +72,13 @@ func rounds():
 		
 		# If the entity is an enemy, leave it to the AI
 		if current_entity.classe == "boss":
-			print("ooga booga")
-			#current.AI()
+			if current_entity.get_name() == "Slime":
+				execute_action("Attack", 0)
+			else:
+				execute_action("Skill", [0,0])
+			emit_signal("turn_finished")
+			#print("ooga booga")
+			#current_entity.AI()
 		# If it's a player, check valid actions (has itens, has MP)
 		else:
 			if not current_entity.skills or current_entity.get_mp() == 0:
@@ -118,9 +117,18 @@ func execute_action(action, target):
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
 		var atk = current_entity.get_atk()
-		var alvo = Enemies[int(target)]
+		var entities = []
+		target = int(target)
+		if target > 0:
+			entities = Players
+			target -= 1
+		else:
+			entities = Enemies
+			target = abs(target)-1
+		var alvo = entities[target]
 		var dmg = alvo.take_damage(PHYSIC, atk)
-		current_entity.update_hate(dmg, int(target))
+		if current_entity.classe != "boss":
+			current_entity.update_hate(dmg, int(target))
 		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
 		if alvo.get_health() <= 0:
 			get_node("E"+target+"0").hide()

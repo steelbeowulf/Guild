@@ -53,3 +53,7 @@ func result_status(status, target, logs):
 		var hp = target.get_health()
 		target.set_stats(HP, hp-10)
 		logs.display_text(target.get_name()+" levou 10 de dano de Poison")
+	elif status == "REGEN":
+		var hp = target.get_health()
+		target.set_stats(HP, hp+10)
+		logs.display_text(target.get_name()+" recuperou 10 de HP")
