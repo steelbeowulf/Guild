@@ -25,10 +25,10 @@ func apply_effect(who, effect, target, t_id, logs):
 	var finalval = TargetStat + value
 	var valmax = 9999
 	for i in range(times):
-		print(i)
 		if stat == HP and value < 0:
 			var dmg = target.take_damage(type, abs(value))
-			who.update_hate(dmg, t_id)
+			if target.classe == "boss" and who.classe != "boss":
+				who.update_hate(dmg, t_id)
 		elif stat == HP:
 			valmax = target.get_stats(HP_MAX)
 		elif stat == MP:
@@ -36,24 +36,29 @@ func apply_effect(who, effect, target, t_id, logs):
 		if TargetStat + value > valmax:
 			finalval = valmax
 		target.set_stats(stat, finalval)
+		if target.get_health() > 0.2*target.get_max_health():
+			target.remove_status("HP_CRITICAL")
 	logs.display_text(target.get_name()+" agora tem "+str(target.get_stats(stat))+" de "+dstats[stat])
 
-func apply_status(status, target, logs):
+func apply_status(status, target, attacker, logs):
 	var type = status[1]
 	var value = status[0]
+	var atkm = attacker.get_atkm()
 	if value:
 		logs.display_text(target.get_name()+" agora está sob o efeito de "+sstats[type])
-		target.add_status(sstats[type], 3)
+		target.add_status(sstats[type], atkm, 3)
 	else:
 		logs.display_text(target.get_name()+" não está mais sob o efeito de "+sstats[type])
 		target.remove_status(sstats[type])
 
-func result_status(status, target, logs):
+func result_status(status, values, target, logs):
 	if status == "POISON":
 		var hp = target.get_health()
-		target.set_stats(HP, hp-10)
-		logs.display_text(target.get_name()+" levou 10 de dano de Poison")
+		var dmg = values[1] - target.get_defm()
+		target.set_stats(HP, hp-dmg)
+		logs.display_text(target.get_name()+" levou "+str(dmg)+" de dano de Poison")
 	elif status == "REGEN":
 		var hp = target.get_health()
-		target.set_stats(HP, hp+10)
-		logs.display_text(target.get_name()+" recuperou 10 de HP")
+		var max_hp = target.get_max_health()
+		target.set_stats(HP, hp+(max_hp)*0.05)
+		logs.display_text(target.get_name()+" recuperou "+str(0.05*max_hp)+" de HP")

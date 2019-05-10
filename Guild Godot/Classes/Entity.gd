@@ -1,5 +1,6 @@
 extends "Stats.gd"
 
+var id
 var nome
 var stats
 var buffs
@@ -9,6 +10,7 @@ var position
 var classe
 var skills
 var status = {}
+var dead = false
 
 func get_status():
 	return status
@@ -16,14 +18,19 @@ func get_status():
 func remove_status(effect):
 	stats.erase(effect)
 
-func add_status(effect, turns):
-	status[effect] = turns
+func add_status(effect, atkm, turns):
+	#print("adding status "+effect)
+	status[effect] = [turns, atkm]
+	if effect == "KO":
+		dead = true
+	#print(status)
 
 func decrement_turns():
 	for st in status:
-		status[st] -= 1
-		if status[st] == 0:
-			status.erase(st)
+		if st != "KO" and st != "HP_CRITICAL" and st != "TRAPPED" and st != "FLOAT" and st != "UNDEAD":
+			status[st][0] -= 1
+			if status[st][0] == 0:
+				status.erase(st)
 
 func take_damage(type, damage):
 	#print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
@@ -32,12 +39,18 @@ func take_damage(type, damage):
 		dmg = damage - stats[DEF]
 	elif type == MAGIC:
 		dmg = damage - stats[DEFM]
-	print("dmg is "+str(dmg))
-	print("stats[def] is"+str(stats[DEF]))
-	print("value is"+str(damage))
+	#print("dmg is "+str(dmg))
+	#print("stats[def] is"+str(stats[DEF]))
+	#print("value is"+str(damage))
+	if dmg < 0:
+		dmg = 0
 	set_stats(HP, get_health()-dmg)
-	#print(nome+ " AGORA TEM "+str(get_health())+" DE VIDA!")
+	if get_health() < 0.2*get_max_health():
+		self.add_status("HP_CRITICAL", 0, 999)
 	return dmg
+
+func is_dead():
+	return dead
 
 func set_stats(stat, value):
 	self.stats[stat] = value
