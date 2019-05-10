@@ -13,6 +13,7 @@ var over
 var current_action
 var current_target
 var dead_allies = 0
+var dead_enemies = 0
 var total_enemies
 
 signal round_finished
@@ -66,41 +67,57 @@ func rounds():
 		current_entity = turnorder[i]
 		
 		# If the entity is currently affected by a status, apply its effect
+		var can_move = []
+		var can_actually_move = 0
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
 		if status:
 			for st in status.keys():
-				result_status(st, status[st], current_entity, $Log)
+				can_move.append(result_status(st, status[st], current_entity, $Log))
 			current_entity.decrement_turns()
-		if current_entity.is_dead():
-			continue
-		# If the entity is an enemy, leave it to the AI
-		if current_entity.classe == "boss":
-			#if current_entity.get_name() == "Slime":
-			#	execute_action("Attack", 0)
-			#else:
-			#	execute_action("Skills", [0,1])
-			var decision = current_entity.AI(Players, Enemies)
-			execute_action(decision[0], decision[1])
-			emit_signal("turn_finished")
-			#print("ooga booga")
-			#current_entity.AI()
-		# If it's a player, check valid actions (has itens, has MP)
-		else:
-
-			if not current_entity.skills or current_entity.get_mp() == 0:
-
-				get_node("Menu/Skills").disabled = true
+			print(current_entity.get_name()+" e seu canmove "+str(can_move))
+			for condition in can_move:
+				if condition == -1:
+					can_actually_move = -1
+				elif condition == -2:
+					can_actually_move = -2
+					#var atk = current_entity.get_atk()
+		if can_actually_move == 0:
+			# If the entity is an enemy, leave it to the AI
+			if current_entity.classe == "boss":
+				#if current_entity.get_name() == "Slime":
+				#	execute_action("Attack", 0)
+				#else:
+				#	execute_action("Skills", [0,1])
+				var decision = current_entity.AI(Players, Enemies)
+				print(current_entity.get_name()+"decidiu usar "+decision[0]+" em "+str(decision[1]))
+				execute_action(decision[0], decision[1])
+				emit_signal("turn_finished")
+				#print("ooga booga")
+				#current_entity.AI()
+			# If it's a player, check valid actions (has itens, has MP)
 			else:
-				get_node("Menu/Skills").disabled = false
-			if Inventory.size() == 0:
-				get_node("Menu/Itens").disabled = true
-			
-			# Show the Menu and wait until action is selected
-			get_node("Menu").show()
-			$Menu/Attack.grab_focus()
-			yield($Menu, "turn_finished")
-			execute_action(current_action, current_target)
+	
+				if not current_entity.skills or current_entity.get_mp() == 0:
+	
+					get_node("Menu/Skills").disabled = true
+				else:
+					get_node("Menu/Skills").disabled = false
+				if Inventory.size() == 0:
+					get_node("Menu/Itens").disabled = true
+				
+				# Show the Menu and wait until action is selected
+				get_node("Menu").show()
+				$Menu/Attack.grab_focus()
+				yield($Menu, "turn_finished")
+				execute_action(current_action, current_target)
+		elif can_actually_move == -1:
+			execute_action("Pass", 0)
+			emit_signal("turn_finished")
+		elif can_actually_move == -2:
+			randomize()
+			var rand = rand_range(-LOADER.List.size(), 0)
+			execute_action("Attack", rand)
 		# Check if all players or enemies are dead
 		if check_game_over() or check_win_battle():
 			over = true
@@ -113,7 +130,7 @@ func check_game_over():
 
 # All players are dead: Victory!
 func check_win_battle():
-	return Enemies == []
+	return dead_enemies == Enemies.size()
 
 # Auxiliary function to sort the turnorder vector
 func stackagility(a,b):
@@ -353,6 +370,7 @@ func kill(entity, id):
 	if entity[id].classe == "boss":
 		a = "E"
 		b = "0"
+		dead_enemies += 1
 	else:
 		dead_allies += 1
 		a = "P"

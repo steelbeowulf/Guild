@@ -16,25 +16,25 @@ func get_status():
 	return status
 
 func remove_status(effect):
-	if status == "SLOW":
+	if effect == "SLOW":
 		var agi = self.get_agi()
 		self.set_stats(AGI, agi*2)
 		#logs.display_text(self.get_name()+" recuperou agilidade")
-	elif status == "HASTE":
+	elif effect == "HASTE":
 		var agi = self.get_agi()
 		self.set_stats(AGI, agi/2)
 		#logs.display_text(target.get_name()+" ganhou o dobro de agilidade")
-	elif status == "MAX_HP_DOWN":
+	elif effect == "MAX_HP_DOWN":
 		var hp_max = self.get_max_health()
 		var hp = self.get_health()
 		self.set_stats(HP_MAX, 3*hp_max/2)
 		#logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
-	elif status == "MAX_MP_DOWN":
+	elif effect == "MAX_MP_DOWN":
 		var mp_max = self.get_max_mp()
 		var mp = self.get_mp()
 		self.set_stats(MP_MAX, 3*mp_max/2)
 		#logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
-	elif status == "CURSE":
+	elif effect == "CURSE":
 		var hp = self.get_health()
 		var agi = self.get_agi()
 		var atk = self.get_atk()
@@ -49,31 +49,33 @@ func remove_status(effect):
 		self.set_stats(DEF, def*2)
 		self.set_stats(DEFM, defm*2)
 		self.set_stats(ACC, acc*2)
-		#logs.display_text(target.get_name()+" foi amaldiçoado. todos seus status foram reduzidos pela metade")
-	elif status == "BERSERK":
+		#logs.display_text(target.get_name()+" foi amaldiçoado. todos seus effect foram reduzidos pela metade")
+	elif effect == "BERSERK":
 		var atk = self.get_atk()
 		self.set_stats(ATK, atk - 40)
 		#logs.display_text(target.get_name()+" esta fora de controle, atacará qualquer um em sua frente")
-	elif status == "UNDEAD":
+	elif effect == "UNDEAD":
 		var atk = self.get_atk()
 		self.set_stats(ATK, atk + 40)
 		#logs.display_text(target.get_name()+" foi zumbificado, atacará qualquer alvo")
-	elif status == "PETRIFY":
+	elif effect == "PETRIFY":
 		var def = self.get_def()
 		var defm = self.get_defm()
 		self.set_stats(DEF, 3*def/4)
 		self.set_stats(DEFM, defm*2)
 			#logs.display_text(target.get_name()+" esta petrificado, não consegue atacar")
-	elif status == "BLIND":
+	elif effect == "BLIND":
 		var acc = self.get_acc()
 		self.set_stats(ACC, acc*10)
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
-	stats.erase(effect)
+	if stats.has(effect):
+		stats.erase(effect)
 
 func add_status(effect, atkm, turns):
 	#print("adding status "+effect)
 	status[effect] = [turns, atkm]
 	if effect == "KO":
+		self.remove_status("HP_CRITICAL")
 		dead = true
 	#print(status)
 
@@ -97,8 +99,11 @@ func take_damage(type, damage):
 	if dmg < 0:
 		dmg = 0
 	set_stats(HP, get_health()-dmg)
-	if get_health() < 0.2*get_max_health():
+	if get_health() < 0.2*get_max_health() and get_health() > 0:
 		self.add_status("HP_CRITICAL", 0, 999)
+	if get_health() <= 0:
+		self.add_status("KO", 0, 999)
+		self.remove_status("HP_CRITICAL")
 	return dmg
 
 func is_dead():
