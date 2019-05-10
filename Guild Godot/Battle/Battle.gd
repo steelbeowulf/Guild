@@ -66,6 +66,7 @@ func rounds():
 		
 		# If the entity is currently affected by a status, apply its effect
 		var status = current_entity.get_status()
+		LOADER.List = Enemies
 		if status:
 			for st in status.keys():
 				result_status(st, current_entity, $Log)
@@ -239,7 +240,8 @@ func execute_action(action, target):
 		if alvo.get_health() <= 0:
 			get_node("E"+str(target[1])+"0").hide()
 			Enemies.remove(int(target[1]))
-
+	elif action == "Pass":
+		pass
 # Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action
