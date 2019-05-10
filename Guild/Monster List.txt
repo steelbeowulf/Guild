@@ -29,9 +29,15 @@
       Cleave: Hit all enemies on the mid lane
       
     >Ape(low lv enemy):
-    	Rock: hit enemies on the back row
-      Fist: Melee Weapon Attack
+	Rock: hit enemies on the back row
+	Fist: Melee Weapon Attack
     
+    >Twisted Ape(low lv enemy):
+	Rock: hit enemies on the back row
+	Fist: Melee Weapon Attack
+	Primal Frenzy: Buff agility and attack
+	Boulder Toss: Hit all enemies on the mid lane
+
     >Behemoth:
     	Opener:
       	Frightful Roar: Scramble the party's formation
@@ -62,7 +68,7 @@
       Water weakness
       Spellcasting:
       	• Fire Bolt
-        •	Fire pillar(AoE targeting all players)
+        • Fire pillar(AoE targeting all players)
         • Call of the elements (Powers up magic damage, gains MP)
     
     >Icemancer*:
@@ -70,7 +76,7 @@
       Fire weakness
       Spellcasting:
       	• Iceblast
-        •	Cone of Cold(AoE targeting all players)
+        • Cone of Cold(AoE targeting all players)
         • Call of the elements (Powers up magic damage, gains MP)
         
     >Earthmancer*:
@@ -78,7 +84,7 @@
       Ice weakness
       Spellcasting:
       	• Stone spike
-        •	Tremor(AoE targeting all players)
+        • Tremor(AoE targeting all players)
         • Call of the elements (Powers up magic damage, gains MP)
     
     >Windmancer*:
@@ -86,15 +92,21 @@
       Earth weakness
       Spellcasting:
       	• Air Gust
-        •	Twister(AoE targeting all players)
+        • Twister(AoE targeting all players)
         • Call of the elements (Powers up magic damage, gains MP)
 		
     *All of those are the same boss encounter
     
-    >Skunk:
-    	Bite: Melee Weapon Attack
-      Odor: Front lane Debuff(Accuracy down)
+    >Skunk(low lv enemy):
+	Bite: Melee Weapon Attack
+	Odor: Front lane Debuff(Accuracy down)
     
+    >Twisted Skunk(low lv enemy):
+	Bite: Melee Weapon Attack
+	Odor: Front lane Debuff(Accuracy down)
+	Twisted Mutation: Buff defense and magic defense
+	Pungent Wave: AoE Magic damage. Chance of confuse targets
+
     >Ranger(mid lv enemy):
     	high agility
       moderate hp
@@ -108,8 +120,12 @@
       Poisonous bite: Melee Weapon Attack, causes poison
     
     >Bat(low lv enemy):
-    	Bite: Melee Weapon Attack
-      
+	Bite: Melee Weapon Attack
+
+    >Twisted Bat(mid lv enemy):
+	Bite: Melee Weapon Attack
+	Poisoned fangs: Melee Weapon Attack. high chance of Poison	      
+
     >Berserker(low lv enemy):
     	low defense
       high damage
@@ -117,6 +133,12 @@
     >Bear(low lv enemy):
     	Bite: Melee Weapon Attack
       Claws: Melee Weapon Attack
+
+    >Twisted Bear(mid lv enemy):
+	Bite: Melee Weapon Attack
+	Claws: Melee Weapon Attack
+	Bloodlust: Buff attack
+	Crescent Slash: Physical AoE damage
     
     >Slime(low lv enemy):
     	Jump: Melee Weapon Attack
@@ -168,9 +190,51 @@
       Sleep spore: Put a random target to sleep
     
     >Crocodile(Low lv enemy):
-    	Bite: Melee Weapon Attack
-      Death roll: low chance of dealing Max HP damage. otherwise halves hp of the target
-    
+	Bite: Melee Weapon Attack
+	Death roll: low chance of dealing Max HP damage. otherwise halves hp of the target
+
+    >Twisted Crocodile(Mid lv enemy):
+	Bite: Melee Weapon Attack
+	Death roll: low chance of dealing Max HP damage. otherwise halves hp of the target
+	Mutilate: Moderate chance of dealing Max HP damage. otherwise deals high damage and paralysis	
+
     >Boar(low lv enemy):
     	Tackle: Deals extra damage on the front lane
       Tusk: Melee weapon attack
+    
+    >Twisted Boar(mid lv enemy):
+	Tackle: Deals extra damage on the front lane
+	Tusk: Melee weapon attack
+	Frenzy Madness: Deals double damage to a random target. Buffs attack
+
+    >Spider(mid lv enemy):
+	Bite: Melee weapon attack. Low chance of inflicting poison
+	Web throw: Slow random target
+	Jump: Melee weapon attack. Targets a random target on the back lane
+
+    >Corrupted Drider(spider queen)(half-spider half-human):
+	Web throw: Slow random target
+	Axe swipe: Melee weapon damage
+	Axe swing: High damage weapon attack
+	Crushing constrict: Stop a random target
+	Arachnophobia: AoE paralyze(moderate chance of happening) buffs attack damage
+	
+    >Twisted Treant(mid lv enemy):
+	FIre Weakness
+	Log swing: Melee Weapon Attack
+	Seed drop: Inflict a random stat debuff(sleep, poison, paralysis, slow, stop, blind, silence, charm, burn)
+	Twisted branches: Single target Magic Damage
+
+     >Corrupted Ancient:
+	Fire Weakness
+	Opener:
+	  Force of the Nature: Slow AoE
+	
+	Rootcalling: Single target Magic Damage
+	Seed drop: Inflict a random stat debuff(sleep, poison, paralysis, slow, stop, blind, silence, charm, burn)
+	Thorn whip: Single target magic damage. deals extra damage on the back row. inflicts poison
+	Nourish: Moderate self-heal
+	Sea of thorns: AoE magic damage. Moderate chance of inflictin Poison
+
+     >Fungae
+	
