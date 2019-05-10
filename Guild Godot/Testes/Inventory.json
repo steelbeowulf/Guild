@@ -1,10 +1,17 @@
 [
 	{"NAME":"POTION",
 	"QUANT":10,
+	"TARGET":"ONE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":10, "TYPE":"", "TURNS":1}],
+	"STATUS":[]},
+	{"NAME":"MEGA POTION",
+	"QUANT":5,
+	"TARGET":"ALL",
+	"EFFECTS":[{"STAT":"HP", "VALUE":20, "TYPE":"", "TURNS":1}],
 	"STATUS":[]},
 	{"NAME":"ETHER",
 	"QUANT":10,
+	"TARGET":"ONE",
 	"EFFECTS":[{"STAT":"MP", "VALUE":10, "TYPE":"", "TURNS":1}],
 	"STATUS":[]},
 ]

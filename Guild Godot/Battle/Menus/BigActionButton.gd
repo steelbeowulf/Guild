@@ -1,4 +1,4 @@
-extends Button
+extends "res://Battle/Apply.gd"
 var item_picked = null
 
 signal action_picked
@@ -12,6 +12,7 @@ func _ready():
 	for c in $Targets/HBoxContainer/Enemies.get_children():
 		c.connect("target_picked", self, "_on_Target_Picked")
 		c.disabled = true
+
 
 func hide_stuff():
 	for c in get_parent().get_children():
@@ -36,8 +37,23 @@ func _on_Action_pressed():
 
 func _on_Item_Picked(item):
 	item_picked = item
-	for e in $Targets/HBoxContainer/Enemies.get_children():
-		e.disabled = false
-	for p in $Targets/HBoxContainer/Players.get_children():
-		p.disabled = false
+	print("opa, List é"+str(List))
+	item = LOADER.List[int(item)]
+	print(item.get_name())
+	if item.get_target() == "ALL":
+		for e in $Targets/HBoxContainer/Enemies.get_children():
+			e.hide()
+		for p in $Targets/HBoxContainer/Players.get_children():
+			p.hide()
+		$Targets/HBoxContainer/Enemies/"-1".set_text("All Enemies")
+		$Targets/HBoxContainer/Enemies/"-1".disabled = false
+		$Targets/HBoxContainer/Enemies/"-1".show()
+		$Targets/HBoxContainer/Players/"1".set_text("All Players")
+		$Targets/HBoxContainer/Players/"1".disabled = false
+		$Targets/HBoxContainer/Players/"1".show()
+	else:
+		for e in $Targets/HBoxContainer/Enemies.get_children():
+			e.disabled = false
+		for p in $Targets/HBoxContainer/Players.get_children():
+			p.disabled = false
 	$Targets/HBoxContainer/Players/"1".grab_focus()
