@@ -35,6 +35,7 @@ func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 func _ready():
 	over = false
 	Enemies = []
+
 	Players = LOADER.players_from_file("res://Testes/Players.json")
 	Inventory = LOADER.items_from_file("res://Testes/Inventory.json")
 	Enemies = LOADER.enemies_from_file("res://Testes/Enemies.json")
@@ -66,7 +67,7 @@ func rounds():
 		
 		# If the entity is currently affected by a status, apply its effect
 		var status = current_entity.get_status()
-		#LOADER.List = Enemies
+		LOADER.List = Enemies
 		if status:
 			for st in status.keys():
 				result_status(st, status[st], current_entity, $Log)
@@ -86,7 +87,9 @@ func rounds():
 			#current_entity.AI()
 		# If it's a player, check valid actions (has itens, has MP)
 		else:
+
 			if not current_entity.skills or current_entity.get_mp() == 0:
+
 				get_node("Menu/Skills").disabled = true
 			else:
 				get_node("Menu/Skills").disabled = false
@@ -186,6 +189,7 @@ func execute_action(action, target):
 		# No more of the item used
 		if item.quantity == 0:
 			Inventory.remove(int(target[0]))
+		
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Skills").show()
@@ -233,6 +237,8 @@ func execute_action(action, target):
 #		get_node("Menu/Run").show()
 		if alvo.get_health() <= 0:
 			kill(entities, alvo.id)
+	elif action == "Pass":
+		pass
 
 # Auxiliary functions for the action selection
 func set_current_action(action):

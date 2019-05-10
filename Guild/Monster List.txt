@@ -1,0 +1,240 @@
+  Monster list (under consideration):
+  	>Aboleth:
+    	Multiattack: The aboleth makes three tentacle attacks.
+			Tentacle: Melee Weapon Attack and DOT for a few turns
+      Enslave: Charm a target and sap his HP until the charm is broken
+      Mucous Cloud: Poisoned upon melee attack
+      
+    >Acolyte(low lv enemy):
+    	Club: Melee Weapon Attack
+      Spellcasting: Heals, Buffs and low dps
+      
+    >Androsphinx:
+    	Spellcasting:
+				• 2nd level (3 slots): Lesser Restoration
+				• 3rd level (3 slots): Dispel Magic
+				• 4th level (3 slots): Banishment
+				• 5th level (2 slots): Flame Strike, Greater Restoration
+      Multiattack: The sphinx makes two claw attacks.
+      Claw: Melee Weapon Attack
+      Roar: AoE debuff that gets stronger the closer you are and how many times you're hit with if
+      	1st: Slowed and attack down
+        2nd: Paralysed and attack down
+        3rd: damage and attack down
+        Wont work on back lane players and the attack debuff is stronger the closer you are
+    
+    >Animated Armor(mid lv enemy):
+    	low magic resistence
+      Slam: Melee Weapon Attack
+      Cleave: Hit all enemies on the mid lane
+      
+    >Ape(low lv enemy):
+	Rock: hit enemies on the back row
+	Fist: Melee Weapon Attack
+    
+    >Twisted Ape(low lv enemy):
+	Rock: hit enemies on the back row
+	Fist: Melee Weapon Attack
+	Primal Frenzy: Buff agility and attack
+	Boulder Toss: Hit all enemies on the mid lane
+
+    >Behemoth:
+    	Opener:
+      	Frightful Roar: Scramble the party's formation
+      Claw: Melee Weapon Attack
+      Bite: Melee Weapon Attack and DOT for a few turns
+      Charge: Heavy damage to the front lane. Pushes the target back one lane
+      Tremor: Ground damage to all targets
+      Menacing roar: Fear a random target
+    
+    >Wizard(mid lv enemy):
+    	Magic resistence
+      low HP
+      Spellcasting: 
+				• 1st level (4 slots): Fire Bolt
+				• 2nd level (3 slots): Reflect, Lightning Bolt
+				• 4th level (3 slots): Protect(defense up spell)
+				• 5th level (3 slots): Cone of Cold(Ice damage and low chance of freeze on all players)
+        
+    >Assassin(mid lv enemy):
+    	High agility
+      moderate HP
+      Assasinate: Low chance of Max HP damage
+      Stab: Melee Weapon Attack
+      Sneak attack: high chance of dealing double damage
+    
+    >Firemancer*:
+    	Fire immunity
+      Water weakness
+      Spellcasting:
+      	• Fire Bolt
+        • Fire pillar(AoE targeting all players)
+        • Call of the elements (Powers up magic damage, gains MP)
+    
+    >Icemancer*:
+    	Ice immunity
+      Fire weakness
+      Spellcasting:
+      	• Iceblast
+        • Cone of Cold(AoE targeting all players)
+        • Call of the elements (Powers up magic damage, gains MP)
+        
+    >Earthmancer*:
+    	Ground immunity
+      Ice weakness
+      Spellcasting:
+      	• Stone spike
+        • Tremor(AoE targeting all players)
+        • Call of the elements (Powers up magic damage, gains MP)
+    
+    >Windmancer*:
+    	Wind immunity
+      Earth weakness
+      Spellcasting:
+      	• Air Gust
+        • Twister(AoE targeting all players)
+        • Call of the elements (Powers up magic damage, gains MP)
+		
+    *All of those are the same boss encounter
+    
+    >Skunk(low lv enemy):
+	Bite: Melee Weapon Attack
+	Odor: Front lane Debuff(Accuracy down)
+    
+    >Twisted Skunk(low lv enemy):
+	Bite: Melee Weapon Attack
+	Odor: Front lane Debuff(Accuracy down)
+	Twisted Mutation: Buff defense and magic defense
+	Pungent Wave: AoE Magic damage. Chance of confuse targets
+
+    >Ranger(mid lv enemy):
+    	high agility
+      moderate hp
+      Rain of arrows: Hits the mid and back lane with a moderate damage
+      Trueshot: Targets the lowest HP party member for a execute damage(stops scaling with 30% missing health)
+      Mend: moderate heal
+      
+    >Basilisk(early lv boss):
+    	Petrifying Gaze: Petrify enemy
+      Bite: Melee Weapon Attack
+      Poisonous bite: Melee Weapon Attack, causes poison
+    
+    >Bat(low lv enemy):
+	Bite: Melee Weapon Attack
+
+    >Twisted Bat(mid lv enemy):
+	Bite: Melee Weapon Attack
+	Poisoned fangs: Melee Weapon Attack. high chance of Poison	      
+
+    >Berserker(low lv enemy):
+    	low defense
+      high damage
+    
+    >Bear(low lv enemy):
+    	Bite: Melee Weapon Attack
+      Claws: Melee Weapon Attack
+
+    >Twisted Bear(mid lv enemy):
+	Bite: Melee Weapon Attack
+	Claws: Melee Weapon Attack
+	Bloodlust: Buff attack
+	Crescent Slash: Physical AoE damage
+    
+    >Slime(low lv enemy):
+    	Jump: Melee Weapon Attack
+    
+    >Chimera(mid lv enemy):
+    	Fire breath(low chance of inflicting burn)
+      Thunder breath(Low chance of inflicting paralysis)
+      Ice breath(Low chance of inflicting freeze)
+      Bite: Melee Weapon Attack
+      Horns: Melee Weapon Attack
+      Claws: Melee Weapon Attack
+    
+    >Golem(mid lv enemy):
+    	Vunerable to water
+      Resistent to Ground
+      Magic Resistance
+      Multiattack: The golem makes two slam attacks
+      Slam: Melee Weapon Attack
+      Tremor: (Ground AoE damaga to all party members)
+      
+    >Cultist(high lv enemy):
+    	Calling of the dark: Halves current HP of all party members
+      Insanity: increase agility, attack and magic attack
+      Faith unbound: Summon tentacles that deal magic damage and poisons the target. Targets the player with the lowest HP
+    
+    >Cultist Leader(high lv enemy):
+    	Darkness unleashed: Cuts the current HP of all party members to 1/8
+      Insanity: increase agility, attack and magic attack
+      Unholy visions: Summon tentacles that deals even more magic damage, poisons the target and curses him. Targets the player with the lowest HP
+    
+    >Undead(mid lv enemy):
+    	Zombify: Turn a random target undead
+      
+    >Lamia(mid lv enemy):
+    	Charm: Charms a enemy(duh)
+      Bloodsucc: Deals moderate damage. Poison a target and self cast regen
+      Constrict: Melee Weapon Attack. Paralyze the target
+    
+    >Grim(mid/high lv enemy):
+    	Reaper: Casts Doom ona random target
+      Assimilation: Deals damage. Gain MP and halves the enemy MP
+      
+    >Man-Eater(low lv enemy):
+    	Spore: Blinds a random target
+      Whip: Melee Weapon Attack. low chance of casting poison
+      Paralysis spore: Paralyze a random target
+      Petrify spore: Petrify a random target
+      Poisonous spore: Poison a random target
+      Sleep spore: Put a random target to sleep
+    
+    >Crocodile(Low lv enemy):
+	Bite: Melee Weapon Attack
+	Death roll: low chance of dealing Max HP damage. otherwise halves hp of the target
+
+    >Twisted Crocodile(Mid lv enemy):
+	Bite: Melee Weapon Attack
+	Death roll: low chance of dealing Max HP damage. otherwise halves hp of the target
+	Mutilate: Moderate chance of dealing Max HP damage. otherwise deals high damage and paralysis	
+
+    >Boar(low lv enemy):
+    	Tackle: Deals extra damage on the front lane
+      Tusk: Melee weapon attack
+    
+    >Twisted Boar(mid lv enemy):
+	Tackle: Deals extra damage on the front lane
+	Tusk: Melee weapon attack
+	Frenzy Madness: Deals double damage to a random target. Buffs attack
+
+    >Spider(mid lv enemy):
+	Bite: Melee weapon attack. Low chance of inflicting poison
+	Web throw: Slow random target
+	Jump: Melee weapon attack. Targets a random target on the back lane
+
+    >Corrupted Drider(spider queen)(half-spider half-human):
+	Web throw: Slow random target
+	Axe swipe: Melee weapon damage
+	Axe swing: High damage weapon attack
+	Crushing constrict: Stop a random target
+	Arachnophobia: AoE paralyze(moderate chance of happening) buffs attack damage
+	
+    >Twisted Treant(mid lv enemy):
+	FIre Weakness
+	Log swing: Melee Weapon Attack
+	Seed drop: Inflict a random stat debuff(sleep, poison, paralysis, slow, stop, blind, silence, charm, burn)
+	Twisted branches: Single target Magic Damage
+
+     >Corrupted Ancient:
+	Fire Weakness
+	Opener:
+	  Force of the Nature: Slow AoE
+	
+	Rootcalling: Single target Magic Damage
+	Seed drop: Inflict a random stat debuff(sleep, poison, paralysis, slow, stop, blind, silence, charm, burn)
+	Thorn whip: Single target magic damage. deals extra damage on the back row. inflicts poison
+	Nourish: Moderate self-heal
+	Sea of thorns: AoE magic damage. Moderate chance of inflictin Poison
+
+     >Fungae
+	
