@@ -159,5 +159,4 @@ margin_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "-5"
-
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]
