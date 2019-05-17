@@ -13,5 +13,8 @@ func _init(valores,  pos, identificacao, habilidades):
 func get_skills():
 	return self.skills
 	
+func get_hate():
+	return self.hate
+	
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)

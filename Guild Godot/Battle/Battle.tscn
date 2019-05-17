@@ -98,6 +98,12 @@ scale = Vector2( 3.2, 3.2 )
 texture = ExtResource( 6 )
 
 [node name="E10" type="Sprite" parent="Battle"]
+position = Vector2( 728.931, 481.579 )
+rotation = -0.0055467
+scale = Vector2( 3.2, 3.2 )
+texture = ExtResource( 6 )
+
+[node name="E20" type="Sprite" parent="Battle"]
 position = Vector2( 727.004, 211.165 )
 rotation = -0.0055467
 scale = Vector2( 3, 3 )
@@ -110,6 +116,7 @@ z_index = -1
 texture = ExtResource( 8 )
 
 [node name="Menu" type="VBoxContainer" parent="Battle"]
+editor/display_folded = true
 margin_left = 10.0
 margin_top = 467.0
 margin_right = 306.0

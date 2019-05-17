@@ -34,7 +34,7 @@ static func enemies_from_file(path):
 				for st in sk["STATUS"]:
 					status.append([st["BOOL"], STATUS[st["STATUS"]]])
 				skills.append(cenaitem.new(sk["NAME"], sk["QUANT"], sk["TARGET"],
-				effects, status))
+				sk["TYPE"], effects, status))
 			players.append(cenaenemy.new([data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
@@ -77,7 +77,7 @@ static func players_from_file(path):
 				for st in sk["STATUS"]:
 					status.append([st["BOOL"], STATUS[st["STATUS"]]])
 				skills.append(cenaitem.new(sk["NAME"], sk["QUANT"], sk["TARGET"],
-				effects, status))
+				sk["TYPE"], effects, status))
 			players.append(cenaplayer.new([data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
@@ -117,7 +117,7 @@ static func items_from_file(path):
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATUS[st["STATUS"]]])
 			itens.append(cenaitem.new(data["NAME"], data["QUANT"], data["TARGET"],
-			effects, status))
+			data["TYPE"], effects, status))
 	else:  # If parse has errors
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
