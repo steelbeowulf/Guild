@@ -45,8 +45,8 @@ func _ready():
 	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
 		for p in Players:
-			print(p.get_name()+" hate matrix is ")
-			print(p.hate)
+			print(p.get_name()+" resist is ")
+			print(p.resist)
 		rounds()
 		yield(self, "round_finished")
 	$Log.display_text("Fim de jogo!")
