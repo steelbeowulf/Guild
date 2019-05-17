@@ -11,6 +11,9 @@ var classe
 var skills
 var status = {}
 var dead = false
+var resist = []
+	#fire, water, ligthting, ice, earth, wind, holy, darkness]
+var elem = {0:"NULL", 1:"NULLL", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
 func get_status():
 	return status
@@ -89,16 +92,22 @@ func decrement_turns():
 func take_damage(type, damage):
 	#print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
 	var dmg = 0
+	var resistance = 1.0
 	if type == PHYSIC:
 		dmg = damage - stats[DEF]
-	elif type == MAGIC:
+	else:
 		dmg = damage - stats[DEFM]
-	#print("dmg is "+str(dmg))
-	#print("stats[def] is"+str(stats[DEF]))
-	#print("value is"+str(damage))
-	if dmg < 0:
+		resistance = resist[elem[type]]
+		dmg = dmg*resistance
+		print("defm is "+str(stats[DEFM]))
+		print("dmg is "+str(dmg))
+		print("resistance is  "+str(resistance))
+		print("type is"+str(type))
+		print("elem is"+str(elem[type]))
+	if dmg < 0 and resistance == 1.0:
 		dmg = 0
-	set_stats(HP, get_health()-dmg)
+	#set_stats(HP, get_health()-dmg)
+	stats[HP] = get_health() - dmg
 	if get_health() < 0.2*get_max_health() and get_health() > 0:
 		self.add_status("HP_CRITICAL", 0, 999)
 	if get_health() <= 0:

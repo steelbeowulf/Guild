@@ -55,5 +55,4 @@ margin_right = 250.0
 margin_bottom = 68.0
 size_flags_horizontal = 3
 text = "4"
-
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

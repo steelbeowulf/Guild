@@ -1,9 +1,5 @@
 extends "Apply.gd"
 
-var cenaplayer = load("res://Classes/Player.gd")
-var cenaenemy = load("res://Classes/Enemy.gd")
-var cenaitem = load("res://Classes/Itens.gd")
-
 var Players
 var Enemies
 var Inventory
@@ -49,8 +45,8 @@ func _ready():
 	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
 		for p in Players:
-			print(p.get_name()+" hate matrix is ")
-			print(p.hate)
+			print(p.get_name()+" resist is ")
+			print(p.resist)
 		rounds()
 		yield(self, "round_finished")
 	$Log.display_text("Fim de jogo!")
@@ -76,30 +72,25 @@ func rounds():
 				can_move.append(result_status(st, status[st], current_entity, $Log))
 			current_entity.decrement_turns()
 			print(current_entity.get_name()+" e seu canmove "+str(can_move))
+			
+			# Also covers cases in which the action is chosen for you (confuse, paralysis, etc)
 			for condition in can_move:
 				if condition == -1:
 					can_actually_move = -1
 				elif condition == -2:
 					can_actually_move = -2
-					#var atk = current_entity.get_atk()
+
 		if can_actually_move == 0:
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
-				#if current_entity.get_name() == "Slime":
-				#	execute_action("Attack", 0)
-				#else:
-				#	execute_action("Skills", [0,1])
 				var decision = current_entity.AI(Players, Enemies)
 				print(current_entity.get_name()+"decidiu usar "+decision[0]+" em "+str(decision[1]))
 				execute_action(decision[0], decision[1])
 				emit_signal("turn_finished")
-				#print("ooga booga")
-				#current_entity.AI()
+
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
-	
 				if not current_entity.skills or current_entity.get_mp() == 0:
-	
 					get_node("Menu/Skills").disabled = true
 				else:
 					get_node("Menu/Skills").disabled = false
@@ -111,9 +102,11 @@ func rounds():
 				$Menu/Attack.grab_focus()
 				yield($Menu, "turn_finished")
 				execute_action(current_action, current_target)
+		# Current entity cannot move
 		elif can_actually_move == -1:
 			execute_action("Pass", 0)
 			emit_signal("turn_finished")
+		# Current entity is forced to attack a random enemy
 		elif can_actually_move == -2:
 			randomize()
 			var rand = rand_range(-LOADER.List.size(), 0)
@@ -237,16 +230,16 @@ func execute_action(action, target):
 			for p in entities:
 				affected.append(p)
 		for alvo in affected:
-			#print(current_entity.get_name()+" USOU O SKILL "+skill.nome+" NO TARGET "+alvo.get_name())
 			$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
 			if (skill.effect != []):
 				for eff in skill.effect:
-					print(eff)
 					apply_effect(current_entity, eff, alvo, int(target[1]), $Log)
 			if (skill.status != []):
 				for st in skill.status:
 					apply_status(st, alvo, current_entity, $Log)
 		var mp = current_entity.get_mp()
+		
+		# Spends the MP
 		current_entity.set_stats(MP, mp-skill.quantity)
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
@@ -254,6 +247,7 @@ func execute_action(action, target):
 #		get_node("Menu/Run").show()
 		if alvo.get_health() <= 0:
 			kill(entities, alvo.id)
+	# Literally does nothing
 	elif action == "Pass":
 		pass
 
@@ -266,8 +260,9 @@ func set_current_target(target):
 
 func _process(delta):
 	if over:
-		$E00.hide()
-		$E10.hide()
+		get_tree().paused = true
+		#$E00.hide()
+		#$E10.hide()
 	if Input.is_action_pressed("ui_cancel") or (Input.is_action_pressed("ui_left") and (state == "Attack" or state == "Lane")):
 		for c in $Menu.get_children():
 			c.hide_stuff()
@@ -315,8 +310,9 @@ func _on_Itens_button_down():
 		players.get_node(str(i)).show()
 		players.get_node(str(i)).set_text(Players[i-1].get_name()+"   HP:"+str(Players[i-1].get_health())+"/"+str(Players[i-1].get_max_health())+"        MP: "+str(Players[i-1].get_mp())+"/"+str(Players[i-1].get_max_mp()))
 	for i in range(1, Enemies.size()+1):
-		enemies.get_node(str(-i)).show()
-		enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
+		if not Enemies[abs(i)-1].is_dead():
+			enemies.get_node(str(-i)).show()
+			enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
 	itens.get_node("0").grab_focus()
 	get_node("Menu/Itens/")._on_Action_pressed()
 
@@ -328,7 +324,6 @@ func _on_Skills_button_down():
 	get_node("Menu/Itens").hide()
 #	get_node("Menu/Run").hide()
 	var skills = current_entity.get_skills()
-	print(skills)
 	var itens = get_node("Menu/Skills/Targets/HBoxContainer/Itens")
 	var players = get_node("Menu/Skills/Targets/HBoxContainer/Players")
 	var enemies = get_node("Menu/Skills/Targets/HBoxContainer/Enemies")
@@ -349,19 +344,20 @@ func _on_Skills_button_down():
 		players.get_node(str(i)).show()
 		players.get_node(str(i)).set_text(Players[i-1].get_name()+"   HP:"+str(Players[i-1].get_health())+"/"+str(Players[i-1].get_max_health())+"        MP: "+str(Players[i-1].get_mp())+"/"+str(Players[i-1].get_max_mp()))
 	for i in range(1, Enemies.size()+1):
-		enemies.get_node(str(-i)).show()
-		enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
+		if not Enemies[abs(i)-1].is_dead():
+			enemies.get_node(str(-i)).show()
+			enemies.get_node(str(-i)).set_text(Enemies[abs(i)-1].get_name())
 	itens.get_node("0").grab_focus()
 	get_node("Menu/Skills/")._on_Action_pressed()
 
 func _on_Attack_button_down():
 	state = "Attack"
-	print(state)
 	for i in range(total_enemies):
 		get_node("Menu/Attack/Targets/"+str(i)).hide()
 	for i in range(Enemies.size()):
-		get_node("Menu/Attack/Targets/"+str(i)).show()
-		get_node("Menu/Attack/Targets/"+str(i)).set_text(Enemies[i].nome)
+		if not Enemies[i].is_dead(): 
+			get_node("Menu/Attack/Targets/"+str(i)).show()
+			get_node("Menu/Attack/Targets/"+str(i)).set_text(Enemies[i].nome)
 	get_node("Menu/Attack/")._on_Action_pressed()
 
 func kill(entity, id):
