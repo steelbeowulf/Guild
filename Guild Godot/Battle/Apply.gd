@@ -12,11 +12,11 @@ var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW",
 	25:"HIDDEN", 26:"FREEZE", 27:"IMMOBILIZE", 28:"KO", 29:"VEIL", 30:"TRAPPED", 31:"ATTACK_UP",
 	32:"ATTACK_DOWN", 33:"DEFENSE_UP", 34:"DEFENSE_DOWN", 35:"MAGIC_DEFENSE_UP", 37:"MAGIC_DEFENSE_DOWN",
 	38:"MAGIC_ATTACK_UP", 39:"MAGIC_ATTACK_DOWN", 40:"MAX_HP_UP", 41:"MAX_MP_UP", 42:"ACCURACY_UP",
-	43:"ACCURACY_DOWN", 44:"AGILITY_UP", 45:"AGILITY_DOWN", 46:"LUCK_UP", 47:"LUCK_DOWN"}
+	43:"ACCURACY_DOWN", 44:"AGILITY_UP", 45:"AGILITY_DOWN", 46:"LUCK_UP", 47:"LUCK_DOWN", 48:"FEAR"}
 
 # Attack type
-enum {PHYSIC, MAGIC}
-var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
+enum {PHYSIC, MAGIC, FIRE}
+var dtype = {PHYSIC:"físico", MAGIC:"mágico", FIRE:"de fogo"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
 func apply_effect(who, effect, target, t_id, logs):
@@ -30,17 +30,20 @@ func apply_effect(who, effect, target, t_id, logs):
 	for i in range(times):
 		if stat == HP and value < 0:
 			var dmg = target.take_damage(type, abs(value))
+			print("dano de "+str(dmg))
 			if target.classe == "boss" and who.classe != "boss":
 				who.update_hate(dmg, t_id)
-		elif stat == HP:
-			valmax = target.get_stats(HP_MAX)
-		elif stat == MP:
-			valmax = target.get_stats(MP_MAX)
-		if TargetStat + value > valmax:
-			finalval = valmax
-		target.set_stats(stat, finalval)
-		if target.get_health() > 0.2*target.get_max_health():
-			target.remove_status("HP_CRITICAL")
+		else:
+			if stat == HP:
+				valmax = target.get_stats(HP_MAX)
+			elif stat == MP:
+				valmax = target.get_stats(MP_MAX)
+			if TargetStat + value > valmax:
+				finalval = valmax
+			#print("antes do setstat: hp is"+str(target.get_stats(HP)))
+			target.set_stats(stat, finalval)
+			if target.get_health() > 0.2*target.get_max_health():
+				target.remove_status("HP_CRITICAL")
 	logs.display_text(target.get_name()+" agora tem "+str(target.get_stats(stat))+" de "+dstats[stat])
 
 func apply_status(status, target, attacker, logs):

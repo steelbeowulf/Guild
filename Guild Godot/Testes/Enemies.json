@@ -1,5 +1,5 @@
 [
-	{"HP":100,
+	{"HP":1,
 	"HP_MAX":100,
 	"MP":200,
 	"MP_MAX":200,
@@ -12,7 +12,7 @@
 	"LCK":5,
 	"NAME":"Mad Slime",
 	"SKILLS":[]},
-	{"HP":100,
+	{"HP":1,
 	"HP_MAX":100,
 	"MP":200,
 	"MP_MAX":200,
@@ -40,6 +40,6 @@
 	"LCK":5,
 	"NAME":"Minotauro",
 	"SKILLS":[{"NAME":"CRUSHING BLOW", "QUANT":30, "TARGET":"ALL", "TYPE":"OFFENSE",
-		"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":3}],
+		"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"FIRE", "TURNS":1}],
 		"STATUS":[]}]},
 ]
