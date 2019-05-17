@@ -178,7 +178,7 @@
       Constrict: Melee Weapon Attack. Paralyze the target
     
     >Grim(mid/high lv enemy):
-    	Reaper: Casts Doom ona random target
+    	Reaper: Casts Doom on a random target
       Assimilation: Deals damage. Gain MP and halves the enemy MP
       
     >Man-Eater(low lv enemy):
@@ -220,7 +220,7 @@
 	Arachnophobia: AoE paralyze(moderate chance of happening) buffs attack damage
 	
     >Twisted Treant(mid lv enemy):
-	FIre Weakness
+	Fire Weakness
 	Log swing: Melee Weapon Attack
 	Seed drop: Inflict a random stat debuff(sleep, poison, paralysis, slow, stop, blind, silence, charm, burn)
 	Twisted branches: Single target Magic Damage
