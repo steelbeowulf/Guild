@@ -1,20 +1,20 @@
   Monster list (under consideration):
-  	>Aboleth:
-    	Multiattack: The aboleth makes three tentacle attacks.
-			Tentacle: Melee Weapon Attack and DOT for a few turns
-      Enslave: Charm a target and sap his HP until the charm is broken
-      Mucous Cloud: Poisoned upon melee attack
+    >Aboleth:
+	Multiattack: The aboleth makes three tentacle attacks.
+	Tentacle: Melee Weapon Attack and DOT for a few turns
+	Enslave: Charm a target and sap his HP until the charm is broken
+	Mucous Cloud: Poisoned upon melee attack
       
     >Acolyte(low lv enemy):
-    	Club: Melee Weapon Attack
-      Spellcasting: Heals, Buffs and low dps
+	Club: Melee Weapon Attack
+	Spellcasting: Heals, Buffs and low dps
       
     >Androsphinx:
     	Spellcasting:
-				• 2nd level (3 slots): Lesser Restoration
-				• 3rd level (3 slots): Dispel Magic
-				• 4th level (3 slots): Banishment
-				• 5th level (2 slots): Flame Strike, Greater Restoration
+	• 2nd level (3 slots): Lesser Restoration
+	• 3rd level (3 slots): Dispel Magic
+	• 4th level (3 slots): Banishment
+	• 5th level (2 slots): Flame Strike, Greater Restoration
       Multiattack: The sphinx makes two claw attacks.
       Claw: Melee Weapon Attack
       Roar: AoE debuff that gets stronger the closer you are and how many times you're hit with if
@@ -39,22 +39,22 @@
 	Boulder Toss: Hit all enemies on the mid lane
 
     >Behemoth:
-    	Opener:
-      	Frightful Roar: Scramble the party's formation
-      Claw: Melee Weapon Attack
-      Bite: Melee Weapon Attack and DOT for a few turns
-      Charge: Heavy damage to the front lane. Pushes the target back one lane
-      Tremor: Ground damage to all targets
-      Menacing roar: Fear a random target
+	Opener:
+      	   Frightful Roar: Scramble the party's formation
+	Claw: Melee Weapon Attack
+	Bite: Melee Weapon Attack and DOT for a few turns
+	Charge: Heavy damage to the front lane. Pushes the target back one lane
+        Tremor: Ground damage to all targets
+        Menacing roar: Fear a random target
     
     >Wizard(mid lv enemy):
     	Magic resistence
       low HP
       Spellcasting: 
-				• 1st level (4 slots): Fire Bolt
-				• 2nd level (3 slots): Reflect, Lightning Bolt
-				• 4th level (3 slots): Protect(defense up spell)
-				• 5th level (3 slots): Cone of Cold(Ice damage and low chance of freeze on all players)
+	• 1st level (4 slots): Fire Bolt
+	• 2nd level (3 slots): Reflect, Lightning Bolt
+	• 4th level (3 slots): Protect(defense up spell)
+	• 5th level (3 slots): Cone of Cold(Ice damage and low chance of freeze on all players)
         
     >Assassin(mid lv enemy):
     	High agility
@@ -236,5 +236,71 @@
 	Nourish: Moderate self-heal
 	Sea of thorns: AoE magic damage. Moderate chance of inflictin Poison
 
-     >Fungae
+
+     >Twisted Fungae(mid lv enemy):
+	Fire Weakness
+	Poisonous spore: Poison a random target
+	Paralysis spore: Paralyze a random target
+	Sleep spore: Put a random target to sleep
+	Drain: Deals magic damage to a target. Gains regen(or heals for a porcentage of damage dealt)
+	Fatal Fungi: Massive magic damage to a target. Inflicts poison
+
+     >Wolf(low lv enemy):
+	Bite: Melee Weapon attack
+	Howl: Increases attack
+	Lick wounds: Small single target heal
+
+      >Twisted Wolf(mid lv enemy):
+	Bite: Melee Weapon attack
+	Lick wounds: Small single target heal
+	Feral instincts: Increases attack, agility and luck
+
+      >Flesh Golem(High lv enemy):
+	Lightning immunity
+	high magic resistence
+	Fire weakness
+	High strength and HP
+	Slam: Melee Weapon Attack 
+	Reform: Moderate self heal
+
+      >Ghoul(low lv enemy):
+	Weakness to holy
+	Heals deal damage instead
+	Bite: Melee weapon attack
+	Claw: Melee weapon attack
+
+      >Spectrum(low lv enemy):
+	Heals deal damage instead
+	Immune to Physical attacks
+	Claw: Melee weapon attack
+	Fear(original): Fear a random target
+	Possession: Charm a random target
+
+      >Cloud Giant:
+	Floating
+	Wind Staff: Single-target Wind Spell
+	Whirwind: Wind AoE damage
+
+      >Fire Giant:
+	Fire Imunity
+	Flaming Sword: Melee weapon Attack. Moderate chance of inflicting burn
+	Inferno: Fire AoE damage. Moderate chance of inflicting burn
+
+      >Rock Giant:
+	Ground Resistence
+	Stone Hammer: Melee weapon attack
+	Tremor: Ground AoE damage to all party members
+
+      >Storm Giant:
+	Lightning Imunity
+	Lightning Spear: Melee weapon Attack. Moderate chance of inflicting paralysis
+	Thunderstorm: Lightning AoE damage. Moderate chance of inflicting paralysis
+	
+      >Frost Giant:
+	Ice Resistence
+	Frost Greataxe: Melee weapon attack. Moderate chance of inflicting Freeze
+	Blizzard: AoE ice damage. chance of inflicting freeze
+	
+
+
 	
