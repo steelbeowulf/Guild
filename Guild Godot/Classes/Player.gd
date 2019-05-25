@@ -3,7 +3,9 @@ extends "Entity.gd"
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
 
-func _init(valores,  pos, identificacao, habilidades, resistances):
+func _init(lv, experience, valores,  pos, identificacao, habilidades, resistances):
+	self.level = int(lv)
+	self.xp = int(experience)
 	self.stats = valores
 	self.alive = true
 	self.position = pos

@@ -1,121 +1,139 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
-[ext_resource path="res://warrior spritesheet calciumtrice.png" type="Texture" id=2]
-[ext_resource path="res://rogue spritesheet calciumtrice.png" type="Texture" id=3]
-[ext_resource path="res://ranger spritesheet calciumtrice.png" type="Texture" id=4]
-[ext_resource path="res://cleric spritesheet calciumtrice.png" type="Texture" id=5]
-[ext_resource path="res://slime spritesheet calciumtrice.png" type="Texture" id=6]
-[ext_resource path="res://minotaur spritesheet calciumtrice.png" type="Texture" id=7]
-[ext_resource path="res://environment_forest_alt1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/warrior spritesheet calciumtrice.png" type="Texture" id=2]
+[ext_resource path="res://Assets/rogue spritesheet calciumtrice.png" type="Texture" id=3]
+[ext_resource path="res://Assets/ranger spritesheet calciumtrice.png" type="Texture" id=4]
+[ext_resource path="res://Assets/cleric spritesheet calciumtrice.png" type="Texture" id=5]
+[ext_resource path="res://Assets/slime spritesheet calciumtrice.png" type="Texture" id=6]
+[ext_resource path="res://Assets/minotaur spritesheet calciumtrice.png" type="Texture" id=7]
+[ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=8]
 [ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=9]
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=12]
 
-[node name="Node" type="Node"]
-
-[node name="Battle" type="Node2D" parent="."]
+[node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
 script = ExtResource( 1 )
 
-[node name="P00" type="Sprite" parent="Battle"]
+[node name="P00" type="Sprite" parent="."]
 visible = false
 position = Vector2( 117.55, 190 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
-[node name="P01" type="Sprite" parent="Battle"]
+[node name="P01" type="Sprite" parent="."]
 visible = false
 position = Vector2( 256.883, 190 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
-[node name="P02" type="Sprite" parent="Battle"]
+[node name="P02" type="Sprite" parent="."]
 visible = false
 position = Vector2( 398.216, 190 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
-[node name="P10" type="Sprite" parent="Battle"]
+[node name="P10" type="Sprite" parent="."]
 visible = false
 position = Vector2( 117.55, 260 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="P11" type="Sprite" parent="Battle"]
+[node name="P11" type="Sprite" parent="."]
 visible = false
 position = Vector2( 256.883, 260 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="P12" type="Sprite" parent="Battle"]
+[node name="P12" type="Sprite" parent="."]
 visible = false
 position = Vector2( 398.216, 260 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="P20" type="Sprite" parent="Battle"]
+[node name="P20" type="Sprite" parent="."]
 visible = false
 position = Vector2( 123.91, 330 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
-[node name="P21" type="Sprite" parent="Battle"]
+[node name="P21" type="Sprite" parent="."]
 visible = false
 position = Vector2( 261.213, 330 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
-[node name="P22" type="Sprite" parent="Battle"]
+[node name="P22" type="Sprite" parent="."]
 visible = false
 position = Vector2( 401.606, 330 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
-[node name="P30" type="Sprite" parent="Battle"]
+[node name="P30" type="Sprite" parent="."]
 visible = false
 position = Vector2( 118.744, 400 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 
-[node name="P31" type="Sprite" parent="Battle"]
+[node name="P31" type="Sprite" parent="."]
 visible = false
 position = Vector2( 255.601, 400 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 
-[node name="P32" type="Sprite" parent="Battle"]
+[node name="P32" type="Sprite" parent="."]
 visible = false
 position = Vector2( 396.247, 400 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 
-[node name="E00" type="Sprite" parent="Battle"]
+[node name="E00" type="Sprite" parent="."]
+visible = false
 position = Vector2( 725.773, 350 )
 rotation = -0.0055467
 scale = Vector2( 3.2, 3.2 )
 texture = ExtResource( 6 )
 
-[node name="E10" type="Sprite" parent="Battle"]
+[node name="E10" type="Sprite" parent="."]
+visible = false
 position = Vector2( 728.931, 481.579 )
 rotation = -0.0055467
 scale = Vector2( 3.2, 3.2 )
 texture = ExtResource( 6 )
 
-[node name="E20" type="Sprite" parent="Battle"]
+[node name="E20" type="Sprite" parent="."]
+visible = false
 position = Vector2( 727.004, 211.165 )
 rotation = -0.0055467
 scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 
-[node name="Background" type="Sprite" parent="Battle"]
+[node name="E30" type="Sprite" parent="."]
+visible = false
+position = Vector2( 888.689, 255.969 )
+rotation = -0.0055467
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="E40" type="Sprite" parent="."]
+visible = false
+position = Vector2( 898.19, 382.021 )
+rotation = -0.0055467
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="."]
 position = Vector2( 509.005, 236.088 )
 scale = Vector2( 1.0022, 0.935547 )
 z_index = -1
 texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Menu" type="VBoxContainer" parent="Battle"]
+[node name="Menu" type="VBoxContainer" parent="."]
 editor/display_folded = true
 margin_left = 10.0
 margin_top = 467.0
@@ -123,30 +141,31 @@ margin_right = 306.0
 margin_bottom = 587.0
 script = ExtResource( 9 )
 
-[node name="Attack" parent="Battle/Menu" instance=ExtResource( 10 )]
+[node name="Attack" parent="Menu" instance=ExtResource( 10 )]
 margin_bottom = 27.0
 focus_neighbour_top = NodePath("../Itens")
 text = "Attack"
 
-[node name="Lane" parent="Battle/Menu" instance=ExtResource( 10 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 31.0
 margin_bottom = 58.0
 text = "Lane"
 
-[node name="Skills" parent="Battle/Menu" instance=ExtResource( 11 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 11 )]
 margin_top = 62.0
 margin_bottom = 89.0
 text = "Skills"
 
-[node name="Itens" parent="Battle/Menu" instance=ExtResource( 11 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 11 )]
 margin_top = 93.0
 margin_bottom = 120.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Item"
 
-[node name="Log" parent="Battle" instance=ExtResource( 12 )]
-[connection signal="gui_input" from="Battle/Menu" to="Battle" method="_on_Menu_gui_input"]
-[connection signal="button_down" from="Battle/Menu/Attack" to="Battle" method="_on_Attack_button_down"]
-[connection signal="button_down" from="Battle/Menu/Lane" to="Battle" method="_on_Lane_button_down"]
-[connection signal="button_down" from="Battle/Menu/Skills" to="Battle" method="_on_Skills_button_down"]
-[connection signal="button_down" from="Battle/Menu/Itens" to="Battle" method="_on_Itens_button_down"]
+[node name="Log" parent="." instance=ExtResource( 12 )]
+
+[connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
+[connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
+[connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]
+[connection signal="button_down" from="Menu/Skills" to="." method="_on_Skills_button_down"]
+[connection signal="button_down" from="Menu/Itens" to="." method="_on_Itens_button_down"]

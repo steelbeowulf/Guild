@@ -1,6 +1,9 @@
 extends "Entity.gd"
 
-func _init(valores, identificacao, habilidades):
+func _init(lv, experience, img, valores, identificacao, habilidades):
+	self.level = int(lv)
+	self.xp = int(experience)
+	self.sprite = img
 	self.classe = "boss"
 	self.stats = valores
 	self.alive = true
@@ -42,5 +45,10 @@ func AI(player_list, enemies_list):
 		return ["Attack", possible_target+1]
 	return ["Skills", [best_skill, possible_target+1]]
 
+func get_xp():
+	return self.xp
+	
+func enemy_duplicate():
+	return self.get_script().new(self.level, self.xp, self.sprite, self.stats, self.nome, self.skills)
 # Skills devem possuir tipos!
 # Esda
