@@ -170,6 +170,12 @@ func apply_status(status, target, attacker, logs):
 			var agi = target.get_agi()
 			target.set_stats(AGI, agi/2)
 			logs.display_text(target.get_name()+" perdeu metade de sua agilidade")
+		elif type == "FEAR":
+			var agi = target.get_agi()
+			var atk = target.get_atk()
+			target.set_stats(AGI, 3*agi/4)
+			target.set_stats(ATK, 3*atk/4)
+			logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	else:
 		if type == "ATTACK_UP":
@@ -261,6 +267,11 @@ func apply_status(status, target, attacker, logs):
 		elif type == "SLOW":
 			var agi = target.get_agi()
 			target.set_stats(AGI, agi*2)
+		elif type == "FEAR":
+			var agi = target.get_agi()
+			var atk = target.get_atk()
+			target.set_stats(AGI, 4*agi/3)
+			target.set_stats(ATK, 4*atk/3)
 		logs.display_text(target.get_name()+" não está mais sob o efeito de "+sstats[type])
 		target.remove_status(sstats[type])
 
@@ -285,6 +296,13 @@ func result_status(status, values, target, logs):
 		if chance < 50:
 			#target.execute_action("Pass", 0)
 			logs.display_text(target.get_name()+" esta paralisado, não consegue atacar")
+			return -1
+	elif status == "FEAR":
+		randomize()
+		var chance = rand_range(0, 99)
+		if chance < 26:
+			#target.execute_action("Pass", 0)
+			logs.display_text(target.get_name()+" esta apavorado, não consegue atacar")
 			return -1
 	elif status == "FREEZE":
 		#target.execute_action("Pass", 0)

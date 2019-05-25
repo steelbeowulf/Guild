@@ -1,7 +1,7 @@
   Monster list (under consideration):
     >Aboleth:
 	Multiattack: The aboleth makes three tentacle attacks.
-	Tentacle: Melee Weapon Attack and DOT for a few turns
+	Tentacle: Melee Weapon Attack and poison the target
 	Enslave: Charm a target and sap his HP until the charm is broken
 	Mucous Cloud: Poisoned upon melee attack
       
@@ -300,6 +300,80 @@
 	Ice Resistence
 	Frost Greataxe: Melee weapon attack. Moderate chance of inflicting Freeze
 	Blizzard: AoE ice damage. chance of inflicting freeze
+
+      >Gargoyle(mid lv enemy):
+	Claw: Melee weapon attack.
+	Sinister wind: Fear a random target
+	
+      >Gibbering Mouther(high lv enemy):
+	Bite: Melee weapon attack
+	Corrosive sludge:AoE Magic damage spell. moderate chance of causing blindness
+	Aberration: Fear a target
+      
+      >Mad Gladiator(mid lv enemy):
+	Stab: Melee Weapon Attack
+	Sword swipe: Melee weapon attack, deals high damage to the front lane
+	Trasher: AoE Physical attack
+
+      >Glabrezu(high lv enemy):
+	Pincer: Melee weapon attack
+	Slam: Melee weapon attack
+	Dark Wave:Darkness AoE attack. moderate chance of causing fear
+	Dark Advance: Darkness single target spell
+
+      >Crab Man(mid lv enemy):
+	Pincer: Melee weapon attack
+	Slam: Melee weapon attack
+	Bubbleshower: Single target Water spell
+
+      >Goblin(low lv enemy):
+	Club: Melee weapon attack
+	Poison stab: Single target melee attack. poison the target
+
+      >Grick(Mid Lv enemy):
+	High Evasion
+	Tentacle: Melee Weapon Attack and poison the target
+	Beak: melee weapon attack
+
+      >Twisted Griffon(High lv enemy):
+	High luck
+	Beak: Melee weapon attack
+	Deafing Screech: Fear a random target
+	Dark Flame: Single target darkness spell. Moderate chance of causing burn
+
+      >Hezrou(HIgh lv enemy):
+	high defense
+	Bite: Melee weapon attack
+	claws: melee weapon attack
+	Stench: AoE Magic damage. high chance of causing poison
+
+      >Hobgoblin:
+	Stab: Melee Weapon Attack
+	Sword swipe: Melee weapon attack, deals high damage to the front lane
+	Tremor: Ground AoE damage to all party members
+
+      >Kobold(low lv enemy):
+	stab: Melee weapon attack
+	paralysis stab: melee weapon attack. paralyze the target
+
+      >Lich:
+	Holy weakness
+	high magic damage
+	Dark Wave:Darkness AoE attack. moderate chance of causing fear
+	Calling of the dark: Halves current HP of all party members
+	Unholy visions: Summon tentacles that deals even more magic damage, poisons the target and curses him. Targets the player with the lowest HP
+	Darkness unleashed: Cuts the current HP of all party members to 1/8
+	Poison cloud: AoE Spell. Moderate chance of poison
+	Death: Small chance dealing max HP damage to a target
+	Frightening Gaze: single target fear
+	
+      >Merrow(mid lv enemy):
+	Bite: melee weapon attack
+	claws: Melee weapon attack
+	Harpoon: Ranged weapon attack. targets the back lane
+
+      >
+	
 	
 
 
