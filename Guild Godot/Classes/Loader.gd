@@ -20,7 +20,7 @@ static func enemies_from_file(path):
 	"SLEEP":15, "FLOAT":16, "UNKILLABLE":17, "VISIBILITY":18, "REFLECT":19, 
 	"CONTROL":20, "CHARM":21, "HP_CRITICAL":22, "CURSE":23, "STOP":24, 
 	"HIDDEN":25, "FREEZE":26, "IMMOBILIZE":27, "KO":28, "VEIL":29, "TRAPPED":30}
-	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1, "FIRE":2}
+	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1, "FIRE":2, "EARTH":3, "WIND":4}
 	var STAT = {"HP":0, "HP_MAX":1, "MP":2, "MP_MAX":3, "ATK":4, "ATKM":5, "DEF":6, "DEFM":7, "AGI":8, "LCK":9}
 	var cenaitem = load("res://Classes/Itens.gd")
 	var cenaenemy = load("res://Classes/Enemy.gd")
