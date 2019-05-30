@@ -16,7 +16,7 @@ var status = {}
 var dead = false
 var resist = []
 	#fire, water, ligthting, ice, earth, wind, holy, darkness]
-var elem = {0:"NULL", 1:"NULLL", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
+var elem = {0:"PHYSIC", 1:"MAGIC", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
 func get_status():
 	return status
@@ -98,6 +98,8 @@ func take_damage(type, damage):
 	var resistance = 1.0
 	if type == PHYSIC:
 		dmg = damage - stats[DEF]
+	elif type == MAGIC:
+		dmg = damage - stats[DEFM]
 	else:
 		dmg = damage - stats[DEFM]
 		resistance = resist[elem[type]]
