@@ -1,7 +1,6 @@
 [
 	{"LEVEL":5,
 	"EXPERIENCE":50,
-	"IMG":"res://Assets/red_slime.png",
 	"IMG":"res://Assets/slime spritesheet calciumtrice.png",
 	"HP":100,
 	"HP_MAX":100,
