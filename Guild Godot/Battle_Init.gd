@@ -4,9 +4,8 @@ onready var first = true
 onready var Play
 onready var Enem
 onready var Inve
-onready var Position = [Vector2(0,0), Vector2(0,0), Vector2(0,0), Vector2(0,0)]
-onready var Backs = [Vector2(0,0), Vector2(0,0), Vector2(0,0)]
-onready var Vel = [Vector2(0,0), Vector2(0,0), Vector2(0,0)]
+onready var Position = []
+onready var Leader_pos = []
 
 func init(Players, Enemies, Inventory):
 	Play =  [] + Players
@@ -15,15 +14,15 @@ func init(Players, Enemies, Inventory):
 	first = false
 	return
 
-func get_back_pos(id):
-	return [Backs[id-1], Vel[id-1]]
+func get_leader_pos(id):
+	if 50*id < len(Leader_pos):
+		return Leader_pos[-id*50]
+	else:
+		return Vector2(0,0)
 
-
-func update_global_position(Players_pos, Backs_pos, Velocities):
-	print("updating pos")
+func update_global_position(Players_pos):
 	Position = [] + Players_pos
-	Backs = [] + Backs_pos
-	Vel = [] + Velocities
+	Leader_pos.append(Position[0])
 
 func begin_battle(Enemies):
 	Enem = [] + Enemies

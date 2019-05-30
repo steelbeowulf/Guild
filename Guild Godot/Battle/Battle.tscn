@@ -112,17 +112,6 @@ texture = ExtResource( 7 )
 
 [node name="E30" type="Sprite" parent="."]
 visible = false
-z_index = 1
-texture = ExtResource( 8 )
-flip_h = true
-
-[node name="E40" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 9 )
-
-[node name="E50" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 10 )
 position = Vector2( 888.689, 255.969 )
 rotation = -0.0055467
 scale = Vector2( 3, 3 )
