@@ -3,6 +3,7 @@ extends KinematicBody2D
 const SPEED = 250
 var velocity = Vector2(0,0)
 var id = -1
+var tolerance = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,17 +31,17 @@ func _physics_process(delta):
 	else:
 		var my_pos = get_global_position()
 		var leader_pos  = BATTLE_INIT.get_leader_pos(id)
-		if my_pos.y > leader_pos.y:
+		if my_pos.y - leader_pos.y > tolerance:
 			velocity.y = -SPEED
 			$AnimatedSprite.play("walk_up")
-		if my_pos.y < leader_pos.y:
+		if my_pos.y - leader_pos.y < tolerance:
 			velocity.y = SPEED
 			$AnimatedSprite.play("walk_down")
-		if my_pos.x > leader_pos.x:
+		if my_pos.x - leader_pos.x > tolerance:
 			velocity.x = -SPEED
 			$AnimatedSprite.scale.x = -1
 			$AnimatedSprite.play("walk_right")
-		if my_pos.x < leader_pos.x:
+		if my_pos.x - leader_pos.x < tolerance:
 			velocity.x = SPEED
 			$AnimatedSprite.scale.x = 1
 			$AnimatedSprite.play("walk_right")
