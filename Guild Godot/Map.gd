@@ -29,6 +29,7 @@ func _ready():
 		BATTLE_INIT.init(Players, Enemies, Inventory)
 	else:
 		Players_pos = BATTLE_INIT.Position
+		Backs_pos = BATTLE_INIT.Position
 		Players = BATTLE_INIT.Play
 	for i in range(len(Players)):
 		var cara = cara_no_mundo.instance()
