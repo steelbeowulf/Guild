@@ -2,6 +2,7 @@
 	{"LEVEL":5,
 	"EXPERIENCE":50,
 	"IMG":"res://Assets/red_slime.png",
+	"IMG":"res://Assets/slime spritesheet calciumtrice.png",
 	"HP":100,
 	"HP_MAX":100,
 	"MP":200,
@@ -58,6 +59,7 @@
 		"STATUS":[]}]},
 	{"LEVEL":8,
 	"EXPERIENCE":100,
+	"IMG":"res://Assets/worm.png",
 	"HP":200,
 	"HP_MAX":200,
 	"MP":100,
@@ -80,6 +82,7 @@
 
 	{"LEVEL":8,
 	"EXPERIENCE":100,
+	"IMG":"res://Assets/plant.png",
 	"HP":150,
 	"HP_MAX":150,
 	"MP":150,
@@ -106,6 +109,7 @@
 
 	{	"LEVEL":8,
 		"EXPERIENCE":100,
+		"IMG":"res://Assets/butterfly.png",
 		"HP":100,
 		"HP_MAX":100,
 		"MP":100,
