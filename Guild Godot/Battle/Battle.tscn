@@ -125,8 +125,8 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 7 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 509.005, 236.088 )
-scale = Vector2( 1.0022, 0.935547 )
+position = Vector2( 510.33, 245.363 )
+scale = Vector2( 1.07725, 0.959701 )
 z_index = -1
 texture = ExtResource( 8 )
 __meta__ = {
