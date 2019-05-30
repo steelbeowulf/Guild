@@ -11,4 +11,3 @@ position = Vector2( 513.897, 272.895 )
 texture = ExtResource( 2 )
 
 [node name="Party" type="Node" parent="."]
-

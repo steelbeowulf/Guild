@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/worm.png-2e1629290dddf451fbcf9903ce499d1e.stex"
+path="res://.import/worm.png-5cde6a017e9faca6f400dbbe037c1746.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://worm.png"
-dest_files=[ "res://.import/worm.png-2e1629290dddf451fbcf9903ce499d1e.stex" ]
+source_file="res://Assets/worm.png"
+dest_files=[ "res://.import/worm.png-5cde6a017e9faca6f400dbbe037c1746.stex" ]
 
 [params]
 

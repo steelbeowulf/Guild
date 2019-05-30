@@ -111,4 +111,3 @@ position = Vector2( 461.837, 333.178 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 384, 480, 16, 16 )
-

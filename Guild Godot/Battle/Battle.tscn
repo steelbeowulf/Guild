@@ -7,9 +7,9 @@
 [ext_resource path="res://cleric spritesheet calciumtrice.png" type="Texture" id=5]
 [ext_resource path="res://slime spritesheet calciumtrice.png" type="Texture" id=6]
 [ext_resource path="res://minotaur spritesheet calciumtrice.png" type="Texture" id=7]
-[ext_resource path="res://worm.png" type="Texture" id=8]
-[ext_resource path="res://plant.png" type="Texture" id=9]
-[ext_resource path="res://butterfly.png" type="Texture" id=10]
+[ext_resource path="res://Assets/worm.png" type="Texture" id=8]
+[ext_resource path="res://Assets/plant.png" type="Texture" id=9]
+[ext_resource path="res://Assets/butterfly.png" type="Texture" id=10]
 [ext_resource path="res://environment_forest_alt1.png" type="Texture" id=11]
 [ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=12]
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=13]
@@ -26,6 +26,9 @@
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=12]
+
+
+
 
 [node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
