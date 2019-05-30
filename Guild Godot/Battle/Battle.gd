@@ -14,9 +14,20 @@ var total_enemies
 
 signal round_finished
 
-func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
+
+func _ready():
+	over = false
+
+	Players = BATTLE_INIT.Play
+	Inventory =  BATTLE_INIT.Inve
+	Enemies =  BATTLE_INIT.Enem
+	
+	print("enemies="+str(Enemies))
+
+	for c in get_node("Menu").get_children():
+		c.focus_previous = NodePath("Menu/Attack")
+
 	var lane
-	var sk = LOADER.items_from_file("res://Testes/Skills.json")
 	for i in range(Players.size()):
 		Players[i].id = i
 		lane = Players[i].get_pos()
@@ -26,21 +37,9 @@ func InitBattle(Players, Enemies, Inventory, Normal, Boss, Fboss):
 	for i in range(Enemies.size()):
 		Enemies[i].id = i
 		lane = Enemies[i].get_pos()
+		get_node("E"+str(i)+str(lane)).texture  = load(Enemies[i].sprite)
 		get_node("E"+str(i)+str(lane)).show()
 	total_enemies = Enemies.size()
-
-func _ready():
-	over = false
-	Enemies = []
-
-	Players = LOADER.players_from_file("res://Testes/Players.json")
-	Inventory = LOADER.items_from_file("res://Testes/Inventory.json")
-	Enemies = LOADER.enemies_from_file("res://Testes/Enemies.json")
-
-	for c in get_node("Menu").get_children():
-		c.focus_previous = NodePath("Menu/Attack")
-
-	InitBattle(Players, Enemies, Inventory, 0,0,0)
 	
 	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
@@ -50,7 +49,8 @@ func _ready():
 		rounds()
 		yield(self, "round_finished")
 	$Log.display_text("Fim de jogo!")
-	print("FIM DE JOGO")
+	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
+	get_tree().change_scene("res://Map.tscn")
 
 # A round is comprised of the turns of all entities participating in battle
 func rounds():

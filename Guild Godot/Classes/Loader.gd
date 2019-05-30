@@ -44,7 +44,8 @@ static func enemies_from_file(path):
 					status.append([st["BOOL"], STATUS[st["STATUS"]]])
 				skills.append(cenaitem.new(sk["NAME"], sk["QUANT"], sk["TARGET"],
 				sk["TYPE"], effects, status))
-			players.append(cenaenemy.new([data["HP"], data["HP_MAX"], 
+			players.append(cenaenemy.new(data["LEVEL"], data["EXPERIENCE"], data["IMG"],
+			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
@@ -91,7 +92,8 @@ static func players_from_file(path):
 			#var resist = []
 			#for res in data["RESISTANCE"]:
 				#resist.append(res)
-			players.append(cenaplayer.new([data["HP"], data["HP_MAX"], 
+			players.append(cenaplayer.new(data["LEVEL"], data["EXPERIENCE"],
+			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 

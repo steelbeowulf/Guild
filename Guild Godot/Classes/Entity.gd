@@ -1,6 +1,9 @@
 extends "Stats.gd"
 
 var id
+var level
+var xp
+var sprite
 var nome
 var stats
 var buffs

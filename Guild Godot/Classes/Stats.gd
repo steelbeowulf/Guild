@@ -1,6 +1,7 @@
 extends "res://Battle/Apply.gd"
 class_name STATS
 
+var level_max_exp = {2:100, 3:120, 4:140, 5:200, 6:250, 7:300, 8:400, 9:520, 10:650, 11:775, 12:850, 13:900, 14:1000, 15:1500, 16:2000}
 
 # Status effects
 enum{CONFUSION, POISON, BURN, SLOW, HASTE, BERSERK, 

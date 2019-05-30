@@ -27,13 +27,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Guild"
-run/main_scene="res://Battle/Battle.tscn"
+run/main_scene="res://Map.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 STATS="*res://Classes/Stats.gd"
 LOADER="*res://Classes/Loader.gd"
+BATTLE_INIT="*res://Battle_Init.gd"
 
 [rendering]
 
