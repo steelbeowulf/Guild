@@ -1,5 +1,6 @@
 [
-	{"LEVEL":5,
+	{"ID":0,
+	"LEVEL":5,
 	"EXPERIENCE":50,
 	"IMG":"res://Assets/red_slime.png",
 	"HP":100,
@@ -18,7 +19,9 @@
 	"SKILLS":[{"NAME":"FIRE SPIT", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-25, "TYPE":"FIRE", "TURNS":1}],
 		"STATUS":[{"BOOL":0.75, "STATUS":"BURN"}]}]},
-	{"LEVEL":5,
+
+	{"ID":1,
+	"LEVEL":5,
 	"EXPERIENCE":50,
 	"IMG":"res://Assets/slime spritesheet calciumtrice.png",
 	"HP":100,
@@ -37,7 +40,9 @@
 	"SKILLS":[{"NAME":"HEAL", "QUANT":10, "TARGET":"ONE", "TYPE":"RECOVERY",
 		"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"PHYSIC", "TURNS":3}],
 		"STATUS":[]}]},
-	{"LEVEL":8,
+
+	{"ID":2,
+	"LEVEL":8,
 	"EXPERIENCE":100,
 	"IMG":"res://Assets/minotaur spritesheet calciumtrice.png",	
 	"HP":1,
@@ -56,7 +61,9 @@
 	"SKILLS":[{"NAME":"CRUSHING BLOW", "QUANT":30, "TARGET":"BACK", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"FIRE", "TURNS":1}],
 		"STATUS":[]}]},
-	{"LEVEL":8,
+
+	{"ID":3,
+	"LEVEL":8,
 	"EXPERIENCE":100,
 	"IMG":"res://Assets/worm.png",
 	"HP":200,
@@ -78,8 +85,8 @@
 		"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":3}],
 		"STATUS":[{"BOOL":true, "STATUS":"SLOW"}]}]},
 
-
-	{"LEVEL":8,
+	{"ID":4,
+	"LEVEL":8,
 	"EXPERIENCE":100,
 	"IMG":"res://Assets/plant.png",
 	"HP":150,
@@ -95,18 +102,17 @@
 	"LCK":5,
 	"NAME":"Plant",
 	"SKILLS":[{"NAME":"POISON SPORES", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"FIRE", "TURNS":4}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":4}],
 	"STATUS":[{"BOOL":true, "STATUS":"POISON"}]},
 	{"NAME":"PARALYSIS SPORES", "QUANT":10, "TARGET":"ONE", "TYPE":"OFFENSE",
-		"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"FIRE", "TURNS":5}],
+		"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":5}],
 		"STATUS":[{"BOOL":true, "STATUS":"PARALYSIS"}]},
 	{"NAME":"VINE WHIP", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
-		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"FIRE", "TURNS":6}],
+		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":6}],
 		"STATUS":[]}]},
-		
 
-
-	{"LEVEL":8,
+	{"ID":5,
+	"LEVEL":8,
 	"EXPERIENCE":100,
 	"IMG":"res://Assets/butterfly.png",
 	"HP":100,
@@ -126,5 +132,5 @@
 	"STATUS":[]},
 	{"NAME":"DRAIN", "QUANT":10, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":3}],
-		"STATUS":[{"BOOL":true, "STATUS":"REGEN"}]}]},
+		"STATUS":[{"BOOL":true, "STATUS":"POISON"}]}]},
 ]

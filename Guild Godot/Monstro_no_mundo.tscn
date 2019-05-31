@@ -1,0 +1,55 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Monstro_no_mundo.gd" type="Script" id=1]
+[ext_resource path="res://Assets/butterfly.png" type="Texture" id=2]
+[ext_resource path="res://Assets/butterfly2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/butterfly3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/butterfly4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/butterfly5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/butterfly6.png" type="Texture" id=7]
+[ext_resource path="res://Assets/butterfly7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/butterfly8.png" type="Texture" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "5",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 13.7987
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+[node name="Monstro_no_mundo" type="KinematicBody2D"]
+script = ExtResource( 1 )
+id = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+shape = SubResource( 3 )
+
+[node name="View" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
+position = Vector2( -91.4488, 1.84402 )
+rotation = 1.5708
+scale = Vector2( 5.5, 10 )
+shape = SubResource( 2 )
+
+[node name="Battle" type="Area2D" parent="."]
+scale = Vector2( 1.3, 1.3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Battle"]
+position = Vector2( 0, 1 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
+[connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]
+[connection signal="body_entered" from="Battle" to="." method="_on_Battle_body_entered"]

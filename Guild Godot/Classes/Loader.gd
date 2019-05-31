@@ -44,7 +44,7 @@ static func enemies_from_file(path):
 					status.append([st["BOOL"], STATUS[st["STATUS"]]])
 				skills.append(cenaitem.new(sk["NAME"], sk["QUANT"], sk["TARGET"],
 				sk["TYPE"], effects, status))
-			players.append(cenaenemy.new(data["LEVEL"], data["EXPERIENCE"], data["IMG"],
+			players.append(cenaenemy.new(data["ID"], data["LEVEL"], data["EXPERIENCE"], data["IMG"],
 			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
