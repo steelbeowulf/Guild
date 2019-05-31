@@ -18,7 +18,7 @@ func generate_enemies():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if BATTLE_INIT.first:
-		Players_pos = [Vector2(500, 300), Vector2(500, 340), Vector2(500, 380), Vector2(500, 420)]
+		Players_pos = [Vector2(500, 300), Vector2(500, 300), Vector2(500, 300), Vector2(500, 300)]
 		Players = LOADER.players_from_file("res://Testes/Players.json")
 		Inventory = LOADER.items_from_file("res://Testes/Inventory.json")
 		Enemies = LOADER.enemies_from_file("res://Testes/Enemies.json")
