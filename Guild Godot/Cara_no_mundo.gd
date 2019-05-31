@@ -32,7 +32,6 @@ func _physics_process(delta):
 	else:
 		var my_pos = get_global_position()
 		var leader_pos  = BATTLE_INIT.get_leader_pos(id, delta)
-		print(delta)
 		if not stop or abs(norm(my_pos - leader_pos)) > 12*id:
 			if my_pos.y - leader_pos.y > tolerance:
 				self.set_z_index(id)

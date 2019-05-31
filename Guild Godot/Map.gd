@@ -32,7 +32,7 @@ func _ready():
 		cara.id = i
 		$Party.add_child(cara)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	update_positions()
 	if Input.is_action_just_pressed('ui_focus_next'):
 		Enemies = LOADER.enemies_from_file("res://Testes/Enemies.json")

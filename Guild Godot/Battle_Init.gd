@@ -16,7 +16,7 @@ func init(Players, Enemies, Inventory):
 	return
 
 func get_leader_pos(id, delta):
-	var index = delta*3000*id
+	var index = 10*id
 	if index < len(Leader_pos):
 		return Leader_pos[-index]
 	else:
@@ -28,6 +28,7 @@ func update_global_position(Players_pos):
 		Leader_pos.append(Position[0])
 	Leader_pos[count % 500000] = Position[0]
 	count+=1
+	print(len(Leader_pos))
 
 func begin_battle(Enemies):
 	Enem = [] + Enemies
