@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=2]
+[ext_resource path="res://Monstro_no_mundo.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,4 +14,16 @@ z_index = -10
 texture = ExtResource( 2 )
 
 [node name="Party" type="Node" parent="."]
+
+[node name="Borboleta" parent="." instance=ExtResource( 3 )]
+position = Vector2( 169.858, 501.302 )
+id = 5
+
+[node name="Borboleta2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 676.142, 243.655 )
+id = 5
+
+[node name="Borboleta3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 929.576, 490.24 )
+id = 5
 

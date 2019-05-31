@@ -1,6 +1,7 @@
 extends "Entity.gd"
 
-func _init(lv, experience, img, valores, identificacao, habilidades):
+func _init(id, lv, experience, img, valores, identificacao, habilidades):
+	self.id = id
 	self.level = int(lv)
 	self.xp = int(experience)
 	self.sprite = img
@@ -49,6 +50,6 @@ func get_xp():
 	return self.xp
 	
 func enemy_duplicate():
-	return self.get_script().new(self.level, self.xp, self.sprite, self.stats, self.nome, self.skills)
+	return self.get_script().new(self.id, self.level, self.xp, self.sprite, self.stats, self.nome, self.skills)
 # Skills devem possuir tipos!
 # Esda
