@@ -31,13 +31,15 @@ func _physics_process(delta):
 			$AnimatedSprite.play("walk_right")
 	else:
 		var my_pos = get_global_position()
-		var leader_pos  = BATTLE_INIT.get_leader_pos(id)
+		var leader_pos  = BATTLE_INIT.get_leader_pos(id, delta)
 		print(delta)
 		if not stop or abs(norm(my_pos - leader_pos)) > 12*id:
 			if my_pos.y - leader_pos.y > tolerance:
+				self.set_z_index(id)
 				velocity.y = -SPEED
 				$AnimatedSprite.play("walk_up")
 			if my_pos.y - leader_pos.y < tolerance:
+				self.set_z_index(-id)
 				velocity.y = SPEED
 				$AnimatedSprite.play("walk_down")
 			if my_pos.x - leader_pos.x > tolerance:
