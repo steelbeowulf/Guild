@@ -16,8 +16,8 @@ func init(Players, Enemies, Inventory):
 	return
 
 func get_leader_pos(id):
-	if 50*id < len(Leader_pos):
-		return Leader_pos[-id*50]
+	if 15*id < len(Leader_pos):
+		return Leader_pos[-id*15]
 	else:
 		return Leader_pos[0]
 

@@ -95,13 +95,13 @@
 	"LCK":5,
 	"NAME":"Plant",
 	"SKILLS":[{"NAME":"POISON SPORES", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"MAGIC", "TURNS":4}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"FIRE", "TURNS":4}],
 	"STATUS":[{"BOOL":true, "STATUS":"POISON"}]},
 	{"NAME":"PARALYSIS SPORES", "QUANT":10, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"FIRE", "TURNS":5}],
 		"STATUS":[{"BOOL":true, "STATUS":"PARALYSIS"}]},
 	{"NAME":"VINE WHIP", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
-		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"FIRE", "TURNS":2}],
+		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"FIRE", "TURNS":6}],
 		"STATUS":[]}]},
 		
 
@@ -125,6 +125,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"WIND", "TURNS":1}],
 	"STATUS":[]},
 	{"NAME":"DRAIN", "QUANT":10, "TARGET":"ONE", "TYPE":"OFFENSE",
-		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"MAGIC", "TURNS":3}],
+		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":3}],
 		"STATUS":[{"BOOL":true, "STATUS":"REGEN"}]}]},
 ]
