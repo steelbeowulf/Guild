@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export(int) var id
 var chasing = null
-const SPEED = 300
+const SPEED = 275
 var velocity = Vector2(0,0)
 const tolerance = 0.0
 
@@ -18,16 +18,15 @@ func _physics_process(delta):
 	else:
 		var my_pos = get_global_position()
 		var leader_pos  = chasing.get_global_position()
+		self.rotation = (my_pos - leader_pos).angle()
 		if my_pos.y - leader_pos.y > tolerance:
 			velocity.y = -SPEED
 		if my_pos.y - leader_pos.y < tolerance:
 			velocity.y = SPEED
 		if my_pos.x - leader_pos.x > tolerance:
-			#print("-SPEED")
 			velocity.x = -SPEED
 			$AnimatedSprite.scale.x = -1
 		if my_pos.x - leader_pos.x < tolerance:
-			#print("SPEED")
 			velocity.x = SPEED
 			$AnimatedSprite.scale.x = 1
 
@@ -48,7 +47,6 @@ func _on_View_body_entered(body):
 func _on_View_body_exited(body):
 	if body.is_in_group("player"):
 		chasing = null
-
 
 func _on_Battle_body_entered(body):
 	if body.is_in_group("player"):

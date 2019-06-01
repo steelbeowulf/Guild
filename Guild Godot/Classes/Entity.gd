@@ -1,6 +1,7 @@
 extends "Stats.gd"
 
 var id
+var index
 var level
 var xp
 var sprite
@@ -14,7 +15,7 @@ var classe
 var skills
 var status = {}
 var dead = false
-var resist = []
+var resist = {}
 	#fire, water, ligthting, ice, earth, wind, holy, darkness]
 var elem = {0:"PHYSIC", 1:"MAGIC", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
@@ -74,8 +75,10 @@ func remove_status(effect):
 		var acc = self.get_acc()
 		self.set_stats(ACC, acc*10)
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
-	if stats.has(effect):
-		stats.erase(effect)
+	elif effect == "KO":
+		dead = false
+	if status.has(effect):
+		status.erase(effect)
 
 func add_status(effect, atkm, turns):
 	#print("adding status "+effect)
@@ -104,11 +107,6 @@ func take_damage(type, damage):
 		dmg = damage - stats[DEFM]
 		resistance = resist[elem[type]]
 		dmg = dmg*resistance
-		print("defm is "+str(stats[DEFM]))
-		print("dmg is "+str(dmg))
-		print("resistance is  "+str(resistance))
-		print("type is"+str(type))
-		print("elem is"+str(elem[type]))
 	if dmg < 0 and resistance == 1.0:
 		dmg = 0
 	#set_stats(HP, get_health()-dmg)

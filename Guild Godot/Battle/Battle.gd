@@ -10,32 +10,39 @@ var current_action
 var current_target
 var dead_allies = 0
 var dead_enemies = 0
-var total_enemies
+var total_enemies = 0
+var total_allies = 0
 
 signal round_finished
 
+func print_battle_results():
+	print("dead_allies="+str(dead_allies))
+	print("dead_enemies="+str(dead_enemies))
+	for p in Players:
+		print(p.get_name()+" tem "+str(p.get_health())+" de vida!")
+	for e in Enemies:
+		print(e.get_name()+" tem "+str(e.get_health())+" de vida!")
 
 func _ready():
 	over = false
-
 	Players = BATTLE_INIT.Play
 	Inventory =  BATTLE_INIT.Inve
 	Enemies =  BATTLE_INIT.Enem
 	
-	print("enemies="+str(Enemies))
-
 	for c in get_node("Menu").get_children():
 		c.focus_previous = NodePath("Menu/Attack")
-
+	
 	var lane
 	for i in range(Players.size()):
-		Players[i].id = i
+		Players[i].index = i
 		lane = Players[i].get_pos()
 		get_node("P"+str(i)+str(lane)).show()
+		get_node("P"+str(i)+str(lane)).texture = load(Players[i].sprite)
 		for j in range(Enemies.size()):
 			Players[i].hate.append(0)
+	total_allies = Players.size()
 	for i in range(Enemies.size()):
-		Enemies[i].id = i
+		Enemies[i].index = i
 		lane = Enemies[i].get_pos()
 		get_node("E"+str(i)+str(lane)).texture  = load(Enemies[i].sprite)
 		get_node("E"+str(i)+str(lane)).show()
@@ -43,12 +50,10 @@ func _ready():
 	
 	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
-		for p in Players:
-			print(p.get_name()+" resist is ")
-			print(p.resist)
 		rounds()
 		yield(self, "round_finished")
 	$Log.display_text("Fim de jogo!")
+	print_battle_results()
 	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
 	get_tree().change_scene("res://Map.tscn")
 
@@ -85,8 +90,8 @@ func rounds():
 			if current_entity.classe == "boss":
 				var decision = current_entity.AI(Players, Enemies)
 				print(current_entity.get_name()+"decidiu usar "+decision[0]+" em "+str(decision[1]))
-				execute_action(decision[0], decision[1])
 				emit_signal("turn_finished")
+				execute_action(decision[0], decision[1])
 
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
@@ -113,17 +118,18 @@ func rounds():
 			execute_action("Attack", rand)
 		# Check if all players or enemies are dead
 		if check_game_over() or check_win_battle():
+			print("Hey game over")
 			over = true
 			break
 	emit_signal("round_finished")
 
 # All players are dead: Defeat!
 func check_game_over():
-	return dead_allies == Players.size()
+	return dead_allies == total_allies
 
 # All players are dead: Victory!
 func check_win_battle():
-	return dead_enemies == Enemies.size()
+	return dead_enemies == total_enemies
 
 # Auxiliary function to sort the turnorder vector
 func stackagility(a,b):
@@ -131,6 +137,7 @@ func stackagility(a,b):
 
 # Executes an action on a given target
 func execute_action(action, target):
+	print("ex_action "+action+", "+str(target))
 	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
@@ -146,7 +153,7 @@ func execute_action(action, target):
 			current_entity.update_hate(dmg, int(target))
 		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
 		if alvo.get_health() <= 0:
-			kill(entities, alvo.id)
+			kill(entities, alvo.index)
 	
 	# Lane: only the player characters may change lanes
 	elif action == "Lane":
@@ -191,10 +198,12 @@ func execute_action(action, target):
 			item.quantity = item.quantity - 1
 			if (item.effect != []):
 				for eff in item.effect:
-					apply_effect(current_entity, eff, alvo,  alvo.id , $Log)
+					apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
 			if (item.status != []):
 				for st in item.status:
 					apply_status(st, alvo, current_entity, $Log)
+			if alvo.get_health() <= 0:
+				kill(entities, alvo.index)
 		
 		# No more of the item used
 		if item.quantity == 0:
@@ -204,17 +213,18 @@ func execute_action(action, target):
 		get_node("Menu/Lane").show()
 		get_node("Menu/Skills").show()
 #		get_node("Menu/Run").show()
-		if alvo.get_health() <= 0:
-			kill(entities, alvo.id)
+
 	elif action == "Skills":
 		var entities = []
 		target[1] = int(target[1])
 		if target[1] > 0:
 			entities = Players
 			target[1] -= 1
+			print("USANDO SKILL EM PLAYERS "+str(target[1]))
 		else:
 			entities = Enemies
 			target[1] = abs(target[1])-1
+			print("USANDO SKILL EM ENEMIES "+str(target[1]))
 		var alvo = entities[target[1]]
 		var skill = current_entity.get_skills()[int(target[0])]
 		
@@ -237,6 +247,8 @@ func execute_action(action, target):
 			if (skill.status != []):
 				for st in skill.status:
 					apply_status(st, alvo, current_entity, $Log)
+			if alvo.get_health() <= 0:
+				kill(entities, alvo.index)
 		var mp = current_entity.get_mp()
 		
 		# Spends the MP
@@ -245,8 +257,6 @@ func execute_action(action, target):
 		get_node("Menu/Lane").show()
 		get_node("Menu/Itens").show()
 #		get_node("Menu/Run").show()
-		if alvo.get_health() <= 0:
-			kill(entities, alvo.id)
 	# Literally does nothing
 	elif action == "Pass":
 		pass
@@ -259,10 +269,11 @@ func set_current_target(target):
 	current_target = target
 
 func _process(delta):
-	if over:
-		get_tree().paused = true
-		#$E00.hide()
-		#$E10.hide()
+	for p in Players:
+		if not p.is_dead():
+			var index = p.index
+			var lane = p.get_pos()
+			get_node("P"+str(index)+str(lane)).show()
 	if Input.is_action_pressed("ui_cancel") or (Input.is_action_pressed("ui_left") and (state == "Attack" or state == "Lane")):
 		for c in $Menu.get_children():
 			c.hide_stuff()
@@ -361,6 +372,7 @@ func _on_Attack_button_down():
 	get_node("Menu/Attack/")._on_Action_pressed()
 
 func kill(entity, id):
+	print(entity[id].get_name()+" morreu")
 	var a
 	var b
 	if entity[id].classe == "boss":
@@ -370,6 +382,7 @@ func kill(entity, id):
 	else:
 		dead_allies += 1
 		a = "P"
+		entity[id].zero_hate()
 		b = str(entity[id].get_pos())
 	entity[id].add_status("KO", 999, 0)
 	get_node(a+str(id)+b).hide()

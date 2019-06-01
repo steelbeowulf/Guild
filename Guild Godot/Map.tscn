@@ -17,13 +17,16 @@ texture = ExtResource( 2 )
 
 [node name="Borboleta" parent="." instance=ExtResource( 3 )]
 position = Vector2( 169.858, 501.302 )
+scale = Vector2( 1.2, 1.2 )
 id = 5
 
 [node name="Borboleta2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 676.142, 243.655 )
+position = Vector2( 800, 243.655 )
+scale = Vector2( 1.2, 1.2 )
 id = 5
 
 [node name="Borboleta3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 929.576, 490.24 )
+scale = Vector2( 1.2, 1.2 )
 id = 5
 

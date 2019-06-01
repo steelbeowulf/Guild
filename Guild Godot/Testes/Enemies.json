@@ -18,7 +18,8 @@
 	"NAME":"Mad Slime",
 	"SKILLS":[{"NAME":"FIRE SPIT", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-25, "TYPE":"FIRE", "TURNS":1}],
-		"STATUS":[{"BOOL":0.75, "STATUS":"BURN"}]}]},
+		"STATUS":[{"BOOL":0.75, "STATUS":"BURN"}]}],
+	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 
 	{"ID":1,
 	"LEVEL":5,
@@ -39,7 +40,9 @@
 	"NAME":"Calm Slime",
 	"SKILLS":[{"NAME":"HEAL", "QUANT":10, "TARGET":"ONE", "TYPE":"RECOVERY",
 		"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"PHYSIC", "TURNS":3}],
-		"STATUS":[]}]},
+		"STATUS":[]}],
+	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
+
 
 	{"ID":2,
 	"LEVEL":8,
@@ -60,7 +63,9 @@
 	"NAME":"Minotauro",
 	"SKILLS":[{"NAME":"CRUSHING BLOW", "QUANT":30, "TARGET":"BACK", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"FIRE", "TURNS":1}],
-		"STATUS":[]}]},
+		"STATUS":[]}],
+	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
+
 
 	{"ID":3,
 	"LEVEL":8,
@@ -83,7 +88,8 @@
 	"STATUS":[]},
 	{"NAME":"MUCUS", "QUANT":10, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":3}],
-		"STATUS":[{"BOOL":true, "STATUS":"SLOW"}]}]},
+		"STATUS":[{"BOOL":true, "STATUS":"SLOW"}]}],
+	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 
 	{"ID":4,
 	"LEVEL":8,
@@ -109,7 +115,8 @@
 		"STATUS":[{"BOOL":true, "STATUS":"PARALYSIS"}]},
 	{"NAME":"VINE WHIP", "QUANT":20, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":6}],
-		"STATUS":[]}]},
+		"STATUS":[]}],
+	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 
 	{"ID":5,
 	"LEVEL":8,
@@ -132,5 +139,7 @@
 	"STATUS":[]},
 	{"NAME":"DRAIN", "QUANT":10, "TARGET":"ONE", "TYPE":"OFFENSE",
 		"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":3}],
-		"STATUS":[{"BOOL":true, "STATUS":"POISON"}]}]},
+		"STATUS":[{"BOOL":true, "STATUS":"POISON"}]}],
+	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
+
 ]

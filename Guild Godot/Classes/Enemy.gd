@@ -1,6 +1,6 @@
 extends "Entity.gd"
 
-func _init(id, lv, experience, img, valores, identificacao, habilidades):
+func _init(id, lv, experience, img, valores, identificacao, habilidades, resistances):
 	self.id = id
 	self.level = int(lv)
 	self.xp = int(experience)
@@ -11,6 +11,9 @@ func _init(id, lv, experience, img, valores, identificacao, habilidades):
 	self.position = 0
 	self.nome = identificacao
 	self.skills = habilidades
+	self.resist = resistances
+	self.resist["PHYSIC"] = 1.0
+	self.resist["MAGIC"] = 1.0
 
 func AI(player_list, enemies_list):
 	var possible_target = -1
@@ -22,17 +25,18 @@ func AI(player_list, enemies_list):
 					for i in range(self.skills.size()):
 						var sk = self.skills[i]
 						if sk.type == "RECOVERY" and self.get_mp() >= sk.get_cost():
-							return ["Skills", [i, -(e.id+1)]]
+							return ["Skills", [i, -(e.index)]]
 	var max_hate = 0
 	for p in player_list:
-		if p.get_hate()[self.id] > max_hate:
-			max_hate = p.get_hate()[self.id]
-			possible_target = p.id
-	print("posstarget="+str(possible_target))
+		if p.get_hate()[self.index] > max_hate:
+			max_hate = p.get_hate()[self.index]
+			possible_target = p.index
 	if possible_target < 0:
-		print("menor que zero")
 		randomize()
 		possible_target = floor(rand_range(0,player_list.size()-1))
+		while player_list[possible_target].is_dead():
+			randomize()
+			possible_target = floor(rand_range(0,player_list.size()-1))
 	var best_skill = -1
 	var best_dmg = 0
 	for i in range(self.skills.size()):
@@ -50,6 +54,5 @@ func get_xp():
 	return self.xp
 	
 func enemy_duplicate():
-	return self.get_script().new(self.id, self.level, self.xp, self.sprite, self.stats, self.nome, self.skills)
-# Skills devem possuir tipos!
-# Esda
+	return self.get_script().new(self.id, self.level, self.xp, 
+	self.sprite, self.stats, self.nome, self.skills, self.resist)
