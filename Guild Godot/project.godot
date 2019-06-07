@@ -38,8 +38,6 @@ BATTLE_INIT="*res://Battle_Init.gd"
 
 [display]
 
-window/size/test_width=640
-window/size/test_height=420
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 

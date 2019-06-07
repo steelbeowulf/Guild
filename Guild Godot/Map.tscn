@@ -16,17 +16,9 @@ texture = ExtResource( 2 )
 [node name="Party" type="Node" parent="."]
 
 [node name="Borboleta" parent="." instance=ExtResource( 3 )]
-position = Vector2( 169.858, 501.302 )
+position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 id = 5
-
-[node name="Borboleta2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 800, 243.655 )
-scale = Vector2( 1.2, 1.2 )
-id = 5
-
-[node name="Borboleta3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 929.576, 490.24 )
-scale = Vector2( 1.2, 1.2 )
-id = 5
+movement = 1
+radius = 200.0
 
