@@ -117,19 +117,22 @@ func rounds():
 			var rand = rand_range(-LOADER.List.size(), 0)
 			execute_action("Attack", rand)
 		# Check if all players or enemies are dead
-		if check_game_over() or check_win_battle():
+		if check_battle_end():
 			print("Hey game over")
 			over = true
 			break
 	emit_signal("round_finished")
 
-# All players are dead: Defeat!
-func check_game_over():
-	return dead_allies == total_allies
-
-# All players are dead: Victory!
-func check_win_battle():
-	return dead_enemies == total_enemies
+func check_battle_end():
+	dead_allies = 0
+	dead_enemies = 0
+	for p in Players:
+		if p.is_dead():
+			dead_allies += 1
+	for e in Enemies:
+		if e.is_dead():
+			dead_enemies += 1
+	return dead_allies == total_allies or dead_enemies == total_enemies
 
 # Auxiliary function to sort the turnorder vector
 func stackagility(a,b):
@@ -194,16 +197,17 @@ func execute_action(action, target):
 		
 		# Apply the effect on all affected
 		for alvo in affected:
-			$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
-			item.quantity = item.quantity - 1
-			if (item.effect != []):
-				for eff in item.effect:
-					apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
-			if (item.status != []):
-				for st in item.status:
-					apply_status(st, alvo, current_entity, $Log)
-			if alvo.get_health() <= 0:
-				kill(entities, alvo.index)
+			if not alvo.is_dead() or item.type == "RESSURECTION":
+				$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
+				item.quantity = item.quantity - 1
+				if (item.effect != []):
+					for eff in item.effect:
+						apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
+				if (item.status != []):
+					for st in item.status:
+						apply_status(st, alvo, current_entity, $Log)
+				if alvo.get_health() <= 0:
+					kill(entities, alvo.index)
 		
 		# No more of the item used
 		if item.quantity == 0:
@@ -240,15 +244,16 @@ func execute_action(action, target):
 			for p in entities:
 				affected.append(p)
 		for alvo in affected:
-			$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
-			if (skill.effect != []):
-				for eff in skill.effect:
-					apply_effect(current_entity, eff, alvo, int(target[1]), $Log)
-			if (skill.status != []):
-				for st in skill.status:
-					apply_status(st, alvo, current_entity, $Log)
-			if alvo.get_health() <= 0:
-				kill(entities, alvo.index)
+			if not alvo.is_dead() or skill.type == "RESSURECTION":
+				$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
+				if (skill.effect != []):
+					for eff in skill.effect:
+						apply_effect(current_entity, eff, alvo, int(target[1]), $Log)
+				if (skill.status != []):
+					for st in skill.status:
+						apply_status(st, alvo, current_entity, $Log)
+				if alvo.get_health() <= 0:
+					kill(entities, alvo.index)
 		var mp = current_entity.get_mp()
 		
 		# Spends the MP
@@ -373,14 +378,13 @@ func _on_Attack_button_down():
 
 func kill(entity, id):
 	print(entity[id].get_name()+" morreu")
+	entity[id].set_stats(HP, 0)
 	var a
 	var b
 	if entity[id].classe == "boss":
 		a = "E"
 		b = "0"
-		dead_enemies += 1
 	else:
-		dead_allies += 1
 		a = "P"
 		entity[id].zero_hate()
 		b = str(entity[id].get_pos())

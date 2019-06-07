@@ -38,7 +38,7 @@ func apply_effect(who, effect, target, t_id, logs):
 				valmax = target.get_stats(HP_MAX)
 			elif stat == MP:
 				valmax = target.get_stats(MP_MAX)
-			if TargetStat + value > valmax:
+			if finalval > valmax:
 				finalval = valmax
 			#print("antes do setstat: hp is"+str(target.get_stats(HP)))
 			target.set_stats(stat, finalval)

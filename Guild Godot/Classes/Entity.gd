@@ -81,12 +81,10 @@ func remove_status(effect):
 		status.erase(effect)
 
 func add_status(effect, atkm, turns):
-	#print("adding status "+effect)
-	status[effect] = [turns, atkm]
 	if effect == "KO":
-		self.remove_status("HP_CRITICAL")
+		status = {}
 		dead = true
-	#print(status)
+	status[effect] = [turns, atkm]
 
 func decrement_turns():
 	for st in status:

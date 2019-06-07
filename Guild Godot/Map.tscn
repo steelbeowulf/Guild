@@ -19,6 +19,19 @@ texture = ExtResource( 2 )
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 id = 5
+movement = 4
+radius = 100.0
+
+[node name="Borboleta2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 984.37, 58.7355 )
+scale = Vector2( 1.2, 1.2 )
+id = 5
+radius = 100.0
+
+[node name="Borboleta3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 107.625, 58.7355 )
+scale = Vector2( 1.2, 1.2 )
+id = 5
 movement = 1
-radius = 200.0
+radius = 100.0
 

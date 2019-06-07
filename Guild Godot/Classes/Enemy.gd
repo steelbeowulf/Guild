@@ -32,11 +32,13 @@ func AI(player_list, enemies_list):
 			max_hate = p.get_hate()[self.index]
 			possible_target = p.index
 	if possible_target < 0:
+		print("VOU ESCOLHER ALEATÓRIO")
 		randomize()
 		possible_target = floor(rand_range(0,player_list.size()-1))
 		while player_list[possible_target].is_dead():
 			randomize()
 			possible_target = floor(rand_range(0,player_list.size()-1))
+	print("ESCOLHI "+player_list[possible_target].get_name())
 	var best_skill = -1
 	var best_dmg = 0
 	for i in range(self.skills.size()):
