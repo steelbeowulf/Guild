@@ -27,6 +27,7 @@ func _ready():
 	else:
 		Players_pos = BATTLE_INIT.Position
 		Players = BATTLE_INIT.Play
+		print("i'mm back, here are players:"+str(Players))
 	var kill = BATTLE_INIT.kill
 	if kill:
 		self.get_node(str(kill)).queue_free()

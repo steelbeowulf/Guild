@@ -20,7 +20,8 @@ static func enemies_from_file(path):
 	"SLEEP":15, "FLOAT":16, "UNKILLABLE":17, "VISIBILITY":18, "REFLECT":19, 
 	"CONTROL":20, "CHARM":21, "HP_CRITICAL":22, "CURSE":23, "STOP":24, 
 	"HIDDEN":25, "FREEZE":26, "IMMOBILIZE":27, "KO":28, "VEIL":29, "TRAPPED":30}
-	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1, "FIRE":2, "EARTH":3, "WIND":4}
+	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1, "FIRE":2, "WATER":3,
+	"ELECTRIC":4, "ICE":5, "EARTH":6, "WIND":7, "HOLLY":8, "DARKNESS":9}
 	var STAT = {"HP":0, "HP_MAX":1, "MP":2, "MP_MAX":3, "ATK":4, "ATKM":5, "DEF":6, "DEFM":7, "AGI":8, "LCK":9}
 	var cenaitem = load("res://Classes/Itens.gd")
 	var cenaenemy = load("res://Classes/Enemy.gd")
@@ -50,7 +51,7 @@ static func enemies_from_file(path):
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
 			data["AGI"], data["ACC"], data["LCK"]],
-			data["NAME"], skills))
+			data["NAME"], skills, data["RESISTANCE"]))
 	else:  # If parse has errors
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
@@ -65,7 +66,8 @@ static func players_from_file(path):
 	"CONTROL":20, "CHARM":21, "HP_CRITICAL":22, "CURSE":23, "STOP":24, 
 	"HIDDEN":25, "FREEZE":26, "IMMOBILIZE":27, "KO":28, "VEIL":29, "TRAPPED":30}
 	var RESISTANCES = {"FIRE":0, "WATER":1, "ELECTRIC":2, "ICE":3, "EARTH":4, "WIND":5, "HOLY":6, "DARKNESS":7}
-	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1}
+	var TYPE = {"":-1, "PHYSIC":0, "MAGIC":1, "FIRE":2, "WATER":3,
+	"ELECTRIC":4, "ICE":5, "EARTH":6, "WIND":7, "HOLLY":8, "DARKNESS":9}
 	var STAT = {"HP":0, "HP_MAX":1, "MP":2, "MP_MAX":3, "ATK":4, "ATKM":5, "DEF":6, "DEFM":7, "AGI":8, "LCK":9}
 	var cenaitem = load("res://Classes/Itens.gd")
 	var cenaplayer = load("res://Classes/Player.gd")
@@ -92,7 +94,8 @@ static func players_from_file(path):
 			#var resist = []
 			#for res in data["RESISTANCE"]:
 				#resist.append(res)
-			players.append(cenaplayer.new(data["LEVEL"], data["EXPERIENCE"],
+			players.append(cenaplayer.new(data["ID"], data["LEVEL"], 
+			data["EXPERIENCE"], data["IMG"],
 			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 

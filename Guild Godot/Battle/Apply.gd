@@ -16,7 +16,7 @@ var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW",
 
 # Attack type
 enum {PHYSIC, MAGIC, FIRE}
-var dtype = {PHYSIC:"físico", MAGIC:"mágico", FIRE:"de fogo"}
+var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
 func apply_effect(who, effect, target, t_id, logs):
@@ -38,7 +38,7 @@ func apply_effect(who, effect, target, t_id, logs):
 				valmax = target.get_stats(HP_MAX)
 			elif stat == MP:
 				valmax = target.get_stats(MP_MAX)
-			if TargetStat + value > valmax:
+			if finalval > valmax:
 				finalval = valmax
 			#print("antes do setstat: hp is"+str(target.get_stats(HP)))
 			target.set_stats(stat, finalval)
@@ -272,8 +272,8 @@ func apply_status(status, target, attacker, logs):
 			var atk = target.get_atk()
 			target.set_stats(AGI, 4*agi/3)
 			target.set_stats(ATK, 4*atk/3)
-		logs.display_text(target.get_name()+" não está mais sob o efeito de "+sstats[type])
-		target.remove_status(sstats[type])
+		logs.display_text(target.get_name()+" não está mais sob o efeito de "+type)
+		target.remove_status(type)
 
 func result_status(status, values, target, logs):
 	if status == "POISON":

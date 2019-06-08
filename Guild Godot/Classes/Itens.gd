@@ -17,6 +17,9 @@ func _init(name, quant, targ, tipo, efeito, statusEffects):
 	
 func get_target():
 	return target
-	
+
+func get_type():
+	return type
+
 func get_cost():
 	return quantity

@@ -37,21 +37,27 @@ func begin_battle(Enemies, OnMap):
 	return
 
 func end_battle(Players, Enemies, Inventory):
+	if Players == []:
+		print("AAAAAAAA")
 	var total_exp = 0
 	for e in Enemies:
 		total_exp += e.get_xp()
 	
+	Play = []
 	for p in Players:
-		p.xp += total_exp
-		print(p.get_name()+" ganhou "+str(total_exp)+" de experiência!")
-		var up = STATS.level_max_exp[p.level]
-		if p.xp >= up:
-			print(p.get_name()+" aumentou de nível!") 
-			p.xp = p.xp - up
-			p.level += 1
-		print(p.get_name()+" agora tem "+str(p.xp)+" de experiência no nível "+str(p.level))
+		if not p.is_dead():
+			p.xp += total_exp
+			print(p.get_name()+" ganhou "+str(total_exp)+" de experiência!")
+			var up = STATS.level_max_exp[p.level]
+			if p.xp >= up:
+				print(p.get_name()+" aumentou de nível!") 
+				p.xp = p.xp - up
+				p.level += 1
+			print(p.get_name()+" agora tem "+str(p.xp)+" de experiência no nível "+str(p.level))
+			Play.append(p)
+		else:
+			print("this guy "+p.get_name()+" is dead and will be removed")
 	
-	Play =  [] + Players
 	Enem = []
 	Inve = [] + Inventory
 	return

@@ -37,9 +37,10 @@ func _on_Action_pressed():
 
 func _on_Item_Picked(item):
 	item_picked = item
-	print("opa, List é"+str(List))
+	var ress = false
 	item = LOADER.List[int(item)]
-	print(item.get_name())
+	if item.get_type() == "RESSURECTION":
+		ress = true
 	if item.get_target() == "ALL":
 		for e in $Targets/HBoxContainer/Enemies.get_children():
 			e.hide()
