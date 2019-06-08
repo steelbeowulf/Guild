@@ -372,7 +372,20 @@
 	claws: Melee weapon attack
 	Harpoon: Ranged weapon attack. targets the back lane
 
-      >
+      >Minotaur(low lv enemy):
+	Flail: Melee weapon attack
+	Crushing Blow: AoE physical attack
+	
+      >Nightmare(mid lv enemy):
+	Holy weakness
+	Fear: Fear a target
+	Ethereal claws: Deals single target darkness damage
+	Mind Drain: Deals Magic damage to a target. Caster gains regen
+
+      >Orc(mid/high lv enemy):
+	High HP
+	Inner Fury: Increases Attack and Agility
+	Cleave: Hit all enemies on the mid lanes
 	
 	
 
