@@ -134,7 +134,6 @@ __meta__ = {
 }
 
 [node name="Menu" type="VBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 10.0
 margin_top = 467.0
 margin_right = 306.0
@@ -163,7 +162,6 @@ focus_neighbour_bottom = NodePath("../Attack")
 text = "Item"
 
 [node name="Log" parent="." instance=ExtResource( 12 )]
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

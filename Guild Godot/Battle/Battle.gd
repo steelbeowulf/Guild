@@ -66,6 +66,7 @@ func rounds():
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
+		print("turno de: " + str(current_entity.get_name()))
 		
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
@@ -103,10 +104,15 @@ func rounds():
 					get_node("Menu/Itens").disabled = true
 				
 				# Show the Menu and wait until action is selected
+				print("1")
 				get_node("Menu").show()
+				print("2")
 				$Menu/Attack.grab_focus()
+				print("3")
 				yield($Menu, "turn_finished")
+				print("4")
 				execute_action(current_action, current_target)
+				print("5")
 		# Current entity cannot move
 		elif can_actually_move == -1:
 			execute_action("Pass", 0)

@@ -27,5 +27,8 @@ func zero_hate():
 	for i in range(len(hate)):
 		hate[i] = 0
 
+func reset_hate():
+	hate = []
+
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)
