@@ -29,7 +29,7 @@ func update_global_position(Players_pos):
 		Leader_pos.append(Position[0])
 	Leader_pos[count % 500000] = Position[0]
 	count+=1
-	print(len(Leader_pos))
+	#print(len(Leader_pos))
 
 func begin_battle(Enemies, OnMap):
 	kill = OnMap
@@ -45,6 +45,7 @@ func end_battle(Players, Enemies, Inventory):
 	
 	Play = []
 	for p in Players:
+		p.hate = []
 		if not p.is_dead():
 			p.xp += total_exp
 			print(p.get_name()+" ganhou "+str(total_exp)+" de experiência!")
