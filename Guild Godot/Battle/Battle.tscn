@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/warrior spritesheet calciumtrice.png" type="Texture" id=2]
@@ -9,9 +9,10 @@
 [ext_resource path="res://Assets/minotaur spritesheet calciumtrice.png" type="Texture" id=7]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=8]
 [ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=9]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=13]
 
 [node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
@@ -142,26 +143,25 @@ script = ExtResource( 9 )
 
 [node name="Attack" parent="Menu" instance=ExtResource( 10 )]
 margin_bottom = 27.0
-focus_neighbour_top = NodePath("../Itens")
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 10 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 11 )]
 margin_top = 31.0
 margin_bottom = 58.0
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 11 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 12 )]
 margin_top = 62.0
 margin_bottom = 89.0
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 11 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 12 )]
 margin_top = 93.0
 margin_bottom = 120.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Item"
 
-[node name="Log" parent="." instance=ExtResource( 12 )]
+[node name="Log" parent="." instance=ExtResource( 13 )]
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]
