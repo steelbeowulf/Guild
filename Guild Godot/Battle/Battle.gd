@@ -40,6 +40,7 @@ func _ready():
 		get_node("P"+str(i)+str(0)).texture = load(Players[i].sprite)
 		get_node("P"+str(i)+str(1)).texture = load(Players[i].sprite)
 		get_node("P"+str(i)+str(2)).texture = load(Players[i].sprite)
+		Players[i].reset_hate()
 		for j in range(Enemies.size()):
 			Players[i].hate.append(0)
 	total_allies = Players.size()
