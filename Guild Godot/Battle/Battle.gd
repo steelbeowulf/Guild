@@ -1,5 +1,6 @@
 extends "Apply.gd"
 
+# Logic Stuff
 var Players
 var Enemies
 var Inventory
@@ -12,6 +13,10 @@ var dead_allies = 0
 var dead_enemies = 0
 var total_enemies = 0
 var total_allies = 0
+
+# Graphical stuff
+var Players_img = []
+var Enemies_img = []
 
 signal round_finished
 
@@ -34,22 +39,34 @@ func _ready():
 	
 	var lane
 	for i in range(Players.size()):
+		# Logic stuff
 		Players[i].index = i
-		lane = Players[i].get_pos()
-		get_node("P"+str(i)+str(lane)).show()
-		get_node("P"+str(i)+str(0)).texture = load(Players[i].sprite)
-		get_node("P"+str(i)+str(1)).texture = load(Players[i].sprite)
-		get_node("P"+str(i)+str(2)).texture = load(Players[i].sprite)
 		Players[i].reset_hate()
 		for j in range(Enemies.size()):
 			Players[i].hate.append(0)
+		
+		# Graphics stuff
+		lane = Players[i].get_pos()
+		var node = get_node("Players/P"+str(i))
+		Players_img.append(node)
+		node.change_lane(lane)
+		node.set_sprite(Players[i].sprite)
+		node.show()
+		
 	total_allies = Players.size()
 	for i in range(Enemies.size()):
 		Enemies[i].index = i
 		lane = Enemies[i].get_pos()
-		get_node("E"+str(i)+str(lane)).texture  = load(Enemies[i].sprite)
-		get_node("E"+str(i)+str(lane)).show()
+		var node = get_node("Enemies/E"+str(i))
+		Enemies_img.append(node)
+		node.set_sprite(Enemies[i].sprite)
+		node.show()
 	total_enemies = Enemies.size()
+	
+	# Link target buttons with visual targets
+	$Menu/Attack.connect_targets(Players_img, Enemies_img, self)
+	$Menu/Skills.connect_targets(Players_img, Enemies_img, self)
+	$Menu/Itens.connect_targets(Players_img, Enemies_img, self)
 	
 	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
@@ -70,6 +87,7 @@ func rounds():
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
 		print("turno de: " + str(current_entity.get_name()))
+		var id = current_entity.index
 		
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
@@ -92,13 +110,21 @@ func rounds():
 		if can_actually_move == 0:
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
+				Enemies_img[id].turn()
+				print("MOSTRA HATE PLS")
+				manage_hate(0, id)
+				$Timer.start()
+				yield($Timer, "timeout")
 				var decision = current_entity.AI(Players, Enemies)
 				print(current_entity.get_name()+" decidiu usar "+decision[0]+" em "+str(decision[1]))
 				emit_signal("turn_finished")
 				execute_action(decision[0], decision[1])
+				Enemies_img[id].end_turn()
 
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
+				manage_hate(1, id)
+				Players_img[id].turn(true)
 				if not current_entity.skills or current_entity.get_mp() == 0:
 					get_node("Menu/Skills").disabled = true
 				else:
@@ -107,17 +133,16 @@ func rounds():
 					get_node("Menu/Itens").disabled = true
 				
 				# Show the Menu and wait until action is selected
-				print("1")
 				get_node("Menu").show()
 				for c in get_node("Menu").get_children():
 					c.show()
-				print("2")
 				$Menu/Attack.grab_focus()
-				print("3")
 				yield($Menu, "turn_finished")
-				print("4")
+				Players_img[id].end_turn(true)
 				execute_action(current_action, current_target)
-				print("5")
+				var bounds = recalculate_bounds()
+				for p in Players_img:
+					p.update_bounds(bounds)
 		# Current entity cannot move
 		elif can_actually_move == -1:
 			execute_action("Pass", 0)
@@ -167,20 +192,18 @@ func execute_action(action, target):
 		var atk = current_entity.get_atk()
 		var dmg = alvo.take_damage(PHYSIC, atk)
 		if alvo.classe == "boss" and current_entity.classe != "boss":
-			current_entity.update_hate(dmg, alvo.index)
+			var hate = current_entity.update_hate(dmg, alvo.index)
 		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
 		if alvo.get_health() <= 0:
 			kill(entities, alvo.index)
 	
 	# Lane: only the player characters may change lanes
 	elif action == "Lane":
-		for i in range(Players.size()):
-			if Players[i] == current_entity:
-				var lane = current_entity.get_pos()
-				current_entity.set_pos(int(target))
-				$Log.display_text(current_entity.get_name()+" se moveu para a lane "+dlanes[int(target)])
-				get_node("P"+str(i)+str(lane)).hide()
-				get_node("P"+str(i)+str(target)).show()
+		var id = current_entity.index
+		var lane = int(target)
+		current_entity.set_pos(lane)
+		$Log.display_text(current_entity.get_name()+" se moveu para a lane "+dlanes[int(target)])
+		Players_img[id].change_lane(lane)
 	
 	# Item: only the player characters may use items
 	elif action == "Item":
@@ -290,7 +313,7 @@ func _process(delta):
 		if not p.is_dead():
 			var index = p.index
 			var lane = p.get_pos()
-			get_node("P"+str(index)+str(lane)).show()
+			get_node("Players/P"+str(index)).show()
 	if Input.is_action_pressed("ui_cancel") and state != null:
 		for c in $Menu.get_children():
 			c.hide_stuff()
@@ -418,15 +441,31 @@ func _on_Attack_button_down():
 func kill(entity, id):
 	print(entity[id].get_name()+" morreu")
 	entity[id].set_stats(HP, 0)
-	var a
-	var b
+	var img
 	if entity[id].classe == "boss":
-		a = "E"
-		b = "0"
+		img = Enemies_img
 	else:
-		a = "P"
+		img = Players_img
 		entity[id].zero_hate()
-		b = str(entity[id].get_pos())
 	entity[id].add_status("KO", 999, 0)
-	get_node(a+str(id)+b).hide()
+	img[id].die()
 	#entity.remove(id)
+
+func recalculate_bounds():
+	var bounds = []
+	for e in Enemies:
+		var hatemax = 0
+		var id = e.index
+		for p in Players:
+			if p.hate[id] > hatemax:
+				hatemax = p.hate[id]
+		bounds.append(hatemax)
+	return bounds
+	
+func manage_hate(type, target):
+	if type == 0:
+		# Focus entered
+		for i in range(len(Players)):
+			var img = Players_img[i]
+			var p = Players[i]
+			img.display_hate(p.hate[target], target)
