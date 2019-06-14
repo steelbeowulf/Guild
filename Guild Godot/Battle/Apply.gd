@@ -44,7 +44,6 @@ func apply_effect(who, effect, target, t_id, logs):
 			target.set_stats(stat, finalval)
 			if target.get_health() > 0.2*target.get_max_health():
 				target.remove_status("HP_CRITICAL")
-	logs.display_text(target.get_name()+" agora tem "+str(target.get_stats(stat))+" de "+dstats[stat])
 
 func apply_status(status, target, attacker, logs):
 	var type = sstats[status[1]]

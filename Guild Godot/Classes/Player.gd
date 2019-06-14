@@ -32,3 +32,4 @@ func reset_hate():
 
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)
+	return self.hate

@@ -8,6 +8,25 @@ func _ready():
 	for c in $Targets/HBoxContainer/Enemies.get_children():
 		c.connect("target_picked", self, "_on_Target_Picked")
 
+func connect_targets(list_players, list_enemies, manager):
+	var id = 0
+	var img
+	for e in $Targets/HBoxContainer/Enemies.get_children():
+		if id < len(list_enemies):
+			img = list_enemies[id]
+			e.connect("focus_entered", img, "turn")
+			e.connect("focus_exited", img, "end_turn")
+			e.connect("focus_entered", manager, "manage_hate", [0, id])
+			e.connect("focus_exited", manager, "manage_hate", [1, id])      
+			id += 1
+	id = 0
+	for e in $Targets/HBoxContainer/Players.get_children():
+		if id < len(list_players):
+			img = list_players[id]
+			e.connect("focus_entered", img, "turn")
+			e.connect("focus_exited", img, "end_turn")  
+			id += 1
+
 func hide_stuff():
 	for c in get_parent().get_children():
 		c.show()
