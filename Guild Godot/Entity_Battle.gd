@@ -58,3 +58,8 @@ func display_hate(value, id):
 	
 func hide_hate():
 	$ProgressBar.hide()
+
+func take_damage(value):
+	$Damage.text = str(value)
+	$Damage.show()
+	$AnimationPlayer.play("Damage")

@@ -182,18 +182,22 @@ func execute_action(action, target):
 	if action == "Attack":
 		var entities = []
 		var alvo = target[1]
+		var imgs = []
 		var skitem = int(target[0])
 		if alvo.left(1) == "P":
 			entities = Players
+			imgs = Players_img
 		else:
 			entities = Enemies
+			imgs = Enemies_img
 		alvo = int(alvo.right(1))
 		alvo = entities[alvo]
 		var atk = current_entity.get_atk()
 		var dmg = alvo.take_damage(PHYSIC, atk)
+		imgs[alvo.index].take_damage(dmg)
 		if alvo.classe == "boss" and current_entity.classe != "boss":
 			var hate = current_entity.update_hate(dmg, alvo.index)
-		$Log.display_text(current_entity.get_name()+" atacou "+alvo.get_name()+", causando "+str(dmg)+" de dano "+dtype[PHYSIC])
+		$Log.display_text("ATTACK")
 		if alvo.get_health() <= 0:
 			kill(entities, alvo.index)
 	
@@ -209,12 +213,15 @@ func execute_action(action, target):
 	elif action == "Item":
 		# Quick trick to identify if target is friend or foe
 		var entities = []
+		var imgs = []
 		var alvo = target[1]
 		var skitem = int(target[0])
 		if alvo.left(1) == "P":
 			entities = Players
+			imgs = Players_img
 		else:
 			entities = Enemies
+			imgs = Enemies_img
 		alvo = int(alvo.right(1))
 		alvo = entities[alvo]
 		var item = Inventory[skitem]
@@ -232,14 +239,17 @@ func execute_action(action, target):
 			for p in entities:
 				affected.append(p)
 		
+		$Log.display_text(item.nome)
 		# Apply the effect on all affected
 		for alvo in affected:
 			if not alvo.is_dead() or item.type == "RESSURECTION":
-				$Log.display_text(current_entity.get_name()+" usou o item "+item.nome+" em "+alvo.get_name())
 				item.quantity = item.quantity - 1
 				if (item.effect != []):
+					var result
 					for eff in item.effect:
-						apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
+						result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
+						if result >= 0:
+							imgs[alvo.index].take_damage(result)
 				if (item.status != []):
 					for st in item.status:
 						apply_status(st, alvo, current_entity, $Log)
@@ -257,12 +267,15 @@ func execute_action(action, target):
 
 	elif action == "Skills":
 		var entities = []
+		var imgs = []
 		var alvo = target[1]
 		var skitem = int(target[0])
 		if alvo.left(1) == "P":
 			entities = Players
+			imgs = Players_img
 		else:
 			entities = Enemies
+			imgs = Enemies_img
 		alvo = int(alvo.right(1))
 		alvo = entities[alvo]
 		var skill = current_entity.get_skills()[skitem]
@@ -278,12 +291,14 @@ func execute_action(action, target):
 		elif skill.get_target() == "ALL":
 			for p in entities:
 				affected.append(p)
+		$Log.display_text(skill.nome)
 		for alvo in affected:
 			if not alvo.is_dead() or skill.type == "RESSURECTION":
-				$Log.display_text(current_entity.get_name()+" usou a habilidade "+skill.nome+" em "+alvo.get_name())
-				if (skill.effect != []):
-					for eff in skill.effect:
-						apply_effect(current_entity, eff, alvo, int(target[1]), $Log)
+				var result
+				for eff in skill.effect:
+					result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
+					if result >= 0:
+						imgs[alvo.index].take_damage(result)
 				if (skill.status != []):
 					for st in skill.status:
 						apply_status(st, alvo, current_entity, $Log)

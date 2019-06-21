@@ -20,6 +20,7 @@ var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
 func apply_effect(who, effect, target, t_id, logs):
+	var ret = -1
 	var stat = effect[0]
 	var value = effect[1]
 	var type = effect[2]
@@ -30,7 +31,7 @@ func apply_effect(who, effect, target, t_id, logs):
 	for i in range(times):
 		if stat == HP and value < 0:
 			var dmg = target.take_damage(type, abs(value))
-			print("dano de "+str(dmg))
+			ret = dmg
 			if target.classe == "boss" and who.classe != "boss":
 				who.update_hate(dmg, t_id)
 		else:
@@ -44,6 +45,7 @@ func apply_effect(who, effect, target, t_id, logs):
 			target.set_stats(stat, finalval)
 			if target.get_health() > 0.2*target.get_max_health():
 				target.remove_status("HP_CRITICAL")
+	return ret
 
 func apply_status(status, target, attacker, logs):
 	var type = sstats[status[1]]
