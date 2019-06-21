@@ -26,4 +26,5 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.996078, 0, 0, 1 )
 text = "Return to the Title Screen"
 flat = true
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
