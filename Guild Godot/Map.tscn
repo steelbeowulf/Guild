@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/environment_forest_evening.png" type="Texture" id=2]
 [ext_resource path="res://Monstro_no_mundo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -35,3 +36,6 @@ id = 5
 movement = 1
 radius = 100.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
