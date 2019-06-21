@@ -9,6 +9,7 @@
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=8]
 
+
 [node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
 script = ExtResource( 1 )
