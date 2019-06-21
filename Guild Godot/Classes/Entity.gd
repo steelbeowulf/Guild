@@ -129,7 +129,13 @@ func is_dead():
 	return dead
 
 func set_stats(stat, value):
+	var ret
+	if stat == HP:
+		if get_health() +  value > get_max_health():
+			ret = get_max_health() - get_health()
+			value = get_max_health()
 	self.stats[stat] = value
+	return ret
 
 func get_graphics():
 	return self.graphics

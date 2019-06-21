@@ -298,8 +298,7 @@ func result_status(status, values, target, logs):
 	elif status == "REGEN":
 		var hp = target.get_health()
 		var max_hp = target.get_max_health()
-		target.set_stats(HP, hp+floor(max_hp*0.05))
-		result = -floor(max_hp*0.05)
+		result = target.set_stats(HP, hp+floor(max_hp*0.05))
 		logs.display_text(target.get_name()+" recuperou "+str(-result)+" de HP")
 	elif status == "BURN":
 		var hp = target.get_health()
