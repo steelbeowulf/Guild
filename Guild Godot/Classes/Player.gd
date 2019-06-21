@@ -30,6 +30,12 @@ func zero_hate():
 func reset_hate():
 	hate = []
 
+func die():
+	remove_all_status()
+	zero_hate()
+	add_status("KO", 999, 999)
+	self.graphics.die()
+
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)
 	return self.hate

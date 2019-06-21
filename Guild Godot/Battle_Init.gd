@@ -45,6 +45,7 @@ func end_battle(Players, Enemies, Inventory):
 	Play = []
 	for p in Players:
 		if not p.is_dead():
+			p.remove_all_status()
 			p.zero_hate()
 			p.reset_hate()
 			p.xp += total_exp
