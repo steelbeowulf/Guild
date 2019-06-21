@@ -22,7 +22,7 @@ func set_sprite(sprite):
 
 # Just hide for now
 func die():
-	self.hide()
+	$AnimationPlayer.play("Death")
 
 func turn(keep=false):
 	if keep:
@@ -59,7 +59,24 @@ func display_hate(value, id):
 func hide_hate():
 	$ProgressBar.hide()
 
-func take_damage(value):
+func take_damage(value, type):
+	if type == 0:
+		if value < 0:
+			value = abs(value)
+			$Damage.self_modulate = Color(0, 255, 30)
+		else:
+			$Damage.self_modulate = Color(255, 255, 255)
+	else:
+		if value < 0:
+			value = abs(value)
+			$Damage.self_modulate = Color(0, 0, 255)
+		else:
+			$Damage.self_modulate = Color(125, 0, 160)
 	$Damage.text = str(value)
 	$Damage.show()
 	$AnimationPlayer.play("Damage")
+	
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		self.hide()

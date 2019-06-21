@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Guild"
-run/main_scene="res://Title Screen.tscn"
+run/main_scene="res://Map.tscn"
 config/icon="res://icon.png"
 
 [autoload]
