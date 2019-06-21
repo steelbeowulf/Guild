@@ -34,4 +34,3 @@ allow_greater = true
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 4 )
 tint_progress = Color( 1, 0, 0, 1 )
-
