@@ -88,6 +88,9 @@ func rounds():
 		current_entity = turnorder[i]
 		print("turno de: " + str(current_entity.get_name()))
 		var id = current_entity.index
+		var img = Players_img[id]
+		if current_entity.classe == "boss":
+			Enemies_img[id]
 		
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
@@ -95,8 +98,12 @@ func rounds():
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
 		if status:
+			var result
 			for st in status.keys():
-				can_move.append(result_status(st, status[st], current_entity, $Log))
+				result = result_status(st, status[st], current_entity, $Log)
+				can_move.append(result[0])
+				img.take_damage(result[1], 0)
+				
 			current_entity.decrement_turns()
 			print(current_entity.get_name()+" e seu canmove "+str(can_move))
 			
@@ -194,7 +201,7 @@ func execute_action(action, target):
 		alvo = entities[alvo]
 		var atk = current_entity.get_atk()
 		var dmg = alvo.take_damage(PHYSIC, atk)
-		imgs[alvo.index].take_damage(dmg)
+		imgs[alvo.index].take_damage(dmg, 0)
 		if alvo.classe == "boss" and current_entity.classe != "boss":
 			var hate = current_entity.update_hate(dmg, alvo.index)
 		$Log.display_text("ATTACK")
@@ -248,8 +255,8 @@ func execute_action(action, target):
 					var result
 					for eff in item.effect:
 						result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
-						if result >= 0:
-							imgs[alvo.index].take_damage(result)
+						if result[0] != -1:
+							imgs[alvo.index].take_damage(result[0], result[1])
 				if (item.status != []):
 					for st in item.status:
 						apply_status(st, alvo, current_entity, $Log)
@@ -297,8 +304,8 @@ func execute_action(action, target):
 				var result
 				for eff in skill.effect:
 					result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
-					if result >= 0:
-						imgs[alvo.index].take_damage(result)
+					if result[0] == -1:
+						imgs[alvo.index].take_damage(result[0], result[1])
 				if (skill.status != []):
 					for st in skill.status:
 						apply_status(st, alvo, current_entity, $Log)

@@ -34,3 +34,4 @@ scale = Vector2( 1.2, 1.2 )
 id = 5
 movement = 1
 radius = 100.0
+

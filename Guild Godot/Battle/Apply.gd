@@ -21,6 +21,7 @@ var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
 func apply_effect(who, effect, target, t_id, logs):
 	var ret = -1
+	var tipo = -1
 	var stat = effect[0]
 	var value = effect[1]
 	var type = effect[2]
@@ -30,6 +31,7 @@ func apply_effect(who, effect, target, t_id, logs):
 	var valmax = 9999
 	for i in range(times):
 		if stat == HP and value < 0:
+			tipo = 0
 			var dmg = target.take_damage(type, abs(value))
 			ret = dmg
 			if target.classe == "boss" and who.classe != "boss":
@@ -37,15 +39,23 @@ func apply_effect(who, effect, target, t_id, logs):
 		else:
 			if stat == HP:
 				valmax = target.get_stats(HP_MAX)
+				tipo = 0
+				ret = -value
+				if finalval > valmax:
+					finalval = valmax
+					ret = -(valmax - target.get_health())
 			elif stat == MP:
 				valmax = target.get_stats(MP_MAX)
-			if finalval > valmax:
-				finalval = valmax
+				tipo = 1
+				ret = -value
+				if finalval > valmax:
+					finalval = valmax
+					ret = -(valmax - target.get_mp())
 			#print("antes do setstat: hp is"+str(target.get_stats(HP)))
 			target.set_stats(stat, finalval)
 			if target.get_health() > 0.2*target.get_max_health():
 				target.remove_status("HP_CRITICAL")
-	return ret
+	return [ret, tipo]
 
 func apply_status(status, target, attacker, logs):
 	var type = sstats[status[1]]
@@ -277,19 +287,24 @@ func apply_status(status, target, attacker, logs):
 		target.remove_status(type)
 
 func result_status(status, values, target, logs):
+	var can_move = 0
+	var result = -1
 	if status == "POISON":
 		var hp = target.get_health()
 		var dmg = values[1] - target.get_defm()
 		target.set_stats(HP, hp-dmg)
+		result = dmg
 		logs.display_text(target.get_name()+" levou "+str(dmg)+" de dano de Poison")
 	elif status == "REGEN":
 		var hp = target.get_health()
 		var max_hp = target.get_max_health()
-		target.set_stats(HP, hp+(max_hp)*0.05)
+		target.set_stats(HP, hp+floor(max_hp*0.05))
+		result = floor(max_hp*0.05)
 		logs.display_text(target.get_name()+" recuperou "+str(0.05*max_hp)+" de HP")
 	elif status == "BURN":
 		var hp = target.get_health()
 		target.set_stats(HP, hp-10)
+		result = 10
 		logs.display_text(target.get_name()+" levou 10 de dano de Burn")
 	elif status == "PARALYSIS":
 		randomize()
@@ -297,44 +312,43 @@ func result_status(status, values, target, logs):
 		if chance < 50:
 			#target.execute_action("Pass", 0)
 			logs.display_text(target.get_name()+" esta paralisado, não consegue atacar")
-			return -1
+			can_move = -1
 	elif status == "FEAR":
 		randomize()
 		var chance = rand_range(0, 99)
 		if chance < 26:
 			#target.execute_action("Pass", 0)
 			logs.display_text(target.get_name()+" esta apavorado, não consegue atacar")
-			return -1
+			can_move = -1
 	elif status == "FREEZE":
 		#target.execute_action("Pass", 0)
 		logs.display_text(target.get_name()+" esta congelado, não consegue atacar")
-		return -1
+		can_move =  -1
 	elif status == "BERSERK":
 		#var atk = target.get_atk()
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 0)
 		#target.execute_action("Attack", rand)
 		logs.display_text(target.get_name()+" esta fora de controle, atacará qualquer um em sua frente")
-		return -2
+		can_move =  -2
 	elif status == "UNDEAD":
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 3)
 		#target.execute_action("Attack", rand)
 		logs.display_text(target.get_name()+" atacará qualquer alvo")
-		return -2
+		can_move = -2
 	elif status == "PETRIFY":
 		#target.execute_action("Pass", 0)
 		logs.display_text(target.get_name()+" esta petrificado, não consegue atacar")
-		return -1
+		can_move = -1
 	elif status == "KO":
-		return -1
+		can_move = -1
 		#target.execute_action("Pass", 0)
 	elif status == "SLEEP":
 		var hp = target.get_health()
-		target.set_stats(HP, hp + hp*0.05)
-		var mp = target.get_mp()
-		target.set_stats(MP, mp + mp*0.05)
+		target.set_stats(HP, hp + floor(hp*0.05))
+		result = floor(hp*0.05)
 		#target.execute_action("Pass", 0)
 		logs.display_text(target.get_name()+" esta dormindo, não consegue atacar")	
-		return -1
-	return 0
+		can_move = -1
+	return [can_move, result]
