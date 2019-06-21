@@ -81,6 +81,7 @@ allow_greater = true
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 4 )
 tint_progress = Color( 1, 0, 0, 1 )
+<<<<<<< HEAD
 
 [node name="Damage" type="Label" parent="."]
 visible = false
@@ -95,3 +96,5 @@ text = "250"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 3 )
 
+=======
+>>>>>>> 8bf071ffd7b9a43b1a2af215a842c46d81f4b04a
