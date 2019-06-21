@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Entity_Battle.tscn" type="PackedScene" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=8]
-
+[ext_resource path="res://Musics/Modern Castle - Tension (online-audio-converter.com).ogg" type="AudioStream" id=9]
 
 [node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
@@ -113,6 +113,9 @@ margin_bottom = 594.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

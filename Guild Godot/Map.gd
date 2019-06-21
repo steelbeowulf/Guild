@@ -46,3 +46,4 @@ func update_positions():
 	for i in range(len($Party.get_children())):
 		Players_pos[i] = $Party.get_child(i).get_global_position()
 	BATTLE_INIT.update_global_position(Players_pos)
+

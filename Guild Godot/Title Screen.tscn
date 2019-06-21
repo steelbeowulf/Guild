@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Title Screen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Title screen 2.png" type="Texture" id=2]
 [ext_resource path="res://alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Musics/TownTheme (online-audio-converter.com).ogg" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 33
@@ -29,6 +30,7 @@ text = "START"
 flat = true
 
 [node name="Button2" type="Button" parent="."]
+pause_mode = 2
 margin_left = 155.624
 margin_top = 478.137
 margin_right = 299.624
@@ -47,6 +49,10 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_hover = Color( 0.831373, 0.898039, 0.0627451, 1 )
 text = "EXIT"
 flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_Button3_pressed"]
