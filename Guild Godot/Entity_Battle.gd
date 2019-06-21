@@ -60,14 +60,15 @@ func hide_hate():
 	$ProgressBar.hide()
 
 func take_damage(value, type):
+	var bad_heal = (str(value) == "-0")
 	if type == 0:
-		if value < 0:
+		if value < 0 or bad_heal:
 			value = abs(value)
 			$Damage.self_modulate = Color(0, 255, 30)
 		else:
 			$Damage.self_modulate = Color(255, 255, 255)
 	else:
-		if value < 0:
+		if value < 0 or bad_heal:
 			value = abs(value)
 			$Damage.self_modulate = Color(0, 0, 255)
 		else:

@@ -52,6 +52,7 @@ func _ready():
 		node.change_lane(lane)
 		node.set_sprite(Players[i].sprite)
 		node.show()
+		Players[i].graphics = node
 		
 	total_allies = Players.size()
 	for i in range(Enemies.size()):
@@ -61,6 +62,7 @@ func _ready():
 		Enemies_img.append(node)
 		node.set_sprite(Enemies[i].sprite)
 		node.show()
+		Enemies[i].graphics = node
 	total_enemies = Enemies.size()
 	
 	# Link target buttons with visual targets
@@ -72,6 +74,8 @@ func _ready():
 	while (not over):
 		rounds()
 		yield(self, "round_finished")
+	$Timer.start()
+	yield($Timer, "timeout")
 	$Log.display_text("Fim de jogo!")
 	print_battle_results()
 	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
@@ -90,7 +94,7 @@ func rounds():
 		var id = current_entity.index
 		var img = Players_img[id]
 		if current_entity.classe == "boss":
-			Enemies_img[id]
+			img = Enemies_img[id]
 		
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
@@ -120,6 +124,7 @@ func rounds():
 				Enemies_img[id].turn()
 				print("MOSTRA HATE PLS")
 				manage_hate(0, id)
+				$Timer.wait_time = 1.5
 				$Timer.start()
 				yield($Timer, "timeout")
 				var decision = current_entity.AI(Players, Enemies)
@@ -164,6 +169,9 @@ func rounds():
 			print("Hey game over")
 			over = true
 			break
+		$Timer.wait_time = 1.0
+		$Timer.start()
+		yield($Timer, "timeout")
 	emit_signal("round_finished")
 
 func check_battle_end():
@@ -304,7 +312,7 @@ func execute_action(action, target):
 				var result
 				for eff in skill.effect:
 					result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
-					if result[0] == -1:
+					if result[0] != -1:
 						imgs[alvo.index].take_damage(result[0], result[1])
 				if (skill.status != []):
 					for st in skill.status:
@@ -461,17 +469,7 @@ func _on_Attack_button_down():
 	get_node("Menu/Attack/").set_pressed(true)
 
 func kill(entity, id):
-	print(entity[id].get_name()+" morreu")
-	entity[id].set_stats(HP, 0)
-	var img
-	if entity[id].classe == "boss":
-		img = Enemies_img
-	else:
-		img = Players_img
-		entity[id].zero_hate()
-	entity[id].add_status("KO", 999, 0)
-	img[id].die()
-	#entity.remove(id)
+	entity[id].die()
 
 func recalculate_bounds():
 	var bounds = []

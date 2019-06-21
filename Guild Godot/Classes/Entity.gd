@@ -13,14 +13,22 @@ var health
 var position
 var classe
 var skills
+var graphics
 var status = {}
 var dead = false
 var resist = {}
 	#fire, water, ligthting, ice, earth, wind, holy, darkness]
 var elem = {0:"PHYSIC", 1:"MAGIC", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
+func die():
+	add_status("KO", 999, 999)
+	self.graphics.die()
+
 func get_status():
 	return status
+
+func remove_all_status():
+	status = {}
 
 func remove_status(effect):
 	if effect == "SLOW":
@@ -109,6 +117,7 @@ func take_damage(type, damage):
 		dmg = 0
 	#set_stats(HP, get_health()-dmg)
 	stats[HP] = get_health() - dmg
+	self.graphics.take_damage(0, dmg)
 	if get_health() < 0.2*get_max_health() and get_health() > 0:
 		self.add_status("HP_CRITICAL", 0, 999)
 	if get_health() <= 0:
@@ -121,6 +130,9 @@ func is_dead():
 
 func set_stats(stat, value):
 	self.stats[stat] = value
+
+func get_graphics():
+	return self.graphics
 
 func get_skills():
 	return self.skills
