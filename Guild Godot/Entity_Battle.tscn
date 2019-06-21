@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Entity_Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/warrior spritesheet calciumtrice.png" type="Texture" id=2]
+[ext_resource path="res://Assets/NO.png" type="Texture" id=3]
+[ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -20,15 +22,16 @@ polygon = PoolVector2Array( -1.35055, -21.03, 4.29088, -21.0182, 1.72063, -17.03
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-margin_left = -28.0
-margin_top = 34.0
-margin_right = 12.0
-margin_bottom = 48.0
-rect_scale = Vector2( 1.5, 1 )
+[node name="ProgressBar" type="TextureProgress" parent="."]
+margin_left = -38.3996
+margin_top = 7.16805
+margin_right = 361.6
+margin_bottom = 187.168
+rect_scale = Vector2( 0.2, 0.5 )
 theme = SubResource( 1 )
-custom_colors/font_color = Color( 0.964706, 0.0431373, 0.0313726, 1 )
-custom_colors/font_color_shadow = Color( 0.968627, 0.0313726, 0.0313726, 1 )
 max_value = 999.0
 allow_greater = true
-percent_visible = false
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+tint_progress = Color( 1, 0, 0, 1 )
+
