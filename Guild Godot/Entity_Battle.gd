@@ -46,6 +46,12 @@ func update_bounds(bounds):
 	self.bounds = bounds
 	
 func display_hate(value, id):
+	if value < 100:
+		$ProgressBar.tint_progress = Color(0, 255, 120)
+	elif value < 300:
+		$ProgressBar.tint_progress = Color(200, 200, 0)
+	else:
+		$ProgressBar.tint_progress = Color(255, 0, 0)
 	$ProgressBar.set_value(value)
 	$ProgressBar.max_value = bounds[id]
 	$ProgressBar.show()
