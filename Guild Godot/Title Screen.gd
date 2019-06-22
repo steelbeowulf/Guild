@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	pass # Replace with function body.
+	$Button.grab_focus()
 
 
 func _on_Button_pressed():
