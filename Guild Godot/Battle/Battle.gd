@@ -196,9 +196,8 @@ func execute_action(action, target):
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
 		var entities = []
-		var alvo = target[1]
+		var alvo = target
 		var imgs = []
-		var skitem = int(target[0])
 		if alvo.left(1) == "P":
 			entities = Players
 			imgs = Players_img
