@@ -17,8 +17,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
 func set_sprite(sprite):
-	$Sprite.texture = load(sprite)
+	$Sprite.texture = load(sprite[0])
+
+func idle(sprite):
+	for i in range(9):
+		$Sprite.texture = load(sprite[i])
 
 # Just hide for now
 func die():

@@ -122,4 +122,3 @@ text = "250"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 3 )
 anims/Death = SubResource( 4 )
-

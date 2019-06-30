@@ -196,8 +196,9 @@ func execute_action(action, target):
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
 		var entities = []
-		var alvo = target
 		var imgs = []
+		var alvo = target[1]
+		var skitem = int(target[0])
 		if alvo.left(1) == "P":
 			entities = Players
 			imgs = Players_img
@@ -338,6 +339,10 @@ func set_current_target(target):
 	current_target = target
 
 func _process(delta):
+	for i in range(Players.size()):
+		var node = get_node("Players/P"+str(i))
+		node.idle(Players[i].sprite)
+		Players[i].graphics = node
 	for p in Players:
 		if not p.is_dead():
 			var index = p.index
