@@ -112,11 +112,11 @@ tint_progress = Color( 1, 0, 0, 1 )
 
 [node name="Damage" type="Label" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.882353 )
+modulate = Color( 1, 1, 1, 0.0588235 )
 margin_left = 25.0
-margin_top = -5.0
+margin_top = -20.0
 margin_right = 79.0
-margin_bottom = 31.0
+margin_bottom = 16.0
 custom_fonts/font = SubResource( 2 )
 text = "250"
 
@@ -124,4 +124,3 @@ text = "250"
 anims/Damage = SubResource( 3 )
 anims/Death = SubResource( 4 )
 anims/Idle = SubResource( 5 )
-
