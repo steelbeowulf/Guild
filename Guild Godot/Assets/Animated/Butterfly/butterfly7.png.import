@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/butterfly.png-4a5ae3bf3d6b6ac3466d28c8928c1fd1.stex"
+path="res://.import/butterfly7.png-92db5b67d73b53ead3c59e2164f600d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/butterfly.png"
-dest_files=[ "res://.import/butterfly.png-4a5ae3bf3d6b6ac3466d28c8928c1fd1.stex" ]
+source_file="res://Assets/Animated/Butterfly/butterfly7.png"
+dest_files=[ "res://.import/butterfly7.png-92db5b67d73b53ead3c59e2164f600d7.stex" ]
 
 [params]
 

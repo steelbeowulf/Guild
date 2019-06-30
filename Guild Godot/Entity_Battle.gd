@@ -4,6 +4,7 @@ var OFFSET_LANE = Vector2(140, 0)
 var current_lane = 0
 var initial_position
 var my_turn = false
+var frames = SpriteFrames.new()
 var bounds = [0,0,0,0,0]
 export(bool) var Player = false
 
@@ -19,11 +20,11 @@ func _ready():
 #	pass
 
 func set_sprite(sprite):
-	$Sprite.texture = load(sprite[0])
-
-func idle(sprite):
-	for i in range(9):
-		$Sprite.texture = load(sprite[i])
+	frames.add_animation("idle")
+	for i in range(len(sprite)):
+		frames.add_frame("idle", load(sprite[i]))
+	$Sprite.frames  = frames
+	$Sprite.play("idle")
 
 # Just hide for now
 func die():
