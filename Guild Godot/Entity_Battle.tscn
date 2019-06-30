@@ -1,10 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Entity_Battle.gd" type="Script" id=1]
-[ext_resource path="res://Assets/warrior spritesheet calciumtrice.png" type="Texture" id=2]
-[ext_resource path="res://Assets/NO.png" type="Texture" id=3]
-[ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=4]
-[ext_resource path="res://_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/NO.png" type="Texture" id=2]
+[ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=3]
+[ext_resource path="res://_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -13,7 +12,7 @@ size = 42
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
-font_data = ExtResource( 5 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Damage"
@@ -81,6 +80,9 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+
 [node name="P0" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -92,9 +94,8 @@ z_index = 5
 color = Color( 0.0470588, 0.407843, 0.929412, 1 )
 polygon = PoolVector2Array( -1.35055, -21.03, 4.29088, -21.0182, 1.72063, -17.0343 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
 
 [node name="ProgressBar" type="TextureProgress" parent="."]
 margin_left = -38.3996
@@ -105,8 +106,8 @@ rect_scale = Vector2( 0.2, 0.5 )
 theme = SubResource( 1 )
 max_value = 999.0
 allow_greater = true
-texture_under = ExtResource( 3 )
-texture_progress = ExtResource( 4 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
 tint_progress = Color( 1, 0, 0, 1 )
 
 [node name="Damage" type="Label" parent="."]
@@ -122,3 +123,5 @@ text = "250"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 3 )
 anims/Death = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+

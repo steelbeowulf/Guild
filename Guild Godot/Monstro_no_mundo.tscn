@@ -1,14 +1,22 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Monstro_no_mundo.gd" type="Script" id=1]
-[ext_resource path="res://Assets/butterfly.png" type="Texture" id=2]
-[ext_resource path="res://Assets/butterfly2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/butterfly3.png" type="Texture" id=4]
-[ext_resource path="res://Assets/butterfly4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/butterfly5.png" type="Texture" id=6]
-[ext_resource path="res://Assets/butterfly6.png" type="Texture" id=7]
-[ext_resource path="res://Assets/butterfly7.png" type="Texture" id=8]
-[ext_resource path="res://Assets/butterfly8.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly6.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Animated/Butterfly/butterfly8.png" type="Texture" id=9]
+
+
+
+
+
+
+
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

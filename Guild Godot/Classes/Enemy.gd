@@ -55,7 +55,7 @@ func AI(player_list, enemies_list):
 					best_dmg = ef[1]
 					best_skill = i
 	if best_skill == -1:
-		return ["Attack", possible_target]
+		return ["Attack", [1, possible_target]]
 	return ["Skills", [best_skill, possible_target]]
 
 func get_xp():

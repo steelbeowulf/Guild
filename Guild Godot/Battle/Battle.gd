@@ -339,10 +339,10 @@ func set_current_target(target):
 	current_target = target
 
 func _process(delta):
-	for i in range(Players.size()):
-		var node = get_node("Players/P"+str(i))
-		node.idle(Players[i].sprite)
-		Players[i].graphics = node
+	#for i in range(Players.size()):
+		#var node = get_node("Players/P"+str(i))
+		#node.idle(Players[i].sprite)
+		#Players[i].graphics = node
 	for p in Players:
 		if not p.is_dead():
 			var index = p.index
