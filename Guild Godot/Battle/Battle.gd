@@ -276,7 +276,7 @@ func execute_action(action, target):
 							result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
 							if result[0] != -1:
 								imgs[alvo.index].take_damage(result[0], result[1])
-								$Timer.wait_time = 0.5
+								$Timer.wait_time = 1.0
 								$Timer.start()
 								yield($Timer, "timeout")
 				if (item.status != []):
@@ -330,7 +330,7 @@ func execute_action(action, target):
 						result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
 						if result[0] != -1:
 							imgs[alvo.index].take_damage(result[0], result[1])
-							$Timer.wait_time = 0.1
+							$Timer.wait_time = 1.0
 							$Timer.start()
 							yield($Timer, "timeout")
 				if (skill.status != []):
@@ -508,3 +508,6 @@ func manage_hate(type, target):
 			var img = Players_img[i]
 			var p = Players[i]
 			img.display_hate(p.hate[target], target)
+
+func _on_Timer_timeout():
+	pass
