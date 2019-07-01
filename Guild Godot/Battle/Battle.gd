@@ -222,6 +222,7 @@ func execute_action(action, target):
 			var hate = current_entity.update_hate(dmg, alvo.index)
 		$Log.display_text("ATTACK")
 		if alvo.get_health() <= 0:
+			print("alguém morreu")
 			kill(entities, alvo.index)
 	
 	# Lane: only the player characters may change lanes
@@ -357,10 +358,6 @@ func set_current_target(target):
 	current_target = target
 
 func _process(delta):
-	#for i in range(Players.size()):
-		#var node = get_node("Players/P"+str(i))
-		#node.idle(Players[i].sprite)
-		#Players[i].graphics = node
 	for p in Players:
 		if not p.is_dead():
 			var index = p.index
