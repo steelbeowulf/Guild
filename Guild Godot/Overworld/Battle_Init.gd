@@ -37,7 +37,7 @@ func begin_battle(Enemies, OnMap):
 
 func end_battle(Players, Enemies, Inventory):
 	if Players == []:
-		get_tree().change_scene("res://Game Over.tscn")
+		get_tree().change_scene("res://Battle/Game Over.tscn")
 	var total_exp = 0
 	for e in Enemies:
 		total_exp += e.get_xp()

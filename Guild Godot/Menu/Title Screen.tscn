@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Title Screen.gd" type="Script" id=1]
+[ext_resource path="res://Menu/Title Screen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Title screen 2.png" type="Texture" id=2]
-[ext_resource path="res://alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Musics/TownTheme (online-audio-converter.com).ogg" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
@@ -19,38 +19,38 @@ position = Vector2( 511.292, 300.006 )
 scale = Vector2( 1.27997, 1.19998 )
 texture = ExtResource( 2 )
 
-[node name="Button" type="Button" parent="."]
+[node name="Start" type="Button" parent="."]
 margin_left = 174.952
 margin_top = 405.854
 margin_right = 287.952
 margin_bottom = 443.854
-focus_neighbour_top = NodePath("../Button3")
-focus_neighbour_bottom = NodePath("../Button2")
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../Credits")
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_hover = Color( 0.831373, 0.898039, 0.0627451, 1 )
 text = "START"
 flat = true
 
-[node name="Button2" type="Button" parent="."]
+[node name="Credits" type="Button" parent="."]
 pause_mode = 2
 margin_left = 155.624
 margin_top = 478.137
 margin_right = 299.624
 margin_bottom = 516.137
-focus_neighbour_top = NodePath("../Button")
-focus_neighbour_bottom = NodePath("../Button3")
+focus_neighbour_top = NodePath("../Start")
+focus_neighbour_bottom = NodePath("../Exit")
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_hover = Color( 0.831373, 0.898039, 0.0627451, 1 )
 text = "CREDITS"
 flat = true
 
-[node name="Button3" type="Button" parent="."]
+[node name="Exit" type="Button" parent="."]
 margin_left = 190.207
 margin_top = 536.895
 margin_right = 275.207
 margin_bottom = 574.895
-focus_neighbour_top = NodePath("../Button2")
-focus_neighbour_bottom = NodePath("../Button")
+focus_neighbour_top = NodePath("../Credits")
+focus_neighbour_bottom = NodePath("../Start")
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_hover = Color( 0.831373, 0.898039, 0.0627451, 1 )
 text = "EXIT"
@@ -60,6 +60,6 @@ flat = true
 stream = ExtResource( 4 )
 autoplay = true
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Start" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_Button3_pressed"]

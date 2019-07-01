@@ -79,7 +79,7 @@ func _ready():
 	$Log.display_text("Fim de jogo!")
 	print_battle_results()
 	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
-	get_tree().change_scene("res://Map.tscn")
+	get_tree().change_scene("res://Overworld/Map.tscn")
 
 # A round is comprised of the turns of all entities participating in battle
 func rounds():
@@ -92,15 +92,18 @@ func rounds():
 		current_entity = turnorder[i]
 		print("turno de: " + str(current_entity.get_name()))
 		var id = current_entity.index
-		var img = Players_img[id]
+		var img
 		if current_entity.classe == "boss":
 			img = Enemies_img[id]
+		else:
+			img = Players_img[id]
 		
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
 		var can_actually_move = 0
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
+		$Timer.wait_time = 1.0
 		if status:
 			var result
 			for st in status.keys():
@@ -157,19 +160,24 @@ func rounds():
 					p.update_bounds(bounds)
 		# Current entity cannot move
 		elif can_actually_move == -1:
+			$Timer.wait_time = 0.1
 			execute_action("Pass", 0)
 			emit_signal("turn_finished")
 		# Current entity is forced to attack a random enemy
 		elif can_actually_move == -2:
+			var pref = "E"
+			if current_entity.classe == "boss":
+				pref = "P"
 			randomize()
-			var rand = rand_range(-LOADER.List.size(), 0)
-			execute_action("Attack", rand)
+			var target = rand_range(0,LOADER.List.size())
+			target = pref+str(floor(target))
+			execute_action("Attack", [1, target])
 		# Check if all players or enemies are dead
 		if check_battle_end():
 			print("Hey game over")
 			over = true
 			break
-		$Timer.wait_time = 1.0
+		
 		$Timer.start()
 		yield($Timer, "timeout")
 	emit_signal("round_finished")
@@ -262,9 +270,14 @@ func execute_action(action, target):
 				if (item.effect != []):
 					var result
 					for eff in item.effect:
-						result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
-						if result[0] != -1:
-							imgs[alvo.index].take_damage(result[0], result[1])
+						var times = eff[3]
+						for i in range(times):
+							result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
+							if result[0] != -1:
+								imgs[alvo.index].take_damage(result[0], result[1])
+								$Timer.wait_time = 0.5
+								$Timer.start()
+								yield($Timer, "timeout")
 				if (item.status != []):
 					for st in item.status:
 						apply_status(st, alvo, current_entity, $Log)
@@ -311,9 +324,14 @@ func execute_action(action, target):
 			if not alvo.is_dead() or skill.type == "RESSURECTION":
 				var result
 				for eff in skill.effect:
-					result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
-					if result[0] != -1:
-						imgs[alvo.index].take_damage(result[0], result[1])
+					var times = eff[3]
+					for i in range(times):
+						result = apply_effect(current_entity, eff, alvo,  alvo.index , $Log)
+						if result[0] != -1:
+							imgs[alvo.index].take_damage(result[0], result[1])
+							$Timer.wait_time = 0.1
+							$Timer.start()
+							yield($Timer, "timeout")
 				if (skill.status != []):
 					for st in skill.status:
 						apply_status(st, alvo, current_entity, $Log)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Entity_Battle.gd" type="Script" id=1]
+[ext_resource path="res://Battle/Entity_Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/NO.png" type="Texture" id=2]
 [ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=3]
-[ext_resource path="res://_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="Theme" id=1]
 
@@ -47,7 +47,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( -0.1, 0.8 ),
+"times": PoolRealArray( -0.1, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -112,11 +112,11 @@ tint_progress = Color( 1, 0, 0, 1 )
 
 [node name="Damage" type="Label" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.882353 )
+modulate = Color( 1, 1, 1, 0.0588235 )
 margin_left = 25.0
-margin_top = -5.0
+margin_top = -20.0
 margin_right = 79.0
-margin_bottom = 31.0
+margin_bottom = 16.0
 custom_fonts/font = SubResource( 2 )
 text = "250"
 

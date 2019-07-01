@@ -1,0 +1,9 @@
+{
+	"ID":6,
+	"NAME":"CHARGE ATTACK", 
+	"QUANT":50, 
+	"TYPE":"OFFENSE", 
+	"TARGET":"ONE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[]
+}

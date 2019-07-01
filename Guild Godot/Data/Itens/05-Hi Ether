@@ -1,0 +1,9 @@
+{	
+	"ID":5,	
+	"NAME":"HI ETHER",
+	"QUANT":1,
+	"TARGET":"ONE",
+	"TYPE":"RECOVERY",
+	"EFFECTS":[{"STAT":"MP", "VALUE":50, "TYPE":"", "TURNS":1}],
+	"STATUS":[]
+}

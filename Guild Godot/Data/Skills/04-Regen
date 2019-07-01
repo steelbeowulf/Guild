@@ -1,0 +1,9 @@
+{
+	"ID":4,
+	"NAME":"REGEN", 
+	"QUANT":15, 
+	"TARGET":"ONE", 
+	"TYPE":"RECOVERY",
+	"EFFECTS":[],
+	"STATUS":[{"BOOL":1, "STATUS":"REGEN"}]
+}

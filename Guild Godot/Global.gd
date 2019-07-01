@@ -1,0 +1,7 @@
+extends Node
+
+var ALL_ITENS
+var ALL_SKILLS
+var ALL_ENEMIES
+var ALL_PLAYERS
+var INVENTORY

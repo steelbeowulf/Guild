@@ -1,0 +1,9 @@
+{
+	"ID":19,	
+	"NAME":"VINE WHIP", 
+	"QUANT":20, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[]
+}

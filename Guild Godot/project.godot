@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/Loader.gd"
 }, {
-"base": "LOADER",
+"base": "Node",
 "class": "STATS",
 "language": "GDScript",
 "path": "res://Classes/Stats.gd"
@@ -27,14 +27,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Guild"
-run/main_scene="res://Title Screen.tscn"
+run/main_scene="res://Menu/Title Screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 STATS="*res://Classes/Stats.gd"
 LOADER="*res://Classes/Loader.gd"
-BATTLE_INIT="*res://Battle_Init.gd"
+GLOBAL="*res://Global.gd"
+BATTLE_INIT="*res://Overworld/Battle_Init.gd"
 
 [display]
 

@@ -1,0 +1,9 @@
+{	
+	"ID":3,	
+	"NAME":"HI POTION",
+	"QUANT":1,
+	"TARGET":"ONE",
+	"TYPE":"RECOVERY",
+	"EFFECTS":[{"STAT":"HP", "VALUE":50, "TYPE":"", "TURNS":1}],
+	"STATUS":[]
+}

@@ -3,7 +3,7 @@ extends Node2D
 onready var Players = []
 onready var Inventory = []
 onready var Enemies = []
-var cara_no_mundo = load("res://Cara_no_mundo.tscn")
+var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
 var Players_pos
 
 func generate_enemies(id):
@@ -12,24 +12,24 @@ func generate_enemies(id):
 	randomize()
 	var total = int(rand_range(1,4))
 	for i in range(total):
-		var enemy_id = int(rand_range(0,len(Enemies)))
+		var enemy_id = int(rand_range(1,len(Enemies)))
 		newEnemy.append(Enemies[enemy_id].enemy_duplicate())
 	return newEnemy
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Enemies = LOADER.enemies_from_file("res://Testes/Enemies.json")
+	Enemies = GLOBAL.ALL_ENEMIES
 	if BATTLE_INIT.first:
 		Players_pos = [Vector2(500, 300), Vector2(500, 300), Vector2(500, 300), Vector2(500, 300)]
-		Players = LOADER.players_from_file("res://Testes/Players.json")
-		Inventory = LOADER.items_from_file("res://Testes/Inventory.json")
+		Players = GLOBAL.ALL_PLAYERS
+		Inventory = GLOBAL.INVENTORY
 		BATTLE_INIT.init(Players, Enemies, Inventory)
 	else:
 		Players_pos = BATTLE_INIT.Position
 		Players = BATTLE_INIT.Play
 		print("i'mm back, here are players:"+str(Players))
 		if Players == []:
-			get_tree().change_scene("res://Game Over.tscn")
+			get_tree().change_scene("res://Battle/Game Over.tscn")
 	var kill = BATTLE_INIT.kill
 	if kill:
 		self.get_node(str(kill)).queue_free()

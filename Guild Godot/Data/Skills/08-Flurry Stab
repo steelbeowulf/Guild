@@ -1,0 +1,9 @@
+{
+	"ID":8,	
+	"NAME":"FLURRY STAB", 
+	"QUANT":25, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":3}],
+	"STATUS":[]
+}

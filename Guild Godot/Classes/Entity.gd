@@ -20,6 +20,9 @@ var resist = {}
 	#fire, water, ligthting, ice, earth, wind, holy, darkness]
 var elem = {0:"PHYSIC", 1:"MAGIC", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
+enum {PHYSIC, MAGIC, FIRE, WATER, ELECTRIC, ICE, EARTH, WIND, HOLY, DARKNESS}
+enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK}
+
 func die():
 	add_status("KO", 999, 999)
 	self.graphics.die()

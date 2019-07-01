@@ -25,36 +25,34 @@ func apply_effect(who, effect, target, t_id, logs):
 	var stat = effect[0]
 	var value = effect[1]
 	var type = effect[2]
-	var times = effect[3]
 	var TargetStat = target.get_stats(stat)
 	var finalval = TargetStat + value
 	var valmax = 9999
-	for i in range(times):
-		if stat == HP and value < 0:
+	if stat == HP and value < 0:
+		tipo = 0
+		var dmg = target.take_damage(type, abs(value))
+		ret = dmg
+		if target.classe == "boss" and who.classe != "boss":
+			who.update_hate(dmg, t_id)
+	else:
+		if stat == HP:
+			valmax = target.get_stats(HP_MAX)
 			tipo = 0
-			var dmg = target.take_damage(type, abs(value))
-			ret = dmg
-			if target.classe == "boss" and who.classe != "boss":
-				who.update_hate(dmg, t_id)
-		else:
-			if stat == HP:
-				valmax = target.get_stats(HP_MAX)
-				tipo = 0
-				ret = -value
-				if finalval > valmax:
-					finalval = valmax
-					ret = -(valmax - target.get_health())
-			elif stat == MP:
-				valmax = target.get_stats(MP_MAX)
-				tipo = 1
-				ret = -value
-				if finalval > valmax:
-					finalval = valmax
-					ret = -(valmax - target.get_mp())
-			#print("antes do setstat: hp is"+str(target.get_stats(HP)))
-			target.set_stats(stat, finalval)
-			if target.get_health() > 0.2*target.get_max_health():
-				target.remove_status("HP_CRITICAL")
+			ret = -value
+			if finalval > valmax:
+				finalval = valmax
+				ret = -(valmax - target.get_health())
+		elif stat == MP:
+			valmax = target.get_stats(MP_MAX)
+			tipo = 1
+			ret = -value
+			if finalval > valmax:
+				finalval = valmax
+				ret = -(valmax - target.get_mp())
+		#print("antes do setstat: hp is"+str(target.get_stats(HP)))
+		target.set_stats(stat, finalval)
+		if target.get_health() > 0.2*target.get_max_health():
+			target.remove_status("HP_CRITICAL")
 	return [ret, tipo]
 
 func apply_status(status, target, attacker, logs):

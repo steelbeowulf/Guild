@@ -1,0 +1,9 @@
+{
+	"ID":1,	
+	"NAME":"HEAL",
+	"QUANT":20,
+	"TYPE":"RECOVERY",
+	"TARGET":"ONE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
+	"STATUS":[]
+}

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
-[ext_resource path="res://Entity_Battle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=3]
 [ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=4]
 [ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=5]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Musics/Modern Castle - Tension (online-audio-converter.com).ogg" type="AudioStream" id=9]
+
 
 [node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
