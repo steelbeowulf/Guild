@@ -24,6 +24,7 @@ enum {PHYSIC, MAGIC, FIRE, WATER, ELECTRIC, ICE, EARTH, WIND, HOLY, DARKNESS}
 enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK}
 
 func die():
+	self.set_stats(HP, 0)
 	add_status("KO", 999, 999)
 	self.graphics.die()
 
@@ -88,6 +89,7 @@ func remove_status(effect):
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
 	elif effect == "KO":
 		dead = false
+		self.graphics.revive()
 	if status.has(effect):
 		status.erase(effect)
 

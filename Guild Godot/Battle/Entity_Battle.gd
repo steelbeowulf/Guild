@@ -30,6 +30,9 @@ func set_sprite(sprite):
 func die():
 	$AnimationPlayer.play("Death")
 
+func revive():
+	$AnimationPlayer.play_backwards("Death")
+
 func turn(keep=false):
 	if keep:
 		my_turn = true
@@ -37,6 +40,7 @@ func turn(keep=false):
 
 func end_turn(force=false):
 	if not my_turn or force:
+		my_turn = false
 		$Turn.hide()
 
 func change_lane(lane):

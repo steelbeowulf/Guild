@@ -34,6 +34,7 @@ func die():
 	remove_all_status()
 	zero_hate()
 	add_status("KO", 999, 999)
+	set_stats(HP, 0)
 	self.graphics.die()
 
 func update_hate(dmg, enemy):
