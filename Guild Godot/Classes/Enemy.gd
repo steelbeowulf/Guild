@@ -62,5 +62,6 @@ func get_xp():
 	return self.xp
 	
 func enemy_duplicate():
+	var new_stats = [] + self.stats
 	return self.get_script().new(self.id, self.level, self.xp, 
-	self.sprite, self.stats, self.nome, self.skills, self.resist)
+	self.sprite, new_stats, self.nome, self.skills, self.resist)

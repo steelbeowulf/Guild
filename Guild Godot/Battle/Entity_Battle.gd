@@ -7,6 +7,9 @@ var my_turn = false
 var frames = SpriteFrames.new()
 var bounds = [0,0,0,0,0]
 export(bool) var Player = false
+var parent
+
+signal finish_anim
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +28,7 @@ func set_sprite(sprite):
 		frames.add_frame("idle", load(sprite[i]))
 	$Sprite.frames  = frames
 	$Sprite.play("idle")
+	self.parent.connect("anim_finished", self, "_anim_finished")
 
 # Just hide for now
 func die():
@@ -86,8 +90,9 @@ func take_damage(value, type):
 	$Damage.text = str(value)
 	$Damage.show()
 	$AnimationPlayer.play("Damage")
-	
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if (anim_name == "Death"):
 		self.hide()
+	elif (anim_name == "Damage"):
+		emit_signal("finish_anim")

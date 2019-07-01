@@ -19,6 +19,7 @@ var Players_img = []
 var Enemies_img = []
 
 signal round_finished
+signal finish_anim
 
 func print_battle_results():
 	print("dead_allies="+str(dead_allies))
@@ -31,7 +32,7 @@ func print_battle_results():
 func _ready():
 	over = false
 	Players = BATTLE_INIT.Play
-	Inventory =  BATTLE_INIT.Inve
+	Inventory =  GLOBAL.INVENTORY
 	Enemies =  BATTLE_INIT.Enem
 	
 	for c in get_node("Menu").get_children():
@@ -49,6 +50,7 @@ func _ready():
 		lane = Players[i].get_pos()
 		var node = get_node("Players/P"+str(i))
 		Players_img.append(node)
+		node.parent = self
 		node.change_lane(lane)
 		node.set_sprite(Players[i].sprite)
 		node.show()
@@ -60,6 +62,7 @@ func _ready():
 		lane = Enemies[i].get_pos()
 		var node = get_node("Enemies/E"+str(i))
 		Enemies_img.append(node)
+		node.parent = self
 		node.set_sprite(Enemies[i].sprite)
 		node.show()
 		Enemies[i].graphics = node
@@ -511,3 +514,6 @@ func manage_hate(type, target):
 
 func _on_Timer_timeout():
 	pass
+
+func _finish_anim():
+	print("oi")

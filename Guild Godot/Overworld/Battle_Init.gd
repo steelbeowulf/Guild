@@ -9,19 +9,16 @@ onready var Leader_pos = [Vector2(500, 320)]
 onready var count = 0
 onready var kill = null
 
-func init(Players, Enemies, Inventory):
-	Play =  [] + Players
-	Enem = [] + Enemies
-	Inve = [] + Inventory
-	first = false
-	return
-
 func get_leader_pos(id):
 	var index = 10*id
 	if index < len(Leader_pos):
 		return Leader_pos[-index]
 	else:
 		return Leader_pos[0]
+
+func init(players, enemies):
+	Play = [] + players
+	Enem = [] + enemies
 
 func update_global_position(Players_pos):
 	Position = [] + Players_pos
@@ -61,5 +58,5 @@ func end_battle(Players, Enemies, Inventory):
 			print("this guy "+p.get_name()+" is dead and will be removed")
 	
 	Enem = []
-	Inve = [] + Inventory
+	GLOBAL.INVENTORY = [] + Inventory
 	return

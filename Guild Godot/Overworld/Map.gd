@@ -23,7 +23,7 @@ func _ready():
 		Players_pos = [Vector2(500, 300), Vector2(500, 300), Vector2(500, 300), Vector2(500, 300)]
 		Players = GLOBAL.ALL_PLAYERS
 		Inventory = GLOBAL.INVENTORY
-		BATTLE_INIT.init(Players, Enemies, Inventory)
+		BATTLE_INIT.init(Players, Enemies)
 	else:
 		Players_pos = BATTLE_INIT.Position
 		Players = BATTLE_INIT.Play
