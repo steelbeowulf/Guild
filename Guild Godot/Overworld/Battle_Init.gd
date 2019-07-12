@@ -59,4 +59,5 @@ func end_battle(Players, Enemies, Inventory):
 	
 	Enem = []
 	GLOBAL.INVENTORY = [] + Inventory
+	GLOBAL.ALL_PLAYERS = Play
 	return

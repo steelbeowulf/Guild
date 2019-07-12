@@ -11,7 +11,6 @@
 [ext_resource path="res://Assets/walk_down_02.png" type="Texture" id=9]
 [ext_resource path="res://Assets/walk_down_03.png" type="Texture" id=10]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
@@ -60,5 +59,6 @@ shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
 [connection signal="body_entered" from="In" to="." method="_on_In_body_entered"]
 [connection signal="body_exited" from="In" to="." method="_on_In_body_exited"]
