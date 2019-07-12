@@ -58,6 +58,7 @@ flat = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -17.155
 autoplay = true
 [connection signal="pressed" from="Start" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Button2_pressed"]

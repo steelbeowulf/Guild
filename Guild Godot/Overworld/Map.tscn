@@ -17,7 +17,7 @@ texture = ExtResource( 2 )
 [node name="Party" type="Node" parent="."]
 
 [node name="Borboleta" parent="." instance=ExtResource( 3 )]
-position = Vector2( 528.874, 514.232 )
+position = Vector2( 294.85, 555.129 )
 scale = Vector2( 1.2, 1.2 )
 id = 6
 movement = 4
@@ -38,5 +38,5 @@ radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -18.227
 autoplay = true
-
