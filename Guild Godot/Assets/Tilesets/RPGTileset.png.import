@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset.png-a39e944f25b35d62f55d4f98a36e2b5e.stex"
+path="res://.import/RPGTileset.png-eeac64bafbdbdf5abdaa663ebbfae5bf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tileset.png"
-dest_files=[ "res://.import/tileset.png-a39e944f25b35d62f55d4f98a36e2b5e.stex" ]
+source_file="res://Assets/Tilesets/RPGTileset.png"
+dest_files=[ "res://.import/RPGTileset.png-eeac64bafbdbdf5abdaa663ebbfae5bf.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

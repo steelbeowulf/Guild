@@ -1,0 +1,208 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Tilesets/RPGTileset.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.91808, 8.0744 )
+
+[node name="TileMap" type="Node2D"]
+
+[node name="UpperLeftGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="UpperGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="UpperRightGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="RightGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 16, 16, 16 )
+
+[node name="LowerRightGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 32, 16, 16 )
+
+[node name="LowerGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 32, 16, 16 )
+
+[node name="LowerLeftGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 32, 16, 16 )
+
+[node name="LeftGround" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 16, 16, 16 )
+
+[node name="Ground" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 16, 16, 16 )
+
+[node name="Grass" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 0, 16, 16 )
+
+[node name="Grass2" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 16, 16, 16 )
+
+[node name="Grass3" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 32, 16, 16 )
+
+[node name="Grass4" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 80, 16, 16 )
+
+[node name="UpperLeftWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 80, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="UpperLeftWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="UpperLeftWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="UpperWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 80, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="UpperWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="UpperWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="UpperRightWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 80, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="UpperRightWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="UpperRightWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="RightWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 96, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RightWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="RightWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="LowerRightWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 112, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LowerRightWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="LowerRightWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="LowerWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 112, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LowerWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="LowerWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="LowerLeftWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 112, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LowerLeftWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="LowerLeftWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="LeftWater" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LeftWater"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="LeftWater/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Water" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 96, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Water"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="Water/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="TallGrass" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 96, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TallGrass"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="TallGrass/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Tree" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 128, 32, 48 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Tree"]
+
+[node name="CollisionShapeD" type="CollisionShape2D" parent="Tree/StaticBody2D"]
+position = Vector2( -0.19371, 17.6277 )
+shape = SubResource( 1 )
+
