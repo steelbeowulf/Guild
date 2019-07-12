@@ -33,17 +33,16 @@ func _ready():
 	var kill = BATTLE_INIT.kill
 	if kill:
 		self.get_node(str(kill)).queue_free()
-	for i in range(len(Players)):
-		var cara = cara_no_mundo.instance()
-		cara.set_global_position(Players_pos[i])
-		cara.id = i
-		$Party.add_child(cara)
+	var cara = cara_no_mundo.instance()
+	cara.set_global_position(Players_pos[0])
+	cara.id = 0
+	$Party.add_child(cara)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	update_positions()
 
 func update_positions():
-	for i in range(len($Party.get_children())):
-		Players_pos[i] = $Party.get_child(i).get_global_position()
+
+	Players_pos[0] = $Party.get_child(0).get_global_position()
 	BATTLE_INIT.update_global_position(Players_pos)
 

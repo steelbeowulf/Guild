@@ -56,3 +56,7 @@ scale = Vector2( 1.2, 1.2 )
 id = 2
 radius = 100.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -18.227
+autoplay = true
