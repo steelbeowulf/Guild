@@ -77,12 +77,7 @@ func _ready():
 	while (not over):
 		rounds()
 		yield(self, "round_finished")
-	$Timer.start()
-	yield($Timer, "timeout")
-	$Log.display_text("Fim de jogo!")
-	print_battle_results()
-	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
-	get_tree().change_scene("res://Overworld/Map.tscn")
+	end_battle()
 
 # A round is comprised of the turns of all entities participating in battle
 func rounds():
@@ -158,6 +153,8 @@ func rounds():
 				yield($Menu, "turn_finished")
 				Players_img[id].end_turn(true)
 				execute_action(current_action, current_target)
+				if over:
+					break
 				var bounds = recalculate_bounds()
 				for p in Players_img:
 					p.update_bounds(bounds)
@@ -295,7 +292,7 @@ func execute_action(action, target):
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Skills").show()
-#		get_node("Menu/Run").show()
+		get_node("Menu/Run").show()
 
 	elif action == "Skills":
 		var entities = []
@@ -348,7 +345,18 @@ func execute_action(action, target):
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Itens").show()
-#		get_node("Menu/Run").show()
+		get_node("Menu/Run").show()
+	
+	elif action == "Run":
+		randomize()
+		var chance = rand_range(0,100)
+		if chance <= 75:
+			$Log.display_text("FUGA")
+			over = true
+			end_battle()
+		else:
+			$Log.display_text("TENTATIVA DE FUGA FALHOU")
+	
 	# Literally does nothing
 	elif action == "Pass":
 		pass
@@ -518,10 +526,21 @@ func manage_hate(type, target):
 			var p = Players[i]
 			img.display_hate(p.hate[target], target)
 
+func end_battle():
+	$Timer.start()
+	yield($Timer, "timeout")
+	$Log.display_text("Fim de jogo!")
+	print_battle_results()
+	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
+	get_tree().change_scene("res://Overworld/Map.tscn")
+
 func _on_Timer_timeout():
 	pass
 
 func _finish_anim():
 	print("oi")
 
+func _on_Run_button_down():
+	state = "Run"
+	get_node("Menu/Run/")._on_Action_pressed()
 
