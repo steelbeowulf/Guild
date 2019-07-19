@@ -83,37 +83,32 @@ margin_bottom = 593.0
 script = ExtResource( 4 )
 
 [node name="Attack" parent="Menu" instance=ExtResource( 5 )]
-margin_bottom = 20.0
+margin_bottom = 24.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
 [node name="Lane" parent="Menu" instance=ExtResource( 6 )]
-margin_top = 24.0
+margin_top = 28.0
+margin_bottom = 52.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
 [node name="Skills" parent="Menu" instance=ExtResource( 7 )]
-margin_top = 48.0
-margin_bottom = 68.0
+margin_top = 56.0
+margin_bottom = 80.0
 text = "Skills"
 
 [node name="Itens" parent="Menu" instance=ExtResource( 7 )]
-margin_top = 72.0
-margin_bottom = 92.0
+margin_top = 84.0
+margin_bottom = 108.0
 text = "Item"
 
 [node name="Run" parent="Menu" instance=ExtResource( 6 )]
-margin_top = 96.0
-margin_bottom = 120.0
+margin_top = 112.0
+margin_bottom = 140.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Run"
 RUN = true
-
-[node name="Run" parent="Menu" instance=ExtResource( 6 )]
-margin_top = 96.0
-margin_bottom = 120.0
-rect_pivot_offset = Vector2( 896.515, -365.321 )
-text = "Run"
 
 [node name="Info" type="VBoxContainer" parent="."]
 margin_left = 319.0
@@ -130,7 +125,6 @@ wait_time = 2.0
 stream = ExtResource( 9 )
 volume_db = -17.155
 autoplay = true
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]
