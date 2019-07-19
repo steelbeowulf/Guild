@@ -31,7 +31,7 @@
 
 	{"ID":1,
 	"LEVEL":15,
-	"EXPERIENCE":50,
+	"EXPERIENCE":90,
 	"IMG":["res://Assets/Animated/Rogue/rogue spritesheet calciumtrice1.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice2.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice3.png",
