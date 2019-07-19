@@ -42,7 +42,7 @@
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice8.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice9.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice10.png",],
-	"HP":150,
+	"HP":1,
 	"HP_MAX":150,
 	"MP":120,
 	"MP_MAX":120,
