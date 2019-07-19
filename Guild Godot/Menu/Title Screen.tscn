@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Menu/Title Screen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Title screen 2.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Musics/TownTheme (online-audio-converter.com).ogg" type="AudioStream" id=4]
+[ext_resource path="res://TILEBONITO.tres" type="TileSet" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 33
@@ -60,6 +61,12 @@ flat = true
 stream = ExtResource( 4 )
 volume_db = -17.155
 autoplay = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
 [connection signal="pressed" from="Start" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button3_pressed"]
