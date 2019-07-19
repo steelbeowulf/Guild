@@ -36,7 +36,8 @@ func end_battle(Players, Enemies, Inventory):
 	
 	var total_exp = 0
 	for e in Enemies:
-		total_exp += e.get_xp()
+		if e.is_dead():
+			total_exp += e.get_xp()
 	
 	Play = []
 	for p in Players:
