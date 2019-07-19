@@ -526,7 +526,7 @@ func end_battle():
 	$Log.display_text("Fim de jogo!")
 	print_battle_results()
 	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
-	get_tree().change_scene("res://Overworld/Map.tscn")
+	#get_tree().change_scene("res://Overworld/Map.tscn")
 
 func _on_Timer_timeout():
 	pass

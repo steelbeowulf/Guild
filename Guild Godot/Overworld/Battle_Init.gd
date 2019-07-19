@@ -60,6 +60,12 @@ func end_battle(Players, Enemies, Inventory):
 	Enem = []
 	GLOBAL.INVENTORY = [] + Inventory
 	GLOBAL.ALL_PLAYERS = Play
-	if Players == []:
+	
+	print("battle ended, here are play:")
+	print(Play)
+	
+	if Play == []:
+		print("whaat")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
-	return
+	else:
+		get_tree().change_scene("res://Overworld/Map.tscn")
