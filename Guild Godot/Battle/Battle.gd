@@ -379,12 +379,6 @@ func _process(delta):
 			c.hide_stuff()
 		get_node("Menu/"+str(state)).grab_focus()
 
-func _on_Run_button_down():
-	#randomize()
-	#var run_chance = floor(rand_range(0,99))
-	#if (run_chance >=49):
-	print("halp")
-
 func _on_Lane_button_down():
 	state = "Lane"
 	for i in range(3):
