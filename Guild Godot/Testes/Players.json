@@ -31,7 +31,7 @@
 
 	{"ID":1,
 	"LEVEL":15,
-	"EXPERIENCE":50,
+	"EXPERIENCE":90,
 	"IMG":["res://Assets/Animated/Rogue/rogue spritesheet calciumtrice1.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice2.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice3.png",
@@ -42,7 +42,7 @@
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice8.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice9.png",
 		"res://Assets/Animated/Rogue/rogue spritesheet calciumtrice10.png",],
-	"HP":150,
+	"HP":1,
 	"HP_MAX":150,
 	"MP":120,
 	"MP_MAX":120,

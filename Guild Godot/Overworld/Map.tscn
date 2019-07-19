@@ -54,6 +54,7 @@ tile_data = PoolIntArray( -65513, 11, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0,
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -17.154
 autoplay = true
 
 [node name="Borboleta" parent="." instance=ExtResource( 5 )]

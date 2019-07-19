@@ -89,6 +89,7 @@ text = "Attack"
 
 [node name="Lane" parent="Menu" instance=ExtResource( 6 )]
 margin_top = 24.0
+rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
 [node name="Skills" parent="Menu" instance=ExtResource( 7 )]
@@ -107,6 +108,12 @@ margin_bottom = 120.0
 focus_neighbour_bottom = NodePath("../Attack")
 text = "Run"
 RUN = true
+
+[node name="Run" parent="Menu" instance=ExtResource( 6 )]
+margin_top = 96.0
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 896.515, -365.321 )
+text = "Run"
 
 [node name="Info" type="VBoxContainer" parent="."]
 margin_left = 319.0

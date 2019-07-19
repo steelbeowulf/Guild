@@ -379,6 +379,12 @@ func _process(delta):
 			c.hide_stuff()
 		get_node("Menu/"+str(state)).grab_focus()
 
+func _on_Run_button_down():
+	#randomize()
+	#var run_chance = floor(rand_range(0,99))
+	#if (run_chance >=49):
+	print("halp")
+
 func _on_Lane_button_down():
 	state = "Lane"
 	for i in range(3):
@@ -404,7 +410,7 @@ func _on_Itens_button_down():
 	get_node("Menu/Attack").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Skills").hide()
-#	get_node("Menu/Run").hide()
+	get_node("Menu/Run").hide()
 	var itens = get_node("Menu/Itens/Targets/HBoxContainer/Itens")
 	var players = get_node("Menu/Itens/Targets/HBoxContainer/Players")
 	var enemies = get_node("Menu/Itens/Targets/HBoxContainer/Enemies")
@@ -438,7 +444,7 @@ func _on_Skills_button_down():
 	get_node("Menu/Attack").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Itens").hide()
-#	get_node("Menu/Run").hide()
+	get_node("Menu/Run").hide()
 	var skills = current_entity.get_skills()
 	var itens = get_node("Menu/Skills/Targets/HBoxContainer/Itens")
 	var players = get_node("Menu/Skills/Targets/HBoxContainer/Players")
@@ -473,7 +479,7 @@ func _on_Attack_button_down():
 	get_node("Menu/Skills").hide()
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Itens").hide()
-#	get_node("Menu/Run").hide()
+	get_node("Menu/Run").hide()
 	var players = get_node("Menu/Attack/Targets/HBoxContainer/Players")
 	var enemies = get_node("Menu/Attack/Targets/HBoxContainer/Enemies")
 	for i in range(4):
@@ -537,3 +543,4 @@ func _finish_anim():
 func _on_Run_button_down():
 	state = "Run"
 	get_node("Menu/Run/")._on_Action_pressed()
+

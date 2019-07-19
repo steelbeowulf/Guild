@@ -29,6 +29,7 @@ func _ready():
 		Players = BATTLE_INIT.Play
 		print("i'mm back, here are players:"+str(Players))
 		if Players == []:
+			print("rip")
 			get_tree().change_scene("res://Battle/Game Over.tscn")
 	var kill = BATTLE_INIT.kill
 	if kill:

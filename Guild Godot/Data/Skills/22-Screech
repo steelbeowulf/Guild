@@ -1,0 +1,9 @@
+{
+	"ID":21,	
+	"NAME":"SCREECH", 
+	"QUANT":30, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-35, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[]
+}
