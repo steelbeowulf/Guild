@@ -426,4 +426,14 @@ segments = PoolVector2Array( 23.3229, 85.2223, 30.9618, 50.5, 30.9618, 50.5, 41.
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 14/z_index = 0
+15/name = "FAKE WATER"
+15/texture = ExtResource( 1 )
+15/tex_offset = Vector2( 0, 0 )
+15/modulate = Color( 1, 1, 1, 1 )
+15/region = Rect2( 608, 160, 32, 32 )
+15/tile_mode = 0
+15/occluder_offset = Vector2( 0, 0 )
+15/navigation_offset = Vector2( 0, 0 )
+15/shapes = [  ]
+15/z_index = 0
 
