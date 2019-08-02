@@ -104,9 +104,11 @@ margin_bottom = 108.0
 text = "Item"
 
 [node name="Run" parent="Menu" instance=ExtResource( 6 )]
-margin_top = 112.0
-margin_bottom = 140.0
+margin_top = 96.0
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 896.515, -365.321 )
 focus_neighbour_bottom = NodePath("../Attack")
+focus_next = NodePath("")
 text = "Run"
 RUN = true
 

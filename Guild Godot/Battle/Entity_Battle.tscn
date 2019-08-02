@@ -124,3 +124,4 @@ text = "250"
 anims/Damage = SubResource( 3 )
 anims/Death = SubResource( 4 )
 anims/Idle = SubResource( 5 )
+

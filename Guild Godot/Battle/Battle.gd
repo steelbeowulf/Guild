@@ -379,7 +379,6 @@ func _process(delta):
 			c.hide_stuff()
 		get_node("Menu/"+str(state)).grab_focus()
 
-
 func _on_Lane_button_down():
 	state = "Lane"
 	for i in range(3):
