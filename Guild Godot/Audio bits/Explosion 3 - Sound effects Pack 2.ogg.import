@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Explosion 3 - Sound effects Pack 2.ogg-75036b5da5ad88be048b24b699584203.oggstr"
+
+[deps]
+
+source_file="res://Audio bits/Explosion 3 - Sound effects Pack 2.ogg"
+dest_files=[ "res://.import/Explosion 3 - Sound effects Pack 2.ogg-75036b5da5ad88be048b24b699584203.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
