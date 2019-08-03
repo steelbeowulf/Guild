@@ -42,6 +42,7 @@ func _ready():
 	var kill = BATTLE_INIT.kill
 	if kill:
 		for k in kill:
+			print("matando "+str(k))
 			get_node("Enemies").get_node(str(k)).queue_free()
 	var cara = cara_no_mundo.instance()
 	var pos = Player_pos
@@ -62,9 +63,15 @@ func _encounter_management(value, id, name):
 	else:
 		Encounter.erase(id)
 		Kill.erase(name)
-	
+
+func get_map_margin():
+	return [$Limits.margin_bottom, $Limits.margin_left,
+	$Limits.margin_top, $Limits.margin_right] 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var pos = $Party.get_child(0).get_global_position()
 	GLOBAL.POSITION = pos
 
+func send_message(text):
+	$CanvasLayer/Log.display_text(text)

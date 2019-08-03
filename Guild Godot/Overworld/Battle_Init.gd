@@ -14,7 +14,7 @@ func init(players, enemies):
 	Enem = [] + enemies
 
 func begin_battle(Enemies, OnMap):
-	kill.append(OnMap)
+	kill = [] + kill + OnMap
 	Enem = [] + Enemies
 	return
 
