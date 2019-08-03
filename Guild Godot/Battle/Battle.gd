@@ -18,6 +18,11 @@ var total_allies = 0
 var Players_img = []
 var Enemies_img = []
 
+#Audio Stuff
+onready var hit = get_node("Hit")
+onready var spell = get_node("Spell")
+onready var run = get_node("Run")
+
 signal round_finished
 signal finish_anim
 
@@ -203,6 +208,7 @@ func execute_action(action, target):
 	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
+		hit.play(0)
 		var entities = []
 		var imgs = []
 		var alvo = target[1]
@@ -295,6 +301,7 @@ func execute_action(action, target):
 		get_node("Menu/Run").show()
 
 	elif action == "Skills":
+		spell.play(0)
 		var entities = []
 		var imgs = []
 		var alvo = target[1]
@@ -351,6 +358,7 @@ func execute_action(action, target):
 		randomize()
 		var chance = rand_range(0,100)
 		if chance <= 75:
+			run.play(0)
 			$Log.display_text("FUGA")
 			over = true
 			end_battle()
