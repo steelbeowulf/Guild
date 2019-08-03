@@ -428,7 +428,7 @@ func _on_Itens_button_down():
 		else:
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(Inventory[i].nome)
+		itens.get_node(str(i)).set_text(Inventory[i].nome+" x"+str(Inventory[i].quantity))
 	for i in range(Players.size()):
 		players.get_node("P"+str(i)).show()
 		players.get_node("P"+str(i)).set_text(Players[i].get_name()+"   HP:"+str(Players[i].get_health())+"/"+str(Players[i].get_max_health())+"        MP: "+str(Players[i].get_mp())+"/"+str(Players[i].get_max_mp()))

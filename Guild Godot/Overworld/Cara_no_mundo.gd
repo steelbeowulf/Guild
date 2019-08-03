@@ -12,8 +12,11 @@ var stop = false
 func _ready():
 	$AnimatedSprite.animation = "walk_down"
 	self.set_z_index(-id)
-
-
+	var margin = get_parent().get_parent().get_map_margin()
+	$Camera2D.set_limit(MARGIN_BOTTOM, margin[0])
+	$Camera2D.set_limit(MARGIN_LEFT, margin[1])
+	$Camera2D.set_limit(MARGIN_TOP, margin[2])
+	$Camera2D.set_limit(MARGIN_RIGHT, margin[3])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

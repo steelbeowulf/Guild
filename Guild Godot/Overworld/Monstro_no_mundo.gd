@@ -6,6 +6,8 @@ export(int) var id
 export(MOVEMENT) var movement = MOVEMENT.idle
 export(float) var radius = 0.0
 var mode = MODE.moving
+onready var map = self.get_parent().get_parent()
+signal battle_notifier
 
 var velocities
 var accum = Vector2(0,0)
@@ -146,9 +148,16 @@ func _on_View_body_exited(body):
 
 func _on_Battle_body_entered(body):
 	if body.is_in_group("player"):
-		var Enemies = self.get_parent().generate_enemies(id)
-		BATTLE_INIT.begin_battle(Enemies, self.get_name())
+		map.generate_enemies()
 		get_tree().change_scene("res://Battle/Battle.tscn")
 
 func norm(vec):
 	return sqrt(vec.x*vec.x + vec.y*vec.y)
+
+
+func _on_VisibilityNotifier2D_viewport_entered(viewport):
+	emit_signal("battle_notifier", true, id, self.get_name())
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	emit_signal("battle_notifier", false, id, self.get_name())

@@ -7,28 +7,14 @@ onready var Inve
 onready var Position = []
 onready var Leader_pos = [Vector2(500, 320)]
 onready var count = 0
-onready var kill = null
-
-func get_leader_pos(id):
-	var index = 10*id
-	if index < len(Leader_pos):
-		return Leader_pos[-index]
-	else:
-		return Leader_pos[0]
+onready var kill = []
 
 func init(players, enemies):
 	Play = [] + players
 	Enem = [] + enemies
 
-func update_global_position(Players_pos):
-	Position = [] + Players_pos
-	if count < 500000:
-		Leader_pos.append(Position[0])
-	Leader_pos[count % 500000] = Position[0]
-	count+=1
-
 func begin_battle(Enemies, OnMap):
-	kill = OnMap
+	kill = [] + kill + OnMap
 	Enem = [] + Enemies
 	return
 

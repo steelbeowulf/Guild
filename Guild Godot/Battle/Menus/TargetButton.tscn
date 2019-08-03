@@ -6,4 +6,5 @@
 margin_right = 194.0
 margin_bottom = 20.0
 script = ExtResource( 1 )
+
 [connection signal="pressed" from="." to="." method="_on_Target_pressed"]
