@@ -14,6 +14,12 @@ func _on_Down_area_entered(area):
 		can_interact = true
 		velocity = Vector2(0,-1)
 
+func _update(value):
+	var pos = value[1]
+	value = value[0]
+	if value:
+		self.queue_free()
+	self.set_global_position(pos)
 
 func _on_Down_area_exited(area):
 	if area.is_in_group("head"):

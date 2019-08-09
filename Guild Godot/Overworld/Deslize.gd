@@ -9,7 +9,7 @@ onready var directions = {'0':Vector2(0,-1), '90':Vector2(1,0),
 
 func _physics_process(delta):
 	if inbody:
-		if inbody.velocity == Vector2(0,0):
+		if inbody.velocity == Vector2(0,0) and inbody.is_in_group("player"):
 			inbody.stop.pop_front()
 		print("movendo com vel="+str(velocity))
 		inbody.move_and_slide(MOVEMENT*velocity*delta)

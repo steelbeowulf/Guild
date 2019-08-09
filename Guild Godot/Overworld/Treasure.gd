@@ -15,10 +15,16 @@ func _process(delta):
 			closed = false
 			$Sprite.play("open")
 			get_parent().get_parent().send_message("Encontrou "+nome+" x"+str(item_quantity))
+			get_parent().get_parent().save_state("TREASURE", self.get_name())
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("head"):
 		inbody = true
+
+func _update(value):
+	if value:
+		closed = false
+		$Sprite.animation = "opened"
 
 
 func _on_Area2D_area_exited(area):

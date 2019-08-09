@@ -149,11 +149,18 @@ func _on_View_body_exited(body):
 func _on_Battle_body_entered(body):
 	if body.is_in_group("player"):
 		map.generate_enemies()
+		map.update_objects_position()
 		get_tree().change_scene("res://Battle/Battle.tscn")
 
 func norm(vec):
 	return sqrt(vec.x*vec.x + vec.y*vec.y)
 
+func _update(value):
+	var pos = value[1]
+	value = value[0]
+	if value:
+		self.queue_free()
+	self.set_global_position(pos)
 
 func _on_VisibilityNotifier2D_viewport_entered(viewport):
 	emit_signal("battle_notifier", true, id, self.get_name())

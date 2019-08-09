@@ -7,6 +7,7 @@ onready var Encounter = []
 onready var Kill = []
 var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
 onready var Player_pos = Vector2(500, 300)
+onready var state = {}
 
 func generate_enemies():
 	var newEnemy = []
@@ -39,11 +40,14 @@ func _ready():
 		if Players == []:
 			print("rip")
 			get_tree().change_scene("res://Battle/Game Over.tscn")
+	if GLOBAL.STATE:
+		state = GLOBAL.STATE
 	var kill = BATTLE_INIT.kill
 	if kill:
 		for k in kill:
 			print("matando "+str(k))
 			get_node("Enemies").get_node(str(k)).queue_free()
+			save_state("ENEMY_KILL", str(k))
 	var cara = cara_no_mundo.instance()
 	var pos = Player_pos
 	if GLOBAL.POSITION:
@@ -55,6 +59,16 @@ func _ready():
 	# Connects itself to monsters
 	for e in get_node("Enemies").get_children():
 		e.connect("battle_notifier", self, "_encounter_management")
+	
+	if state:
+		for key in state.keys():
+			var value = state[key]
+			get_node(key)._update(value)
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_focus_next"):
+		if get_node("Objects/Door"):
+			get_node("Objects/Door").open()
 
 func _encounter_management(value, id, name):
 	if value:
@@ -75,3 +89,22 @@ func _physics_process(delta):
 
 func send_message(text):
 	$CanvasLayer/Log.display_text(text)
+
+func update_objects_position():
+	for e in get_node("Objects").get_children():
+		save_state("OBJ_POS", e.get_name(), e.get_global_position())
+	for p in get_node("Party").get_children():
+		save_state("PLAYER_POS", p.get_name(), p.get_global_position()) 
+
+func save_state(type, node, pos=Vector2(0,0)):
+	if type == "TREASURE":
+		state["Treasure/"+str(node)] = true
+	elif type == "ENEMY_KILL":
+		state["Enemies/"+str(node)] = [false, pos]
+	elif type == "ENEMY_POS":
+		state["Enemies/"+str(node)] = [false, pos]
+	elif type == "OBJ_POS":
+		state["Objects/"+str(node)] = [false, pos]
+	elif type == "PLAYER_POS":
+		state["Party/"+str(node)] = [false, pos]
+	GLOBAL.STATE = state
