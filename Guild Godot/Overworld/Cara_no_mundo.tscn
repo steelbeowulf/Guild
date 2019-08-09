@@ -54,12 +54,12 @@ animation = "walk_up"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.12851, -0.357442 )
 shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="In" type="Area2D" parent="."]
 scale = Vector2( 1.5, 1.5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="In"]
 position = Vector2( 0.12851, -0.357442 )
@@ -67,6 +67,5 @@ shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-
 [connection signal="body_entered" from="In" to="." method="_on_In_body_entered"]
 [connection signal="body_exited" from="In" to="." method="_on_In_body_exited"]
