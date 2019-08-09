@@ -1,36 +1,39 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Overworld/Cara_no_mundo.gd" type="Script" id=1]
-[ext_resource path="res://Assets/walk_down_01.png" type="Texture" id=2]
-[ext_resource path="res://Assets/walk_down_02.png" type="Texture" id=3]
-[ext_resource path="res://Assets/walk_down_03.png" type="Texture" id=4]
-[ext_resource path="res://Assets/walk_right_01.png" type="Texture" id=5]
-[ext_resource path="res://Assets/walk_right_02.png" type="Texture" id=6]
-[ext_resource path="res://Assets/walk_right_03.png" type="Texture" id=7]
-[ext_resource path="res://Assets/walk_up_01.png" type="Texture" id=8]
-[ext_resource path="res://Assets/walk_up_02.png" type="Texture" id=9]
-[ext_resource path="res://Assets/walk_up_03.png" type="Texture" id=10]
+[ext_resource path="res://Assets/walk_right_01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/walk_right_02.png" type="Texture" id=3]
+[ext_resource path="res://Assets/walk_right_03.png" type="Texture" id=4]
+[ext_resource path="res://Assets/walk_up_01.png" type="Texture" id=5]
+[ext_resource path="res://Assets/walk_up_02.png" type="Texture" id=6]
+[ext_resource path="res://Assets/walk_up_03.png" type="Texture" id=7]
+[ext_resource path="res://Assets/walk_down_01.png" type="Texture" id=8]
+[ext_resource path="res://Assets/walk_down_02.png" type="Texture" id=9]
+[ext_resource path="res://Assets/walk_down_03.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "walk_right",
+"name": "walk_up",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "walk_down",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6.40801, 7.50632 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 0.325039, 1.43955 )
 
 [node name="Cara" type="KinematicBody2D" groups=[
 "player",
@@ -58,15 +61,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="In" type="Area2D" parent="."]
-scale = Vector2( 1.5, 1.5 )
+[node name="Head" type="Area2D" parent="." groups=[
+"head",
+]]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="In"]
-position = Vector2( 0.12851, -0.357442 )
-shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2( -0.055912, -7.45297 )
+shape = SubResource( 3 )
 
-[connection signal="body_entered" from="In" to="." method="_on_In_body_entered"]
-[connection signal="body_exited" from="In" to="." method="_on_In_body_exited"]

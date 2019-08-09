@@ -148,3 +148,4 @@ volume_db = -9.65
 [connection signal="button_down" from="Menu/Itens" to="." method="_on_Itens_button_down"]
 [connection signal="button_down" from="Menu/Run" to="." method="_on_Run_button_down"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+

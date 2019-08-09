@@ -16,10 +16,11 @@ func _process(delta):
 			$Sprite.play("open")
 			get_parent().get_parent().send_message("Encontrou "+nome+" x"+str(item_quantity))
 
-func _on_Area2D_body_entered(body):
-	if body.is_in_group("player"):
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("head"):
 		inbody = true
 
-func _on_Area2D_body_exited(body):
-	if body.is_in_group("player"):
+
+func _on_Area2D_area_exited(area):
+	if area.is_in_group("head"):
 		inbody = false
