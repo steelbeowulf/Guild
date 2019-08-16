@@ -101,4 +101,3 @@ position = Vector2( 112.936, 42.1482 )
 next = 2
 
 [node name="Party" type="Node" parent="."]
-

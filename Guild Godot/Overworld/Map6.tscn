@@ -64,4 +64,3 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
-

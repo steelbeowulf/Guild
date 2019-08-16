@@ -43,7 +43,7 @@ format = 1
 [node name="Treasure" type="Node2D" parent="."]
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
-position = Vector2( 913.754, 364.665 )
+position = Vector2( 1169.17, 584.921 )
 item_id = 1
 item_quantity = 13
 
@@ -110,4 +110,3 @@ next = 3
 
 [node name="Door" parent="Objects" instance=ExtResource( 8 )]
 position = Vector2( 681.776, 209.217 )
-
