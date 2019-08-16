@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://TILEBONITO.tres" type="TileSet" id=2]
-[ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Deslize.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Overworld/Caixa_no_mundo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=8]
 
 [node name="Map" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,38 +31,74 @@ z_index = 10
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -65513, 11, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 6, 11, 0, 22, 9, 0, 23, 9, 0, 65537, 11, 0, 65538, 11, 0, 65540, 11, 0, 65542, 9, 0, 65545, 13, 196609, 65551, 11, 0, 65554, 13, 196609, 65560, 11, 0, 131074, 9, 0, 131076, 11, 0, 131090, 9, 0, 131091, 9, 0, 196609, 11, 0, 196610, 11, 0, 196611, 9, 0, 196612, 9, 0, 196614, 11, 0, 196621, 13, 65536, 196627, 9, 0, 196630, 11, 0, 262144, 11, 0, 262145, 9, 0, 262146, 9, 0, 262147, 9, 0, 262148, 9, 0, 262149, 11, 0, 262153, 13, 196609, 262160, 9, 0, 327681, 11, 0, 327695, 9, 0, 327702, 11, 0, 327705, 11, 0, 327706, 11, 0, 327707, 11, 0, 327708, 11, 0, 393243, 11, 0, 458766, 13, 196609, 458769, 13, 196608, 458770, 11, 0, 458778, 11, 0, 458779, 11, 0, 458781, 11, 0, 524303, 9, 0, 524305, 9, 0, 589840, 11, 0, 589841, 9, 0, 589842, 9, 0, 589843, 11, 0, 589851, 11, 0, 655376, 9, 0, 655377, 9, 0, 655378, 9, 0, 655379, 11, 0, 720913, 11, 0, 851968, 11, 0, 851982, 13, 196608, 917512, 9, 0, 917527, 11, 0, 917528, 11, 0, 983040, 9, 0, 983041, 9, 0, 983049, 9, 0, 983062, 11, 0, 983065, 11, 0, 983066, 11, 0, 983067, 11, 0, 1048576, 9, 0, 1048579, 13, 196608, 1048582, 12, 0, 1048584, 9, 0, 1048588, 13, 196608, 1048600, 11, 0, 1114132, 12, 0, 1179666, 13, 196608 )
+tile_data = PoolIntArray( -65513, 11, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 6, 11, 0, 22, 9, 0, 23, 9, 0, 65537, 11, 0, 65538, 11, 0, 65540, 11, 0, 65542, 9, 0, 65545, 13, 196609, 65551, 11, 0, 65554, 13, 196609, 65560, 11, 0, 131074, 9, 0, 131076, 11, 0, 131090, 9, 0, 131091, 9, 0, 196609, 11, 0, 196610, 11, 0, 196611, 9, 0, 196612, 9, 0, 196614, 11, 0, 196621, 13, 65536, 196627, 9, 0, 196630, 11, 0, 262144, 11, 0, 262145, 9, 0, 262146, 9, 0, 262147, 9, 0, 262148, 9, 0, 262149, 11, 0, 262153, 13, 196609, 262160, 9, 0, 327681, 11, 0, 327695, 9, 0, 327702, 11, 0, 327705, 11, 0, 327706, 11, 0, 327707, 11, 0, 327708, 11, 0, 393243, 11, 0, 458766, 13, 196609, 458769, 13, 196608, 458770, 11, 0, 458778, 11, 0, 458779, 11, 0, 458781, 11, 0, 524303, 9, 0, 524305, 9, 0, 589840, 11, 0, 589841, 9, 0, 589842, 9, 0, 589843, 11, 0, 589851, 11, 0, 655367, 14, 65536, 655376, 9, 0, 655377, 9, 0, 655378, 9, 0, 655379, 11, 0, 720903, 14, 65536, 720913, 11, 0, 786439, 14, 65536, 851968, 11, 0, 851982, 13, 196608, 917511, 14, 65536, 917512, 9, 0, 917527, 11, 0, 917528, 11, 0, 983040, 9, 0, 983041, 9, 0, 983047, 14, 65536, 983049, 9, 0, 983062, 11, 0, 983065, 11, 0, 983066, 11, 0, 983067, 11, 0, 1048576, 9, 0, 1048579, 13, 196608, 1048582, 12, 0, 1048584, 9, 0, 1048588, 13, 196608, 1048600, 11, 0, 1114132, 12, 0, 1179666, 13, 196608 )
+
+[node name="Lama" type="Node2D" parent="."]
+
+[node name="Deslize" parent="Lama" instance=ExtResource( 3 )]
+position = Vector2( 384, 357 )
+
+[node name="Deslize2" parent="Lama" instance=ExtResource( 3 )]
+position = Vector2( 404, 357 )
+
+[node name="Deslize3" parent="Lama" instance=ExtResource( 3 )]
+position = Vector2( 424, 357 )
+
+[node name="Deslize4" parent="Lama" instance=ExtResource( 3 )]
+position = Vector2( 444, 357 )
+
+[node name="Deslize5" parent="Lama" instance=ExtResource( 3 )]
+position = Vector2( 464, 357 )
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Caixa_no_mundo" parent="Objects" instance=ExtResource( 4 )]
+position = Vector2( 350, 356 )
+
+[node name="Caixa_no_mundo2" parent="Objects" instance=ExtResource( 4 )]
+position = Vector2( 314, 384 )
+
+[node name="Caixa_no_mundo3" parent="Objects" instance=ExtResource( 4 )]
+position = Vector2( 362, 408 )
+
+[node name="Door" parent="Objects" instance=ExtResource( 5 )]
+modulate = Color( 0.898039, 0, 1, 1 )
+self_modulate = Color( 0.215686, 0.164706, 0.164706, 1 )
+position = Vector2( 242, 432 )
 
 [node name="Treasure" type="Node2D" parent="."]
 
-[node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
+[node name="Chest1" parent="Treasure" instance=ExtResource( 6 )]
 position = Vector2( 425.04, 383.794 )
 item_id = 1
 item_quantity = 13
 
-[node name="Party" type="Node2D" parent="."]
-scale = Vector2( 0.85, 0.85 )
+[node name="Chest2" parent="Treasure" instance=ExtResource( 6 )]
+position = Vector2( 455, 384 )
+item_id = 1
+item_quantity = 13
+
+[node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
-[node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Borboleta" parent="Enemies" instance=ExtResource( 7 )]
 id = 7
 radius = 100.0
 
-[node name="Borboleta2" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Borboleta2" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 379.58, -379.58 )
 id = 3
 radius = 100.0
 
-[node name="Borboleta3" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Borboleta3" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 349.042, -84.515 )
 id = 2
 radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
 volume_db = -18.227
 autoplay = true
 
@@ -73,4 +111,5 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
+[node name="Log" parent="CanvasLayer" instance=ExtResource( 8 )]
+

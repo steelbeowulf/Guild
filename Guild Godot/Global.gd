@@ -6,6 +6,7 @@ var ALL_ENEMIES
 var ALL_PLAYERS
 var INVENTORY
 var POSITION
+var STATE
 
 func add_item(item_id, item_quantity):
 	var done = false
