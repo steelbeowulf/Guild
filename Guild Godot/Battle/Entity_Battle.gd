@@ -26,6 +26,7 @@ func set_sprite(sprite):
 	frames.add_animation("idle")
 	for i in range(len(sprite)):
 		frames.add_frame("idle", load(sprite[i]))
+	print("added spriteframe for "+sprite[0])
 	$Sprite.frames  = frames
 	$Sprite.play("idle")
 	self.parent.connect("anim_finished", self, "_anim_finished")

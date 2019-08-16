@@ -74,7 +74,10 @@ func _ready():
 		node.show()
 		Enemies[i].graphics = node
 	total_enemies = Enemies.size()
-	if Enemies[0].id == 8:
+	print(Enemies[0].id)
+	print(Enemies[0].nome)
+	print(Enemies[0].sprite)
+	if Enemies[0].id == 9:
 		bosstheme.play(0)
 	else:
 		battletheme.play(0)

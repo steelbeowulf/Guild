@@ -8,8 +8,8 @@
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Musics/Heavy Concept A Bass Master (online-audio-converter.com).ogg" type="AudioStream" id=9]
-[ext_resource path="res://Musics/Modern Castle - Tension (online-audio-converter.com).ogg" type="AudioStream" id=10]
+[ext_resource path="res://Musics/Modern Castle - Tension (online-audio-converter.com).ogg" type="AudioStream" id=9]
+[ext_resource path="res://Musics/Heavy Concept A Bass Master (online-audio-converter.com).ogg" type="AudioStream" id=10]
 [ext_resource path="res://Audio bits/Powerup 4 - Sound effects Pack 2.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Audio bits/Fantozzi-SandL1.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Audio bits/Explosion 3 - Sound effects Pack 2.ogg" type="AudioStream" id=13]
@@ -126,13 +126,13 @@ margin_bottom = 594.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="Boss" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -16.082
-
 [node name="Battle Theme" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 9 )
 volume_db = -17.155
+
+[node name="Boss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -10.0
 
 [node name="Spell" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
