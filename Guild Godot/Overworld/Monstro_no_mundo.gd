@@ -148,7 +148,6 @@ func _on_View_body_exited(body):
 
 
 func _on_Battle_body_entered(body):
-	self.dead = true
 	if body.is_in_group("player"):
 		map.generate_enemies()
 		map.update_objects_position()

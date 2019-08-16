@@ -5,7 +5,7 @@ var open = false
 func _update(value):
 	var pos = value[1]
 	value = value[0]
-	if not value:
+	if value:
 		self.visible = false
 		$CollisionShape2D.disabled = true
 	self.set_global_position(pos)

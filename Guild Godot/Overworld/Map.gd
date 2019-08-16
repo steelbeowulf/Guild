@@ -1,6 +1,7 @@
 extends Node2D
 
 export var Transitions = {}
+export var Doors = {}
 
 onready var Players = []
 onready var Inventory = []
@@ -8,7 +9,7 @@ onready var Enemies = []
 onready var Encounter = []
 onready var Kill = []
 var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
-onready var Player_pos = Vector2(500, 300)
+onready var Player_pos = Vector2(527, 529)
 onready var state = {}
 var id = 0
 
@@ -17,6 +18,8 @@ func generate_enemies():
 	var total = int(rand_range(1,4))
 	var current = 0
 	Encounter.shuffle()
+	for k in Kill:
+		get_node("Enemies/"+str(k)).dead = true
 	while current <= total or Encounter:
 		if Encounter:
 			newEnemy.append(Enemies[Encounter[0]].enemy_duplicate())
@@ -48,13 +51,6 @@ func _ready():
 			get_tree().change_scene("res://Battle/Game Over.tscn")
 	if GLOBAL.STATE[id]:
 		state = GLOBAL.STATE[id]
-#	var kill = BATTLE_INIT.kill
-#	if kill:
-#		for k in kill:
-#			print("matando "+str(k))
-#			var a = (get_node("Enemies").get_children())
-#			get_node("Enemies").get_node(str(k)).queue_free()
-#			save_state("ENEMY_KILL", str(k))
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
 	var pos = Player_pos	
@@ -76,12 +72,6 @@ func _ready():
 	cara.id = 0
 	
 
-
-func _process(delta):
-	if Input.is_action_just_pressed("ui_focus_next"):
-		if get_node("Objects/Door"):
-			get_node("Objects/Door").open()
-
 func _encounter_management(value, id, name):
 	if value:
 		Encounter.append(id)
@@ -98,27 +88,43 @@ func get_map_margin():
 func _physics_process(delta):
 	var pos = $Party.get_child(0).get_global_position()
 	GLOBAL.POSITION = pos
+	for d in Doors.keys():
+		if Doors[d] == 'Defeat all enemies' and not $Enemies.get_children():
+			get_node("Objects/"+str(d)).open()
+			send_message("Uma nova passagem se abriu")
+			Doors[d] = ''
+		elif Doors[d] == 'Room puzzle' and GLOBAL.ROOM:
+			get_node("Objects/"+str(d)).open() 
+			send_message("Uma nova passagem se abriu")
+			Doors[d] = ''
+		elif Doors[d] == 'Matching puzzle' and GLOBAL.MATCH:
+			get_node("Objects/"+str(d)).open() 
+			send_message("Uma nova passagem se abriu")
+			Doors[d] = ''
+		elif Doors[d].split(" ")[0] == 'Switch':
+			if get_node("Objects/"+str(Doors[d].split(" ")[1])).activated:
+				get_node("Objects/"+str(d)).open() 
+				Doors[d] = ''
 
 func send_message(text):
 	$CanvasLayer/Log.display_text(text)
 
 func update_objects_position():
 	for e in get_node("Objects").get_children():
-		save_state("OBJ_POS", e.get_name(), e.get_global_position())
+		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
 	for p in get_node("Party").get_children():
 		save_state("PLAYER_POS", p.get_name(), p.get_global_position()) 
 	for e in get_node("Enemies").get_children():
 		if e.dead:
 			save_state("ENEMY_KILL", e.get_name())
 
-func save_state(type, node, pos=Vector2(0,0)):
-	print(type)
+func save_state(type, node, open=false, pos=Vector2(0,0)):
 	if type == "TREASURE":
 		state["Treasure/"+str(node)] = true
 	elif type == "ENEMY_KILL":
 		state["Enemies/"+str(node)] = [true, pos]
 	elif type == "OBJ_POS":
-		state["Objects/"+str(node)] = [false, pos]
+		state["Objects/"+str(node)] = [open, pos]
 	elif type == "PLAYER_POS":
 		state["Party/"+str(node)] = [false, pos]
 	GLOBAL.STATE[id] = state

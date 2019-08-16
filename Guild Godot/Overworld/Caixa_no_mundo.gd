@@ -4,6 +4,7 @@ const MOVEMENT = 5200
 
 onready var can_interact = false
 onready var velocity = Vector2(0,0)
+var open = false
 
 func _physics_process(delta):
 	if can_interact and Input.is_action_pressed("ui_accept"):
