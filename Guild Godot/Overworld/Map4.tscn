@@ -72,4 +72,3 @@ __meta__ = {
 [node name="Transition" parent="." instance=ExtResource( 7 )]
 position = Vector2( 8.66543, 751.406 )
 next = 3
-

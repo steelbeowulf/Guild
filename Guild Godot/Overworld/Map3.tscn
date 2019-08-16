@@ -472,4 +472,3 @@ position = Vector2( 342.937, 290.719 )
 
 [node name="Deslize135" parent="Puzzle" instance=ExtResource( 9 )]
 position = Vector2( 448.91, 451.885 )
-

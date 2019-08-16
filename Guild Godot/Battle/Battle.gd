@@ -22,6 +22,8 @@ var Enemies_img = []
 onready var hit = get_node("Hit")
 onready var spell = get_node("Spell")
 onready var run = get_node("Run")
+onready var bosstheme = get_node("Boss")
+onready var battletheme = get_node("Battle Theme")
 
 signal round_finished
 signal finish_anim
@@ -72,6 +74,10 @@ func _ready():
 		node.show()
 		Enemies[i].graphics = node
 	total_enemies = Enemies.size()
+	if Enemies[0].id == 8:
+		bosstheme.play(0)
+	else:
+		battletheme.play(0)
 	
 	# Link target buttons with visual targets
 	$Menu/Attack.connect_targets(Players_img, Enemies_img, self)

@@ -109,4 +109,3 @@ next = 3
 
 [node name="Door" parent="Objects" instance=ExtResource( 8 )]
 position = Vector2( 681.776, 209.217 )
-
