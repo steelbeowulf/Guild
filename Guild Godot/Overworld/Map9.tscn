@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://TILEBONITO.tres" type="TileSet" id=2]
@@ -6,13 +6,17 @@
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=8]
 
 [node name="Map9" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
 8: Vector2( 425, 50 ),
 10: Vector2( 150, 605 )
+}
+Doors = {
+"Door": "Defeat all enemies"
 }
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -87,12 +91,16 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 7 )]
+[node name="Door" parent="Objects" instance=ExtResource( 7 )]
+position = Vector2( 146.409, 611.899 )
+scale = Vector2( 5, 1 )
+
+[node name="Transition" parent="." instance=ExtResource( 8 )]
 position = Vector2( 433.105, 24.603 )
 scale = Vector2( 6, 1 )
 next = 8
 
-[node name="Transition2" parent="." instance=ExtResource( 7 )]
+[node name="Transition2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 146.018, 636.853 )
 scale = Vector2( 6, 1 )
 next = 10

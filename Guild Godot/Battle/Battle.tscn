@@ -145,6 +145,7 @@ volume_db = -17.155
 [node name="Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
 volume_db = -9.65
+
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

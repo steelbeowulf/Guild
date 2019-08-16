@@ -159,7 +159,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 74 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ) ],
 "loop": true,
-"name": "8",
+"name": "3",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 82 ), ExtResource( 83 ), ExtResource( 84 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 87 ) ],
@@ -177,9 +177,9 @@ animations = [ {
 "name": "3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 118 ), ExtResource( 119 ), ExtResource( 120 ), ExtResource( 121 ), ExtResource( 122 ), ExtResource( 123 ), ExtResource( 124 ), ExtResource( 125 ), ExtResource( 126 ), ExtResource( 127 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 130 ), ExtResource( 131 ), ExtResource( 132 ), ExtResource( 133 ), ExtResource( 134 ), ExtResource( 135 ), ExtResource( 136 ), ExtResource( 137 ), ExtResource( 138 ) ],
+"frames": [ ExtResource( 131 ), ExtResource( 132 ), ExtResource( 133 ), ExtResource( 134 ), ExtResource( 135 ), ExtResource( 136 ), ExtResource( 137 ), ExtResource( 138 ) ],
 "loop": true,
-"name": "4",
+"name": "6",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 139 ) ],
@@ -208,7 +208,7 @@ shape = SubResource( 2 )
 
 [node name="View" type="Area2D" parent="."]
 position = Vector2( -5, 0 )
-scale = Vector2( 2, 3 )
+scale = Vector2( 1.5, 2.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
 position = Vector2( -91.4488, 1.84402 )
