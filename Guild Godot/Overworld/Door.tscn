@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Tilesets/Slates[Ivan_Voirol].png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 17, 16 )
+extents = Vector2( 17, 12 )
 
 [node name="Door" type="StaticBody2D"]
 script = ExtResource( 1 )
@@ -15,5 +15,6 @@ region_enabled = true
 region_rect = Rect2( 448, 608, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -4 )
 shape = SubResource( 1 )
 

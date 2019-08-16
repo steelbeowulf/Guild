@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://TILEBONITO.tres" type="TileSet" id=2]
@@ -6,9 +6,13 @@
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
 
 [node name="Map6" type="Node2D"]
 script = ExtResource( 1 )
+Transitions = {
+5: Vector2( 560, 560 )
+}
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -64,4 +68,11 @@ __meta__ = {
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Transition" parent="." instance=ExtResource( 7 )]
+position = Vector2( 634.248, 324.923 )
+scale = Vector2( 1, 50 )
+next = 5
 

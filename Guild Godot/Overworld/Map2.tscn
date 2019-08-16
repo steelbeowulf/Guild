@@ -6,11 +6,10 @@
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=8]
 
 [node name="Map2" type="Node2D"]
-position = Vector2( 10.2885, 0 )
 script = ExtResource( 1 )
 Transitions = {
 1: Vector2( 111, 490 ),
@@ -43,7 +42,7 @@ format = 1
 [node name="Treasure" type="Node2D" parent="."]
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
-position = Vector2( 913.754, 364.665 )
+position = Vector2( 382.811, 255.664 )
 item_id = 1
 item_quantity = 13
 

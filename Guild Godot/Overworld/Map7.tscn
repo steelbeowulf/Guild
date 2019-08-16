@@ -6,7 +6,7 @@
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
 
 [node name="Map7" type="Node2D"]
 position = Vector2( 12.9618, 13.3799 )

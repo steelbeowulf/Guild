@@ -20,7 +20,7 @@ func generate_enemies():
 	Encounter.shuffle()
 	for k in Kill:
 		get_node("Enemies/"+str(k)).dead = true
-	while current <= total or Encounter:
+	while current <= total:
 		if Encounter:
 			newEnemy.append(Enemies[Encounter[0]].enemy_duplicate())
 			Encounter.pop_front()
@@ -93,18 +93,15 @@ func _physics_process(delta):
 			get_node("Objects/"+str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ''
-		elif Doors[d] == 'Room puzzle' and GLOBAL.ROOM:
-			get_node("Objects/"+str(d)).open() 
-			send_message("Uma nova passagem se abriu")
-			Doors[d] = ''
 		elif Doors[d] == 'Matching puzzle' and GLOBAL.MATCH:
 			get_node("Objects/"+str(d)).open() 
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ''
-		elif Doors[d].split(" ")[0] == 'Switch':
+		elif Doors[d].split(" ")[0] == 'Activate':
 			if get_node("Objects/"+str(Doors[d].split(" ")[1])).activated:
 				get_node("Objects/"+str(d)).open() 
 				Doors[d] = ''
+				send_message("Uma nova passagem se abriu")
 
 func send_message(text):
 	$CanvasLayer/Log.display_text(text)

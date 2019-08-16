@@ -10,6 +10,7 @@ func _on_Button_pressed():
 	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
 	GLOBAL.INVENTORY = loader.build_inventory()
 	GLOBAL.ALL_PLAYERS = loader.players_from_file()
+	GLOBAL.reload_state()
 	get_tree().change_scene("res://Overworld/Map1.tscn")
 
 func _on_Button2_pressed():

@@ -13,6 +13,15 @@ var MAP
 onready var MATCH = false
 onready var ROOM = false
 
+func reload_state():
+	STATE = {1:{}, 2:{}, 3:{}, 4:{}, 5:{}, 6:{}, 7:{}, 8:{}, 9:{}, 10:{},
+	11:{}, 12:{}, 13:{}, 14:{}, 15:{}}
+	MATCH = false
+	ROOM = false
+	TRANSITION = null
+	MAP = null
+	POSITION = null
+
 func add_item(item_id, item_quantity):
 	var done = false
 	for item in INVENTORY:
