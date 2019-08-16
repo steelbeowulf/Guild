@@ -18,6 +18,7 @@ var velocity = Vector2(0,0)
 var base_pos
 var my_pos
 var chasing = null
+var dead = false
 var prev_velocity = Vector2(-1,0) # else random gets stuck forever
 const tolerance = 0.0
 
@@ -147,6 +148,7 @@ func _on_View_body_exited(body):
 
 
 func _on_Battle_body_entered(body):
+	self.dead = true
 	if body.is_in_group("player"):
 		map.generate_enemies()
 		map.update_objects_position()

@@ -1,5 +1,7 @@
 extends Node2D
 
+export var Transitions = {}
+
 onready var Players = []
 onready var Inventory = []
 onready var Enemies = []
@@ -8,6 +10,7 @@ onready var Kill = []
 var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
 onready var Player_pos = Vector2(500, 300)
 onready var state = {}
+var id = 0
 
 func generate_enemies():
 	var newEnemy = []
@@ -29,6 +32,9 @@ func generate_enemies():
 func _ready():
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
+	var name = get_tree().get_current_scene().get_name()
+	id = int(name.substr(3, len(name)))
+	GLOBAL.MAP = id
 	if BATTLE_INIT.first:
 		Players = GLOBAL.ALL_PLAYERS
 		Inventory = GLOBAL.INVENTORY
@@ -40,22 +46,18 @@ func _ready():
 		if Players == []:
 			print("rip")
 			get_tree().change_scene("res://Battle/Game Over.tscn")
-	if GLOBAL.STATE:
-		state = GLOBAL.STATE
-	var kill = BATTLE_INIT.kill
-	if kill:
-		for k in kill:
-			print("matando "+str(k))
-			get_node("Enemies").get_node(str(k)).queue_free()
-			save_state("ENEMY_KILL", str(k))
+	if GLOBAL.STATE[id]:
+		state = GLOBAL.STATE[id]
+#	var kill = BATTLE_INIT.kill
+#	if kill:
+#		for k in kill:
+#			print("matando "+str(k))
+#			var a = (get_node("Enemies").get_children())
+#			get_node("Enemies").get_node(str(k)).queue_free()
+#			save_state("ENEMY_KILL", str(k))
 	var cara = cara_no_mundo.instance()
-	var pos = Player_pos
-	if GLOBAL.POSITION:
-		pos = GLOBAL.POSITION
-	cara.set_global_position(pos)
-	cara.id = 0
 	$Party.add_child(cara)
-	
+	var pos = Player_pos	
 	# Connects itself to monsters
 	for e in get_node("Enemies").get_children():
 		e.connect("battle_notifier", self, "_encounter_management")
@@ -64,6 +66,16 @@ func _ready():
 		for key in state.keys():
 			var value = state[key]
 			get_node(key)._update(value)
+	
+	if GLOBAL.POSITION:
+		pos = GLOBAL.POSITION
+	if GLOBAL.TRANSITION:
+		pos = Transitions[GLOBAL.TRANSITION]
+		GLOBAL.TRANSITION = false
+	cara.set_global_position(pos)
+	cara.id = 0
+	
+
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_focus_next"):
@@ -95,16 +107,18 @@ func update_objects_position():
 		save_state("OBJ_POS", e.get_name(), e.get_global_position())
 	for p in get_node("Party").get_children():
 		save_state("PLAYER_POS", p.get_name(), p.get_global_position()) 
+	for e in get_node("Enemies").get_children():
+		if e.dead:
+			save_state("ENEMY_KILL", e.get_name())
 
 func save_state(type, node, pos=Vector2(0,0)):
+	print(type)
 	if type == "TREASURE":
 		state["Treasure/"+str(node)] = true
 	elif type == "ENEMY_KILL":
-		state["Enemies/"+str(node)] = [false, pos]
-	elif type == "ENEMY_POS":
-		state["Enemies/"+str(node)] = [false, pos]
+		state["Enemies/"+str(node)] = [true, pos]
 	elif type == "OBJ_POS":
 		state["Objects/"+str(node)] = [false, pos]
 	elif type == "PLAYER_POS":
 		state["Party/"+str(node)] = [false, pos]
-	GLOBAL.STATE = state
+	GLOBAL.STATE[id] = state

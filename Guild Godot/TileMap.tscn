@@ -113,4 +113,3 @@ region_rect = Rect2( 0, 128, 32, 48 )
 [node name="CollisionShapeD" type="CollisionShape2D" parent="Layer3/Tree/StaticBody2D"]
 position = Vector2( -0.19371, 17.6277 )
 shape = SubResource( 1 )
-

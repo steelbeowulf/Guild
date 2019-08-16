@@ -109,4 +109,4 @@ func end_battle(Players, Enemies, Inventory):
 		print("whaat")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
 	else:
-		get_tree().change_scene("res://Overworld/Map.tscn")
+		get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")

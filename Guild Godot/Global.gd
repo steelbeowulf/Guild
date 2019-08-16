@@ -6,7 +6,9 @@ var ALL_ENEMIES
 var ALL_PLAYERS
 var INVENTORY
 var POSITION
-var STATE
+var STATE = {1:{}, 2:{}}
+var TRANSITION
+var MAP
 
 func add_item(item_id, item_quantity):
 	var done = false
@@ -16,6 +18,6 @@ func add_item(item_id, item_quantity):
 			done = true
 			break
 	if not done:
-		var item = ALL_ITENS[item_id].duplicate()
+		var item = ALL_ITENS[item_id]
 		item.quantity += item_quantity
-		INVENTORY.add(item)
+		INVENTORY.append(item)
