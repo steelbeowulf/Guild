@@ -16,6 +16,8 @@ var id = 0
 func generate_enemies():
 	var newEnemy = []
 	var total = int(rand_range(1,4))
+	if Encounter[0] == 9:
+		total = 0
 	var current = 0
 	Encounter.shuffle()
 	for k in Kill:
@@ -33,6 +35,8 @@ func generate_enemies():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if GLOBAL.WIN:
+		get_tree().change_scene("res://Menu/Credits.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
 	var name = get_tree().get_current_scene().get_name()

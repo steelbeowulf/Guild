@@ -53,16 +53,19 @@ scale = Vector2( 1.2, 1.2 )
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -45.836, -282.525 )
 id = 3
+movement = 1
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -42.3272, -236.034 )
 id = 3
+movement = 1
 radius = 100.0
 
 [node name="Borboleta3" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -44.0816, -182.525 )
 id = 3
+movement = 1
 radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

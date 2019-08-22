@@ -43,8 +43,8 @@ format = 1
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 382.811, 255.664 )
-item_id = 1
-item_quantity = 13
+item_id = 4
+item_quantity = 4
 
 [node name="Party" type="Node" parent="."]
 
@@ -53,8 +53,9 @@ position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( -200.222, -108.841 )
+position = Vector2( -219.315, -163.733 )
 id = 7
+movement = 1
 radius = 100.0
 
 [node name="Borboleta4" parent="Enemies" instance=ExtResource( 4 )]
@@ -67,18 +68,20 @@ id = 3
 radius = 100.0
 
 [node name="Borboleta6" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 11.1529, -241.841 )
+position = Vector2( -85.5053, -188.142 )
 id = 4
+movement = 3
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( -329.344, -173.761 )
+position = Vector2( -338.891, -229.847 )
 id = 3
 radius = 100.0
 
 [node name="Borboleta3" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( -397.427, -127.052 )
+position = Vector2( -389.074, -131.825 )
 id = 4
+movement = 2
 radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -109,3 +112,4 @@ next = 3
 
 [node name="Door" parent="Objects" instance=ExtResource( 8 )]
 position = Vector2( 681.776, 209.217 )
+

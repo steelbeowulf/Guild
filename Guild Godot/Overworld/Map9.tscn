@@ -56,16 +56,19 @@ scale = Vector2( 1.2, 1.2 )
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -319.151, -158.795 )
 id = 3
+movement = 4
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -188.218, -264.658 )
 id = 3
+movement = 4
 radius = 100.0
 
 [node name="Borboleta4" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -186.957, -41.3866 )
 id = 3
+movement = 2
 radius = 100.0
 
 [node name="Borboleta3" parent="Enemies" instance=ExtResource( 4 )]

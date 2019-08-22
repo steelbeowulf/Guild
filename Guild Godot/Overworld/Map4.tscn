@@ -38,8 +38,8 @@ format = 1
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 208.518, 876.321 )
-item_id = 7
-item_quantity = 1
+item_id = 3
+item_quantity = 2
 
 [node name="Party" type="Node2D" parent="."]
 scale = Vector2( 0.85, 0.85 )
@@ -51,6 +51,7 @@ scale = Vector2( 1.2, 1.2 )
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -200.222, -108.841 )
 id = 7
+movement = 3
 radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

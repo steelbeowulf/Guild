@@ -35,6 +35,9 @@ func print_battle_results():
 		print(p.get_name()+" tem "+str(p.get_health())+" de vida!")
 	for e in Enemies:
 		print(e.get_name()+" tem "+str(e.get_health())+" de vida!")
+		if e.get_name() == 'Statue' and e.get_health() <= 0:
+			print("acabou a demo")
+			GLOBAL.WIN = true
 
 func _ready():
 	over = false
@@ -366,6 +369,9 @@ func execute_action(action, target):
 	elif action == "Run":
 		randomize()
 		var chance = rand_range(0,100)
+		if bosstheme.is_playing():
+			chance = 100
+			$Log.display_text("NÃO CONSEGUE FUGIR DESTE INIMIGO")
 		if chance <= 75:
 			run.play(0)
 			$Log.display_text("FUGA")

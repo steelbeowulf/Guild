@@ -39,18 +39,18 @@ tile_data = PoolIntArray( -131072, 9, 0, -131071, 9, 0, -131070, 9, 0, -131069, 
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 294.81, 130.447 )
-item_id = 2
-item_quantity = 2
+item_id = 6
+item_quantity = 1
 
 [node name="Chest2" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 321.145, 130.935 )
-item_id = 5
+item_id = 3
 item_quantity = 2
 
 [node name="Chest3" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 270.426, 130.935 )
-item_id = 6
-item_quantity = 1
+item_id = 5
+item_quantity = 2
 
 [node name="Party" type="Node2D" parent="."]
 scale = Vector2( 0.85, 0.85 )
@@ -62,6 +62,7 @@ scale = Vector2( 1.2, 1.2 )
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -200.222, -108.841 )
 id = 7
+movement = 1
 radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

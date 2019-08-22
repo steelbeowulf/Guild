@@ -13,7 +13,7 @@ var velocities
 var accum = Vector2(0,0)
 var state = 0
 
-const SPEED = 200
+const SPEED = 100
 var velocity = Vector2(0,0)
 var base_pos
 var my_pos
@@ -61,6 +61,7 @@ func _physics_process(delta):
 				velocity.x = -SPEED
 			if my_pos.x - leader_pos.x < tolerance:
 				velocity.x = SPEED
+			velocity*=1.5
 
 	if velocity == Vector2(0,0):
 		$AnimatedSprite.frame = 0

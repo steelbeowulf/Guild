@@ -14,7 +14,7 @@ func _process(delta):
 			var nome = GLOBAL.ALL_ITENS[item_id].nome
 			closed = false
 			$Sprite.play("open")
-			get_parent().get_parent().send_message("Encontrou "+nome+" x"+str(item_quantity))
+			get_parent().get_parent().send_message("Encontrou "+nome+" x"+str(item_quantity+1))
 			get_parent().get_parent().save_state("TREASURE", self.get_name())
 
 func _on_Area2D_area_entered(area):

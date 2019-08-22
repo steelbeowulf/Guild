@@ -51,6 +51,7 @@ scale = Vector2( 1.2, 1.2 )
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( -200.222, -108.841 )
 id = 7
+movement = 4
 radius = 100.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -75,3 +76,4 @@ __meta__ = {
 position = Vector2( 634.248, 324.923 )
 scale = Vector2( 1, 50 )
 next = 5
+
