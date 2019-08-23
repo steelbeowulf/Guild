@@ -54,6 +54,7 @@ func load_all_enemies():
 			data["AGI"], data["ACC"], data["LCK"]],
 			data["NAME"], skills, data["RESISTANCE"]))
 		else:  # If parse has errors
+			print(e)
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
 			print("Error String: ", result_json.error_string)
@@ -83,6 +84,7 @@ func load_all_itens():
 			ret.append(ITEM_CLASS.new(data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status))
 		else:  # If parse has errors
+			print(i)
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
 			print("Error String: ", result_json.error_string)
@@ -112,6 +114,7 @@ func load_all_skills():
 			ret.append(ITEM_CLASS.new(data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status))
 		else:  # If parse has errors
+			print(s)
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
 			print("Error String: ", result_json.error_string)
@@ -130,6 +133,7 @@ func build_inventory():
 			itens.append(GLOBAL.ALL_ITENS[item["ID"]])
 			itens[-1].quantity = item["QUANT"]
 	else:  # If parse has errors
+		print('inve')
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)
@@ -157,6 +161,7 @@ func players_from_file():
 			data["AGI"], data["ACC"], data["LCK"]],
 			data["LANE"], data["NAME"], skills, data["RESISTANCE"]))
 	else:  # If parse has errors
+		print('players')
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)

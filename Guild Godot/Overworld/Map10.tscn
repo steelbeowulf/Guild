@@ -4,8 +4,8 @@
 [ext_resource path="res://TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=4]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Map10" type="Node2D"]
 script = ExtResource( 1 )
@@ -53,22 +53,7 @@ item_quantity = 5
 
 [node name="Chest4" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 362.765, 70 )
-item_id = 4
-item_quantity = 5
-
-[node name="Chest5" parent="Treasure" instance=ExtResource( 3 )]
-position = Vector2( 395.178, 70 )
 item_id = 3
-item_quantity = 5
-
-[node name="Chest6" parent="Treasure" instance=ExtResource( 3 )]
-position = Vector2( 426.857, 70 )
-item_id = 2
-item_quantity = 5
-
-[node name="Chest7" parent="Treasure" instance=ExtResource( 3 )]
-position = Vector2( 456.838, 70 )
-item_id = 1
 item_quantity = 5
 
 [node name="Party" type="Node2D" parent="."]
@@ -90,13 +75,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 5 )]
-
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
+[node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 160.4, 23.1727 )
 scale = Vector2( 7, 1 )
 next = 9
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+
+

@@ -4,8 +4,8 @@
 [ext_resource path="res://TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=4]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Map14" type="Node2D"]
 script = ExtResource( 1 )
@@ -65,13 +65,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 5 )]
-
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
+[node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 463.862, 633.559 )
 scale = Vector2( 5.5, 1 )
 next = 13
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+
+

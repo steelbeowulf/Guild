@@ -152,6 +152,8 @@ func _on_Battle_body_entered(body):
 	if body.is_in_group("player"):
 		map.generate_enemies()
 		map.update_objects_position()
+		map.get_node("HUD/Transition").play("Battle")
+		yield(map.get_node("HUD/Transition"), "animation_finished")
 		get_tree().change_scene("res://Battle/Battle.tscn")
 
 func norm(vec):

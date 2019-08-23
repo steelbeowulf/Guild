@@ -5,9 +5,9 @@
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=8]
 
 [node name="Map12" type="Node2D"]
 position = Vector2( 4.22679, 5.4165 )
@@ -87,31 +87,31 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
-
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( -25.6249, 73.8599 )
 scale = Vector2( 1, 5 )
 
-[node name="Door2" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door2" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 601.167, 1.09675 )
 scale = Vector2( 6, 1 )
 
-[node name="Transition" parent="." instance=ExtResource( 8 )]
+[node name="Transition" parent="." instance=ExtResource( 7 )]
 position = Vector2( 163.679, 1081.73 )
 scale = Vector2( 8, 1 )
 next = 5
 
-[node name="Transition2" parent="." instance=ExtResource( 8 )]
+[node name="Transition2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 606.219, -31.5966 )
 scale = Vector2( 8, 1 )
 next = 15
 
-[node name="Transition3" parent="." instance=ExtResource( 8 )]
+[node name="Transition3" parent="." instance=ExtResource( 7 )]
 position = Vector2( -61.8273, 74.4867 )
 scale = Vector2( 1, 7 )
 next = 13
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
+
+

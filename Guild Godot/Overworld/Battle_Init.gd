@@ -33,7 +33,7 @@ func end_battle(Players, Enemies, Inventory):
 			p.reset_hate()
 			p.xp += total_exp
 			print(p.get_name()+" ganhou "+str(total_exp)+" de experiência!")
-			var up = ((14/10)^p.level)*5
+			var up = ((18/10)^p.level)*5
 			if p.xp >= up:
 				print(p.get_name()+" aumentou de nível!") 
 				p.xp = p.xp - up
