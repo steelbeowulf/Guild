@@ -4,6 +4,6 @@
 	"QUANT":50, 
 	"TYPE":"OFFENSE", 
 	"TARGET":"ONE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-75, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-105, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[]
 }

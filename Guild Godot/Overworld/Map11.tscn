@@ -69,5 +69,3 @@ next = 5
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-
-
