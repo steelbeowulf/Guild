@@ -13,6 +13,7 @@ onready var Player_pos = Vector2(527, 529)
 onready var state = {}
 var id = 0
 
+
 func generate_enemies():
 	var newEnemy = []
 	var total = int(rand_range(1,4))
@@ -35,6 +36,8 @@ func generate_enemies():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if get_tree().get_current_scene().get_name() == 'Map4':
+		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:
 		get_tree().change_scene("res://Menu/Credits.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES

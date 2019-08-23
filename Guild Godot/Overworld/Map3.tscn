@@ -5,10 +5,10 @@
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Overworld/Deslize.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Deslize.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=9]
 
 [node name="Map3" type="Node2D"]
 position = Vector2( 8.72684, 0.513351 )
@@ -74,403 +74,402 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
-
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 5.2206, 156.021 )
 scale = Vector2( 1, 3.6 )
 
-[node name="Transition" parent="." instance=ExtResource( 8 )]
+[node name="Transition" parent="." instance=ExtResource( 7 )]
 position = Vector2( 3.99854, 751.857 )
 next = 2
 
-[node name="Transition2" parent="." instance=ExtResource( 8 )]
+[node name="Transition2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 792.34, 592.348 )
 next = 4
 
-[node name="Transition3" parent="." instance=ExtResource( 8 )]
+[node name="Transition3" parent="." instance=ExtResource( 7 )]
 position = Vector2( -54.2078, 143.804 )
 scale = Vector2( 1, 5 )
 next = 5
 
 [node name="Puzzle" type="Node" parent="."]
+editor/display_folded = true
 
-[node name="Deslize" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 161.011, 743.775 )
 
-[node name="Deslize12" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize12" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 127.41, 715.106 )
 
-[node name="Deslize26" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize26" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.436, 510.774 )
 
-[node name="Deslize40" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize40" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.427, 301.445 )
 
-[node name="Deslize13" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize13" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 127.787, 695.861 )
 
-[node name="Deslize31" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize31" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.814, 491.529 )
 
-[node name="Deslize35" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize35" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.804, 282.2 )
 
-[node name="Deslize14" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize14" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.164, 675.861 )
 
-[node name="Deslize27" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize27" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.191, 471.529 )
 
-[node name="Deslize42" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize42" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.182, 262.2 )
 
-[node name="Deslize15" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize15" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.542, 657.371 )
 
-[node name="Deslize30" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize30" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.569, 453.039 )
 
-[node name="Deslize34" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize34" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.559, 243.71 )
 
-[node name="Deslize16" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize16" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.542, 638.999 )
 
-[node name="Deslize29" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize29" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.569, 434.667 )
 
-[node name="Deslize37" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize37" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.559, 225.338 )
 
-[node name="Deslize17" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize17" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.082, 621.167 )
 
-[node name="Deslize32" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize32" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.109, 416.835 )
 
-[node name="Deslize41" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize41" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 131.099, 207.506 )
 
-[node name="Deslize18" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize18" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.542, 601.714 )
 
-[node name="Deslize23" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize23" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.569, 397.382 )
 
-[node name="Deslize43" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize43" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.559, 188.053 )
 
-[node name="Deslize19" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize19" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.542, 582.801 )
 
-[node name="Deslize25" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize25" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.569, 378.469 )
 
-[node name="Deslize38" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize38" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.559, 169.14 )
 
-[node name="Deslize20" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize20" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.802, 564.524 )
 
-[node name="Deslize33" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize33" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.829, 360.192 )
 
-[node name="Deslize36" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize36" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 131.82, 150.863 )
 
-[node name="Deslize21" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize21" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.172, 545.616 )
 
-[node name="Deslize24" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize24" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 130.199, 341.284 )
 
-[node name="Deslize22" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize22" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 128.542, 525.448 )
 
-[node name="Deslize28" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize28" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 129.569, 321.116 )
 
-[node name="Deslize2" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize2" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 181.197, 743.759 )
 
-[node name="Deslize46" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize46" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 374.728, 744.272 )
 
-[node name="Deslize59" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize59" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 186.746, 223.321 )
 
-[node name="Deslize102" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize102" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 168.084, 290.456 )
 
-[node name="Deslize54" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize54" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 569.798, 745.298 )
 
-[node name="Deslize60" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize60" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 381.816, 224.348 )
 
-[node name="Deslize91" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize91" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 363.155, 291.482 )
 
-[node name="Deslize138" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize138" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 469.128, 452.648 )
 
-[node name="Deslize3" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize3" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 201.224, 743.759 )
 
-[node name="Deslize50" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize50" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 394.755, 744.272 )
 
-[node name="Deslize64" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize64" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 206.773, 223.321 )
 
-[node name="Deslize100" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize100" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 188.111, 290.456 )
 
-[node name="Deslize134" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize134" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 294.085, 451.621 )
 
-[node name="Deslize56" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize56" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 589.826, 745.298 )
 
-[node name="Deslize69" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize69" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 401.844, 224.348 )
 
-[node name="Deslize95" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize95" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 383.182, 291.482 )
 
-[node name="Deslize142" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize142" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 489.156, 452.648 )
 
-[node name="Deslize4" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize4" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 221.252, 743.759 )
 
-[node name="Deslize49" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize49" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 414.783, 744.272 )
 
-[node name="Deslize74" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize74" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 226.801, 223.321 )
 
-[node name="Deslize94" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize94" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 208.139, 290.456 )
 
-[node name="Deslize143" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize143" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 314.113, 451.621 )
 
-[node name="Deslize61" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize61" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 609.854, 745.298 )
 
-[node name="Deslize75" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize75" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 421.872, 224.348 )
 
-[node name="Deslize90" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize90" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 403.21, 291.482 )
 
-[node name="Deslize141" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize141" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 509.184, 452.648 )
 
-[node name="Deslize80" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize80" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 511.681, 224.348 )
 
-[node name="Deslize103" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize103" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 493.019, 291.482 )
 
-[node name="Deslize132" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize132" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 598.993, 452.648 )
 
-[node name="Deslize5" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize5" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 241.28, 744.022 )
 
-[node name="Deslize44" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize44" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 434.81, 744.535 )
 
-[node name="Deslize77" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize77" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 246.828, 223.585 )
 
-[node name="Deslize93" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize93" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 228.167, 290.719 )
 
-[node name="Deslize140" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize140" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 334.14, 451.885 )
 
-[node name="Deslize62" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize62" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 629.881, 745.562 )
 
-[node name="Deslize70" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize70" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 441.899, 224.612 )
 
-[node name="Deslize87" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize87" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 423.238, 291.746 )
 
-[node name="Deslize127" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize127" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 529.211, 452.911 )
 
-[node name="Deslize79" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize79" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 531.709, 224.612 )
 
-[node name="Deslize105" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize105" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 513.047, 291.746 )
 
-[node name="Deslize136" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize136" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 619.021, 452.911 )
 
-[node name="Deslize6" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize6" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 261.373, 744.022 )
 
-[node name="Deslize52" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize52" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 454.904, 744.535 )
 
-[node name="Deslize63" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize63" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 266.922, 223.585 )
 
-[node name="Deslize101" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize101" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 248.26, 290.719 )
 
-[node name="Deslize128" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize128" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 354.234, 451.885 )
 
-[node name="Deslize55" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize55" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 649.975, 745.562 )
 
-[node name="Deslize67" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize67" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 461.993, 224.612 )
 
-[node name="Deslize92" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize92" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 443.331, 291.746 )
 
-[node name="Deslize130" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize130" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 549.304, 452.911 )
 
-[node name="Deslize81" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize81" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 551.802, 224.612 )
 
-[node name="Deslize137" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize137" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 639.114, 452.911 )
 
-[node name="Deslize7" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize7" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 279.763, 744.022 )
 
-[node name="Deslize39" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize39" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 473.294, 744.535 )
 
-[node name="Deslize68" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize68" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 285.312, 223.585 )
 
-[node name="Deslize97" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize97" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 266.65, 290.719 )
 
-[node name="Deslize133" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize133" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 372.624, 451.885 )
 
-[node name="Deslize58" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize58" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 668.365, 745.562 )
 
-[node name="Deslize76" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize76" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 480.383, 224.612 )
 
-[node name="Deslize106" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize106" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 461.721, 291.746 )
 
-[node name="Deslize139" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize139" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 567.695, 452.911 )
 
-[node name="Deslize83" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize83" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 570.192, 224.612 )
 
-[node name="Deslize131" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize131" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 657.504, 452.911 )
 
-[node name="Deslize146" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize146" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 674.982, 452.911 )
 
-[node name="Deslize147" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize147" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 694.445, 452.911 )
 
-[node name="Deslize8" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize8" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 298.154, 744.022 )
 
-[node name="Deslize47" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize47" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 491.685, 744.535 )
 
-[node name="Deslize57" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize57" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 303.702, 223.585 )
 
-[node name="Deslize88" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize88" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 285.041, 290.719 )
 
-[node name="Deslize145" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize145" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 391.014, 451.885 )
 
-[node name="Deslize53" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize53" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 686.755, 745.562 )
 
-[node name="Deslize66" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize66" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 498.773, 224.612 )
 
-[node name="Deslize99" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize99" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 480.112, 291.746 )
 
-[node name="Deslize144" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize144" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 586.085, 452.911 )
 
-[node name="Deslize82" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize82" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 588.583, 224.612 )
 
-[node name="Deslize9" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize9" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 316.885, 744.022 )
 
-[node name="Deslize48" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize48" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 510.415, 744.535 )
 
-[node name="Deslize73" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize73" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 322.433, 223.585 )
 
-[node name="Deslize96" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize96" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 303.772, 290.719 )
 
-[node name="Deslize126" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize126" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 409.745, 451.885 )
 
-[node name="Deslize10" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize10" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 336.297, 744.022 )
 
-[node name="Deslize71" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize71" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 148.315, 223.071 )
 
-[node name="Deslize45" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize45" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 529.828, 744.535 )
 
-[node name="Deslize72" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize72" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 341.846, 223.585 )
 
-[node name="Deslize89" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize89" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 323.184, 290.719 )
 
-[node name="Deslize129" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize129" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 429.157, 451.885 )
 
-[node name="Deslize11" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize11" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 356.049, 744.022 )
 
-[node name="Deslize78" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize78" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 168.067, 223.071 )
 
-[node name="Deslize98" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize98" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 149.406, 290.206 )
 
-[node name="Deslize51" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize51" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 549.58, 744.535 )
 
-[node name="Deslize65" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize65" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 361.598, 223.585 )
 
-[node name="Deslize104" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize104" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 342.937, 290.719 )
 
-[node name="Deslize135" parent="Puzzle" instance=ExtResource( 9 )]
+[node name="Deslize135" parent="Puzzle" instance=ExtResource( 8 )]
 position = Vector2( 448.91, 451.885 )
+
+[node name="HUD" parent="." instance=ExtResource( 9 )]
 

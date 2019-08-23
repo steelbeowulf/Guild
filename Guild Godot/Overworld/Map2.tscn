@@ -5,9 +5,9 @@
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=8]
 
 [node name="Map2" type="Node2D"]
 script = ExtResource( 1 )
@@ -96,20 +96,18 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
-
-[node name="Transition" parent="." instance=ExtResource( 7 )]
+[node name="Transition" parent="." instance=ExtResource( 6 )]
 position = Vector2( 111.161, 522.494 )
 next = 1
 
-[node name="Transition2" parent="." instance=ExtResource( 7 )]
+[node name="Transition2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1008.97, 207.201 )
 next = 3
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 8 )]
+[node name="Door" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 681.776, 209.217 )
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
 

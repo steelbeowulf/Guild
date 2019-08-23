@@ -5,8 +5,8 @@
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=7]
 
 [node name="Map15" type="Node2D"]
 script = ExtResource( 1 )
@@ -66,14 +66,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Log" parent="CanvasLayer" instance=ExtResource( 6 )]
-
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 7 )]
+[node name="Transition" parent="." instance=ExtResource( 6 )]
 position = Vector2( 579.459, 1076.42 )
 scale = Vector2( 8, 1 )
 next = 12
+
+[node name="HUD" parent="." instance=ExtResource( 7 )]
 
