@@ -19,6 +19,7 @@ func generate_enemies():
 	var total = int(rand_range(1,4))
 	if Encounter[0] == 9:
 		total = 0
+		GLOBAL.WIN = true
 	var current = 0
 	Encounter.shuffle()
 	for k in Kill:
@@ -39,7 +40,7 @@ func _ready():
 	if get_tree().get_current_scene().get_name() == 'Map4':
 		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:
-		get_tree().change_scene("res://Menu/Credits.tscn")
+		get_tree().change_scene("res://Menu/Victory.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
 	var name = get_tree().get_current_scene().get_name()
@@ -111,7 +112,7 @@ func _physics_process(delta):
 				send_message("Uma nova passagem se abriu")
 
 func send_message(text):
-	$CanvasLayer/Log.display_text(text)
+	$HUD/Log.display_text(text)
 
 func update_objects_position():
 	for e in get_node("Objects").get_children():

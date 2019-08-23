@@ -59,7 +59,14 @@ func apply_status(status, target, attacker, logs):
 	var type = sstats[status[1]]
 	var value = status[0]
 	var atkm = attacker.get_atkm()
-	if value:
+	if typeof(value) != TYPE_BOOL:
+		randomize()
+		var chance = rand_range(0, 99)
+		if chance <= value*100:
+			value = 1
+		else:
+			value = 0
+	if value == 1:
 		logs.display_text(target.get_name()+" agora está sob o efeito de "+type)
 		target.add_status(type, atkm, 3)
 		if type == "ATTACK_UP":
@@ -186,7 +193,7 @@ func apply_status(status, target, attacker, logs):
 			target.set_stats(ATK, 3*atk/4)
 			logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
-	else:
+	elif value == -1:
 		if type == "ATTACK_UP":
 			var atk = target.get_atk()
 			target.set_stats(ATK, 5*atk/6)
