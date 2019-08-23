@@ -19,6 +19,7 @@ func generate_enemies():
 	var total = int(rand_range(1,4))
 	if Encounter[0] == 9:
 		total = 0
+		GLOBAL.WIN = true
 	var current = 0
 	Encounter.shuffle()
 	for k in Kill:

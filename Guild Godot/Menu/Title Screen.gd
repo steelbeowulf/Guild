@@ -11,7 +11,7 @@ func _on_Button_pressed():
 	GLOBAL.INVENTORY = loader.build_inventory()
 	GLOBAL.ALL_PLAYERS = loader.players_from_file()
 	GLOBAL.reload_state()
-	get_tree().change_scene("res://Overworld/Map1.tscn")
+	get_tree().change_scene("res://Overworld/Map15.tscn")
 
 func _on_Button2_pressed():
 	get_tree().change_scene("res://Menu/Credits.tscn")
