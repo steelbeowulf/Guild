@@ -189,14 +189,13 @@ func rounds():
 			var target = rand_range(0,LOADER.List.size())
 			target = pref+str(floor(target))
 			execute_action("Attack", [1, target])
+		$Timer.start()
+		yield($Timer, "timeout")
 		# Check if all players or enemies are dead
 		if check_battle_end():
 			print("Hey game over")
 			over = true
 			break
-		
-		$Timer.start()
-		yield($Timer, "timeout")
 	emit_signal("round_finished")
 
 func check_battle_end():

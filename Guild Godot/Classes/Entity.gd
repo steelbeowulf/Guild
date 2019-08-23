@@ -97,6 +97,7 @@ func add_status(effect, atkm, turns):
 	if effect == "KO":
 		status = {}
 		dead = true
+		self.graphics.die()
 	status[effect] = [turns, atkm]
 
 func decrement_turns():

@@ -39,7 +39,7 @@ func _ready():
 	if get_tree().get_current_scene().get_name() == 'Map4':
 		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:
-		get_tree().change_scene("res://Menu/Credits.tscn")
+		get_tree().change_scene("res://Menu/Victory.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
 	var name = get_tree().get_current_scene().get_name()

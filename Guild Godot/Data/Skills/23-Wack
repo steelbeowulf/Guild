@@ -1,0 +1,9 @@
+{
+	"ID":23,	
+	"NAME":"WACK", 
+	"QUANT":30, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":0, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[{"BOOL":0.01, "STATUS":"KO"}]
+}
