@@ -17,7 +17,7 @@ var id = 0
 func generate_enemies():
 	var newEnemy = []
 	var total = int(rand_range(1,4))
-	if Encounter[0] == 9:
+	if Encounter and Encounter[0] == 9:
 		total = 0
 		GLOBAL.WIN = true
 	var current = 0
