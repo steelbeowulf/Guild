@@ -111,7 +111,7 @@ func _physics_process(delta):
 				send_message("Uma nova passagem se abriu")
 
 func send_message(text):
-	$CanvasLayer/Log.display_text(text)
+	$HUD/Log.display_text(text)
 
 func update_objects_position():
 	for e in get_node("Objects").get_children():
