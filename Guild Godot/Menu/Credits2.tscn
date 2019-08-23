@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Menu/Credits.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Credits.png" type="Texture" id=2]
+[ext_resource path="res://Menu/Credits2.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Credits2.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Musics/1. The Market (online-audio-converter.com).ogg" type="AudioStream" id=4]
 
@@ -18,10 +18,10 @@ scale = Vector2( 0.93428, 1.21947 )
 texture = ExtResource( 2 )
 
 [node name="Title" type="Button" parent="."]
-margin_left = 20.505
-margin_top = 487.437
-margin_right = 510.505
-margin_bottom = 536.437
+margin_left = 4.99673
+margin_top = 360.786
+margin_right = 494.997
+margin_bottom = 409.786
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.996078, 0, 0, 1 )
@@ -29,14 +29,14 @@ text = "Return to the Title Screen"
 flat = true
 
 [node name="More Credits" type="Button" parent="."]
-margin_left = 20.5051
-margin_top = 419.911
-margin_right = 510.505
-margin_bottom = 468.911
+margin_left = -102.269
+margin_top = 308.768
+margin_right = 387.731
+margin_bottom = 357.768
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.996078, 0, 0, 1 )
-text = "Next Page"
+text = "Previous Page"
 flat = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

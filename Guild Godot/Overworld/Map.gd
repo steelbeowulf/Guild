@@ -36,7 +36,7 @@ func generate_enemies():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if GLOBAL.WIN:
-		get_tree().change_scene("res://Menu/Credits.tscn")
+		get_tree().change_scene("res://Menu/Victory.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
 	var name = get_tree().get_current_scene().get_name()
