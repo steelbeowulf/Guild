@@ -37,6 +37,7 @@ func generate_enemies():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GLOBAL.play_bgm('MAP_THEME', true)
 	if get_tree().get_current_scene().get_name() == 'Map4':
 		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:

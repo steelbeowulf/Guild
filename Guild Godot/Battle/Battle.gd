@@ -13,17 +13,11 @@ var dead_allies = 0
 var dead_enemies = 0
 var total_enemies = 0
 var total_allies = 0
+var boss = false
 
 # Graphical stuff
 var Players_img = []
 var Enemies_img = []
-
-#Audio Stuff
-onready var hit = get_node("Hit")
-onready var spell = get_node("Spell")
-onready var run = get_node("Run")
-onready var bosstheme = get_node("Boss")
-onready var battletheme = get_node("Battle Theme")
 
 signal round_finished
 signal finish_anim
@@ -81,9 +75,10 @@ func _ready():
 	print(Enemies[0].nome)
 	print(Enemies[0].sprite)
 	if Enemies[0].id == 9:
-		bosstheme.play(0)
+		boss = true
+		GLOBAL.play_bgm('BOSS_THEME')
 	else:
-		battletheme.play(0)
+		GLOBAL.play_bgm('BATTLE_THEME')
 	
 	# Link target buttons with visual targets
 	$Menu/Attack.connect_targets(Players_img, Enemies_img, self)
@@ -219,7 +214,7 @@ func execute_action(action, target):
 	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
-		hit.play(0)
+		GLOBAL.play_se('HIT')
 		var entities = []
 		var imgs = []
 		var alvo = target[1]
@@ -312,7 +307,7 @@ func execute_action(action, target):
 		get_node("Menu/Run").show()
 
 	elif action == "Skills":
-		spell.play(0)
+		GLOBAL.play_se('SPELL')
 		var entities = []
 		var imgs = []
 		var alvo = target[1]
@@ -368,11 +363,11 @@ func execute_action(action, target):
 	elif action == "Run":
 		randomize()
 		var chance = rand_range(0,100)
-		if bosstheme.is_playing():
+		if boss:
 			chance = 100
 			$Log.display_text("NÃO CONSEGUE FUGIR DESTE INIMIGO")
 		if chance <= 75:
-			run.play(0)
+			GLOBAL.play_se('RUN')
 			$Log.display_text("FUGA")
 			over = true
 			end_battle()

@@ -2,6 +2,7 @@ extends Node
 onready var loader = get_node("/root/LOADER")
 
 func _ready():
+	GLOBAL.initSound()
 	$Start.grab_focus()
 
 func _on_Button_pressed():
