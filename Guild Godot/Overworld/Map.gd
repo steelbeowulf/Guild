@@ -9,7 +9,7 @@ onready var Enemies = []
 onready var Encounter = []
 onready var Kill = []
 var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
-onready var Player_pos = Vector2(527, 529)
+onready var Player_pos = Vector2(512, 512)
 onready var state = {}
 var id = 0
 
@@ -62,7 +62,8 @@ func _ready():
 		state = GLOBAL.STATE[id]
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
-	var pos = Player_pos	
+	#var cara = get_node("Party/Cara")
+	var pos = Player_pos
 	# Connects itself to monsters
 	for e in get_node("Enemies").get_children():
 		e.connect("battle_notifier", self, "_encounter_management")
@@ -77,9 +78,8 @@ func _ready():
 	if GLOBAL.TRANSITION:
 		pos = Transitions[GLOBAL.TRANSITION]
 		GLOBAL.TRANSITION = false
-	cara.set_global_position(pos)
-	cara.id = 0
-	
+	cara.position = pos
+
 
 func _encounter_management(value, id, name):
 	if value:
