@@ -8,6 +8,17 @@ onready var Position = []
 onready var Leader_pos = [Vector2(500, 320)]
 onready var count = 0
 onready var kill = []
+onready var levelup = 0
+onready var lvup_max_hp = 0
+onready var lvup_max_mp = 0
+onready var lvup_agi = 0
+onready var lvup_atk = 0 
+onready var lvup_atkm = 0 
+onready var lvup_def = 0 
+onready var lvup_defm = 0 
+onready var lvup_acc = 0 
+onready var lvup_lck = 0 
+
 
 func init(players, enemies):
 	Play = [] + players
@@ -35,6 +46,7 @@ func end_battle(Players, Enemies, Inventory):
 			print(p.get_name()+" ganhou "+str(total_exp)+" de experiência!")
 			var up = ((18/10)^p.level)*5
 			if p.xp >= up:
+				levelup = 1
 				print(p.get_name()+" aumentou de nível!") 
 				p.xp = p.xp - up
 				p.level += 1
@@ -52,46 +64,55 @@ func end_battle(Players, Enemies, Inventory):
 				var stat_up = int(floor(rand_range(0,5.99)))
 				p.set_stats(1, max_hp + stat_up)
 				print(p.get_name()+" ganhou HPMAX +"+ str(stat_up))
+				lvup_max_hp = stat_up
 				#MP MAX UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(3, max_mp + stat_up)
 				print(p.get_name()+" ganhou MPMAX +"+ str(stat_up))
+				lvup_max_mp = stat_up
 				#ATK UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(4, atk + stat_up)
 				print(p.get_name()+" ganhou ATK +"+ str(stat_up))
+				lvup_atk = stat_up
 				#ATKM UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(5, atkm + stat_up)
 				print(p.get_name()+" ganhou ATKM +"+ str(stat_up))
+				lvup_atkm = stat_up
 				#DEF UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(6, def + stat_up)
 				print(p.get_name()+" ganhou DEF +"+ str(stat_up))
+				lvup_def = stat_up
 				#DEFM UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(7, defm + stat_up)
 				print(p.get_name()+" ganhou DEFM +"+ str(stat_up))
+				lvup_defm = stat_up
 				#AGI UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(8, agi + stat_up)
 				print(p.get_name()+" ganhou AGI +"+ str(stat_up))
+				lvup_agi = stat_up
 				#ACC UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(9, acc + stat_up)
 				print(p.get_name()+" ganhou ACC +"+ str(stat_up))
+				lvup_acc = stat_up
 				#LCK UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(10, lck + stat_up)
 				print(p.get_name()+" ganhou LCK +"+ str(stat_up))
+				lvup_lck = stat_up
 				
 			print(p.get_name()+" agora tem "+str(p.xp)+" de experiência no nível "+str(p.level))
 			Play.append(p)
@@ -108,5 +129,7 @@ func end_battle(Players, Enemies, Inventory):
 	if Play == []:
 		print("whaat")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
+	elif (levelup == 1):
+		get_tree().change_scene("res://Battle/Level Up.tscn")
 	else:
 		get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
