@@ -9,7 +9,7 @@ onready var Enemies = []
 onready var Encounter = []
 onready var Kill = []
 var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
-onready var Player_pos = Vector2(512, 512)
+onready var Player_pos = Vector2(816, 368)
 onready var state = {}
 var id = 0
 
@@ -26,11 +26,11 @@ func generate_enemies():
 		get_node("Enemies/"+str(k)).dead = true
 	while current <= total:
 		if Encounter:
-			newEnemy.append(Enemies[Encounter[0]].enemy_duplicate())
+			newEnemy.append(Enemies[Encounter[0]]._duplicate())
 			Encounter.pop_front()
 		else:
 			var enemy_id = int(rand_range(1,len(Enemies)-1))
-			newEnemy.append(Enemies[enemy_id].enemy_duplicate())
+			newEnemy.append(Enemies[enemy_id]._duplicate())
 		current+=1
 	BATTLE_INIT.begin_battle(newEnemy, Kill)
 	return
@@ -76,10 +76,14 @@ func _ready():
 	if GLOBAL.POSITION:
 		pos = GLOBAL.POSITION
 	if GLOBAL.TRANSITION:
+		print("VOU MUDAR POS DO PALAYER")
 		pos = Transitions[GLOBAL.TRANSITION]
 		GLOBAL.TRANSITION = false
+	print(cara.position)
+	print("MUDEI")
 	cara.position = pos
-
+	GLOBAL.POSITION = pos
+	cara._rready()
 
 func _encounter_management(value, id, name):
 	if value:

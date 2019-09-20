@@ -5,7 +5,7 @@ var ALL_SKILLS
 var ALL_ENEMIES
 var ALL_PLAYERS
 var INVENTORY
-var POSITION
+var POSITION = Vector2(816, 368)
 var STATE = {1:{}, 2:{}, 3:{}, 4:{}, 5:{}, 6:{}, 7:{}, 8:{}, 9:{}, 10:{},
 	11:{}, 12:{}, 13:{}, 14:{}, 15:{}}
 var TRANSITION

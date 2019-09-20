@@ -40,3 +40,8 @@ func die():
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)
 	return self.hate
+
+func _duplicate():
+	var new_stats = [] + self.stats
+	return self.get_script().new(self.id, self.level, self.xp, 
+	self.sprite, new_stats, self.position, self.nome, self.skills, self.resist)

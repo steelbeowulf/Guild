@@ -107,7 +107,7 @@ next = 3
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Door" parent="Objects" instance=ExtResource( 7 )]
-position = Vector2( 681.776, 209.217 )
+position = Vector2( 704.332, 133.347 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 

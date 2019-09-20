@@ -15,11 +15,9 @@ var movedir = Vector2() # move direction
 onready var ray = $RayCast2D
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _rready():
 	if GLOBAL.POSITION:
 		position = GLOBAL.POSITION
-	else:
-		position = Vector2(816, 368)
 	$AnimatedSprite.animation = "walk_down"
 	self.set_z_index(-id)
 	var margin = get_parent().get_parent().get_map_margin()
@@ -62,9 +60,17 @@ func get_movedir():
 		$Head.rotation_degrees = 90
 
 func _physics_process(delta):
+		# IDLE
+    	if position == target_position:
+    		get_movedir()
+    		if movedir == Vector2.ZERO:
+    			$AnimatedSprite.stop()
+    		last_position = position # record the player's current idle position
+    		target_position += movedir * tile_size # if key is pressed, get new target (also shifts to moving state)
+	
     	# MOVEMENT
     	if ray.is_colliding():
-    		print("AAAAAA!")
+    		#print("AAAAAA!")
     		position = last_position
     		target_position = last_position
     	else:
@@ -73,13 +79,7 @@ func _physics_process(delta):
     		if position.distance_to(last_position) >= tile_size: # if we've moved further than one space
     			position = target_position # snap the player to the intended position
     	
-    	# IDLE
-    	if position == target_position:
-    		get_movedir()
-    		if movedir == Vector2.ZERO:
-    			$AnimatedSprite.stop()
-    		last_position = position # record the player's current idle position
-    		target_position += movedir * tile_size # if key is pressed, get new target (also shifts to moving state)
+    	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _physics_process(delta):

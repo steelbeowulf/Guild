@@ -61,7 +61,7 @@ func AI(player_list, enemies_list):
 func get_xp():
 	return self.xp
 	
-func enemy_duplicate():
+func _duplicate():
 	var new_stats = [] + self.stats
 	return self.get_script().new(self.id, self.level, self.xp, 
 	self.sprite, new_stats, self.nome, self.skills, self.resist)

@@ -5,5 +5,5 @@
 	"TARGET":"ONE",
 	"TYPE":"STATUS",
 	"EFFECTS":[],
-	"STATUS":[{"BOOL":true, "STATUS":"HASTE"}]
+	"STATUS":[{"BOOL":1, "STATUS":"HASTE"}]
 }

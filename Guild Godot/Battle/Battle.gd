@@ -18,6 +18,7 @@ var boss = false
 # Graphical stuff
 var Players_img = []
 var Enemies_img = []
+var Players_status = []
 
 signal round_finished
 signal finish_anim
@@ -84,6 +85,11 @@ func _ready():
 	$Menu/Attack.connect_targets(Players_img, Enemies_img, self)
 	$Menu/Skills.connect_targets(Players_img, Enemies_img, self)
 	$Menu/Itens.connect_targets(Players_img, Enemies_img, self)
+	
+	Players_status = [get_node("Info/P0"), get_node("Info/P1"), get_node("Info/P2"), get_node("Info/P3")]
+	for i in range(len(Players)):
+		Players_status[i].set_name(Players[i].nome)
+		Players_status[i].set_level(Players[i].level)
 	
 	# Main battle loop: calls rounds() while the battle isn't over
 	while (not over):
@@ -211,6 +217,7 @@ func stackagility(a,b):
 # Executes an action on a given target
 func execute_action(action, target):
 	print("ex_action "+action+", "+str(target))
+	var tmp_current_entity = current_entity._duplicate()
 	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
@@ -276,6 +283,7 @@ func execute_action(action, target):
 				affected.append(p)
 		
 		$Log.display_text(item.nome)
+		
 		# Apply the effect on all affected
 		for alvo in affected:
 			if not alvo.is_dead() or item.type == "RESSURECTION":
@@ -351,10 +359,10 @@ func execute_action(action, target):
 						apply_status(st, alvo, current_entity, $Log)
 				if alvo.get_health() <= 0:
 					kill(entities, alvo.index)
-		var mp = current_entity.get_mp()
+		var mp = tmp_current_entity.get_mp()
 		
 		# Spends the MP
-		current_entity.set_stats(MP, mp-skill.quantity)
+		tmp_current_entity.set_stats(MP, mp-skill.quantity)
 		get_node("Menu/Attack").show()
 		get_node("Menu/Lane").show()
 		get_node("Menu/Itens").show()
@@ -386,7 +394,9 @@ func set_current_target(target):
 	current_target = target
 
 func _process(delta):
-	for p in Players:
+	for i in range(len(Players)):
+		var p = Players[i]
+		Players_status[i]._update(p.get_health(), p.get_max_health(), p.get_mp(), p.get_max_mp())
 		if not p.is_dead():
 			var index = p.index
 			var lane = p.get_pos()
