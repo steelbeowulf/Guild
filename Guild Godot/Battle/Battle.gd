@@ -385,6 +385,10 @@ func execute_action(action, target):
 	# Literally does nothing
 	elif action == "Pass":
 		pass
+	
+	for i in range(len(Players_status)):
+		var p = Players[i]
+		Players_status[i]._update(p.get_health(), p.get_max_health(), p.get_mp(), p.get_max_mp())
 
 # Auxiliary functions for the action selection
 func set_current_action(action):
@@ -396,7 +400,7 @@ func set_current_target(target):
 func _process(delta):
 	for i in range(len(Players)):
 		var p = Players[i]
-		Players_status[i]._update(p.get_health(), p.get_max_health(), p.get_mp(), p.get_max_mp())
+		#Players_status[i]._update(p.get_health(), p.get_max_health(), p.get_mp(), p.get_max_mp())
 		if not p.is_dead():
 			var index = p.index
 			var lane = p.get_pos()
