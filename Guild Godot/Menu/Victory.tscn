@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Menu/Victoty.gd" type="Script" id=1]
+[ext_resource path="res://Menu/Victory.gd" type="Script" id=1]
 [ext_resource path="res://Assets/victory.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Musics/1. The Market (online-audio-converter.com).ogg" type="AudioStream" id=4]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 37

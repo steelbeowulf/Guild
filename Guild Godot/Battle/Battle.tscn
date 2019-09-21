@@ -60,8 +60,8 @@ visible = false
 position = Vector2( 842.574, 252.321 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 510.33, 245.363 )
-scale = Vector2( 1.077, 1.2 )
+position = Vector2( 510.33, 281.238 )
+scale = Vector2( 1.077, 1.29342 )
 z_index = -1
 texture = ExtResource( 3 )
 
@@ -110,29 +110,34 @@ text = "Run"
 RUN = true
 
 [node name="Info" type="VBoxContainer" parent="."]
-margin_left = 326.625
-margin_top = 645.593
-margin_right = 990.625
-margin_bottom = 781.593
+margin_left = 327.0
+margin_top = 646.0
+margin_right = 1003.0
+margin_bottom = 782.0
+rect_min_size = Vector2( 676, 136 )
 
 [node name="P0" parent="Info" instance=ExtResource( 8 )]
-margin_bottom = 31.0
-rect_min_size = Vector2( 664, 20 )
+margin_right = 676.0
+margin_bottom = 20.0
+alignment = 2
 
 [node name="P1" parent="Info" instance=ExtResource( 8 )]
-margin_top = 35.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 664, 20 )
+margin_top = 24.0
+margin_right = 676.0
+margin_bottom = 44.0
+alignment = 2
 
 [node name="P2" parent="Info" instance=ExtResource( 8 )]
-margin_top = 70.0
-margin_bottom = 101.0
-rect_min_size = Vector2( 664, 20 )
+margin_top = 48.0
+margin_right = 676.0
+margin_bottom = 68.0
+alignment = 2
 
 [node name="P3" parent="Info" instance=ExtResource( 8 )]
-margin_top = 105.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 664, 20 )
+margin_top = 72.0
+margin_right = 676.0
+margin_bottom = 92.0
+alignment = 2
 
 [node name="Log" parent="." instance=ExtResource( 9 )]
 

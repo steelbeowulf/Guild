@@ -153,7 +153,7 @@ func players_from_file():
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.ALL_SKILLS[id])
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
-			data["EXPERIENCE"], data["IMG"],
+			data["EXPERIENCE"], data["IMG"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 

@@ -57,7 +57,7 @@ func _ready():
 		Players_img.append(node)
 		node.parent = self
 		node.change_lane(lane)
-		node.set_sprite(Players[i].sprite)
+		node.set_animations(Players[i].sprite, Players[i].animations)
 		node.show()
 		Players[i].graphics = node
 		
@@ -68,7 +68,7 @@ func _ready():
 		var node = get_node("Enemies/E"+str(i))
 		Enemies_img.append(node)
 		node.parent = self
-		node.set_sprite(Enemies[i].sprite)
+		#node.set_animations(Enemies[i].sprite, {})
 		node.show()
 		Enemies[i].graphics = node
 	total_enemies = Enemies.size()
@@ -528,6 +528,7 @@ func _on_Attack_button_down():
 	get_node("Menu/Attack/").set_pressed(true)
 	get_node("Menu/Attack/")._on_Action_pressed()
 	get_node("Menu/Attack/").set_pressed(true)
+	Players_img[0].get_node("AnimationPlayer").play("attack")
 
 func kill(entity, id):
 	entity[id].die()

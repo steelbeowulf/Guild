@@ -1,25 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle/Entity_Battle.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Animated/Statue/statue1.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Animated/Statue/statue2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Animated/Statue/statue3.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Animated/Statue/statue4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Animated/Statue/statue5.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Animated/Statue/statue6.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Animated/Statue/statue7.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Animated/Statue/statue8.png" type="Texture" id=9]
-[ext_resource path="res://Assets/NO.png" type="Texture" id=10]
-[ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=11]
-[ext_resource path="res://Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=12]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-} ]
+[ext_resource path="res://Assets/NO.png" type="Texture" id=2]
+[ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Animated/cleric spritesheet calciumtrice.png" type="Texture" id=5]
 
 [sub_resource type="Theme" id=2]
 
@@ -28,7 +13,7 @@ size = 42
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
-font_data = ExtResource( 12 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="Animation" id=4]
 tracks/0/type = "value"
@@ -38,7 +23,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 25, -5 ), Vector2( 25, -20 ) ]
@@ -50,7 +35,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( -0.1, 0.7 ),
+"times": PoolRealArray( -0.1, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.0588235 ) ]
@@ -62,7 +47,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( -0.1, 0.7 ),
+"times": PoolRealArray( -0.1, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -70,7 +55,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -78,23 +63,9 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-
-[sub_resource type="Animation" id=6]
 
 [node name="P0" type="Node2D"]
 script = ExtResource( 1 )
@@ -107,11 +78,6 @@ z_index = 5
 color = Color( 0.0470588, 0.407843, 0.929412, 1 )
 polygon = PoolVector2Array( -1.35055, -21.03, 4.29088, -21.0182, 1.72063, -17.0343 )
 
-[node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
-frames = SubResource( 1 )
-animation = "idle"
-
 [node name="ProgressBar" type="TextureProgress" parent="."]
 margin_left = -38.3996
 margin_top = 7.16805
@@ -121,8 +87,8 @@ rect_scale = Vector2( 0.2, 0.5 )
 theme = SubResource( 2 )
 max_value = 999.0
 allow_greater = true
-texture_under = ExtResource( 10 )
-texture_progress = ExtResource( 11 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
 tint_progress = Color( 1, 0, 0, 1 )
 
 [node name="Damage" type="Label" parent="."]
@@ -138,4 +104,11 @@ text = "250"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 4 )
 anims/Death = SubResource( 5 )
-anims/Idle = SubResource( 6 )
+
+[node name="Spritesheet" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+vframes = 10
+hframes = 10
+frame = 9
+

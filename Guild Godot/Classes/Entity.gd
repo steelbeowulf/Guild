@@ -5,6 +5,7 @@ var index
 var level
 var xp
 var sprite
+var animations
 var nome
 var stats
 var buffs

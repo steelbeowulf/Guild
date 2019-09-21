@@ -4,7 +4,6 @@ var OFFSET_LANE = Vector2(140, 0)
 var current_lane = 0
 var initial_position
 var my_turn = false
-var frames = SpriteFrames.new()
 var bounds = [0,0,0,0,0]
 export(bool) var Player = false
 var parent
@@ -22,13 +21,25 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func set_sprite(sprite):
-	frames.add_animation("idle")
-	for i in range(len(sprite)):
-		frames.add_frame("idle", load(sprite[i]))
-	print("added spriteframe for "+sprite[0])
-	$Sprite.frames  = frames
-	$Sprite.play("idle")
+func set_animations(sprite, animations):
+	$Spritesheet.texture = load(sprite)
+	for k in animations.keys():
+		var v = animations[k]
+		print("adicionando animacao "+str(k))
+		var animation = Animation.new()
+		var track_index = animation.add_track(Animation.TYPE_VALUE)
+		animation.track_set_path(track_index, "Spritesheet:frame")
+		animation.set_loop(v[0])
+		print("setting loop as "+str(v[0]))
+		var time = 0.0
+		v.pop_front()
+		for frame in v:
+			print("adicionando frame "+str(frame))
+			animation.track_insert_key(track_index, time, frame)
+			time += 0.2
+		animation.set_length(time)
+		$AnimationPlayer.add_animation(k , animation)
+	$AnimationPlayer.play("idle")
 	self.parent.connect("anim_finished", self, "_anim_finished")
 
 # Just hide for now
