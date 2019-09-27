@@ -2,7 +2,7 @@
 	"ID":6,
 	"LEVEL":8,
 	"EXPERIENCE":100,
-	"IMG":{"path": "res://Assets/Animated/butterfly spritesheet calciumtrice.png",
+	"IMG":{"path": "res://Assets/Animated/butterfly spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-7"], 
 			"attack": [false, "8-15"],

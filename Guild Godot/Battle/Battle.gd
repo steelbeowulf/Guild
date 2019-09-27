@@ -534,6 +534,7 @@ func _on_Attack_button_down():
 	get_node("Menu/Attack/").set_pressed(true)
 
 func kill(entity, id):
+	entity[id].graphics.play_animation("death")
 	entity[id].die()
 
 func recalculate_bounds():

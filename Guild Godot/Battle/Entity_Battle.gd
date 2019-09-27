@@ -120,6 +120,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_Sprite_animation_finished(name):
+	if name == 'death':
+		return
 	print("ACABEI A ANIMAÇÃO!!! "+str(name))
 	$Animations.get_node(name).hide()
 	$Animations.get_node("idle").show()

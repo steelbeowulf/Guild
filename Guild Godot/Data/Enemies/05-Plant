@@ -2,7 +2,7 @@
 	"ID":5,
 	"LEVEL":8,
 	"EXPERIENCE":100,
-	"IMG":{"path": "res://Assets/Animated/plant spritesheet calciumtrice.png",
+	"IMG":{"path": "res://Assets/Animated/plant spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-3"], 
 			"attack": [false, "0-7"],
