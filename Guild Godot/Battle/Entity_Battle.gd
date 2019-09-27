@@ -22,26 +22,34 @@ func _ready():
 #	pass
 
 func set_animations(sprite, animations):
+	var img = sprite['path']
+	var vf = sprite['vframes']
+	var hf = sprite['hframes']
+	var sc = sprite['scale']
 	print("animacoes do "+str(sprite))
-	$Spritesheet.texture = load(sprite)
 	for k in animations.keys():
 		var v = animations[k]
 		print("adicionando animacao "+str(k))
-		var animation = Animation.new()
-		var track_index = animation.add_track(Animation.TYPE_VALUE)
-		animation.track_set_path(track_index, "Spritesheet:frame")
-		animation.set_loop(v[0])
-		print("setting loop as "+str(v[0]))
-		var time = 0.0
-		v.pop_front()
-		for frame in v:
-			print("adicionando frame "+str(frame))
-			animation.track_insert_key(track_index, time, frame)
-			time += 0.1
-		animation.set_length(time)
-		$AnimationPlayer.add_animation(k , animation)
-	#$AnimationPlayer.play("idle")
-	#self.parent.connect("anim_finished", self, "_anim_finished")
+		var animation = Sprite.new()
+		animation.texture = load(img)
+		animation.set_name(k)
+		animation.set_script(load('res://Battle/Spritesheet.gd'))
+		animation.loop = v[0]
+		animation.physical_frames = v[1]
+		animation.vframes = vf
+		animation.hframes = hf
+		animation.scale = Vector2(sc[0], sc[1])
+		animation.fps = 10
+		animation.hide()
+		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
+		$Animations.add_child(animation)
+
+func play_animation(name):
+	$Animations.get_node("idle").stop()
+	for c in $Animations.get_children():
+		c.hide()
+	$Animations.get_node(name).show()
+	$Animations.get_node(name).play(true)
 
 # Just hide for now
 func die():
@@ -109,3 +117,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		self.hide()
 	elif (anim_name == "Damage"):
 		emit_signal("finish_anim")
+
+
+func _on_Sprite_animation_finished(name):
+	print("ACABEI A ANIMAÇÃO!!! "+str(name))
+	$Animations.get_node(name).hide()
+	$Animations.get_node("idle").show()
+	$Animations.get_node("idle").play(true)

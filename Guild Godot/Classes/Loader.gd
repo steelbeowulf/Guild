@@ -46,7 +46,8 @@ func load_all_enemies():
 			var skills = []
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.ALL_SKILLS[id])
-			ret.append(ENEMY_CLASS.new(data["ID"], data["LEVEL"], data["EXPERIENCE"], data["IMG"],
+			ret.append(ENEMY_CLASS.new(data["ID"], data["LEVEL"], data["EXPERIENCE"], 
+			data["IMG"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 

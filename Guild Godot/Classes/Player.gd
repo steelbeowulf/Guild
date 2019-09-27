@@ -45,4 +45,4 @@ func update_hate(dmg, enemy):
 func _duplicate():
 	var new_stats = [] + self.stats
 	return self.get_script().new(self.id, self.level, self.xp, 
-	self.sprite, new_stats, self.position, self.nome, self.skills, self.resist)
+	self.sprite, self.animations, new_stats, self.position, self.nome, self.skills, self.resist)

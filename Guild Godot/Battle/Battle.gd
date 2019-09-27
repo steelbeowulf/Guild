@@ -58,6 +58,7 @@ func _ready():
 		node.parent = self
 		node.change_lane(lane)
 		node.set_animations(Players[i].sprite, Players[i].animations)
+		node.play_animation("idle")
 		node.show()
 		Players[i].graphics = node
 		
@@ -68,7 +69,8 @@ func _ready():
 		var node = get_node("Enemies/E"+str(i))
 		Enemies_img.append(node)
 		node.parent = self
-		#node.set_animations(Enemies[i].sprite, {})
+		node.set_animations(Enemies[i].sprite, Enemies[i].animations)
+		node.play_animation("idle")
 		node.show()
 		Enemies[i].graphics = node
 	total_enemies = Enemies.size()
@@ -85,9 +87,6 @@ func _ready():
 	$Menu/Attack.connect_targets(Players_img, Enemies_img, self)
 	$Menu/Skills.connect_targets(Players_img, Enemies_img, self)
 	$Menu/Itens.connect_targets(Players_img, Enemies_img, self)
-	
-	for p in Players_img:
-		p.get_node("AnimationPlayer").play('idle')
 	
 	Players_status = [get_node("Info/P0"), get_node("Info/P1"), get_node("Info/P2"), get_node("Info/P3")]
 	for i in range(len(Players)):
@@ -240,6 +239,7 @@ func execute_action(action, target):
 		var atk = current_entity.get_atk()
 		var dmg = alvo.take_damage(PHYSIC, atk)
 		imgs[alvo.index].take_damage(dmg, 0)
+		current_entity.graphics.play_animation("attack")
 		if alvo.classe == "boss" and current_entity.classe != "boss":
 			var hate = current_entity.update_hate(dmg, alvo.index)
 		$Log.display_text("ATTACK")
@@ -362,6 +362,7 @@ func execute_action(action, target):
 						apply_status(st, alvo, current_entity, $Log)
 				if alvo.get_health() <= 0:
 					kill(entities, alvo.index)
+		#current_entity.graphics.play_animation("attack")
 		var mp = tmp_current_entity.get_mp()
 		
 		# Spends the MP
@@ -531,7 +532,6 @@ func _on_Attack_button_down():
 	get_node("Menu/Attack/").set_pressed(true)
 	get_node("Menu/Attack/")._on_Action_pressed()
 	get_node("Menu/Attack/").set_pressed(true)
-	Players_img[0].get_node("AnimationPlayer").play("attack")
 
 func kill(entity, id):
 	entity[id].die()
