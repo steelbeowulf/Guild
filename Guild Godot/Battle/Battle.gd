@@ -86,6 +86,9 @@ func _ready():
 	$Menu/Skills.connect_targets(Players_img, Enemies_img, self)
 	$Menu/Itens.connect_targets(Players_img, Enemies_img, self)
 	
+	for p in Players_img:
+		p.get_node("AnimationPlayer").play('idle')
+	
 	Players_status = [get_node("Info/P0"), get_node("Info/P1"), get_node("Info/P2"), get_node("Info/P3")]
 	for i in range(len(Players)):
 		Players_status[i].set_name(Players[i].nome)

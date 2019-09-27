@@ -22,6 +22,7 @@ func _ready():
 #	pass
 
 func set_animations(sprite, animations):
+	print("animacoes do "+str(sprite))
 	$Spritesheet.texture = load(sprite)
 	for k in animations.keys():
 		var v = animations[k]
@@ -36,11 +37,11 @@ func set_animations(sprite, animations):
 		for frame in v:
 			print("adicionando frame "+str(frame))
 			animation.track_insert_key(track_index, time, frame)
-			time += 0.2
+			time += 0.1
 		animation.set_length(time)
 		$AnimationPlayer.add_animation(k , animation)
-	$AnimationPlayer.play("idle")
-	self.parent.connect("anim_finished", self, "_anim_finished")
+	#$AnimationPlayer.play("idle")
+	#self.parent.connect("anim_finished", self, "_anim_finished")
 
 # Just hide for now
 func die():
