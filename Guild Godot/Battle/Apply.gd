@@ -19,7 +19,7 @@ enum {PHYSIC, MAGIC, FIRE}
 var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
-func apply_effect(who, effect, target, t_id, logs):
+func apply_effect(who, effect, target, t_id):
 	var ret = -1
 	var tipo = -1
 	var stat = effect[0]
@@ -52,14 +52,13 @@ func apply_effect(who, effect, target, t_id, logs):
 				ret = -(valmax - target.get_mp())
 			if finalval < 0:
 				finalval = 0
-		#print("antes do setstat: hp is"+str(target.get_stats(HP)))
 		target.set_stats(stat, finalval)
 		if target.get_health() > 0.2*target.get_max_health():
 			target.remove_status("HP_CRITICAL")
 	print(who.nome + " fez algo para que " + target.nome + " sofresse um efeito de " + dstats[stat])
 	return [ret, tipo]
 
-func apply_status(status, target, attacker, logs):
+func apply_status(status, target, attacker):
 	var type = sstats[status[1]]
 	var value = status[0]
 	var atkm = attacker.get_atkm()
@@ -71,64 +70,64 @@ func apply_status(status, target, attacker, logs):
 		else:
 			value = 0
 	if value == 1:
-		logs.display_text(target.get_name()+" agora está sob o efeito de "+type)
+		#logs.display_text(target.get_name()+" agora está sob o efeito de "+type)
 		target.add_status(type, atkm, 3)
 		if type == "ATTACK_UP":
 			var atk = target.get_atk()
 			target.set_stats(ATK, 6*atk/5)
-			logs.display_text(target.get_name()+" aumentou seu ataque fisico")
+			#logs.display_text(target.get_name()+" aumentou seu ataque fisico")
 		elif type == "ATTACK_DOWN":
 			var atk = target.get_atk()
 			target.set_stats(ATK, 5*atk/6)
-			logs.display_text(target.get_name()+" teve seu ataque fisico diminuido")
+			#logs.display_text(target.get_name()+" teve seu ataque fisico diminuido")
 		elif type == "MAGIC_ATTACK_UP":
 			#var atkm = target.get_atkm()
 			target.set_stats(ATKM, 6*atkm/5)
-			logs.display_text(target.get_name()+" aumentou seu ataque magico")
+			#logs.display_text(target.get_name()+" aumentou seu ataque magico")
 		elif type == "MAGIC_ATTACK_DOWN":
 			#var atkm = target.get_atkm()
 			target.set_stats(ATKM, 5*atkm/6)
-			logs.display_text(target.get_name()+" teve seu ataque magico diminuida")
+			#logs.display_text(target.get_name()+" teve seu ataque magico diminuida")
 		elif type == "DEFENSE_UP":
 			var def = target.get_def()
 			target.set_stats(DEF, 6*def/5)
-			logs.display_text(target.get_name()+" aumentou sua defesa fisica")
+			#logs.display_text(target.get_name()+" aumentou sua defesa fisica")
 		elif type == "DEFENSE_DOWN":
 			var def = target.get_def()
 			target.set_stats(DEF, 5*def/6)
-			logs.display_text(target.get_name()+" teve sua defesa fisica diminuida")
+			#logs.display_text(target.get_name()+" teve sua defesa fisica diminuida")
 		elif type == "MAGIC_DEFENSE_UP":
 			var defm = target.get_def()
 			target.set_stats(DEFM, 6*defm/5)
-			logs.display_text(target.get_name()+" aumentou sua defesa magica")
+			#logs.display_text(target.get_name()+" aumentou sua defesa magica")
 		elif type == "MAGIC_DEFENSE_DOWN":
 			var defm = target.get_def()
 			target.set_stats(DEFM, 5*defm/6)
-			logs.display_text(target.get_name()+" teve sua defesa magica diminuida")
+			#logs.display_text(target.get_name()+" teve sua defesa magica diminuida")
 		elif type == "ACCURACY_UP":
 			var acc = target.get_acc()
 			target.set_stats(ACC, 6*acc/5)
-			logs.display_text(target.get_name()+" aumentou sua acurácia")
+			#logs.display_text(target.get_name()+" aumentou sua acurácia")
 		elif type == "ACCURACY_DOWN":
 			var acc = target.get_acc()
 			target.set_stats(ACC, 5*acc/6)
-			logs.display_text(target.get_name()+" teve sua acurácia diminuida")
+			#logs.display_text(target.get_name()+" teve sua acurácia diminuida")
 		elif type == "AGILITY_UP":
 			var agi = target.get_agi()
 			target.set_stats(AGI, 6*agi/5)
-			logs.display_text(target.get_name()+" aumentou sua agilidade")
+			#logs.display_text(target.get_name()+" aumentou sua agilidade")
 		elif type == "AGILITY_DOWN":
 			var agi = target.get_agi()
 			target.set_stats(AGI, 5*agi/6)
-			logs.display_text(target.get_name()+" teve sua agilidade diminuida")
+			#logs.display_text(target.get_name()+" teve sua agilidade diminuida")
 		elif type == "LUCK_UP":
 			var luck = target.get_lck()
 			target.set_stats(LCK, 6*luck/5)
-			logs.display_text(target.get_name()+" aumentou sua sorte fisica")
+			#logs.display_text(target.get_name()+" aumentou sua sorte fisica")
 		elif type == "LUCK_DOWN":
 			var luck = target.get_lck()
 			target.set_stats(LCK, 5*luck/6)
-			logs.display_text(target.get_name()+" teve sua sorte diminuida")
+			#logs.display_text(target.get_name()+" teve sua sorte diminuida")
 		elif type == "MAX_HP_UP":
 			var hp_max = target.get_max_health()
 			var hp = target.get_health()
@@ -136,7 +135,7 @@ func apply_status(status, target, attacker, logs):
 			target.set_stats(HP_MAX, 3*hp_max/2)
 			var increase = target.get_max_health()
 			target.set_stats(HP, hp + (increase - diferenca))
-			logs.display_text(target.get_name()+" ganhou vida maxima excedente")
+			#logs.display_text(target.get_name()+" ganhou vida maxima excedente")
 		elif type == "MAX_MP_UP":
 			var mp_max = target.get_max_mp()
 			var mp = target.get_health()
@@ -144,25 +143,25 @@ func apply_status(status, target, attacker, logs):
 			target.set_stats(MP_MAX, 3*mp_max/2)
 			var increase = target.get_max_mp()
 			target.set_stats(MP, mp + (increase - diferenca))
-			logs.display_text(target.get_name()+" ganhou mp maximo excedente")
+			#logs.display_text(target.get_name()+" ganhou mp maximo excedente")
 		elif type == "MAX_HP_DOWN":
 			var hp_max = target.get_max_health()
 			var hp = target.get_health()
 			target.set_stats(HP_MAX, 2*hp_max/3)
 			if hp > hp_max:
 				target.set_stats(HP, HP_MAX)
-			logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
+			#logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
 		elif type == "MAX_MP_DOWN":
 			var mp_max = target.get_max_mp()
 			var mp = target.get_mp()
 			target.set_stats(MP_MAX, 2*mp_max/3)
 			if mp > mp_max:
 				target.set_stats(MP, MP_MAX)
-			logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
+			#logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
 		elif type == "BLIND":
 			var acc = target.get_acc()
 			target.set_stats(ACC, acc/10)
-			logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
+			#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
 		elif type == "BERSERK":
 			var atk = target.get_atk()
 			target.set_stats(ATK, atk + 40)
@@ -181,21 +180,21 @@ func apply_status(status, target, attacker, logs):
 			target.set_stats(DEF, def/2)
 			target.set_stats(DEFM, defm/2)
 			target.set_stats(ACC, acc/2)
-			logs.display_text(target.get_name()+" foi amaldiçoado. todos seus status foram reduzidos pela metade")
+			#logs.display_text(target.get_name()+" foi amaldiçoado. todos seus status foram reduzidos pela metade")
 		elif type == "HASTE":
 			var agi = target.get_agi()
 			target.set_stats(AGI, agi*2)
-			logs.display_text(target.get_name()+" ganhou o dobro de agilidade")
+			#logs.display_text(target.get_name()+" ganhou o dobro de agilidade")
 		elif type == "SLOW":
 			var agi = target.get_agi()
 			target.set_stats(AGI, agi/2)
-			logs.display_text(target.get_name()+" perdeu metade de sua agilidade")
+			#logs.display_text(target.get_name()+" perdeu metade de sua agilidade")
 		elif type == "FEAR":
 			var agi = target.get_agi()
 			var atk = target.get_atk()
 			target.set_stats(AGI, 3*agi/4)
 			target.set_stats(ATK, 3*atk/4)
-			logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
+			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	elif value == -1:
 		if type == "ATTACK_UP":
@@ -292,7 +291,7 @@ func apply_status(status, target, attacker, logs):
 			var atk = target.get_atk()
 			target.set_stats(AGI, 4*agi/3)
 			target.set_stats(ATK, 4*atk/3)
-		logs.display_text(target.get_name()+" não está mais sob o efeito de "+type)
+		#logs.display_text(target.get_name()+" não está mais sob o efeito de "+type)
 		target.remove_status(type)
 
 func result_status(status, values, target, logs):
@@ -303,51 +302,51 @@ func result_status(status, values, target, logs):
 		var dmg = values[1] - target.get_defm()
 		target.set_stats(HP, hp-dmg)
 		result = dmg
-		logs.display_text(target.get_name()+" levou "+str(dmg)+" de dano de Poison")
+		#logs.display_text(target.get_name()+" levou "+str(dmg)+" de dano de Poison")
 	elif status == "REGEN":
 		var hp = target.get_health()
 		var max_hp = target.get_max_health()
 		result = target.set_stats(HP, hp+floor(max_hp*0.05))
-		logs.display_text(target.get_name()+" recuperou "+str(-result)+" de HP")
+		#logs.display_text(target.get_name()+" recuperou "+str(-result)+" de HP")
 	elif status == "BURN":
 		var hp = target.get_health()
 		target.set_stats(HP, hp-10)
 		result = 10
-		logs.display_text(target.get_name()+" levou 10 de dano de Burn")
+		#logs.display_text(target.get_name()+" levou 10 de dano de Burn")
 	elif status == "PARALYSIS":
 		randomize()
 		var chance = rand_range(0, 99)
 		if chance < 50:
 			#target.execute_action("Pass", 0)
-			logs.display_text(target.get_name()+" esta paralisado, não consegue atacar")
+			#logs.display_text(target.get_name()+" esta paralisado, não consegue atacar")
 			can_move = -1
 	elif status == "FEAR":
 		randomize()
 		var chance = rand_range(0, 99)
 		if chance < 26:
 			#target.execute_action("Pass", 0)
-			logs.display_text(target.get_name()+" esta apavorado, não consegue atacar")
+			#logs.display_text(target.get_name()+" esta apavorado, não consegue atacar")
 			can_move = -1
 	elif status == "FREEZE":
 		#target.execute_action("Pass", 0)
-		logs.display_text(target.get_name()+" esta congelado, não consegue atacar")
+		#logs.display_text(target.get_name()+" esta congelado, não consegue atacar")
 		can_move =  -1
 	elif status == "BERSERK":
 		#var atk = target.get_atk()
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 0)
 		#target.execute_action("Attack", rand)
-		logs.display_text(target.get_name()+" esta fora de controle, atacará qualquer um em sua frente")
+		#logs.display_text(target.get_name()+" esta fora de controle, atacará qualquer um em sua frente")
 		can_move =  -2
 	elif status == "UNDEAD":
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 3)
 		#target.execute_action("Attack", rand)
-		logs.display_text(target.get_name()+" atacará qualquer alvo")
+		#logs.display_text(target.get_name()+" atacará qualquer alvo")
 		can_move = -2
 	elif status == "PETRIFY":
 		#target.execute_action("Pass", 0)
-		logs.display_text(target.get_name()+" esta petrificado, não consegue atacar")
+		#logs.display_text(target.get_name()+" esta petrificado, não consegue atacar")
 		can_move = -1
 	elif status == "KO":
 		can_move = -1
@@ -357,6 +356,6 @@ func result_status(status, values, target, logs):
 		target.set_stats(HP, hp + floor(hp*0.05))
 		result = floor(hp*0.05)
 		#target.execute_action("Pass", 0)
-		logs.display_text(target.get_name()+" esta dormindo, não consegue atacar")	
+		#logs.display_text(target.get_name()+" esta dormindo, não consegue atacar")	
 		can_move = -1
 	return [can_move, result]

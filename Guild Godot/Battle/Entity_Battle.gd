@@ -17,10 +17,6 @@ func _ready():
 		$Turn.set_color(Color(1, 0, 0))
 		$ProgressBar.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func set_animations(sprite, animations):
 	var img = sprite['path']
 	var vf = sprite['vframes']
@@ -44,19 +40,12 @@ func set_animations(sprite, animations):
 		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
 		$Animations.add_child(animation)
 
-func play_animation(name):
+func play(name, options):
 	$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()
 	$Animations.get_node(name).show()
 	$Animations.get_node(name).play(true)
-
-# Just hide for now
-func die():
-	$AnimationPlayer.play("Death")
-
-func revive():
-	$AnimationPlayer.play_backwards("Death")
 
 func turn(keep=false):
 	if keep:
@@ -112,17 +101,9 @@ func take_damage(value, type):
 	$Damage.show()
 	$AnimationPlayer.play("Damage")
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if (anim_name == "Death"):
-		self.hide()
-	elif (anim_name == "Damage"):
-		emit_signal("finish_anim")
-
-
 func _on_Sprite_animation_finished(name):
 	if name == 'death':
 		return
-	print("ACABEI A ANIMAÇÃO!!! "+str(name))
 	$Animations.get_node(name).hide()
 	$Animations.get_node("idle").show()
 	$Animations.get_node("idle").play(true)

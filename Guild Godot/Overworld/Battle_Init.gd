@@ -97,6 +97,7 @@ func end_battle(Players, Enemies, Inventory):
 			Play.append(p)
 		else:
 			print("this guy "+p.get_name()+" is dead and will be removed")
+			Play.append(p)
 	
 	Enem = []
 	GLOBAL.INVENTORY = [] + Inventory
