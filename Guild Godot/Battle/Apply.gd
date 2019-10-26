@@ -69,6 +69,11 @@ func apply_status(status, target, attacker):
 			value = 1
 		else:
 			value = 0
+	else:
+		if value:
+			value = 1
+		else:
+			value = -1
 	if value == 1:
 		#logs.display_text(target.get_name()+" agora está sob o efeito de "+type)
 		target.add_status(type, atkm, 3)

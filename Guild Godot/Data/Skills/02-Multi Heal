@@ -4,6 +4,6 @@
 	"QUANT":25, 
 	"TARGET":"ALL", 
 	"TYPE":"RECOVERY",
-	"EFFECTS":[{"STAT":"HP", "VALUE":20, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":50, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[]
 }

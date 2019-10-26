@@ -4,6 +4,6 @@
 	"QUANT":50,
 	"TARGET":"ONE",
 	"TYPE":"RESSURECTION",
-	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":35, "TYPE":"", "TURNS":1}],
 	"STATUS":[{"BOOL":false, "STATUS":"KO"}]
 }

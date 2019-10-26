@@ -81,6 +81,5 @@ __meta__ = {
 position = Vector2( 160.4, 23.1727 )
 scale = Vector2( 7, 1 )
 next = 9
+
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-
-

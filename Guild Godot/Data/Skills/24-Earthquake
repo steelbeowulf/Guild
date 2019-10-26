@@ -1,7 +1,7 @@
 {
 	"ID":24,	
 	"NAME":"EARTHQUAKE", 
-	"QUANT":100, 
+	"QUANT":130, 
 	"TARGET":"ALL", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-75, "TYPE":"EARTH", "TURNS":1}],
