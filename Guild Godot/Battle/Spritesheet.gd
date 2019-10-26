@@ -124,7 +124,6 @@ func _next_frame():
 	if frame_count == 0:
 		return false # should not have this case
 		
-	print(frame_count)
 	if current_frame >= frame_count-1:
 		if !loop:
 			self.get_parent().get_parent()._on_Sprite_animation_finished(self.name)

@@ -6,7 +6,6 @@ var initial_position
 var my_turn = false
 var bounds = [0,0,0,0,0]
 export(bool) var Player = false
-var parent
 
 signal finish_anim
 
@@ -40,7 +39,7 @@ func set_animations(sprite, animations):
 		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
 		$Animations.add_child(animation)
 
-func play(name, options):
+func play(name, options=[]):
 	$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()
@@ -102,8 +101,13 @@ func take_damage(value, type):
 	$AnimationPlayer.play("Damage")
 
 func _on_Sprite_animation_finished(name):
-	if name == 'death':
-		return
+	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
-	$Animations.get_node("idle").show()
-	$Animations.get_node("idle").play(true)
+	if name != "death":
+		$Animations.get_node("idle").show()
+		$Animations.get_node("idle").play(true)
+	else:
+		print("opa morri")
+		emit_signal("finish_anim", name)
+		emit_signal("finish_anim", name)
+		emit_signal("finish_anim", name)

@@ -36,7 +36,6 @@ func die():
 	zero_hate()
 	add_status("KO", 999, 999)
 	set_stats(HP, 0)
-	self.graphics.die()
 
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)

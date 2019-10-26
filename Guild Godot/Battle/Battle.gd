@@ -49,6 +49,8 @@ func _ready():
 		Enemies[i].index = i
 
 	total_enemies = Enemies.size()
+	
+	$AnimationManager.initialize(Players, Enemies)
 
 	# Change later: demo specific TODO
 	if Enemies[0].id == 9:
@@ -72,6 +74,11 @@ func rounds():
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
+		var next = null
+		if i < turnorder.size() - 1:
+			next = turnorder[i+1]
+		else:
+			next = turnorder[0]
 		print("turno de: " + str(current_entity.get_name()))
 		var id = current_entity.index
 
@@ -83,7 +90,7 @@ func rounds():
 		if status:
 			var result
 			for st in status.keys():
-				result = result_status(st, status[st], current_entity, $Log)
+				result = result_status(st, status[st], current_entity, $AnimationManager/Log)
 				can_move.append(result[0])
 				
 			current_entity.decrement_turns()
@@ -151,7 +158,11 @@ func rounds():
 
 		# Actually executes the actions for the turn and animates it
 		result = execute_action(action, target)
-		$AnimationManager.resolve(current_entity, action, target, result, bounds)
+		target = result[0]
+		result = result[1]
+		$AnimationManager.resolve(current_entity, action, target, result, bounds, next)
+		yield($AnimationManager, "animation_finished")
+		print("Voltei das animaões")
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
@@ -200,14 +211,14 @@ func execute_action(action, target):
 		if alvo.get_health() <= 0:
 			dies_on_attack = true
 			alvo.die()
-		return [dies_on_attack, dmg]
+		return [alvo, [dies_on_attack, dmg]]
 	
 	# Lane: only the player characters may change lanes
 	elif action == "Lane":
 		var id = current_entity.index
 		var lane = int(target)
 		current_entity.set_pos(lane)
-		return lane
+		return [0, lane]
 	
 	# Item: only the player characters may use items
 	elif action == "Item":
@@ -239,11 +250,13 @@ func execute_action(action, target):
 		var dead = []
 		var stat_change = []
 		var ailments = []
+		var targets = []
 		# Apply the effect on all affected
 		for alvo in affected:
 			# Checks if alvo may be targeted by the item
 			if not alvo.is_dead() or item.type == "RESSURECTION":
 				item.quantity = item.quantity - 1
+				targets.append(alvo)
 				if (item.effect != []):
 					var result
 					for eff in item.effect:
@@ -265,7 +278,7 @@ func execute_action(action, target):
 		# No more of the item used
 		if item.quantity == 0:
 			Inventory.remove(int(target[0]))
-		return [dead, ailments, stats_change]
+		return [targets, [dead, ailments, stat_change]]
 
 	elif action == "Skills":
 		var entities = []
@@ -294,8 +307,10 @@ func execute_action(action, target):
 		var dead = []
 		var ailments = []
 		var stats_change = []
+		var targets = []
 		for alvo in affected:
 			if not alvo.is_dead() or skill.type == "RESSURECTION":
+				targets.append(alvo)
 				var result
 				for eff in skill.effect:
 					var times = eff[3]
@@ -316,16 +331,16 @@ func execute_action(action, target):
 		
 		# Spends the MP
 		current_entity.set_stats(MP, mp-skill.quantity)
-		return [dead, ailments, stats_change]
+		return [targets, [dead, ailments, stats_change]]
 	
 	elif action == "Run":
 		randomize()
 		var chance = rand_range(0,100)
-		return [boss, chance<=75]
+		return [0, [boss, chance<=75]]
 	
 	# Literally does nothing
 	elif action == "Pass":
-		pass
+		return [0, 0]
 	
 # Auxiliary functions for the action selection
 func set_current_action(action):
@@ -337,11 +352,9 @@ func set_current_target(target):
 func _process(delta):
 	for i in range(len(Players)):
 		var p = Players[i]
-		#Players_status[i]._update(p.get_health(), p.get_max_health(), p.get_mp(), p.get_max_mp())
 		if not p.is_dead():
 			var index = p.index
 			var lane = p.get_pos()
-			get_node("Players/P"+str(index)).show()
 	if Input.is_action_pressed("ui_cancel") and menu_state != null:
 		for c in $Menu.get_children():
 			c.hide_stuff()
@@ -467,9 +480,7 @@ func _on_Attack_button_down():
 	get_node("Menu/Attack/").set_pressed(true)
 
 func end_battle():
-	$Timer.start()
-	yield($Timer, "timeout")
-	$Log.display_text("Fim de jogo!")
+	$AnimationManager/Log.display_text("Fim de jogo!")
 	print_battle_results()
 	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
 	#get_tree().change_scene("res://battle_overworld/Map.tscn")

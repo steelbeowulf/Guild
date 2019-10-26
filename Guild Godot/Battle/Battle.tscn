@@ -3,13 +3,13 @@
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=4]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=5]
-[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=5]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=6]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,56 +17,57 @@ script = ExtResource( 1 )
 [node name="AnimationManager" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
-[node name="Players" type="Node" parent="."]
+[node name="Players" type="Node" parent="AnimationManager"]
 
-[node name="P0" parent="Players" instance=ExtResource( 3 )]
+[node name="P0" parent="AnimationManager/Players" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 120, 160 )
 Player = true
 
-[node name="P1" parent="Players" instance=ExtResource( 3 )]
+[node name="P1" parent="AnimationManager/Players" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 120, 240 )
 Player = true
 
-[node name="P2" parent="Players" instance=ExtResource( 3 )]
+[node name="P2" parent="AnimationManager/Players" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 120, 320 )
 Player = true
 
-[node name="P3" parent="Players" instance=ExtResource( 3 )]
+[node name="P3" parent="AnimationManager/Players" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 120, 400 )
 Player = true
 
-[node name="Enemies" type="Node" parent="."]
-editor/display_folded = true
+[node name="Enemies" type="Node" parent="AnimationManager"]
 
-[node name="E0" parent="Enemies" instance=ExtResource( 3 )]
+[node name="E0" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 724.782, 201.336 )
 
-[node name="E1" parent="Enemies" instance=ExtResource( 3 )]
+[node name="E1" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 726.54, 298.031 )
 
-[node name="E2" parent="Enemies" instance=ExtResource( 3 )]
+[node name="E2" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 726.54, 398.242 )
 
-[node name="E3" parent="Enemies" instance=ExtResource( 3 )]
+[node name="E3" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 844.332, 343.741 )
 
-[node name="E4" parent="Enemies" instance=ExtResource( 3 )]
+[node name="E4" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 842.574, 252.321 )
+
+[node name="Log" parent="AnimationManager" instance=ExtResource( 4 )]
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 510.33, 281.238 )
 scale = Vector2( 1.077, 1.29342 )
 z_index = -1
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 4.0
@@ -81,29 +82,29 @@ margin_left = 10.0
 margin_top = 646.428
 margin_right = 306.0
 margin_bottom = 766.428
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
-[node name="Attack" parent="Menu" instance=ExtResource( 6 )]
+[node name="Attack" parent="Menu" instance=ExtResource( 7 )]
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 7 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 8 )]
 margin_top = 24.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 8 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 48.0
 margin_bottom = 68.0
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 8 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 72.0
 margin_bottom = 92.0
 text = "Item"
 
-[node name="Run" parent="Menu" instance=ExtResource( 7 )]
+[node name="Run" parent="Menu" instance=ExtResource( 8 )]
 margin_top = 96.0
 margin_bottom = 120.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
@@ -119,30 +120,28 @@ margin_right = 1003.0
 margin_bottom = 782.0
 rect_min_size = Vector2( 676, 136 )
 
-[node name="P0" parent="Info" instance=ExtResource( 9 )]
+[node name="P0" parent="Info" instance=ExtResource( 10 )]
 margin_right = 676.0
 margin_bottom = 20.0
 alignment = 2
 
-[node name="P1" parent="Info" instance=ExtResource( 9 )]
+[node name="P1" parent="Info" instance=ExtResource( 10 )]
 margin_top = 24.0
 margin_right = 676.0
 margin_bottom = 44.0
 alignment = 2
 
-[node name="P2" parent="Info" instance=ExtResource( 9 )]
+[node name="P2" parent="Info" instance=ExtResource( 10 )]
 margin_top = 48.0
 margin_right = 676.0
 margin_bottom = 68.0
 alignment = 2
 
-[node name="P3" parent="Info" instance=ExtResource( 9 )]
+[node name="P3" parent="Info" instance=ExtResource( 10 )]
 margin_top = 72.0
 margin_right = 676.0
 margin_bottom = 92.0
 alignment = 2
-
-[node name="Log" parent="." instance=ExtResource( 10 )]
 
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]

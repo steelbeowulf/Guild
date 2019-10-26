@@ -27,7 +27,6 @@ enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK}
 func die():
 	self.set_stats(HP, 0)
 	add_status("KO", 999, 999)
-	self.graphics.die()
 
 func get_status():
 	return status
@@ -98,7 +97,6 @@ func add_status(effect, atkm, turns):
 	if effect == "KO":
 		status = {}
 		dead = true
-		self.graphics.die()
 	status[effect] = [turns, atkm]
 
 func decrement_turns():
