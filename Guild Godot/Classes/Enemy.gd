@@ -1,10 +1,11 @@
 extends "Entity.gd"
 
-func _init(id, lv, experience, img, valores, identificacao, habilidades, resistances):
+func _init(id, lv, experience, img, animation, valores, identificacao, habilidades, resistances):
 	self.id = id
 	self.level = int(lv)
 	self.xp = int(experience)
 	self.sprite = img
+	self.animations = animation
 	self.classe = "boss"
 	self.stats = valores
 	self.alive = true
@@ -61,7 +62,7 @@ func AI(player_list, enemies_list):
 func get_xp():
 	return self.xp
 	
-func enemy_duplicate():
+func _duplicate():
 	var new_stats = [] + self.stats
 	return self.get_script().new(self.id, self.level, self.xp, 
-	self.sprite, new_stats, self.nome, self.skills, self.resist)
+	self.sprite, self.animations, new_stats, self.nome, self.skills, self.resist)

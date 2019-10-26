@@ -3,9 +3,10 @@ extends "Entity.gd"
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
 
-func _init(id, lv, experience, img, valores,  pos, identificacao, habilidades, resistances):
+func _init(id, lv, experience, img, anim, valores,  pos, identificacao, habilidades, resistances):
 	self.id = id
 	self.sprite = img
+	self.animations = anim
 	self.level = int(lv)
 	self.xp = int(experience)
 	self.stats = valores
@@ -35,8 +36,12 @@ func die():
 	zero_hate()
 	add_status("KO", 999, 999)
 	set_stats(HP, 0)
-	self.graphics.die()
 
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)
 	return self.hate
+
+func _duplicate():
+	var new_stats = [] + self.stats
+	return self.get_script().new(self.id, self.level, self.xp, 
+	self.sprite, self.animations, new_stats, self.position, self.nome, self.skills, self.resist)

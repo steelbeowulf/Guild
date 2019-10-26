@@ -53,29 +53,30 @@ scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 4.81961, -285.383 )
-id = 7
+id = 6
 movement = 2
 radius = 40.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 326.948, -329.719 )
-id = 3
+id = 6
 radius = 100.0
 
 [node name="Borboleta3" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 280.713, -235.023 )
-id = 2
+id = 6
 movement = 1
 radius = 100.0
 
 [node name="Borboleta4" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( -340.709, -201.782 )
-id = 4
+position = Vector2( -534.062, -201.86 )
+id = 6
 movement = 4
 radius = 100.0
 
 [node name="Borboleta5" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( -141.263, -208.246 )
+position = Vector2( 452.605, -281.86 )
+id = 6
 movement = 3
 radius = 100.0
 
@@ -96,10 +97,11 @@ __meta__ = {
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Door" parent="Objects" instance=ExtResource( 7 )]
-position = Vector2( 112.058, 74.6998 )
+position = Vector2( 176, 80 )
 
 [node name="Transition" parent="." instance=ExtResource( 8 )]
 position = Vector2( 112.936, 42.1482 )
 next = 2
 
 [node name="Party" type="Node" parent="."]
+

@@ -4,10 +4,8 @@ var OFFSET_LANE = Vector2(140, 0)
 var current_lane = 0
 var initial_position
 var my_turn = false
-var frames = SpriteFrames.new()
 var bounds = [0,0,0,0,0]
 export(bool) var Player = false
-var parent
 
 signal finish_anim
 
@@ -18,25 +16,35 @@ func _ready():
 		$Turn.set_color(Color(1, 0, 0))
 		$ProgressBar.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func set_animations(sprite, animations):
+	var img = sprite['path']
+	var vf = sprite['vframes']
+	var hf = sprite['hframes']
+	var sc = sprite['scale']
+	print("animacoes do "+str(sprite))
+	for k in animations.keys():
+		var v = animations[k]
+		print("adicionando animacao "+str(k))
+		var animation = Sprite.new()
+		animation.texture = load(img)
+		animation.set_name(k)
+		animation.set_script(load('res://Battle/Spritesheet.gd'))
+		animation.loop = v[0]
+		animation.physical_frames = v[1]
+		animation.vframes = vf
+		animation.hframes = hf
+		animation.scale = Vector2(sc[0], sc[1])
+		animation.fps = 10
+		animation.hide()
+		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
+		$Animations.add_child(animation)
 
-func set_sprite(sprite):
-	frames.add_animation("idle")
-	for i in range(len(sprite)):
-		frames.add_frame("idle", load(sprite[i]))
-	print("added spriteframe for "+sprite[0])
-	$Sprite.frames  = frames
-	$Sprite.play("idle")
-	self.parent.connect("anim_finished", self, "_anim_finished")
-
-# Just hide for now
-func die():
-	$AnimationPlayer.play("Death")
-
-func revive():
-	$AnimationPlayer.play_backwards("Death")
+func play(name, options=[]):
+	$Animations.get_node("idle").stop()
+	for c in $Animations.get_children():
+		c.hide()
+	$Animations.get_node(name).show()
+	$Animations.get_node(name).play(true)
 
 func turn(keep=false):
 	if keep:
@@ -92,8 +100,14 @@ func take_damage(value, type):
 	$Damage.show()
 	$AnimationPlayer.play("Damage")
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if (anim_name == "Death"):
-		self.hide()
-	elif (anim_name == "Damage"):
-		emit_signal("finish_anim")
+func _on_Sprite_animation_finished(name):
+	emit_signal("finish_anim", name)
+	$Animations.get_node(name).hide()
+	if name != "death":
+		$Animations.get_node("idle").show()
+		$Animations.get_node("idle").play(true)
+	else:
+		print("opa morri")
+		emit_signal("finish_anim", name)
+		emit_signal("finish_anim", name)
+		emit_signal("finish_anim", name)
