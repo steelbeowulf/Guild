@@ -94,6 +94,17 @@ func resolve(current_entity, action, target, result, bounds, next):
 			if dies_on_attack:
 				enqueue(target.graphics, "death", null) #death animaton
 		
+		elif action == "Skills":
+			var dies_on_attack = result[0]
+			var dmg = result[1]
+			#$Log.display_text("")
+			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
+			#enqueue(target.graphics, "Damage") # dano no alvo
+			#enqueue(target.graphics, "Damage", dmg) # valor do dano
+			#enqueue(info[target], target, null) # lifebar
+			if dies_on_attack:
+				enqueue(target.graphics, "death", null) #death animaton
+		
 		elif action == "Lane":
 			var lane = result
 			$Log.display_text("Lane change")

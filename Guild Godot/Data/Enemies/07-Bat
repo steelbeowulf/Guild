@@ -7,6 +7,7 @@
 	"ANIM":{"idle": [true, "50-79"], 
 			"attack": [false, "80-89"],
 			"death":[false, "90-99"]},
+			"skill": [false, "80-89"],
 	"HP":90,
 	"HP_MAX":90,
 	"MP":100,
