@@ -15,6 +15,7 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
+	self.tipo = "Enemy"
 
 func AI(player_list, enemies_list):
 	print(str(player_list))

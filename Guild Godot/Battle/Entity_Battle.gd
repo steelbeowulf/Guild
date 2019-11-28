@@ -40,6 +40,10 @@ func set_animations(sprite, animations):
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
+	if name == 'Damage':
+		print(options)
+		take_damage(options, 0)
+		return
 	$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()

@@ -309,6 +309,7 @@ func execute_action(action, target):
 		var stats_change = []
 		var targets = []
 		for alvo in affected:
+			dead.append(false)
 			if not alvo.is_dead() or skill.type == "RESSURECTION":
 				targets.append(alvo)
 				var result
@@ -326,12 +327,12 @@ func execute_action(action, target):
 						ailments.append(ailment)
 				if alvo.get_health() <= 0:
 					alvo.die()
-					dead.append(alvo)
+					dead[-1] = true
 		var mp = current_entity.get_mp()
 		
 		# Spends the MP
 		current_entity.set_stats(MP, mp-skill.quantity)
-		return [targets, [dead, ailments, stats_change]]
+		return [[targets, skill.quantity], [dead, ailments, stats_change]]
 	
 	elif action == "Run":
 		randomize()
