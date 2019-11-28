@@ -103,7 +103,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
 			#enqueue(info[target], target, null) # lifebar
 			if dies_on_attack:
-				enqueue(target.graphics, "death", null) #death animaton
+				enqueue(target[0].graphics, "death", null) #death animaton
 		
 		elif action == "Lane":
 			var lane = result

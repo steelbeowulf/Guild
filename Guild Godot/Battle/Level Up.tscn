@@ -59,27 +59,24 @@ visible = false
 position = Vector2( 842.574, 252.321 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 510.33, 245.363 )
-scale = Vector2( 1.07725, 0.959701 )
+position = Vector2( 510.33, 261.223 )
+scale = Vector2( 1.07725, 1.32051 )
 z_index = -1
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 4.0
-margin_top = 469.0
+margin_top = 633.0
 margin_right = 1005.0
-margin_bottom = 594.0
+margin_bottom = 761.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 
 [node name="Menu" type="VBoxContainer" parent="."]
-margin_left = 10.0
-margin_top = 473.0
-margin_right = 306.0
-margin_bottom = 593.0
+margin_left = 6.12292
+margin_top = 637.129
+margin_right = 302.123
+margin_bottom = 757.129
 script = ExtResource( 4 )
 
 [node name="Attack" parent="Menu" instance=ExtResource( 5 )]
@@ -112,15 +109,15 @@ text = "Run"
 RUN = true
 
 [node name="Info" type="VBoxContainer" parent="."]
-margin_left = 319.0
-margin_top = 469.0
-margin_right = 1007.0
-margin_bottom = 594.0
+margin_left = 311.246
+margin_top = 634.422
+margin_right = 999.246
+margin_bottom = 759.422
 
 [node name="Log" parent="." instance=ExtResource( 8 )]
 
 [node name="LevelUpLog" parent="." instance=ExtResource( 9 )]
-visible = false
+position = Vector2( -6.02942, 99.4845 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
