@@ -1,8 +1,12 @@
 extends HBoxContainer
 
-const HP_CRITICAL = Color(0.75, 0.75, 0)
-const HP_MID = Color(1,0,0)
+const HP_CRITICAL = Color(1, 0, 0)
+const HP_MID = Color(0.75,0.75,0)
 const HP_FULL = Color(0.33, 0.85, 0.12)
+var maxHp = 0
+var maxMp = 0
+var Hp = 0
+var Mp = 0
 
 func _ready():
 	$HP/Fill.set_scale(Vector2(1,1))
@@ -14,7 +18,18 @@ func set_name(name):
 func set_level(level):
 	$Level.set_text(str(level))
 
-func set_hp(hp, maxHp):
+func set_max_hp(hp):
+	self.maxHp = hp
+	self.Hp = hp
+	
+func set_max_mp(mp):
+	self.maxMp = mp
+	self.Mp = mp
+
+func set_hp(hp):
+	if hp < 0:
+		Hp = 0
+		hp = 0
 	if hp/maxHp <= 0.25:
 		$HP/Fill.color = HP_CRITICAL
 	elif hp/maxHp <= 0.5:
@@ -28,7 +43,10 @@ func set_hp(hp, maxHp):
         Tween.TRANS_CIRC, Tween.EASE_OUT)
 	$Tween.start()
 
-func set_mp(mp, maxMp):
+func set_mp(mp):
+	if mp < 0:
+		Mp = 0
+		mp = 0
 	$MPText.set_text(str(mp)+"/"+str(maxMp))
 	var scale = $MP/Fill.get_scale()
 	$Tween.interpolate_property($MP/Fill, "rect_scale",
@@ -36,9 +54,14 @@ func set_mp(mp, maxMp):
         Tween.TRANS_CIRC, Tween.EASE_OUT)
 	$Tween.start()
 
-func _update(hp, maxhp, mp, maxmp):
-	self.set_hp(hp, maxhp)
-	self.set_mp(mp, maxmp)
+
+func play(name, options=[]):
+	if name == 'UpdateHP':
+		self.Hp = Hp - options
+		self.set_hp(Hp)
+	elif name == 'UpdateMP':
+		self.Mp = Mp - options
+		self.set_mp(Mp)
 
 func _on_Tween_tween_started(object, key):
 	print("fazendo tween no "+str(object)+" usando chave "+str(key))

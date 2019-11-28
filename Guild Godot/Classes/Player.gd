@@ -17,6 +17,7 @@ func _init(id, lv, experience, img, anim, valores,  pos, identificacao, habilida
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
+	self.tipo = "Player"
 
 func get_skills():
 	return self.skills

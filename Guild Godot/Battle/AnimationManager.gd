@@ -28,6 +28,9 @@ func initialize(Players, Enemies):
 		node.show()
 		node.connect("finish_anim", self, "_on_animation_finished")
 		Players[i].graphics = node
+		Players[i].info = Info.get_node("P"+str(i))
+		Players[i].info.set_max_hp(Players[i].get_max_health())
+		Players[i].info.set_max_mp(Players[i].get_max_mp())
 	
 	for i in range(len(Enemies)):
 		var lane = Enemies[i].get_pos()
@@ -64,7 +67,7 @@ func play(anim):
 	var animation_name = anim[1] 
 	var info = anim[2]
 	print("Vou tocar animaçao "+animation_name+" no escopo "+str(scope))
-	if info != "ALL" and info != "LANE":
+	if typeof(info) == TYPE_STRING and info != "ALL" and info != "LANE":
 		can_play = false
 	scope.play(animation_name, info)
 
@@ -78,7 +81,6 @@ func _physics_process(delta):
 		play(current_animation)
 	if not queue and can_play:
 		emit_signal("animation_finished")
-	
 
 func resolve(current_entity, action, target, result, bounds, next):
 	# TODO Deal with ailments
@@ -88,22 +90,38 @@ func resolve(current_entity, action, target, result, bounds, next):
 			var dmg = result[1]
 			$Log.display_text("Attack")
 			enqueue(current_entity.graphics, "attack", null) # ataque do current_entity
-			#enqueue(target.graphics, "Damage") # dano no alvo
+			enqueue(target.graphics, "Damage", dmg) # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
-			#enqueue(info[target], target, null) # lifebar
+			if target.tipo == 'Player':
+				enqueue(target.info, "UpdateHP", dmg) # lifebar
 			if dies_on_attack:
 				enqueue(target.graphics, "death", null) #death animaton
 		
+		#[targets, skill.quantity, [dead, ailments, stats_change]]
 		elif action == "Skills":
+			var targets = target[0]
+			var mp = target[1]
 			var dies_on_attack = result[0]
-			var dmg = result[1]
+			var ailments = result[1]
+			var stats = result[2]
+			print(result)
 			#$Log.display_text("")
 			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
+			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
 			#enqueue(target.graphics, "Damage") # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
 			#enqueue(info[target], target, null) # lifebar
-			if dies_on_attack:
-				enqueue(target[0].graphics, "death", null) #death animaton
+
+			if current_entity.tipo == 'Player':
+				enqueue(current_entity.info, "UpdateMP", mp)
+			for i in range(len(targets)):
+				if targets[i].tipo == 'Player':
+					for st in stats:
+						#enqueue(targets[i].graphics, "Damage") # dano no alvo
+						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
+				if dies_on_attack[i]:
+					enqueue(targets[i].graphics, "death", null) #death animaton
+
 		
 		elif action == "Lane":
 			var lane = result
@@ -126,7 +144,6 @@ func resolve(current_entity, action, target, result, bounds, next):
 		var all_ailments = result[1]
 		var stats_change = result[2]
 		
-		enqueue(current_entity.graphics, "attack", 10)
 #		for ailment in all_ailments:
 #			enqueue(target.graphics, ailment, action.target) #ailment effect anim
 #		for stat_change in stats_change:

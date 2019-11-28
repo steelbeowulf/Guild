@@ -18,6 +18,8 @@ var graphics
 var status = {}
 var dead = false
 var resist = {}
+var tipo
+var info
 	#fire, water, ligthting, ice, earth, wind, holy, darkness]
 var elem = {0:"PHYSIC", 1:"MAGIC", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
