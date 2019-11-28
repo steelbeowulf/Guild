@@ -30,7 +30,7 @@ func begin_battle(Enemies, OnMap):
 	return
 
 func end_battle(Players, Enemies, Inventory):
-	
+	print("ACABOU BATLHAA")
 	var total_exp = 0
 	for e in Enemies:
 		if e.is_dead():
@@ -127,10 +127,12 @@ func end_battle(Players, Enemies, Inventory):
 	print("battle ended, here are play:")
 	print(Play)
 	
+	print(levelup)
 	if Play == []:
 		print("whaat")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
 	elif (levelup == 1):
+		print("Muda pra cena de level up pf")
 		get_tree().change_scene("res://Battle/Level Up.tscn")
 	else:
 		get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
