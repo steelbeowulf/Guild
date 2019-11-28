@@ -81,7 +81,6 @@ func _physics_process(delta):
 		play(current_animation)
 	if not queue and can_play:
 		emit_signal("animation_finished")
-	
 
 func resolve(current_entity, action, target, result, bounds, next):
 	# TODO Deal with ailments
@@ -112,7 +111,8 @@ func resolve(current_entity, action, target, result, bounds, next):
 			#enqueue(target.graphics, "Damage") # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
 			#enqueue(info[target], target, null) # lifebar
-			enqueue(current_entity.info, "UpdateMP", mp)
+			if current_entity.tipo == 'Player':
+				enqueue(current_entity.info, "UpdateMP", mp)
 			for i in range(len(targets)):
 				if targets[i].tipo == 'Player':
 					for st in stats:

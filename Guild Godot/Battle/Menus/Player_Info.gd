@@ -27,6 +27,9 @@ func set_max_mp(mp):
 	self.Mp = mp
 
 func set_hp(hp):
+	if hp < 0:
+		Hp = 0
+		hp = 0
 	if hp/maxHp <= 0.25:
 		$HP/Fill.color = HP_CRITICAL
 	elif hp/maxHp <= 0.5:
@@ -41,6 +44,9 @@ func set_hp(hp):
 	$Tween.start()
 
 func set_mp(mp):
+	if mp < 0:
+		Mp = 0
+		mp = 0
 	$MPText.set_text(str(mp)+"/"+str(maxMp))
 	var scale = $MP/Fill.get_scale()
 	$Tween.interpolate_property($MP/Fill, "rect_scale",
