@@ -111,6 +111,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 			#enqueue(target.graphics, "Damage") # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
 			#enqueue(info[target], target, null) # lifebar
+
 			if current_entity.tipo == 'Player':
 				enqueue(current_entity.info, "UpdateMP", mp)
 			for i in range(len(targets)):
@@ -120,6 +121,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
 				if dies_on_attack[i]:
 					enqueue(targets[i].graphics, "death", null) #death animaton
+
 		
 		elif action == "Lane":
 			var lane = result
