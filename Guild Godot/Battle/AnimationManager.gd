@@ -29,8 +29,8 @@ func initialize(Players, Enemies):
 		node.connect("finish_anim", self, "_on_animation_finished")
 		Players[i].graphics = node
 		Players[i].info = Info.get_node("P"+str(i))
-		Players[i].info.set_max_hp(Players[i].get_max_health())
-		Players[i].info.set_max_mp(Players[i].get_max_mp())
+		Players[i].info.set_initial_hp(Players[i].get_health(), Players[i].get_max_health())
+		Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
 	
 	for i in range(len(Enemies)):
 		var lane = Enemies[i].get_pos()
@@ -116,7 +116,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 				enqueue(current_entity.info, "UpdateMP", mp)
 			for i in range(len(targets)):
 				if targets[i].tipo == 'Player':
-					for st in stats:
+					for st in stats[i]:
 						#enqueue(targets[i].graphics, "Damage") # dano no alvo
 						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
 				if dies_on_attack[i]:

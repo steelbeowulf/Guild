@@ -313,6 +313,7 @@ func execute_action(action, target):
 			if not alvo.is_dead() or skill.type == "RESSURECTION":
 				targets.append(alvo)
 				var result
+				var stat_change = []
 				for eff in skill.effect:
 					var times = eff[3]
 					for i in range(times):
@@ -320,7 +321,7 @@ func execute_action(action, target):
 						if result[0] != -1:
 							var ret = result[0]
 							var type = result[1]
-							stats_change.append([ret, type])
+							stat_change.append([ret, type])
 				if (skill.status != []):
 					for st in skill.status:
 						var ailment = apply_status(st, alvo, current_entity)
@@ -328,6 +329,7 @@ func execute_action(action, target):
 				if alvo.get_health() <= 0:
 					alvo.die()
 					dead[-1] = true
+				stats_change.append(stat_change)
 		var mp = current_entity.get_mp()
 		
 		# Spends the MP
@@ -349,6 +351,7 @@ func set_current_action(action):
 	
 func set_current_target(target):
 	current_target = target
+
 
 func _process(delta):
 	for i in range(len(Players)):
