@@ -160,6 +160,7 @@ func rounds():
 		result = execute_action(action, target)
 		target = result[0]
 		result = result[1]
+		print("JA OCORREU")
 		$AnimationManager.resolve(current_entity, action, target, result, bounds, next)
 		yield($AnimationManager, "animation_finished")
 		print("Voltei das animaões")

@@ -108,9 +108,11 @@ func _on_Sprite_animation_finished(name):
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
 	if name != "death":
-		if name != "dead":
-			$Animations.get_node("idle").show()
-			$Animations.get_node("idle").play(true)
+		$Animations.get_node("idle").show()
+		$Animations.get_node("idle").play(true)
+	if name != "dead":
+		$Animations.get_node("idle").show()
+		$Animations.get_node("idle").play(true)
 	elif name == "death":
 		print("opa morri")
 		#emit_signal("finish_anim", name)
@@ -118,3 +120,4 @@ func _on_Sprite_animation_finished(name):
 		#emit_signal("finish_anim", name)
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
+	

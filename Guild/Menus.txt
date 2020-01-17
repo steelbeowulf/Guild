@@ -1,0 +1,12 @@
+Menu:
+Itens
+Equip
+Skills
+Status
+Options(Screen size, text speed, volume)
+Save
+Load
+Job Trees
+Game Time
+Money
+Chars Portrait, health, mana and level

@@ -11,7 +11,6 @@ var Info = null
 var queue = []
 var can_play = true
 var global_animations = null
-
 signal animation_finished
 
 func initialize(Players, Enemies):
@@ -24,7 +23,10 @@ func initialize(Players, Enemies):
 		Players_img.append(node)
 		node.change_lane(lane)
 		node.set_animations(Players[i].sprite, Players[i].animations)
-		node.play("idle")
+		if not Players[i].is_dead():
+			node.play("idle")
+		else:
+			node.play("dead")
 		node.show()
 		node.connect("finish_anim", self, "_on_animation_finished")
 		Players[i].graphics = node
@@ -64,7 +66,7 @@ func _on_animation_finished(anim):
 
 func play(anim):
 	var scope = anim[0]
-	var animation_name = anim[1] 
+	var animation_name = anim[1]
 	var info = anim[2]
 	print("Vou tocar animaçao "+animation_name+" no escopo "+str(scope))
 	if typeof(info) == TYPE_STRING and info != "ALL" and info != "LANE":
