@@ -90,3 +90,4 @@ text = "250"
 anims/Damage = SubResource( 3 )
 
 [node name="Animations" type="Node2D" parent="."]
+
