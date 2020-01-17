@@ -18,13 +18,15 @@ func set_name(name):
 func set_level(level):
 	$Level.set_text(str(level))
 
-func set_max_hp(hp):
-	self.maxHp = hp
+func set_initial_hp(hp, max_hp):
+	self.maxHp = max_hp
 	self.Hp = hp
+	$HP/Fill.set_scale(Vector2(hp/max_hp,1))
 	
-func set_max_mp(mp):
-	self.maxMp = mp
+func set_initial_mp(mp, max_mp):
+	self.maxMp = max_mp
 	self.Mp = mp
+	$MP/Fill.set_scale(Vector2(mp/max_mp,1))
 
 func set_hp(hp):
 	if hp < 0:
