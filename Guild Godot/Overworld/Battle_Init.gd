@@ -115,10 +115,13 @@ func end_battle(Players, Enemies, Inventory):
 				lvup_lck = stat_up
 				
 			print(p.get_name()+" agora tem "+str(p.xp)+" de experiência no nível "+str(p.level))
+			print("My current health is: " + str(p.get_health()))
 			Play.append(p)
 		else:
 			print("this guy "+p.get_name()+" is dead and will be removed")
 			Play.append(p)
+	for p in Play:
+		print("Player atual: " + p.get_name()+ "\n his health: " + str(p.get_health()) )
 	
 	Enem = []
 	GLOBAL.INVENTORY = [] + Inventory

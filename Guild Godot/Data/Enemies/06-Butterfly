@@ -7,6 +7,7 @@
 	"ANIM":{"idle": [true, "0-7"], 
 			"attack": [false, "8-15"],
 			"death":[false, "7,6,5,4,3,4,3,4,3,4,3,10,10,10"],
+			"dead":[true, "10"],
 			"skill": [false, "8-15"],},
 	"HP":100,
 	"HP_MAX":100,

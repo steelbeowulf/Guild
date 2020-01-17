@@ -12,15 +12,16 @@ func _ready():
 	var lane
 	for i in range(Players.size()):
 		# Graphics stuff
-		lane = Players[i].get_pos()
-		var node = get_node("Players/P"+str(i))
-		Players_img.append(node)
-		node.change_lane(lane)
-		node.set_animations(Players[i].sprite, Players[i].animations)
-		node.play("idle")
-		node.show()
-		node.connect("finish_anim", self, "_on_animation_finished")
-		Players[i].graphics = node
+		if not Players[i].is_dead():
+			lane = Players[i].get_pos()
+			var node = get_node("Players/P"+str(i))
+			Players_img.append(node)
+			node.change_lane(lane)
+			node.set_animations(Players[i].sprite, Players[i].animations)
+			node.play("idle")
+			node.show()
+			node.connect("finish_anim", self, "_on_animation_finished")
+			Players[i].graphics = node
 		
 	$Log.display_text("Enemies defeated!")
 	for p in BATTLE_INIT.Play:
@@ -41,5 +42,6 @@ func _ready():
 func _process(delta):
 	if $Timer.time_left == 0:
 		if Input.is_key_pressed(KEY_SPACE):
+			GLOBAL.play_bgm('MAP_THEME', false)
 			get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
 
