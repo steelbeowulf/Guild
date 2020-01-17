@@ -10,3 +10,4 @@ Job Trees
 Game Time
 Money
 Chars Portrait, health, mana and level
+Area Name
