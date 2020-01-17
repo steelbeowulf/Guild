@@ -436,4 +436,3 @@ segments = PoolVector2Array( 23.3229, 85.2223, 30.9618, 50.5, 30.9618, 50.5, 41.
 15/navigation_offset = Vector2( 0, 0 )
 15/shapes = [  ]
 15/z_index = 0
-
