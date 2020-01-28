@@ -138,4 +138,5 @@ func end_battle(Players, Enemies, Inventory):
 		print("Muda pra cena de level up pf")
 		get_tree().change_scene("res://Battle/Level Up.tscn")
 	else:
-		get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
+		get_tree().change_scene("Root.tscn")
+		#get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
