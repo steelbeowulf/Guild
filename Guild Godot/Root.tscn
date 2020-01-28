@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Root.gd" type="Script" id=1]
+[ext_resource path="res://Menu.tscn" type="PackedScene" id=2]
+
+[node name="Root" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="Menu_Area" type="Node2D" parent="."]
+pause_mode = 2
+visible = false
+z_index = 999
+z_as_relative = false
+
+[node name="Menu" parent="Menu_Area" instance=ExtResource( 2 )]
+focus_mode = 2
+
+[node name="Camera2D" type="Camera2D" parent="Menu_Area"]
+position = Vector2( 512, 384 )
+scale = Vector2( 0.99, 0.99 )
+editor_draw_limits = true
+

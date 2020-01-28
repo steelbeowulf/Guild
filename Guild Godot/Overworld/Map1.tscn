@@ -19,6 +19,7 @@ Doors = {
 }
 
 [node name="Tiles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Ground" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 2 )
@@ -41,6 +42,7 @@ format = 1
 tile_data = PoolIntArray( 262171, 536870923, 0, 851985, 8, 0, 917521, 8, 2, 983057, 8, 2, 1048593, 8, 65536 )
 
 [node name="Treasure" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
 position = Vector2( 911.479, 332.812 )
@@ -48,6 +50,7 @@ item_id = 1
 item_quantity = 4
 
 [node name="Enemies" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
@@ -72,6 +75,7 @@ __meta__ = {
 [node name="HUD" parent="." instance=ExtResource( 6 )]
 
 [node name="Objects" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Door" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 176, 80 )

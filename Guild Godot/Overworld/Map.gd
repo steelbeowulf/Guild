@@ -8,6 +8,8 @@ onready var Inventory = []
 onready var Enemies = []
 onready var Encounter = []
 onready var Kill = []
+
+var menu = load("res://Menu.tscn")
 var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
 onready var Player_pos = Vector2(816, 368)
 onready var state = {}
@@ -37,14 +39,15 @@ func generate_enemies():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.pause_mode = Node.PAUSE_MODE_STOP
 	GLOBAL.play_bgm('MAP_THEME', true)
-	if get_tree().get_current_scene().get_name() == 'Map4':
+	if get_tree().get_current_scene().get_area() == 'Map4':
 		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:
 		get_tree().change_scene("res://Menu/Victory.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
-	var name = get_tree().get_current_scene().get_name()
+	var name = get_tree().get_current_scene().get_area()
 	id = int(name.substr(3, len(name)))
 	GLOBAL.MAP = id
 	if BATTLE_INIT.first:
@@ -138,3 +141,9 @@ func save_state(type, node, open=false, pos=Vector2(0,0)):
 	elif type == "PLAYER_POS":
 		state["Party/"+str(node)] = [false, pos]
 	GLOBAL.STATE[id] = state
+
+func hide_hud():
+	self.get_node("HUD").layer = -1
+
+func show_hud():
+	self.get_node("HUD").layer = 1
