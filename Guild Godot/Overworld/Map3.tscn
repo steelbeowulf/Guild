@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
-[ext_resource path="res://TILEBONITO.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Musics/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Overworld/Transition.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Overworld/Deslize.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=9]
+
 
 [node name="Map3" type="Node2D"]
 position = Vector2( 8.72684, 0.513351 )
