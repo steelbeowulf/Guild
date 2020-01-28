@@ -2,7 +2,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var start = load("res://Overworld/Map1.tscn")
+	var start = load("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
 	self.add_child(start.instance())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -12,7 +12,7 @@ func _process(delta):
 			get_node("Menu_Area").show()
 			get_child(1).hide_hud()
 			get_node("Menu_Area/Camera2D").make_current()
-			get_node("Menu_Area/Menu").enter()
+			get_node("Menu_Area/Menu").enter(GLOBAL.ALL_PLAYERS)
 			get_tree().paused = true
 		else:
 			get_node("Menu_Area").hide()
@@ -22,3 +22,9 @@ func _process(delta):
 
 func get_area():
 	return self.get_child(1).get_name()
+
+func transition(next):
+	var new = load("res://Overworld/Map"+str(next)+".tscn")
+	get_child(1).queue_free()
+	remove_child(get_child(1))
+	self.add_child(new.instance())

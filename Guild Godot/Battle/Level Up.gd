@@ -43,5 +43,6 @@ func _process(delta):
 	if $Timer.time_left == 0:
 		if Input.is_key_pressed(KEY_SPACE):
 			GLOBAL.play_bgm('MAP_THEME', false)
-			get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
+			get_tree().change_scene("Root.tscn")
+			#get_tree().change_scene("res://Overworld/Map"+str(GLOBAL.MAP)+".tscn")
 

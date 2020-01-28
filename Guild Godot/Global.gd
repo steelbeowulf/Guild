@@ -9,7 +9,7 @@ var POSITION = Vector2(816, 368)
 var STATE = {1:{}, 2:{}, 3:{}, 4:{}, 5:{}, 6:{}, 7:{}, 8:{}, 9:{}, 10:{},
 	11:{}, 12:{}, 13:{}, 14:{}, 15:{}}
 var TRANSITION
-var MAP
+var MAP = 1
 var WIN
 onready var MATCH = false
 onready var ROOM = false
@@ -21,7 +21,7 @@ func reload_state():
 	MATCH = false
 	ROOM = false
 	TRANSITION = null
-	MAP = null
+	MAP = 1
 	POSITION = null
 
 func add_item(item_id, item_quantity):
