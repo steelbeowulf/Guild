@@ -391,10 +391,10 @@ func _on_Itens_button_down():
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Skills").hide()
 	get_node("Menu/Run").hide()
-	var itens = get_node("Menu/Itens/Targets/HBoxContainer/Itens")
-	var players = get_node("Menu/Itens/Targets/HBoxContainer/Players")
-	var enemies = get_node("Menu/Itens/Targets/HBoxContainer/Enemies")
-	for i in range(5):
+	var itens = get_node("Menu/Itens/Targets/ItemContainer/HBoxContainer/Itens")
+	var players = get_node("Menu/Itens/Targets/PlayerContainer/HBoxContainer/Players")
+	var enemies = get_node("Menu/Itens/Targets/EnemiesContainer/HBoxContainer/Enemies")
+	for i in range(Inventory.size()):
 		itens.get_node(str(i)).hide()
 	for i in range(4):
 		players.get_node("P"+str(i)).hide()
@@ -426,9 +426,9 @@ func _on_Skills_button_down():
 	get_node("Menu/Itens").hide()
 	get_node("Menu/Run").hide()
 	var skills = current_entity.get_skills()
-	var itens = get_node("Menu/Skills/Targets/HBoxContainer/Itens")
-	var players = get_node("Menu/Skills/Targets/HBoxContainer/Players")
-	var enemies = get_node("Menu/Skills/Targets/HBoxContainer/Enemies")
+	var itens = get_node("Menu/Skills/Targets/ItemContainer/HBoxContainer/Itens")
+	var players = get_node("Menu/Skills/Targets/PlayerContainer/HBoxContainer/Players")
+	var enemies = get_node("Menu/Skills/Targets/EnemiesContainer/HBoxContainer/Enemies")
 	for i in range(5):
 		itens.get_node(str(i)).hide()
 	for i in range(4):
