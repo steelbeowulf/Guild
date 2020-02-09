@@ -165,6 +165,16 @@ func rounds():
 		yield($AnimationManager, "animation_finished")
 		print("Voltei das animaões")
 		
+		get_node("Menu/Attack").grab_focus()
+		get_node("Menu/Attack").disabled = false
+		get_node("Menu/Attack").set_focus_mode(2)
+		
+		get_node("Menu/Skills").disabled = false
+		get_node("Menu/Skills").set_focus_mode(2)
+		
+		get_node("Menu/Itens").disabled = false
+		get_node("Menu/Itens").set_focus_mode(2)
+		
 		# Check if all players or enemies are dead
 		if check_battle_end():
 			print("Hey game battle_over")
@@ -346,6 +356,7 @@ func execute_action(action, target):
 	elif action == "Pass":
 		return [0, 0]
 	
+	
 # Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action
@@ -364,6 +375,9 @@ func _process(delta):
 		for c in $Menu.get_children():
 			c.hide_stuff()
 		get_node("Menu/"+str(menu_state)).grab_focus()
+		get_node("Menu/"+str(menu_state)).disabled = false
+		get_node("Menu/"+str(menu_state)).set_focus_mode(2)
+
 
 func _on_Lane_button_down():
 	menu_state = "Lane"
@@ -391,6 +405,8 @@ func _on_Itens_button_down():
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Skills").hide()
 	get_node("Menu/Run").hide()
+	get_node("Menu/Itens").disabled = true
+	get_node("Menu/Itens").set_focus_mode(0)
 	var itens = get_node("Menu/Itens/Targets/ItemContainer/HBoxContainer/Itens")
 	var players = get_node("Menu/Itens/Targets/PlayerContainer/HBoxContainer/Players")
 	var enemies = get_node("Menu/Itens/Targets/EnemiesContainer/HBoxContainer/Enemies")
@@ -425,6 +441,8 @@ func _on_Skills_button_down():
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Itens").hide()
 	get_node("Menu/Run").hide()
+	get_node("Menu/Skills").disabled = true
+	get_node("Menu/Skills").set_focus_mode(0)
 	var skills = current_entity.get_skills()
 	var itens = get_node("Menu/Skills/Targets/ItemContainer/HBoxContainer/Itens")
 	var players = get_node("Menu/Skills/Targets/PlayerContainer/HBoxContainer/Players")
@@ -460,6 +478,8 @@ func _on_Attack_button_down():
 	get_node("Menu/Lane").hide()
 	get_node("Menu/Itens").hide()
 	get_node("Menu/Run").hide()
+	get_node("Menu/Attack").disabled = true
+	get_node("Menu/Attack").set_focus_mode(0)
 	var players = get_node("Menu/Attack/Targets/HBoxContainer/Players")
 	var enemies = get_node("Menu/Attack/Targets/HBoxContainer/Enemies")
 	for i in range(4):

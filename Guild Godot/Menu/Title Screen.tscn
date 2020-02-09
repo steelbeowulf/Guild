@@ -61,7 +61,6 @@ flat = true
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 format = 1
-
 [connection signal="pressed" from="Start" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_Button3_pressed"]

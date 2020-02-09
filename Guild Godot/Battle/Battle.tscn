@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=5]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=6]
-[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=6]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=7]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -76,40 +77,65 @@ margin_right = 1005.0
 margin_bottom = 767.428
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+custom_styles/panelf = ExtResource( 6 )
+custom_styles/panel = ExtResource( 6 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
 margin_left = 10.0
 margin_top = 646.428
 margin_right = 306.0
 margin_bottom = 766.428
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
-[node name="Attack" parent="Menu" instance=ExtResource( 7 )]
+[node name="Attack" parent="Menu" instance=ExtResource( 8 )]
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../Run")
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 8 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 24.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 9 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 48.0
 margin_bottom = 68.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 9 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 72.0
 margin_bottom = 92.0
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
 text = "Item"
 
-[node name="Run" parent="Menu" instance=ExtResource( 8 )]
+[node name="Run" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 96.0
 margin_bottom = 120.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 focus_neighbour_bottom = NodePath("../Attack")
 focus_next = NodePath("")
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
 text = "Run"
 RUN = true
 
@@ -120,29 +146,28 @@ margin_right = 1003.0
 margin_bottom = 782.0
 rect_min_size = Vector2( 676, 136 )
 
-[node name="P0" parent="Info" instance=ExtResource( 10 )]
+[node name="P0" parent="Info" instance=ExtResource( 11 )]
 margin_right = 676.0
 margin_bottom = 20.0
 alignment = 2
 
-[node name="P1" parent="Info" instance=ExtResource( 10 )]
+[node name="P1" parent="Info" instance=ExtResource( 11 )]
 margin_top = 24.0
 margin_right = 676.0
 margin_bottom = 44.0
 alignment = 2
 
-[node name="P2" parent="Info" instance=ExtResource( 10 )]
+[node name="P2" parent="Info" instance=ExtResource( 11 )]
 margin_top = 48.0
 margin_right = 676.0
 margin_bottom = 68.0
 alignment = 2
 
-[node name="P3" parent="Info" instance=ExtResource( 10 )]
+[node name="P3" parent="Info" instance=ExtResource( 11 )]
 margin_top = 72.0
 margin_right = 676.0
 margin_bottom = 92.0
 alignment = 2
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

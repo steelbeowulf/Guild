@@ -39,6 +39,7 @@ func _on_Target_Picked(target):
 	print("emitindo sinal action_picked do "+str(self.text))
 
 func _on_Action_pressed():
+	
 	$Targets.show()
 	$Targets/HBoxContainer.show()
 	for b in $Targets/HBoxContainer/Enemies.get_children():
