@@ -48,9 +48,9 @@ func _on_Target_Picked(target):
 
 func _on_Action_pressed():
 	$Targets.show()
-	$Targets/ItemContainer/HBoxContainer.show()
-	$Targets/PlayerContainer/HBoxContainer.show()
-	$Targets/EnemiesContainer/HBoxContainer.show()
+	$Targets/ItemContainer.show()
+	$Targets/PlayerContainer.show()
+	$Targets/EnemiesContainer.show()
 	#re-enabling focus on menu
 	for e in $Targets/ItemContainer/HBoxContainer/Itens.get_children():
 		e.set_focus_mode(2)

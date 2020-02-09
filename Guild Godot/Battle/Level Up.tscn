@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Battle/Level Up.gd" type="Script" id=1]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=3]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=4]
-[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Battle/Level Up Log.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=5]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/Level Up Log.tscn" type="PackedScene" id=10]
 
 [node name="Battle" type="Node2D"]
 position = Vector2( 3.48497, 1.32062 )
@@ -71,35 +72,36 @@ margin_right = 1005.0
 margin_bottom = 761.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+custom_styles/panel = ExtResource( 4 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
 margin_left = 6.12292
 margin_top = 637.129
 margin_right = 302.123
 margin_bottom = 757.129
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
-[node name="Attack" parent="Menu" instance=ExtResource( 5 )]
+[node name="Attack" parent="Menu" instance=ExtResource( 6 )]
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 6 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 7 )]
 margin_top = 24.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 7 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 8 )]
 margin_top = 48.0
 margin_bottom = 68.0
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 7 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 8 )]
 margin_top = 72.0
 margin_bottom = 92.0
 text = "Item"
 
-[node name="Run" parent="Menu" instance=ExtResource( 6 )]
+[node name="Run" parent="Menu" instance=ExtResource( 7 )]
 margin_top = 96.0
 margin_bottom = 120.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
@@ -114,15 +116,14 @@ margin_top = 634.422
 margin_right = 999.246
 margin_bottom = 759.422
 
-[node name="Log" parent="." instance=ExtResource( 8 )]
+[node name="Log" parent="." instance=ExtResource( 9 )]
 
-[node name="LevelUpLog" parent="." instance=ExtResource( 9 )]
+[node name="LevelUpLog" parent="." instance=ExtResource( 10 )]
 position = Vector2( -6.02942, 99.4845 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

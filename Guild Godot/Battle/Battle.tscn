@@ -90,39 +90,21 @@ script = ExtResource( 7 )
 [node name="Attack" parent="Menu" instance=ExtResource( 8 )]
 margin_bottom = 20.0
 focus_neighbour_top = NodePath("../Run")
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
 text = "Attack"
 
 [node name="Lane" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 24.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
 text = "Lane"
 
 [node name="Skills" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 48.0
 margin_bottom = 68.0
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/disabled = ExtResource( 6 )
 text = "Skills"
 
 [node name="Itens" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 72.0
 margin_bottom = 92.0
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/disabled = ExtResource( 6 )
 text = "Item"
 
 [node name="Run" parent="Menu" instance=ExtResource( 9 )]
@@ -131,11 +113,6 @@ margin_bottom = 120.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 focus_neighbour_bottom = NodePath("../Attack")
 focus_next = NodePath("")
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/disabled = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
 text = "Run"
 RUN = true
 
