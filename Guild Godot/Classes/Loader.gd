@@ -4,8 +4,10 @@ class_name LOADER
 const ENEMY_PATH = "res://Data/Enemies/"
 const ITENS_PATH = "res://Data/Itens/"
 const SKILLS_PATH = "res://Data/Skills/"
-const PLAYERS_PATH = "res://Testes/Players.json"
-const INVENTORY_PATH = "res://Testes/Inventory.json"
+const PLAYERS_PATH = "res://Demo_data/Players.json"
+const INVENTORY_PATH = "res://Demo_data/Inventory.json"
+
+const SAVE_PATH = "res://Save_data/"
 
 var PLAYER_CLASS = load("res://Classes/Player.gd")
 var ENEMY_CLASS = load("res://Classes/Enemy.gd")
@@ -29,6 +31,20 @@ func list_files_in_directory(path):
     dir.list_dir_end()
 
     return files
+
+static func load_save_info():
+	var ret = []
+	var file = File.new()
+	for i in range(4):
+		file.open("res://Save_data/Slot"+str(i)+"/Info", file.READ)
+		var text = file.get_as_text()
+		var result_json = JSON.parse(text)
+		if result_json.error == OK:  # If parse OK
+			var data = result_json.result
+			ret.append(data)
+		else:
+			ret.append({})
+	return ret
 
 func load_all_enemies():
 	print("vou carregar inimigos")
@@ -82,7 +98,7 @@ func load_all_itens():
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
-			ret.append(ITEM_CLASS.new(data["NAME"], data["QUANT"], data["TARGET"],
+			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status))
 		else:  # If parse has errors
 			print(i)
@@ -112,7 +128,7 @@ func load_all_skills():
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
-			ret.append(ITEM_CLASS.new(data["NAME"], data["QUANT"], data["TARGET"],
+			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status))
 		else:  # If parse has errors
 			print(s)

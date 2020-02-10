@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Modern Castle - Tension (online-audio-converter.com).ogg-8cfb5d1f34c8c0dc89716ba4824bdae3.oggstr"
+
+[deps]
+
+source_file="res://Assets/BGM/Modern Castle - Tension (online-audio-converter.com).ogg"
+dest_files=[ "res://.import/Modern Castle - Tension (online-audio-converter.com).ogg-8cfb5d1f34c8c0dc89716ba4824bdae3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

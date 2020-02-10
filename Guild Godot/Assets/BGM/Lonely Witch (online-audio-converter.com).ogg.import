@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Lonely Witch (online-audio-converter.com).ogg-c77217834a187606b2035aa532d89a20.oggstr"
+
+[deps]
+
+source_file="res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg"
+dest_files=[ "res://.import/Lonely Witch (online-audio-converter.com).ogg-c77217834a187606b2035aa532d89a20.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Pause/Panel.gd" type="Script" id=1]
 
-[node name="Menu" type="Control"]
+[node name="Itens" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -74,4 +74,5 @@ margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
 text = "500G"
+
 [connection signal="pressed" from="Panel/HBoxContainer/Chars/Char4" to="Panel" method="_on_Char4_pressed"]

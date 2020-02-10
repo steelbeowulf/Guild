@@ -2,7 +2,7 @@
 	"ID":4,
 	"LEVEL":8,
 	"EXPERIENCE":100,
-	"IMG":{"path": "res://Assets/Animated/goblin spritesheet calciumtrice.png",
+	"IMG":{"path": "res://Assets/Animations/goblin spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-19"], 
 			"attack": [false, "30-39"],

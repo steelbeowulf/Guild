@@ -36,6 +36,7 @@ STATS="*res://Classes/Stats.gd"
 LOADER="*res://Classes/Loader.gd"
 GLOBAL="*res://Global.gd"
 BATTLE_INIT="*res://Overworld/Battle_Init.gd"
+AUDIO="*res://Audio.gd"
 
 [display]
 

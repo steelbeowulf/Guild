@@ -24,6 +24,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Left" type="Panel" parent="Panel/All"]
+editor/display_folded = true
 margin_left = 15.0
 margin_right = 735.0
 margin_bottom = 768.0
@@ -565,3 +566,6 @@ valign = 1
 uppercase = true
 
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Item" to="." method="_on_Item_pressed"]
+[connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Skill" to="." method="_on_Skill_pressed"]
+[connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Save" to="." method="_on_Save_pressed"]

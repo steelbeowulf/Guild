@@ -1,5 +1,6 @@
 extends Node
 
+var id
 var nome
 var quantity
 var type #Offensive, Defensive, Healing
@@ -7,7 +8,8 @@ var target #Individual, Lane, All
 var effect = [] #["MP", +10, PHYS, 5]
 var status = [] #causa confuse [true, "Confuse"]
 
-func _init(name, quant, targ, tipo, efeito, statusEffects):
+func _init(id, name, quant, targ, tipo, efeito, statusEffects):
+	self.id = id
 	self.nome = name
 	self.quantity = quant
 	self.target = targ

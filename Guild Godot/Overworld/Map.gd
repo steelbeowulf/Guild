@@ -10,7 +10,7 @@ onready var Encounter = []
 onready var Kill = []
 
 var menu = load("res://Menu.tscn")
-var cara_no_mundo = load("res://Overworld/Cara_no_mundo.tscn")
+var cara_no_mundo = load("res://Overworld/Objects/Cara_no_mundo.tscn")
 onready var Player_pos = Vector2(816, 368)
 onready var state = {}
 var id = 0
@@ -40,7 +40,7 @@ func generate_enemies():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.pause_mode = Node.PAUSE_MODE_STOP
-	GLOBAL.play_bgm('MAP_THEME', true)
+	AUDIO.play_bgm('MAP_THEME', true)
 	if get_tree().get_current_scene().get_area() == 'Map4':
 		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:

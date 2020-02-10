@@ -55,9 +55,9 @@ func _ready():
 	# Change later: demo specific TODO
 	if Enemies[0].id == 9:
 		boss = true
-		GLOBAL.play_bgm('BOSS_THEME')
+		AUDIO.play_bgm('BOSS_THEME')
 	else:
-		GLOBAL.play_bgm('BATTLE_THEME')
+		AUDIO.play_bgm('BATTLE_THEME')
 
 	# Main battle loop: calls rounds() while the battle isn't battle_over
 	while (not battle_over):
