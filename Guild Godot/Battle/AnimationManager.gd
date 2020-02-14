@@ -136,7 +136,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 			var run_successful = result[1]
 			if not is_boss and run_successful:
 				$Log.display_text("Ran away safely")
-				enqueue(global_animations, "Run", null) #run animation
+				enqueue(current_entity.graphics, "Run", null) #run animation
 			elif is_boss:
 				$Log.display_text("Can't escape")
 			else:
