@@ -59,8 +59,10 @@ func initialize(Players, Enemies):
 
 func _on_animation_finished(anim):
 	can_play = true
-	print("alguma animação acabou: "+anim)
-	print(queue)
+	
+
+	
+
 	if not queue:
 		emit_signal("animation_finished")
 
@@ -68,13 +70,15 @@ func play(anim):
 	var scope = anim[0]
 	var animation_name = anim[1]
 	var info = anim[2]
-	print("Vou tocar animaçao "+animation_name+" no escopo "+str(scope))
+	
+
 	if typeof(info) == TYPE_STRING and info != "ALL" and info != "LANE":
 		can_play = false
 	scope.play(animation_name, info)
 
 func enqueue(scope, animation_name, additional_info):
-	print("Enfilerei animaçao "+animation_name+" no escopo "+str(scope))
+	
+
 	queue.push_front([scope, animation_name, additional_info])
 
 func _physics_process(delta):
@@ -106,7 +110,8 @@ func resolve(current_entity, action, target, result, bounds, next):
 			var dies_on_attack = result[0]
 			var ailments = result[1]
 			var stats = result[2]
-			print(result)
+			
+
 			#$Log.display_text("")
 			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
 			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo

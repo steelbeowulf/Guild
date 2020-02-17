@@ -21,10 +21,12 @@ func set_animations(sprite, animations):
 	var vf = sprite['vframes']
 	var hf = sprite['hframes']
 	var sc = sprite['scale']
-	print("animacoes do "+str(sprite))
+	
+
 	for k in animations.keys():
 		var v = animations[k]
-		print("adicionando animacao "+str(k))
+		
+
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
@@ -41,7 +43,8 @@ func set_animations(sprite, animations):
 
 func play(name, options=[]):
 	if name == 'Damage':
-		print(options)
+		
+
 		take_damage(options, 0)
 		return
 	$Animations.get_node("idle").stop()
@@ -114,7 +117,8 @@ func _on_Sprite_animation_finished(name):
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)
 	elif name == "death":
-		print("opa morri")
+		
+
 		#emit_signal("finish_anim", name)
 		#emit_signal("finish_anim", name)
 		#emit_signal("finish_anim", name)

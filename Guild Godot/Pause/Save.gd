@@ -33,7 +33,7 @@ func load_saves(saves):
 	var tmp = 0
 	for slot in slots.get_children():
 		if saves[tmp].has("area"):
-			slot.get_node("Area").set_text(saves[tmp]["area"])
+			slot.get_node("Area").set_text(saves[tmp]["area"]["NAME"])
 			slot.get_node("Playtime").set_text(format_playtime(saves[tmp]["playtime"]))
 			slot.get_node("Gold").set_text(format_gold(saves[tmp]["gold"]))
 			# Set screenshot
@@ -80,7 +80,8 @@ func remove_focus():
 
 
 func _on_SaveDialog_confirmed():
-	print("Salvando no slot "+str(chosen_slot))
+	
+
 	GLOBAL.save(chosen_slot)
 	GLOBAL.save_inventory(chosen_slot)
 	load_saves(LOADER.load_save_info())
@@ -88,5 +89,6 @@ func _on_SaveDialog_confirmed():
 
 
 func _on_LoadDialog_confirmed():
-	print("Carregando slot "+str(chosen_slot))
+	pass
+
 	# do actual loading here

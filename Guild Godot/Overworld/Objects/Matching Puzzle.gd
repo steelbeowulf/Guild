@@ -38,7 +38,8 @@ func check_colors():
 
 func _process(delta):
 	if check_colors() and not GLOBAL.MATCH:
-		print("YAY!!")
+		
+
 		GLOBAL.MATCH = true
 		get_parent().send_message("Uma nova passagem se abriu!")
 

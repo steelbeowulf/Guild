@@ -19,6 +19,7 @@
 	"DEFM":10, 
 	"AGI":10,
 	"ACC":10, 
+	"EVA":100, 
 	"LCK":5,
 	"NAME":"Rat",
 	"SKILLS":[21],

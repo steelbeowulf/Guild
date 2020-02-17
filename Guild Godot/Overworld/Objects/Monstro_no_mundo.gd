@@ -149,6 +149,7 @@ func _on_View_body_exited(body):
 
 
 func _on_Battle_body_entered(body):
+	self.dead = true
 	if body.is_in_group("player"):
 		map.generate_enemies()
 		map.update_objects_position()
@@ -160,7 +161,7 @@ func norm(vec):
 	return sqrt(vec.x*vec.x + vec.y*vec.y)
 
 func _update(value):
-	var pos = value[1]
+	var pos = GLOBAL.parse_position(value[1])
 	value = value[0]
 	if value:
 		self.queue_free()

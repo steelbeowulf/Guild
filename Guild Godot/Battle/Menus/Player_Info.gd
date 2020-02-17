@@ -66,8 +66,10 @@ func play(name, options=[]):
 		self.set_mp(Mp)
 
 func _on_Tween_tween_started(object, key):
-	print("fazendo tween no "+str(object)+" usando chave "+str(key))
+	pass
+
 
 
 func _on_Tween_tween_completed(object, key):
-	print("completei tween no "+str(object)+" usando chave "+str(key))
+	pass
+

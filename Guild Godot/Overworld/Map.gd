@@ -34,11 +34,12 @@ func generate_enemies():
 			var enemy_id = int(rand_range(1,len(Enemies)-1))
 			newEnemy.append(Enemies[enemy_id]._duplicate())
 		current+=1
-	BATTLE_INIT.begin_battle(newEnemy, Kill)
+	BATTLE_INIT.begin_battle(id, newEnemy, Kill)
 	return
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
 	self.pause_mode = Node.PAUSE_MODE_STOP
 	AUDIO.play_bgm('MAP_THEME', true)
 	if get_tree().get_current_scene().get_area() == 'Map4':
@@ -47,48 +48,46 @@ func _ready():
 		get_tree().change_scene("res://Menu/Victory.tscn")
 	Enemies = GLOBAL.ALL_ENEMIES
 	Encounter = []
-	var name = get_tree().get_current_scene().get_area()
+	var name = get_name()
 	id = int(name.substr(3, len(name)))
 	GLOBAL.MAP = id
+	Player_pos = GLOBAL.POSITION
 	if BATTLE_INIT.first:
 		Players = GLOBAL.ALL_PLAYERS
 		Inventory = GLOBAL.INVENTORY
 		BATTLE_INIT.init(Players, Enemies)
 	else:
-		Player_pos = GLOBAL.POSITION
 		Players = BATTLE_INIT.Play
-		print("i'mm back, here are players:"+str(Players))
 		if Players == []:
-			print("rip")
 			get_tree().change_scene("res://Battle/Game Over.tscn")
-	if GLOBAL.STATE[id]:
-		state = GLOBAL.STATE[id]
+	if GLOBAL.STATE[str(id)]:
+		state = GLOBAL.STATE[str(id)]
+
+	var pos = Player_pos
+	if GLOBAL.POSITION:
+		pos = GLOBAL.POSITION
+	if GLOBAL.TRANSITION:
+		pos = Transitions[GLOBAL.TRANSITION]
+		GLOBAL.TRANSITION = false
+
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
 	#var cara = get_node("Party/Cara")
-	var pos = Player_pos
 	# Connects itself to monsters
 	for e in get_node("Enemies").get_children():
 		e.connect("battle_notifier", self, "_encounter_management")
-	
+
 	if state:
 		for key in state.keys():
 			var value = state[key]
 			get_node(key)._update(value)
-	
-	if GLOBAL.POSITION:
-		pos = GLOBAL.POSITION
-	if GLOBAL.TRANSITION:
-		print("VOU MUDAR POS DO PALAYER")
-		pos = Transitions[GLOBAL.TRANSITION]
-		GLOBAL.TRANSITION = false
-	print(cara.position)
-	print("MUDEI")
+
 	cara.position = pos
 	GLOBAL.POSITION = pos
 	cara._rready()
 
 func _encounter_management(value, id, name):
+
 	if value:
 		Encounter.append(id)
 		Kill.append(name)
@@ -98,7 +97,7 @@ func _encounter_management(value, id, name):
 
 func get_map_margin():
 	return [$Limits.margin_bottom, $Limits.margin_left,
-	$Limits.margin_top, $Limits.margin_right] 
+	$Limits.margin_top, $Limits.margin_right]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -110,12 +109,12 @@ func _physics_process(delta):
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ''
 		elif Doors[d] == 'Matching puzzle' and GLOBAL.MATCH:
-			get_node("Objects/"+str(d)).open() 
+			get_node("Objects/"+str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ''
 		elif Doors[d].split(" ")[0] == 'Activate':
 			if get_node("Objects/"+str(Doors[d].split(" ")[1])).activated:
-				get_node("Objects/"+str(d)).open() 
+				get_node("Objects/"+str(d)).open()
 				Doors[d] = ''
 				send_message("Uma nova passagem se abriu")
 
@@ -126,7 +125,7 @@ func update_objects_position():
 	for e in get_node("Objects").get_children():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
 	for p in get_node("Party").get_children():
-		save_state("PLAYER_POS", p.get_name(), p.get_global_position()) 
+		save_state("PLAYER_POS", p.get_name(), p.get_global_position())
 	for e in get_node("Enemies").get_children():
 		if e.dead:
 			save_state("ENEMY_KILL", e.get_name())
@@ -140,7 +139,7 @@ func save_state(type, node, open=false, pos=Vector2(0,0)):
 		state["Objects/"+str(node)] = [open, pos]
 	elif type == "PLAYER_POS":
 		state["Party/"+str(node)] = [false, pos]
-	GLOBAL.STATE[id] = state
+	GLOBAL.STATE[str(id)] = state
 
 func hide_hud():
 	self.get_node("HUD").layer = -1
