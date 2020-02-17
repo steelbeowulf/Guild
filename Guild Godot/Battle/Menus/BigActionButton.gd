@@ -41,17 +41,18 @@ func _on_Target_Picked(target):
 	if item_picked != null:
 		target = [item_picked, target]
 		emit_signal("action_picked", self.text, target)
-		$Targets/ItemContainer/HBoxContainer.hide()
-		$Targets/PlayerContainer/HBoxContainer.hide()
-		$Targets/EnemiesContainer/HBoxContainer.hide()
-		
-
+		$Targets/ItemContainer.hide()
+		$Targets/PlayerContainer.hide()
+		$Targets/EnemiesContainer.hide()
 
 func _on_Action_pressed():
 	$Targets.show()
-	$Targets/ItemContainer/HBoxContainer.show()
-	$Targets/PlayerContainer/HBoxContainer.show()
-	$Targets/EnemiesContainer/HBoxContainer.show()
+	$Targets/ItemContainer.show()
+	$Targets/PlayerContainer.show()
+	$Targets/EnemiesContainer.show()
+	#re-enabling focus on menu
+	for e in $Targets/ItemContainer/HBoxContainer/Itens.get_children():
+		e.set_focus_mode(2)
 	get_node("Targets/ItemContainer/HBoxContainer/Itens/0").grab_focus()
 	for e in $Targets/EnemiesContainer/HBoxContainer/Enemies.get_children():
 		e.disabled = true
@@ -61,6 +62,10 @@ func _on_Action_pressed():
 
 
 func _on_Item_Picked(item):
+	#removing focus on options of the menu, preventing the focus to go on unwanted places
+	for e in $Targets/ItemContainer/HBoxContainer/Itens.get_children():
+		e.disabled = true
+		e.set_focus_mode(0)
 	item_picked = item
 	var ress = false
 	item = LOADER.List[int(item)]

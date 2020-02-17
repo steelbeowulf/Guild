@@ -40,6 +40,7 @@ func _on_Target_Picked(target):
 
 
 func _on_Action_pressed():
+	
 	$Targets.show()
 	$Targets/HBoxContainer.show()
 	for b in $Targets/HBoxContainer/Enemies.get_children():

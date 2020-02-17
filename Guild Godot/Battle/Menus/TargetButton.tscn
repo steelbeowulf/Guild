@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=2]
 
 [node name="Target" type="Button"]
 margin_right = 194.0
 margin_bottom = 20.0
-script = ExtResource( 1 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 1 )
+custom_styles/normal = ExtResource( 1 )
+script = ExtResource( 2 )
 [connection signal="pressed" from="." to="." method="_on_Target_pressed"]

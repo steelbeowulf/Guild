@@ -1,71 +1,88 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Pause/Panel.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://Pause/Panel.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Hover_Menu_Info_Panel.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=5]
 
-[node name="Itens" type="Control"]
+[node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 1030.0
 margin_bottom = 770.0
-script = ExtResource( 1 )
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-anchor_right = 0.2
-margin_right = 818.0
-margin_bottom = 773.0
+margin_right = 1024.0
+margin_bottom = 744.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 
-[node name="Chars" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_right = 720.0
-margin_bottom = 773.0
-rect_min_size = Vector2( 720, 0 )
-
-[node name="Char4" type="Button" parent="Panel/HBoxContainer/Chars"]
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-text = "Ppau Kweh"
-
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 724.0
-margin_right = 1024.0
-margin_bottom = 773.0
+margin_right = 300.0
+margin_bottom = 744.0
 rect_min_size = Vector2( 300, 50 )
 
-[node name="Use" type="Button" parent="Panel/HBoxContainer/Options"]
+[node name="CurrentMenu" type="Button" parent="Panel/HBoxContainer/Options"]
 margin_right = 300.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
-text = "Use"
+custom_styles/normal = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "Itens"
 
-[node name="Organize" type="Button" parent="Panel/HBoxContainer/Options"]
+[node name="Use" type="Button" parent="Panel/HBoxContainer/Options"]
 margin_top = 74.0
 margin_right = 300.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
-text = "Organize"
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Use"
 
-[node name="Key Itens" type="Button" parent="Panel/HBoxContainer/Options"]
+[node name="Organize" type="Button" parent="Panel/HBoxContainer/Options"]
 margin_top = 148.0
 margin_right = 300.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 0, 70 )
-text = "Key Itens"
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Organize"
 
-[node name="Back" type="Button" parent="Panel/HBoxContainer/Options"]
+[node name="KeyItens" type="Button" parent="Panel/HBoxContainer/Options"]
 margin_top = 222.0
 margin_right = 300.0
 margin_bottom = 292.0
 rect_min_size = Vector2( 0, 70 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Key Itens"
+
+[node name="Back" type="Button" parent="Panel/HBoxContainer/Options"]
+margin_top = 296.0
+margin_right = 300.0
+margin_bottom = 366.0
+rect_min_size = Vector2( 0, 70 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
 text = "Back"
 
 [node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Options"]
-margin_top = 296.0
+margin_top = 370.0
 margin_right = 300.0
-margin_bottom = 516.0
+margin_bottom = 590.0
 rect_min_size = Vector2( 0, 220 )
 
 [node name="Money" type="Label" parent="Panel/HBoxContainer/Options/Info"]
@@ -75,4 +92,243 @@ rect_min_size = Vector2( 0, 80 )
 custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
 text = "500G"
 
-[connection signal="pressed" from="Panel/HBoxContainer/Chars/Char4" to="Panel" method="_on_Char4_pressed"]
+[node name="Itens" type="VBoxContainer" parent="Panel/HBoxContainer"]
+margin_left = 304.0
+margin_right = 1024.0
+margin_bottom = 744.0
+rect_min_size = Vector2( 720, 0 )
+
+[node name="ItemSlot0" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot1" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot2" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot3" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot4" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot5" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot6" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot7" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot8" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot9" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot10" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot11" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot12" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot13" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot14" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot15" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot16" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+
+[node name="ItemSlot17" type="Button" parent="Panel/HBoxContainer/Itens"]
+visible = false
+margin_right = 720.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "Ppau Kweh"
+script = ExtResource( 5 )
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Use" to="Panel" method="_on_Use_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot0" to="Panel/HBoxContainer/Itens/ItemSlot0" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot1" to="Panel/HBoxContainer/Itens/ItemSlot1" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot2" to="Panel/HBoxContainer/Itens/ItemSlot2" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot3" to="Panel/HBoxContainer/Itens/ItemSlot3" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot4" to="Panel/HBoxContainer/Itens/ItemSlot4" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot5" to="Panel/HBoxContainer/Itens/ItemSlot5" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot6" to="Panel/HBoxContainer/Itens/ItemSlot6" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot7" to="Panel/HBoxContainer/Itens/ItemSlot7" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot8" to="Panel/HBoxContainer/Itens/ItemSlot8" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot9" to="Panel/HBoxContainer/Itens/ItemSlot9" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot10" to="Panel/HBoxContainer/Itens/ItemSlot10" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot11" to="Panel/HBoxContainer/Itens/ItemSlot11" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot12" to="Panel/HBoxContainer/Itens/ItemSlot12" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot13" to="Panel/HBoxContainer/Itens/ItemSlot13" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot14" to="Panel/HBoxContainer/Itens/ItemSlot14" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot15" to="Panel/HBoxContainer/Itens/ItemSlot15" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot16" to="Panel/HBoxContainer/Itens/ItemSlot16" method="_on_ItemSlot0_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot17" to="Panel/HBoxContainer/Itens/ItemSlot17" method="_on_ItemSlot0_pressed"]

@@ -13,6 +13,8 @@ func _on_New_pressed():
 	GLOBAL.ALL_PLAYERS = loader.load_players(-1)
 	GLOBAL.reload_state()
 	get_tree().change_scene("res://Root.tscn")
+	#Use this to get to the item menu for it to work
+	#get_tree().change_scene("res://Pause/Itens.tscn")
 
 
 func _on_Load_pressed():
