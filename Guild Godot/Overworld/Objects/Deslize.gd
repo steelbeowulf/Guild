@@ -13,7 +13,8 @@ func _physics_process(delta):
 			count += 1
 			if count == 25:
 				inbody.stop.pop_front()
-		print("movendo com vel="+str(velocity))
+		
+
 		inbody.move_and_slide(MOVEMENT*velocity*delta)
 	else:
 		count = 0
@@ -26,11 +27,13 @@ func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
 		body.stop.append(0)
 		velocity = directions[body.dir()]
-		print("entrando, body="+str(body.stop))
+		
+
 
 func _on_Area2D_body_exited(body):
 	if body == inbody:
 		inbody = null
 		if body.is_in_group("player"):
 			body.stop.pop_front()
-			print("saindo, body="+str(body.stop))
+			
+

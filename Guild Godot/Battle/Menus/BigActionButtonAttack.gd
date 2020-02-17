@@ -36,7 +36,8 @@ func _on_Target_Picked(target):
 	target = [1, target]
 	emit_signal("action_picked", self.text, target)
 	$Targets/HBoxContainer.hide()
-	print("emitindo sinal action_picked do "+str(self.text))
+	
+
 
 func _on_Action_pressed():
 	$Targets.show()

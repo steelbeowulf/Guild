@@ -18,7 +18,8 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.tipo = "Enemy"
 
 func AI(player_list, enemies_list):
-	print(str(player_list))
+	
+
 	var possible_target = -1
 	for e in enemies_list:
 		if not e.is_dead():
@@ -34,18 +35,15 @@ func AI(player_list, enemies_list):
 		if p.get_hate()[self.index] > max_hate:
 			max_hate = p.get_hate()[self.index]
 			possible_target = p.index
-			print("A")
-	for p in player_list:
-		print("Hate atual de " + str(p.get_name()) + " é: " + str(p.get_hate()))
-	if possible_target < 0:
-		print("VOU ESCOLHER ALEATÓRIO")
-		print("QUANTOS ALVOS POSSO ESCOLHER?: " + str(player_list.size()))
+			
+
 		randomize()
 		possible_target = floor(rand_range(0,player_list.size()))
 		while player_list[possible_target].is_dead():
 			randomize()
 			possible_target = floor(rand_range(0,player_list.size()))
-	print("ESCOLHI "+player_list[possible_target].get_name())
+	
+
 	var best_skill = -1
 	var best_dmg = 0
 	possible_target = "P"+str(possible_target)

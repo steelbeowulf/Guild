@@ -70,7 +70,8 @@ func get_movedir():
 #
 #    	# MOVEMENT
 #    	if ray.is_colliding():
-#    		#print("AAAAAA!")
+#    		#
+
 #    		position = last_position
 #    		target_position = last_position
 #    	else:
@@ -111,7 +112,7 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 
 func _update(value):
-	var pos = value[1]
+	var pos = GLOBAL.parse_position(value[1])
 	value = value[0]
 	if value:
 		self.queue_free()

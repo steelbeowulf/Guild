@@ -3,7 +3,7 @@ extends StaticBody2D
 var open = false
 
 func _update(value):
-	var pos = value[1]
+	var pos = GLOBAL.parse_position(value[1])
 	value = value[0]
 	if value:
 		self.visible = false

@@ -22,9 +22,6 @@ visible = false
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="Menu_Area"]
-position = Vector2( 512, 384 )
-scale = Vector2( 0.99, 0.99 )
-editor_draw_limits = true
 
 [node name="Node2D" type="Node2D" parent="Menu_Area"]
 visible = false

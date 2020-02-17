@@ -16,9 +16,8 @@ func enter(players):
 		#node.get_node("Sprite").set_texture(players[i].sprite)
 
 func update_info():
-	get_node("Panel/All/Left/Chars/Char1").grab_focus()
 	var info = get_node("Panel/All/Right/Info")
-	info.get_node("Area/Area_text").set_text(GLOBAL.area)
+	info.get_node("Area/Area_text").set_text(GLOBAL.AREA)
 	info.get_node("Money/Money_text").set_text(format_gold(GLOBAL.gold))
 	info.get_node("Playtime/Playtime_text").set_text(format_playtime(GLOBAL.playtime))
 
@@ -26,21 +25,20 @@ func format_gold(money):
 	return str(money)+"G"
 
 func format_playtime(T):
-	print("aki o hotstio")
-	print(T)
-	var hours = floor(T / 3600);
-	var minutes = floor(T / 60) - hours*60;
-	var seconds = (T % 60);
+	var hours = floor(T / 3600)
+	var minutes = floor(T / 60) - hours*60
+	var seconds = (int(T) % int(60))
 	return str(hours)+"h"+str(minutes)+"m"+str(seconds)+"s" 
 
+func give_focus():
+	get_node("Panel/All/Right/Options_Panel/Options/Item").grab_focus()
+
 func _on_Item_pressed():
-	print("pressei item")
-	get_tree().change_scene("Itens.tscn")
+	get_parent().get_parent().open_inventory()
 
 
 func _on_Skill_pressed():
-	print("pressei skill")
-	get_tree().change_scene("Skill.tscn")
+	pass # Replace with function body.
 
 
 func _on_Options_pressed():

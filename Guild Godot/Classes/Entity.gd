@@ -24,7 +24,7 @@ var info
 var elem = {0:"PHYSIC", 1:"MAGIC", 2:"FIRE", 3:"WATER", 4:"ELECTRIC", 5:"ICE", 6:"EARTH", 7:"WIND", 8:"HOLY", 9:"DARKNESS"}
 
 enum {PHYSIC, MAGIC, FIRE, WATER, ELECTRIC, ICE, EARTH, WIND, HOLY, DARKNESS}
-enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK}
+enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, EVA, LCK}
 
 func die():
 	self.set_stats(HP, 0)
@@ -109,7 +109,8 @@ func decrement_turns():
 				status.erase(st)
 
 func take_damage(type, damage):
-	#print(nome+" TOMOU "+str(damage - stats[DEF])+" DE DANO!")
+	#
+
 	var dmg = 0
 	var resistance = 1.0
 	if type == PHYSIC:
@@ -191,6 +192,9 @@ func get_agi():
 
 func get_acc():
 	return self.stats[ACC] 
+
+func get_eva():
+	return self.stats[EVA] 
 
 func get_lck():
 	return self.stats[LCK]

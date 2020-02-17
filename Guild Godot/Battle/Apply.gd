@@ -43,7 +43,8 @@ func apply_effect(who, effect, target, t_id):
 				finalval = valmax
 				ret = -(valmax - target.get_health())
 		elif stat == MP:
-			print("estou tomando dano de mp ou recupernado")
+			
+
 			valmax = target.get_stats(MP_MAX)
 			tipo = 1
 			ret = -value
@@ -55,7 +56,8 @@ func apply_effect(who, effect, target, t_id):
 		target.set_stats(stat, finalval)
 		if target.get_health() > 0.2*target.get_max_health():
 			target.remove_status("HP_CRITICAL")
-	print(who.nome + " fez algo para que " + target.nome + " sofresse um efeito de " + dstats[stat])
+	
+
 	return [ret, tipo]
 
 func apply_status(status, target, attacker):

@@ -19,6 +19,7 @@
 	"DEFM":0, 
 	"AGI":5,
 	"ACC":10, 
+	"EVA":25, 
 	"LCK":5,
 	"NAME":"Statue",
 	"SKILLS":[24,05],

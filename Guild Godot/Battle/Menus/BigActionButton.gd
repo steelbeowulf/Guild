@@ -44,7 +44,8 @@ func _on_Target_Picked(target):
 		$Targets/ItemContainer/HBoxContainer.hide()
 		$Targets/PlayerContainer/HBoxContainer.hide()
 		$Targets/EnemiesContainer/HBoxContainer.hide()
-		print("emitindo sinal action_picked do "+str(self.text))
+		
+
 
 func _on_Action_pressed():
 	$Targets.show()

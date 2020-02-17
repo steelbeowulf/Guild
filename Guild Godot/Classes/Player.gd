@@ -19,9 +19,49 @@ func _init(id, lv, experience, img, anim, valores,  pos, identificacao, habilida
 	self.resist["MAGIC"] = 1.0
 	self.tipo = "Player"
 
+func save_data():
+	var dict = {}
+	dict["ID"] = id
+	dict["LEVEL"] = level
+	dict["EXPERIENCE"] = xp
+	dict["IMG"] = get_sprite()
+	dict["ANIM"] = get_animation()
+	dict["HP"] = get_health()
+	dict["HP_MAX"] = get_max_health()
+	dict["MP"] = get_mp()
+	dict["MP_MAX"] = get_max_mp()
+	dict["ATK"] = get_atk()
+	dict["ATKM"] = get_atkm()
+	dict["DEF"] = get_def()
+	dict["DEFM"] = get_defm()
+	dict["AGI"] = get_agi()
+	dict["ACC"] = get_acc()
+	dict["EVA"] = get_eva()
+	dict["LCK"] = get_lck()
+	dict["LANE"] = 0 # TODO
+	dict["NAME"] = get_name()
+	dict["SKILLS"] = get_skill_ids()
+	dict["RESISTANCE"] = get_resistance()
+	return dict
+
+func get_sprite():
+	return self.sprite
+
+func get_animation():
+	return self.animations
+
 func get_skills():
 	return self.skills
-	
+
+func get_skill_ids():
+	var ids = []
+	for skill in get_skills():
+		ids.append(skill.id)
+	return ids
+
+func get_resistance():
+	return self.resist
+
 func get_hate():
 	return self.hate
 

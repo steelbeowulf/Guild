@@ -19,16 +19,9 @@ var boss = false
 signal round_finished
 signal finish_anim
 
-func print_battle_results():
-	for p in Players:
-		print(p.get_name()+" tem "+str(p.get_health())+" de vida!")
-	for e in Enemies:
-		print(e.get_name()+" tem "+str(e.get_health())+" de vida!")
-		if e.get_name() == 'Statue' and e.get_health() <= 0:
-			print("acabou a demo")
-			GLOBAL.WIN = true
-
 func _ready():
+	
+
 	battle_over = false
 	Players = BATTLE_INIT.Play
 	Inventory =  GLOBAL.INVENTORY
@@ -79,7 +72,8 @@ func rounds():
 			next = turnorder[i+1]
 		else:
 			next = turnorder[0]
-		print("turno de: " + str(current_entity.get_name()))
+		
+
 		var id = current_entity.index
 
 		# If the entity is currently affected by a status, apply its effect
@@ -94,7 +88,8 @@ func rounds():
 				can_move.append(result[0])
 				
 			current_entity.decrement_turns()
-			print(current_entity.get_name()+" e seu canmove "+str(can_move))
+			
+
 			
 			# Also covers cases in which the action is chosen for you (confuse, paralysis, etc)
 			for condition in can_move:
@@ -114,7 +109,8 @@ func rounds():
 				var decision = current_entity.AI(Players, Enemies)
 				target = decision[1]
 				action = decision[0]
-				print(current_entity.get_name()+" decidiu usar "+decision[0]+" em "+str(decision[1]))
+				
+
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)
@@ -160,14 +156,17 @@ func rounds():
 		result = execute_action(action, target)
 		target = result[0]
 		result = result[1]
-		print("JA OCORREU")
+		
+
 		$AnimationManager.resolve(current_entity, action, target, result, bounds, next)
 		yield($AnimationManager, "animation_finished")
-		print("Voltei das animaões")
+		
+
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
-			print("Hey game battle_over")
+			
+
 			battle_over = true
 			break
 	
@@ -191,7 +190,8 @@ func stackagility(a,b):
 
 # Executes an action on a given target
 func execute_action(action, target):
-	print("ex_action "+action+", "+str(target))
+	
+
 	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
@@ -473,7 +473,8 @@ func _on_Attack_button_down():
 	for i in range(Enemies.size()):
 		if not Enemies[i].is_dead():
 			if unfocus:
-				print("unfocus on me E"+str(i)+" which is "+Enemies[i].get_name())
+				
+
 				enemies.get_node("E"+str(i)).grab_focus()
 				unfocus = false
 			enemies.get_node("E"+str(i)).show()
@@ -486,7 +487,8 @@ func _on_Attack_button_down():
 
 func end_battle():
 	$AnimationManager/Log.display_text("Fim de jogo!")
-	print_battle_results()
+	
+
 	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
 	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 

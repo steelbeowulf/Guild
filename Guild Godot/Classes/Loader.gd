@@ -16,27 +16,27 @@ var ITEM_CLASS = load("res://Classes/Itens.gd")
 var List = []
 
 func list_files_in_directory(path):
-    var files = []
-    var dir = Directory.new()
-    dir.open(path)
-    dir.list_dir_begin()
-
-    while true:
-        var file = dir.get_next()
-        if file == "":
-            break
-        elif not file.begins_with("."):
-            files.append(file)
-
-    dir.list_dir_end()
-
-    return files
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+	
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+	
+	dir.list_dir_end()
+	
+	return files
 
 static func load_save_info():
 	var ret = []
 	var file = File.new()
 	for i in range(4):
-		file.open("res://Save_data/Slot"+str(i)+"/Info", file.READ)
+		file.open("res://Save_data/Slot"+str(i)+"/Info.json", file.READ)
 		var text = file.get_as_text()
 		var result_json = JSON.parse(text)
 		if result_json.error == OK:  # If parse OK
@@ -47,11 +47,13 @@ static func load_save_info():
 	return ret
 
 func load_all_enemies():
-	print("vou carregar inimigos")
+	
+
 	var ret = []
 	var enemies = list_files_in_directory(ENEMY_PATH)
 	enemies.sort()
-	print(enemies)
+	
+
 	for e in enemies:
 		var file = File.new()
 		file.open(ENEMY_PATH+e, file.READ)
@@ -68,23 +70,22 @@ func load_all_enemies():
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
-			data["AGI"], data["ACC"], data["LCK"]],
+			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 			data["NAME"], skills, data["RESISTANCE"]))
-		else:  # If parse has errors
-			print(e)
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
+
 	return [0] + ret
 
 func load_all_itens():
-	print("vou carregar itens")
+	
+
 	var ret = []
 	var itens = list_files_in_directory(ITENS_PATH)
 	itens.sort()
-	print(itens)
+	
+
 	for i in itens:
-		print(i)
+		
+
 		var file = File.new()
 		file.open(ITENS_PATH+i, file.READ)
 		var text = file.get_as_text()
@@ -100,22 +101,21 @@ func load_all_itens():
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
 			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status))
-		else:  # If parse has errors
-			print(i)
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
+
 	return [0] + ret
 
 func load_all_skills():
-	print("vou carregar skills")
+	
+
 	var ret = []
 	var itens = list_files_in_directory(SKILLS_PATH)
 	itens.sort()
-	print(itens)
+	
+
 	for s in itens:
 		var file = File.new()
-		print(s)
+		
+
 		file.open(SKILLS_PATH+s, file.READ)
 		var text = file.get_as_text()
 		var result_json = JSON.parse(text)
@@ -130,17 +130,18 @@ func load_all_skills():
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
 			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status))
-		else:  # If parse has errors
-			print(s)
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
+
 	return [0] + ret
 
-func build_inventory():
-	print("vou carregar inveotário")
+func load_inventory(slot):
+	var path = INVENTORY_PATH
+	if slot >= 0:
+		path = SAVE_PATH+"Slot"+str(slot)+"/Inventory.json"
+	return parse_inventory(path)
+
+func parse_inventory(path):
 	var file = File.new()
-	file.open(INVENTORY_PATH, file.READ)
+	file.open(path, file.READ)
 	var itens = []
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)
@@ -149,17 +150,20 @@ func build_inventory():
 		for item in data:
 			itens.append(GLOBAL.ALL_ITENS[item["ID"]])
 			itens[-1].quantity = item["QUANT"]
-	else:  # If parse has errors
-		print('inve')
-		print("Error: ", result_json.error)
-		print("Error Line: ", result_json.error_line)
-		print("Error String: ", result_json.error_string)
+
 	return itens
 
-func players_from_file():
-	print("vou carregar players")
+func load_players(slot):
+	var path = PLAYERS_PATH
+	if slot >= 0:
+		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
+	return parse_players(path)
+
+func parse_players(path):
+	
+
 	var file = File.new()
-	file.open(PLAYERS_PATH, file.READ)
+	file.open(path, file.READ)
 	var players = []
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)
@@ -175,11 +179,6 @@ func players_from_file():
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
-			data["AGI"], data["ACC"], data["LCK"]],
+			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 			data["LANE"], data["NAME"], skills, data["RESISTANCE"]))
-	else:  # If parse has errors
-		print('players')
-		print("Error: ", result_json.error)
-		print("Error Line: ", result_json.error_line)
-		print("Error String: ", result_json.error_string)
 	return players
