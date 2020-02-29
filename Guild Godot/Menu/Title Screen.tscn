@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Menu/Title Screen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Title screen 2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Menu/Save_Slots.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 33
@@ -11,19 +12,18 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [node name="Node" type="Node2D"]
-scale = Vector2( 1, 1.28 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 511.292, 300.006 )
-scale = Vector2( 1.27997, 1.19998 )
+position = Vector2( 511.292, 385.16 )
+scale = Vector2( 1.27997, 1.5406 )
 texture = ExtResource( 2 )
 
 [node name="New" type="Button" parent="."]
-margin_left = 190.0
-margin_top = 338.661
-margin_right = 303.0
-margin_bottom = 376.661
+margin_left = 166.509
+margin_top = 467.86
+margin_right = 343.509
+margin_bottom = 505.86
 focus_neighbour_top = NodePath("../Exit")
 focus_neighbour_bottom = NodePath("../Load")
 custom_fonts/font = SubResource( 1 )
@@ -32,10 +32,10 @@ text = "NEW GAME"
 flat = true
 
 [node name="Load" type="Button" parent="."]
-margin_left = 190.0
-margin_top = 405.854
-margin_right = 303.0
-margin_bottom = 443.854
+margin_left = 166.509
+margin_top = 535.053
+margin_right = 350.509
+margin_bottom = 573.053
 focus_neighbour_top = NodePath("../New")
 focus_neighbour_bottom = NodePath("../Credits")
 custom_fonts/font = SubResource( 1 )
@@ -45,10 +45,10 @@ flat = true
 
 [node name="Credits" type="Button" parent="."]
 pause_mode = 2
-margin_left = 190.0
-margin_top = 478.137
-margin_right = 334.0
-margin_bottom = 516.137
+margin_left = 166.509
+margin_top = 607.336
+margin_right = 310.509
+margin_bottom = 645.336
 focus_neighbour_top = NodePath("../Load")
 focus_neighbour_bottom = NodePath("../Exit")
 custom_fonts/font = SubResource( 1 )
@@ -57,16 +57,23 @@ text = "CREDITS"
 flat = true
 
 [node name="Exit" type="Button" parent="."]
-margin_left = 190.0
-margin_top = 536.895
-margin_right = 275.0
-margin_bottom = 574.895
+margin_left = 166.509
+margin_top = 666.094
+margin_right = 251.509
+margin_bottom = 704.094
 focus_neighbour_top = NodePath("../Credits")
 focus_neighbour_bottom = NodePath("../New")
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_hover = Color( 0.831373, 0.898039, 0.0627451, 1 )
 text = "EXIT"
 flat = true
+
+[node name="Load_Screen" type="Node2D" parent="."]
+visible = false
+position = Vector2( 150, 0 )
+
+[node name="Save Slots" parent="Load_Screen" instance=ExtResource( 4 )]
+margin_bottom = 772.0
 
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Load" to="." method="_on_Load_pressed"]
