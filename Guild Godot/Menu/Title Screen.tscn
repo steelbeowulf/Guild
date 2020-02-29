@@ -67,7 +67,6 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_hover = Color( 0.831373, 0.898039, 0.0627451, 1 )
 text = "EXIT"
 flat = true
-
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

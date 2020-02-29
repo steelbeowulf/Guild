@@ -2,14 +2,13 @@ extends Node2D
 
 onready var STATE = "Map"
 onready var menu = get_node("Menu_Area/Menu")
+onready var item = get_node("Menu_Area/Itens")
 onready var battle_scene = load("res://Battle/Battle.tscn")
 onready var lv_up_scene = load("res://Battle/Level Up.tscn")
 var map = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
-
 	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
 	self.add_child(start.instance())
 	map = get_node("Map"+str(GLOBAL.MAP))
@@ -54,6 +53,7 @@ func open_save():
 func open_inventory():
 	menu.hide()
 	get_node("Menu_Area/Itens").show()
+	get_node("Menu_Area/Itens").give_focus()
 
 
 func get_area():

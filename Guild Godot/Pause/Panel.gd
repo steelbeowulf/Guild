@@ -44,6 +44,7 @@ func _process(delta):
 		for e in $HBoxContainer/Itens.get_children():
 			e.set_focus_mode(0)
 		get_node("HBoxContainer/Options/Use").grab_focus()
+
 	#another placeholder until itens can be used in menus
 	if x == 1:
 		for i in range(len(GLOBAL.INVENTORY)):
