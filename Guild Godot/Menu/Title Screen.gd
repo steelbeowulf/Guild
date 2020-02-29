@@ -25,7 +25,7 @@ func _on_New_pressed():
 
 
 func _on_Load_pressed():
-	$"Load_Screen/Save Slots".enable_focus()
+	$"Load_Screen/Save Slots".enable_focus(false)
 	$Load_Screen.show()
 	GLOBAL.ALL_SKILLS = loader.load_all_skills()
 	GLOBAL.ALL_ITENS = loader.load_all_itens()

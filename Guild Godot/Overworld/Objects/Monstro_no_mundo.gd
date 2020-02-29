@@ -6,14 +6,14 @@ export(int) var id
 export(MOVEMENT) var movement = MOVEMENT.idle
 export(float) var radius = 0.0
 var mode = MODE.moving
-onready var map = self.get_parent().get_parent()
+onready var map = null
 signal battle_notifier
 
 var velocities
 var accum = Vector2(0,0)
 var state = 0
 
-const SPEED = 100
+const SPEED = 150
 var velocity = Vector2(0,0)
 var base_pos
 var my_pos
@@ -22,11 +22,12 @@ var dead = false
 var prev_velocity = Vector2(-1,0) # else random gets stuck forever
 const tolerance = 0.0
 
-# Called when the node enters the scene tree for the first time.
+# Initializes speed, position and animation
 func _ready():
 	velocities = [Vector2(-SPEED, 0), Vector2(0, -SPEED),
 				  Vector2(SPEED, 0), Vector2(0, SPEED)]
 	base_pos = self.get_global_position()
+	map = get_parent().get_parent()
 	$AnimatedSprite.play(str(id))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,34 +36,41 @@ func _physics_process(delta):
 	velocity = Vector2(0,0)
 	my_pos = self.get_global_position()
 	match mode:
+		# Wandering around
 		MODE.moving:
 			velocity = get_movement(delta)
+		
+		# Returning to spawn point
 		MODE.returning:
-			var leader_pos  = base_pos
-			if norm(leader_pos - my_pos) < 1:
+			var target_pos = base_pos
+			# If i'm close to target, start wandering
+			if norm(target_pos - my_pos) < 1:
 				mode = MODE.moving
-			$View.rotation = (my_pos - leader_pos).angle()
-			if my_pos.y - leader_pos.y > tolerance:
+			$View.rotation = (my_pos - target_pos).angle()
+			if my_pos.y - target_pos.y > tolerance:
 				velocity.y = -SPEED
-			if my_pos.y - leader_pos.y < tolerance:
+			if my_pos.y - target_pos.y < tolerance:
 				velocity.y = SPEED
-			if my_pos.x - leader_pos.x > tolerance:
+			if my_pos.x - target_pos.x > tolerance:
 				velocity.x = -SPEED
-			if my_pos.x - leader_pos.x < tolerance:
+			if my_pos.x - target_pos.x < tolerance:
 				velocity.x = SPEED
+		
+		# Chasing player
 		MODE.chasing:
-			var leader_pos  = chasing.get_global_position()
-			$View.rotation = (my_pos - leader_pos).angle()
-			if my_pos.y - leader_pos.y > tolerance:
+			var target_pos  = chasing.get_global_position()
+			$View.rotation = (my_pos - target_pos).angle()
+			if my_pos.y - target_pos.y > tolerance:
 				velocity.y = -SPEED
-			if my_pos.y - leader_pos.y < tolerance:
+			if my_pos.y - target_pos.y < tolerance:
 				velocity.y = SPEED
-			if my_pos.x - leader_pos.x > tolerance:
+			if my_pos.x - target_pos.x > tolerance:
 				velocity.x = -SPEED
-			if my_pos.x - leader_pos.x < tolerance:
+			if my_pos.x - target_pos.x < tolerance:
 				velocity.x = SPEED
-			velocity*=1.5
+			velocity*=1.15
 
+	# Deal with animations and FOV angles
 	if velocity == Vector2(0,0):
 		$AnimatedSprite.frame = 0
 		$AnimatedSprite.stop()
@@ -136,30 +144,40 @@ func get_movement(delta):
 				result =  velocities[newdir]
 			return result
 
+
+# Player has entered monster's FOV: start chase
 func _on_View_body_entered(body):
 	if body.is_in_group("player"):
 		chasing = body
 		mode = MODE.chasing
 
 
+# Player has left monster's FOV: return to spawn point
 func _on_View_body_exited(body):
 	if body.is_in_group("player"):
 		chasing = null
 		mode = MODE.returning
 
 
+# Function called when monster touches player
+# Notifies map to save its state and battle manager
+# to start the battle
 func _on_Battle_body_entered(body):
 	self.dead = true
 	if body.is_in_group("player"):
-		map.generate_enemies()
+		GLOBAL.entering_battle = true
 		map.update_objects_position()
 		map.get_node("HUD/Transition").play("Battle")
 		yield(map.get_node("HUD/Transition"), "animation_finished")
-		get_tree().change_scene("res://Battle/Battle.tscn")
+		BATTLE_MANAGER.initiate_battle()
 
+
+# Helper function to get norm of a Vector2
 func norm(vec):
 	return sqrt(vec.x*vec.x + vec.y*vec.y)
 
+
+# Updates itself according to map state
 func _update(value):
 	var pos = GLOBAL.parse_position(value[1])
 	value = value[0]
@@ -167,9 +185,12 @@ func _update(value):
 		self.queue_free()
 	self.set_global_position(pos)
 
+
+# Warns battle manager monster is being seen
 func _on_VisibilityNotifier2D_viewport_entered(viewport):
 	emit_signal("battle_notifier", true, id, self.get_name())
 
 
+# Warns battle manager monster is no long being seen
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	emit_signal("battle_notifier", false, id, self.get_name())

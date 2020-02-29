@@ -20,12 +20,11 @@ signal round_finished
 signal finish_anim
 
 func _ready():
-	
-
+	GLOBAL.entering_battle = false
 	battle_over = false
-	Players = BATTLE_INIT.Play
+	Players = GLOBAL.ALL_PLAYERS
 	Inventory =  GLOBAL.INVENTORY
-	Enemies =  BATTLE_INIT.Enem
+	Enemies =  BATTLE_MANAGER.Battled_Enemies
 	
 	for c in get_node("Menu").get_children():
 		c.focus_previous = NodePath("Menu/Attack")
@@ -509,7 +508,7 @@ func end_battle():
 	$AnimationManager/Log.display_text("Fim de jogo!")
 	
 
-	BATTLE_INIT.end_battle(Players, Enemies, Inventory)
+	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
 	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 
 # TODO: there are graphical parts in this, move to ANimationManager

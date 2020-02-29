@@ -31,12 +31,12 @@ func _on_Slot_chosen(binds):
 
 func _on_Save_pressed():
 	state = 1
-	slots.enable_focus()
+	slots.enable_focus(true)
 
 
 func _on_Load_pressed():
 	state = 2
-	slots.enable_focus()
+	slots.enable_focus(false)
 
 
 func _on_Quit_pressed():
@@ -64,5 +64,5 @@ func _on_LoadDialog_confirmed():
 	GLOBAL.reload_state()
 	GLOBAL.load_game(chosen_slot)
 	GLOBAL.get_root().close_menu()
-	GLOBAL.get_root().transition(GLOBAL.MAP)
+	GLOBAL.get_root().transition(GLOBAL.MAP, true)
 	get_tree().change_scene("res://Root.tscn")

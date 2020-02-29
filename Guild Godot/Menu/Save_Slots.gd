@@ -11,9 +11,9 @@ func remove_focus():
 		c.set_focus_mode(0)
 		c.disabled = true
 
-func enable_focus():
+func enable_focus(saving):
 	for c in get_children():
-		if c.get_node("Area").text != "UNUSED":
+		if c.get_node("Area").text != "UNUSED" or saving == true:
 			c.set_focus_mode(2)
 			c.disabled = false
 	$Slot0.grab_focus()
