@@ -6,6 +6,7 @@ onready var map = null
 
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
+onready var item = get_node("Menu_Area/Itens")
 onready var battle_scene = load("res://Battle/Battle.tscn")
 onready var lv_up_scene = load("res://Battle/Level Up.tscn")
 
@@ -71,6 +72,7 @@ func open_save():
 func open_inventory():
 	menu.hide()
 	get_node("Menu_Area/Itens").show()
+	get_node("Menu_Area/Itens").give_focus()
 
 
 # Transitions from current area to next area

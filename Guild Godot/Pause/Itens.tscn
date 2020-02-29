@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://Pause/Panel.gd" type="Script" id=2]
+[ext_resource path="res://Pause/Itens.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Hover_Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=5]
@@ -9,12 +9,12 @@
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 1030.0
 margin_bottom = 770.0
-custom_styles/panel = ExtResource( 1 )
-script = ExtResource( 2 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 margin_right = 1024.0
@@ -31,7 +31,8 @@ rect_min_size = Vector2( 300, 50 )
 margin_right = 300.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
-custom_styles/normal = ExtResource( 1 )
+focus_mode = 0
+custom_styles/normal = ExtResource( 2 )
 enabled_focus_mode = 0
 text = "Itens"
 
@@ -43,7 +44,7 @@ rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Use"
 
 [node name="Organize" type="Button" parent="Panel/HBoxContainer/Options"]
@@ -54,7 +55,7 @@ rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Organize"
 
 [node name="KeyItens" type="Button" parent="Panel/HBoxContainer/Options"]
@@ -65,7 +66,7 @@ rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Key Itens"
 
 [node name="Back" type="Button" parent="Panel/HBoxContainer/Options"]
@@ -76,7 +77,7 @@ rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Back"
 
 [node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Options"]
@@ -93,20 +94,20 @@ custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
 text = "500G"
 
 [node name="Itens" type="VBoxContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 margin_left = 304.0
 margin_right = 1024.0
 margin_bottom = 744.0
 rect_min_size = Vector2( 720, 0 )
 
 [node name="ItemSlot0" type="Button" parent="Panel/HBoxContainer/Itens"]
-visible = false
 margin_right = 720.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -118,7 +119,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -130,7 +131,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -142,7 +143,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -154,7 +155,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -166,7 +167,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -178,7 +179,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -190,7 +191,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -202,7 +203,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -214,7 +215,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -226,7 +227,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -238,7 +239,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -250,7 +251,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -262,7 +263,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -274,7 +275,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -286,7 +287,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -298,7 +299,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
 
@@ -310,10 +311,10 @@ rect_min_size = Vector2( 0, 40 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Use" to="Panel" method="_on_Use_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Use" to="." method="_on_Use_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot0" to="Panel/HBoxContainer/Itens/ItemSlot0" method="_on_ItemSlot0_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot1" to="Panel/HBoxContainer/Itens/ItemSlot1" method="_on_ItemSlot0_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot2" to="Panel/HBoxContainer/Itens/ItemSlot2" method="_on_ItemSlot0_pressed"]

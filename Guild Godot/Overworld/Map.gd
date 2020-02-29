@@ -37,6 +37,8 @@ func generate_enemies():
 	BATTLE_INIT.begin_battle(id, newEnemy, Kill)
 	return
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 

@@ -29,5 +29,4 @@ visible = false
 [node name="Timer" type="Timer" parent="Menu_Area/Node2D"]
 pause_mode = 2
 autostart = true
-
 [connection signal="timeout" from="Menu_Area/Node2D/Timer" to="." method="_on_Timer_timeout"]
