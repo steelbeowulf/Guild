@@ -9,6 +9,8 @@ var ALL_ENEMIES
 var ALL_PLAYERS
 var INVENTORY
 
+var entering_battle = false
+
 # State variables for the Demo_area
 # TODO: make it not hardcoded and generic
 var POSITION = Vector2(816, 368)

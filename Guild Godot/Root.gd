@@ -73,12 +73,14 @@ func open_inventory():
 
 # Transitions from current area to next area
 # TODO: fix crash when map changes are quick
-func transition(next):
+func transition(next, fake=false):
 	var new = load("res://Overworld/Demo_Area/Map"+str(next)+".tscn")
 	if map:
 		remove_child(map)
 		map.queue_free()
-	GLOBAL.TRANSITION = GLOBAL.MAP
+	GLOBAL.TRANSITION = -1
+	if not fake:
+		GLOBAL.TRANSITION = GLOBAL.MAP
 	GLOBAL.MAP = next
 	self.add_child(new.instance())
 	map = get_node("Map"+str(next))

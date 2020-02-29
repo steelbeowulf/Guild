@@ -106,8 +106,6 @@ func check_doors():
 func update_objects_position():
 	for e in get_node("Objects").get_children():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
-	for p in get_node("Party").get_children():
-		save_state("PLAYER_POS", p.get_name(), p.get_global_position())
 	for e in get_node("Enemies").get_children():
 		if e.dead:
 			save_state("ENEMY_KILL", e.get_name())
@@ -118,7 +116,6 @@ func update_objects_position():
 # TREASURE -> when a treasure chest is opened
 # ENEMY_KILL -> when a enemy is killed
 # OBJ_POS -> when an object changes position
-# PLAYER_POS -> when the player changes position
 func save_state(type, node, open=false, pos=Vector2(0,0)):
 	if type == "TREASURE":
 		state["Treasure/"+str(node)] = true
@@ -126,8 +123,6 @@ func save_state(type, node, open=false, pos=Vector2(0,0)):
 		state["Enemies/"+str(node)] = [true, pos]
 	elif type == "OBJ_POS":
 		state["Objects/"+str(node)] = [open, pos]
-	elif type == "PLAYER_POS":
-		state["Party/"+str(node)] = [false, pos]
 	# Saves current map state on the game's memory (not persistent)
 	GLOBAL.set_state(state)
 

@@ -1,8 +1,6 @@
 extends Node
 class_name STATS
 
-var level_max_exp = {2:100, 3:120, 4:140, 5:200, 6:250, 7:300, 8:400, 9:520, 10:650, 11:775, 12:850, 13:900, 14:1000, 15:1500, 16:2000}
-
 var STATUS = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW", 
 	4:"HASTE", 5:"BERSERK", 6:"REGEN", 7:"UNDEAD", 8:"PETRIFY", 9:"SILENCE", 
 	10:"BLIND", 11:"DOOM", 12:"PARALYSIS", 13:"MAX_HP_DOWN", 14:"MAX_MP_DOWN", 
