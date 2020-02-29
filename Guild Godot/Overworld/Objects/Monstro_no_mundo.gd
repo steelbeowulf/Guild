@@ -151,11 +151,10 @@ func _on_View_body_exited(body):
 func _on_Battle_body_entered(body):
 	self.dead = true
 	if body.is_in_group("player"):
-		map.generate_enemies()
 		map.update_objects_position()
 		map.get_node("HUD/Transition").play("Battle")
 		yield(map.get_node("HUD/Transition"), "animation_finished")
-		get_tree().change_scene("res://Battle/Battle.tscn")
+		BATTLE_MANAGER.initiate_battle()
 
 func norm(vec):
 	return sqrt(vec.x*vec.x + vec.y*vec.y)

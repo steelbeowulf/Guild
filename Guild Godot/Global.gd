@@ -15,7 +15,7 @@ var POSITION = Vector2(816, 368)
 var STATE = {'1':{}, '2':{}, '3':{}, '4':{}, '5':{}, 
 			 '6':{}, '7':{}, '8':{}, '9':{}, '10':{},
 			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{}}
-var TRANSITION
+var TRANSITION = -1
 var MAP = 1
 var WIN
 onready var MATCH = false
@@ -24,7 +24,7 @@ onready var ROOM = false
 
 # Helper function to get the Root node
 func get_root():
-	return find_node("Root")
+	return get_node("/root/Root")
 
 
 # Joins all info from the map in a saveable format
@@ -35,7 +35,6 @@ func get_area_dict():
 	area_dict["STATE"] = STATE
 	area_dict["MATCH"] = MATCH
 	area_dict["ROOM"] = ROOM
-	area_dict["TRANSITION"] = TRANSITION
 	area_dict["MAP"] = MAP
 	area_dict["POSITION"] = POSITION
 	return area_dict
@@ -47,7 +46,6 @@ func load_area(area_dict):
 	STATE = area_dict["STATE"]
 	MATCH = area_dict["MATCH"]
 	ROOM = area_dict["ROOM"]
-	TRANSITION = area_dict["TRANSITION"]
 	MAP = area_dict["MAP"]
 	POSITION = parse_position(area_dict["POSITION"])
 	AREA = area_dict["NAME"]
@@ -73,7 +71,7 @@ func reload_state():
 			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{}}
 	MATCH = false
 	ROOM = false
-	TRANSITION = null
+	TRANSITION = -1
 	MAP = 1
 	POSITION = Vector2(816, 368)
 
@@ -120,7 +118,7 @@ func save(slot):
 	# Saves inventory information
 	var itens_data = []
 	for item in INVENTORY:
-		save_dict.append({"ID":item.id, "QUANT":item.quantity})
+		itens_data.append({"ID":item.id, "QUANT":item.quantity})
 	savegame.open(save_path+str(slot)+"/Inventory.json", File.WRITE)
 	savegame.store_line(to_json(itens_data))
 	savegame.close()
@@ -143,7 +141,7 @@ var playtime = 0
 
 # Returns state from the current map
 func get_state():
-	return STATE[MAP]
+	return STATE[str(MAP)]
 
 # Update state on the current map
 func set_state(state_arg):

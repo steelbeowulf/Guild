@@ -15,7 +15,7 @@ var movedir = Vector2() # move direction
 onready var ray = $RayCast2D
 
 # Called when the node enters the scene tree for the first time.
-func _rready():
+func _initialize():
 	if GLOBAL.POSITION:
 		position = GLOBAL.POSITION
 	$AnimatedSprite.animation = "walk_down"

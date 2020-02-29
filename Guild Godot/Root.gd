@@ -6,8 +6,6 @@ onready var map = null
 
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
-onready var battle_scene = load("res://Battle/Battle.tscn")
-onready var lv_up_scene = load("res://Battle/Level Up.tscn")
 
 
 # Loads the correct map
@@ -80,6 +78,7 @@ func transition(next):
 	if map:
 		remove_child(map)
 		map.queue_free()
+	GLOBAL.TRANSITION = GLOBAL.MAP
 	GLOBAL.MAP = next
 	self.add_child(new.instance())
 	map = get_node("Map"+str(next))

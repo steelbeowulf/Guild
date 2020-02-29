@@ -1,108 +1,91 @@
 extends Node2D
 
+# Positions for map transitions
+# key: from which map I came
+# value: position I start
 export var Transitions = {}
+
+# Doors and conditions
+# key: node name
+# value: condition
 export var Doors = {}
 
-onready var Players = []
-onready var Inventory = []
+# State variables
 onready var Enemies = []
-onready var Encounter = []
-onready var Kill = []
-
-var menu = load("res://Menu.tscn")
-var cara_no_mundo = load("res://Overworld/Objects/Cara_no_mundo.tscn")
 onready var Player_pos = Vector2(816, 368)
 onready var state = {}
-var id = 0
+
+# Shortcut variables
+var menu = load("res://Menu.tscn")
+var cara_no_mundo = load("res://Overworld/Objects/Cara_no_mundo.tscn")
 
 
-func generate_enemies():
-	var newEnemy = []
-	var total = int(rand_range(1,4))
-	if Encounter and Encounter[0] == 9:
-		total = 0
-		GLOBAL.WIN = true
-	var current = 0
-	Encounter.shuffle()
-	for k in Kill:
-		get_node("Enemies/"+str(k)).dead = true
-	while current <= total:
-		if Encounter:
-			newEnemy.append(Enemies[Encounter[0]]._duplicate())
-			Encounter.pop_front()
-		else:
-			var enemy_id = int(rand_range(1,len(Enemies)-1))
-			newEnemy.append(Enemies[enemy_id]._duplicate())
-		current+=1
-	BATTLE_INIT.begin_battle(id, newEnemy, Kill)
-	return
+# Returns current maps' margins (used to limit player camera)
+func get_map_margin():
+	return [$Limits.margin_bottom, $Limits.margin_left,
+	$Limits.margin_top, $Limits.margin_right]
 
-# Called when the node enters the scene tree for the first time.
+
+###### PREPARATION FUNCTION #####
+
 func _ready():
-
+	# Initializes pause mode and play map music
 	self.pause_mode = Node.PAUSE_MODE_STOP
 	AUDIO.play_bgm('MAP_THEME', true)
-	if get_tree().get_current_scene().get_area() == 'Map4':
+	
+	# Arbitrary stuff hardcoded for the demo
+	# TODO: fix it
+	if GLOBAL.get_map() == 4:
 		get_node("Matching Puzzle").reset()
 	if GLOBAL.WIN:
 		get_tree().change_scene("res://Menu/Victory.tscn")
+	
+	# TODO: Limit Enemies to enemies on this area
 	Enemies = GLOBAL.ALL_ENEMIES
-	Encounter = []
-	var name = get_name()
-	id = int(name.substr(3, len(name)))
-	GLOBAL.MAP = id
 	Player_pos = GLOBAL.POSITION
-	if BATTLE_INIT.first:
-		Players = GLOBAL.ALL_PLAYERS
-		Inventory = GLOBAL.INVENTORY
-		BATTLE_INIT.init(Players, Enemies)
-	else:
-		Players = BATTLE_INIT.Play
-		if Players == []:
-			get_tree().change_scene("res://Battle/Game Over.tscn")
-	if GLOBAL.STATE[str(id)]:
-		state = GLOBAL.STATE[str(id)]
+	
+	# Gets current map state from global area state
+	state = GLOBAL.get_state()
 
+	# Sets player position on map
 	var pos = Player_pos
 	if GLOBAL.POSITION:
 		pos = GLOBAL.POSITION
-	if GLOBAL.TRANSITION:
-		pos = Transitions[GLOBAL.TRANSITION]
-		GLOBAL.TRANSITION = false
-
+	if GLOBAL.TRANSITION != -1:
+		pos = Transitions[int(GLOBAL.TRANSITION)]
+		GLOBAL.TRANSITION = -1
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
-	#var cara = get_node("Party/Cara")
-	# Connects itself to monsters
+	cara.position = pos
+	GLOBAL.POSITION = pos
+	cara._initialize()
+	
+	# Connects battle manager to monsters
+	var BM = get_node("/root/BATTLE_MANAGER")
+	BM.init(Enemies, self)
 	for e in get_node("Enemies").get_children():
-		e.connect("battle_notifier", self, "_encounter_management")
+		e.connect("battle_notifier", BM, "_encounter_management")
 
+	# Updates objects and enemies on the map according to loaded state
 	if state:
 		for key in state.keys():
 			var value = state[key]
 			get_node(key)._update(value)
 
-	cara.position = pos
-	GLOBAL.POSITION = pos
-	cara._rready()
 
-func _encounter_management(value, id, name):
-
-	if value:
-		Encounter.append(id)
-		Kill.append(name)
-	else:
-		Encounter.erase(id)
-		Kill.erase(name)
-
-func get_map_margin():
-	return [$Limits.margin_bottom, $Limits.margin_left,
-	$Limits.margin_top, $Limits.margin_right]
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Updates player position and checks current map doors' conditions
+# on each frame
+# TODO: make check_doors be event driven
 func _physics_process(delta):
-	var pos = $Party.get_child(0).get_global_position()
-	GLOBAL.POSITION = pos
+	GLOBAL.POSITION = $Party.get_child(0).get_global_position()
+	check_doors()
+
+
+###### STATE FUNCTIONS #####
+
+# Check if doors' objectives has been accomplished
+# If so, opens it and sends a message on the HUD log
+func check_doors():
 	for d in Doors.keys():
 		if Doors[d] == 'Defeat all enemies' and not $Enemies.get_children():
 			get_node("Objects/"+str(d)).open()
@@ -118,9 +101,8 @@ func _physics_process(delta):
 				Doors[d] = ''
 				send_message("Uma nova passagem se abriu")
 
-func send_message(text):
-	$HUD/Log.display_text(text)
 
+# Updates all objects, player's and enemies states on the current map
 func update_objects_position():
 	for e in get_node("Objects").get_children():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
@@ -130,6 +112,13 @@ func update_objects_position():
 		if e.dead:
 			save_state("ENEMY_KILL", e.get_name())
 
+
+# Saves a change on the current map
+# The types of events currently available are:
+# TREASURE -> when a treasure chest is opened
+# ENEMY_KILL -> when a enemy is killed
+# OBJ_POS -> when an object changes position
+# PLAYER_POS -> when the player changes position
 func save_state(type, node, open=false, pos=Vector2(0,0)):
 	if type == "TREASURE":
 		state["Treasure/"+str(node)] = true
@@ -139,10 +128,21 @@ func save_state(type, node, open=false, pos=Vector2(0,0)):
 		state["Objects/"+str(node)] = [open, pos]
 	elif type == "PLAYER_POS":
 		state["Party/"+str(node)] = [false, pos]
-	GLOBAL.STATE[str(id)] = state
+	# Saves current map state on the game's memory (not persistent)
+	GLOBAL.set_state(state)
 
+
+###### HUD FUNCTIONS #####
+
+# Shows a message on the HUD log
+func send_message(text):
+	$HUD/Log.display_text(text)
+
+# Hides the HUD layer (currently only a log)
 func hide_hud():
 	self.get_node("HUD").layer = -1
 
+
+# Shows the HUD layer (currently only a log)
 func show_hud():
 	self.get_node("HUD").layer = 1

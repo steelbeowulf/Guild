@@ -31,12 +31,12 @@ func _on_Slot_chosen(binds):
 
 func _on_Save_pressed():
 	state = 1
-	slots.enable_focus()
+	slots.enable_focus(true)
 
 
 func _on_Load_pressed():
 	state = 2
-	slots.enable_focus()
+	slots.enable_focus(false)
 
 
 func _on_Quit_pressed():
