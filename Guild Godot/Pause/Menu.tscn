@@ -31,7 +31,6 @@ rect_min_size = Vector2( 720, 0 )
 custom_styles/panel = ExtResource( 2 )
 
 [node name="Chars" type="VBoxContainer" parent="Panel/All/Left"]
-editor/display_folded = true
 margin_right = 720.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 720, 0 )
@@ -458,6 +457,7 @@ focus_neighbour_bottom = NodePath("../Equip")
 custom_styles/hover = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
 text = "Skill"
 flat = true
 
@@ -472,6 +472,7 @@ focus_neighbour_bottom = NodePath("../Status")
 custom_styles/hover = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
 text = "Equipment"
 flat = true
 
@@ -486,6 +487,7 @@ focus_neighbour_bottom = NodePath("../Tree")
 custom_styles/hover = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
 text = "Status"
 flat = true
 
@@ -500,6 +502,7 @@ focus_neighbour_bottom = NodePath("../Options")
 custom_styles/hover = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
 text = "Job Tree"
 flat = true
 
@@ -601,5 +604,6 @@ uppercase = true
 
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Item" to="." method="_on_Item_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Skill" to="." method="_on_Skill_pressed"]
+[connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Status" to="." method="_on_Status_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Save" to="." method="_on_Save_pressed"]
