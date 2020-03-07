@@ -4,20 +4,12 @@ func enter(players):
 	give_focus()
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
-		node.get_node("Name").set_text(players[i].get_name())
-		node.get_node("Level").set_text(str(players[i].level))
-		var tmp = str(players[i].get_health())+"/"+str(players[i].get_max_health())
-		node.get_node("HP").set_text(tmp)
-		tmp = str(players[i].get_mp())+"/"+str(players[i].get_max_mp())
-		node.get_node("MP").set_text(tmp)
-		tmp = str(players[i].xp)+"/"+str(((18/10)^players[i].level)*5)
-		node.get_node("EXP").set_text(tmp)
+		node.update_info(players[i])
 		node.connect("pressed", self, "_on_Player_chosen", [i])
-		# Needs a portrait
-		#node.get_node("Sprite").set_texture(players[i].sprite)
 
 
 func _on_Player_chosen(binds):
+	print("Cliquei no player "+str(binds))
 	get_parent().get_parent().player_clicked(binds)
 
 
@@ -46,6 +38,9 @@ func force_char_focus():
 	var chars = $Panel/All/Left/Chars.get_children()
 	for c in chars:
 		c.set_focus_mode(2)
+		c.disabled = false
+		for l in c.get_node("Lanes").get_children():
+			l.set_focus_mode(0)
 	chars[0].grab_focus()
 
 
@@ -56,6 +51,9 @@ func give_focus():
 	var chars = $Panel/All/Left/Chars.get_children()
 	for c in chars:
 		c.set_focus_mode(0)
+		c.disabled = true
+		for l in c.get_node("Lanes").get_children():
+			l.set_focus_mode(2)
 	options[0].grab_focus()
 
 

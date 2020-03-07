@@ -10,6 +10,7 @@ onready var Map = null
 onready var Battled_Enemies = []
 
 # Level up variables
+onready var leveled_up = [0,0,0,0]
 onready var levelup = 0
 onready var lvup_max_hp = 0
 onready var lvup_max_mp = 0
@@ -81,6 +82,7 @@ func generate_enemies():
 
 # Generates enemies and begins the battle
 func initiate_battle():
+	leveled_up = [0,0,0,0]
 	Battled_Enemies = generate_enemies()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
@@ -108,6 +110,7 @@ func end_battle(Players, Enemies, Inventory):
 			var up = ((18/10)^p.level)*5
 			while p.xp >= up:
 				levelup = 1
+				leveled_up[p.id] = 1
 				p.xp = p.xp - up
 				p.level += 1
 				var max_hp = p.get_max_health()

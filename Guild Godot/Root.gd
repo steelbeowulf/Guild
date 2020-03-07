@@ -38,7 +38,8 @@ func _process(delta):
 		menu.give_focus()
 	# Cheap hack to test money
 	elif Input.is_action_just_pressed("debug"):
-		print(menu.get_focus_owner())
+		if(menu.get_focus_owner()):
+			print(menu.get_focus_owner().get_name())
 
 
 # Opens the main pause menu (pauses map)
