@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=5]
 
-[node name="Menu" type="Control"]
+[node name="Itens" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -314,6 +314,7 @@ custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
+
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Use" to="." method="_on_Use_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot0" to="Panel/HBoxContainer/Itens/ItemSlot0" method="_on_ItemSlot0_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot1" to="Panel/HBoxContainer/Itens/ItemSlot1" method="_on_ItemSlot0_pressed"]

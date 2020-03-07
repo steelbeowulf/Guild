@@ -1,7 +1,7 @@
 extends Control
 
 func enter(players):
-	get_node("Panel/All/Right/Options_Panel/Options/Item").grab_focus()
+	give_focus()
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.get_node("Name").set_text(players[i].get_name())
@@ -31,7 +31,10 @@ func format_playtime(T):
 	return str(hours)+"h"+str(minutes)+"m"+str(seconds)+"s" 
 
 func give_focus():
-	get_node("Panel/All/Right/Options_Panel/Options/Item").grab_focus()
+	var b = get_node("Panel/All/Right/Options_Panel/Options/Item")
+	b.set_focus_mode(2)
+	b.grab_focus()
+
 
 func _on_Item_pressed():
 	get_parent().get_parent().open_inventory()

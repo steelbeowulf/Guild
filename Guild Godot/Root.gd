@@ -6,6 +6,9 @@ onready var map = null
 
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
+onready var save = load("res://Pause/Save.tscn")
+onready var itens = load("res://Pause/Itens.tscn")
+
 
 # Loads the correct map
 func _ready():
@@ -27,13 +30,14 @@ func _process(delta):
 		close_menu()
 	# Closes submenus and returns to menu
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
-		for c in get_node("Menu_Area").get_children():
-			c.hide()
+		#$Menu_Area/SubMenus.hide()
+		for c in $Menu_Area/SubMenus.get_children():
+			c.free()
 		menu.show()
 		menu.give_focus()
 	# Cheap hack to test money
-	elif Input.is_action_just_pressed("ui_focus_next"):
-		GLOBAL.gold += 100
+	elif Input.is_action_just_pressed("debug"):
+		print(menu.get_focus_owner())
 
 
 # Opens the main pause menu (pauses map)
@@ -60,15 +64,20 @@ func close_menu():
 # Opens the save submenu
 func open_save():
 	menu.hide()
-	get_node("Menu_Area/Save").show()
-	get_node("Menu_Area/Save").remove_focus()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(save.instance())
+	get_node("Menu_Area/SubMenus/Save").show()
+	get_node("Menu_Area/SubMenus/Save").enter()
+	get_node("Menu_Area/SubMenus/Save").remove_focus()
 
 
 # Opens the inventory submenu
 func open_inventory():
 	menu.hide()
-	get_node("Menu_Area/Itens").show()
-	get_node("Menu_Area/Itens").give_focus()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(itens.instance())
+	get_node("Menu_Area/SubMenus/Itens").show()
+	get_node("Menu_Area/SubMenus/Itens").give_focus()
 
 
 # Transitions from current area to next area

@@ -48,11 +48,12 @@ func _process(delta):
 			node.set_text(str(GLOBAL.INVENTORY[i].nome) + " x" + str(GLOBAL.INVENTORY[i].quantity))
 		x = 0
 
+
 func give_focus():
 	$Panel/HBoxContainer/Options/Use.set_focus_mode(2)
 	$Panel/HBoxContainer/Options/Organize.set_focus_mode(2)
 	$Panel/HBoxContainer/Options/KeyItens.set_focus_mode(2)
 	$Panel/HBoxContainer/Options/Back.set_focus_mode(2)
 	for e in $Panel/HBoxContainer/Itens.get_children():
-			e.set_focus_mode(0)
+		e.set_focus_mode(0)
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
