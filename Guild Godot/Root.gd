@@ -67,9 +67,16 @@ func open_save():
 # Opens the inventory submenu
 func open_inventory():
 	menu.hide()
+	get_node("Menu_Area/ItemUse").hide()
 	get_node("Menu_Area/Itens").show()
+	get_node("Menu_Area/Itens").just_entered()
 	get_node("Menu_Area/Itens").give_focus()
 
+func use_item(item):
+	get_node("Menu_Area/Itens").hide()
+	get_node("Menu_Area/ItemUse").show()
+	get_node("Menu_Area/ItemUse").give_focus()
+	get_node("Menu_Area/ItemUse").enter(item)
 
 # Transitions from current area to next area
 # TODO: fix crash when map changes are quick

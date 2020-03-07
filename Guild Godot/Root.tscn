@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Root.gd" type="Script" id=1]
 [ext_resource path="res://Pause/Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Pause/Save.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Pause/Itens.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Pause/ItemUse.tscn" type="PackedScene" id=5]
 
 [node name="Root" type="Node2D"]
 pause_mode = 2
@@ -19,6 +20,9 @@ focus_mode = 2
 visible = false
 
 [node name="Itens" parent="Menu_Area" instance=ExtResource( 4 )]
+visible = false
+
+[node name="ItemUse" parent="Menu_Area" instance=ExtResource( 5 )]
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="Menu_Area"]
