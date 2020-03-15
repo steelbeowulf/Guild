@@ -95,6 +95,7 @@ func open_inventory():
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(itens.instance())
 	get_node("Menu_Area/SubMenus/Itens").show()
+  get_node("Menu_Area/SubMenus/Itens").just_entered()
 	get_node("Menu_Area/SubMenus/Itens").give_focus()
 
 
@@ -112,6 +113,11 @@ func open_status(char_id):
 	get_node("Menu_Area/SubMenus/Status").show()
 	get_node("Menu_Area/SubMenus/Status").enter(char_id)
 
+func use_item(item):
+	get_node("Menu_Area/Itens").hide()
+	get_node("Menu_Area/ItemUse").show()
+	get_node("Menu_Area/ItemUse").give_focus()
+	get_node("Menu_Area/ItemUse").enter(item)
 
 # Transitions from current area to next area
 # TODO: fix crash when map changes are quick
