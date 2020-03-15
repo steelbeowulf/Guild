@@ -89,3 +89,25 @@ func play_se(sound, loud=0):
 			audio[i].stream = sound
 			audio[i].play()
 			return
+
+############# CONFIG FUNCTIONS ###################
+func get_master_volume():
+	return base_master
+
+func get_bgm_volume():
+	return base_bgm
+
+func get_sfx_volume():
+	return base_se
+
+func set_master_volume(vol):
+	base_master = vol
+	recalibrate()
+
+func set_sfx_volume(vol):
+	base_se = vol
+	recalibrate()
+
+func set_bgm_volume(vol):
+	base_bgm = vol
+	recalibrate()

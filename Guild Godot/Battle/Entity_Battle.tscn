@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
 
-
 [sub_resource type="Theme" id=1]
 
 [sub_resource type="DynamicFont" id=2]
@@ -91,3 +90,4 @@ text = "250"
 anims/Damage = SubResource( 3 )
 
 [node name="Animations" type="Node2D" parent="."]
+

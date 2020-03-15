@@ -23,11 +23,28 @@ onready var lvup_acc = 0
 onready var lvup_eva = 0  
 onready var lvup_lck = 0 
 
+# Config variables
+onready var cursor_default = 0
+onready var cursor_opt = ["RESET", "REMEMBER"]
+onready var cursor = [0, 1]
+
+onready var animation_speed = 1
+onready var speed_opt = ["SLOW", "NORMAL", "FAST"]
+onready var speed = [0.5, 1, 2]
 
 # Sets the possible pool of enemies to draw from and the map
 func init(enemies_arg, map_arg):
 	Enemies = enemies_arg
 	Map = map_arg
+
+######### CONFIG FUCTIONS #########
+func set_battle_speed(ID):
+	animation_speed = speed[ID]
+
+
+func set_cursor_default(ID):
+	cursor_default = cursor[ID]
+
 
 ###### ENEMY ENCOUNTER FUNCTIONS #####
 

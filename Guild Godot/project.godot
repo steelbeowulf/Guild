@@ -37,10 +37,12 @@ LOADER="*res://Classes/Loader.gd"
 GLOBAL="*res://Global.gd"
 AUDIO="*res://Audio.gd"
 BATTLE_MANAGER="*res://Overworld/Battle_Manager.gd"
+DISPLAY="*res://Display.gd"
 
 [display]
 
-window/size/height=768
+window/size/width=1280
+window/size/height=720
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

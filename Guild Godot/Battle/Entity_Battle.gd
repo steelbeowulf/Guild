@@ -37,14 +37,13 @@ func set_animations(sprite, animations):
 		animation.hframes = hf
 		animation.scale = Vector2(sc[0], sc[1])
 		animation.fps = 10
+		animation.speed = BATTLE_MANAGER.animation_speed
 		animation.hide()
 		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
 	if name == 'Damage':
-		
-
 		take_damage(options, 0)
 		return
 	$Animations.get_node("idle").stop()
