@@ -11,6 +11,7 @@ onready var save = load("res://Pause/Save.tscn")
 onready var itens = load("res://Pause/Itens.tscn")
 onready var use_itens = load("res://Pause/ItemUse.tscn")
 onready var status = load("res://Pause/Status.tscn")
+onready var skills = load("res://Pause/Skills.tscn")
 
 
 # Loads the correct map
@@ -106,6 +107,14 @@ func back_to_inventory():
 	get_node("Menu_Area/SubMenus/Itens").just_entered()
 	get_node("Menu_Area/SubMenus/Itens").give_focus()
 
+func open_skills(player):
+	menu.hide()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(skills.instance())
+	get_node("Menu_Area/SubMenus/Skills").show()
+	get_node("Menu_Area/SubMenus/Skills").just_entered()
+	get_node("Menu_Area/SubMenus/Skills").show_skills(player)
+	get_node("Menu_Area/SubMenus/Skills").give_focus()
 
 # Toggles status submenu
 func toggle_status():
@@ -121,7 +130,7 @@ func open_status(char_id):
 	get_node("Menu_Area/SubMenus/Status").show()
 	get_node("Menu_Area/SubMenus/Status").enter(char_id)
 
-
+# Opens the use item submenu
 func use_item(item):
 	get_node("Menu_Area/SubMenus/Itens").hide()
 	get_node("Menu_Area/SubMenus").add_child(use_itens.instance())

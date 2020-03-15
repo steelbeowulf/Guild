@@ -62,8 +62,11 @@ func _on_Item_pressed():
 
 
 func _on_Skill_pressed():
-	pass # Replace with function body.
+	pass#need to use the on_char pressed function, without triggering by simpling pressing the char portrait. to be fized to actually work
+	#get_parent().get_parent().open_skills()
 
+func _on_Char0_pressed():
+	pass #how to use this and still share it with regular button press
 
 func _on_Options_pressed():
 	pass # Replace with function body.
@@ -75,3 +78,6 @@ func _on_Save_pressed():
 
 func _on_Status_pressed():
 	get_parent().get_parent().toggle_status()
+
+
+
