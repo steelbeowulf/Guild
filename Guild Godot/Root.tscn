@@ -17,9 +17,6 @@ visible = false
 visible = false
 focus_mode = 2
 
-[node name="ItemUse" parent="Menu_Area" instance=ExtResource( 5 )]
-visible = false
-
 [node name="Camera2D" type="Camera2D" parent="Menu_Area"]
 
 [node name="Timer" type="Timer" parent="."]

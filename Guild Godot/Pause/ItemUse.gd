@@ -48,7 +48,8 @@ func actual_item(item):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("ui_cancel") and location == "TARGETS":
-		get_parent().get_parent().open_inventory()
+		get_parent().get_parent().get_parent().back_to_inventory()
+		queue_free()
 
 func _on_Char0_pressed():
 	hp_char =  hp_char  + recoverHP
@@ -58,7 +59,8 @@ func _on_Char0_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	get_parent().get_parent().open_inventory()
+	get_parent().get_parent().get_parent().back_to_inventory()
+	queue_free()
 
 
 func _on_Char1_pressed():
@@ -69,7 +71,8 @@ func _on_Char1_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	get_parent().get_parent().open_inventory()
+	get_parent().get_parent().get_parent().back_to_inventory()
+	queue_free()
 
 
 func _on_Char2_pressed():
@@ -80,7 +83,8 @@ func _on_Char2_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	get_parent().get_parent().open_inventory()
+	get_parent().get_parent().get_parent().back_to_inventory()
+	queue_free()
 
 
 func _on_Char3_pressed():
@@ -91,4 +95,5 @@ func _on_Char3_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	get_parent().get_parent().open_inventory()
+	get_parent().get_parent().get_parent().back_to_inventory()
+	queue_free()

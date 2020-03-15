@@ -36,8 +36,7 @@ func _on_Item_selected(name):
 	use_item(nome)
 
 func use_item(namex):
-	
-	get_parent().get_parent().use_item(namex)
+	get_parent().get_parent().get_parent().use_item(namex)
 
 func _on_Use_pressed():
 	for e in $Panel/HBoxContainer/Options.get_children():
