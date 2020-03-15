@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Root.gd" type="Script" id=1]
 [ext_resource path="res://Pause/Menu.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Pause/Save.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Pause/Itens.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Pause/ItemUse.tscn" type="PackedScene" id=5]
+
 
 [node name="Root" type="Node2D"]
 pause_mode = 2
@@ -12,25 +10,20 @@ script = ExtResource( 1 )
 
 [node name="Menu_Area" type="CanvasLayer" parent="."]
 
+[node name="SubMenus" type="Node2D" parent="Menu_Area"]
+visible = false
+
 [node name="Menu" parent="Menu_Area" instance=ExtResource( 2 )]
 visible = false
 focus_mode = 2
-
-[node name="Save" parent="Menu_Area" instance=ExtResource( 3 )]
-visible = false
-
-[node name="Itens" parent="Menu_Area" instance=ExtResource( 4 )]
-visible = false
 
 [node name="ItemUse" parent="Menu_Area" instance=ExtResource( 5 )]
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="Menu_Area"]
 
-[node name="Node2D" type="Node2D" parent="Menu_Area"]
-visible = false
-
-[node name="Timer" type="Timer" parent="Menu_Area/Node2D"]
+[node name="Timer" type="Timer" parent="."]
 pause_mode = 2
 autostart = true
-[connection signal="timeout" from="Menu_Area/Node2D/Timer" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

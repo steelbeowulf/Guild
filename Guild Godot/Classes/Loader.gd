@@ -151,6 +151,7 @@ func load_inventory(slot):
 		path = SAVE_PATH+"Slot"+str(slot)+"/Inventory.json"
 	return parse_inventory(path)
 
+
 # Uses information from load_inventory to build the actual inventory,
 # TODO: Fix dependency on load_all_itens when it doesn't load everything.
 func parse_inventory(path):

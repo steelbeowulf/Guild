@@ -58,11 +58,12 @@ func _process(delta):
 		location == "OUTSIDE"
 		get_parent().get_parent().open_menu()
 
+
 func give_focus():
 	$Panel/HBoxContainer/Options/Use.set_focus_mode(2)
 	$Panel/HBoxContainer/Options/Organize.set_focus_mode(2)
 	$Panel/HBoxContainer/Options/KeyItens.set_focus_mode(2)
 	$Panel/HBoxContainer/Options/Back.set_focus_mode(2)
 	for e in $Panel/HBoxContainer/Itens.get_children():
-			e.set_focus_mode(0)
+		e.set_focus_mode(0)
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()

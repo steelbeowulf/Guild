@@ -2,10 +2,15 @@ extends Node2D
 
 # State variables
 onready var STATE = "Map"
+onready var char_screen = -1 #0 skill, 1 equip, 2 status, 3 tree
 onready var map = null
 
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
+onready var save = load("res://Pause/Save.tscn")
+onready var itens = load("res://Pause/Itens.tscn")
+onready var status = load("res://Pause/Status.tscn")
+
 
 # Loads the correct map
 func _ready():
@@ -27,13 +32,14 @@ func _process(delta):
 		close_menu()
 	# Closes submenus and returns to menu
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
-		for c in get_node("Menu_Area").get_children():
-			c.hide()
+		for c in $Menu_Area/SubMenus.get_children():
+			c.free()
 		menu.show()
 		menu.give_focus()
 	# Cheap hack to test money
-	elif Input.is_action_just_pressed("ui_focus_next"):
-		GLOBAL.gold += 100
+	elif Input.is_action_just_pressed("debug"):
+		if(menu.get_focus_owner()):
+			print(menu.get_focus_owner().get_name())
 
 
 # Opens the main pause menu (pauses map)
@@ -57,20 +63,55 @@ func close_menu():
 	get_tree().paused = false
 
 
+func player_clicked(num):
+	if char_screen == -1:
+		# TODO: change lanes somehow
+		pass
+	elif char_screen == 0:
+		# TODO: skill screen
+		pass
+	elif char_screen == 1:
+		# TODO: equip screen
+		pass
+	elif char_screen == 2:
+		open_status(num)
+	elif char_screen == 3:
+		# TODO: job tree screen
+		pass
+
+
 # Opens the save submenu
 func open_save():
 	menu.hide()
-	get_node("Menu_Area/Save").show()
-	get_node("Menu_Area/Save").remove_focus()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(save.instance())
+	get_node("Menu_Area/SubMenus/Save").show()
+	get_node("Menu_Area/SubMenus/Save").remove_focus()
 
 
 # Opens the inventory submenu
 func open_inventory():
 	menu.hide()
-	get_node("Menu_Area/ItemUse").hide()
-	get_node("Menu_Area/Itens").show()
-	get_node("Menu_Area/Itens").just_entered()
-	get_node("Menu_Area/Itens").give_focus()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(itens.instance())
+	get_node("Menu_Area/SubMenus/Itens").show()
+  get_node("Menu_Area/SubMenus/Itens").just_entered()
+	get_node("Menu_Area/SubMenus/Itens").give_focus()
+
+
+# Toggles status submenu
+func toggle_status():
+	char_screen = 2
+	menu.force_char_focus()
+
+
+# Opens the status submenu
+func open_status(char_id):
+	menu.hide()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(status.instance())
+	get_node("Menu_Area/SubMenus/Status").show()
+	get_node("Menu_Area/SubMenus/Status").enter(char_id)
 
 func use_item(item):
 	get_node("Menu_Area/Itens").hide()

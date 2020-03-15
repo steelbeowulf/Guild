@@ -10,6 +10,7 @@ onready var Map = null
 onready var Battled_Enemies = []
 
 # Level up variables
+onready var leveled_up = [0,0,0,0]
 onready var levelup = 0
 onready var lvup_max_hp = 0
 onready var lvup_max_mp = 0
@@ -81,6 +82,7 @@ func generate_enemies():
 
 # Generates enemies and begins the battle
 func initiate_battle():
+	leveled_up = [0,0,0,0]
 	Battled_Enemies = generate_enemies()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
@@ -106,8 +108,9 @@ func end_battle(Players, Enemies, Inventory):
 			# Level up logic
 			p.xp += total_exp
 			var up = ((18/10)^p.level)*5
-			if p.xp >= up:
+			while p.xp >= up:
 				levelup = 1
+				leveled_up[p.id] = 1
 				p.xp = p.xp - up
 				p.level += 1
 				var max_hp = p.get_max_health()
@@ -125,61 +128,61 @@ func end_battle(Players, Enemies, Inventory):
 				randomize()
 				var stat_up = int(floor(rand_range(0,5.99)))
 				p.set_stats(1, max_hp + stat_up)
-				lvup_max_hp = stat_up
+				lvup_max_hp += stat_up
 				
 				#MP MAX UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(3, max_mp + stat_up)
-				lvup_max_mp = stat_up
+				lvup_max_mp += stat_up
 				
 				#ATK UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(4, atk + stat_up)
-				lvup_atk = stat_up
+				lvup_atk += stat_up
 				
 				#ATKM UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(5, atkm + stat_up)
-				lvup_atkm = stat_up
+				lvup_atkm += stat_up
 				
 				#DEF UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(6, def + stat_up)
-				lvup_def = stat_up
+				lvup_def += stat_up
 				
 				#DEFM UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(7, defm + stat_up)
-				lvup_defm = stat_up
+				lvup_defm += stat_up
 				
 				#AGI UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(8, agi + stat_up)
-				lvup_agi = stat_up
+				lvup_agi += stat_up
 				
 				#ACC UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(9, acc + stat_up)
-				lvup_acc = stat_up
+				lvup_acc += stat_up
 				
 				#EVA UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(9, eva + stat_up)
-				lvup_eva = stat_up
+				lvup_eva += stat_up
 				
 				#LCK UP
 				randomize()
 				stat_up = floor(rand_range(0,5.99))
 				p.set_stats(10, lck + stat_up)
-				lvup_lck = stat_up
+				lvup_lck += stat_up
 		Play.append(p)
 
 	GLOBAL.ALL_PLAYERS = Play

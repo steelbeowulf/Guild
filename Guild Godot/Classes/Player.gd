@@ -62,6 +62,9 @@ func get_skill_ids():
 func get_resistance():
 	return self.resist
 
+func get_resist(type):
+	return self.resist[type]
+
 func get_hate():
 	return self.hate
 
