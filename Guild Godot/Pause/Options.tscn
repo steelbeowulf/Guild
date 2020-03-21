@@ -16,7 +16,9 @@ margin_bottom = 66.0
 rect_pivot_offset = Vector2( 1520, -10 )
 custom_styles/panel = ExtResource( 2 )
 
-[node name="Description" type="Label" parent="Top_Panel"]
+[node name="Description" type="Label" parent="Top_Panel" groups=[
+"text",
+]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -43,7 +45,9 @@ margin_left = -200.0
 margin_right = -200.0
 alignment = 1
 
-[node name="Resolution_Label" type="Label" parent="Overview/Labels"]
+[node name="Resolution_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 132.0
 margin_right = 155.0
 margin_bottom = 177.0
@@ -51,7 +55,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Resolution
 "
 
-[node name="Display_Mode" type="Label" parent="Overview/Labels"]
+[node name="Display_Mode" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 181.0
 margin_right = 155.0
 margin_bottom = 226.0
@@ -59,7 +65,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Display Mode
 "
 
-[node name="Volume_Label" type="Label" parent="Overview/Labels"]
+[node name="Volume_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 230.0
 margin_right = 155.0
 margin_bottom = 275.0
@@ -67,7 +75,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Volume
 "
 
-[node name="SFX_Label" type="Label" parent="Overview/Labels"]
+[node name="SFX_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 279.0
 margin_right = 155.0
 margin_bottom = 324.0
@@ -75,7 +85,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Volume SFX
 "
 
-[node name="BGM_Label" type="Label" parent="Overview/Labels"]
+[node name="BGM_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 328.0
 margin_right = 155.0
 margin_bottom = 373.0
@@ -83,7 +95,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Volume BGM
 "
 
-[node name="Font_Label" type="Label" parent="Overview/Labels"]
+[node name="Font_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 377.0
 margin_right = 155.0
 margin_bottom = 422.0
@@ -91,7 +105,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Font Size
 "
 
-[node name="Speed_Label" type="Label" parent="Overview/Labels"]
+[node name="Speed_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 426.0
 margin_right = 155.0
 margin_bottom = 471.0
@@ -99,7 +115,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Text Speed
 "
 
-[node name="Battle_Speed_Label" type="Label" parent="Overview/Labels"]
+[node name="Battle_Speed_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 475.0
 margin_right = 155.0
 margin_bottom = 520.0
@@ -107,7 +125,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Battle Speed
 "
 
-[node name="Cursor_Label" type="Label" parent="Overview/Labels"]
+[node name="Cursor_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
 margin_top = 524.0
 margin_right = 155.0
 margin_bottom = 569.0
@@ -122,7 +142,9 @@ anchor_bottom = 1.0
 margin_left = 100.0
 alignment = 1
 
-[node name="Resolution" type="OptionButton" parent="Overview/Values"]
+[node name="Resolution" type="OptionButton" parent="Overview/Values" groups=[
+"text",
+]]
 margin_top = 155.0
 margin_right = 141.0
 margin_bottom = 195.0
@@ -132,6 +154,7 @@ text = "1280x768"
 flat = true
 
 [node name="Display" type="OptionButton" parent="Overview/Values" groups=[
+"text",
 "options",
 ]]
 margin_top = 199.0
@@ -142,25 +165,33 @@ custom_fonts/font = ExtResource( 3 )
 text = "Windowed"
 flat = true
 
-[node name="Volume" type="HSlider" parent="Overview/Values"]
+[node name="Volume" type="HSlider" parent="Overview/Values" groups=[
+"text",
+]]
 margin_top = 243.0
 margin_right = 141.0
 margin_bottom = 283.0
 rect_min_size = Vector2( 0, 40 )
+ticks_on_borders = true
 
-[node name="SFX" type="HSlider" parent="Overview/Values"]
+[node name="SFX" type="HSlider" parent="Overview/Values" groups=[
+"text",
+]]
 margin_top = 287.0
 margin_right = 141.0
 margin_bottom = 327.0
 rect_min_size = Vector2( 0, 40 )
 
-[node name="BGM" type="HSlider" parent="Overview/Values"]
+[node name="BGM" type="HSlider" parent="Overview/Values" groups=[
+"text",
+]]
 margin_top = 331.0
 margin_right = 141.0
 margin_bottom = 371.0
 rect_min_size = Vector2( 0, 40 )
 
 [node name="Text_size" type="OptionButton" parent="Overview/Values" groups=[
+"text",
 "options",
 ]]
 margin_top = 375.0
@@ -172,6 +203,7 @@ text = "20"
 flat = true
 
 [node name="Text_speed" type="OptionButton" parent="Overview/Values" groups=[
+"text",
 "options",
 ]]
 margin_top = 419.0
@@ -183,6 +215,7 @@ text = "Normal"
 flat = true
 
 [node name="Battle_speed" type="OptionButton" parent="Overview/Values" groups=[
+"text",
 "options",
 ]]
 margin_top = 463.0
@@ -193,7 +226,8 @@ custom_fonts/font = ExtResource( 3 )
 text = "Normal"
 flat = true
 
-[node name="Battle_Cursor" type="OptionButton" parent="Overview/Values" groups=[
+[node name="Battle_cursor" type="OptionButton" parent="Overview/Values" groups=[
+"text",
 "options",
 ]]
 margin_top = 507.0
@@ -212,4 +246,4 @@ flat = true
 [connection signal="item_selected" from="Overview/Values/Text_size" to="." method="_on_Text_size_item_selected"]
 [connection signal="item_selected" from="Overview/Values/Text_speed" to="." method="_on_Text_speed_item_selected"]
 [connection signal="item_selected" from="Overview/Values/Battle_speed" to="." method="_on_Battle_speed_item_selected"]
-[connection signal="item_selected" from="Overview/Values/Battle_Cursor" to="." method="_on_Battle_Cursor_item_selected"]
+[connection signal="item_selected" from="Overview/Values/Battle_cursor" to="." method="_on_Battle_Cursor_item_selected"]

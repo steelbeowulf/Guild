@@ -15,8 +15,8 @@ font_data = ExtResource( 3 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 511.292, 385.16 )
-scale = Vector2( 1.27997, 1.5406 )
+position = Vector2( 639.564, 360.433 )
+scale = Vector2( 1.60065, 1.44169 )
 texture = ExtResource( 2 )
 
 [node name="New" type="Button" parent="."]
@@ -70,7 +70,8 @@ flat = true
 
 [node name="Load_Screen" type="Node2D" parent="."]
 visible = false
-position = Vector2( 150, 0 )
+position = Vector2( 370, 12 )
+scale = Vector2( 1, 0.9 )
 
 [node name="Save Slots" parent="Load_Screen" instance=ExtResource( 4 )]
 margin_bottom = 772.0

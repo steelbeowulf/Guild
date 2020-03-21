@@ -76,4 +76,5 @@ custom_styles/hover = ExtResource( 1 )
 custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 3 )
 text = "0"
+
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

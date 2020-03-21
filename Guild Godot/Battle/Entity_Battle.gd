@@ -37,7 +37,7 @@ func set_animations(sprite, animations):
 		animation.hframes = hf
 		animation.scale = Vector2(sc[0], sc[1])
 		animation.fps = 10
-		animation.speed = BATTLE_MANAGER.animation_speed
+		#animation.speed = BATTLE_MANAGER.animation_speed
 		animation.hide()
 		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
 		$Animations.add_child(animation)

@@ -21,8 +21,22 @@ func _ready():
 	for opt in DISPLAY.get_available_resolutions():
 		$Overview/Values/Resolution.add_item(opt)
 	
+	$Overview/Values/Resolution.selected = DISPLAY.get_current_res()
+	
 	for opt in DISPLAY.get_modes():
 		$Overview/Values/Display.add_item(opt)
+	
+	for opt in BATTLE_MANAGER.get_speed_opts():
+		$Overview/Values/Battle_speed.add_item(opt)
+	
+	for opt in BATTLE_MANAGER.get_cursor_opts():
+		$Overview/Values/Battle_cursor.add_item(opt)
+
+	for opt in TEXT.get_size_opts():
+		$Overview/Values/Text_size.add_item(opt)
+	
+	for opt in TEXT.get_speed_opts():
+		$Overview/Values/Text_speed.add_item(opt)
 
 
 func set_text(index):
@@ -50,13 +64,11 @@ func _on_BGM_value_changed(value):
 
 
 func _on_Text_size_item_selected(ID):
-	#TEXT.set_font_size(ID)
-	pass
+	TEXT.set_size(ID)
 
 
 func _on_Text_speed_item_selected(ID):
-	#TEXT.set_text_speed(ID)
-	pass
+	TEXT.set_speed(ID)
 
 
 func _on_Battle_speed_item_selected(ID):

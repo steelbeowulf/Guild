@@ -66,7 +66,7 @@ func _on_Skill_pressed():
 
 
 func _on_Options_pressed():
-	pass # Replace with function body.
+	get_parent().get_parent().open_options()
 
 
 func _on_Save_pressed():
