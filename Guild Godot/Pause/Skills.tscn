@@ -36,7 +36,7 @@ custom_styles/normal = ExtResource( 2 )
 enabled_focus_mode = 0
 text = "Skills"
 
-[node name="Skill Type 1" type="Button" parent="Panel/HBoxContainer/Options"]
+[node name="SkillType1" type="Button" parent="Panel/HBoxContainer/Options"]
 margin_top = 74.0
 margin_right = 300.0
 margin_bottom = 144.0
@@ -47,7 +47,7 @@ custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 2 )
 text = "Skill Type 1"
 
-[node name="Skill Type 2" type="Button" parent="Panel/HBoxContainer/Options"]
+[node name="SkillType2" type="Button" parent="Panel/HBoxContainer/Options"]
 margin_top = 148.0
 margin_right = 300.0
 margin_bottom = 218.0
@@ -293,7 +293,7 @@ custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 2 )
 text = "Ppau Kweh"
 script = ExtResource( 5 )
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Skill Type 1" to="." method="_on_Skill_Type_1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/SkillType1" to="." method="_on_Skill_Type_1_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot1" to="Panel/HBoxContainer/Skills/SkillSlot1" method="_on_ItemSlot0_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot2" to="Panel/HBoxContainer/Skills/SkillSlot2" method="_on_ItemSlot0_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot3" to="Panel/HBoxContainer/Skills/SkillSlot3" method="_on_ItemSlot0_pressed"]

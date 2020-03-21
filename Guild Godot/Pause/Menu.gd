@@ -48,6 +48,7 @@ func give_focus():
 	var options = $Panel/All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(2)
+		b.disabled = false
 	var chars = $Panel/All/Left/Chars.get_children()
 	for c in chars:
 		c.set_focus_mode(0)
@@ -56,17 +57,60 @@ func give_focus():
 			l.set_focus_mode(2)
 	options[0].grab_focus()
 
+func change_focus():
+	var options = $Panel/All/Right/Options_Panel/Options.get_children()
+	for b in options:
+		b.set_focus_mode(0)
+		b.disabled = true
+	var chars = $Panel/All/Left/Chars.get_children()
+	for c in chars:
+		c.set_focus_mode(2)
+		c.disabled = false
+		for l in c.get_node("Lanes").get_children():
+			l.set_focus_mode(0)
+	chars[0].grab_focus()
 
 func _on_Item_pressed():
 	get_parent().get_parent().open_inventory()
 
 
 func _on_Skill_pressed():
-	pass#need to use the on_char pressed function, without triggering by simpling pressing the char portrait. to be fized to actually work
-	#get_parent().get_parent().open_skills()
+	change_focus()
+	
 
 func _on_Char0_pressed():
-	pass #how to use this and still share it with regular button press
+	var name = get_node("Panel/All/Left/Chars/Char0").text
+	var id
+	for i in range(len(GLOBAL.ALL_PLAYERS)):
+		if name == GLOBAL.ALL_PLAYERS[i].nome:
+			id = GLOBAL.ALL_PLAYERS[i].id
+	get_parent().get_parent().open_skills(id)
+
+func _on_Char1_pressed():
+	var name = get_node("Panel/All/Left/Chars/Char1").text
+	var id
+	for i in range(len(GLOBAL.ALL_PLAYERS)):
+		if name == GLOBAL.ALL_PLAYERS[i].nome:
+			id = GLOBAL.ALL_PLAYERS[i].id
+	get_parent().get_parent().open_skills(id)
+
+
+func _on_Char2_pressed():
+	var name = get_node("Panel/All/Left/Chars/Char2").text
+	var id
+	for i in range(len(GLOBAL.ALL_PLAYERS)):
+		if name == GLOBAL.ALL_PLAYERS[i].nome:
+			id = GLOBAL.ALL_PLAYERS[i].id
+	get_parent().get_parent().open_skills(id)
+
+
+func _on_Char3_pressed():
+	var name = get_node("Panel/All/Left/Chars/Char3").text
+	var id
+	for i in range(len(GLOBAL.ALL_PLAYERS)):
+		if name == GLOBAL.ALL_PLAYERS[i].nome:
+			id = GLOBAL.ALL_PLAYERS[i].id
+	get_parent().get_parent().open_skills(id)
 
 func _on_Options_pressed():
 	pass # Replace with function body.
@@ -78,6 +122,5 @@ func _on_Save_pressed():
 
 func _on_Status_pressed():
 	get_parent().get_parent().toggle_status()
-
 
 
