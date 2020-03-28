@@ -16,7 +16,6 @@ func enter():
 
 func just_entered(nameid):
 	location = "SUBMENU"
-	print(nameid)
 	identification = nameid
 
 func show_skills(players):
@@ -36,10 +35,10 @@ func show_skills(players):
 			e.set_focus_mode(0)
 
 func update_skills(skills):#Ainda mantendo a solução temporaria de esconder o node quando nao houver mais mana para as skills
-	for i in range(len(skills)):#por hora nao funciona, arrumar depois
+	for i in range(len(skills)):
 		var node = get_node("Panel/HBoxContainer/Skills/SkillSlot" + str(i))
 		mpleft = player.get_mp()
-		if mpleft < player[i].quantity:
+		if mpleft < skills[i].quantity:
 			node.hide()
 
 func _on_Skill_selected(name):
@@ -48,7 +47,7 @@ func _on_Skill_selected(name):
 	use_skill(nome)
 
 func use_skill(namex):
-	get_parent().get_parent().use_skill(namex, player.id)
+	get_parent().get_parent().get_parent().use_skill(namex, player.id)
 	#for i in range(skills):#The MP spend will be made here instead of on the other menu
 	#	if namex == skills[i].name:
 	#		player.set_mp(mpleft - skills[i].quantity)

@@ -9,8 +9,11 @@ var mp_char = GLOBAL.ALL_PLAYERS[0].stats[2]
 var mpmax_char = GLOBAL.ALL_PLAYERS[0].stats[3]
 var current_player
 var spell_list
+onready var identification
+onready var spending
 
 func enter(itemx, id):
+	identification = id
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
 	for i in range(len(GLOBAL.ALL_PLAYERS)):
@@ -27,7 +30,7 @@ func enter(itemx, id):
 		node.get_node("EXP").set_text(tmp)
 		# Needs a portrait
 		#node.get_node("Sprite").set_texture(players[i].sprite)
-		spell_list = current_player.get_skills()
+	spell_list = current_player.get_skills()
 	for i in range(len(spell_list)):
 		if itemx == spell_list[i].nome:
 			actual_skill(spell_list[i])
@@ -47,14 +50,16 @@ func actual_skill(skill):
 			recoverMP = skill.effect[i][1]
 	#spend the mp here
 	var mp = current_player.get_mp()
-	current_player.set_mp(mp - skill.quantity)
+	spending = mp - skill.quantity
+
 
 func _process(delta):
 	if Input.is_action_pressed("ui_cancel") and location == "TARGETS":
-		get_parent().get_parent().get_parent().back_to_skills()
+		get_parent().get_parent().get_parent().back_to_skills(identification)
 		queue_free()
 
 func _on_Char0_pressed():
+	print("vida anterior do curado: " +str(hp_char))
 	hp_char =  hp_char  + recoverHP
 	mp_char  =  mp_char  + recoverMP
 	if hp_char > hpmax_char:
@@ -65,7 +70,12 @@ func _on_Char0_pressed():
 	for i in range(len(GLOBAL.ALL_PLAYERS)):
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
-	get_parent().get_parent().get_parent().back_to_skills()
+	current_player.stats[2] = spending
+	print("valor curado: " + str(recoverHP))
+	print("vida atual do curado: " +str(hp_char))
+	GLOBAL.ALL_PLAYERS[0].stats[0] = hp_char
+	GLOBAL.ALL_PLAYERS[0].stats[2] = mp_char
+	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()
 
 func _on_Char1_pressed():
@@ -79,7 +89,11 @@ func _on_Char1_pressed():
 	for i in range(len(GLOBAL.ALL_PLAYERS)):
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
-	get_parent().get_parent().get_parent().back_to_skills()
+	current_player.stats[2] = spending
+	print("valor curado: " + recoverHP)
+	GLOBAL.ALL_PLAYERS[1].stats[0] = hp_char
+	GLOBAL.ALL_PLAYERS[1].stats[2] = mp_char
+	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()
 
 func _on_Char2_pressed():
@@ -93,7 +107,11 @@ func _on_Char2_pressed():
 	for i in range(len(GLOBAL.ALL_PLAYERS)):
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
-	get_parent().get_parent().get_parent().back_to_skills()
+	current_player.stats[2] = spending
+	print("valor curado: " + recoverHP)
+	GLOBAL.ALL_PLAYERS[2].stats[0] = hp_char
+	GLOBAL.ALL_PLAYERS[2].stats[2] = mp_char
+	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()
 
 func _on_Char3_pressed():
@@ -107,5 +125,9 @@ func _on_Char3_pressed():
 	for i in range(len(GLOBAL.ALL_PLAYERS)):
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
-	get_parent().get_parent().get_parent().back_to_skills()
+	current_player.stats[2] = spending
+	print("valor curado: " + recoverHP)
+	GLOBAL.ALL_PLAYERS[3].stats[0] = hp_char
+	GLOBAL.ALL_PLAYERS[3].stats[2] = mp_char
+	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()

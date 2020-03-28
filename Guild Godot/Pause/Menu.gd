@@ -1,6 +1,9 @@
 extends Control
 
+onready var location = "MENU"
+
 func enter(players):
+	location = "MENU"
 	give_focus()
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
@@ -75,42 +78,31 @@ func _on_Item_pressed():
 
 
 func _on_Skill_pressed():
+	location = "SKILLS"
 	change_focus()
 	
 
 func _on_Char0_pressed():
-	var name = get_node("Panel/All/Left/Chars/Char0").text
-	var id
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if name == GLOBAL.ALL_PLAYERS[i].nome:
-			id = GLOBAL.ALL_PLAYERS[i].id
-	get_parent().get_parent().open_skills(id)
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char0").id
+		get_parent().get_parent().open_skills(id)
 
 func _on_Char1_pressed():
-	var name = get_node("Panel/All/Left/Chars/Char1").text
-	var id
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if name == GLOBAL.ALL_PLAYERS[i].nome:
-			id = GLOBAL.ALL_PLAYERS[i].id
-	get_parent().get_parent().open_skills(id)
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char1").id
+		get_parent().get_parent().open_skills(id)
 
 
 func _on_Char2_pressed():
-	var name = get_node("Panel/All/Left/Chars/Char2").text
-	var id
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if name == GLOBAL.ALL_PLAYERS[i].nome:
-			id = GLOBAL.ALL_PLAYERS[i].id
-	get_parent().get_parent().open_skills(id)
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char2").id
+		get_parent().get_parent().open_skills(id)
 
 
 func _on_Char3_pressed():
-	var name = get_node("Panel/All/Left/Chars/Char3").text
-	var id
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if name == GLOBAL.ALL_PLAYERS[i].nome:
-			id = GLOBAL.ALL_PLAYERS[i].id
-	get_parent().get_parent().open_skills(id)
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char3").id
+		get_parent().get_parent().open_skills(id)
 
 func _on_Options_pressed():
 	pass # Replace with function body.
@@ -121,6 +113,7 @@ func _on_Save_pressed():
 
 
 func _on_Status_pressed():
+	location = "STATUS"
 	get_parent().get_parent().toggle_status()
 
 

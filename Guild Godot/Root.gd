@@ -110,18 +110,18 @@ func back_to_inventory():
 	get_node("Menu_Area/SubMenus/Itens").give_focus()
 
 # Opens the skill submenu
-func back_to_skills():
+func back_to_skills(id):
 	get_node("Menu_Area/SubMenus/SkillUse").hide()
 	get_node("Menu_Area/SubMenus/Skills").show()
-	get_node("Menu_Area/SubMenus/Skills").just_entered()
+	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
 	get_node("Menu_Area/SubMenus/Skills").give_focus()
 
-func open_skills(nameid):
+func open_skills(id):
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(skills.instance())
 	get_node("Menu_Area/SubMenus/Skills").show()
-	get_node("Menu_Area/SubMenus/Skills").just_entered(nameid)
+	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
 	get_node("Menu_Area/SubMenus/Skills").enter()
 	get_node("Menu_Area/SubMenus/Skills").give_focus()
 
@@ -148,12 +148,12 @@ func use_item(item):
 	get_node("Menu_Area/SubMenus/ItemUse").enter(item)
 
 # Opens the use skill submenu
-func use_skill(skill):
+func use_skill(name, playerid):
 	get_node("Menu_Area/SubMenus/Skills").hide()
 	get_node("Menu_Area/SubMenus").add_child(use_skills.instance())
 	get_node("Menu_Area/SubMenus/SkillUse").show()
 	get_node("Menu_Area/SubMenus/SkillUse").give_focus()
-	get_node("Menu_Area/SubMenus/SkillUse").enter(skill)
+	get_node("Menu_Area/SubMenus/SkillUse").enter(name, playerid)
 
 # Transitions from current area to next area
 # TODO: fix crash when map changes are quick
