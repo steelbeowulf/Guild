@@ -11,7 +11,7 @@ var mode_opts = ["Windowed", "Full Screen"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var ASPECT_RATIO = 16.0/10.0
+	var ASPECT_RATIO = 16.0/9.0
 	var max_res = OS.get_screen_size().y
 	var i = 0
 	while common_res[i] <= max_res:

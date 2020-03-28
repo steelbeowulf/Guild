@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=5]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=6]
-[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=6]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=7]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,87 +21,97 @@ script = ExtResource( 2 )
 [node name="Players" type="Node" parent="AnimationManager"]
 
 [node name="P0" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-position = Vector2( 165.537, 201.743 )
+position = Vector2( 250, 250 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="P1" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-position = Vector2( 165.537, 281.743 )
+position = Vector2( 250, 400 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="P2" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-position = Vector2( 165.537, 361.743 )
+position = Vector2( 250, 550 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="P3" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-position = Vector2( 165.537, 441.743 )
+position = Vector2( 250, 700 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="Enemies" type="Node" parent="AnimationManager"]
 
 [node name="E0" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 986.622, 208.926 )
+position = Vector2( 1400, 250 )
+scale = Vector2( 2, 2 )
 
 [node name="E1" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 988.38, 305.621 )
+position = Vector2( 1400, 475 )
+scale = Vector2( 2, 2 )
 
 [node name="E2" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 988.38, 405.832 )
+position = Vector2( 1400, 700 )
+scale = Vector2( 2, 2 )
 
 [node name="E3" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 1106.17, 351.331 )
+position = Vector2( 1600, 375 )
+scale = Vector2( 2, 2 )
 
 [node name="E4" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-position = Vector2( 1104.41, 259.911 )
+position = Vector2( 1600, 575 )
+scale = Vector2( 2, 2 )
 
 [node name="Log" parent="AnimationManager" instance=ExtResource( 4 )]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 665.916, 281.238 )
-scale = Vector2( 1.38088, 1.29342 )
+position = Vector2( 966.024, 518.53 )
+scale = Vector2( 1.96703, 1.51696 )
 z_index = -1
 texture = ExtResource( 5 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 4.0
-margin_top = 554.0
-margin_right = 1285.0
-margin_bottom = 722.0
+margin_top = 908.0
+margin_right = 1919.0
+margin_bottom = 1080.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+custom_styles/panel = ExtResource( 6 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
 margin_left = 10.0
-margin_top = 558.0
+margin_top = 912.084
 margin_right = 328.0
-margin_bottom = 719.0
-script = ExtResource( 6 )
+margin_bottom = 1073.08
+script = ExtResource( 7 )
 
-[node name="Attack" parent="Menu" instance=ExtResource( 7 )]
+[node name="Attack" parent="Menu" instance=ExtResource( 8 )]
 margin_right = 318.0
 margin_bottom = 29.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 8 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 33.0
 margin_right = 318.0
 margin_bottom = 62.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 9 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 66.0
 margin_right = 318.0
 margin_bottom = 95.0
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 9 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 99.0
 margin_right = 318.0
 margin_bottom = 128.0
 text = "Item"
 
-[node name="Run" parent="Menu" instance=ExtResource( 8 )]
+[node name="Run" parent="Menu" instance=ExtResource( 9 )]
 margin_top = 132.0
 margin_right = 318.0
 margin_bottom = 161.0
@@ -111,35 +122,36 @@ text = "Run"
 RUN = true
 
 [node name="Info" type="VBoxContainer" parent="."]
-margin_left = 561.456
-margin_top = 562.272
-margin_right = 1237.46
-margin_bottom = 698.272
+margin_left = 1080.0
+margin_top = 925.0
+margin_right = 1756.0
+margin_bottom = 1061.0
 rect_min_size = Vector2( 676, 136 )
+rect_scale = Vector2( 1.2, 1 )
 alignment = 1
 
-[node name="P0" parent="Info" instance=ExtResource( 10 )]
+[node name="P0" parent="Info" instance=ExtResource( 11 )]
 margin_top = 2.0
 margin_right = 676.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P1" parent="Info" instance=ExtResource( 10 )]
+[node name="P1" parent="Info" instance=ExtResource( 11 )]
 margin_top = 36.0
 margin_right = 676.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P2" parent="Info" instance=ExtResource( 10 )]
+[node name="P2" parent="Info" instance=ExtResource( 11 )]
 margin_top = 70.0
 margin_right = 676.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P3" parent="Info" instance=ExtResource( 10 )]
+[node name="P3" parent="Info" instance=ExtResource( 11 )]
 margin_top = 104.0
 margin_right = 676.0
 margin_bottom = 134.0
