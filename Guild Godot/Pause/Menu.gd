@@ -105,7 +105,7 @@ func _on_Char3_pressed():
 		get_parent().get_parent().open_skills(id)
 
 func _on_Options_pressed():
-	pass # Replace with function body.
+	get_parent().get_parent().open_options()
 
 
 func _on_Save_pressed():

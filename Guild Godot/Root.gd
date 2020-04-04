@@ -12,7 +12,9 @@ onready var itens = load("res://Pause/Itens.tscn")
 onready var use_itens = load("res://Pause/ItemUse.tscn")
 onready var use_skills = load("res://Pause/SkillUse.tscn")
 onready var status = load("res://Pause/Status.tscn")
+onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
+
 
 
 # Loads the correct map
@@ -90,6 +92,14 @@ func open_save():
 	get_node("Menu_Area/SubMenus").add_child(save.instance())
 	get_node("Menu_Area/SubMenus/Save").show()
 	get_node("Menu_Area/SubMenus/Save").remove_focus()
+
+
+# Opens the options submenu
+func open_options():
+	menu.hide()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(options.instance())
+	get_node("Menu_Area/SubMenus/Options").show()
 
 
 # Opens the inventory submenu

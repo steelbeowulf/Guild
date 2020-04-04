@@ -59,10 +59,6 @@ func initialize(Players, Enemies):
 
 func _on_animation_finished(anim):
 	can_play = true
-	
-
-	
-
 	if not queue:
 		emit_signal("animation_finished")
 
@@ -70,15 +66,12 @@ func play(anim):
 	var scope = anim[0]
 	var animation_name = anim[1]
 	var info = anim[2]
-	
 
 	if typeof(info) == TYPE_STRING and info != "ALL" and info != "LANE":
 		can_play = false
 	scope.play(animation_name, info)
 
 func enqueue(scope, animation_name, additional_info):
-	
-
 	queue.push_front([scope, animation_name, additional_info])
 
 func _physics_process(delta):

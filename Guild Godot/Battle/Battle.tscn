@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=5]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=6]
-[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=6]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=7]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,93 +21,100 @@ script = ExtResource( 2 )
 [node name="Players" type="Node" parent="AnimationManager"]
 
 [node name="P0" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 120, 160 )
+position = Vector2( 250, 250 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="P1" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 120, 240 )
+position = Vector2( 250, 400 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="P2" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 120, 320 )
+position = Vector2( 250, 550 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="P3" parent="AnimationManager/Players" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 120, 400 )
+position = Vector2( 250, 700 )
+scale = Vector2( 2, 2 )
 Player = true
 
 [node name="Enemies" type="Node" parent="AnimationManager"]
 
 [node name="E0" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 724.782, 201.336 )
+position = Vector2( 1400, 250 )
+scale = Vector2( 2, 2 )
 
 [node name="E1" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 726.54, 298.031 )
+position = Vector2( 1400, 475 )
+scale = Vector2( 2, 2 )
 
 [node name="E2" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 726.54, 398.242 )
+position = Vector2( 1400, 700 )
+scale = Vector2( 2, 2 )
 
 [node name="E3" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 844.332, 343.741 )
+position = Vector2( 1600, 375 )
+scale = Vector2( 2, 2 )
 
 [node name="E4" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
-visible = false
-position = Vector2( 842.574, 252.321 )
+position = Vector2( 1600, 575 )
+scale = Vector2( 2, 2 )
 
 [node name="Log" parent="AnimationManager" instance=ExtResource( 4 )]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 510.33, 281.238 )
-scale = Vector2( 1.077, 1.29342 )
+position = Vector2( 966.024, 518.53 )
+scale = Vector2( 1.96703, 1.51696 )
 z_index = -1
 texture = ExtResource( 5 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 4.0
-margin_top = 642.428
-margin_right = 1005.0
-margin_bottom = 767.428
+margin_top = 908.0
+margin_right = 1919.0
+margin_bottom = 1080.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+custom_styles/panel = ExtResource( 6 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
 margin_left = 10.0
-margin_top = 646.428
-margin_right = 306.0
-margin_bottom = 766.428
-script = ExtResource( 6 )
+margin_top = 912.084
+margin_right = 328.0
+margin_bottom = 1073.08
+script = ExtResource( 7 )
 
-[node name="Attack" parent="Menu" instance=ExtResource( 7 )]
-margin_bottom = 20.0
+[node name="Attack" parent="Menu" instance=ExtResource( 8 )]
+margin_right = 318.0
+margin_bottom = 29.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 8 )]
-margin_top = 24.0
+[node name="Lane" parent="Menu" instance=ExtResource( 9 )]
+margin_top = 33.0
+margin_right = 318.0
+margin_bottom = 62.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 9 )]
-margin_top = 48.0
-margin_bottom = 68.0
+[node name="Skills" parent="Menu" instance=ExtResource( 10 )]
+margin_top = 66.0
+margin_right = 318.0
+margin_bottom = 95.0
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 9 )]
-margin_top = 72.0
-margin_bottom = 92.0
+[node name="Itens" parent="Menu" instance=ExtResource( 10 )]
+margin_top = 99.0
+margin_right = 318.0
+margin_bottom = 128.0
 text = "Item"
 
-[node name="Run" parent="Menu" instance=ExtResource( 8 )]
-margin_top = 96.0
-margin_bottom = 120.0
+[node name="Run" parent="Menu" instance=ExtResource( 9 )]
+margin_top = 132.0
+margin_right = 318.0
+margin_bottom = 161.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 focus_neighbour_bottom = NodePath("../Attack")
 focus_next = NodePath("")
@@ -114,34 +122,42 @@ text = "Run"
 RUN = true
 
 [node name="Info" type="VBoxContainer" parent="."]
-margin_left = 327.0
-margin_top = 646.0
-margin_right = 1003.0
-margin_bottom = 782.0
+margin_left = 1080.0
+margin_top = 925.0
+margin_right = 1756.0
+margin_bottom = 1061.0
 rect_min_size = Vector2( 676, 136 )
+rect_scale = Vector2( 1.2, 1 )
+alignment = 1
 
-[node name="P0" parent="Info" instance=ExtResource( 10 )]
+[node name="P0" parent="Info" instance=ExtResource( 11 )]
+margin_top = 2.0
 margin_right = 676.0
-margin_bottom = 20.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P1" parent="Info" instance=ExtResource( 10 )]
-margin_top = 24.0
+[node name="P1" parent="Info" instance=ExtResource( 11 )]
+margin_top = 36.0
 margin_right = 676.0
-margin_bottom = 44.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P2" parent="Info" instance=ExtResource( 10 )]
-margin_top = 48.0
+[node name="P2" parent="Info" instance=ExtResource( 11 )]
+margin_top = 70.0
 margin_right = 676.0
-margin_bottom = 68.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P3" parent="Info" instance=ExtResource( 10 )]
-margin_top = 72.0
+[node name="P3" parent="Info" instance=ExtResource( 11 )]
+margin_top = 104.0
 margin_right = 676.0
-margin_bottom = 92.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 664, 30 )
 alignment = 2
+
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]
