@@ -1,6 +1,9 @@
 extends Control
 
+onready var location = "MENU"
+
 func enter(players):
+	location = "MENU"
 	give_focus()
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
@@ -48,6 +51,7 @@ func give_focus():
 	var options = $Panel/All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(2)
+		b.disabled = false
 	var chars = $Panel/All/Left/Chars.get_children()
 	for c in chars:
 		c.set_focus_mode(0)
@@ -56,14 +60,49 @@ func give_focus():
 			l.set_focus_mode(2)
 	options[0].grab_focus()
 
+func change_focus():
+	var options = $Panel/All/Right/Options_Panel/Options.get_children()
+	for b in options:
+		b.set_focus_mode(0)
+		b.disabled = true
+	var chars = $Panel/All/Left/Chars.get_children()
+	for c in chars:
+		c.set_focus_mode(2)
+		c.disabled = false
+		for l in c.get_node("Lanes").get_children():
+			l.set_focus_mode(0)
+	chars[0].grab_focus()
 
 func _on_Item_pressed():
 	get_parent().get_parent().open_inventory()
 
 
 func _on_Skill_pressed():
-	pass # Replace with function body.
+	location = "SKILLS"
+	change_focus()
+	
 
+func _on_Char0_pressed():
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char0").id
+		get_parent().get_parent().open_skills(id)
+
+func _on_Char1_pressed():
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char1").id
+		get_parent().get_parent().open_skills(id)
+
+
+func _on_Char2_pressed():
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char2").id
+		get_parent().get_parent().open_skills(id)
+
+
+func _on_Char3_pressed():
+	if location == "SKILLS":
+		var id = get_node("Panel/All/Left/Chars/Char3").id
+		get_parent().get_parent().open_skills(id)
 
 func _on_Options_pressed():
 	get_parent().get_parent().open_options()
@@ -74,4 +113,7 @@ func _on_Save_pressed():
 
 
 func _on_Status_pressed():
+	location = "STATUS"
 	get_parent().get_parent().toggle_status()
+
+
