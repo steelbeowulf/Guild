@@ -49,7 +49,7 @@ func play(name, options=[]):
 	$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()
-	$Animations.get_node(name).show()
+ 	$Animations.get_node(name).show()
 	$Animations.get_node(name).play(true)
 
 func turn(keep=false):

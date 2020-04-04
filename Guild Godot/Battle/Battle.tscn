@@ -88,33 +88,33 @@ script = ExtResource( 7 )
 
 [node name="Attack" parent="Menu" instance=ExtResource( 8 )]
 margin_right = 318.0
-margin_bottom = 29.0
+margin_bottom = 28.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
 [node name="Lane" parent="Menu" instance=ExtResource( 9 )]
-margin_top = 33.0
+margin_top = 32.0
 margin_right = 318.0
-margin_bottom = 62.0
+margin_bottom = 60.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
 [node name="Skills" parent="Menu" instance=ExtResource( 10 )]
-margin_top = 66.0
+margin_top = 64.0
 margin_right = 318.0
-margin_bottom = 95.0
+margin_bottom = 92.0
 text = "Skills"
 
 [node name="Itens" parent="Menu" instance=ExtResource( 10 )]
-margin_top = 99.0
+margin_top = 96.0
 margin_right = 318.0
-margin_bottom = 128.0
+margin_bottom = 124.0
 text = "Item"
 
 [node name="Run" parent="Menu" instance=ExtResource( 9 )]
-margin_top = 132.0
+margin_top = 128.0
 margin_right = 318.0
-margin_bottom = 161.0
+margin_bottom = 160.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 focus_neighbour_bottom = NodePath("../Attack")
 focus_next = NodePath("")

@@ -1,16 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=7]
-
-
-
-
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Map15" type="Node2D"]
 script = ExtResource( 1 )
@@ -58,11 +53,6 @@ position = Vector2( 49.5655, -106.389 )
 id = 9
 radius = 100.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -18.227
-autoplay = true
-
 [node name="Limits" type="MarginContainer" parent="."]
 margin_right = 1216.0
 margin_bottom = 1024.0
@@ -72,11 +62,10 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
+[node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 579.459, 1076.42 )
 scale = Vector2( 8, 1 )
 next = 12
 
-[node name="HUD" parent="." instance=ExtResource( 7 )]
-
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 

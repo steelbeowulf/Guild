@@ -1,17 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=4]
-[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=7]
-
-
-
-
-
+[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Map13" type="Node2D"]
 script = ExtResource( 1 )
@@ -77,11 +71,6 @@ id = 7
 movement = 4
 radius = 100.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -18.227
-autoplay = true
-
 [node name="Limits" type="MarginContainer" parent="."]
 margin_right = 640.0
 margin_bottom = 640.0
@@ -91,18 +80,19 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 5 )]
+[node name="Door" parent="Objects" instance=ExtResource( 4 )]
 position = Vector2( 432.475, 35.8217 )
 scale = Vector2( 3.00839, 1.9043 )
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
+[node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 633.55, 566.39 )
 scale = Vector2( 1, 4 )
 next = 12
 
-[node name="Transition2" parent="." instance=ExtResource( 6 )]
+[node name="Transition2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 433.706, 24.6885 )
 scale = Vector2( 5.5, 1 )
 next = 14
 
-[node name="HUD" parent="." instance=ExtResource( 7 )]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+

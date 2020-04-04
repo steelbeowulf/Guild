@@ -173,6 +173,8 @@ margin_top = 243.0
 margin_right = 141.0
 margin_bottom = 283.0
 rect_min_size = Vector2( 0, 40 )
+min_value = -15.0
+max_value = 15.0
 ticks_on_borders = true
 
 [node name="SFX" type="HSlider" parent="Overview/Values" groups=[
@@ -182,6 +184,8 @@ margin_top = 287.0
 margin_right = 141.0
 margin_bottom = 327.0
 rect_min_size = Vector2( 0, 40 )
+min_value = -10.0
+max_value = 10.0
 
 [node name="BGM" type="HSlider" parent="Overview/Values" groups=[
 "text",
@@ -190,6 +194,8 @@ margin_top = 331.0
 margin_right = 141.0
 margin_bottom = 371.0
 rect_min_size = Vector2( 0, 40 )
+min_value = -10.0
+max_value = 10.0
 
 [node name="Text_size" type="OptionButton" parent="Overview/Values" groups=[
 "text",

@@ -28,7 +28,7 @@ anims/Battle = SubResource( 1 )
 [node name="ColorRect" type="ColorRect" parent="Transition"]
 margin_left = 3.0
 margin_top = 4.0
-margin_right = 1289.0
-margin_bottom = 722.0
+margin_right = 1922.0
+margin_bottom = 1090.0
 color = Color( 1, 1, 1, 0 )
 

@@ -119,7 +119,9 @@ margin_right = 1024.0
 margin_bottom = 744.0
 rect_min_size = Vector2( 720, 0 )
 
-[node name="ItemSlot0" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot0" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -132,7 +134,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot1" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot1" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -145,7 +149,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot2" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot2" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -158,7 +164,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot3" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot3" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -171,7 +179,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot4" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot4" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -184,7 +194,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot5" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot5" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -197,7 +209,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot6" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot6" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -210,7 +224,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot7" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot7" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -223,7 +239,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot8" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot8" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -236,7 +254,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot9" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot9" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -249,7 +269,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot10" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot10" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -262,7 +284,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot11" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot11" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -275,7 +299,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot12" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot12" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -288,7 +314,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot13" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot13" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -301,7 +329,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot14" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot14" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -314,7 +344,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot15" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot15" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -327,7 +359,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot16" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot16" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -340,7 +374,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot17" type="Button" parent="Panel/HBoxContainer/Itens"]
+[node name="ItemSlot17" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
+"text",
+]]
 visible = false
 margin_right = 720.0
 margin_bottom = 40.0
@@ -352,6 +388,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
+
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Use" to="." method="_on_Use_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot0" to="Panel/HBoxContainer/Itens/ItemSlot0" method="_on_ItemSlot0_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot1" to="Panel/HBoxContainer/Itens/ItemSlot1" method="_on_ItemSlot0_pressed"]

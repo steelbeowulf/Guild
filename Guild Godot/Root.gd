@@ -16,7 +16,6 @@ onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
 
 
-
 # Loads the correct map
 func _ready():
 	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
@@ -26,6 +25,8 @@ func _ready():
 
 # Watches for inputs and deals with state changes
 func _process(delta):
+	for tex in get_tree().get_nodes_in_group("text"):
+		tex.add_font_override("font", TEXT.get_font())
 	# Updates playtime while on menu screen
 	if STATE == "Menu":
 		menu.update_info()
@@ -49,6 +50,7 @@ func _process(delta):
 
 # Opens the main pause menu (pauses map)
 func open_menu():
+	AUDIO.play_bgm("MAP_THEME", true, -5)
 	menu.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
@@ -59,6 +61,7 @@ func open_menu():
 
 # Closes the main pause menu (unpauses map)
 func close_menu():
+	AUDIO.play_bgm("MAP_THEME", true, 0)
 	for c in $Menu_Area.get_children():
 		c.hide()
 	menu.hide()

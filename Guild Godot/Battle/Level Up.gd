@@ -5,7 +5,10 @@ var Players_img = []
 func _ready():
 	Players = GLOBAL.ALL_PLAYERS
 	$AnimationManager.initialize(Players, [])
-		
+	
+	for tex in get_tree().get_nodes_in_group("text"):
+		tex.add_font_override("font", TEXT.get_font())
+	
 	$AnimationManager/Log.display_text("Enemies defeated!")
 	for p in Players:
 		var max_hp = p.get_max_health()

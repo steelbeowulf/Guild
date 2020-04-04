@@ -1,18 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=8]
-
-
-
-
-
+[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=7]
 
 [node name="Map12" type="Node2D"]
 position = Vector2( 4.22679, 5.4165 )
@@ -80,11 +74,6 @@ id = 7
 movement = 1
 radius = 100.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -18.227
-autoplay = true
-
 [node name="Limits" type="MarginContainer" parent="."]
 margin_right = 1216.0
 margin_bottom = 1024.0
@@ -94,28 +83,29 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 6 )]
+[node name="Door" parent="Objects" instance=ExtResource( 5 )]
 position = Vector2( -25.6249, 73.8599 )
 scale = Vector2( 1, 5 )
 
-[node name="Door2" parent="Objects" instance=ExtResource( 6 )]
+[node name="Door2" parent="Objects" instance=ExtResource( 5 )]
 position = Vector2( 601.167, 1.09675 )
 scale = Vector2( 6, 1 )
 
-[node name="Transition" parent="." instance=ExtResource( 7 )]
+[node name="Transition" parent="." instance=ExtResource( 6 )]
 position = Vector2( 163.679, 1081.73 )
 scale = Vector2( 8, 1 )
 next = 5
 
-[node name="Transition2" parent="." instance=ExtResource( 7 )]
+[node name="Transition2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 606.219, -31.5966 )
 scale = Vector2( 8, 1 )
 next = 15
 
-[node name="Transition3" parent="." instance=ExtResource( 7 )]
+[node name="Transition3" parent="." instance=ExtResource( 6 )]
 position = Vector2( -79.7517, 82.7319 )
 rotation = -3.11734
 scale = Vector2( 1, 7 )
 next = 13
 
-[node name="HUD" parent="." instance=ExtResource( 8 )]
+[node name="HUD" parent="." instance=ExtResource( 7 )]
+

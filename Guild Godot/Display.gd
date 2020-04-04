@@ -26,6 +26,8 @@ func _ready():
 func get_current_res():
 	return resolution
 
+func get_current():
+	return mode
 
 func get_modes():
 	return mode_opts

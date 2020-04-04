@@ -1,19 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg" type="AudioStream" id=5]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Overworld/Objects/Switch.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=9]
-
-
-
-
-
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Objects/Switch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=8]
 
 [node name="Map5" type="Node2D"]
 position = Vector2( -14.22, -14.22 )
@@ -79,11 +73,6 @@ id = 2
 movement = 3
 radius = 100.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-volume_db = -18.227
-autoplay = true
-
 [node name="Limits" type="MarginContainer" parent="."]
 margin_top = -21.0
 margin_right = 1216.0
@@ -92,64 +81,65 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
+[node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1273.57, 898.866 )
 scale = Vector2( 1, 5 )
 next = 3
 
-[node name="Transition2" parent="." instance=ExtResource( 6 )]
+[node name="Transition2" parent="." instance=ExtResource( 5 )]
 position = Vector2( -57.5961, 608.294 )
 scale = Vector2( 1, 4 )
 next = 7
 
-[node name="Transition3" parent="." instance=ExtResource( 6 )]
+[node name="Transition3" parent="." instance=ExtResource( 5 )]
 position = Vector2( -60.8823, 76.2605 )
 scale = Vector2( 1, 6 )
 next = 8
 
-[node name="Transition4" parent="." instance=ExtResource( 6 )]
+[node name="Transition4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 752.624, -29.4688 )
 scale = Vector2( 6, 1 )
 next = 11
 
-[node name="Transition5" parent="." instance=ExtResource( 6 )]
+[node name="Transition5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1011.21, -33.2965 )
 scale = Vector2( 6, 1 )
 next = 12
 
-[node name="Transition6" parent="." instance=ExtResource( 6 )]
+[node name="Transition6" parent="." instance=ExtResource( 5 )]
 position = Vector2( -54.5359, 886.271 )
 scale = Vector2( 1, 15 )
 next = 6
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 750.315, 20.879 )
 scale = Vector2( 3.92, 1 )
 
-[node name="Door2" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door2" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 1018.31, 15.4375 )
 scale = Vector2( 3.92, 1 )
 
-[node name="Door3" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door3" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 76.4898, 97.6328 )
 scale = Vector2( 1, 4 )
 
-[node name="Door4" parent="Objects" instance=ExtResource( 7 )]
+[node name="Door4" parent="Objects" instance=ExtResource( 6 )]
 position = Vector2( 69.0873, 621.36 )
 scale = Vector2( 1, 4 )
 
-[node name="Switch" parent="Objects" instance=ExtResource( 8 )]
+[node name="Switch" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 609.769, 220.34 )
 
-[node name="Switch2" parent="Objects" instance=ExtResource( 8 )]
+[node name="Switch2" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 803.28, 441.047 )
 
-[node name="Switch3" parent="Objects" instance=ExtResource( 8 )]
+[node name="Switch3" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 419.256, 314.419 )
 
-[node name="Switch4" parent="Objects" instance=ExtResource( 8 )]
+[node name="Switch4" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 516.764, 473.951 )
 
-[node name="HUD" parent="." instance=ExtResource( 9 )]
+[node name="HUD" parent="." instance=ExtResource( 8 )]
+

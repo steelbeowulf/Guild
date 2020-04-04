@@ -6,14 +6,14 @@ var audio = []
 var prev_pos = 0.0
 
 # Loads all our songs and SFXs
-var MENU_THEME = load("res://Musics/TownTheme (online-audio-converter.com).ogg")
-var MAP_THEME = load("res://Musics/Lonely Witch (online-audio-converter.com).ogg")
-var BATTLE_THEME = load("res://Musics/Modern Castle - Tension (online-audio-converter.com).ogg")
-var GAME_OVER_THEME = load("res://Musics/Game over jingle 4.wav")
-var BOSS_THEME = load("res://Musics/Heavy Concept A Bass Master (online-audio-converter.com).ogg")
-var SPELL = load("res://Audio bits/Powerup 4 - Sound effects Pack 2.ogg")
-var RUN = load("res://Audio bits/Fantozzi-SandL1.ogg")
-var HIT = load("res://Audio bits/Explosion 3 - Sound effects Pack 2.ogg")
+var MENU_THEME = load("res://Assets/BGM/TownTheme (online-audio-converter.com).ogg")
+var MAP_THEME = load("res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg")
+var BATTLE_THEME = load("res://Assets/BGM/Modern Castle - Tension (online-audio-converter.com).ogg")
+var GAME_OVER_THEME = load("res://Assets/BGM/Game over jingle 4.wav")
+var BOSS_THEME = load("res://Assets/BGM/Heavy Concept A Bass Master (online-audio-converter.com).ogg")
+var SPELL = load("res://Assets/SFX/Powerup 4 - Sound effects Pack 2.ogg")
+var RUN = load("res://Assets/SFX/Fantozzi-SandL1.ogg")
+var HIT = load("res://Assets/SFX/Explosion 3 - Sound effects Pack 2.ogg")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
@@ -22,8 +22,8 @@ var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT}
 
 # Base volumes
 onready var base_master = -10
-onready var base_bgm = 0
-onready var base_se = 0
+onready var base_bgm = 5
+onready var base_se = 5
 
 
 # Initializes or resets the sounds system
@@ -33,17 +33,19 @@ func initSound():
 			audio.push_back(AudioStreamPlayer.new())
 			self.add_child(audio[i])
 			audio[i].volume_db = base_master
+			audio[i].pause_mode = PAUSE_MODE_PROCESS
 	else:
 		audio[0].stop()
 	if music == null:
 		music = AudioStreamPlayer.new()
 		self.add_child(music)
 		music.stream = MENU_THEME
-		music.volume_db = base_master -5
+		music.volume_db = base_master + base_bgm
 		music.play()
+		music.pause_mode = PAUSE_MODE_PROCESS
 	elif music.stream != MENU_THEME:
 		music.stream = MENU_THEME
-		music.volume_db = base_master -5
+		music.volume_db = base_master + base_bgm
 		music.play()
 	else:
 		return
@@ -51,7 +53,7 @@ func initSound():
 
 # Resets the volume on all audio streams
 func recalibrate():
-	music.volume_db = base_master + base_bgm - 10
+	music.volume_db = base_master + base_bgm
 	for i in range(10):
 		audio[i].volume_db = base_master + base_se
 
@@ -65,12 +67,12 @@ func stop_bgm():
 
 # Plays a bgm. If a keep argument is sent, it will continue playing
 # the song from current position
-func play_bgm(bgm, keep=false):
+func play_bgm(bgm, keep=false, loud=0):
 	var play = 0.0
 	if music.stream == songs['MAP_THEME']:
 		prev_pos = music.get_playback_position()
 	music.stream = songs[bgm]
-	music.volume_db = base_master + base_bgm + 2
+	music.volume_db = base_master + base_bgm + loud
 	if keep:
 		play = prev_pos
 	music.play(play)

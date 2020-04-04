@@ -26,18 +26,31 @@ func _ready():
 	for opt in DISPLAY.get_modes():
 		$Overview/Values/Display.add_item(opt)
 	
+	$Overview/Values/Display.selected = DISPLAY.get_current()
+	
 	for opt in BATTLE_MANAGER.get_speed_opts():
 		$Overview/Values/Battle_speed.add_item(opt)
+	
+	$Overview/Values/Battle_speed.selected = BATTLE_MANAGER.get_speed()
 	
 	for opt in BATTLE_MANAGER.get_cursor_opts():
 		$Overview/Values/Battle_cursor.add_item(opt)
 
+	$Overview/Values/Battle_cursor.selected = BATTLE_MANAGER.get_cursor()
+
 	for opt in TEXT.get_size_opts():
 		$Overview/Values/Text_size.add_item(opt)
+	
+	$Overview/Values/Text_size.selected = TEXT.get_size_id()
 	
 	for opt in TEXT.get_speed_opts():
 		$Overview/Values/Text_speed.add_item(opt)
 
+	$Overview/Values/Text_speed.selected = TEXT.get_speed_id()
+	
+	$Overview/Values/Volume.set_value(AUDIO.get_master_volume())
+	$Overview/Values/BGM.set_value(AUDIO.get_bgm_volume())
+	$Overview/Values/SFX.set_value(AUDIO.get_sfx_volume())
 
 func set_text(index):
 	$Top_Panel/Description.set_text(options_text[index])

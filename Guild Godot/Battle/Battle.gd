@@ -26,6 +26,9 @@ func _ready():
 	Inventory =  GLOBAL.INVENTORY
 	Enemies =  BATTLE_MANAGER.Battled_Enemies
 	
+	for tex in get_tree().get_nodes_in_group("text"):
+		tex.add_font_override("font", TEXT.get_font())
+	
 	for c in get_node("Menu").get_children():
 		c.focus_previous = NodePath("Menu/Attack")
 	
@@ -204,6 +207,7 @@ func execute_action(action, target):
 	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
+		AUDIO.play_se("HIT")
 		var dies_on_attack = false
 		var entities = []
 		var alvo = target[1]
@@ -225,6 +229,7 @@ func execute_action(action, target):
 	
 	# Lane: only the player characters may change lanes
 	elif action == "Lane":
+		AUDIO.play_se("RUN")
 		var id = current_entity.index
 		var lane = int(target)
 		current_entity.set_pos(lane)
@@ -232,6 +237,7 @@ func execute_action(action, target):
 	
 	# Item: only the player characters may use items
 	elif action == "Item":
+		AUDIO.play_se("SPELL")
 		# Quick trick to identify if target is friend or foe
 		var entities = []
 		var alvo = target[1]
@@ -291,6 +297,7 @@ func execute_action(action, target):
 		return [targets, [dead, ailments, stat_change]]
 
 	elif action == "Skills":
+		AUDIO.play_se("SPELL")
 		var entities = []
 		var alvo = target[1]
 		var skitem = int(target[0])
@@ -347,6 +354,7 @@ func execute_action(action, target):
 		return [[targets, skill.quantity], [dead, ailments, stats_change]]
 	
 	elif action == "Run":
+		AUDIO.play_se("RUN")
 		randomize()
 		var chance = rand_range(0,100)
 		return [0, [boss, chance<=75]]
