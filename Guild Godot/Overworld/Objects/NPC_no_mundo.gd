@@ -5,13 +5,12 @@ const SPEED = 13500
 var velocity = Vector2(0,0)
 var inbody = null
 var interacting = false
+var delay = 0.0
 
-export(Array) var dialogues 
+export(int) var id
 
-# Initializes player on map - sets position and camera
-func _initialize():
-	if GLOBAL.POSITION:
-		position = GLOBAL.POSITION
+# Initializes position
+func _ready():
 	$AnimatedSprite.animation = "walk_down"
 	self.set_z_index(1)
 
@@ -20,18 +19,19 @@ func _initialize():
 func _physics_process(delta):
 	velocity = Vector2(0,0)
 	move_and_slide(velocity*delta)
-	
-	if inbody and Input.is_action_just_pressed("ui_accept") and not interacting:
-		print("tô entrando onde nã doevia")
-		GLOBAL.play_dialogues(dialogues, self)
-		interacting = true
-		inbody.stop.append(self)
-		
+	delay = delay - delta
+	if delay <= 0:
+		if inbody and Input.is_action_just_pressed("ui_accept") and not interacting:
+			GLOBAL.play_dialogues(id, self)
+			interacting = true
+			inbody.stop.append(self)
+
 
 func _on_Dialogue_Ended():
-	print("cabô")
 	inbody.stop.pop_front()
 	interacting = false
+	delay = 0.5
+
 
 func _on_Interactable_body_entered(body):
 	if body.is_in_group("player"):

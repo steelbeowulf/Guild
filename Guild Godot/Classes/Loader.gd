@@ -9,6 +9,7 @@ const SKILLS_PATH = "res://Data/Skills/"
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
 const INVENTORY_PATH = "res://Demo_data/Inventory.json"
+const NPCS_PATH = "res://Demo_data/NPCs"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -17,6 +18,7 @@ const SAVE_PATH = "res://Save_data/"
 var PLAYER_CLASS = load("res://Classes/Player.gd")
 var ENEMY_CLASS = load("res://Classes/Enemy.gd")
 var ITEM_CLASS = load("res://Classes/Itens.gd")
+var NPC_CLASS = load("res://Classes/NPC.gd")
 
 var List
 
@@ -175,6 +177,25 @@ func load_players(slot):
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
 	return parse_players(path)
+
+func load_npcs():
+	var path = NPCS_PATH
+	return parse_npcs(path)
+
+func parse_npcs(path):
+	var file = File.new()
+	file.open(path, file.READ)
+	var npcs = []
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK: 
+		print("lendo") 
+		var datas = result_json.result
+		for data in datas:
+			npcs.append(NPC_CLASS.new(data["ID"], 
+			data["IMG"], data["ANIM"], data["DIALOGUE"]))
+	print("cabei")
+	return npcs
 
 
 # Uses information from load_players to build the actual players.

@@ -1,0 +1,24 @@
+[
+	{"ID":0,
+	"IMG":{"path": "res://Assets/Animations/warrior spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME":"Warrior",
+	"DIALOGUE":[
+		"Hi! I'm a warrior!",
+		"Welcome to Guild!",
+		"Isn't it nice over here?"
+	],
+	"PORTRAIT": "res://Assets/Portraits/warrior.png"
+	},
+	{"ID":1,
+	"IMG":{"path": "res://Assets/Animations/rogue spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME":"Rogue",
+	"DIALOGUE":[
+		"Sup, I'm a rogue"
+	],
+	"PORTRAIT": "res://Assets/Portraits/rogue.png"
+	}
+]

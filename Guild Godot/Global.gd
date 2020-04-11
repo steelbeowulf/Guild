@@ -4,6 +4,7 @@ extends Node
 var ALL_ITENS
 var ALL_SKILLS
 var ALL_ENEMIES
+var ALL_NPCS
 
 # Global variables containing current players info (party and inventory)
 var ALL_PLAYERS
@@ -168,12 +169,14 @@ func register_node(name, node):
 
 var caller = null
 
-func play_dialogues(dials, callback):
+func play_dialogues(id, callback):
+	print(ALL_NPCS)
 	var node = NODES["Dialogue"]
+	var dials = ALL_NPCS[id].get_dialogues()
 	for dial in dials:
 		node.push_dialogue(dial)
 	caller = callback
 	node.start_dialogue()
 
 func dialogue_ended():
-	caller.on_Dialogue_Ended()
+	caller._on_Dialogue_Ended()

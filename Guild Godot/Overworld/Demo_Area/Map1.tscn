@@ -82,5 +82,4 @@ next = 2
 
 [node name="Cara" parent="." instance=ExtResource( 8 )]
 position = Vector2( 458.193, 397.772 )
-dialogues = [ "This is a test dialogue", "haaaaaaaalp", "Hello!", "Ayuda" ]
 
