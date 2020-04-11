@@ -9,7 +9,7 @@ const SKILLS_PATH = "res://Data/Skills/"
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
 const INVENTORY_PATH = "res://Demo_data/Inventory.json"
-const NPCS_PATH = "res://Demo_data/NPCs"
+const NPCS_PATH = "res://Demo_data/NPCs.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -192,8 +192,13 @@ func parse_npcs(path):
 		print("lendo") 
 		var datas = result_json.result
 		for data in datas:
-			npcs.append(NPC_CLASS.new(data["ID"], 
+			npcs.append(NPC_CLASS.new(data["ID"], data["NAME"],
 			data["IMG"], data["ANIM"], data["DIALOGUE"]))
+	else:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)
+
 	print("cabei")
 	return npcs
 

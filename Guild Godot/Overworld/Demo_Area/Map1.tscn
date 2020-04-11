@@ -80,6 +80,6 @@ next = 2
 
 [node name="Party" type="Node" parent="."]
 
-[node name="Cara" parent="." instance=ExtResource( 8 )]
+[node name="NPC" parent="." instance=ExtResource( 8 )]
 position = Vector2( 458.193, 397.772 )
 

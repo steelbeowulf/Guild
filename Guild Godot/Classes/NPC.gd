@@ -2,8 +2,9 @@ extends "Entity.gd"
 
 var dialogues
 
-func _init(id, img, anim, dialogue):
+func _init(id, name, img, anim, dialogue):
 	self.id = id
+	self.nome = name
 	self.sprite = img
 	self.animations = anim
 	self.dialogues = dialogue

@@ -170,9 +170,10 @@ func register_node(name, node):
 var caller = null
 
 func play_dialogues(id, callback):
-	print(ALL_NPCS)
 	var node = NODES["Dialogue"]
-	var dials = ALL_NPCS[id].get_dialogues()
+	var npc = ALL_NPCS[id]
+	var dials = npc.get_dialogues()
+	node.set_talker(npc.get_name())
 	for dial in dials:
 		node.push_dialogue(dial)
 	caller = callback

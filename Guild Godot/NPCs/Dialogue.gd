@@ -2,11 +2,9 @@ extends Control
 
 var dialogues = []
 var dialogue = ""
-var TEXT_SPEED = 10
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
-	set_talker("Papu")
 	GLOBAL.register_node("Dialogue", self)
 	#push_dialogue("Oi, meu nome é Papu!")
 	#push_dialogue("Tudo bem com você?")
@@ -37,7 +35,6 @@ func start_dialogue():
 
 
 func push_dialogue(text):
-	print(text)
 	dialogues.append(text)
 
 
@@ -49,7 +46,7 @@ func set_talker(name, sprite=null):
 func set_dialogue(text):
 	dialogue = text
 	if dialogue:
-		var speed = len(dialogue)/TEXT_SPEED
+		var speed = len(dialogue)/TEXT.get_speed()
 		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
 		$Tween.set_speed_scale(1.0)
 		$Tween.start()
