@@ -1,0 +1,9 @@
+{
+	"ID":2,	
+	"NAME":"MULTI HEAL", 
+	"QUANT":25, 
+	"TARGET":"ALL", 
+	"TYPE":"RECOVERY",
+	"EFFECTS":[{"STAT":"HP", "VALUE":50, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[]
+}

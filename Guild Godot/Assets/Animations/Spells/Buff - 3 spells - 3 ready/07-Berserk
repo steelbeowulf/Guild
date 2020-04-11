@@ -1,0 +1,9 @@
+{
+	"ID":7,
+	"NAME":"BERSERK",
+	"QUANT":30,
+	"TARGET":"ONE",
+	"TYPE":"STATUS",
+	"EFFECTS":[],
+	"STATUS":[{"BOOL":1.0, "STATUS":"BERSERK"}]
+}

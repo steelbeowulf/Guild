@@ -192,5 +192,4 @@ custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "-1"
-
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

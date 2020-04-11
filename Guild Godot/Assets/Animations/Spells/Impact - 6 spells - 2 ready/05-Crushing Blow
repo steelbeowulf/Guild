@@ -1,0 +1,9 @@
+{
+	"ID":5,
+	"NAME":"CRUSHING BLOW", 
+	"QUANT":30, 
+	"TYPE":"OFFENSE", 
+	"TARGET":"ALL",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[]
+}

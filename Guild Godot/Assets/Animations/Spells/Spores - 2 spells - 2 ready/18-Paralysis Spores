@@ -1,0 +1,9 @@
+{
+	"ID":18,	
+	"NAME":"PARALYSIS SPORES", 
+	"QUANT":25, 
+	"TARGET":"ALL", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[{"BOOL":0.25, "STATUS":"PARALYSIS"}]
+}

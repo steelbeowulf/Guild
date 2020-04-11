@@ -1,0 +1,9 @@
+{
+	"ID":20,	
+	"NAME":"GUST", 
+	"QUANT":20, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"WIND", "TURNS":1}],
+	"STATUS":[]
+}

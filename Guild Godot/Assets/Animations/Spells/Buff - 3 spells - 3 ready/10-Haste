@@ -1,0 +1,9 @@
+{
+	"ID":10,
+	"NAME":"HASTE",
+	"QUANT":50,
+	"TARGET":"ONE",
+	"TYPE":"STATUS",
+	"EFFECTS":[],
+	"STATUS":[{"BOOL":1, "STATUS":"HASTE"}]
+}
