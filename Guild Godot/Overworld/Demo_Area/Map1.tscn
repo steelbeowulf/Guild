@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=8]
 
 [node name="Map1" type="Node2D"]
 script = ExtResource( 1 )
@@ -78,4 +79,8 @@ position = Vector2( 112.936, 42.1482 )
 next = 2
 
 [node name="Party" type="Node" parent="."]
+
+[node name="Cara" parent="." instance=ExtResource( 8 )]
+position = Vector2( 458.193, 397.772 )
+dialogues = [ "This is a test dialogue", "haaaaaaaalp", "Hello!", "Ayuda" ]
 

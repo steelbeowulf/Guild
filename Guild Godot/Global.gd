@@ -9,6 +9,8 @@ var ALL_ENEMIES
 var ALL_PLAYERS
 var INVENTORY
 
+var NODES = {}
+
 var entering_battle = false
 
 # State variables for the Demo_area
@@ -160,3 +162,18 @@ func get_area():
 
 func get_map():
 	return MAP
+
+func register_node(name, node):
+	NODES[name] = node
+
+var caller = null
+
+func play_dialogues(dials, callback):
+	var node = NODES["Dialogue"]
+	for dial in dials:
+		node.push_dialogue(dial)
+	caller = callback
+	node.start_dialogue()
+
+func dialogue_ended():
+	caller.on_Dialogue_Ended()
