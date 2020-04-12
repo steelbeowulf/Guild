@@ -173,7 +173,7 @@ func play_dialogues(id, callback):
 	var node = NODES["Dialogue"]
 	var npc = ALL_NPCS[id]
 	var dials = npc.get_dialogues()
-	node.set_talker(npc.get_name())
+	node.set_talker(npc.get_name(), npc.get_portrait())
 	for dial in dials:
 		node.push_dialogue(dial)
 	caller = callback

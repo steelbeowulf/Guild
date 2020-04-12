@@ -83,3 +83,7 @@ next = 2
 [node name="NPC" parent="." instance=ExtResource( 8 )]
 position = Vector2( 458.193, 397.772 )
 
+[node name="NPC2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 305.955, 396.375 )
+id = 1
+

@@ -2,14 +2,12 @@ extends Control
 
 var dialogues = []
 var dialogue = ""
+var max_cols = 70
+var max_lines = 3
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
 	GLOBAL.register_node("Dialogue", self)
-	#push_dialogue("Oi, meu nome é Papu!")
-	#push_dialogue("Tudo bem com você?")
-	#push_dialogue("Guild será o melhor jogo de RPG de todos os tempos! \nVou escrever várias coisas até encher a caixa! Hehehehehe")
-	#start_dialogue()
 
 
 func _process(delta):
@@ -35,12 +33,29 @@ func start_dialogue():
 
 
 func push_dialogue(text):
-	dialogues.append(text)
+	var num_lines = max(len(text)/max_cols, 1) 
+	var new_text = ""
+	var current_line = 0
+	var words = text.split(" ")
+	for i in range(num_lines):
+		var line_size = 0
+		while words and (line_size + len(words[0])) < max_cols:
+			new_text += words[0]
+			line_size += len(words[0]) + 1
+			words.remove(0)
+			new_text += " "
+		new_text += "\n"
+		current_line += 1
+		if current_line == num_lines or current_line == max_lines:
+			num_lines -= max_lines
+			current_line = 0
+			dialogues.append(new_text)
+			new_text = ""
 
 
-func set_talker(name, sprite=null):
+func set_talker(name, sprite):
 	$Id.set_text(name)
-	#$Sprite.set_texture(sprite)
+	$Sprite.set_texture(load(sprite))
 
 
 func set_dialogue(text):

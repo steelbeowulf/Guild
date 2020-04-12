@@ -3,10 +3,13 @@ extends "Entity.gd"
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
 
-func _init(id, lv, experience, img, anim, valores,  pos, identificacao, habilidades, resistances):
+var portrait
+
+func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, resistances):
 	self.id = id
 	self.sprite = img
 	self.animations = anim
+	self.portrait = port
 	self.level = int(lv)
 	self.xp = int(experience)
 	self.stats = valores
@@ -26,6 +29,7 @@ func save_data():
 	dict["EXPERIENCE"] = xp
 	dict["IMG"] = get_sprite()
 	dict["ANIM"] = get_animation()
+	dict["PORTRAIT"] = get_portrait()
 	dict["HP"] = get_health()
 	dict["HP_MAX"] = get_max_health()
 	dict["MP"] = get_mp()
@@ -49,6 +53,9 @@ func get_sprite():
 
 func get_animation():
 	return self.animations
+
+func get_portrait():
+	return self.portrait
 
 func get_skills():
 	return self.skills

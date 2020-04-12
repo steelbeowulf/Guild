@@ -193,7 +193,7 @@ func parse_npcs(path):
 		var datas = result_json.result
 		for data in datas:
 			npcs.append(NPC_CLASS.new(data["ID"], data["NAME"],
-			data["IMG"], data["ANIM"], data["DIALOGUE"]))
+			data["IMG"], data["ANIM"], data["DIALOGUE"], data["PORTRAIT"]))
 	else:  # If parse has errors
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
@@ -218,7 +218,7 @@ func parse_players(path):
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.ALL_SKILLS[id])
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
-			data["EXPERIENCE"], data["IMG"], data["ANIM"],
+			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 

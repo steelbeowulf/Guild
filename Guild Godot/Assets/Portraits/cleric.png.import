@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rogue.png-b0d48dda2903f1fee064143e565d3a02.stex"
+path="res://.import/cleric.png-da05ddd31a7a98d5e47f49406a27ab98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Portraits/rogue.png"
-dest_files=[ "res://.import/rogue.png-b0d48dda2903f1fee064143e565d3a02.stex" ]
+source_file="res://Assets/Portraits/cleric.png"
+dest_files=[ "res://.import/cleric.png-da05ddd31a7a98d5e47f49406a27ab98.stex" ]
 
 [params]
 
