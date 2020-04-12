@@ -12,8 +12,7 @@ func update_info(player):
 	tmp = str(player.xp)+"/"+str(((18/10)^player.level)*5)
 	$EXP.set_text(tmp)
 	set_lane(player.position)
-	# Needs a portrait
-	#$Sprite.set_texture(players[i].sprite)
+	$Sprite.set_texture(load(player.portrait))
 
 func set_lane(lane):
 	for l in $Lanes.get_children():

@@ -4,10 +4,13 @@ extends Node
 var ALL_ITENS
 var ALL_SKILLS
 var ALL_ENEMIES
+var ALL_NPCS
 
 # Global variables containing current players info (party and inventory)
 var ALL_PLAYERS
 var INVENTORY
+
+var NODES = {}
 
 var entering_battle = false
 
@@ -160,3 +163,21 @@ func get_area():
 
 func get_map():
 	return MAP
+
+func register_node(name, node):
+	NODES[name] = node
+
+var caller = null
+
+func play_dialogues(id, callback):
+	var node = NODES["Dialogue"]
+	var npc = ALL_NPCS[id]
+	var dials = npc.get_dialogues()
+	node.set_talker(npc.get_name(), npc.get_portrait())
+	for dial in dials:
+		node.push_dialogue(dial)
+	caller = callback
+	node.start_dialogue()
+
+func dialogue_ended():
+	caller._on_Dialogue_Ended()

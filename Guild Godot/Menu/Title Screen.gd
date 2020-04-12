@@ -18,6 +18,7 @@ func _on_New_pressed():
 	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
 	GLOBAL.INVENTORY = loader.load_inventory(-1)
 	GLOBAL.ALL_PLAYERS = loader.load_players(-1)
+	GLOBAL.ALL_NPCS = loader.load_npcs()
 	GLOBAL.reload_state()
 	get_tree().change_scene("res://Root.tscn")
 	#Use this to get to the item menu for it to work
@@ -30,6 +31,7 @@ func _on_Load_pressed():
 	GLOBAL.ALL_SKILLS = loader.load_all_skills()
 	GLOBAL.ALL_ITENS = loader.load_all_itens()
 	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
+	GLOBAL.ALL_NPCS = loader.load_npcs()
 
 func _on_Slot_chosen(slot):
 	GLOBAL.INVENTORY = loader.load_inventory(slot)

@@ -4,8 +4,6 @@
 [ext_resource path="res://Assets/Animations/Chest/chest1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Animations/Chest/chest2.png" type="Texture" id=3]
 
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],

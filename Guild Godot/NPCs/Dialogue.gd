@@ -2,15 +2,12 @@ extends Control
 
 var dialogues = []
 var dialogue = ""
-var TEXT_SPEED = 10
+var max_cols = 70
+var max_lines = 3
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
-	set_talker("Papu")
-	push_dialogue("Oi, meu nome é Papu!")
-	push_dialogue("Tudo bem com você?")
-	push_dialogue("Guild será o melhor jogo de RPG de todos os tempos! \nVou escrever várias coisas até encher a caixa! Hehehehehe")
-	start_dialogue()
+	GLOBAL.register_node("Dialogue", self)
 
 
 func _process(delta):
@@ -25,25 +22,53 @@ func _process(delta):
 
 
 func start_dialogue():
-	$Text.add_font_override("font", TEXT.get_font())
-	set_dialogue(dialogues.pop_front())
+	if len(dialogues) > 0 or dialogue != "":
+		self.show()
+		$Text.add_font_override("font", TEXT.get_font())
+		set_dialogue(dialogues.pop_front())
+	else:
+		self.hide()
+		dialogue = ""
+		GLOBAL.dialogue_ended()
 
 
 func push_dialogue(text):
-	dialogues.append(text)
+	var num_lines = max(len(text)/max_cols, 1) 
+	var new_text = ""
+	var current_line = 0
+	var words = text.split(" ")
+	for i in range(num_lines):
+		var line_size = 0
+		while words and (line_size + len(words[0])) < max_cols:
+			new_text += words[0]
+			line_size += len(words[0]) + 1
+			words.remove(0)
+			new_text += " "
+		new_text += "\n"
+		current_line += 1
+		if current_line == num_lines or current_line == max_lines:
+			num_lines -= max_lines
+			current_line = 0
+			dialogues.append(new_text)
+			new_text = ""
 
 
-func set_talker(name, sprite=null):
+func set_talker(name, sprite):
 	$Id.set_text(name)
-	#$Sprite.set_texture(sprite)
+	$Sprite.set_texture(load(sprite))
 
 
 func set_dialogue(text):
 	dialogue = text
-	var speed = len(dialogue)/TEXT_SPEED
-	$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
-	$Tween.set_speed_scale(1.0)
-	$Tween.start()
+	if dialogue:
+		var speed = len(dialogue)/TEXT.get_speed()
+		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
+		$Tween.set_speed_scale(1.0)
+		$Tween.start()
+	else:
+		self.hide()
+		dialogue = ""
+		GLOBAL.dialogue_ended()
 
 
 func set_text(value):
@@ -52,6 +77,7 @@ func set_text(value):
 
 func get_length():
 	return len(dialogue)
+
 
 func _on_Tween_tween_completed(object, key):
 	$End.show()
