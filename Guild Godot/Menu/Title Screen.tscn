@@ -15,6 +15,7 @@ font_data = ExtResource( 3 )
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 963.07, 543.697 )
 scale = Vector2( 2.40942, 2.17474 )
 texture = ExtResource( 2 )
@@ -78,6 +79,7 @@ position = Vector2( 650, 275 )
 
 [node name="Save Slots" parent="Load_Screen" instance=ExtResource( 4 )]
 margin_bottom = 772.0
+
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

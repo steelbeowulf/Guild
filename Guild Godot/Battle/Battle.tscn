@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/cursor.png" type="Texture" id=12]
+
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -157,6 +159,11 @@ margin_right = 676.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
+
+[node name="cursor" type="Sprite" parent="."]
+position = Vector2( 1283.01, 253.268 )
+texture = ExtResource( 12 )
+
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

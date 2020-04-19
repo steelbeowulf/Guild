@@ -25,8 +25,6 @@ func set_animations(sprite, animations):
 
 	for k in animations.keys():
 		var v = animations[k]
-		
-
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
@@ -43,6 +41,7 @@ func set_animations(sprite, animations):
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
+	print("playing anim "+name)
 	if name == 'Damage':
 		take_damage(options, 0)
 		return
@@ -107,20 +106,15 @@ func take_damage(value, type):
 	$AnimationPlayer.play("Damage")
 
 func _on_Sprite_animation_finished(name):
+	print("finished animation "+name)
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
 	if name != "death":
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)
-	if name != "dead":
+	elif name != "dead":
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)
-	elif name == "death":
-		
-
-		#emit_signal("finish_anim", name)
-		#emit_signal("finish_anim", name)
-		#emit_signal("finish_anim", name)
+	else:
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
-	

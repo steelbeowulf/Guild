@@ -95,6 +95,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 				enqueue(target.info, "UpdateHP", dmg) # lifebar
 			if dies_on_attack:
 				enqueue(target.graphics, "death", null) #death animaton
+				target.graphics
 		
 		#[targets, skill.quantity, [dead, ailments, stats_change]]
 		elif action == "Skills":
