@@ -1,9 +1,0 @@
-{
-	"ID":11,	
-	"NAME":"SHOCKING ARROW", 
-	"QUANT":10, 
-	"TARGET":"ONE", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[{"BOOL":1.0, "STATUS":"PARALYSIS"}]
-}

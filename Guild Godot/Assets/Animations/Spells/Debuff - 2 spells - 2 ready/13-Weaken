@@ -1,9 +1,0 @@
-{
-	"ID":13,
-	"NAME":"WEAKEN",
-	"QUANT":30,
-	"TARGET":"ONE",
-	"TYPE":"STATUS",
-	"EFFECTS":[],
-	"STATUS":[{"BOOL":0.5, "STATUS":"ATTACK_DOWN"}]
-}

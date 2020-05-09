@@ -1,9 +1,0 @@
-{
-	"ID":23,
-	"NAME":"FIREBALL", 
-	"QUANT":10, 
-	"TARGET":"ONE", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-75, "TYPE":"FIRE", "TURNS":1}],
-	"STATUS":[{"BOOL":0.15, "STATUS":"BURN"}]
-}

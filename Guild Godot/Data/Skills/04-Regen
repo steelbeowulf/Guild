@@ -5,5 +5,8 @@
 	"TARGET":"ONE", 
 	"TYPE":"RECOVERY",
 	"EFFECTS":[],
-	"STATUS":[{"BOOL":1, "STATUS":"REGEN"}]
+	"STATUS":[{"BOOL":1, "STATUS":"REGEN"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Buff - Done/Regen.png",
+		   "vframes": 5, "hframes":10, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-45"]}
 }

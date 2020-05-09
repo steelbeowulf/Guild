@@ -5,5 +5,8 @@
 	"TARGET":"ONE",
 	"TYPE":"STATUS",
 	"EFFECTS":[],
-	"STATUS":[{"BOOL":1, "STATUS":"HASTE"}]
+	"STATUS":[{"BOOL":1, "STATUS":"HASTE"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Buff - Done/Haste.png",
+		   "vframes": 4, "hframes":3, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-11"]}
 }

@@ -5,5 +5,8 @@
 	"TARGET":"ONE",
 	"TYPE":"STATUS",
 	"EFFECTS":[],
-	"STATUS":[{"BOOL":0.5, "STATUS":"ATTACK_DOWN"}]
+	"STATUS":[{"BOOL":0.5, "STATUS":"ATTACK_DOWN"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Debuff - Done/Weaken.png",
+		   "vframes": 5, "hframes":8, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-37"]}
 }

@@ -5,5 +5,8 @@
 	"TYPE":"OFFENSE", 
 	"TARGET":"ONE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-105, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[]
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Impact - Done/Charge Attack.png",
+		   "vframes": 5, "hframes":2, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-9"]}
 }

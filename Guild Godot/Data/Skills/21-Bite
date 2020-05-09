@@ -5,5 +5,8 @@
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-27, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[]
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Water - Done/Mucus.png",
+		   "vframes": 9, "hframes":1, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-8, 8,7,6,5,4,3,2,1,0"]}
 }

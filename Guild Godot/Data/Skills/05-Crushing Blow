@@ -5,5 +5,8 @@
 	"TYPE":"OFFENSE", 
 	"TARGET":"ALL",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[]
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Impact - Done/Crushing Blow.png",
+		   "vframes": 5, "hframes":2, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-9"]}
 }

@@ -5,5 +5,8 @@
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":0, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[{"BOOL":0.01, "STATUS":"KO"}]
+	"STATUS":[{"BOOL":0.01, "STATUS":"KO"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Death - Done/Wack.png",
+		   "vframes": 1, "hframes":1, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0,0,0,0,0,0"]}
 }

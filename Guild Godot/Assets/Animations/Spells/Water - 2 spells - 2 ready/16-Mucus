@@ -1,9 +1,0 @@
-{
-	"ID":16,	
-	"NAME":"MUCUS", 
-	"QUANT":10, 
-	"TARGET":"ONE", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[{"BOOL":0.8, "STATUS":"SLOW"}]
-}

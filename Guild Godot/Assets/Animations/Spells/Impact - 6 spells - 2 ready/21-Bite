@@ -1,9 +1,0 @@
-{
-	"ID":21,	
-	"NAME":"BITE", 
-	"QUANT":20, 
-	"TARGET":"ONE", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-27, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[]
-}

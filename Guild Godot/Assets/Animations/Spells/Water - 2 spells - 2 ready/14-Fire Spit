@@ -1,9 +1,0 @@
-{
-	"ID":14,
-	"NAME":"FIRE SPIT", 
-	"QUANT":20, 
-	"TARGET":"ONE", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-25, "TYPE":"FIRE", "TURNS":1}],
-	"STATUS":[{"BOOL":0.75, "STATUS":"BURN"}]
-}

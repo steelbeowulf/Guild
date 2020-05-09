@@ -5,5 +5,8 @@
 	"TARGET":"ALL", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-75, "TYPE":"EARTH", "TURNS":1}],
-	"STATUS":[]
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Earth - Done/Earth.png",
+		   "vframes": 1, "hframes":1, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0,0,0"]}
 }

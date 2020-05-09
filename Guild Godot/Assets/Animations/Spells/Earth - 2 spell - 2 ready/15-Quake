@@ -1,9 +1,0 @@
-{
-	"ID":15,	
-	"NAME":"QUAKE", 
-	"QUANT":20, 
-	"TARGET":"ALL", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"EARTH", "TURNS":1}],
-	"STATUS":[]
-}

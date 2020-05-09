@@ -70,4 +70,3 @@ scale = Vector2( 1, 50 )
 next = 5
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-

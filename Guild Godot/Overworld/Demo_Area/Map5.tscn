@@ -142,4 +142,3 @@ position = Vector2( 419.256, 314.419 )
 position = Vector2( 516.764, 473.951 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
-

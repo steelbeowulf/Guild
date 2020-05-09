@@ -1,9 +1,0 @@
-{
-	"ID":17,	
-	"NAME":"POISON SPORES", 
-	"QUANT":20, 
-	"TARGET":"ONE", 
-	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[{"BOOL":true, "STATUS":"POISON"}]
-}

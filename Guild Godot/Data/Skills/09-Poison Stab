@@ -5,5 +5,8 @@
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-40, "TYPE":"PHYSIC", "TURNS":1}],
-	"STATUS":[{"BOOL":0.75, "STATUS":"POISON"}]
+	"STATUS":[{"BOOL":0.75, "STATUS":"POISON"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Impact - Done/Poison Stab.png",
+		   "vframes": 5, "hframes":10, "scale":[2,2]},
+	"ANIM":{"skill": [false, "38-45, 0-37"]}
 }

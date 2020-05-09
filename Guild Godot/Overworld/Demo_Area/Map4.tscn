@@ -65,4 +65,3 @@ position = Vector2( 99.7626, 104.711 )
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-
