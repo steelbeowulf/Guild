@@ -9,6 +9,7 @@ const SKILLS_PATH = "res://Data/Skills/"
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
 const INVENTORY_PATH = "res://Demo_data/Inventory.json"
+const NPCS_PATH = "res://Demo_data/NPCs.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -17,6 +18,7 @@ const SAVE_PATH = "res://Save_data/"
 var PLAYER_CLASS = load("res://Classes/Player.gd")
 var ENEMY_CLASS = load("res://Classes/Enemy.gd")
 var ITEM_CLASS = load("res://Classes/Itens.gd")
+var NPC_CLASS = load("res://Classes/NPC.gd")
 
 var List
 
@@ -176,6 +178,30 @@ func load_players(slot):
 		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
 	return parse_players(path)
 
+func load_npcs():
+	var path = NPCS_PATH
+	return parse_npcs(path)
+
+func parse_npcs(path):
+	var file = File.new()
+	file.open(path, file.READ)
+	var npcs = []
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK: 
+		print("lendo") 
+		var datas = result_json.result
+		for data in datas:
+			npcs.append(NPC_CLASS.new(data["ID"], data["NAME"],
+			data["IMG"], data["ANIM"], data["DIALOGUE"], data["PORTRAIT"]))
+	else:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)
+
+	print("cabei")
+	return npcs
+
 
 # Uses information from load_players to build the actual players.
 # TODO: Fix dependency on load_all_skills when it doesn't load everything.
@@ -192,7 +218,7 @@ func parse_players(path):
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.ALL_SKILLS[id])
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
-			data["EXPERIENCE"], data["IMG"], data["ANIM"],
+			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
 			data["MP"], data["MP_MAX"],
 			data["ATK"], data["ATKM"], 

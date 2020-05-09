@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=1]
+[ext_resource path="res://NPCs/Dialogue.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Battle"
@@ -31,4 +32,12 @@ margin_top = 4.0
 margin_right = 1922.0
 margin_bottom = 1090.0
 color = Color( 1, 1, 1, 0 )
+
+[node name="Dialogue" parent="." instance=ExtResource( 2 )]
+visible = false
+margin_left = 9.80847
+margin_top = 788.147
+margin_right = 9.80847
+margin_bottom = 788.147
+rect_scale = Vector2( 1.5, 1.5 )
 

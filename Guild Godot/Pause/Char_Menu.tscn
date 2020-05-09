@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Assets/Menu_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Pause/Char_Menu.gd" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Portraits/cleric.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Hover_Menu_Info_Panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/Menu_Info_Dark.tres" type="StyleBox" id=6]
 
@@ -118,8 +118,8 @@ custom_fonts/font = ExtResource( 2 )
 text = "Lv"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 114.303, 88.0598 )
-scale = Vector2( 2.42149, 2.22103 )
+position = Vector2( 93.4314, 69.6436 )
+scale = Vector2( 8, 8 )
 texture = ExtResource( 4 )
 
 [node name="Lanes" type="HBoxContainer" parent="."]
