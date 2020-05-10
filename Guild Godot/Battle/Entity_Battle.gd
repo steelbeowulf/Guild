@@ -41,15 +41,17 @@ func set_animations(sprite, animations):
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
-	print("playing anim "+name)
+	#print("playing anim "+name)
 	if name == 'Damage':
 		take_damage(options, 0)
 		return
 	$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()
- 	$Animations.get_node(name).show()
+	$Animations.get_node(name).show()
 	$Animations.get_node(name).play(true)
+	#print("oi")
+	#draw_circle_arc(Vector2(500, 500), 100, 0, 180, Color(0,0,0))
 
 func turn(keep=false):
 	if keep:
@@ -74,15 +76,16 @@ func update_bounds(bounds):
 	self.bounds = bounds
 	
 func display_hate(value, id):
-	if value == bounds[id]:
-		$ProgressBar.tint_progress = Color(255, 0, 0)
-	elif value > bounds[id] - 100:
-		$ProgressBar.tint_progress = Color(255, 255, 0)
-	else:
-		$ProgressBar.tint_progress = Color(0, 40, 255)
-	$ProgressBar.value = value
-	$ProgressBar.max_value = bounds[id]
-	$ProgressBar.show()
+	pass
+#	if value == bounds[id]:
+#		$ProgressBar.tint_progress = Color(255, 0, 0)
+#	elif value > bounds[id] - 100:
+#		$ProgressBar.tint_progress = Color(255, 255, 0)
+#	else:
+#		$ProgressBar.tint_progress = Color(0, 40, 255)
+#	$ProgressBar.value = value
+#	$ProgressBar.max_value = bounds[id]
+#	$ProgressBar.show()
 	
 func hide_hate():
 	$ProgressBar.hide()
@@ -106,7 +109,7 @@ func take_damage(value, type):
 	$AnimationPlayer.play("Damage")
 
 func _on_Sprite_animation_finished(name):
-	print("finished animation "+name)
+	#rint("finished animation "+name)
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
 	if name != "death":

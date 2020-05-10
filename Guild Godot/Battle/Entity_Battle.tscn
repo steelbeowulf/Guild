@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Battle/Entity_Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/NO.png" type="Texture" id=2]
 [ext_resource path="res://Assets/MAX_AGGRO.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/cursor.png" type="Texture" id=5]
+[ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Theme" id=1]
 
@@ -90,4 +92,13 @@ text = "250"
 anims/Damage = SubResource( 3 )
 
 [node name="Animations" type="Node2D" parent="."]
+
+[node name="Cursor" type="Sprite" parent="."]
+visible = false
+position = Vector2( -50, 0 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 5 )
+
+[node name="Target" parent="." instance=ExtResource( 6 )]
+visible = false
 

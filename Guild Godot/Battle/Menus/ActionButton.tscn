@@ -25,6 +25,7 @@ text = "Action"
 script = ExtResource( 5 )
 
 [node name="Targets" type="VBoxContainer" parent="."]
+editor/display_folded = true
 visible = false
 margin_left = 323.0
 margin_top = 4.0
@@ -49,9 +50,8 @@ text = "0"
 "text",
 ] instance=ExtResource( 6 )]
 visible = false
-margin_top = 31.0
 margin_right = 274.0
-margin_bottom = 58.0
+margin_bottom = 27.0
 focus_previous = NodePath("../..")
 size_flags_horizontal = 3
 custom_styles/hover = ExtResource( 1 )

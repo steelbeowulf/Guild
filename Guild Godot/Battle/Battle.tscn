@@ -1,18 +1,33 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=6]
-[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=7]
-[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/cursor.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Shaders/Smooth.gd" type="Script" id=5]
+[ext_resource path="res://Assets/environment_forest_alt1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=7]
+[ext_resource path="res://Battle/Menus/ActionMenu.gd" type="Script" id=8]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/Menus/BigActionButton.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=12]
 
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 4
+emission_point_count = 1
+flag_disable_z = true
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+color = Color( 1, 0, 0, 1 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -66,11 +81,26 @@ scale = Vector2( 2, 2 )
 
 [node name="Log" parent="AnimationManager" instance=ExtResource( 4 )]
 
+[node name="Path2D" type="Path2D" parent="AnimationManager"]
+z_index = 25
+curve = SubResource( 1 )
+script = ExtResource( 5 )
+spline_length = 20.0
+
+[node name="Particles2D" type="Particles2D" parent="AnimationManager/Path2D"]
+amount = 500
+lifetime = 15.0
+speed_scale = 20.0
+fract_delta = false
+visibility_rect = Rect2( -100, -100, 1000, 200 )
+local_coords = false
+process_material = SubResource( 2 )
+
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 966.024, 518.53 )
 scale = Vector2( 1.96703, 1.51696 )
 z_index = -1
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 4.0
@@ -79,41 +109,42 @@ margin_right = 1919.0
 margin_bottom = 1080.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
-custom_styles/panel = ExtResource( 6 )
+custom_styles/panel = ExtResource( 7 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
+editor/display_folded = true
 margin_left = 10.0
 margin_top = 912.084
 margin_right = 328.0
 margin_bottom = 1073.08
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
-[node name="Attack" parent="Menu" instance=ExtResource( 8 )]
+[node name="Attack" parent="Menu" instance=ExtResource( 9 )]
 margin_right = 318.0
 margin_bottom = 28.0
 focus_neighbour_top = NodePath("../Run")
 text = "Attack"
 
-[node name="Lane" parent="Menu" instance=ExtResource( 9 )]
+[node name="Lane" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 32.0
 margin_right = 318.0
 margin_bottom = 60.0
 rect_pivot_offset = Vector2( 896.515, -365.321 )
 text = "Lane"
 
-[node name="Skills" parent="Menu" instance=ExtResource( 10 )]
+[node name="Skills" parent="Menu" instance=ExtResource( 11 )]
 margin_top = 64.0
 margin_right = 318.0
 margin_bottom = 92.0
 text = "Skills"
 
-[node name="Itens" parent="Menu" instance=ExtResource( 10 )]
+[node name="Itens" parent="Menu" instance=ExtResource( 11 )]
 margin_top = 96.0
 margin_right = 318.0
 margin_bottom = 124.0
 text = "Item"
 
-[node name="Run" parent="Menu" instance=ExtResource( 9 )]
+[node name="Run" parent="Menu" instance=ExtResource( 10 )]
 margin_top = 128.0
 margin_right = 318.0
 margin_bottom = 160.0
@@ -132,37 +163,33 @@ rect_min_size = Vector2( 676, 136 )
 rect_scale = Vector2( 1.2, 1 )
 alignment = 1
 
-[node name="P0" parent="Info" instance=ExtResource( 11 )]
+[node name="P0" parent="Info" instance=ExtResource( 12 )]
 margin_top = 2.0
 margin_right = 676.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P1" parent="Info" instance=ExtResource( 11 )]
+[node name="P1" parent="Info" instance=ExtResource( 12 )]
 margin_top = 36.0
 margin_right = 676.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P2" parent="Info" instance=ExtResource( 11 )]
+[node name="P2" parent="Info" instance=ExtResource( 12 )]
 margin_top = 70.0
 margin_right = 676.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P3" parent="Info" instance=ExtResource( 11 )]
+[node name="P3" parent="Info" instance=ExtResource( 12 )]
 margin_top = 104.0
 margin_right = 676.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
-
-[node name="cursor" type="Sprite" parent="."]
-position = Vector2( 1283.01, 253.268 )
-texture = ExtResource( 12 )
 
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]

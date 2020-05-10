@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "STATS",
 "language": "GDScript",
 "path": "res://Classes/Stats.gd"
+}, {
+"base": "Path2D",
+"class": "SmoothPath",
+"language": "GDScript",
+"path": "res://Assets/Shaders/Smooth.gd"
 } ]
 _global_script_class_icons={
 "LOADER": "",
-"STATS": ""
+"STATS": "",
+"SmoothPath": ""
 }
 
 [application]

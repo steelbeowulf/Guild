@@ -54,6 +54,9 @@ func initialize(Players, Enemies):
 	for i in range(len(Players)):
 		Players_status[i].set_name(Players[i].nome)
 		Players_status[i].set_level(Players[i].level)
+	
+	$Path2D.create_curve(Players_img[0].get_global_position(), Enemies_img[0].get_global_position(), 50)
+	
 	return [Players, Enemies]
 
 

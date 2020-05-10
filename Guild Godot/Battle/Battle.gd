@@ -75,7 +75,6 @@ func rounds():
 		else:
 			next = turnorder[0]
 		
-
 		var id = current_entity.index
 
 		# If the entity is currently affected by a status, apply its effect
@@ -90,9 +89,7 @@ func rounds():
 				can_move.append(result[0])
 				
 			current_entity.decrement_turns()
-			
-
-			
+				
 			# Also covers cases in which the action is chosen for you (confuse, paralysis, etc)
 			for condition in can_move:
 				if condition == -1:
@@ -111,8 +108,6 @@ func rounds():
 				var decision = current_entity.AI(Players, Enemies)
 				target = decision[1]
 				action = decision[0]
-				
-
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)

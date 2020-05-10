@@ -12,4 +12,5 @@ custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
 script = ExtResource( 2 )
+
 [connection signal="pressed" from="." to="." method="_on_Target_pressed"]
