@@ -68,6 +68,28 @@ scale = Vector2( 2, 2 )
 position = Vector2( 1600, 575 )
 scale = Vector2( 2, 2 )
 
+[node name="Spells" type="Node" parent="AnimationManager"]
+
+[node name="S0" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 1400, 250 )
+scale = Vector2( 2, 2 )
+
+[node name="S1" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 1400, 475 )
+scale = Vector2( 2, 2 )
+
+[node name="S2" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 1400, 700 )
+scale = Vector2( 2, 2 )
+
+[node name="S3" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 1600, 375 )
+scale = Vector2( 2, 2 )
+
+[node name="S4" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 1600, 575 )
+scale = Vector2( 2, 2 )
+
 [node name="Log" parent="AnimationManager" instance=ExtResource( 4 )]
 
 [node name="Path2D" type="Path2D" parent="AnimationManager"]
@@ -75,6 +97,8 @@ z_index = 25
 curve = SubResource( 1 )
 script = ExtResource( 5 )
 spline_length = 20.0
+_smooth = false
+_straighten = false
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 966.024, 518.53 )
@@ -169,7 +193,6 @@ margin_right = 676.0
 margin_bottom = 134.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

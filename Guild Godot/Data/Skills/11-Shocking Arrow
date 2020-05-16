@@ -7,6 +7,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":1.0, "STATUS":"PARALYSIS"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Arrow - Done/Shocking Arrow.png",
-		   "vframes": 4, "hframes":3, "scale":[2,2]},
+		   "vframes": 3, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "6-11, 0-5"]}
 }

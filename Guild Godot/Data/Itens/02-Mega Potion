@@ -5,5 +5,8 @@
 	"TARGET":"ALL",
 	"TYPE":"RECOVERY",
 	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
-	"STATUS":[]
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal - Done/Heal.png",
+		   "vframes": 5, "hframes":6, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-28"]}
 }

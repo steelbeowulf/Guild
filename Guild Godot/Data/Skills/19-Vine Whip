@@ -7,6 +7,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[],
 	"IMG":{"path": "res://Assets/Animations/Spells/Impact - Done/Vine Whip.png",
-		   "vframes": 10, "hframes":1, "scale":[2,2]},
+		   "vframes": 1, "hframes":10, "scale":[2,2]},
 	"ANIM":{"skill": [false, "0-9"]}
 }

@@ -47,7 +47,8 @@ func play(name, options=[]):
 	if name == 'Damage':
 		take_damage(options, 0)
 		return
-	$Animations.get_node("idle").stop()
+	if name != 'skill':
+		$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()
 	$Animations.get_node(name).show()
@@ -114,9 +115,13 @@ func _on_Sprite_animation_finished(name):
 	#rint("finished animation "+name)
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
-	if name != "death":
+	if name == "skill":
+		pass
+		#$Animations.set_animations(null, null, null)
+	elif name != "death":
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)
+	
 	elif name != "dead":
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)

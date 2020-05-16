@@ -7,6 +7,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":-25, "TYPE":"FIRE", "TURNS":1}],
 	"STATUS":[{"BOOL":0.75, "STATUS":"BURN"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Water - Done/Fire Spit.png",
-		   "vframes": 4, "hframes":6, "scale":[2,2]},
+		   "vframes": 6, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "16-23, 14-15, 0-13"]}
 }

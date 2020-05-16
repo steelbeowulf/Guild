@@ -7,8 +7,10 @@ var type #Offensive, Defensive, Healing
 var target #Individual, Lane, All
 var effect = [] #["MP", +10, PHYS, 5]
 var status = [] #causa confuse [true, "Confuse"]
+var img
+var anim
 
-func _init(id, name, quant, targ, tipo, efeito, statusEffects):
+func _init(id, name, quant, targ, tipo, efeito, statusEffects, img, anim):
 	self.id = id
 	self.nome = name
 	self.quantity = quant
@@ -16,6 +18,8 @@ func _init(id, name, quant, targ, tipo, efeito, statusEffects):
 	self.type = tipo
 	self.effect = efeito
 	self.status = statusEffects
+	self.img = img
+	self.anim = anim
 	
 func get_target():
 	return target

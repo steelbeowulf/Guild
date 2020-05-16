@@ -7,6 +7,7 @@ var Inventory
 var current_entity
 var menu_state
 var battle_over
+var skill
 
 var current_action
 var current_target
@@ -150,12 +151,13 @@ func rounds():
 			action = "Attack"
 
 		# Actually executes the actions for the turn and animates it
+		
 		result = execute_action(action, target)
 		target = result[0]
 		result = result[1]
-		
-
-		$AnimationManager.resolve(current_entity, action, target, result, bounds, next)
+		print(skill)
+		$AnimationManager.resolve(current_entity, action, target, result, bounds, next, skill)
+		skill = null
 		yield($AnimationManager, "animation_finished")
 		
 
@@ -302,7 +304,7 @@ func execute_action(action, target):
 			entities = Enemies
 		alvo = int(alvo.right(1))
 		alvo = entities[alvo]
-		var skill = current_entity.get_skills()[skitem]
+		skill = current_entity.get_skills()[skitem]
 		
 		var affected = []
 		if skill.get_target() == "ONE":

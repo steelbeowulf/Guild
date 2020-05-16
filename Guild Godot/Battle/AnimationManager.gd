@@ -3,10 +3,13 @@ extends Node2D
 # Graphical stuff
 var Players_img = []
 var Enemies_img = []
+var Spells_img = []
 var Players_status = []
 var info = []
 var Menu = null
 var Info = null
+var En
+var Pl
 
 var queue = []
 var can_play = true
@@ -14,6 +17,8 @@ var global_animations = null
 signal animation_finished
 
 func initialize(Players, Enemies):
+	En = Enemies
+	Pl = Players
 # Graphics stuff
 	Menu = self.get_parent().get_node("Menu")
 	Info = self.get_parent().get_node("Info")
@@ -23,6 +28,7 @@ func initialize(Players, Enemies):
 		Players_img.append(node)
 		node.change_lane(lane)
 		node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
+		
 		if not Players[i].is_dead():
 			node.play("idle")
 		else:
@@ -33,7 +39,7 @@ func initialize(Players, Enemies):
 		Players[i].info = Info.get_node("P"+str(i))
 		Players[i].info.set_initial_hp(Players[i].get_health(), Players[i].get_max_health())
 		Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
-	
+		
 	for i in range(len(Enemies)):
 		var lane = Enemies[i].get_pos()
 		var node = get_node("Enemies/E"+str(i))
@@ -43,6 +49,8 @@ func initialize(Players, Enemies):
 		node.show()
 		node.connect("finish_anim", self, "_on_animation_finished")
 		Enemies[i].graphics = node
+	
+	
 	
 	# Link target buttons with visual targets
 	Menu.get_node("Attack").connect_targets(Players_img, Enemies_img, self)
@@ -84,7 +92,7 @@ func _physics_process(delta):
 	if not queue and can_play:
 		emit_signal("animation_finished")
 
-func resolve(current_entity, action, target, result, bounds, next):
+func resolve(current_entity, action, target, result, bounds, next, skill):
 	# TODO Deal with ailments
 	if typeof(action) == TYPE_STRING:
 		if action == "Attack":
@@ -102,12 +110,27 @@ func resolve(current_entity, action, target, result, bounds, next):
 		
 		#[targets, skill.quantity, [dead, ailments, stats_change]]
 		elif action == "Skills":
+			var node
 			var targets = target[0]
+			for i in range(len(targets)):
+				var lane = targets[i].get_pos()
+				for j in range(len(En)):
+					if targets[i] == En[j]:
+						node = get_node("Spells/S"+str(j))
+				for x in range(len(Pl)):
+					if targets[i] == Pl[x]:
+						node = get_node("Spells/S"+str(x))
+				Spells_img.append(node)
+				node.set_animations(skill.img, skill.anim, targets[i])
+				node.play("skill")
+				node.show()
+				node.connect("finish_anim", self, "_on_animation_finished")
+				targets[i].graphics = node
 			var mp = target[1]
 			var dies_on_attack = result[0]
 			var ailments = result[1]
 			var stats = result[2]
-			#$Log.display_text("")
+			$Log.display_text(skill.nome)
 			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
 			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
 			#enqueue(target.graphics, "Damage") # dano no alvo
@@ -121,7 +144,7 @@ func resolve(current_entity, action, target, result, bounds, next):
 					for st in stats[i]:
 						#enqueue(targets[i].graphics, "Damage") # dano no alvo
 						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
-				if dies_on_attack[i]:
+				#if dies_on_attack[i]:
 					enqueue(targets[i].graphics, "death", null) #death animaton
 
 		
