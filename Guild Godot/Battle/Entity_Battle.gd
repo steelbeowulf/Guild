@@ -5,6 +5,7 @@ var current_lane = 0
 var initial_position
 var my_turn = false
 var bounds = [0,0,0,0,0]
+var data = null
 export(bool) var Player = false
 
 signal finish_anim
@@ -16,7 +17,8 @@ func _ready():
 		$Turn.set_color(Color(1, 0, 0))
 		$ProgressBar.hide()
 
-func set_animations(sprite, animations):
+func set_animations(sprite, animations, data_arg):
+	self.data = data_arg
 	var img = sprite['path']
 	var vf = sprite['vframes']
 	var hf = sprite['hframes']
@@ -25,8 +27,6 @@ func set_animations(sprite, animations):
 
 	for k in animations.keys():
 		var v = animations[k]
-		
-
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
@@ -43,14 +43,17 @@ func set_animations(sprite, animations):
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
+	#print("playing anim "+name)
 	if name == 'Damage':
 		take_damage(options, 0)
 		return
 	$Animations.get_node("idle").stop()
 	for c in $Animations.get_children():
 		c.hide()
- 	$Animations.get_node(name).show()
+	$Animations.get_node(name).show()
 	$Animations.get_node(name).play(true)
+	#print("oi")
+	#draw_circle_arc(Vector2(500, 500), 100, 0, 180, Color(0,0,0))
 
 func turn(keep=false):
 	if keep:
@@ -75,15 +78,16 @@ func update_bounds(bounds):
 	self.bounds = bounds
 	
 func display_hate(value, id):
-	if value == bounds[id]:
-		$ProgressBar.tint_progress = Color(255, 0, 0)
-	elif value > bounds[id] - 100:
-		$ProgressBar.tint_progress = Color(255, 255, 0)
-	else:
-		$ProgressBar.tint_progress = Color(0, 40, 255)
-	$ProgressBar.value = value
-	$ProgressBar.max_value = bounds[id]
-	$ProgressBar.show()
+	pass
+#	if value == bounds[id]:
+#		$ProgressBar.tint_progress = Color(255, 0, 0)
+#	elif value > bounds[id] - 100:
+#		$ProgressBar.tint_progress = Color(255, 255, 0)
+#	else:
+#		$ProgressBar.tint_progress = Color(0, 40, 255)
+#	$ProgressBar.value = value
+#	$ProgressBar.max_value = bounds[id]
+#	$ProgressBar.show()
 	
 func hide_hate():
 	$ProgressBar.hide()
@@ -107,20 +111,15 @@ func take_damage(value, type):
 	$AnimationPlayer.play("Damage")
 
 func _on_Sprite_animation_finished(name):
+	#rint("finished animation "+name)
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
 	if name != "death":
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)
-	if name != "dead":
+	elif name != "dead":
 		$Animations.get_node("idle").show()
 		$Animations.get_node("idle").play(true)
-	elif name == "death":
-		
-
-		#emit_signal("finish_anim", name)
-		#emit_signal("finish_anim", name)
-		#emit_signal("finish_anim", name)
+	else:
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
-	

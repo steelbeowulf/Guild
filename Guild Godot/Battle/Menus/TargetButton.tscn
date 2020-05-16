@@ -1,15 +1,22 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=2]
+[ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=1]
+[ext_resource path="res://Assets/cursor.png" type="Texture" id=2]
 
 [node name="Target" type="Button"]
-margin_right = 194.0
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 12.0
 margin_bottom = 20.0
-custom_styles/hover = ExtResource( 1 )
-custom_styles/pressed = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 1 )
-custom_styles/normal = ExtResource( 1 )
-script = ExtResource( 2 )
+rect_scale = Vector2( 0.1, 0.1 )
+flat = true
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -285.95, 399.951 )
+scale = Vector2( 10, 10 )
+texture = ExtResource( 2 )
+
+[connection signal="focus_entered" from="." to="." method="_on_Target_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_Target_focus_exited"]
 [connection signal="pressed" from="." to="." method="_on_Target_pressed"]
