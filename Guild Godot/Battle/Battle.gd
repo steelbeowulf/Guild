@@ -514,14 +514,6 @@ func end_battle():
 	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
 	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 
-# TODO: there are graphical parts in this, move to ANimationManager
-func manage_hate(type, target):
-	if type == 0:
-		# Focus entered
-		for i in range(len(Players)):
-			#var img = Players_img[i]
-			var p = Players[i]
-			#img.display_hate(p.hate[target], target)
 
 func recalculate_bounds():
 	var bounds = []

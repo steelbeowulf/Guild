@@ -7,14 +7,17 @@ export(bool) var _smooth setget smooth
 export(bool) var _straighten setget straighten
 
 var t = 0.0
+var particles_scene = load("res://Battle/Particles.tscn")
+var particles = null
 
 func create_curve(begin, end, nb_points):
+	self.show()
+	particles = particles_scene.instance()
+	self.add_child(particles)
 	var radius = (end - begin).length()/2
-	print(radius)
 	var center = begin + direction_to(begin, end) * radius
 	var tangent = center.tangent().normalized()
 	var middle = center + (tangent * 250)
-	print(middle)
 	curve = Curve2D.new()
 	
 	var t = 0.0
@@ -26,12 +29,17 @@ func create_curve(begin, end, nb_points):
 	
 	smooth(true)
 
+func destroy_curve():
+	self.hide()
+	particles.queue_free()
+	particles = null
 
 func _physics_process(delta):
 	t += delta
 	if t >= 1.0:
 		t = 0.0
-	$Particles2D.position = curve.interpolate_baked(t * curve.get_baked_length(), true)
+	if particles:
+		particles.position = curve.interpolate_baked(t * curve.get_baked_length(), true)
 
 func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float):
 	var q0 = p0.linear_interpolate(p1, t)

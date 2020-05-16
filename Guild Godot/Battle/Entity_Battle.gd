@@ -5,6 +5,7 @@ var current_lane = 0
 var initial_position
 var my_turn = false
 var bounds = [0,0,0,0,0]
+var data = null
 export(bool) var Player = false
 
 signal finish_anim
@@ -16,7 +17,8 @@ func _ready():
 		$Turn.set_color(Color(1, 0, 0))
 		$ProgressBar.hide()
 
-func set_animations(sprite, animations):
+func set_animations(sprite, animations, data_arg):
+	self.data = data_arg
 	var img = sprite['path']
 	var vf = sprite['vframes']
 	var hf = sprite['hframes']

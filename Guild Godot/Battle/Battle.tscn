@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
@@ -17,17 +17,6 @@
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
-
-[sub_resource type="ParticlesMaterial" id=2]
-emission_shape = 4
-emission_point_count = 1
-flag_disable_z = true
-spread = 10.0
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 10.0
-color = Color( 1, 0, 0, 1 )
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
@@ -87,15 +76,6 @@ curve = SubResource( 1 )
 script = ExtResource( 5 )
 spline_length = 20.0
 
-[node name="Particles2D" type="Particles2D" parent="AnimationManager/Path2D"]
-amount = 500
-lifetime = 15.0
-speed_scale = 20.0
-fract_delta = false
-visibility_rect = Rect2( -100, -100, 1000, 200 )
-local_coords = false
-process_material = SubResource( 2 )
-
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 966.024, 518.53 )
 scale = Vector2( 1.96703, 1.51696 )
@@ -112,7 +92,6 @@ size_flags_stretch_ratio = 0.0
 custom_styles/panel = ExtResource( 7 )
 
 [node name="Menu" type="VBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 10.0
 margin_top = 912.084
 margin_right = 328.0

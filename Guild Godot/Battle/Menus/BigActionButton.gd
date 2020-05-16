@@ -22,7 +22,7 @@ func connect_targets(list_players, list_enemies, manager):
 			e.connect("focus_entered", img, "turn")
 			e.connect("focus_exited", img, "end_turn")
 			e.connect("focus_entered", manager, "manage_hate", [0, id])
-			e.connect("focus_exited", manager, "manage_hate", [1, id])      
+			e.connect("focus_exited", manager, "hide_hate")  
 			id += 1
 	id = 0
 	for e in $Targets/PlayerContainer/HBoxContainer/Players.get_children():

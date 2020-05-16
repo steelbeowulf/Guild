@@ -22,7 +22,7 @@ func initialize(Players, Enemies):
 		var node = get_node("Players/P"+str(i))
 		Players_img.append(node)
 		node.change_lane(lane)
-		node.set_animations(Players[i].sprite, Players[i].animations)
+		node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
 		if not Players[i].is_dead():
 			node.play("idle")
 		else:
@@ -38,7 +38,7 @@ func initialize(Players, Enemies):
 		var lane = Enemies[i].get_pos()
 		var node = get_node("Enemies/E"+str(i))
 		Enemies_img.append(node)
-		node.set_animations(Enemies[i].sprite, Enemies[i].animations)
+		node.set_animations(Enemies[i].sprite, Enemies[i].animations, Enemies[i])
 		node.play("idle")
 		node.show()
 		node.connect("finish_anim", self, "_on_animation_finished")
@@ -55,7 +55,7 @@ func initialize(Players, Enemies):
 		Players_status[i].set_name(Players[i].nome)
 		Players_status[i].set_level(Players[i].level)
 	
-	$Path2D.create_curve(Players_img[0].get_global_position(), Enemies_img[0].get_global_position(), 50)
+#	$Path2D.create_curve(Players_img[0].get_global_position(), Enemies_img[0].get_global_position(), 50)
 	
 	return [Players, Enemies]
 
@@ -160,3 +160,24 @@ func resolve(current_entity, action, target, result, bounds, next):
 	# TODO MUDAR bounds should be on the logical part
 	#for i in range(len(Players_img)):
 	#	Players_img[i].update_bounds(bounds)
+
+# TODO: there are graphical parts in this, move to ANimationManager
+func manage_hate(type, target):
+	print("manaingig gate")
+	var max_hate = -1
+	var index = -1
+	if type == 0:
+		# Focus entered
+		for i in range(len(Players_img)):
+			#var img = Players_img[i]
+			var p = Players_img[i]
+			if p.data.hate[target] >= max_hate:
+				max_hate = p.data.hate[target]
+				index = i
+			#img.display_hate(p.data.hate[target], target)
+		print("managing hate")
+		$Path2D.create_curve(Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32)
+
+
+func hide_hate():
+	$Path2D.destroy_curve()
