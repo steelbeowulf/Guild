@@ -13,16 +13,8 @@ func enter(itemx):
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
 	for i in range(len(GLOBAL.ALL_PLAYERS)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
-		node.get_node("Name").set_text(GLOBAL.ALL_PLAYERS[i].get_name())
-		node.get_node("Level").set_text(str(GLOBAL.ALL_PLAYERS[i].level))
-		var tmp = str(GLOBAL.ALL_PLAYERS[i].get_health())+"/"+str(GLOBAL.ALL_PLAYERS[i].get_max_health())
-		node.get_node("HP").set_text(tmp)
-		tmp = str(GLOBAL.ALL_PLAYERS[i].get_mp())+"/"+str(GLOBAL.ALL_PLAYERS[i].get_max_mp())
-		node.get_node("MP").set_text(tmp)
-		tmp = str(GLOBAL.ALL_PLAYERS[i].xp)+"/"+str(((18/10)^GLOBAL.ALL_PLAYERS[i].level)*5)
-		node.get_node("EXP").set_text(tmp)
-		# Needs a portrait
-		#node.get_node("Sprite").set_texture(players[i].sprite)
+		node.update_info(GLOBAL.ALL_PLAYERS[i])
+
 	for i in range(len(GLOBAL.INVENTORY)):
 		if itemx == GLOBAL.INVENTORY[i].nome:
 			actual_item(GLOBAL.INVENTORY[i])
@@ -33,8 +25,6 @@ func give_focus():
 	$Panel/All/Left/Chars/Char2.set_focus_mode(2)
 	$Panel/All/Left/Chars/Char3.set_focus_mode(2)
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
-	
-
 
 
 func actual_item(item):

@@ -20,16 +20,7 @@ func enter(itemx, id):
 		if id == GLOBAL.ALL_PLAYERS[i].id:
 			current_player = GLOBAL.ALL_PLAYERS[i]
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
-		node.get_node("Name").set_text(GLOBAL.ALL_PLAYERS[i].get_name())
-		node.get_node("Level").set_text(str(GLOBAL.ALL_PLAYERS[i].level))
-		var tmp = str(GLOBAL.ALL_PLAYERS[i].get_health())+"/"+str(GLOBAL.ALL_PLAYERS[i].get_max_health())
-		node.get_node("HP").set_text(tmp)
-		tmp = str(GLOBAL.ALL_PLAYERS[i].get_mp())+"/"+str(GLOBAL.ALL_PLAYERS[i].get_max_mp())
-		node.get_node("MP").set_text(tmp)
-		tmp = str(GLOBAL.ALL_PLAYERS[i].xp)+"/"+str(((18/10)^GLOBAL.ALL_PLAYERS[i].level)*5)
-		node.get_node("EXP").set_text(tmp)
-		# Needs a portrait
-		#node.get_node("Sprite").set_texture(players[i].sprite)
+		node.update_info(GLOBAL.ALL_PLAYERS[i])
 	spell_list = current_player.get_skills()
 	for i in range(len(spell_list)):
 		if itemx == spell_list[i].nome:
@@ -90,7 +81,7 @@ func _on_Char1_pressed():
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
-	print("valor curado: " + recoverHP)
+	print("valor curado: " + str(recoverHP))
 	GLOBAL.ALL_PLAYERS[1].stats[0] = hp_char
 	GLOBAL.ALL_PLAYERS[1].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
@@ -126,7 +117,7 @@ func _on_Char3_pressed():
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
-	print("valor curado: " + recoverHP)
+	print("valor curado: " + str(recoverHP))
 	GLOBAL.ALL_PLAYERS[3].stats[0] = hp_char
 	GLOBAL.ALL_PLAYERS[3].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
