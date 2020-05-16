@@ -75,13 +75,13 @@ func _on_Item_Picked(item):
 		ress = true
 	if item.get_target() == "ALL":
 		for e in $Targets/EnemiesContainer.get_children():
-			e.hide()
+			e.set_focus_mode(2)
 		for p in $Targets/PlayerContainer.get_children():
-			p.hide()
-		$Targets/EnemiesContainer/"E0".set_text("All Enemies")
+			p.set_focus_mode(2)
+		$Targets/EnemiesContainer/"E0".set_all()
 		$Targets/EnemiesContainer/"E0".disabled = false
 		$Targets/EnemiesContainer/"E0".show()
-		$Targets/PlayerContainer/"P0".set_text("All Players")
+		$Targets/PlayerContainer/"P0".set_all()
 		$Targets/PlayerContainer/"P0".disabled = false
 		$Targets/PlayerContainer/"P0".show()
 	else:
