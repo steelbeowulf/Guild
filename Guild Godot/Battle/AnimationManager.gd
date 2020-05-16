@@ -103,8 +103,6 @@ func resolve(current_entity, action, target, result, bounds, next):
 			var dies_on_attack = result[0]
 			var ailments = result[1]
 			var stats = result[2]
-			
-
 			#$Log.display_text("")
 			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
 			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
