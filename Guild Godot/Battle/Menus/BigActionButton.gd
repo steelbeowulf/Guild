@@ -6,28 +6,30 @@ signal action_picked
 func _ready():
 	for c in $Targets/ItemContainer/HBoxContainer/Itens.get_children():
 		c.connect("target_picked", self, "_on_Item_Picked")
-	for c in $Targets/PlayerContainer/HBoxContainer/Players.get_children():
+	for c in $Targets/PlayerContainer.get_children():
 		c.connect("target_picked", self, "_on_Target_Picked")
 		c.disabled = true
-	for c in $Targets/EnemiesContainer/HBoxContainer/Enemies.get_children():
+	for c in $Targets/EnemiesContainer.get_children():
 		c.connect("target_picked", self, "_on_Target_Picked")
 		c.disabled = true
 
 func connect_targets(list_players, list_enemies, manager):
 	var id = 0
 	var img
-	for e in $Targets/EnemiesContainer/HBoxContainer/Enemies.get_children():
+	for e in $Targets/EnemiesContainer.get_children():
 		if id < len(list_enemies):
 			img = list_enemies[id]
+			e.set_global_position(img.get_global_position())
 			e.connect("focus_entered", img, "turn")
 			e.connect("focus_exited", img, "end_turn")
 			e.connect("focus_entered", manager, "manage_hate", [0, id])
-			e.connect("focus_exited", manager, "manage_hate", [1, id])      
+			e.connect("focus_exited", manager, "hide_hate")  
 			id += 1
 	id = 0
-	for e in $Targets/PlayerContainer/HBoxContainer/Players.get_children():
+	for e in $Targets/PlayerContainer.get_children():
 		if id < len(list_players):
 			img = list_players[id]
+			e.set_global_position(img.get_global_position())
 			e.connect("focus_entered", img, "turn")
 			e.connect("focus_exited", img, "end_turn")  
 			id += 1
@@ -54,9 +56,9 @@ func _on_Action_pressed():
 	for e in $Targets/ItemContainer/HBoxContainer/Itens.get_children():
 		e.set_focus_mode(2)
 	get_node("Targets/ItemContainer/HBoxContainer/Itens/0").grab_focus()
-	for e in $Targets/EnemiesContainer/HBoxContainer/Enemies.get_children():
+	for e in $Targets/EnemiesContainer.get_children():
 		e.disabled = true
-	for p in $Targets/PlayerContainer/HBoxContainer/Players.get_children():
+	for p in $Targets/PlayerContainer.get_children():
 		p.disabled = true
 
 
@@ -72,22 +74,22 @@ func _on_Item_Picked(item):
 	if item.get_type() == "RESSURECTION":
 		ress = true
 	if item.get_target() == "ALL":
-		for e in $Targets/EnemiesContainer/HBoxContainer/Enemies.get_children():
-			e.hide()
-		for p in $Targets/PlayerContainer/HBoxContainer/Players.get_children():
-			p.hide()
-		$Targets/EnemiesContainer/HBoxContainer/Enemies/"E0".set_text("All Enemies")
-		$Targets/EnemiesContainer/HBoxContainer/Enemies/"E0".disabled = false
-		$Targets/EnemiesContainer/HBoxContainer/Enemies/"E0".show()
-		$Targets/PlayerContainer/HBoxContainer/Players/"P0".set_text("All Players")
-		$Targets/PlayerContainer/HBoxContainer/Players/"P0".disabled = false
-		$Targets/PlayerContainer/HBoxContainer/Players/"P0".show()
+		for e in $Targets/EnemiesContainer.get_children():
+			e.set_focus_mode(2)
+		for p in $Targets/PlayerContainer.get_children():
+			p.set_focus_mode(2)
+		$Targets/EnemiesContainer/"E0".set_all()
+		$Targets/EnemiesContainer/"E0".disabled = false
+		$Targets/EnemiesContainer/"E0".show()
+		$Targets/PlayerContainer/"P0".set_all()
+		$Targets/PlayerContainer/"P0".disabled = false
+		$Targets/PlayerContainer/"P0".show()
 	else:
-		for e in $Targets/EnemiesContainer/HBoxContainer/Enemies.get_children():
+		for e in $Targets/EnemiesContainer.get_children():
 			e.disabled = false
-		for p in $Targets/PlayerContainer/HBoxContainer/Players.get_children():
+		for p in $Targets/PlayerContainer.get_children():
 			p.disabled = false
-	$Targets/PlayerContainer/HBoxContainer/Players/"P0".grab_focus()
+	$Targets/PlayerContainer/"P0".grab_focus()
 
 func _on_4_focus_exited():
 	if Input.is_action_pressed("ui_down"):

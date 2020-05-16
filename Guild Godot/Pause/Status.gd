@@ -31,7 +31,7 @@ func set_overview_info(player):
 	tmp = str(player.xp)+"/"+str(((18/10)^player.level)*5)
 	node.get_node("EXP").set_text(tmp)
 	# Needs a portrait
-	#node.get_node("Sprite").set_texture(player.sprite)
+	$Overview/Sprite.set_texture(load(player.portrait))
 
 
 # Sets stats info

@@ -40,6 +40,7 @@ func _process(delta):
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
 		for c in $Menu_Area/SubMenus.get_children():
 			c.free()
+		menu.enter(GLOBAL.ALL_PLAYERS)
 		menu.show()
 		menu.give_focus()
 	# Cheap hack to test money

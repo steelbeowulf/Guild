@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Hover_Menu_Info_Panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Battle/Menus/BigActionButton.gd" type="Script" id=5]
-[ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Battle/Menus/SkillButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=7]
 
 [node name="Action" type="Button" groups=[
 "text",
@@ -45,466 +46,152 @@ margin_bottom = 165.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="0" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="0" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 313.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_right = 301.0
 
-[node name="1" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="1" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_top = 64.0
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 24.0
+margin_right = 301.0
+margin_bottom = 44.0
 
-[node name="2" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="2" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_top = 84.0
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 48.0
+margin_right = 301.0
+margin_bottom = 68.0
 
-[node name="3" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="3" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 72.0
+margin_right = 301.0
+margin_bottom = 92.0
 
-[node name="4" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="4" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 96.0
+margin_right = 301.0
+margin_bottom = 116.0
 
-[node name="5" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="5" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 120.0
+margin_right = 301.0
+margin_bottom = 140.0
 
-[node name="6" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="6" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 144.0
+margin_right = 301.0
+margin_bottom = 164.0
 
-[node name="7" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="7" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 168.0
+margin_right = 301.0
+margin_bottom = 188.0
 
-[node name="8" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="8" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 192.0
+margin_right = 301.0
+margin_bottom = 212.0
 
-[node name="9" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="9" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 216.0
+margin_right = 301.0
+margin_bottom = 236.0
 
-[node name="10" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="10" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 240.0
+margin_right = 301.0
+margin_bottom = 260.0
 
-[node name="11" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="11" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 264.0
+margin_right = 301.0
+margin_bottom = 284.0
 
-[node name="12" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="12" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 288.0
+margin_right = 301.0
+margin_bottom = 308.0
 
-[node name="13" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="13" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 312.0
+margin_right = 301.0
+margin_bottom = 332.0
 
-[node name="14" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="14" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 336.0
+margin_right = 301.0
+margin_bottom = 356.0
 
-[node name="15" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="15" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 360.0
+margin_right = 301.0
+margin_bottom = 380.0
 
-[node name="16" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="16" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 384.0
+margin_right = 301.0
+margin_bottom = 404.0
 
-[node name="17" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="17" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 408.0
+margin_right = 301.0
+margin_bottom = 428.0
 
-[node name="18" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="18" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 432.0
+margin_right = 301.0
+margin_bottom = 452.0
 
-[node name="19" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="19" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 456.0
+margin_right = 301.0
+margin_bottom = 476.0
 
-[node name="20" parent="Targets/ItemContainer/HBoxContainer/Itens" groups=[
-"text",
-] instance=ExtResource( 6 )]
+[node name="20" parent="Targets/ItemContainer/HBoxContainer/Itens" instance=ExtResource( 6 )]
 visible = false
-margin_right = 164.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "0"
+margin_top = 480.0
+margin_right = 301.0
+margin_bottom = 500.0
 
-[node name="PlayerContainer" type="ScrollContainer" parent="Targets"]
-margin_left = 315.0
-margin_right = 775.0
-margin_bottom = 165.0
+[node name="PlayerContainer" type="Node2D" parent="Targets"]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Targets/PlayerContainer"]
-margin_right = 460.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="P0" parent="Targets/PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="Players" type="VBoxContainer" parent="Targets/PlayerContainer/HBoxContainer"]
-margin_right = 460.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
+[node name="P1" parent="Targets/PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="P0" parent="Targets/PlayerContainer/HBoxContainer/Players" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 460.0
-margin_bottom = 165.0
-focus_neighbour_left = NodePath("../../Itens/0")
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "1"
+[node name="P2" parent="Targets/PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="P1" parent="Targets/PlayerContainer/HBoxContainer/Players" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 293.0
-margin_bottom = 124.0
-focus_neighbour_left = NodePath("../../Itens/0")
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "1"
+[node name="P3" parent="Targets/PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="P2" parent="Targets/PlayerContainer/HBoxContainer/Players" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 293.0
-margin_bottom = 124.0
-focus_neighbour_left = NodePath("../../Itens/0")
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "1"
+[node name="P4" parent="Targets/PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="P3" parent="Targets/PlayerContainer/HBoxContainer/Players" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 293.0
-margin_bottom = 124.0
-focus_neighbour_left = NodePath("../../Itens/0")
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "1"
+[node name="EnemiesContainer" type="Node2D" parent="Targets"]
 
-[node name="EnemiesContainer" type="ScrollContainer" parent="Targets"]
-margin_left = 780.0
-margin_right = 1240.0
-margin_bottom = 165.0
+[node name="E0" parent="Targets/EnemiesContainer" instance=ExtResource( 7 )]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Targets/EnemiesContainer"]
-margin_right = 460.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="E1" parent="Targets/EnemiesContainer" instance=ExtResource( 7 )]
 
-[node name="Enemies" type="VBoxContainer" parent="Targets/EnemiesContainer/HBoxContainer"]
-margin_right = 460.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.0
+[node name="E2" parent="Targets/EnemiesContainer" instance=ExtResource( 7 )]
 
-[node name="E0" parent="Targets/EnemiesContainer/HBoxContainer/Enemies" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 460.0
-margin_bottom = 165.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "-1"
+[node name="E3" parent="Targets/EnemiesContainer" instance=ExtResource( 7 )]
 
-[node name="E1" parent="Targets/EnemiesContainer/HBoxContainer/Enemies" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 338.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "-1"
-
-[node name="E2" parent="Targets/EnemiesContainer/HBoxContainer/Enemies" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 338.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "-1"
-
-[node name="E3" parent="Targets/EnemiesContainer/HBoxContainer/Enemies" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 338.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "-1"
-
-[node name="E4" parent="Targets/EnemiesContainer/HBoxContainer/Enemies" groups=[
-"text",
-] instance=ExtResource( 6 )]
-visible = false
-margin_right = 338.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/focus = ExtResource( 1 )
-custom_styles/disabled = ExtResource( 3 )
-custom_fonts/font = ExtResource( 4 )
-text = "-1"
+[node name="E4" parent="Targets/EnemiesContainer" instance=ExtResource( 7 )]
 
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

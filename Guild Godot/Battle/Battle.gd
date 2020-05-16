@@ -75,7 +75,6 @@ func rounds():
 		else:
 			next = turnorder[0]
 		
-
 		var id = current_entity.index
 
 		# If the entity is currently affected by a status, apply its effect
@@ -90,9 +89,7 @@ func rounds():
 				can_move.append(result[0])
 				
 			current_entity.decrement_turns()
-			
-
-			
+				
 			# Also covers cases in which the action is chosen for you (confuse, paralysis, etc)
 			for condition in can_move:
 				if condition == -1:
@@ -111,8 +108,6 @@ func rounds():
 				var decision = current_entity.AI(Players, Enemies)
 				target = decision[1]
 				action = decision[0]
-				
-
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)
@@ -415,8 +410,8 @@ func _on_Itens_button_down():
 	get_node("Menu/Itens").disabled = true
 	get_node("Menu/Itens").set_focus_mode(0)
 	var itens = get_node("Menu/Itens/Targets/ItemContainer/HBoxContainer/Itens")
-	var players = get_node("Menu/Itens/Targets/PlayerContainer/HBoxContainer/Players")
-	var enemies = get_node("Menu/Itens/Targets/EnemiesContainer/HBoxContainer/Enemies")
+	var players = get_node("Menu/Itens/Targets/PlayerContainer")
+	var enemies = get_node("Menu/Itens/Targets/EnemiesContainer")
 	for i in range(Inventory.size()):
 		itens.get_node(str(i)).hide()
 	for i in range(4):
@@ -432,11 +427,11 @@ func _on_Itens_button_down():
 		itens.get_node(str(i)).set_text(Inventory[i].nome+" x"+str(Inventory[i].quantity))
 	for i in range(Players.size()):
 		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).set_text(Players[i].get_name()+"   HP:"+str(Players[i].get_health())+"/"+str(Players[i].get_max_health())+"        MP: "+str(Players[i].get_mp())+"/"+str(Players[i].get_max_mp()))
+		players.get_node("P"+str(i)).set_text("")
 	for i in range(Enemies.size()):
 		if not Enemies[i].is_dead():
 			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).set_text(Enemies[i].get_name())
+			enemies.get_node("E"+str(i)).set_text("")
 	itens.get_node("0").grab_focus()
 	LOADER.List = Inventory
 	get_node("Menu/Itens/")._on_Action_pressed()
@@ -452,8 +447,8 @@ func _on_Skills_button_down():
 	get_node("Menu/Skills").set_focus_mode(0)
 	var skills = current_entity.get_skills()
 	var itens = get_node("Menu/Skills/Targets/ItemContainer/HBoxContainer/Itens")
-	var players = get_node("Menu/Skills/Targets/PlayerContainer/HBoxContainer/Players")
-	var enemies = get_node("Menu/Skills/Targets/EnemiesContainer/HBoxContainer/Enemies")
+	var players = get_node("Menu/Skills/Targets/PlayerContainer/")
+	var enemies = get_node("Menu/Skills/Targets/EnemiesContainer/")
 	for i in range(5):
 		itens.get_node(str(i)).hide()
 	for i in range(4):
@@ -469,11 +464,11 @@ func _on_Skills_button_down():
 		itens.get_node(str(i)).set_text(skills[i].nome)
 	for i in range(Players.size()):
 		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).set_text(Players[i].get_name()+"   HP:"+str(Players[i].get_health())+"/"+str(Players[i].get_max_health())+"        MP: "+str(Players[i].get_mp())+"/"+str(Players[i].get_max_mp()))
+		players.get_node("P"+str(i)).set_text("")
 	for i in range(Enemies.size()):
 		if not Enemies[i].is_dead():
 			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).set_text(Enemies[i].get_name())
+			enemies.get_node("E"+str(i)).set_text("")
 	itens.get_node("0").grab_focus()
 	LOADER.List = current_entity.get_skills()
 	get_node("Menu/Skills/")._on_Action_pressed()
@@ -496,17 +491,15 @@ func _on_Attack_button_down():
 	for i in range(Players.size()):
 		players.get_node("P"+str(i)).show()
 		players.get_node("P"+str(i)).disabled = false
-		players.get_node("P"+str(i)).set_text(Players[i].get_name()+"   HP:"+str(Players[i].get_health())+"/"+str(Players[i].get_max_health())+"        MP: "+str(Players[i].get_mp())+"/"+str(Players[i].get_max_mp()))
+		players.get_node("P"+str(i)).set_text("")
 	for i in range(Enemies.size()):
 		if not Enemies[i].is_dead():
 			if unfocus:
-				
-
 				enemies.get_node("E"+str(i)).grab_focus()
 				unfocus = false
 			enemies.get_node("E"+str(i)).show()
 			enemies.get_node("E"+str(i)).disabled = false
-			enemies.get_node("E"+str(i)).set_text(Enemies[i].get_name())
+			enemies.get_node("E"+str(i)).set_text("")
 	#enemies.get_node("E0").grab_focus()
 	get_node("Menu/Attack/").set_pressed(true)
 	get_node("Menu/Attack/")._on_Action_pressed()
@@ -519,14 +512,6 @@ func end_battle():
 	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
 	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 
-# TODO: there are graphical parts in this, move to ANimationManager
-func manage_hate(type, target):
-	if type == 0:
-		# Focus entered
-		for i in range(len(Players)):
-			#var img = Players_img[i]
-			var p = Players[i]
-			#img.display_hate(p.hate[target], target)
 
 func recalculate_bounds():
 	var bounds = []

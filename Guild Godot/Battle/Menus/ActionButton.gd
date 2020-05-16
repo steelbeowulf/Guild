@@ -2,11 +2,12 @@ extends Button
 
 signal action_picked
 export(bool) var RUN = false
+var targets = []
 
 func _ready():
 	if not RUN:
-		self.set_focus_next(NodePath("Targets/0"))
-		for c in $Targets.get_children():
+		#self.set_focus_next(NodePath("Targets/0"))
+		for c in targets:
 			c.connect("target_picked", self, "_on_Target_Picked")
 
 func _on_Target_Picked(target):

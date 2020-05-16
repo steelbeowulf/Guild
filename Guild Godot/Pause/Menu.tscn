@@ -38,71 +38,25 @@ margin_right = 720.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 720, 0 )
 
-[node name="Char0" parent="Panel/All/Left/Chars" groups=[
-"text",
-] instance=ExtResource( 3 )]
+[node name="Char0" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
 focus_neighbour_right = NodePath("")
 focus_mode = 0
 enabled_focus_mode = 0
 
-[node name="Name" parent="Panel/All/Left/Chars/Char0" index="0" groups=[
-"text",
-]]
-
-[node name="MP" parent="Panel/All/Left/Chars/Char0" index="1" groups=[
-"text",
-]]
-
-[node name="MP_Label" parent="Panel/All/Left/Chars/Char0" index="2" groups=[
-"text",
-]]
-
-[node name="HP" parent="Panel/All/Left/Chars/Char0" index="3" groups=[
-"text",
-]]
-
-[node name="HP_Label" parent="Panel/All/Left/Chars/Char0" index="4" groups=[
-"text",
-]]
-
-[node name="EXP_Label" parent="Panel/All/Left/Chars/Char0" index="5" groups=[
-"text",
-]]
-
-[node name="EXP" parent="Panel/All/Left/Chars/Char0" index="6" groups=[
-"text",
-]]
-
-[node name="Level" parent="Panel/All/Left/Chars/Char0" index="7" groups=[
-"text",
-]]
-
-[node name="Level_Label" parent="Panel/All/Left/Chars/Char0" index="8" groups=[
-"text",
-]]
-
-[node name="Back" parent="Panel/All/Left/Chars/Char0/Lanes" index="0" groups=[
-"text",
-]]
+[node name="Back" parent="Panel/All/Left/Chars/Char0/Lanes" index="0"]
 focus_neighbour_top = NodePath("../../../Char3/Lanes/Back")
 focus_neighbour_bottom = NodePath("../../../Char1/Lanes/Back")
 
-[node name="Mid" parent="Panel/All/Left/Chars/Char0/Lanes" index="1" groups=[
-"text",
-]]
+[node name="Mid" parent="Panel/All/Left/Chars/Char0/Lanes" index="1"]
 focus_neighbour_top = NodePath("../../../Char3/Lanes/Mid")
 focus_neighbour_bottom = NodePath("../../../Char1/Lanes/Mid")
 
-[node name="Front" parent="Panel/All/Left/Chars/Char0/Lanes" index="2" groups=[
-"text",
-]]
+[node name="Front" parent="Panel/All/Left/Chars/Char0/Lanes" index="2"]
 focus_neighbour_top = NodePath("../../../Char3/Lanes/Front")
 focus_neighbour_bottom = NodePath("../../../Char1/Lanes/Front")
 
-[node name="Char1" parent="Panel/All/Left/Chars" groups=[
-"text",
-] instance=ExtResource( 3 )]
+[node name="Char1" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
 margin_top = 194.0
 margin_bottom = 384.0
@@ -112,63 +66,19 @@ focus_neighbour_bottom = NodePath("../Char2")
 focus_mode = 0
 enabled_focus_mode = 0
 
-[node name="Name" parent="Panel/All/Left/Chars/Char1" index="0" groups=[
-"text",
-]]
-
-[node name="MP" parent="Panel/All/Left/Chars/Char1" index="1" groups=[
-"text",
-]]
-
-[node name="MP_Label" parent="Panel/All/Left/Chars/Char1" index="2" groups=[
-"text",
-]]
-
-[node name="HP" parent="Panel/All/Left/Chars/Char1" index="3" groups=[
-"text",
-]]
-
-[node name="HP_Label" parent="Panel/All/Left/Chars/Char1" index="4" groups=[
-"text",
-]]
-
-[node name="EXP_Label" parent="Panel/All/Left/Chars/Char1" index="5" groups=[
-"text",
-]]
-
-[node name="EXP" parent="Panel/All/Left/Chars/Char1" index="6" groups=[
-"text",
-]]
-
-[node name="Level" parent="Panel/All/Left/Chars/Char1" index="7" groups=[
-"text",
-]]
-
-[node name="Level_Label" parent="Panel/All/Left/Chars/Char1" index="8" groups=[
-"text",
-]]
-
-[node name="Back" parent="Panel/All/Left/Chars/Char1/Lanes" index="0" groups=[
-"text",
-]]
+[node name="Back" parent="Panel/All/Left/Chars/Char1/Lanes" index="0"]
 focus_neighbour_top = NodePath("../../../Char0/Lanes/Back")
 focus_neighbour_bottom = NodePath("../../../Char2/Lanes/Back")
 
-[node name="Mid" parent="Panel/All/Left/Chars/Char1/Lanes" index="1" groups=[
-"text",
-]]
+[node name="Mid" parent="Panel/All/Left/Chars/Char1/Lanes" index="1"]
 focus_neighbour_top = NodePath("../../../Char0/Lanes/Mid")
 focus_neighbour_bottom = NodePath("../../../Char2/Lanes/Mid")
 
-[node name="Front" parent="Panel/All/Left/Chars/Char1/Lanes" index="2" groups=[
-"text",
-]]
+[node name="Front" parent="Panel/All/Left/Chars/Char1/Lanes" index="2"]
 focus_neighbour_top = NodePath("../../../Char0/Lanes/Front")
 focus_neighbour_bottom = NodePath("../../../Char2/Lanes/Front")
 
-[node name="Char2" parent="Panel/All/Left/Chars" groups=[
-"text",
-] instance=ExtResource( 3 )]
+[node name="Char2" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
 margin_top = 388.0
 margin_bottom = 578.0
@@ -178,63 +88,19 @@ focus_neighbour_bottom = NodePath("../Char3")
 focus_mode = 0
 enabled_focus_mode = 0
 
-[node name="Name" parent="Panel/All/Left/Chars/Char2" index="0" groups=[
-"text",
-]]
-
-[node name="MP" parent="Panel/All/Left/Chars/Char2" index="1" groups=[
-"text",
-]]
-
-[node name="MP_Label" parent="Panel/All/Left/Chars/Char2" index="2" groups=[
-"text",
-]]
-
-[node name="HP" parent="Panel/All/Left/Chars/Char2" index="3" groups=[
-"text",
-]]
-
-[node name="HP_Label" parent="Panel/All/Left/Chars/Char2" index="4" groups=[
-"text",
-]]
-
-[node name="EXP_Label" parent="Panel/All/Left/Chars/Char2" index="5" groups=[
-"text",
-]]
-
-[node name="EXP" parent="Panel/All/Left/Chars/Char2" index="6" groups=[
-"text",
-]]
-
-[node name="Level" parent="Panel/All/Left/Chars/Char2" index="7" groups=[
-"text",
-]]
-
-[node name="Level_Label" parent="Panel/All/Left/Chars/Char2" index="8" groups=[
-"text",
-]]
-
-[node name="Back" parent="Panel/All/Left/Chars/Char2/Lanes" index="0" groups=[
-"text",
-]]
+[node name="Back" parent="Panel/All/Left/Chars/Char2/Lanes" index="0"]
 focus_neighbour_top = NodePath("../../../Char1/Lanes/Back")
 focus_neighbour_bottom = NodePath("../../../Char3/Lanes/Back")
 
-[node name="Mid" parent="Panel/All/Left/Chars/Char2/Lanes" index="1" groups=[
-"text",
-]]
+[node name="Mid" parent="Panel/All/Left/Chars/Char2/Lanes" index="1"]
 focus_neighbour_top = NodePath("../../../Char1/Lanes/Mid")
 focus_neighbour_bottom = NodePath("../../../Char3/Lanes/Mid")
 
-[node name="Front" parent="Panel/All/Left/Chars/Char2/Lanes" index="2" groups=[
-"text",
-]]
+[node name="Front" parent="Panel/All/Left/Chars/Char2/Lanes" index="2"]
 focus_neighbour_top = NodePath("../../../Char1/Lanes/Front")
 focus_neighbour_bottom = NodePath("../../../Char3/Lanes/Front")
 
-[node name="Char3" parent="Panel/All/Left/Chars" groups=[
-"text",
-] instance=ExtResource( 3 )]
+[node name="Char3" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
 margin_top = 582.0
 margin_bottom = 772.0
@@ -244,57 +110,15 @@ focus_neighbour_bottom = NodePath("../Char0")
 focus_mode = 0
 enabled_focus_mode = 0
 
-[node name="Name" parent="Panel/All/Left/Chars/Char3" index="0" groups=[
-"text",
-]]
-
-[node name="MP" parent="Panel/All/Left/Chars/Char3" index="1" groups=[
-"text",
-]]
-
-[node name="MP_Label" parent="Panel/All/Left/Chars/Char3" index="2" groups=[
-"text",
-]]
-
-[node name="HP" parent="Panel/All/Left/Chars/Char3" index="3" groups=[
-"text",
-]]
-
-[node name="HP_Label" parent="Panel/All/Left/Chars/Char3" index="4" groups=[
-"text",
-]]
-
-[node name="EXP_Label" parent="Panel/All/Left/Chars/Char3" index="5" groups=[
-"text",
-]]
-
-[node name="EXP" parent="Panel/All/Left/Chars/Char3" index="6" groups=[
-"text",
-]]
-
-[node name="Level" parent="Panel/All/Left/Chars/Char3" index="7" groups=[
-"text",
-]]
-
-[node name="Level_Label" parent="Panel/All/Left/Chars/Char3" index="8" groups=[
-"text",
-]]
-
-[node name="Back" parent="Panel/All/Left/Chars/Char3/Lanes" index="0" groups=[
-"text",
-]]
+[node name="Back" parent="Panel/All/Left/Chars/Char3/Lanes" index="0"]
 focus_neighbour_top = NodePath("../../../Char2/Lanes/Back")
 focus_neighbour_bottom = NodePath("../../../Char0/Lanes/Back")
 
-[node name="Mid" parent="Panel/All/Left/Chars/Char3/Lanes" index="1" groups=[
-"text",
-]]
+[node name="Mid" parent="Panel/All/Left/Chars/Char3/Lanes" index="1"]
 focus_neighbour_top = NodePath("../../../Char2/Lanes/Mid")
 focus_neighbour_bottom = NodePath("../../../Char0/Lanes/Mid")
 
-[node name="Front" parent="Panel/All/Left/Chars/Char3/Lanes" index="2" groups=[
-"text",
-]]
+[node name="Front" parent="Panel/All/Left/Chars/Char3/Lanes" index="2"]
 focus_neighbour_top = NodePath("../../../Char2/Lanes/Front")
 focus_neighbour_bottom = NodePath("../../../Char0/Lanes/Front")
 

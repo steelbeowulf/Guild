@@ -3,7 +3,7 @@
 [ext_resource path="res://Pause/Status.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Menu_Font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Portraits/cleric.png" type="Texture" id=4]
 
 [node name="Status" type="Control"]
 pause_mode = 2
@@ -66,7 +66,7 @@ custom_styles/panel = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Overview"]
 position = Vector2( 107.407, 100.951 )
-scale = Vector2( 2.42149, 2.22103 )
+scale = Vector2( 8, 8 )
 texture = ExtResource( 4 )
 
 [node name="Labels" type="VBoxContainer" parent="Overview"]
