@@ -109,8 +109,6 @@ func decrement_turns():
 				status.erase(st)
 
 func take_damage(type, damage):
-	#
-
 	var dmg = 0
 	var resistance = 1.0
 	if type == PHYSIC:

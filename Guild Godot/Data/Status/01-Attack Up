@@ -1,0 +1,8 @@
+{
+	"NAME":"ATTACK UP"
+	"EFFECTS":[{"STAT":"ATK", "VALUE":"3/2"}]
+	"AURA":{
+		"COLOR": "RED",
+		"THICKNESS": "2"
+	}
+}

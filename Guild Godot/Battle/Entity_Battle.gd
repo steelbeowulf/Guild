@@ -6,6 +6,7 @@ var initial_position
 var my_turn = false
 var bounds = [0,0,0,0,0]
 var data = null
+var SHADER = preload("res://Assets/Shaders/outline.shader")
 export(bool) var Player = false
 
 signal finish_anim
@@ -15,7 +16,11 @@ func _ready():
 	initial_position = self.get_global_position()
 	if not Player:
 		$Turn.set_color(Color(1, 0, 0))
-		$ProgressBar.hide()
+
+func set_aura(width, color):
+	for anim in $Animations.get_children():
+		anim.material.set_shader_param("outline_width", width)
+		anim.material.set_shader_param("outline_color", color)
 
 func set_animations(sprite, animations, data_arg):
 	self.data = data_arg
@@ -29,6 +34,9 @@ func set_animations(sprite, animations, data_arg):
 		var v = animations[k]
 		var animation = Sprite.new()
 		animation.texture = load(img)
+		var mat = ShaderMaterial.new()
+		mat.set_shader(SHADER)
+		animation.set_material(mat)
 		animation.set_name(k)
 		animation.set_script(load('res://Battle/Spritesheet.gd'))
 		animation.loop = v[0]
