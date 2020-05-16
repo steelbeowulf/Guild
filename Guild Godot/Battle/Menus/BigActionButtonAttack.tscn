@@ -32,10 +32,7 @@ margin_left = 320.0
 margin_right = 1043.0
 margin_bottom = 124.0
 
-[node name="Players" type="VBoxContainer" parent="Targets/HBoxContainer"]
-margin_right = 359.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
+[node name="Players" type="Node2D" parent="Targets/HBoxContainer"]
 
 [node name="P0" parent="Targets/HBoxContainer/Players" groups=[
 "text",
@@ -112,19 +109,14 @@ custom_styles/disabled = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "1"
 
-[node name="Enemies" type="VBoxContainer" parent="Targets/HBoxContainer"]
-margin_left = 363.0
-margin_right = 723.0
-margin_bottom = 124.0
-size_flags_horizontal = 3
+[node name="Enemies" type="Node2D" parent="Targets/HBoxContainer"]
 
 [node name="E0" parent="Targets/HBoxContainer/Enemies" groups=[
 "text",
 ] instance=ExtResource( 6 )]
 visible = false
-margin_top = 48.0
-margin_right = 338.0
-margin_bottom = 92.0
+margin_right = 360.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 1 )
@@ -192,4 +184,5 @@ custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 3 )
 custom_fonts/font = ExtResource( 4 )
 text = "-1"
+
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

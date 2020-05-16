@@ -14,6 +14,7 @@ func connect_targets(list_players, list_enemies, manager):
 	for e in $Targets/HBoxContainer/Enemies.get_children():
 		if id < len(list_enemies):
 			img = list_enemies[id]
+			e.set_global_position(img.get_global_position())
 			e.connect("focus_entered", img, "turn")
 			e.connect("focus_exited", img, "end_turn")
 			e.connect("focus_entered", manager, "manage_hate", [0, id])
@@ -23,6 +24,7 @@ func connect_targets(list_players, list_enemies, manager):
 	for e in $Targets/HBoxContainer/Players.get_children():
 		if id < len(list_players):
 			img = list_players[id]
+			e.set_global_position(img.get_global_position())
 			e.connect("focus_entered", img, "turn")
 			e.connect("focus_exited", img, "end_turn")  
 			id += 1

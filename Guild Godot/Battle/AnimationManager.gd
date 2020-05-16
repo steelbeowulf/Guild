@@ -163,7 +163,6 @@ func resolve(current_entity, action, target, result, bounds, next):
 
 # TODO: there are graphical parts in this, move to ANimationManager
 func manage_hate(type, target):
-	print("manaingig gate")
 	var max_hate = -1
 	var index = -1
 	if type == 0:
@@ -175,7 +174,6 @@ func manage_hate(type, target):
 				max_hate = p.data.hate[target]
 				index = i
 			#img.display_hate(p.data.hate[target], target)
-		print("managing hate")
 		$Path2D.create_curve(Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32)
 
 
