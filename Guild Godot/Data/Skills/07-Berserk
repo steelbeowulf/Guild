@@ -7,6 +7,6 @@
 	"EFFECTS":[],
 	"STATUS":[{"BOOL":1.0, "STATUS":"BERSERK"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Buff - Done/Berserk.png",
-		   "vframes": 2, "hframes":4, "scale":[2,2]},
+		   "vframes": 2, "hframes":4, "scale":[0.4,0.4]},
 	"ANIM":{"skill": [false, "0-7"]}
 }

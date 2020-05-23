@@ -2,11 +2,11 @@
 	"ID":18,	
 	"NAME":"PARALYSIS SPORES", 
 	"QUANT":25, 
-	"TARGET":"ALL", 
+	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":0.25, "STATUS":"PARALYSIS"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Spores - Done/Paralysis Spores.png",
-		   "vframes": 10, "hframes":5, "scale":[2,2]},
+		   "vframes": 10, "hframes":5, "scale":[0.6,0.6]},
 	"ANIM":{"skill": [false, "0-45"]}
 }

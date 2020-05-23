@@ -7,6 +7,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":50, "TYPE":"", "TURNS":1}],
 	"STATUS":[],
 	"IMG":{"path": "res://Assets/Animations/Spells/Heal - Done/Heal.png",
-		   "vframes": 6, "hframes":5, "scale":[2,2]},
+		   "vframes": 7, "hframes":5, "scale":[1,1]},
 	"ANIM":{"skill": [false, "0-28"]}
 }

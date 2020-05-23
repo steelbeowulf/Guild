@@ -6,7 +6,7 @@
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-27, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[],
-	"IMG":{"path": "res://Assets/Animations/Spells/Water - Done/Mucus.png",
-		   "vframes": 1, "hframes":9, "scale":[2,2]},
+	"IMG":{"path": "res://Assets/Animations/Spells/Impact - Done/Bite.png",
+		   "vframes": 1, "hframes":9, "scale":[1,1]},
 	"ANIM":{"skill": [false, "0-8, 8,7,6,5,4,3,2,1,0"]}
 }

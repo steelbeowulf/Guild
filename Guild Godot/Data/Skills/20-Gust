@@ -7,6 +7,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"WIND", "TURNS":1}],
 	"STATUS":[],
 	"IMG":{"path": "res://Assets/Animations/Spells/Wind - Done/Gust.png",
-		   "vframes": 1, "hframes":4, "scale":[2,2]},
-	"ANIM":{"skill": [false, "0-3"]}
+		   "vframes": 1, "hframes":4, "scale":[1,1]},
+	"ANIM":{"skill": [false, "0-3, 0-3, 0-3, 0-3"]}
 }

@@ -7,6 +7,6 @@
 	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":true, "STATUS":"POISON"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Spores - Done/Poison Spores.png",
-		   "vframes": 16, "hframes":5, "scale":[2,2]},
-	"ANIM":{"skill": [false, "35-50, 0-15"]}
+		   "vframes": 16, "hframes":5, "scale":[0.6,0.6]},
+	"ANIM":{"skill": [false, "40-55, 0-15"]}
 }
