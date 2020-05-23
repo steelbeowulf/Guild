@@ -21,11 +21,13 @@ func set_level(level):
 func set_initial_hp(hp, max_hp):
 	self.maxHp = max_hp
 	self.Hp = hp
+	$HPText.set_text(str(Hp)+"/"+str(maxHp))
 	$HP/Fill.set_scale(Vector2(hp/max_hp,1))
 	
 func set_initial_mp(mp, max_mp):
 	self.maxMp = max_mp
 	self.Mp = mp
+	$MPText.set_text(str(Mp)+"/"+str(maxMp))
 	$MP/Fill.set_scale(Vector2(mp/max_mp,1))
 
 func set_hp(hp):

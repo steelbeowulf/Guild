@@ -99,7 +99,7 @@ func _on_Char2_pressed():
 		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
 			GLOBAL.ALL_PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
-	print("valor curado: " + recoverHP)
+	print("valor curado: " + str(recoverHP))
 	GLOBAL.ALL_PLAYERS[2].stats[0] = hp_char
 	GLOBAL.ALL_PLAYERS[2].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
