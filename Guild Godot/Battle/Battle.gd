@@ -152,16 +152,20 @@ func rounds():
 			action = "Attack"
 
 		# Actually executes the actions for the turn and animates it
-		
 		result = execute_action(action, target)
 		target = result[0]
 		result = result[1]
+		if action == "Run":
+			var is_boss = result[0]
+			var run_successful = result[1]
+			if not is_boss and run_successful:
+				battle_over = true
+				emit_signal("round_finished")
+				return
 		print(skill)
 		$AnimationManager.resolve(current_entity, action, target, result, bounds, next, skill)
 		skill = null
 		yield($AnimationManager, "animation_finished")
-		
-
 		
 		get_node("Menu/Attack").grab_focus()
 		get_node("Menu/Attack").disabled = false
@@ -175,8 +179,6 @@ func rounds():
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
-			
-
 			battle_over = true
 			break
 	
@@ -199,10 +201,7 @@ func stackagility(a,b):
 	return a.get_agi() > b.get_agi()
 
 # Executes an action on a given target
-func execute_action(action, target):
-	
-
-	
+func execute_action(action, target):	
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
 		AUDIO.play_se("HIT")

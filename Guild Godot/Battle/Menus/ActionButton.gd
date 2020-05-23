@@ -19,6 +19,7 @@ func hide_stuff():
 func _on_Action_pressed():
 	if RUN:
 		emit_signal("action_picked", self.text, 1)
+		return
 	for c in get_parent().get_children():
 		if c != self:
 			c.hide_stuff()
