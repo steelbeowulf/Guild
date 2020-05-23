@@ -7,8 +7,7 @@ var Players_status = []
 var info = []
 var Menu = null
 var Info = null
-var En
-var Pl
+var timer = 0.0
 
 var queue = []
 var can_play = true
@@ -16,18 +15,14 @@ var global_animations = null
 signal animation_finished
 
 func initialize(Players, Enemies):
-	En = Enemies
-	Pl = Players
 # Graphics stuff
 	Menu = self.get_parent().get_node("Menu")
 	Info = self.get_parent().get_node("Info")
 	for i in range(len(Players)):
 		var lane = Players[i].get_pos()
 		var node = get_node("Players/P"+str(i))
-		var node_spells = get_node("Spells/S"+str(i+5))
 		Players_img.append(node)
 		node.change_lane(lane)
-		node_spells.change_lane(lane)
 		node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
 		
 		if not Players[i].is_dead():
@@ -51,8 +46,6 @@ func initialize(Players, Enemies):
 		node.connect("finish_anim", self, "_on_animation_finished")
 		Enemies[i].graphics = node
 	
-	
-	
 	# Link target buttons with visual targets
 	Menu.get_node("Attack").connect_targets(Players_img, Enemies_img, self)
 	Menu.get_node("Skills").connect_targets(Players_img, Enemies_img, self)
@@ -64,17 +57,17 @@ func initialize(Players, Enemies):
 		Players_status[i].set_name(Players[i].nome)
 		Players_status[i].set_level(Players[i].level)
 	
-#	$Path2D.create_curve(Players_img[0].get_global_position(), Enemies_img[0].get_global_position(), 50)
-	
 	return [Players, Enemies]
 
 
 func _on_animation_finished(anim):
+	print("[ANIMATION MANAGER] finished animation "+anim)
 	can_play = true
 	if not queue:
 		emit_signal("animation_finished")
 
 func play(anim):
+	print("[ANIMATON MANAGER] playing animation "+anim[1])
 	var scope = anim[0]
 	var animation_name = anim[1]
 	var info = anim[2]
@@ -84,6 +77,7 @@ func play(anim):
 	scope.play(animation_name, info)
 
 func enqueue(scope, animation_name, additional_info):
+	print("[ANIMATION PLAYER] Adding "+animation_name+" to queue")
 	queue.push_front([scope, animation_name, additional_info])
 
 func _physics_process(delta):
@@ -94,6 +88,7 @@ func _physics_process(delta):
 		emit_signal("animation_finished")
 
 func resolve(current_entity, action, target, result, bounds, next, skill):
+	print("[ANIMATION PLAYER] Resolving current turn")
 	# TODO Deal with ailments
 	if typeof(action) == TYPE_STRING:
 		if action == "Attack":
@@ -113,24 +108,17 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 		elif action == "Skills":
 			var node
 			var targets = target[0]
+			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
 			for i in range(len(targets)):
-				for j in range(len(En)):
-					if targets[i] == En[j]:
-						node = get_node("Spells/S"+str(j))
-				for x in range(len(Pl)):
-					if targets[i] == Pl[x]:
-						node = get_node("Spells/S"+str(x+5))
-				node.set_animations(skill.img, skill.anim, targets[i])
-				node.play("skill")
-				node.show()
-				node.connect("finish_anim", self, "_on_animation_finished")
-				targets[i].graphics = node
+				node = targets[i].graphics
+				print(skill.name)
+				node.set_spell(skill.img, skill.anim, skill.nome)
+				enqueue(node, skill.nome, 'Skill')
 			var mp = target[1]
 			var dies_on_attack = result[0]
 			var ailments = result[1]
 			var stats = result[2]
 			$Log.display_text(skill.nome)
-			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
 			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
 			#enqueue(target.graphics, "Damage") # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
@@ -143,17 +131,13 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 					for st in stats[i]:
 						#enqueue(targets[i].graphics, "Damage") # dano no alvo
 						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
-				#if dies_on_attack[i]:
+				if dies_on_attack[i]:
 					enqueue(targets[i].graphics, "death", null) #death animaton
 
 		
 		elif action == "Lane":
 			var lane = result
 			$Log.display_text("Lane change")
-			for i in range(len(Pl)):
-				if current_entity == Pl[i]:
-					var node = get_node("Spells/S"+str(i+5))
-					node.change_lane(lane)
 			current_entity.graphics.change_lane(lane)
 			#emit_signal("animation_finished")
 		

@@ -31,6 +31,30 @@ func remove_aura():
 		anim.material.set_shader_param("outline_width", 0)
 		anim.material.set_shader_param("outline_color", "")
 
+func set_spell(sprite, v, k):
+	print("setting spell")
+	print(v)
+	print(k)
+	var img = sprite['path']
+	var vf = sprite['vframes']
+	var hf = sprite['hframes']
+	var sc = sprite['scale']
+	var animation = Sprite.new()
+	animation.texture = load(img)
+	animation.set_name(k)
+	animation.set_script(load('res://Battle/Spritesheet.gd'))
+	animation.loop = v[0]
+	animation.physical_frames = v[1]
+	animation.vframes = vf
+	animation.hframes = hf
+	animation.scale = Vector2(sc[0], sc[1])
+	animation.fps = 10
+	#animation.speed = BATTLE_MANAGER.animation_speed
+	animation.playing = false
+	animation.hide()
+	animation.connect('animation_finished', self, "_on_Spell_animation_finished")
+	$Spells.add_child(animation)
+
 func set_animations(sprite, animations, data_arg):
 	self.data = data_arg
 	var img = sprite['path']
@@ -38,7 +62,6 @@ func set_animations(sprite, animations, data_arg):
 	var hf = sprite['hframes']
 	var sc = sprite['scale']
 	
-
 	for k in animations.keys():
 		var v = animations[k]
 		var animation = Sprite.new()
@@ -47,6 +70,7 @@ func set_animations(sprite, animations, data_arg):
 		mat.set_shader(SHADER)
 		animation.set_material(mat)
 		animation.set_name(k)
+		#print(k)
 		animation.set_script(load('res://Battle/Spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
@@ -56,22 +80,26 @@ func set_animations(sprite, animations, data_arg):
 		animation.fps = 10
 		#animation.speed = BATTLE_MANAGER.animation_speed
 		animation.hide()
+		animation.playing = false
 		animation.connect('animation_finished', self, "_on_Sprite_animation_finished")
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
-	#print("playing anim "+name)
+	print("[ENTITY BATTLE] playing animation "+name)
+	print(options)
+	var node = $Animations
 	if name == 'Damage':
 		take_damage(options, 0)
 		return
-	if name != 'skill':
-		$Animations.get_node("idle").stop()
-	for c in $Animations.get_children():
-		c.hide()
-	$Animations.get_node(name).show()
-	$Animations.get_node(name).play(true)
-	#print("oi")
-	#draw_circle_arc(Vector2(500, 500), 100, 0, 180, Color(0,0,0))
+	if typeof(options) == TYPE_STRING and options == 'Skill':
+		node = $Spells
+	else:
+		for c in $Animations.get_children():
+			c.hide()
+	print(name)
+	print(node.get_name())
+	node.get_node(name).show()
+	node.get_node(name).play(true)
 
 func turn(keep=false):
 	if keep:
@@ -129,19 +157,20 @@ func take_damage(value, type):
 	$AnimationPlayer.play("Damage")
 
 func _on_Sprite_animation_finished(name):
-	#rint("finished animation "+name)
+	print("[ENTITY BATTLE] finished animation "+name)
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
-	if name == "skill":
-		pass
-		#$Animations.set_animations(null, null, null)
-	elif name != "death":
-		$Animations.get_node("idle").show()
-		$Animations.get_node("idle").play(true)
-	
-	elif name != "dead":
-		$Animations.get_node("idle").show()
-		$Animations.get_node("idle").play(true)
-	else:
+	if name == "death":
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
+	elif name == "dead":
+		$Animations.get_node("dead").show()
+		$Animations.get_node("dead").play(true)
+	else:
+		$Animations.get_node("idle").show()
+		$Animations.get_node("idle").play(true)
+
+func _on_Spell_animation_finished(name):
+	print("[ENTITY BATTLE] finished spell animation "+name)
+	emit_signal("finish_anim", name)
+	$Spells.get_node(name).hide()

@@ -19,7 +19,9 @@ func _init(id, name, quant, targ, tipo, efeito, statusEffects, img, anim):
 	self.effect = efeito
 	self.status = statusEffects
 	self.img = img
-	self.anim = anim
+	print(anim)
+	print(name)
+	self.anim = anim["skill"]
 	
 func get_target():
 	return target

@@ -126,8 +126,8 @@ func _next_frame():
 		
 	if current_frame >=  frame_count-1:
 		if !loop:
-			self.get_parent().get_parent()._on_Sprite_animation_finished(self.name)
-			#emit_signal("animation_finished", self.name)
+			#self.get_parent().get_parent()._on_Sprite_animation_finished(self.name)
+			emit_signal("animation_finished", self.name)
 			#self.hide()
 			return false # no next frame
 		else:
@@ -145,8 +145,9 @@ func reset():
 	elapse_time = 0
 
 func play(from_start = false):
+	print("[SPRITESHEET] Playing")
 	if from_start:
-		reset()		
+		reset()
 	playing = true
 	
 func play_new(new_frames_str, new_fps):

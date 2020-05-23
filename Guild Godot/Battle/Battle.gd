@@ -70,6 +70,7 @@ func rounds():
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
 		current_entity = turnorder[i]
+		print("[BATTLE] Turno de "+current_entity.nome)
 		var next = null
 		if i < turnorder.size() - 1:
 			next = turnorder[i+1]

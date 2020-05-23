@@ -112,7 +112,7 @@ func load_all_itens():
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
 			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"], data["QUANT"], data["TARGET"],
-				data["TYPE"], data["IMG"], data["ANIM"], effects, status))
+				data["TYPE"], effects, status, data["IMG"], data["ANIM"]))
 
 	return [0] + ret
 
