@@ -47,6 +47,7 @@ scale = Vector2( 2, 2 )
 Player = true
 
 [node name="Enemies" type="Node" parent="AnimationManager"]
+editor/display_folded = true
 
 [node name="E0" parent="AnimationManager/Enemies" instance=ExtResource( 3 )]
 position = Vector2( 1400, 250 )
@@ -89,6 +90,26 @@ scale = Vector2( 2, 2 )
 [node name="S4" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
 position = Vector2( 1600, 575 )
 scale = Vector2( 2, 2 )
+
+[node name="S5" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 250, 250 )
+scale = Vector2( 2, 2 )
+Player = true
+
+[node name="S6" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 250, 400 )
+scale = Vector2( 2, 2 )
+Player = true
+
+[node name="S7" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 250, 550 )
+scale = Vector2( 2, 2 )
+Player = true
+
+[node name="S8" parent="AnimationManager/Spells" instance=ExtResource( 3 )]
+position = Vector2( 250, 700 )
+scale = Vector2( 2, 2 )
+Player = true
 
 [node name="Log" parent="AnimationManager" instance=ExtResource( 4 )]
 

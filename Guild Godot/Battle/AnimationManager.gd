@@ -3,7 +3,6 @@ extends Node2D
 # Graphical stuff
 var Players_img = []
 var Enemies_img = []
-var Spells_img = []
 var Players_status = []
 var info = []
 var Menu = null
@@ -25,8 +24,10 @@ func initialize(Players, Enemies):
 	for i in range(len(Players)):
 		var lane = Players[i].get_pos()
 		var node = get_node("Players/P"+str(i))
+		var node_spells = get_node("Spells/S"+str(i+5))
 		Players_img.append(node)
 		node.change_lane(lane)
+		node_spells.change_lane(lane)
 		node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
 		
 		if not Players[i].is_dead():
@@ -113,14 +114,12 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 			var node
 			var targets = target[0]
 			for i in range(len(targets)):
-				var lane = targets[i].get_pos()
 				for j in range(len(En)):
 					if targets[i] == En[j]:
 						node = get_node("Spells/S"+str(j))
 				for x in range(len(Pl)):
 					if targets[i] == Pl[x]:
-						node = get_node("Spells/S"+str(x))
-				Spells_img.append(node)
+						node = get_node("Spells/S"+str(x+5))
 				node.set_animations(skill.img, skill.anim, targets[i])
 				node.play("skill")
 				node.show()
@@ -151,6 +150,10 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 		elif action == "Lane":
 			var lane = result
 			$Log.display_text("Lane change")
+			for i in range(len(Pl)):
+				if current_entity == Pl[i]:
+					var node = get_node("Spells/S"+str(i+5))
+					node.change_lane(lane)
 			current_entity.graphics.change_lane(lane)
 			#emit_signal("animation_finished")
 		
