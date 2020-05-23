@@ -77,6 +77,8 @@ z_index = 25
 curve = SubResource( 1 )
 script = ExtResource( 5 )
 spline_length = 20.0
+_smooth = false
+_straighten = false
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 966.024, 518.53 )

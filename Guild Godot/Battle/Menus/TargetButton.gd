@@ -3,6 +3,10 @@ extends Button
 signal target_picked
 var all = false
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		all = false
+
 func _on_Target_pressed():
 	emit_signal("target_picked", get_name())
 	all = false
