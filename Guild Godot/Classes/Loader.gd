@@ -5,6 +5,7 @@ class_name LOADER
 const ENEMY_PATH = "res://Data/Enemies/"
 const ITENS_PATH = "res://Data/Itens/"
 const SKILLS_PATH = "res://Data/Skills/"
+const STATUS_PATH = "res://Data/Status/"
 
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
@@ -145,6 +146,32 @@ func load_all_skills():
 	return [0] + ret
 
 
+# Loads all skills found in the SKILLS_PATH directory.
+# TODO: eventually will be changed to loading only skills
+# from player characters/enemies in the area, to not kill a PC's memory
+func load_all_statuses():
+	var ret = {}
+	var statuses = list_files_in_directory(STATUS_PATH)
+	statuses.sort()
+
+	for s in statuses:
+		var file = File.new()
+		
+		file.open(STATUS_PATH+s, file.READ)
+		var text = file.get_as_text()
+		var result_json = JSON.parse(text)
+		if result_json.error == OK:  # If parse OK
+			var data = result_json.result
+			ret[data["NAME"]] = [data["AURA"]["COLOR"], data["AURA"]["THICKNESS"]]
+		else:  # If parse has errors
+			print("Error: ", result_json.error)
+			print("Error Line: ", result_json.error_line)
+			print("Error String: ", result_json.error_string)
+
+	print(ret)
+	return ret
+
+
 # Loads information regarding the players' inventory.
 # If it's a new game, loads it from Demo_Data.
 func load_inventory(slot):
@@ -199,8 +226,8 @@ func parse_npcs(path):
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)
 
-	print("cabei")
 	return npcs
+
 
 
 # Uses information from load_players to build the actual players.

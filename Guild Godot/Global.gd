@@ -3,6 +3,7 @@ extends Node
 # Global variables containing all loaded itens, skills and enemies
 var ALL_ITENS
 var ALL_SKILLS
+var ALL_STATUS
 var ALL_ENEMIES
 var ALL_NPCS
 

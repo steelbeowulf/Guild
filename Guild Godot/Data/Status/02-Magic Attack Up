@@ -1,8 +1,0 @@
-{
-	"NAME":"MATGIC ATTACK UP"
-	"EFFECTS":[{"STAT":"ATKM", "VALUE":"3/2"}]
-	"AURA":{
-		"COLOR": "BLUE",
-		"THICKNESS": "2"
-	}
-}
