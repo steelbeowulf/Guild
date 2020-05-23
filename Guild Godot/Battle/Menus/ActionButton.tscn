@@ -31,17 +31,9 @@ margin_right = 520.0
 margin_bottom = 89.0
 
 [node name="0" parent="Targets" instance=ExtResource( 6 )]
-margin_right = 170.0
-margin_bottom = 27.0
 
 [node name="1" parent="Targets" instance=ExtResource( 6 )]
-margin_top = 31.0
-margin_right = 170.0
-margin_bottom = 58.0
 
 [node name="2" parent="Targets" instance=ExtResource( 6 )]
-margin_top = 62.0
-margin_right = 170.0
-margin_bottom = 89.0
 
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

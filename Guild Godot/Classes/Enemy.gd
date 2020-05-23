@@ -18,8 +18,6 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.tipo = "Enemy"
 
 func AI(player_list, enemies_list):
-	
-
 	var possible_target = -1
 	for e in enemies_list:
 		if not e.is_dead():

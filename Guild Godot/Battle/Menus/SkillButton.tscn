@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Menu_Font.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=6]
+[ext_resource path="res://Battle/Menus/SkillButton.gd" type="Script" id=6]
 
 [node name="Target" type="Button"]
 margin_right = 194.0
