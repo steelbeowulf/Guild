@@ -94,11 +94,17 @@ func remove_status(effect):
 		self.graphics.revive()
 	if status.has(effect):
 		status.erase(effect)
+	if GLOBAL.ALL_STATUS.has(effect):
+		self.graphics.remove_aura()
 
 func add_status(effect, atkm, turns):
+	print(effect)
 	if effect == "KO":
 		status = {}
 		dead = true
+	if GLOBAL.ALL_STATUS.has(effect):
+		print("IF")
+		self.graphics.set_aura(GLOBAL.ALL_STATUS[effect])
 	status[effect] = [turns, atkm]
 
 func decrement_turns():
@@ -106,11 +112,9 @@ func decrement_turns():
 		if st != "KO" and st != "HP_CRITICAL" and st != "TRAPPED" and st != "FLOAT" and st != "UNDEAD":
 			status[st][0] -= 1
 			if status[st][0] == 0:
-				status.erase(st)
+				remove_status(st)
 
 func take_damage(type, damage):
-	#
-
 	var dmg = 0
 	var resistance = 1.0
 	if type == PHYSIC:

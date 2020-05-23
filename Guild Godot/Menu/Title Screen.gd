@@ -13,6 +13,7 @@ func _ready():
 		tmp += 1
 
 func _on_New_pressed():
+	GLOBAL.ALL_STATUS = loader.load_all_statuses()
 	GLOBAL.ALL_SKILLS = loader.load_all_skills()
 	GLOBAL.ALL_ITENS = loader.load_all_itens()
 	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
@@ -28,6 +29,7 @@ func _on_New_pressed():
 func _on_Load_pressed():
 	$"Load_Screen/Save Slots".enable_focus(false)
 	$Load_Screen.show()
+	GLOBAL.ALL_STATUS = loader.load_all_statuses()
 	GLOBAL.ALL_SKILLS = loader.load_all_skills()
 	GLOBAL.ALL_ITENS = loader.load_all_itens()
 	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
