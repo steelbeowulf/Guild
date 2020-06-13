@@ -10,7 +10,7 @@ var delay = 0.0
 export(int) var id
 
 func _ready():
-	var npc = GLOBAL.ALL_NPCS[id]
+	var npc = GLOBAL.NPCS[id]
 	set_animations(npc.get_sprite(), npc.get_animation())
 
 # Initializes position

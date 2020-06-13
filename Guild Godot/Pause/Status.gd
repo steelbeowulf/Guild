@@ -11,7 +11,7 @@ func _process(delta):
 
 func enter(player_id):
 	id = player_id
-	var player = GLOBAL.ALL_PLAYERS[player_id]
+	var player = GLOBAL.PLAYERS[player_id]
 	# Sets player name
 	$Top_Panel/Char_name.set_text(player.get_name())
 	

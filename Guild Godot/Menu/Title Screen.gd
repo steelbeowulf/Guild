@@ -1,7 +1,5 @@
 extends Node
 
-onready var loader = get_node("/root/LOADER")
-
 signal slot_chosen
 
 func _ready():
@@ -13,33 +11,19 @@ func _ready():
 		tmp += 1
 
 func _on_New_pressed():
-	GLOBAL.ALL_STATUS = loader.load_all_statuses()
-	GLOBAL.ALL_SKILLS = loader.load_all_skills()
-	GLOBAL.ALL_ITENS = loader.load_all_itens()
-	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
-	GLOBAL.INVENTORY = loader.load_inventory(-1)
-	GLOBAL.ALL_PLAYERS = loader.load_players(-1)
-	GLOBAL.ALL_NPCS = loader.load_npcs()
-	GLOBAL.reload_state()
+	GLOBAL.load_game(-1)
 	get_tree().change_scene("res://Root.tscn")
-	#Use this to get to the item menu for it to work
-	#get_tree().change_scene("res://Pause/Itens.tscn")
 
 
 func _on_Load_pressed():
 	$"Load_Screen/Save Slots".enable_focus(false)
 	$Load_Screen.show()
-	GLOBAL.ALL_STATUS = loader.load_all_statuses()
-	GLOBAL.ALL_SKILLS = loader.load_all_skills()
-	GLOBAL.ALL_ITENS = loader.load_all_itens()
-	GLOBAL.ALL_ENEMIES = loader.load_all_enemies()
-	GLOBAL.ALL_NPCS = loader.load_npcs()
+
 
 func _on_Slot_chosen(slot):
-	GLOBAL.INVENTORY = loader.load_inventory(slot)
-	GLOBAL.ALL_PLAYERS = loader.load_players(slot)
 	GLOBAL.load_game(slot)
 	get_tree().change_scene("res://Root.tscn")
+
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):

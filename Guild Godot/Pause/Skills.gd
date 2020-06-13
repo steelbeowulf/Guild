@@ -12,7 +12,7 @@ func enter():
 	for c in $Panel/HBoxContainer/Skills.get_children():
 		c.connect("target_picked", self, "_on_Skill_selected")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
-	show_skills(GLOBAL.ALL_PLAYERS)
+	show_skills(GLOBAL.PLAYERS)
 
 func just_entered(nameid):
 	location = "SUBMENU"

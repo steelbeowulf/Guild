@@ -60,7 +60,7 @@ func _on_SaveDialog_confirmed():
 
 func _on_LoadDialog_confirmed():
 	GLOBAL.INVENTORY = loader.load_inventory(chosen_slot)
-	GLOBAL.ALL_PLAYERS = loader.load_players(chosen_slot)
+	GLOBAL.PLAYERS = loader.load_players(chosen_slot)
 	GLOBAL.reload_state()
 	GLOBAL.load_game(chosen_slot)
 	GLOBAL.get_root().close_menu()
