@@ -8,6 +8,7 @@ const SKILLS_PATH = "res://Data/Skills/"
 const STATUS_PATH = "res://Data/Status/"
 const AREAS_PATH = "res://Data/Maps/"
 const NPCS_PATH = "res://Data/NPCs/"
+const LORES_PATH = "res://Data/Lore/"
 
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
@@ -263,3 +264,20 @@ func parse_players(path):
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 			data["LANE"], data["NAME"], skills, data["RESISTANCE"]))
 	return players
+
+
+func get_random_lore():
+	var lores = list_files_in_directory(LORES_PATH)
+	lores.shuffle()
+	print(lores)
+	var file = File.new()
+	file.open(LORES_PATH+lores[0], file.READ)
+	var text = file.get_as_text()
+	print(text)
+	var result_json = JSON.parse(text)
+	if result_json.error == OK:
+		return result_json.result
+	else:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Menu/Loading.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Title screen 2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Fonts/Font28.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
 
 [node name="Loading" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,6 +20,7 @@ margin_left = 493.94
 margin_top = 958.934
 margin_right = 1513.94
 margin_bottom = 1008.93
+value = 81.0
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 643.12
@@ -27,24 +29,15 @@ margin_right = 1406.12
 margin_bottom = 918.574
 custom_styles/panel = ExtResource( 3 )
 
-[node name="Lore Text" type="Label" parent="Panel"]
-margin_left = 10.6002
-margin_top = 164.303
-margin_right = 773.6
-margin_bottom = 414.303
+[node name="Text" type="Label" parent="Panel"]
+margin_left = 6.39539
+margin_top = 370.337
+margin_right = 769.395
+margin_bottom = 620.337
 custom_fonts/font = ExtResource( 4 )
 text = "Big Lore infodump here"
 
-[node name="Tip Text" type="Label" parent="Panel"]
-margin_left = 207.301
-margin_top = 542.35
-margin_right = 565.301
-margin_bottom = 588.35
-custom_fonts/font = ExtResource( 4 )
-text = "Cool tip here
-"
-
-[node name="Loading" type="Label" parent="Panel"]
+[node name="Title" type="Label" parent="Panel"]
 margin_left = 324.384
 margin_top = 5.16943
 margin_right = 434.384
@@ -52,4 +45,9 @@ margin_bottom = 40.1694
 rect_pivot_offset = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "LOADING"
+
+[node name="Sprite" type="Sprite" parent="Panel"]
+position = Vector2( 374.225, 176.601 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 6 )
 
