@@ -43,6 +43,7 @@ func _physics_process(delta):
 		if err == ERR_FILE_EOF: # load finished
 			print("Loading finished!")
 			update_progress(100)
+			$Panel/Prompt.show()
 			resource = loader.get_resource()
 			loader = null
 			break

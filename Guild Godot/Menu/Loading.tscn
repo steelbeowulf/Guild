@@ -16,17 +16,17 @@ scale = Vector2( 2.409, 2.175 )
 texture = ExtResource( 2 )
 
 [node name="Progress" type="ProgressBar" parent="."]
-margin_left = 493.94
-margin_top = 958.934
-margin_right = 1513.94
-margin_bottom = 1008.93
+margin_left = 493.698
+margin_top = 987.138
+margin_right = 1513.7
+margin_bottom = 1037.13
 step = 1.0
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 643.12
-margin_top = 311.574
-margin_right = 1406.12
-margin_bottom = 918.574
+margin_left = 605.522
+margin_top = 264.697
+margin_right = 1368.52
+margin_bottom = 871.697
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Text" type="Label" parent="Panel"]
@@ -46,6 +46,17 @@ margin_bottom = 40.0
 rect_pivot_offset = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "LOADING"
+align = 1
+
+[node name="Prompt" type="Label" parent="Panel"]
+visible = false
+margin_left = 110.892
+margin_top = 684.989
+margin_right = 721.892
+margin_bottom = 719.989
+rect_pivot_offset = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 5 )
+text = "Aperte [ESPAÇO] para continuar"
 align = 1
 
 [node name="Sprite" type="Sprite" parent="Panel"]
