@@ -94,7 +94,7 @@ func remove_status(effect):
 		self.graphics.revive()
 	if status.has(effect):
 		status.erase(effect)
-	if GLOBAL.ALL_STATUS.has(effect):
+	if GLOBAL.STATUS.has(effect):
 		self.graphics.remove_aura()
 
 func add_status(effect, atkm, turns):
@@ -102,9 +102,9 @@ func add_status(effect, atkm, turns):
 	if effect == "KO":
 		status = {}
 		dead = true
-	if GLOBAL.ALL_STATUS.has(effect):
+	if GLOBAL.STATUS.has(effect):
 		print("IF")
-		self.graphics.set_aura(GLOBAL.ALL_STATUS[effect])
+		self.graphics.set_aura(GLOBAL.STATUS[effect])
 	status[effect] = [turns, atkm]
 
 func decrement_turns():

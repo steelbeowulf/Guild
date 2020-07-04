@@ -3,7 +3,7 @@ var Players
 var Players_img = []
 
 func _ready():
-	Players = GLOBAL.ALL_PLAYERS
+	Players = GLOBAL.PLAYERS
 	$AnimationManager.initialize(Players, [])
 	
 	for tex in get_tree().get_nodes_in_group("text"):

@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
-[ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Overworld/Objects/Tree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Objects/Door.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=9]
 
 [node name="Map1" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,7 +20,6 @@ Doors = {
 }
 
 [node name="Tiles" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Ground" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 2 )
@@ -39,12 +39,15 @@ z_index = 10
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 262171, 536870923, 0, 851985, 8, 0, 917521, 8, 2, 983057, 8, 2, 1048593, 8, 65536 )
+tile_data = PoolIntArray( 262156, 9, 0, 262171, 536870923, 0, 458768, 9, 0, 851985, 8, 0, 917521, 8, 2, 983057, 8, 2, 1048593, 8, 65536 )
+
+[node name="Tree" parent="Tiles" instance=ExtResource( 3 )]
+position = Vector2( 640.949, 393.679 )
 
 [node name="Treasure" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
+[node name="Chest1" parent="Treasure" instance=ExtResource( 4 )]
 position = Vector2( 911.479, 332.812 )
 item_id = 1
 item_quantity = 4
@@ -54,7 +57,7 @@ editor/display_folded = true
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
-[node name="Borboleta3" parent="Enemies" instance=ExtResource( 4 )]
+[node name="Borboleta3" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( 280.713, -235.023 )
 id = 6
 movement = 1
@@ -67,23 +70,23 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="HUD" parent="." instance=ExtResource( 5 )]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 6 )]
+[node name="Door" parent="Objects" instance=ExtResource( 7 )]
 position = Vector2( 176, 80 )
 
-[node name="Transition" parent="." instance=ExtResource( 7 )]
+[node name="Transition" parent="." instance=ExtResource( 8 )]
 position = Vector2( 112.936, 42.1482 )
 next = 2
 
 [node name="Party" type="Node" parent="."]
 
-[node name="NPC" parent="." instance=ExtResource( 8 )]
+[node name="NPC" parent="." instance=ExtResource( 9 )]
 position = Vector2( 458.193, 397.772 )
 
-[node name="NPC2" parent="." instance=ExtResource( 8 )]
+[node name="NPC2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 305.955, 396.375 )
 id = 1
 

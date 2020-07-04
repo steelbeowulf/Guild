@@ -23,9 +23,10 @@ signal finish_anim
 func _ready():
 	GLOBAL.entering_battle = false
 	battle_over = false
-	Players = GLOBAL.ALL_PLAYERS
+	Players = GLOBAL.PLAYERS
 	Inventory =  GLOBAL.INVENTORY
 	Enemies =  BATTLE_MANAGER.Battled_Enemies
+	$Background.set_texture(BATTLE_MANAGER.background)
 	
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
