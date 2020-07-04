@@ -27,6 +27,8 @@ var WIN
 onready var MATCH = false
 onready var ROOM = false
 
+# Loading stuff
+var NEXT_SCENE = "res://Root.tscn"
 
 # Helper function to get the Root node
 func get_root():

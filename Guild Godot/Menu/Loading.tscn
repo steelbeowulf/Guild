@@ -20,7 +20,7 @@ margin_left = 493.94
 margin_top = 958.934
 margin_right = 1513.94
 margin_bottom = 1008.93
-value = 81.0
+step = 1.0
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 643.12
@@ -30,24 +30,26 @@ margin_bottom = 918.574
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Text" type="Label" parent="Panel"]
-margin_left = 6.39539
-margin_top = 370.337
-margin_right = 769.395
-margin_bottom = 620.337
+margin_left = 56.0
+margin_top = 412.194
+margin_right = 707.0
+margin_bottom = 560.194
 custom_fonts/font = ExtResource( 4 )
 text = "Big Lore infodump here"
+align = 1
 
 [node name="Title" type="Label" parent="Panel"]
-margin_left = 324.384
-margin_top = 5.16943
-margin_right = 434.384
-margin_bottom = 40.1694
+margin_left = 82.0
+margin_top = 5.0
+margin_right = 693.0
+margin_bottom = 40.0
 rect_pivot_offset = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 5 )
 text = "LOADING"
+align = 1
 
 [node name="Sprite" type="Sprite" parent="Panel"]
-position = Vector2( 374.225, 176.601 )
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( 385.332, 173.428 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
