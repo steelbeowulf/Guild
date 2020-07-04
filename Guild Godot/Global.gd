@@ -74,12 +74,14 @@ func parse_position(pos_str):
 # TODO: make it generic
 func reload_state():
 	WIN = false
-	STATE = [{}, {}, {}]
+	STATE = []
+	for i in range(25):
+		STATE.append({})
 	MATCH = false
 	ROOM = false
 	TRANSITION = -1
-	MAP = 1
-	POSITION = Vector2(816, 368)
+	MAP = 19
+	POSITION = Vector2(0, 1000)#Vector2(816, 368)
 
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
