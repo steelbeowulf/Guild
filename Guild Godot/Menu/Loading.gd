@@ -61,5 +61,7 @@ func update_progress(progress):
 
 
 func set_new_scene(scene_resource):
-	current_scene = scene_resource.instance()
-	get_node("/root").add_child(current_scene)
+	get_tree().change_scene(GLOBAL.NEXT_SCENE)
+	#current_scene = scene_resource.instance()
+	#get_node("/root").add_child(current_scene)
+	#queue_free()
