@@ -3,6 +3,7 @@ extends Node2D
 var buf = []
 
 func _ready():
+	hide()
 	$Label.set_text("")
 
 func store_text(text):
@@ -13,6 +14,7 @@ func is_empty():
 
 func display_text(text):
 	if text:
+		show()
 		if is_empty():
 			$Label.set_text(text)
 			$Timer.start()
@@ -25,3 +27,5 @@ func _on_Timer_timeout():
 		var txt = buf[0]
 		buf.remove(0)
 		display_text(txt)
+	else:
+		hide()

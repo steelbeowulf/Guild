@@ -5,6 +5,7 @@
 [ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=3]
 
 [node name="Log" type="Node2D"]
+visible = false
 scale = Vector2( 3, 2 )
 script = ExtResource( 1 )
 

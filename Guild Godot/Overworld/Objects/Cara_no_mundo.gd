@@ -18,6 +18,7 @@ func _initialize():
 	$Camera2D.set_limit(MARGIN_LEFT, margin[1])
 	$Camera2D.set_limit(MARGIN_TOP, margin[2])
 	$Camera2D.set_limit(MARGIN_RIGHT, margin[3])
+	print("[PLAYER POSITION] "+str(position))
 
 
 # Deals with input and moves player

@@ -19,9 +19,11 @@ var entering_battle = false
 # TODO: make it not hardcoded and generic
 var POSITION = Vector2(454, 446)
 var STATE = {'1':{}, '2':{}, '3':{}, '4':{}, '5':{}, 
-			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{}
-			, '16':{}, '17':{}, '18':{}, '19':{}, '20':{}
-			, '21':{}, '22':{}, '23':{}, '24':{}}
+			 '6':{}, '7':{}, '8':{}, '9':{}, '10':{},
+			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{},
+			 '16':{}, '17':{}, '18':{}, '19':{}, '20':{},
+			  '21':{}, '22':{}, '23':{}, '24':{}, '25':{}, '26':{}}
+
 var TRANSITION = -1
 var MAP = 1
 var WIN
@@ -75,10 +77,14 @@ func parse_position(pos_str):
 # TODO: make it generic
 func reload_state():
 	WIN = false
-	STATE = [{}, {}, {}]
+	STATE = []
+	for i in range(26):
+		STATE.append({})
 	MATCH = false
 	ROOM = false
 	TRANSITION = -1
+#	MAP = 10
+#	POSITION = Vector2(300, 100)#Vector2(816, 368)
 	MAP = 1
 	POSITION = Vector2(454, 446)
 
