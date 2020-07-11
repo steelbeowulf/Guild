@@ -25,7 +25,6 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Players" type="Node" parent="AnimationManager"]
-editor/display_folded = true
 
 [node name="P0" parent="AnimationManager/Players" instance=ExtResource( 3 )]
 position = Vector2( 250, 250 )

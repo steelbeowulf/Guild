@@ -40,7 +40,7 @@ func _process(delta):
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
 		for c in $Menu_Area/SubMenus.get_children():
 			c.free()
-		menu.enter(GLOBAL.ALL_PLAYERS)
+		menu.enter(GLOBAL.PLAYERS)
 		menu.show()
 		menu.give_focus()
 	# Cheap hack to test money
@@ -55,7 +55,7 @@ func open_menu():
 	menu.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
-	menu.enter(GLOBAL.ALL_PLAYERS)
+	menu.enter(GLOBAL.PLAYERS)
 	STATE = "Menu"
 	get_tree().paused = true
 

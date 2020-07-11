@@ -10,6 +10,8 @@ export var Transitions = {}
 # value: condition
 export var Doors = {}
 
+export var Battle_BG = 1
+
 # State variables
 onready var Enemies = []
 onready var Player_pos = Vector2(816, 368)
@@ -40,7 +42,7 @@ func _ready():
 		get_tree().change_scene("res://Menu/Victory.tscn")
 	
 	# TODO: Limit Enemies to enemies on this area
-	Enemies = GLOBAL.ALL_ENEMIES
+	Enemies = GLOBAL.ENEMIES
 	Player_pos = GLOBAL.POSITION
 	
 	# Gets current map state from global area state

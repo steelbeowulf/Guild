@@ -8,6 +8,7 @@ onready var Map = null
 
 # Battle variables
 onready var Battled_Enemies = []
+onready var background
 
 # Level up variables
 onready var leveled_up = [0,0,0,0]
@@ -38,6 +39,8 @@ onready var speed_index = 0
 func init(enemies_arg, map_arg):
 	Enemies = enemies_arg
 	Map = map_arg
+	print("[BATTLE INIT] current map: "+str(GLOBAL.get_map()))
+	background = load("res://Assets/Backgrounds/forest2.png")
 
 ######### CONFIG FUCTIONS #########
 func set_battle_speed(ID):
@@ -116,6 +119,7 @@ func generate_enemies():
 
 # Generates enemies and begins the battle
 func initiate_battle():
+	print("[BATTLE INIT] initiating battle")
 	leveled_up = [0,0,0,0]
 	Battled_Enemies = generate_enemies()
 	get_tree().change_scene("res://Battle/Battle.tscn")
@@ -219,7 +223,7 @@ func end_battle(Players, Enemies, Inventory):
 				lvup_lck += stat_up
 		Play.append(p)
 
-	GLOBAL.ALL_PLAYERS = Play
+	GLOBAL.PLAYERS = Play
 	GLOBAL.INVENTORY = Inventory
 	
 	# Goes to game over, level up scenes or back to the map

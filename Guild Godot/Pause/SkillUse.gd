@@ -3,10 +3,10 @@ extends Control
 onready var location = "OUTSIDE"
 var recoverHP = 0
 var recoverMP = 0
-var hp_char = GLOBAL.ALL_PLAYERS[0].stats[0]
-var hpmax_char = GLOBAL.ALL_PLAYERS[0].stats[1]
-var mp_char = GLOBAL.ALL_PLAYERS[0].stats[2]
-var mpmax_char = GLOBAL.ALL_PLAYERS[0].stats[3]
+var hp_char = GLOBAL.PLAYERS[0].stats[0]
+var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
+var mp_char = GLOBAL.PLAYERS[0].stats[2]
+var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
 var current_player
 var spell_list
 onready var identification
@@ -16,11 +16,11 @@ func enter(itemx, id):
 	identification = id
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if id == GLOBAL.ALL_PLAYERS[i].id:
-			current_player = GLOBAL.ALL_PLAYERS[i]
+	for i in range(len(GLOBAL.PLAYERS)):
+		if id == GLOBAL.PLAYERS[i].id:
+			current_player = GLOBAL.PLAYERS[i]
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
-		node.update_info(GLOBAL.ALL_PLAYERS[i])
+		node.update_info(GLOBAL.PLAYERS[i])
 	spell_list = current_player.get_skills()
 	for i in range(len(spell_list)):
 		if itemx == spell_list[i].nome:
@@ -58,14 +58,14 @@ func _on_Char0_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
-			GLOBAL.ALL_PLAYERS[i].id = current_player.id
+	for i in range(len(GLOBAL.PLAYERS)):
+		if GLOBAL.PLAYERS[i].id == current_player.id:
+			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
 	print("valor curado: " + str(recoverHP))
 	print("vida atual do curado: " +str(hp_char))
-	GLOBAL.ALL_PLAYERS[0].stats[0] = hp_char
-	GLOBAL.ALL_PLAYERS[0].stats[2] = mp_char
+	GLOBAL.PLAYERS[0].stats[0] = hp_char
+	GLOBAL.PLAYERS[0].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()
 
@@ -77,13 +77,13 @@ func _on_Char1_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
-			GLOBAL.ALL_PLAYERS[i].id = current_player.id
+	for i in range(len(GLOBAL.PLAYERS)):
+		if GLOBAL.PLAYERS[i].id == current_player.id:
+			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
 	print("valor curado: " + str(recoverHP))
-	GLOBAL.ALL_PLAYERS[1].stats[0] = hp_char
-	GLOBAL.ALL_PLAYERS[1].stats[2] = mp_char
+	GLOBAL.PLAYERS[1].stats[0] = hp_char
+	GLOBAL.PLAYERS[1].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()
 
@@ -95,13 +95,13 @@ func _on_Char2_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
-			GLOBAL.ALL_PLAYERS[i].id = current_player.id
+	for i in range(len(GLOBAL.PLAYERS)):
+		if GLOBAL.PLAYERS[i].id == current_player.id:
+			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
 	print("valor curado: " + str(recoverHP))
-	GLOBAL.ALL_PLAYERS[2].stats[0] = hp_char
-	GLOBAL.ALL_PLAYERS[2].stats[2] = mp_char
+	GLOBAL.PLAYERS[2].stats[0] = hp_char
+	GLOBAL.PLAYERS[2].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()
 
@@ -113,12 +113,12 @@ func _on_Char3_pressed():
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
-		if GLOBAL.ALL_PLAYERS[i].id == current_player.id:
-			GLOBAL.ALL_PLAYERS[i].id = current_player.id
+	for i in range(len(GLOBAL.PLAYERS)):
+		if GLOBAL.PLAYERS[i].id == current_player.id:
+			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
 	print("valor curado: " + str(recoverHP))
-	GLOBAL.ALL_PLAYERS[3].stats[0] = hp_char
-	GLOBAL.ALL_PLAYERS[3].stats[2] = mp_char
+	GLOBAL.PLAYERS[3].stats[0] = hp_char
+	GLOBAL.PLAYERS[3].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
 	queue_free()

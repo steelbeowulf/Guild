@@ -1,14 +1,14 @@
 extends Node
 
 # Global variables containing all loaded itens, skills and enemies
-var ALL_ITENS
-var ALL_SKILLS
-var ALL_STATUS
-var ALL_ENEMIES
-var ALL_NPCS
+var ITENS
+var SKILLS
+var STATUS
+var ENEMIES
+var NPCS
 
 # Global variables containing current players info (party and inventory)
-var ALL_PLAYERS
+var PLAYERS
 var INVENTORY
 
 var NODES = {}
@@ -28,6 +28,8 @@ var WIN
 onready var MATCH = false
 onready var ROOM = false
 
+# Loading stuff
+var NEXT_SCENE = "res://Root.tscn"
 
 # Helper function to get the Root node
 func get_root():
@@ -55,7 +57,7 @@ func load_area(area_dict):
 	ROOM = area_dict["ROOM"]
 	MAP = area_dict["MAP"]
 	POSITION = parse_position(area_dict["POSITION"])
-	AREA = area_dict["NAME"]
+	return area_dict["NAME"]
 
 
 # Helper function to parse a Vector2 from a string
@@ -73,14 +75,7 @@ func parse_position(pos_str):
 # TODO: make it generic
 func reload_state():
 	WIN = false
-	STATE = []
-	for i in range(26):
-		STATE.append({})
-	#STATE = {'1':{}, '2':{}, '3':{}, '4':{}, '5':{}, 
-	#		 '6':{}, '7':{}, '8':{}, '9':{}, '10':{},
-	#		 '11':{}, '12':{}, '13':{}, '14':{}, '15':{}
-	#		, '16':{}, '17':{}, '18':{}, '19':{}, '20':{}
-	#		, '21':{}, '22':{}, '23':{} , '24':{}, '25':{}}
+	STATE = [{}, {}, {}]
 	MATCH = false
 	ROOM = false
 	TRANSITION = -1
@@ -92,12 +87,12 @@ func reload_state():
 func add_item(item_id, item_quantity):
 	var done = false
 	for item in INVENTORY:
-		if item == ALL_ITENS[item_id]:
+		if item == ITENS[item_id]:
 			item.quantity += item_quantity
 			done = true
 			break
 	if not done:
-		var item = ALL_ITENS[item_id]
+		var item = ITENS[item_id]
 		item.quantity += item_quantity
 		INVENTORY.append(item)
 
@@ -121,7 +116,7 @@ func save(slot):
 	
 	# Saves players' information
 	var players_data = []
-	for player in ALL_PLAYERS:
+	for player in PLAYERS:
 		players_data.append(player.save_data())
 	savegame.open(save_path+str(slot)+"/Players.json", File.WRITE)
 	savegame.store_line(to_json(players_data))
@@ -135,25 +130,48 @@ func save(slot):
 	savegame.store_line(to_json(itens_data))
 	savegame.close()
 
+# Global state variables
+var AREA
+var gold
+var playtime
+
+onready var loader = get_node("/root/LOADER")
 
 # Loads all information from save_slot argument
+func load_info(save_slot):
+	if save_slot == -1:
+		reload_state()
+		gold = 100
+		playtime = 0
+		AREA = "Demo_Area"
+	else:
+		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
+		var dict = parse_json(savegame.get_line())
+		gold = dict["gold"]
+		playtime = dict["playtime"]
+		AREA = load_area(dict["area"])
+		savegame.close()
+
+
 func load_game(save_slot):
-	savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
-	var dict = parse_json(savegame.get_line())
-	gold = dict["gold"]
-	playtime = dict["playtime"]
-	load_area(dict["area"])
-	savegame.close()
+	STATUS = loader.load_all_statuses()
+	SKILLS = loader.load_all_skills()
+	ITENS = loader.load_all_itens()
+	
+	INVENTORY = loader.load_inventory(save_slot)
+	PLAYERS = loader.load_players(save_slot)
+	
+	load_info(save_slot)
+	var area_info = loader.load_area_info(AREA)
+	NPCS = loader.load_npcs(area_info["NPCS"])
+	print(NPCS)
 
-
-# Global state variables
-var AREA = "Demo_Area"
-var gold = 100
-var playtime = 0
+	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
+	print(ENEMIES)
 
 # Returns state from the current map
 func get_state():
-	return STATE[str(MAP)]
+	return STATE[MAP]
 
 # Update state on the current map
 func set_state(state_arg):
@@ -174,11 +192,13 @@ func get_map():
 func register_node(name, node):
 	NODES[name] = node
 
+
+### Dialogue
 var caller = null
 
 func play_dialogues(id, callback):
 	var node = NODES["Dialogue"]
-	var npc = ALL_NPCS[id]
+	var npc = NPCS[id]
 	var dials = npc.get_dialogues()
 	node.set_talker(npc.get_name(), npc.get_portrait())
 	for dial in dials:

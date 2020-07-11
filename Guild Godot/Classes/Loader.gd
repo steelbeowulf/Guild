@@ -6,11 +6,13 @@ const ENEMY_PATH = "res://Data/Enemies/"
 const ITENS_PATH = "res://Data/Itens/"
 const SKILLS_PATH = "res://Data/Skills/"
 const STATUS_PATH = "res://Data/Status/"
+const AREAS_PATH = "res://Data/Maps/"
+const NPCS_PATH = "res://Data/NPCs/"
+const LORES_PATH = "res://Data/Lore/"
 
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
 const INVENTORY_PATH = "res://Demo_data/Inventory.json"
-const NPCS_PATH = "res://Demo_data/NPCs.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -43,6 +45,16 @@ func list_files_in_directory(path):
 	return files
 
 
+func load_area_info(name):
+	var file = File.new()		
+	file.open(AREAS_PATH+name+".json", file.READ)
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK:  # If parse OK
+		var data = result_json.result
+		return data
+
+
 # Returns a list with the Info.json dictionaries for each
 # save slot - used to show saved info on the save slots
 static func load_save_info():
@@ -61,9 +73,7 @@ static func load_save_info():
 
 
 # Loads all enemies found in the ENEMY_PATH directory.
-# TODO: eventually will be changed to loading only enemies
-# necessary for a certain area, to not kill a PC's memory
-func load_all_enemies():
+func load_enemies(filter_array):
 	var ret = []
 	var enemies = list_files_in_directory(ENEMY_PATH)
 	enemies.sort()
@@ -75,17 +85,18 @@ func load_all_enemies():
 		var result_json = JSON.parse(text)
 		if result_json.error == OK:
 			var data = result_json.result
-			var skills = []
-			for id in data["SKILLS"]:
-				skills.append(GLOBAL.ALL_SKILLS[id])
-			ret.append(ENEMY_CLASS.new(data["ID"], data["LEVEL"], data["EXPERIENCE"], 
-			data["IMG"], data["ANIM"],
-			[data["HP"], data["HP_MAX"], 
-			data["MP"], data["MP_MAX"],
-			data["ATK"], data["ATKM"], 
-			data["DEF"], data["DEFM"], 
-			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
-			data["NAME"], skills, data["RESISTANCE"]))
+			if int(data["ID"]) in filter_array:
+				var skills = []
+				for id in data["SKILLS"]:
+					skills.append(GLOBAL.SKILLS[id])
+				ret.append(ENEMY_CLASS.new(data["ID"], data["LEVEL"], data["EXPERIENCE"], 
+				data["IMG"], data["ANIM"],
+				[data["HP"], data["HP_MAX"], 
+				data["MP"], data["MP_MAX"],
+				data["ATK"], data["ATKM"], 
+				data["DEF"], data["DEFM"], 
+				data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
+				data["NAME"], skills, data["RESISTANCE"]))
 	return [0] + ret
 
 
@@ -192,7 +203,7 @@ func parse_inventory(path):
 	if result_json.error == OK:
 		var data = result_json.result
 		for item in data:
-			itens.append(GLOBAL.ALL_ITENS[item["ID"]])
+			itens.append(GLOBAL.ITENS[item["ID"]])
 			itens[-1].quantity = item["QUANT"]
 	return itens
 
@@ -205,28 +216,28 @@ func load_players(slot):
 		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
 	return parse_players(path)
 
-func load_npcs():
-	var path = NPCS_PATH
-	return parse_npcs(path)
+func load_npcs(filter_array):
+	print(filter_array)
+	var npcs = list_files_in_directory(NPCS_PATH)
+	npcs.sort()
+	var ret = []
+	for npc in npcs:
+		print(npc)
+		var file = File.new()
+		file.open(NPCS_PATH+npc, file.READ)
+		var text = file.get_as_text()
+		var result_json = JSON.parse(text)
+		if result_json.error == OK: 
+			var data = result_json.result
+			if int(data["ID"]) in filter_array:
+				ret.append(NPC_CLASS.new(data["ID"], data["NAME"],
+				data["IMG"], data["ANIM"], data["DIALOGUE"], data["PORTRAIT"]))
+		else:  # If parse has errors
+			print("Error: ", result_json.error)
+			print("Error Line: ", result_json.error_line)
+			print("Error String: ", result_json.error_string)
 
-func parse_npcs(path):
-	var file = File.new()
-	file.open(path, file.READ)
-	var npcs = []
-	var text = file.get_as_text()
-	var result_json = JSON.parse(text)
-	if result_json.error == OK: 
-		print("lendo") 
-		var datas = result_json.result
-		for data in datas:
-			npcs.append(NPC_CLASS.new(data["ID"], data["NAME"],
-			data["IMG"], data["ANIM"], data["DIALOGUE"], data["PORTRAIT"]))
-	else:  # If parse has errors
-		print("Error: ", result_json.error)
-		print("Error Line: ", result_json.error_line)
-		print("Error String: ", result_json.error_string)
-
-	return npcs
+	return ret
 
 
 
@@ -243,7 +254,7 @@ func parse_players(path):
 		for data in datas:
 			var skills = []
 			for id in data["SKILLS"]:
-				skills.append(GLOBAL.ALL_SKILLS[id])
+				skills.append(GLOBAL.SKILLS[id])
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
 			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
@@ -253,3 +264,20 @@ func parse_players(path):
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 			data["LANE"], data["NAME"], skills, data["RESISTANCE"]))
 	return players
+
+
+func get_random_lore():
+	var lores = list_files_in_directory(LORES_PATH)
+	lores.shuffle()
+	print(lores)
+	var file = File.new()
+	file.open(LORES_PATH+lores[0], file.READ)
+	var text = file.get_as_text()
+	print(text)
+	var result_json = JSON.parse(text)
+	if result_json.error == OK:
+		return result_json.result
+	else:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)

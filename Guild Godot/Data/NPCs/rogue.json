@@ -1,20 +1,5 @@
-[
-	{"ID":0,
-	"IMG":{"path": "res://Assets/Animations/warrior spritesheet calciumtrice.png",
-		   "vframes": 10, "hframes":10, "scale":[2,2]},
-	"ANIM":{"idle": [true, "0-19"]},
-	"NAME":"Warrior",
-	"DIALOGUE":[
-		"Hello! Welcome to Guild!",
-		"Use the arrow keys to move",
-		"P opens the pause menu",
-		"Fight the enemies and solve puzzles to make your way through the demo",
-		"A terrible monster awaits you at the end",
-		"Do you think you have what it takes?"
-	],
-	"PORTRAIT": "res://Assets/Portraits/warrior.png"
-	},
-	{"ID":1,
+{
+	"ID":1,
 	"IMG":{"path": "res://Assets/Animations/rogue spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-19"]},
@@ -26,5 +11,4 @@
 		"Thanks for listening, mate"
 	],
 	"PORTRAIT": "res://Assets/Portraits/rogue.png"
-	}
-]
+}

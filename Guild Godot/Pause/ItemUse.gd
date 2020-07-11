@@ -3,17 +3,17 @@ extends Control
 onready var location = "OUTSIDE"
 var recoverHP = 0
 var recoverMP = 0
-var hp_char = GLOBAL.ALL_PLAYERS[0].stats[0]
-var hpmax_char = GLOBAL.ALL_PLAYERS[0].stats[1]
-var mp_char = GLOBAL.ALL_PLAYERS[0].stats[2]
-var mpmax_char = GLOBAL.ALL_PLAYERS[0].stats[3]
+var hp_char = GLOBAL.PLAYERS[0].stats[0]
+var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
+var mp_char = GLOBAL.PLAYERS[0].stats[2]
+var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
 
 func enter(itemx):
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
-	for i in range(len(GLOBAL.ALL_PLAYERS)):
+	for i in range(len(GLOBAL.PLAYERS)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
-		node.update_info(GLOBAL.ALL_PLAYERS[i])
+		node.update_info(GLOBAL.PLAYERS[i])
 
 	for i in range(len(GLOBAL.INVENTORY)):
 		if itemx == GLOBAL.INVENTORY[i].nome:
