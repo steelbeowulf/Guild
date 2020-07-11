@@ -37,8 +37,7 @@ func _ready():
 	
 	# Arbitrary stuff hardcoded for the demo
 	# TODO: fix it
-	if GLOBAL.get_map() == 4:
-		get_node("Matching Puzzle").reset()
+	
 	if GLOBAL.WIN:
 		get_tree().change_scene("res://Menu/Victory.tscn")
 	
@@ -55,6 +54,7 @@ func _ready():
 		pos = GLOBAL.POSITION
 	if GLOBAL.TRANSITION != -1:
 		pos = Transitions[int(GLOBAL.TRANSITION)]
+		print (pos)
 		GLOBAL.TRANSITION = -1
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
