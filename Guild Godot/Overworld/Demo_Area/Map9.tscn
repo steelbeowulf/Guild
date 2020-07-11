@@ -2,17 +2,16 @@
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Map9" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
 7: Vector2( 510.508, 801.49 ),
 10: Vector2( 519.453, 52.99 )
-}
-Doors = {
-"Door": "Defeat all enemies"
 }
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -119,19 +118,15 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Door" parent="Objects" instance=ExtResource( 5 )]
-visible = false
-position = Vector2( -337.064, 571.463 )
-scale = Vector2( 5, 1 )
 
-[node name="Transition" parent="." instance=ExtResource( 6 )]
+[node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 519.453, 2.9901 )
 scale = Vector2( 6, 1 )
 next = 10
 
-[node name="Transition2" parent="." instance=ExtResource( 6 )]
+[node name="Transition2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 510.508, 851.49 )
 scale = Vector2( 6, 1 )
 next = 7
 
-[node name="HUD" parent="." instance=ExtResource( 7 )]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
