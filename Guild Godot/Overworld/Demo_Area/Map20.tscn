@@ -56,4 +56,3 @@ next = 19
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
-[node name="HUD" parent="." instance=ExtResource( 5 )]
