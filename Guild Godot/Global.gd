@@ -20,7 +20,9 @@ var entering_battle = false
 var POSITION = Vector2(816, 368)
 var STATE = {'1':{}, '2':{}, '3':{}, '4':{}, '5':{}, 
 			 '6':{}, '7':{}, '8':{}, '9':{}, '10':{},
-			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{}}
+			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{},
+			 '16':{}, '17':{}, '18':{}, '19':{}, '20':{},
+			  '21':{}, '22':{}, '23':{}, '24':{}, '25':{}, '26':{}}
 var TRANSITION = -1
 var MAP = 1
 var WIN
@@ -75,13 +77,13 @@ func parse_position(pos_str):
 func reload_state():
 	WIN = false
 	STATE = []
-	for i in range(25):
+	for i in range(26):
 		STATE.append({})
 	MATCH = false
 	ROOM = false
 	TRANSITION = -1
-	MAP = 19
-	POSITION = Vector2(0, 1000)#Vector2(816, 368)
+	MAP = 10
+	POSITION = Vector2(300, 100)#Vector2(816, 368)
 
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity

@@ -5,10 +5,10 @@
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
 
-[node name="Map14" type="Node2D"]
+[node name="Map18" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
-13: Vector2( 465, 600 )
+17: Vector2( 320, 610 )
 }
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -50,9 +50,8 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 3 )]
-position = Vector2( 625.869, 424.787 )
-rotation = 1.5708
+[node name="Transition17" parent="." instance=ExtResource( 3 )]
+position = Vector2( 320, 640 )
 scale = Vector2( 5.5, 1 )
 next = 13
 

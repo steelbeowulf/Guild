@@ -5,10 +5,10 @@
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
 
-[node name="Map14" type="Node2D"]
+[node name="Map13" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
-13: Vector2( 465, 600 )
+25: Vector2( 30, 430 )
 }
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -34,8 +34,7 @@ tile_data = PoolIntArray( -131072, 9, 0, -131071, 9, 0, -131070, 9, 0, -131069, 
 
 [node name="Treasure" type="Node2D" parent="."]
 
-[node name="Party" type="Node2D" parent="."]
-scale = Vector2( 0.85, 0.85 )
+[node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 528.874, 514.232 )
@@ -51,10 +50,10 @@ __meta__ = {
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Transition" parent="." instance=ExtResource( 3 )]
-position = Vector2( 625.869, 424.787 )
+position = Vector2( 10, 430 )
 rotation = 1.5708
 scale = Vector2( 5.5, 1 )
-next = 13
+next = 25
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 

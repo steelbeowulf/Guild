@@ -1,18 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/Tree.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
 
 [node name="Map11" type="Node2D"]
-position = Vector2( -3.24219, 3.24219 )
 script = ExtResource( 1 )
 Transitions = {
-5: Vector2( 465, 610 )
+10: Vector2( 605, 350 ),
+25: Vector2( 310, 355 )
 }
 
 [node name="Tiles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Ground" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 2 )
@@ -35,8 +37,7 @@ tile_data = PoolIntArray( -131072, 9, 0, -131071, 9, 0, -131070, 9, 0, -131069, 
 
 [node name="Treasure" type="Node2D" parent="."]
 
-[node name="Party" type="Node2D" parent="."]
-scale = Vector2( 0.85, 0.85 )
+[node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 528.874, 514.232 )
@@ -50,12 +51,17 @@ __meta__ = {
 }
 
 [node name="Transition" parent="." instance=ExtResource( 3 )]
-position = Vector2( 631.482, 340.59 )
+position = Vector2( 630, 340 )
 rotation = 1.5708
 scale = Vector2( 6, 1 )
 next = 10
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
+[node name="Tree" parent="Objects" instance=ExtResource( 4 )]
+position = Vector2( 294.55, 307.574 )
+TYPE = 1
+next = 25
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
 
