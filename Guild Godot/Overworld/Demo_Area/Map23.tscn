@@ -6,11 +6,11 @@
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
 
-[node name="Map8" type="Node2D"]
+[node name="Map23" type="Node2D"]
 position = Vector2( 11.7444, -24.9931 )
 script = ExtResource( 1 )
 Transitions = {
-3: Vector2( 363.383, 373.975 )
+3: Vector2( 409.523, 366.185 )
 }
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -49,10 +49,10 @@ position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_left = 40.4359
-margin_top = -80.9677
-margin_right = 680.436
-margin_bottom = 353.032
+margin_left = 40.0
+margin_top = -81.0
+margin_right = 831.0
+margin_bottom = 353.0
 
 [node name="Transition" parent="." instance=ExtResource( 4 )]
 position = Vector2( 353.383, 337.534 )

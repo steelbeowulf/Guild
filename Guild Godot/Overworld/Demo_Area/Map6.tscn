@@ -53,6 +53,9 @@ scale = Vector2( 1.2, 1.2 )
 margin_left = 4.0
 margin_right = 1084.0
 margin_bottom = 867.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Objects" type="Node2D" parent="."]
 

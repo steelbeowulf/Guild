@@ -11,7 +11,7 @@
 [node name="Map2" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
-1: Vector2( 500, 400 ),
+1: Vector2( 500, 562.54 ),
 3: Vector2( 513, 80 )
 }
 Doors = {
@@ -68,10 +68,13 @@ movement = 1
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_left = 246.0
-margin_top = 22.0
-margin_right = 804.0
-margin_bottom = 621.0
+margin_left = 260.0
+margin_top = 13.0
+margin_right = 976.0
+margin_bottom = 633.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 530.39, 627.663 )
