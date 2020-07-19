@@ -49,10 +49,10 @@ position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_left = 81.0
-margin_top = -44.0
-margin_right = 622.0
-margin_bottom = 232.0
+margin_left = 50.0
+margin_top = -82.0
+margin_right = 661.0
+margin_bottom = 523.0
 
 [node name="Transition" parent="." instance=ExtResource( 4 )]
 position = Vector2( 352.254, 24.9356 )

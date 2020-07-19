@@ -110,9 +110,8 @@ movement = 2
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_top = -15.0
-margin_right = 1048.0
-margin_bottom = 846.0
+margin_right = 1028.0
+margin_bottom = 819.0
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -127,3 +126,4 @@ scale = Vector2( 6, 1 )
 next = 7
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
+
