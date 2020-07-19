@@ -11,7 +11,7 @@
 [node name="Map2" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
-1: Vector2( 500, 400 ),
+1: Vector2( 500, 562.54 ),
 3: Vector2( 513, 80 )
 }
 Doors = {
@@ -68,8 +68,10 @@ movement = 1
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 607.0
+margin_left = 260.0
+margin_top = 13.0
+margin_right = 976.0
+margin_bottom = 633.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -91,4 +93,3 @@ visible = false
 position = Vector2( 1053.73, -41.3535 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
-

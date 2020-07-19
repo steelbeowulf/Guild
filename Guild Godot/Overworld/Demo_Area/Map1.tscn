@@ -43,8 +43,9 @@ position = Vector2( 454.997, 446.586 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 607.0
+margin_left = 250.0
+margin_right = 950.0
+margin_bottom = 474.0
 __meta__ = {
 "_edit_lock_": true
 }
@@ -69,4 +70,3 @@ position = Vector2( 383.316, 147.103 )
 [node name="NPC2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 375.828, 372.384 )
 id = 1
-
