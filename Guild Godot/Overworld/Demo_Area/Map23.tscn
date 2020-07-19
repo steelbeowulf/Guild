@@ -6,7 +6,7 @@
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
 
-[node name="Map8" type="Node2D"]
+[node name="Map23" type="Node2D"]
 position = Vector2( 11.7444, -24.9931 )
 script = ExtResource( 1 )
 Transitions = {
@@ -63,3 +63,4 @@ next = 3
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+

@@ -39,6 +39,7 @@ onready var speed_index = 0
 func init(enemies_arg, map_arg):
 	Enemies = enemies_arg
 	Map = map_arg
+	GLOBAL.TRANSITION = -1
 	print("[BATTLE INIT] current map: "+str(GLOBAL.get_map()))
 	background = load("res://Assets/Backgrounds/forest2.png")
 
