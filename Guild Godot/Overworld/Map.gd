@@ -18,7 +18,6 @@ onready var Player_pos = Vector2(816, 368)
 onready var state = {}
 
 # Shortcut variables
-var menu = load("res://Menu.tscn")
 var cara_no_mundo = load("res://Overworld/Objects/Cara_no_mundo.tscn")
 
 

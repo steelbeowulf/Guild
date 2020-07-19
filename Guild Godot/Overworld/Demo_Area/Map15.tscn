@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 Transitions = {
 14: Vector2( 580, 1050 ),
 16: Vector2( -30, 250 ),
-17: Vector2( 460, -90 )
+17: Vector2( 460, -30 )
 }
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -50,7 +50,7 @@ scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 49.5655, -106.389 )
-id = 9
+id = 5
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]

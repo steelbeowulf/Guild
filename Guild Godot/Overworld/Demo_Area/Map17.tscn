@@ -50,7 +50,6 @@ scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 49.5655, -106.389 )
-id = 9
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]

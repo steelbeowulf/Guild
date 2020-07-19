@@ -50,6 +50,6 @@ margin_bottom = 640.0
 [node name="Transition17" parent="." instance=ExtResource( 3 )]
 position = Vector2( 320, 640 )
 scale = Vector2( 5.5, 1 )
-next = 13
+next = 17
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
