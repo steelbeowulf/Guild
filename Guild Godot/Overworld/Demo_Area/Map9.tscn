@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
@@ -110,14 +110,11 @@ movement = 2
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_right = 640.0
-margin_bottom = 640.0
-__meta__ = {
-"_edit_lock_": true
-}
+margin_top = -15.0
+margin_right = 1048.0
+margin_bottom = 846.0
 
 [node name="Objects" type="Node2D" parent="."]
-
 
 [node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 519.453, 2.9901 )

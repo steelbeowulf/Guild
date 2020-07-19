@@ -116,11 +116,10 @@ movement = 4
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_right = 800.0
-margin_bottom = 1024.0
-__meta__ = {
-"_edit_lock_": true
-}
+margin_left = -6.0
+margin_top = -3.0
+margin_right = 694.0
+margin_bottom = 536.0
 
 [node name="Objects" type="Node2D" parent="."]
 

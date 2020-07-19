@@ -68,11 +68,9 @@ movement = 1
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_right = 1024.0
+margin_left = 246.0
+margin_right = 804.0
 margin_bottom = 607.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 530.39, 627.663 )
@@ -91,4 +89,3 @@ visible = false
 position = Vector2( 1053.73, -41.3535 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
-

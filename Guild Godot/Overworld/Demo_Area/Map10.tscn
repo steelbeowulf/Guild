@@ -44,13 +44,10 @@ position = Vector2( 280, 80 )
 id = 5
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_left = -526.0
-margin_top = -186.0
-margin_right = 891.0
+margin_left = -253.0
+margin_top = -151.0
+margin_right = 674.0
 margin_bottom = 640.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -68,4 +65,3 @@ next = 11
 [node name="Party" type="Node" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-

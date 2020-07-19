@@ -74,11 +74,8 @@ radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
 margin_top = -21.0
-margin_right = 1216.0
-margin_bottom = 1064.0
-__meta__ = {
-"_edit_lock_": true
-}
+margin_right = 714.0
+margin_bottom = 571.0
 
 [node name="Transition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 9.17419, 103.408 )

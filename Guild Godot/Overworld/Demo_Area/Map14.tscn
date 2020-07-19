@@ -59,4 +59,3 @@ TYPE = 1
 next = 25
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-

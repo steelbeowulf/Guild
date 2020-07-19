@@ -58,9 +58,6 @@ margin_left = -44.0
 margin_top = -63.0
 margin_right = 1229.0
 margin_bottom = 1062.0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -81,4 +78,3 @@ scale = Vector2( 8, 1 )
 next = 17
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-
