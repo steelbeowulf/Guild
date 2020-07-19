@@ -51,10 +51,10 @@ position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Limits" type="MarginContainer" parent="."]
-margin_left = 76.0
-margin_top = 41.0
-margin_right = 599.0
-margin_bottom = 640.0
+margin_left = -36.0
+margin_top = -84.0
+margin_right = 1088.0
+margin_bottom = 943.0
 
 [node name="Objects" type="Node2D" parent="."]
 
