@@ -1,0 +1,16 @@
+{
+	"ID":1,
+	"IMG":{"path": "res://Assets/Animations/ranger spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME":"Ranger Iris",
+	"DIALOGUE":[
+		"Sorry to bother you whe you're so busy with your quest...",
+		"But I'm detections a pretty strong source of corruption past this place...",
+		"It might not be as strong as the thing corrupting this place but... ",
+		"I would appreciate if you took care of it as well... If it doesn't bother you or anything of course...",
+		"As well any other of them you find..",
+		"..."
+	],
+	"PORTRAIT": "res://Assets/Portraits/ranger.png"
+}

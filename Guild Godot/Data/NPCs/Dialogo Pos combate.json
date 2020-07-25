@@ -1,0 +1,29 @@
+{
+	"ID":0,
+	"IMG":{"path": "res://Assets/Animations/ranger spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME":"aaaaaaaaaaaaaaaaaaaaaaaaa",
+	"DIALOGUE":[
+		"Juniper: These fiends... are far too strong for us.",
+		"Juniper: I'm sorry my friends, looks like not only our lives, but our beloved home will cease to be",
+		"Ren: I'll miss your weird talk man...",
+		"Iris: *sobs*",
+		"Bravo: My beautiful face... I can't die looking ugly...",
+		"Warrior: Can you stop? We don't want to kill you",
+		"Cleric: Its just a huge mistake, we're trying to save the forest, not ruin it.",
+		"Juniper: Wait, you say that you don't mean us harm?",
+		"Ren: Why didn't you say so before? We wouldn't be wasting both our times here.",
+		"Thief: But we... nevermind",
+		"Juniper: But if you indeed are not enemies, what is your purpose?",
+		"Cleric: We're on a mission to destroy whatever is causing this forest to die.",
+		"Ren: Well, if that's the case, we'll gladly help you out",
+		"Ren: ...Kinda. We're kinda bruised and tired from our little combat",
+		"Ren: Maybe not this guy. He got stamina to spare, he can help your fight no problem",
+		"Basil: ...",
+		"Ren: It's settled then, we'll open the way and he'll fight alongside you guys",
+		"Iris: ...Good luck, I'm rooting for you...",
+		"Juniper: Bring down this beast friends. The forest counts on your struggle for victory!"
+	],
+	"PORTRAIT": "res://Assets/Portraits/ranger.png"
+}

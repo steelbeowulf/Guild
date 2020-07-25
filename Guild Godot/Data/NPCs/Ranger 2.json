@@ -1,0 +1,13 @@
+{
+	"ID":0,
+	"IMG":{"path": "res://Assets/Animations/ranger spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME":"Ranger Juniper",
+	"DIALOGUE":[
+		"Here's the secret path that we mentioned. I'm sure you lot can deal with whoever is causing all of this",
+		"But please be careful my friends, the corruption will be stronger past this.",
+		"Expect even stronger enemies from now on!"
+	],
+	"PORTRAIT": "res://Assets/Portraits/ranger.png"
+}

@@ -16,6 +16,9 @@ Transitions = {
 4: Vector2( 630.515, 85.802 ),
 23: Vector2( 342.288, 90 )
 }
+Doors = {
+"Door": "Matching puzzle"
+}
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -144,4 +147,3 @@ scale = Vector2( 1, 7 )
 next = 4
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
-
