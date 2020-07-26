@@ -2,6 +2,7 @@ extends Button
 onready var id = -1
 
 func update_info(player):
+	self.show()
 	id = player.id
 	$Name.set_text(player.get_name())
 	$Level.set_text(str(player.level))

@@ -6,6 +6,7 @@ var SKILLS
 var STATUS
 var ENEMIES
 var NPCS
+var ENCOUNTERS
 
 # Global variables containing current players info (party and inventory)
 var PLAYERS
@@ -44,8 +45,6 @@ func get_area_dict():
 	area_dict["NAME"] = AREA
 	area_dict["WIN"] = WIN
 	area_dict["STATE"] = STATE
-	area_dict["MATCH"] = MATCH
-	area_dict["ROOM"] = ROOM
 	area_dict["MAP"] = MAP
 	area_dict["POSITION"] = POSITION
 	return area_dict
@@ -55,8 +54,6 @@ func get_area_dict():
 func load_area(area_dict):
 	WIN = area_dict["WIN"]
 	STATE = area_dict["STATE"]
-	MATCH = area_dict["MATCH"]
-	ROOM = area_dict["ROOM"]
 	MAP = area_dict["MAP"]
 	POSITION = parse_position(area_dict["POSITION"])
 	return area_dict["NAME"]
@@ -72,19 +69,22 @@ func parse_position(pos_str):
 	y = y.substr(1, len(y)-2)
 	return Vector2(float(x),float(y))
 
+var events = {}
 
 # Resets state to the default Demo_Area state
 # TODO: make it generic
 func reload_state():
 	WIN = false
 	STATE = []
+	events = {
+		"rangers_defeated": false, 
+		"eyeball_defeated": false, 
+		"all_eyeballs_defeated": false, 
+		"boss_defeated": false
+	}
 	for i in range(26):
 		STATE.append({})
-	MATCH = false
-	ROOM = false
 	TRANSITION = -1
-#	MAP = 10
-#	POSITION = Vector2(300, 100)#Vector2(816, 368)
 	MAP = 1
 	POSITION = Vector2(454, 446)
 
@@ -115,6 +115,7 @@ func save(slot):
 		"area" : get_area_dict(),
         "gold" : get_gold(),
         "playtime" : get_playtime(),
+		"events" : get_events()
 	}
 	savegame.open(save_path+str(slot)+"/Info.json", File.WRITE)
 	savegame.store_line(to_json(save_dict))
@@ -140,6 +141,7 @@ func save(slot):
 var AREA
 var gold
 var playtime
+var ENEMIES_IN_AREA
 
 onready var loader = get_node("/root/LOADER")
 
@@ -155,6 +157,7 @@ func load_info(save_slot):
 		var dict = parse_json(savegame.get_line())
 		gold = dict["gold"]
 		playtime = dict["playtime"]
+		events = dict["events"]
 		AREA = load_area(dict["area"])
 		savegame.close()
 
@@ -169,8 +172,12 @@ func load_game(save_slot):
 	
 	load_info(save_slot)
 	var area_info = loader.load_area_info(AREA)
+	ENEMIES_IN_AREA = area_info["ENEMIES_BY_AREA"]
 	NPCS = loader.load_npcs(area_info["NPCS"])
 	print(NPCS)
+
+	ENCOUNTERS = loader.load_encounters(area_info["ENCOUNTERS"])
+	print(ENCOUNTERS)
 
 	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
 	print(ENEMIES)
@@ -178,6 +185,16 @@ func load_game(save_slot):
 # Returns state from the current map
 func get_state():
 	return STATE[MAP]
+
+# Returns Enemies from current map
+func get_enemies():
+	var enem = []
+	var filter_array = ENEMIES_IN_AREA[MAP]
+	for i in range(1, len(ENEMIES) -1):
+		var enemy = ENEMIES[i]
+		if enemy.id in filter_array:
+			enem.append(enemy)
+	return enem
 
 # Update state on the current map
 func set_state(state_arg):
@@ -195,9 +212,19 @@ func get_area():
 func get_map():
 	return MAP
 
+func get_events():
+	return events
+
 func register_node(name, node):
 	NODES[name] = node
 
+### Events
+
+func get_event_status(id):
+	return events[id]
+
+func set_event_status(id, status):
+	events[id] = status
 
 ### Dialogue
 var caller = null
@@ -208,6 +235,14 @@ func play_dialogues(id, callback):
 	var dials = npc.get_dialogues()
 	node.set_talker(npc.get_name(), npc.get_portrait())
 	for dial in dials:
+		node.push_dialogue(dial)
+	caller = callback
+	node.start_dialogue()
+
+func play_dialogue(dialogue, callback):
+	var node = NODES["Dialogue"]
+	node.set_talker(dialogue.name, dialogue.portrait)
+	for dial in dialogue.message:
 		node.push_dialogue(dial)
 	caller = callback
 	node.start_dialogue()

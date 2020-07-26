@@ -50,7 +50,6 @@ func _process(delta):
 		queue_free()
 
 func _on_Char0_pressed():
-	print("vida anterior do curado: " +str(hp_char))
 	hp_char =  hp_char  + recoverHP
 	mp_char  =  mp_char  + recoverMP
 	if hp_char > hpmax_char:
@@ -62,8 +61,6 @@ func _on_Char0_pressed():
 		if GLOBAL.PLAYERS[i].id == current_player.id:
 			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
-	print("valor curado: " + str(recoverHP))
-	print("vida atual do curado: " +str(hp_char))
 	GLOBAL.PLAYERS[0].stats[0] = hp_char
 	GLOBAL.PLAYERS[0].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
@@ -81,7 +78,6 @@ func _on_Char1_pressed():
 		if GLOBAL.PLAYERS[i].id == current_player.id:
 			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
-	print("valor curado: " + str(recoverHP))
 	GLOBAL.PLAYERS[1].stats[0] = hp_char
 	GLOBAL.PLAYERS[1].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)
@@ -117,7 +113,6 @@ func _on_Char3_pressed():
 		if GLOBAL.PLAYERS[i].id == current_player.id:
 			GLOBAL.PLAYERS[i].id = current_player.id
 	current_player.stats[2] = spending
-	print("valor curado: " + str(recoverHP))
 	GLOBAL.PLAYERS[3].stats[0] = hp_char
 	GLOBAL.PLAYERS[3].stats[2] = mp_char
 	get_parent().get_parent().get_parent().back_to_skills(identification)

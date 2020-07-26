@@ -12,7 +12,6 @@ func enter(players):
 
 
 func _on_Player_chosen(binds):
-	print("Cliquei no player "+str(binds))
 	get_parent().get_parent().player_clicked(binds)
 
 

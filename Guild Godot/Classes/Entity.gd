@@ -98,12 +98,10 @@ func remove_status(effect):
 		self.graphics.remove_aura()
 
 func add_status(effect, atkm, turns):
-	print(effect)
 	if effect == "KO":
 		status = {}
 		dead = true
 	if GLOBAL.STATUS.has(effect):
-		print("IF")
 		self.graphics.set_aura(GLOBAL.STATUS[effect])
 	status[effect] = [turns, atkm]
 

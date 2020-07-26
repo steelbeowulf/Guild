@@ -40,6 +40,7 @@ rect_min_size = Vector2( 720, 0 )
 
 [node name="Char0" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
+visible = false
 focus_neighbour_right = NodePath("")
 focus_mode = 0
 enabled_focus_mode = 0
@@ -58,8 +59,7 @@ focus_neighbour_bottom = NodePath("../../../Char1/Lanes/Front")
 
 [node name="Char1" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
-margin_top = 194.0
-margin_bottom = 384.0
+visible = false
 focus_neighbour_top = NodePath("../Char0")
 focus_neighbour_right = NodePath("")
 focus_neighbour_bottom = NodePath("../Char2")
@@ -80,8 +80,7 @@ focus_neighbour_bottom = NodePath("../../../Char2/Lanes/Front")
 
 [node name="Char2" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
-margin_top = 388.0
-margin_bottom = 578.0
+visible = false
 focus_neighbour_top = NodePath("../Char1")
 focus_neighbour_right = NodePath("")
 focus_neighbour_bottom = NodePath("../Char3")
@@ -102,8 +101,7 @@ focus_neighbour_bottom = NodePath("../../../Char3/Lanes/Front")
 
 [node name="Char3" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
 editor/display_folded = true
-margin_top = 582.0
-margin_bottom = 772.0
+visible = false
 focus_neighbour_top = NodePath("../Char2")
 focus_neighbour_right = NodePath("")
 focus_neighbour_bottom = NodePath("../Char0")

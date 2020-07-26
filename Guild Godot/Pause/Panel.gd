@@ -18,7 +18,6 @@ func show_itens(bag):
 			e.set_focus_mode(0)
 
 func _on_Item_selected(name):
-	print("Sou o item " + name)
 	#Placeholder until we actually put item funcionality on the game
 	for i in range(len(GLOBAL.INVENTORY)):
 		if GLOBAL.INVENTORY[i].nome in name:#that doesnt work, usar mega potion ou hi-potion faz usar potion regulares as well

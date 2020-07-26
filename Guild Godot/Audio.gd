@@ -17,7 +17,7 @@ var HIT = load("res://Assets/SFX/Explosion 3 - Sound effects Pack 2.ogg")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
-'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEM':BOSS_THEME}
+'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME}
 var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT}
 
 # Base volumes

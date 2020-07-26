@@ -13,6 +13,7 @@ func _ready():
 	$MP/Fill.set_scale(Vector2(1,1))
 
 func set_name(name):
+	self.show()
 	$Name.set_text(name)
 
 func set_level(level):

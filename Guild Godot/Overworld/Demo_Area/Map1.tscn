@@ -61,12 +61,14 @@ next = 2
 
 [node name="Party" type="Node" parent="."]
 
-[node name="NPC" parent="." instance=ExtResource( 5 )]
+[node name="Signis" parent="." instance=ExtResource( 5 )]
 position = Vector2( 536.213, 222.863 )
-
-[node name="NPC3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 383.316, 147.103 )
-
-[node name="NPC2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 375.828, 372.384 )
 id = 1
+
+[node name="Signus" parent="." instance=ExtResource( 5 )]
+position = Vector2( 383.316, 147.103 )
+id = 2
+
+[node name="Sign" parent="." instance=ExtResource( 5 )]
+position = Vector2( 375.828, 372.384 )
+

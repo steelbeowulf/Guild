@@ -4,3 +4,4 @@
 
 [node name="Enemy" type="Node"]
 script = ExtResource( 1 )
+

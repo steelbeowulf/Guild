@@ -41,7 +41,7 @@ func _ready():
 		get_tree().change_scene("res://Menu/Victory.tscn")
 	
 	# TODO: Limit Enemies to enemies on this area
-	Enemies = GLOBAL.ENEMIES
+	Enemies = GLOBAL.get_enemies()
 	Player_pos = GLOBAL.POSITION
 	
 	# Gets current map state from global area state
@@ -53,7 +53,6 @@ func _ready():
 		pos = GLOBAL.POSITION
 	if GLOBAL.TRANSITION != -1:
 		pos = Transitions[int(GLOBAL.TRANSITION)]
-		print (pos)
 		GLOBAL.TRANSITION = -1
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
