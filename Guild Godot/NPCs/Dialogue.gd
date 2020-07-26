@@ -33,7 +33,8 @@ func start_dialogue():
 
 
 func push_dialogue(text):
-	var num_lines = max(len(text)/max_cols, 1) 
+	var num_lines = max(len(text)/max_cols + 1, 1)
+	print(num_lines) 
 	var new_text = ""
 	var current_line = 0
 	var words = text.split(" ")
@@ -53,15 +54,16 @@ func push_dialogue(text):
 			new_text = ""
 
 
-func set_talker(name, sprite):
+func set_talker(name, portrait):
 	$Id.set_text(name)
-	$Sprite.set_texture(load(sprite))
+	$Sprite.set_texture(load(portrait.sprite))
+	$Sprite.set_scale(Vector2(portrait.scale[0], portrait.scale[1]))
 
 
 func set_dialogue(text):
 	dialogue = text
 	if dialogue:
-		var speed = len(dialogue)/TEXT.get_speed()
+		var speed = max(len(dialogue)/TEXT.get_speed(), 1.0)
 		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
 		$Tween.set_speed_scale(1.0)
 		$Tween.start()

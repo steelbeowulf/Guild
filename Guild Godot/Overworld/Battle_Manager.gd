@@ -90,10 +90,15 @@ func generate_enemies():
 	
 	# Checks if it's the demo boss
 	# TODO: Make this not hardcoded
-	if Encounter and Encounter[0] == 9:
-		total = 0
-		GLOBAL.WIN = true
-	
+	if Encounter:
+		if Encounter[0] == 11:
+			total = 0
+			GLOBAL.WIN = true
+		elif Encounter[0] == 9:
+			total = 4
+		elif Encounter[0] == 10:
+			total = 0
+		
 	# Sets enemies on the encounter as dead on the map
 	# regardless if player wins (if they lose, it's a game over)
 	for k in Kill:
@@ -105,8 +110,8 @@ func generate_enemies():
 	Encounter.shuffle()
 	while current <= total:
 		if Encounter:
-			newEnemy.append(Enemies[Encounter[0]]._duplicate())
-			Encounter.pop_front()
+			newEnemy.append(GLOBAL.ENEMIES[Encounter[0]]._duplicate())
+			print(GLOBAL.ENEMIES[Encounter.pop_front()].get_name())
 		else:
 			var enemy_id = 1 + (randi() % (len(Enemies)-2))
 			newEnemy.append(Enemies[enemy_id]._duplicate())

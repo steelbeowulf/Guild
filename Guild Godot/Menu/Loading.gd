@@ -15,7 +15,7 @@ func _ready(): # game requests to switch to this scene
 	var path = GLOBAL.NEXT_SCENE
 	loader = ResourceLoader.load_interactive(path)
 	print("LOADER")
-	print(loader)
+	#print(loader)
 	if loader == null: # check for errors
 		print("LOADER - deu ruim")
 		return
@@ -41,7 +41,7 @@ func _physics_process(delta):
 		var err = loader.poll()
 
 		if err == ERR_FILE_EOF: # load finished
-			print("Loading finished!")
+			#print("Loading finished!")
 			update_progress(100)
 			$Panel/Prompt.show()
 			resource = loader.get_resource()
@@ -51,7 +51,7 @@ func _physics_process(delta):
 			var progress = (float(loader.get_stage()) / loader.get_stage_count()) * 100
 			update_progress(progress)
 		else: # error during loading
-			print("LOADER - deu ruim")
+			#print("LOADER - deu ruim")
 			loader = null
 			break
 

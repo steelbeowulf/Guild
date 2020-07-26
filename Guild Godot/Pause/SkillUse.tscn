@@ -37,22 +37,20 @@ margin_bottom = 771.0
 rect_min_size = Vector2( 720, 0 )
 
 [node name="Char0" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
+visible = false
 
 [node name="Char1" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
-margin_top = 194.0
-margin_bottom = 384.0
+visible = false
 focus_neighbour_top = NodePath("../Char0")
 focus_neighbour_bottom = NodePath("../Char2")
 
 [node name="Char2" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
-margin_top = 388.0
-margin_bottom = 578.0
+visible = false
 focus_neighbour_top = NodePath("../Char1")
 focus_neighbour_bottom = NodePath("../Char3")
 
 [node name="Char3" parent="Panel/All/Left/Chars" instance=ExtResource( 3 )]
-margin_top = 582.0
-margin_bottom = 772.0
+visible = false
 focus_neighbour_top = NodePath("../Char2")
 focus_neighbour_bottom = NodePath("../Char0")
 

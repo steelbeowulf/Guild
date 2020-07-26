@@ -32,9 +32,6 @@ func remove_aura():
 		anim.material.set_shader_param("outline_color", "")
 
 func set_spell(sprite, v, k):
-	print("setting spell")
-	print(v)
-	print(k)
 	var img = sprite['path']
 	var vf = sprite['vframes']
 	var hf = sprite['hframes']
@@ -86,7 +83,6 @@ func set_animations(sprite, animations, data_arg):
 
 func play(name, options=[]):
 	print("[ENTITY BATTLE] playing animation "+name)
-	print(options)
 	var node = $Animations
 	if name == 'Damage':
 		take_damage(options, 0)
@@ -96,8 +92,6 @@ func play(name, options=[]):
 	else:
 		for c in $Animations.get_children():
 			c.hide()
-	print(name)
-	print(node.get_name())
 	node.get_node(name).show()
 	node.get_node(name).play(true)
 

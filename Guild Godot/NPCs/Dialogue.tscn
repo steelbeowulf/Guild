@@ -46,8 +46,7 @@ margin_bottom = 196.0
 custom_styles/panel = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 138.18, 103.062 )
-scale = Vector2( 10.8689, 11.2856 )
+position = Vector2( 135, 100 )
 texture = ExtResource( 3 )
 
 [node name="Id" type="Label" parent="."]

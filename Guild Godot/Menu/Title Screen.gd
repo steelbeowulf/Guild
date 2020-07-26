@@ -23,8 +23,8 @@ func _on_Load_pressed():
 
 func _on_Slot_chosen(slot):
 	GLOBAL.load_game(slot)
-	get_tree().change_scene("res://Root.tscn")
-	#get_tree().change_scene("res://Menu/Loading.tscn")
+	#get_tree().change_scene("res://Root.tscn")
+	get_tree().change_scene("res://Menu/Loading.tscn")
 
 
 func _process(delta):

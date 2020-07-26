@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=5]
 
 [node name="Map11" type="Node2D"]
 script = ExtResource( 1 )
@@ -60,3 +61,8 @@ next = 25
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="Cara" parent="." instance=ExtResource( 5 )]
+position = Vector2( 173.957, 360.869 )
+id = 4
+

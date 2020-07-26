@@ -146,6 +146,7 @@ rect_scale = Vector2( 1.2, 1 )
 alignment = 1
 
 [node name="P0" parent="Info" instance=ExtResource( 12 )]
+visible = false
 margin_top = 2.0
 margin_right = 676.0
 margin_bottom = 32.0
@@ -153,23 +154,26 @@ rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
 [node name="P1" parent="Info" instance=ExtResource( 12 )]
+visible = false
+margin_top = 19.0
+margin_right = 676.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 664, 30 )
+alignment = 2
+
+[node name="P2" parent="Info" instance=ExtResource( 12 )]
+visible = false
 margin_top = 36.0
 margin_right = 676.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
-[node name="P2" parent="Info" instance=ExtResource( 12 )]
-margin_top = 70.0
-margin_right = 676.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 664, 30 )
-alignment = 2
-
 [node name="P3" parent="Info" instance=ExtResource( 12 )]
-margin_top = 104.0
+visible = false
+margin_top = 53.0
 margin_right = 676.0
-margin_bottom = 134.0
+margin_bottom = 83.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
 
