@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Underground Background/RockBG.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Underground Background/bones.png" type="Texture" id=4]
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Underground Background/bones2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Underground Background/skeleton (1).png" type="Texture" id=8]
+[ext_resource path="res://Assets/Underground Background/skeleton2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Underground Background/skeleton.png" type="Texture" id=10]
 
 [node name="Map25" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,36 +45,73 @@ tile_data = PoolIntArray( -65518, 10, 0, -65514, 10, 0, 18, 10, 0, 22, 10, 0, 65
 [node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
-position = Vector2( 528.874, 514.232 )
+position = Vector2( 532.025, 510.451 )
 scale = Vector2( 1.2, 1.2 )
+
+[node name="RockBG" type="Sprite" parent="."]
+position = Vector2( 668.385, 452.224 )
+scale = Vector2( 5.57202, 5.6607 )
+z_index = -7
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bones" type="Sprite" parent="."]
+position = Vector2( 464.18, 591.055 )
+scale = Vector2( 0.814143, 0.630483 )
+texture = ExtResource( 4 )
 
 [node name="Limits" type="MarginContainer" parent="."]
 margin_right = 1330.0
 margin_bottom = 912.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition11" parent="." instance=ExtResource( 3 )]
+[node name="Transition11" parent="." instance=ExtResource( 5 )]
 position = Vector2( 675, 890 )
 scale = Vector2( 6, 1 )
 next = 11
 
-[node name="Transition14" parent="." instance=ExtResource( 3 )]
+[node name="Transition14" parent="." instance=ExtResource( 5 )]
 position = Vector2( 670, 0 )
 scale = Vector2( 6, 1 )
 next = 14
 
-[node name="Transition13" parent="." instance=ExtResource( 3 )]
+[node name="Transition13" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1300, 350 )
 rotation = 1.54107
 scale = Vector2( 6, 1 )
 next = 13
 
-[node name="Transition12" parent="." instance=ExtResource( 3 )]
+[node name="Transition12" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 350 )
 rotation = 1.54107
 scale = Vector2( 6, 1 )
 next = 12
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 
+[node name="bones2" type="Sprite" parent="."]
+position = Vector2( 1128.77, 652.211 )
+scale = Vector2( 1.59226, 1.53586 )
+texture = ExtResource( 7 )
+
+[node name="skeleton (1)" type="Sprite" parent="."]
+position = Vector2( 170.85, 686.23 )
+texture = ExtResource( 8 )
+
+[node name="skeleton2" type="Sprite" parent="skeleton (1)"]
+position = Vector2( 237.224, 62.9325 )
+texture = ExtResource( 9 )
+
+[node name="skeleton" type="Sprite" parent="skeleton (1)/skeleton2"]
+position = Vector2( 561.778, -599.603 )
+texture = ExtResource( 10 )
+
+[node name="bones2" type="Sprite" parent="skeleton (1)/skeleton2/skeleton"]
+position = Vector2( -637.291, 6.47491 )
+texture = ExtResource( 7 )
