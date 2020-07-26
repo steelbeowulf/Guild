@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TILEBONITO.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Treasure.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
 
 [node name="Map22" type="Node2D"]
 script = ExtResource( 1 )
@@ -46,6 +47,10 @@ item_quantity = 1
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
+[node name="Boss" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( -124.53, -174.343 )
+id = 11
+
 [node name="Limits" type="MarginContainer" parent="."]
 margin_left = -183.0
 margin_top = -62.0
@@ -54,10 +59,10 @@ margin_bottom = 646.0
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition21" parent="." instance=ExtResource( 4 )]
+[node name="Transition21" parent="." instance=ExtResource( 5 )]
 position = Vector2( 365, 640 )
 scale = Vector2( 6, 1 )
 next = 21
 
-[node name="HUD" parent="." instance=ExtResource( 5 )]
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 

@@ -38,7 +38,7 @@ tile_data = PoolIntArray( -65537, 10, 0, -131072, 10, 0, -131071, 10, 0, -131070
 [node name="Treasure" type="Node2D" parent="."]
 
 [node name="Chest1" parent="Treasure" instance=ExtResource( 3 )]
-position = Vector2( 204.997, 910.211 )
+position = Vector2( 612.365, 585.759 )
 item_id = 7
 item_quantity = 1
 

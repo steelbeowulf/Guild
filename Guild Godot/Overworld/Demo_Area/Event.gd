@@ -34,7 +34,7 @@ func _on_AreaEvent_body_entered(body):
 		player.stop.push_back(0)
 		if GLOBAL.get_event_status("rangers_defeated"):
 			start_dialogue(1)
-		else:	
+		else:
 			start_dialogue(0)
 	elif len(GLOBAL.PLAYERS) > 3:
 		get_parent().get_node("Bravo").show()

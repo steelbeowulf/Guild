@@ -28,6 +28,8 @@ func _ready():
 				  Vector2(SPEED, 0), Vector2(0, SPEED)]
 	base_pos = self.get_global_position()
 	map = get_parent().get_parent()
+	if id == 11:
+		$AnimatedSprite.scale = Vector2(3,3)
 	$AnimatedSprite.play(str(id))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

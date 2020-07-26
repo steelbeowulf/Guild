@@ -78,8 +78,7 @@ func reload_state():
 	STATE = []
 	events = {
 		"rangers_defeated": false, 
-		"eyeball_defeated": false, 
-		"all_eyeballs_defeated": false, 
+		"eyeballs_defeated": 0, 
 		"boss_defeated": false
 	}
 	for i in range(26):

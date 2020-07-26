@@ -92,11 +92,16 @@ func generate_enemies():
 	# TODO: Make this not hardcoded
 	if Encounter:
 		if Encounter[0] == 11:
+			var max_hp = GLOBAL.ENEMIES[11].get_max_health()
+			var num_defeated = GLOBAL.get_event_status("eyeballs_defeated")
+			GLOBAL.ENEMIES[11].set_stats(0, max_hp - max_hp*0.1*num_defeated) 
 			total = 0
 			GLOBAL.WIN = true
 		elif Encounter[0] == 9:
 			total = 4
 		elif Encounter[0] == 10:
+			var num_defeated = GLOBAL.get_event_status("eyeballs_defeated")
+			GLOBAL.set_event_status("eyeballs_defeated", num_defeated+1)
 			total = 0
 		
 	# Sets enemies on the encounter as dead on the map
