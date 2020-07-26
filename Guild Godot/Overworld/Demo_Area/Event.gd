@@ -30,11 +30,11 @@ func join_ranger():
 
 func _on_AreaEvent_body_entered(body):
 	if body.is_in_group("player") and len(GLOBAL.PLAYERS) < 4: 
+		player = body
+		player.stop.push_back(0)
 		if GLOBAL.get_event_status("rangers_defeated"):
 			start_dialogue(1)
-		else:
-			player = body
-			player.stop.push_back(0)
+		else:	
 			start_dialogue(0)
 	elif len(GLOBAL.PLAYERS) > 3:
 		get_parent().get_node("Bravo").show()
