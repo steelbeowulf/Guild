@@ -19,10 +19,10 @@ scale = Vector2( 0.93428, 1.21947 )
 texture = ExtResource( 2 )
 
 [node name="Title" type="Button" parent="."]
-margin_left = 4.99673
-margin_top = 360.786
-margin_right = 494.997
-margin_bottom = 409.786
+margin_left = 11.9595
+margin_top = 522.671
+margin_right = 501.96
+margin_bottom = 571.671
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.996078, 0, 0, 1 )
@@ -30,10 +30,10 @@ text = "Return to the Title Screen"
 flat = true
 
 [node name="More Credits" type="Button" parent="."]
-margin_left = -102.269
-margin_top = 308.768
-margin_right = 387.731
-margin_bottom = 357.768
+margin_left = 4.49389
+margin_top = 475.45
+margin_right = 494.494
+margin_bottom = 524.45
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.996078, 0, 0, 1 )
@@ -44,6 +44,5 @@ flat = true
 stream = ExtResource( 4 )
 volume_db = -17.154
 autoplay = true
-
 [connection signal="pressed" from="Title" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="More Credits" to="." method="_on_More_Credits_pressed"]
