@@ -21,6 +21,7 @@ func _on_Encounter_Ended():
 		get_parent().get_node("Enemies/Ranger1")._on_Battle_body_entered(player)
 	else:
 		join_ranger()
+		player.stop = []
 		get_parent().get_node("Bravo").show()
 
 func join_ranger():
@@ -37,4 +38,5 @@ func _on_AreaEvent_body_entered(body):
 		else:
 			start_dialogue(0)
 	elif len(GLOBAL.PLAYERS) > 3:
+		player.stop = []
 		get_parent().get_node("Bravo").show()

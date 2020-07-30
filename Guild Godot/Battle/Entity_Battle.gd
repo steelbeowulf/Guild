@@ -31,6 +31,9 @@ func remove_aura():
 		anim.material.set_shader_param("outline_width", 0)
 		anim.material.set_shader_param("outline_color", "")
 
+func revive():
+	$Animations.get_node("idle").play()
+
 func set_spell(sprite, v, k):
 	var img = sprite['path']
 	var vf = sprite['vframes']
@@ -92,7 +95,7 @@ func play(name, options=[]):
 	else:
 		for c in $Animations.get_children():
 			c.hide()
-	node.get_node(name).show()
+ 	node.get_node(name).show()
 	node.get_node(name).play(true)
 
 func turn(keep=false):
@@ -117,21 +120,6 @@ func change_lane(lane):
 func update_bounds(bounds):
 	self.bounds = bounds
 	
-func display_hate(value, id):
-	pass
-#	if value == bounds[id]:
-#		$ProgressBar.tint_progress = Color(255, 0, 0)
-#	elif value > bounds[id] - 100:
-#		$ProgressBar.tint_progress = Color(255, 255, 0)
-#	else:
-#		$ProgressBar.tint_progress = Color(0, 40, 255)
-#	$ProgressBar.value = value
-#	$ProgressBar.max_value = bounds[id]
-#	$ProgressBar.show()
-	
-func hide_hate():
-	$ProgressBar.hide()
-
 func take_damage(value, type):
 	var bad_heal = (str(value) == "-0")
 	if type == 0:

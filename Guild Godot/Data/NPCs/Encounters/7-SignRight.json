@@ -1,0 +1,11 @@
+{
+	"ID":0,
+	"IMG":{"path": "res://Assets/signs.png",
+		   "vframes": 5, "hframes":3, "scale":[2,2]},
+	"ANIM":{"idle": [true, "3"]},
+	"NAME":"Sign",
+    "DIALOGUE":[
+        "Forest Maze"
+    ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/sign.png", "scale":[4,4]}
+}

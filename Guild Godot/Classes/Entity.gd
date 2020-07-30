@@ -91,7 +91,7 @@ func remove_status(effect):
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
 	elif effect == "KO":
 		dead = false
-		self.graphics.revive()
+		#self.graphics.revive()
 	if status.has(effect):
 		status.erase(effect)
 	if GLOBAL.STATUS.has(effect):

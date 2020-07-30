@@ -22,7 +22,6 @@ margin_bottom = 265.0
 rect_scale = Vector2( 1.2, 2 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
-text = "BEEFY BOY SUBIU DE NÍVEL!"
 uppercase = true
 
 [node name="Timer" type="Timer" parent="."]

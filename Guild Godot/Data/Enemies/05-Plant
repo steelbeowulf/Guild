@@ -8,7 +8,7 @@
 			"attack": [false, "0-7"],
 			"death":[false, "8-15"],
 			"dead":[true, "15"],
-			"skill": [false, "0-7"],},
+			"skill": [false, "0-7"]},
 	"HP":150,
 	"HP_MAX":150,
 	"MP":150,

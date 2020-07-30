@@ -78,7 +78,7 @@ func _ready():
 # TODO: make check_doors be event driven
 func _physics_process(delta):
 	GLOBAL.POSITION = $Party.get_child(0).get_global_position()
-	check_doors()
+	#check_doors()
 
 
 ###### STATE FUNCTIONS #####

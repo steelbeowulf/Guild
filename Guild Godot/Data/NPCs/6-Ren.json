@@ -3,7 +3,7 @@
 	"IMG":{"path": "res://Assets/Animations/ranger spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-19"]},
-	"NAME": "Iris",
+	"NAME": "Ren",
     "DIALOGUE":[
         "Hey, you made it this far! Great!",
         "Past this point a terrible creature stands tall. Disgusting bastard ruining our home",
