@@ -55,23 +55,24 @@ position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( -338.741, -86.5377 )
+position = Vector2( -265.875, -8.4451 )
 scale = Vector2( 0.5, 0.5 )
 id = 7
-movement = 1
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( -338.495, -140.432 )
+position = Vector2( -272.079, -197.176 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
-movement = 1
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
 margin_top = -21.0
 margin_right = 850.0
 margin_bottom = 571.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Transition" parent="." instance=ExtResource( 4 )]
 position = Vector2( -96.3711, 100.413 )
@@ -92,4 +93,3 @@ next = 24
 visible = false
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-

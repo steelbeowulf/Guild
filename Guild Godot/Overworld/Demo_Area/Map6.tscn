@@ -69,4 +69,3 @@ position = Vector2( 514.177, 472.625 )
 next = 7
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-
