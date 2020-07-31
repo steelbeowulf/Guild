@@ -51,7 +51,7 @@ func set_spell(sprite, v, k):
 	animation.fps = 10
 	#animation.speed = BATTLE_MANAGER.animation_speed
 	animation.playing = false
-	animation.hide()
+	#animation.hide()
 	animation.connect('animation_finished', self, "_on_Spell_animation_finished")
 	$Spells.add_child(animation)
 
