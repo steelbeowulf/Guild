@@ -39,48 +39,47 @@ tile_data = PoolIntArray( -65537, 9, 0, -131072, 9, 0, -131071, 9, 0, -131070, 9
 scale = Vector2( 0.85, 0.85 )
 
 [node name="Enemies" type="Node2D" parent="."]
-editor/display_folded = true
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -402.864, -79.8274 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 6
 movement = 1
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -345.576, -138.671 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 2
 movement = 1
 radius = 100.0
 
 [node name="Borboleta3" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( -70.3024, 64.6565 )
+position = Vector2( -70.3024, 63.2646 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 2
 radius = 100.0
 
 [node name="Borboleta4" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 85.776, -96.1308 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 6
 movement = 1
 radius = 100.0
 
 [node name="Borboleta5" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 374.157, 213.807 )
+position = Vector2( 373.134, 213.807 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 7
 movement = 1
 radius = 100.0
 
 [node name="Borboleta6" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 228.396, -172.926 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 7
 movement = 3
 radius = 100.0
 
@@ -108,6 +107,9 @@ radius = 100.0
 margin_top = 9.0
 margin_right = 1028.0
 margin_bottom = 819.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -122,4 +124,3 @@ scale = Vector2( 6, 1 )
 next = 7
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-

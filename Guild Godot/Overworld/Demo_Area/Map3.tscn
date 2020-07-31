@@ -51,35 +51,35 @@ scale = Vector2( 1.2, 1.2 )
 position = Vector2( 30.6492, -158.704 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
-id = 4
+id = 8
 movement = 2
 radius = 100.0
 
 [node name="Borboleta7" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -279.406, -212.162 )
 scale = Vector2( 0.5, 0.5 )
-id = 4
+id = 2
 movement = 4
 radius = 100.0
 
 [node name="Borboleta8" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( -398.956, -168.424 )
+position = Vector2( -290.93, -168.424 )
 scale = Vector2( 0.5, 0.5 )
-id = 4
+id = 6
 movement = 4
 radius = 100.0
 
 [node name="Borboleta9" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( -150.135, -395.862 )
+position = Vector2( -121.244, -392.094 )
 scale = Vector2( 0.5, 0.5 )
-id = 4
+id = 7
 movement = 1
 radius = 100.0
 
 [node name="Borboleta10" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 75.0588, -355.044 )
 scale = Vector2( 0.5, 0.5 )
-id = 4
+id = 2
 movement = 3
 radius = 100.0
 
@@ -110,4 +110,3 @@ scale = Vector2( 1, 7 )
 next = 4
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-

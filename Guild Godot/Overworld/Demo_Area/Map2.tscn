@@ -54,9 +54,9 @@ movement = 2
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( -324.168, -126.331 )
+position = Vector2( 91.6663, -106.331 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 2
 movement = 1
 radius = 100.0
 
@@ -82,4 +82,3 @@ next = 3
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-
