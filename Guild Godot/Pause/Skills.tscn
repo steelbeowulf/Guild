@@ -306,81 +306,30 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="SkillSlot13" type="Button" parent="Panel/HBoxContainer/Skills" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="SkillSlot14" type="Button" parent="Panel/HBoxContainer/Skills" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="SkillSlot15" type="Button" parent="Panel/HBoxContainer/Skills" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="SkillSlot16" type="Button" parent="Panel/HBoxContainer/Skills" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
 [connection signal="pressed" from="Panel/HBoxContainer/Options/SkillType1" to="." method="_on_Skill_Type_1_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot1" to="Panel/HBoxContainer/Skills/SkillSlot1" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot1" to="Panel/HBoxContainer/Skills/SkillSlot1" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot2" to="Panel/HBoxContainer/Skills/SkillSlot2" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot2" to="Panel/HBoxContainer/Skills/SkillSlot2" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot3" to="Panel/HBoxContainer/Skills/SkillSlot3" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot3" to="Panel/HBoxContainer/Skills/SkillSlot3" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot4" to="Panel/HBoxContainer/Skills/SkillSlot4" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot4" to="Panel/HBoxContainer/Skills/SkillSlot4" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot5" to="Panel/HBoxContainer/Skills/SkillSlot5" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot5" to="Panel/HBoxContainer/Skills/SkillSlot5" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot6" to="Panel/HBoxContainer/Skills/SkillSlot6" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot6" to="Panel/HBoxContainer/Skills/SkillSlot6" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot7" to="Panel/HBoxContainer/Skills/SkillSlot7" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot7" to="Panel/HBoxContainer/Skills/SkillSlot7" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot8" to="Panel/HBoxContainer/Skills/SkillSlot8" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot8" to="Panel/HBoxContainer/Skills/SkillSlot8" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot9" to="Panel/HBoxContainer/Skills/SkillSlot9" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot9" to="Panel/HBoxContainer/Skills/SkillSlot9" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot10" to="Panel/HBoxContainer/Skills/SkillSlot10" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot10" to="Panel/HBoxContainer/Skills/SkillSlot10" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot11" to="Panel/HBoxContainer/Skills/SkillSlot11" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot11" to="Panel/HBoxContainer/Skills/SkillSlot11" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot12" to="Panel/HBoxContainer/Skills/SkillSlot12" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot12" to="Panel/HBoxContainer/Skills/SkillSlot12" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot13" to="Panel/HBoxContainer/Skills/SkillSlot13" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot14" to="Panel/HBoxContainer/Skills/SkillSlot14" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot15" to="Panel/HBoxContainer/Skills/SkillSlot15" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot16" to="Panel/HBoxContainer/Skills/SkillSlot16" method="_on_ItemSlot0_pressed"]

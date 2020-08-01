@@ -238,13 +238,14 @@ radius = 13.7987
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 
-[node name="Monstro_no_mundo" type="KinematicBody2D"]
+[node name="Monstro_no_mundo" type="KinematicBody2D" groups=[
+"enemy",
+]]
 scale = Vector2( 0.85, 0.85 )
 script = ExtResource( 1 )
 id = 1
 
 [node name="Animations" type="Node2D" parent="."]
-scale = Vector2( 1, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
@@ -271,10 +272,6 @@ scale = Vector2( 1.5, 1.5 )
 position = Vector2( 0, 1 )
 shape = SubResource( 2 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-
 [connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
 [connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]
 [connection signal="body_entered" from="Battle" to="." method="_on_Battle_body_entered"]
-[connection signal="viewport_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_entered"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

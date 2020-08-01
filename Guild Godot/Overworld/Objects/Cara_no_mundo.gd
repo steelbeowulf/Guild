@@ -102,3 +102,16 @@ func _physics_process(delta):
 # Returns direction player is facing
 func dir():
 	return str($Head.rotation_degrees)
+
+
+func _on_Battle_body_entered(body):
+	print("BODY ENTERED")
+	print(body)
+	if body.is_in_group("enemy"):
+		print("ENEMY")
+		body.in_encounter()
+
+
+func _on_Battle_body_exited(body):
+	if body.is_in_group("enemy"):
+		body.off_encounter()

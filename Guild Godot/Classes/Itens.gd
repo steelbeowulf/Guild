@@ -29,3 +29,12 @@ func get_type():
 
 func get_cost():
 	return quantity
+
+func get_name():
+	return nome
+
+func get_effects():
+	return effect
+
+func get_status():
+	return status

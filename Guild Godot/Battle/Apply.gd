@@ -43,8 +43,6 @@ func apply_effect(who, effect, target, t_id):
 				finalval = valmax
 				ret = -(valmax - target.get_health())
 		elif stat == MP:
-			
-
 			valmax = target.get_stats(MP_MAX)
 			tipo = 1
 			ret = -value
@@ -57,7 +55,6 @@ func apply_effect(who, effect, target, t_id):
 		if target.get_health() > 0.2*target.get_max_health():
 			target.remove_status("HP_CRITICAL")
 	
-
 	return [ret, tipo]
 
 func apply_status(status, target, attacker):

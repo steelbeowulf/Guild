@@ -1,15 +1,15 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Overworld/Objects/Cara_no_mundo.gd" type="Script" id=1]
 [ext_resource path="res://Assets/walk_up_01.png" type="Texture" id=2]
 [ext_resource path="res://Assets/walk_up_02.png" type="Texture" id=3]
 [ext_resource path="res://Assets/walk_up_03.png" type="Texture" id=4]
-[ext_resource path="res://Assets/walk_right_01.png" type="Texture" id=5]
-[ext_resource path="res://Assets/walk_right_02.png" type="Texture" id=6]
-[ext_resource path="res://Assets/walk_right_03.png" type="Texture" id=7]
-[ext_resource path="res://Assets/walk_down_01.png" type="Texture" id=8]
-[ext_resource path="res://Assets/walk_down_02.png" type="Texture" id=9]
-[ext_resource path="res://Assets/walk_down_03.png" type="Texture" id=10]
+[ext_resource path="res://Assets/walk_down_01.png" type="Texture" id=5]
+[ext_resource path="res://Assets/walk_down_02.png" type="Texture" id=6]
+[ext_resource path="res://Assets/walk_down_03.png" type="Texture" id=7]
+[ext_resource path="res://Assets/walk_right_01.png" type="Texture" id=8]
+[ext_resource path="res://Assets/walk_right_02.png" type="Texture" id=9]
+[ext_resource path="res://Assets/walk_right_03.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -20,12 +20,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "walk_right",
+"name": "walk_down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "walk_right",
 "speed": 5.0
 } ]
 
@@ -34,6 +34,9 @@ extents = Vector2( 6.40801, 7.50632 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 0.325039, 1.43955 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 92.1065
 
 [node name="Cara" type="KinematicBody2D" groups=[
 "player",
@@ -75,3 +78,10 @@ shape = SubResource( 3 )
 enabled = true
 cast_to = Vector2( 0, 8 )
 
+[node name="Battle" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Battle"]
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="Battle" to="." method="_on_Battle_body_entered"]
+[connection signal="body_exited" from="Battle" to="." method="_on_Battle_body_exited"]

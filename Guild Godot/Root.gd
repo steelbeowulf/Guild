@@ -163,12 +163,12 @@ func use_item(item):
 	get_node("Menu_Area/SubMenus/ItemUse").enter(item)
 
 # Opens the use skill submenu
-func use_skill(name, playerid):
+func use_skill(skill, player):
 	get_node("Menu_Area/SubMenus/Skills").hide()
 	get_node("Menu_Area/SubMenus").add_child(use_skills.instance())
 	get_node("Menu_Area/SubMenus/SkillUse").show()
 	get_node("Menu_Area/SubMenus/SkillUse").give_focus()
-	get_node("Menu_Area/SubMenus/SkillUse").enter(name, playerid)
+	get_node("Menu_Area/SubMenus/SkillUse").enter(skill, player)
 
 # Transitions from current area to next area
 func transition(next, fake=false):

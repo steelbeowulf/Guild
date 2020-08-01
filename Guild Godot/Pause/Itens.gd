@@ -1,11 +1,14 @@
 extends Control
-var x = 0
+var item = null
 onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
 
 func _ready():
 	give_focus()
-	for c in $Panel/HBoxContainer/Itens.get_children():
-		c.connect("target_picked", self, "_on_Item_selected")
+	var itemNodes = $Panel/HBoxContainer/Itens.get_children()
+	for i in range(len(itemNodes)):
+		var c = itemNodes[i]
+		c.connect("target_picked", self, "_on_Item_selected", [i])
+		c.connect("target_selected", self, "_on_Item_hover", [i])
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 	show_itens(GLOBAL.INVENTORY)
 
@@ -30,13 +33,27 @@ func update_itens(bag):
 		if bag[i].quantity == 0:
 			node.hide()
 
-func _on_Item_selected(name):
-	var namearray = name.split(" x ", true, 1)
-	var nome = namearray[0]
-	use_item(nome)
+func _on_Item_selected(id):
+	item = GLOBAL.INVENTORY[id]
+	var nome = item.get_name()
+	print("SELECTED "+str(nome))
+	#set_description(item)
+	use_item(item)
 
-func use_item(namex):
-	get_parent().get_parent().get_parent().use_item(namex)
+func _on_Item_hover(id):
+	item = GLOBAL.INVENTORY[id]
+	var nome = item.get_name()
+	print("SELECTED "+str(nome))
+	set_description(item)
+
+func set_description(item):
+	print("Set description")
+	#print(item.get_name())
+	var description = "  "+item.get_name()+"\n  Type: "+item.get_type()+"\n  Targets: "+item.get_target()
+	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
+
+func use_item(item):
+	get_parent().get_parent().get_parent().use_item(item)
 
 func _on_Use_pressed():
 	for e in $Panel/HBoxContainer/Options.get_children():
@@ -44,8 +61,6 @@ func _on_Use_pressed():
 	for e in $Panel/HBoxContainer/Itens.get_children():
 		e.set_focus_mode(2)
 	location = "ITENS"
-	
-	
 	get_node("Panel/HBoxContainer/Itens/ItemSlot0").grab_focus()
 
 func _process(delta):

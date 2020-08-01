@@ -15,6 +15,7 @@ var INVENTORY
 var NODES = {}
 
 var entering_battle = false
+var IN_BATTLE = false
 
 # State variables for the Demo_area
 # TODO: make it not hardcoded and generic

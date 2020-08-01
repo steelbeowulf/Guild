@@ -108,6 +108,7 @@ func update_objects_position():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
 	for e in get_node("Enemies").get_children():
 		if e.dead:
+			print("[MAP] Killing "+e.get_name())
 			save_state("ENEMY_KILL", e.get_name())
 
 

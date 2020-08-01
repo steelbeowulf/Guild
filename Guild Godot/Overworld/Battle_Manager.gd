@@ -72,6 +72,9 @@ func get_speed_opts():
 # Updates the Encounter and Kill variables based on 
 # enemy visibility
 func _encounter_management(value, id, name):
+	if GLOBAL.entering_battle:
+		return
+	print("[BM] Encounter Management "+str(value)+", "+name)
 	if value:
 		Encounter.append(id)
 		Kill.append(name)
@@ -107,18 +110,26 @@ func generate_enemies():
 	# Sets enemies on the encounter as dead on the map
 	# regardless if player wins (if they lose, it's a game over)
 	for k in Kill:
+		print("[BM] "+str(k)+" is going to die")
 		Map.get_node("Enemies/"+str(k)).dead = true
+	
+	Map.update_objects_position()
+	Kill = []
+	Encounter = []
 	
 	# Fills the enemy list from the encounter list (monsters the player
 	# see on the battlefield) and generates random ones if there's not enough
 	var current = 0
+	print("[BM] Creating encounter")
 	Encounter.shuffle()
 	while current <= total:
 		if Encounter:
+			print("OLD: "+GLOBAL.ENEMIES[Encounter[0]].get_name())
 			newEnemy.append(GLOBAL.ENEMIES[Encounter[0]]._duplicate())
 			print(GLOBAL.ENEMIES[Encounter.pop_front()].get_name())
 		else:
 			var enemy_id = 1 + (randi() % (len(Enemies)-2))
+			print("NEW: "+Enemies[enemy_id].get_name())
 			newEnemy.append(Enemies[enemy_id]._duplicate())
 		current+=1
 
@@ -138,6 +149,7 @@ func initiate_battle():
 
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(Players, Enemies, Inventory):
+	GLOBAL.IN_BATTLE = false
 	var total_exp = 0
 	
 	# Calculates total EXP based on the enemies killed
