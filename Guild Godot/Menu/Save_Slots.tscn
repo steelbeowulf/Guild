@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Menu_Info_Dark.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Menu_Font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Crappy Logo.png" type="Texture" id=5]
 
 [node name="Save Slots" type="VBoxContainer"]
 margin_right = 720.0
@@ -71,7 +71,7 @@ align = 2
 
 [node name="Sprite" type="Sprite" parent="Slot0"]
 position = Vector2( 114.303, 88.0598 )
-scale = Vector2( 2.42149, 2.22103 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
 [node name="Slot1" type="Button" parent="."]
@@ -134,7 +134,7 @@ align = 2
 
 [node name="Sprite" type="Sprite" parent="Slot1"]
 position = Vector2( 114.303, 88.0598 )
-scale = Vector2( 2.42149, 2.22103 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
 [node name="Slot2" type="Button" parent="."]
@@ -197,7 +197,7 @@ align = 2
 
 [node name="Sprite" type="Sprite" parent="Slot2"]
 position = Vector2( 114.303, 88.0598 )
-scale = Vector2( 2.42149, 2.22103 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
 [node name="Slot3" type="Button" parent="."]
@@ -260,6 +260,6 @@ align = 2
 
 [node name="Sprite" type="Sprite" parent="Slot3"]
 position = Vector2( 114.303, 88.0598 )
-scale = Vector2( 2.42149, 2.22103 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 5 )
 
