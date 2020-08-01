@@ -174,7 +174,6 @@ margin_right = 676.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

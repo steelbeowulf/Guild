@@ -35,5 +35,4 @@ flat = true
 stream = ExtResource( 4 )
 volume_db = -17.155
 autoplay = true
-
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

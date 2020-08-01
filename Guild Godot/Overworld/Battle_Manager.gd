@@ -247,9 +247,18 @@ func end_battle(Players, Enemies, Inventory):
 	
 	# Goes to game over, level up scenes or back to the map
 	# depending on the outcome of the battle
-	if Play == []:
+	var death = 0
+	for i in range(len(Play)):
+		if Play[i].is_dead():
+			 death+=1
+	print(len(Play))
+	print(death)
+	if death == len(Play):
+		print("morreu")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
 	elif levelup == 1:
+		death = 0
 		get_tree().change_scene("res://Battle/Level Up.tscn")
 	else:
+		death = 0
 		get_tree().change_scene("res://Root.tscn")
