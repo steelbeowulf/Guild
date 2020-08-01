@@ -12,6 +12,8 @@ func enter(players):
 
 
 func _on_Player_chosen(binds):
+	if location == "SKILLS":
+		get_parent().get_parent().open_skills(binds)
 	get_parent().get_parent().player_clicked(binds)
 
 
@@ -80,28 +82,6 @@ func _on_Skill_pressed():
 	location = "SKILLS"
 	change_focus()
 	
-
-func _on_Char0_pressed():
-	if location == "SKILLS":
-		var id = get_node("Panel/All/Left/Chars/Char0").id
-		get_parent().get_parent().open_skills(id)
-
-func _on_Char1_pressed():
-	if location == "SKILLS":
-		var id = get_node("Panel/All/Left/Chars/Char1").id
-		get_parent().get_parent().open_skills(id)
-
-
-func _on_Char2_pressed():
-	if location == "SKILLS":
-		var id = get_node("Panel/All/Left/Chars/Char2").id
-		get_parent().get_parent().open_skills(id)
-
-
-func _on_Char3_pressed():
-	if location == "SKILLS":
-		var id = get_node("Panel/All/Left/Chars/Char3").id
-		get_parent().get_parent().open_skills(id)
 
 func _on_Options_pressed():
 	get_parent().get_parent().open_options()

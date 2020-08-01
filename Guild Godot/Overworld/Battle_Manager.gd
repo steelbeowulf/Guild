@@ -149,6 +149,7 @@ func initiate_battle():
 
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(Players, Enemies, Inventory):
+	GLOBAL.IN_BATTLE = false
 	var total_exp = 0
 	
 	# Calculates total EXP based on the enemies killed
