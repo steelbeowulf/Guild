@@ -85,20 +85,20 @@ radius = 100.0
 [node name="Borboleta7" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -171.845, -279.223 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 2
 movement = 2
 radius = 100.0
 
 [node name="Borboleta9" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -361.97, -353.803 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 2
 radius = 100.0
 
 [node name="Borboleta8" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -92.6039, -279.795 )
 scale = Vector2( 0.5, 0.5 )
-id = 3
+id = 8
 movement = 2
 radius = 100.0
 
@@ -123,4 +123,3 @@ scale = Vector2( 6, 1 )
 next = 7
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
-

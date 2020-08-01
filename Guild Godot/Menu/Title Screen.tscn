@@ -78,7 +78,6 @@ position = Vector2( 650, 275 )
 
 [node name="Save Slots" parent="Load_Screen" instance=ExtResource( 4 )]
 margin_bottom = 772.0
-
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
