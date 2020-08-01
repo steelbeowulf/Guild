@@ -20,7 +20,7 @@ func _ready():
 		var defm = p.get_defm()
 		var acc = p.get_acc()
 		var lck = p.get_lck()
-		var up = ((18/10)^p.level)*5
+		var up = pow(1.8, p.level)*5.0
 		if BATTLE_MANAGER.leveled_up[p.id]:
 			$LevelUpLog.show()
 			$LevelUpLog.display_text(p.nome + " subiu de nivel!\n"+ "HP:" + str(max_hp) +"+"+ str(BATTLE_MANAGER.lvup_max_hp) +"\n"+ "MP:" +str(max_mp) +"+"+ str(BATTLE_MANAGER.lvup_max_mp) + "\n" + "ATK:" +str(atk) +"+"+ str(BATTLE_MANAGER.lvup_atk) + "\n" +"ATKM:" +str(atkm) +"+"+ str(BATTLE_MANAGER.lvup_atkm)+ "\n" + "DEF:" +str(def) +"+"+ str(BATTLE_MANAGER.lvup_def)+ "\n" + "DEFM:" +str(defm) +"+"+ str(BATTLE_MANAGER.lvup_defm)+ "\n" + "ACC:" +str(acc) +"+"+ str(BATTLE_MANAGER.lvup_acc)+ "\n" + "LCK:" +str(lck) +"+"+ str(BATTLE_MANAGER.lvup_lck)+ "\n" + "AGI:" +str(agi) +"+"+ str(BATTLE_MANAGER.lvup_agi))

@@ -171,7 +171,6 @@ position = Vector2( 1299.63, 260.148 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
-
 [connection signal="gui_input" from="Menu" to="." method="_on_Menu_gui_input"]
 [connection signal="button_down" from="Menu/Attack" to="." method="_on_Attack_button_down"]
 [connection signal="button_down" from="Menu/Lane" to="." method="_on_Lane_button_down"]

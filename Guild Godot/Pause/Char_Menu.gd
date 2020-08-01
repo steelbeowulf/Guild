@@ -10,7 +10,7 @@ func update_info(player):
 	$HP.set_text(tmp)
 	tmp = str(player.get_mp())+"/"+str(player.get_max_mp())
 	$MP.set_text(tmp)
-	tmp = str(player.xp)+"/"+str(((18/10)^player.level)*5)
+	tmp = str(player.xp)+"/"+str(ceil(pow(1.8, player.level)*5.0))
 	$EXP.set_text(tmp)
 	set_lane(player.position)
 	$Sprite.set_texture(load(player.portrait))
