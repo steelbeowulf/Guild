@@ -40,6 +40,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 enabled_focus_mode = 0
 text = "Itens"
+flat = true
 
 [node name="Use" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
@@ -67,6 +68,7 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
+disabled = true
 text = "Organize"
 
 [node name="KeyItens" type="Button" parent="Panel/HBoxContainer/Options" groups=[
@@ -81,6 +83,7 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
+disabled = true
 text = "Key Itens"
 
 [node name="Back" type="Button" parent="Panel/HBoxContainer/Options" groups=[
@@ -103,7 +106,7 @@ margin_right = 300.0
 margin_bottom = 590.0
 rect_min_size = Vector2( 0, 220 )
 
-[node name="Money" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
+[node name="Description" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
 "text",
 ]]
 margin_right = 300.0
@@ -111,7 +114,7 @@ margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
-text = "500G"
+text = "  Description"
 
 [node name="Itens" type="VBoxContainer" parent="Panel/HBoxContainer"]
 margin_left = 304.0
@@ -299,112 +302,28 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[node name="ItemSlot12" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="ItemSlot13" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="ItemSlot14" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="ItemSlot15" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="ItemSlot16" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
-[node name="ItemSlot17" type="Button" parent="Panel/HBoxContainer/Itens" groups=[
-"text",
-]]
-visible = false
-margin_right = 720.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 5 )
-custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
-text = "Ppau Kweh"
-script = ExtResource( 6 )
-
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Use" to="." method="_on_Use_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot0" to="Panel/HBoxContainer/Itens/ItemSlot0" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot0" to="Panel/HBoxContainer/Itens/ItemSlot0" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot1" to="Panel/HBoxContainer/Itens/ItemSlot1" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot1" to="Panel/HBoxContainer/Itens/ItemSlot1" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot2" to="Panel/HBoxContainer/Itens/ItemSlot2" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot2" to="Panel/HBoxContainer/Itens/ItemSlot2" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot3" to="Panel/HBoxContainer/Itens/ItemSlot3" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot3" to="Panel/HBoxContainer/Itens/ItemSlot3" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot4" to="Panel/HBoxContainer/Itens/ItemSlot4" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot4" to="Panel/HBoxContainer/Itens/ItemSlot4" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot5" to="Panel/HBoxContainer/Itens/ItemSlot5" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot5" to="Panel/HBoxContainer/Itens/ItemSlot5" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot6" to="Panel/HBoxContainer/Itens/ItemSlot6" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot6" to="Panel/HBoxContainer/Itens/ItemSlot6" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot7" to="Panel/HBoxContainer/Itens/ItemSlot7" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot7" to="Panel/HBoxContainer/Itens/ItemSlot7" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot8" to="Panel/HBoxContainer/Itens/ItemSlot8" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot8" to="Panel/HBoxContainer/Itens/ItemSlot8" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot9" to="Panel/HBoxContainer/Itens/ItemSlot9" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot9" to="Panel/HBoxContainer/Itens/ItemSlot9" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot10" to="Panel/HBoxContainer/Itens/ItemSlot10" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot10" to="Panel/HBoxContainer/Itens/ItemSlot10" method="_on_ItemSlot0_pressed"]
+[connection signal="focus_entered" from="Panel/HBoxContainer/Itens/ItemSlot11" to="Panel/HBoxContainer/Itens/ItemSlot11" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot11" to="Panel/HBoxContainer/Itens/ItemSlot11" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot12" to="Panel/HBoxContainer/Itens/ItemSlot12" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot13" to="Panel/HBoxContainer/Itens/ItemSlot13" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot14" to="Panel/HBoxContainer/Itens/ItemSlot14" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot15" to="Panel/HBoxContainer/Itens/ItemSlot15" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot16" to="Panel/HBoxContainer/Itens/ItemSlot16" method="_on_ItemSlot0_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Itens/ItemSlot17" to="Panel/HBoxContainer/Itens/ItemSlot17" method="_on_ItemSlot0_pressed"]

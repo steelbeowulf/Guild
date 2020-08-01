@@ -1,132 +1,53 @@
-extends Control
+extends "res://Battle/Apply.gd"
 
 onready var location = "OUTSIDE"
-var recoverHP = 0
-var recoverMP = 0
+var targets = []
+var item = null
+var player = null
+var target = null
+var type = "ONE"
 
-var current_player
-var spell_list
-onready var identification
-onready var spending
-
-func enter(itemx, id):
-	identification = id
+func enter(item_arg, player_arg):
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
 	for i in range(len(GLOBAL.PLAYERS)):
-		if id == GLOBAL.PLAYERS[i].id:
-			current_player = GLOBAL.PLAYERS[i]
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(GLOBAL.PLAYERS[i])
-	spell_list = current_player.get_skills()
-	for i in range(len(spell_list)):
-		if itemx == spell_list[i].nome:
-			actual_skill(spell_list[i])
+		node.connect("pressed", self, "_on_Char_pressed", [i])
+	item = item_arg
+	player = player_arg
+	if item.target == "ALL":
+		$Panel/All/Right/Options_Panel/Panel/Question.set_text("Usar "+item.nome+" \nem todos os personagens?")
+		targets = GLOBAL.PLAYERS
+		type = "ALL"
 
 func give_focus():
-	$Panel/All/Left/Chars/Char0.set_focus_mode(2)
-	$Panel/All/Left/Chars/Char1.set_focus_mode(2)
-	$Panel/All/Left/Chars/Char2.set_focus_mode(2)
-	$Panel/All/Left/Chars/Char3.set_focus_mode(2)
+	for c in $Panel/All/Left/Chars.get_children():
+		c.set_focus_mode(2)
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
 
-func actual_skill(skill):
-	for i in range(len(skill.effect)):
-		if skill.effect[i][0] == 0:
-			recoverHP = skill.effect[i][1]
-		if skill.effect[i][0] == 2:
-			recoverMP = skill.effect[i][1]
-	#spend the mp here
-	var mp = current_player.get_mp()
-	spending = mp - skill.quantity
 
-
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("ui_cancel") and location == "TARGETS":
-		get_parent().get_parent().get_parent().back_to_skills(identification)
+		get_parent().get_parent().get_parent().back_to_skills(player.id)
 		queue_free()
+	elif Input.is_action_just_pressed("ui_accept") and type=="ALL":
+		use_item()
 
-func _on_Char0_pressed():
-	var hp_char = GLOBAL.PLAYERS[0].stats[0]
-	var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
-	var mp_char = GLOBAL.PLAYERS[0].stats[2]
-	var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
-	hp_char = max(0, hp_char  + recoverHP)
-	mp_char = max(0, mp_char  + recoverMP)
-	if hp_char > hpmax_char:
-		hp_char = hpmax_char
-	if mp_char > mpmax_char:
-		mp_char = mpmax_char
+func use_item():
+	var mp = player.get_mp()
+	player.set_stats(2, mp - item.quantity)
+	for player in targets:
+		for effect in item.get_effects():
+			apply_effect(null, effect, player, null)
+		for status in item.get_status():
+			apply_status(status, player, player)
 	location = "OUTSIDE"
-	for i in range(len(GLOBAL.PLAYERS)):
-		if GLOBAL.PLAYERS[i].id == current_player.id:
-			GLOBAL.PLAYERS[i].id = current_player.id
-	current_player.stats[2] = spending
-	GLOBAL.PLAYERS[0].stats[0] = hp_char
-	GLOBAL.PLAYERS[0].stats[2] = mp_char
-	get_parent().get_parent().get_parent().back_to_skills(identification)
+	get_parent().get_parent().get_parent().back_to_skills(player.id)
 	queue_free()
 
-func _on_Char1_pressed():
-	var hp_char = GLOBAL.PLAYERS[1].stats[0]
-	var hpmax_char = GLOBAL.PLAYERS[1].stats[1]
-	var mp_char = GLOBAL.PLAYERS[1].stats[2]
-	var mpmax_char = GLOBAL.PLAYERS[1].stats[3]
-	hp_char = max(0, hp_char  + recoverHP)
-	mp_char = max(0, mp_char  + recoverMP)
-	if hp_char > hpmax_char:
-		hp_char = hpmax_char
-	if mp_char > mpmax_char:
-		mp_char = mpmax_char
-	location = "OUTSIDE"
-	for i in range(len(GLOBAL.PLAYERS)):
-		if GLOBAL.PLAYERS[i].id == current_player.id:
-			GLOBAL.PLAYERS[i].id = current_player.id
-	current_player.stats[2] = spending
-	GLOBAL.PLAYERS[1].stats[0] = hp_char
-	GLOBAL.PLAYERS[1].stats[2] = mp_char
-	get_parent().get_parent().get_parent().back_to_skills(identification)
-	queue_free()
-
-func _on_Char2_pressed():
-	var hp_char = GLOBAL.PLAYERS[2].stats[0]
-	var hpmax_char = GLOBAL.PLAYERS[2].stats[1]
-	var mp_char = GLOBAL.PLAYERS[2].stats[2]
-	var mpmax_char = GLOBAL.PLAYERS[2].stats[3]
-	hp_char = max(0, hp_char  + recoverHP)
-	mp_char = max(0, mp_char  + recoverMP)
-	if hp_char > hpmax_char:
-		hp_char = hpmax_char
-	if mp_char > mpmax_char:
-		mp_char = mpmax_char
-	location = "OUTSIDE"
-	for i in range(len(GLOBAL.PLAYERS)):
-		if GLOBAL.PLAYERS[i].id == current_player.id:
-			GLOBAL.PLAYERS[i].id = current_player.id
-	current_player.stats[2] = spending
-	print("valor curado: " + str(recoverHP))
-	GLOBAL.PLAYERS[2].stats[0] = hp_char
-	GLOBAL.PLAYERS[2].stats[2] = mp_char
-	get_parent().get_parent().get_parent().back_to_skills(identification)
-	queue_free()
-
-func _on_Char3_pressed():
-	var hp_char = GLOBAL.PLAYERS[3].stats[0]
-	var hpmax_char = GLOBAL.PLAYERS[3].stats[1]
-	var mp_char = GLOBAL.PLAYERS[3].stats[2]
-	var mpmax_char = GLOBAL.PLAYERS[3].stats[3]
-	hp_char = max(0, hp_char  + recoverHP)
-	mp_char =  max(0, mp_char  + recoverMP)
-	if hp_char > hpmax_char:
-		hp_char = hpmax_char
-	if mp_char > mpmax_char:
-		mp_char = mpmax_char
-	location = "OUTSIDE"
-	for i in range(len(GLOBAL.PLAYERS)):
-		if GLOBAL.PLAYERS[i].id == current_player.id:
-			GLOBAL.PLAYERS[i].id = current_player.id
-	current_player.stats[2] = spending
-	GLOBAL.PLAYERS[3].stats[0] = hp_char
-	GLOBAL.PLAYERS[3].stats[2] = mp_char
-	get_parent().get_parent().get_parent().back_to_skills(identification)
-	queue_free()
+func _on_Char_pressed(id):
+	print("[ITEM USE] pressei "+str(id))
+	targets.append(GLOBAL.PLAYERS[id])
+	use_item()

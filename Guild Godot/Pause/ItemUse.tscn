@@ -83,7 +83,7 @@ margin_top = 2.0
 margin_right = 269.0
 margin_bottom = 74.0
 custom_fonts/font = ExtResource( 4 )
-text = "Who is gonna use this item?"
+text = "Quem vai usar?"
 align = 1
 valign = 1
 
@@ -135,7 +135,3 @@ margin_bottom = 248.0
 rect_min_size = Vector2( 0, 80 )
 custom_styles/panel = ExtResource( 2 )
 
-[connection signal="pressed" from="Panel/All/Left/Chars/Char0" to="." method="_on_Char0_pressed"]
-[connection signal="pressed" from="Panel/All/Left/Chars/Char1" to="." method="_on_Char1_pressed"]
-[connection signal="pressed" from="Panel/All/Left/Chars/Char2" to="." method="_on_Char2_pressed"]
-[connection signal="pressed" from="Panel/All/Left/Chars/Char3" to="." method="_on_Char3_pressed"]

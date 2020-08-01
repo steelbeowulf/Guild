@@ -91,7 +91,8 @@ func remove_status(effect):
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
 	elif effect == "KO":
 		dead = false
-		self.graphics.revive()
+		if GLOBAL.IN_BATTLE:
+			self.graphics.revive()
 	if status.has(effect):
 		status.erase(effect)
 	if GLOBAL.STATUS.has(effect):
@@ -101,7 +102,7 @@ func add_status(effect, atkm, turns):
 	if effect == "KO":
 		status = {}
 		dead = true
-	if GLOBAL.STATUS.has(effect):
+	if GLOBAL.STATUS.has(effect) and GLOBAL.IN_BATTLE:
 		self.graphics.set_aura(GLOBAL.STATUS[effect])
 	status[effect] = [turns, atkm]
 

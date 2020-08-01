@@ -7,7 +7,6 @@ export(MOVEMENT) var movement = MOVEMENT.idle
 export(float) var radius = 0.0
 var mode = MODE.moving
 onready var map = null
-signal battle_notifier
 
 var velocities
 var accum = Vector2(0,0)
@@ -21,6 +20,8 @@ var chasing = null
 var dead = false
 var prev_velocity = Vector2(-1,0) # else random gets stuck forever
 const tolerance = 0.0
+
+signal battle_notifier
 
 func set_animations(sprite, animations):
 	var img = sprite['path']
@@ -199,10 +200,9 @@ func _on_View_body_exited(body):
 # Notifies map to save its state and battle manager
 # to start the battle
 func _on_Battle_body_entered(body):
-	self.dead = true
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not GLOBAL.entering_battle:
+		self.dead = true
 		GLOBAL.entering_battle = true
-		map.update_objects_position()
 		map.get_node("HUD/Transition").play("Battle")
 		yield(map.get_node("HUD/Transition"), "animation_finished")
 		BATTLE_MANAGER.initiate_battle()
@@ -222,11 +222,11 @@ func _update(value):
 	self.set_global_position(pos)
 
 
-# Warns battle manager monster is being seen
-func _on_VisibilityNotifier2D_viewport_entered(viewport):
+## Warns battle manager monster is being seen
+func in_encounter():
 	emit_signal("battle_notifier", true, id, self.get_name())
 
 
 # Warns battle manager monster is no long being seen
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
+func off_encounter():
 	emit_signal("battle_notifier", false, id, self.get_name())
