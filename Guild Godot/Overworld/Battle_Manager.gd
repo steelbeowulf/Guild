@@ -115,12 +115,12 @@ func generate_enemies():
 	
 	Map.update_objects_position()
 	Kill = []
-	Encounter = []
 	
 	# Fills the enemy list from the encounter list (monsters the player
 	# see on the battlefield) and generates random ones if there's not enough
 	var current = 0
 	print("[BM] Creating encounter")
+	print(Encounter)
 	Encounter.shuffle()
 	while current <= total:
 		if Encounter:
@@ -133,6 +133,7 @@ func generate_enemies():
 			newEnemy.append(Enemies[enemy_id]._duplicate())
 		current+=1
 
+	Encounter = []
 	# Returns encounter
 	return newEnemy
 
@@ -252,7 +253,7 @@ func end_battle(Players, Enemies, Inventory):
 				p.set_stats(10, lck + stat_up)
 				lvup_lck += stat_up
 
-		Play.append(p)
+			Play.append(p)
 
 	GLOBAL.PLAYERS = Play
 	GLOBAL.INVENTORY = Inventory
@@ -260,6 +261,7 @@ func end_battle(Players, Enemies, Inventory):
 	# Goes to game over, level up scenes or back to the map
 	# depending on the outcome of the battle
 	if Play == []:
+		AUDIO.play_bgm("GAME_OVER_THEME")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
 	elif levelup == 1:
 		get_tree().change_scene("res://Battle/Level Up.tscn")

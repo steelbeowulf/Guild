@@ -174,6 +174,7 @@ custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 text = "FRONT"
+
 [connection signal="pressed" from="Lanes/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Lanes/Mid" to="." method="_on_Mid_pressed"]
 [connection signal="pressed" from="Lanes/Front" to="." method="_on_Front_pressed"]

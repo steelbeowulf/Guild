@@ -18,6 +18,11 @@ func _on_Dialogue_Ended():
 func _on_Encounter_Ended():
 	if len(get_parent().get_node("Enemies").get_children()) > 0:
 		GLOBAL.set_event_status("rangers_defeated", true)
+		get_parent().get_node("Enemies/Ranger1").in_encounter()
+		get_parent().get_node("Enemies/Ranger2").in_encounter()
+		get_parent().get_node("Enemies/Ranger3").in_encounter()
+		get_parent().get_node("Enemies/Ranger4").in_encounter()
+		get_parent().get_node("Enemies/Ranger5").in_encounter()
 		get_parent().get_node("Enemies/Ranger1")._on_Battle_body_entered(player)
 	else:
 		join_ranger()

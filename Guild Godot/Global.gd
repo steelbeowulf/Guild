@@ -86,7 +86,9 @@ func reload_state():
 		STATE.append({})
 	TRANSITION = -1
 	MAP = 1
+	#MAP = 10
 	POSITION = Vector2(454, 446)
+	#POSITION = Vector2(300, 600)
 
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
