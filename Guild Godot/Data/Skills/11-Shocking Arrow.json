@@ -4,7 +4,7 @@
 	"QUANT":10, 
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-40, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":1.0, "STATUS":"PARALYSIS"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Arrow - Done/Shocking Arrow.png",
 		   "vframes": 3, "hframes":4, "scale":[2,2]},

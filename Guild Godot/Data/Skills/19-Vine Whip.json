@@ -4,7 +4,7 @@
 	"QUANT":20, 
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-20, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[],
 	"IMG":{"path": "res://Assets/Animations/Spells/Impact - Done/Vine Whip.png",
 		   "vframes": 1, "hframes":10, "scale":[2,2]},

@@ -4,7 +4,7 @@
 	"QUANT":20, 
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-40, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":true, "STATUS":"POISON"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Spores - Done/Poison Spores.png",
 		   "vframes": 16, "hframes":5, "scale":[0.6,0.6]},

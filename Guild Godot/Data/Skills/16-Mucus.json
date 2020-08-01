@@ -4,7 +4,7 @@
 	"QUANT":10, 
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-10, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":0.8, "STATUS":"SLOW"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Water - Done/Mucus.png",
 		   "vframes": 2, "hframes":4, "scale":[2,2]},

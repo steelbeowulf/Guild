@@ -4,7 +4,7 @@
 	"QUANT":20, 
 	"TARGET":"ALL", 
 	"TYPE":"OFFENSE",
-	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
+	"EFFECTS":[{"STAT":"HP", "VALUE":-65, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":0.2, "STATUS":"PARALYSIS"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Blast/Laser.png",
 		   "vframes": 5, "hframes":2, "scale":[1,1]},
