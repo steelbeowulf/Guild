@@ -35,8 +35,7 @@ tile_data = PoolIntArray( -65537, 9, 0, -131072, 9, 0, -131071, 9, 0, -131070, 9
 
 [node name="Treasure" type="Node2D" parent="."]
 
-[node name="Party" type="Node2D" parent="."]
-scale = Vector2( 0.85, 0.85 )
+[node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 528.874, 514.232 )
@@ -124,3 +123,4 @@ scale = Vector2( 6, 1 )
 next = 7
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+

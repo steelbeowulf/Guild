@@ -5,6 +5,7 @@
 	"IMG":{"path": "res://Assets/Animations/butterfly spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-7"], 
+			"move": [true, "0-7"],
 			"attack": [false, "8-15"],
 			"death":[false, "7,6,5,4,3,4,3,4,3,4,3,10,10,10"],
 			"dead":[true, "10"],

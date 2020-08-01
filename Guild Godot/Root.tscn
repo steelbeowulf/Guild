@@ -28,4 +28,15 @@ position = Vector2( -117.291, -456.82 )
 scale = Vector2( 4.40551, 4.37599 )
 texture = ExtResource( 3 )
 
+[node name="Effects" type="Node2D" parent="."]
+z_index = 50
+z_as_relative = false
+
+[node name="Corruption" type="ColorRect" parent="Effects"]
+margin_left = -2353.0
+margin_top = -2059.0
+margin_right = 2205.0
+margin_bottom = 1263.0
+color = Color( 0.0196078, 0, 0.0588235, 0 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -202,7 +202,8 @@ func stackagility(a,b):
 	return a.get_agi() > b.get_agi()
 
 # Executes an action on a given target
-func execute_action(action, target):	
+func execute_action(action, target):
+	print("[BATTLE] Executing action "+str(action))
 	# Attack: the target takes PHYSICAL damage
 	if action == "Attack":
 		AUDIO.play_se("HIT")
@@ -223,6 +224,7 @@ func execute_action(action, target):
 		if alvo.get_health() <= 0:
 			dies_on_attack = true
 			alvo.die()
+		print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies_on_attack)+", dmg="+str(dmg))
 		return [alvo, [dies_on_attack, dmg]]
 	
 	# Lane: only the player characters may change lanes
@@ -231,6 +233,7 @@ func execute_action(action, target):
 		var id = current_entity.index
 		var lane = int(target)
 		current_entity.set_pos(lane)
+		print("[BATTLE] lane="+str(lane))
 		return [0, lane]
 	
 	# Item: only the player characters may use items
@@ -246,6 +249,7 @@ func execute_action(action, target):
 			entities = Enemies
 		alvo = int(alvo.right(1))
 		alvo = entities[alvo]
+		skill = Inventory[skitem]
 		var item = Inventory[skitem]
 		
 		# Itens may target entities, lanes or everyone
@@ -268,26 +272,33 @@ func execute_action(action, target):
 		# Apply the effect on all affected
 		for alvo in affected:
 			# Checks if alvo may be targeted by the item
+			var result
+			var ret
+			var type
 			if not alvo.is_dead() or item.type == "RESSURECTION":
 				item.quantity = item.quantity - 1
 				targets.append(alvo)
+				stat_change.append([])
 				if (item.effect != []):
-					var result
 					for eff in item.effect:
 						var times = eff[3]
 						for i in range(times):
 							result = apply_effect(current_entity, eff, alvo,  alvo.index)
 							if result[0] != -1:
-								var ret = result[0]
-								var type = result[1]
-								stat_change.append([ret, type])
+								ret = result[0]
+								type = result[1]
+								stat_change[-1].append([ret, type])
 				if (item.status != []):
 					for st in item.status:
 						var ailment = apply_status(st, alvo, current_entity)
 						ailments.append(ailment)
-				if alvo.get_health() <= 0:
+				var dies = alvo.get_health() <= 0
+				dead.append(false)
+				if dies:
 					alvo.die()
 					dead.append(alvo)
+					dead[-1] = true
+				print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		
 		# No more of the item used
 		if item.quantity == 0:
@@ -323,28 +334,33 @@ func execute_action(action, target):
 		var ailments = []
 		var stats_change = []
 		var targets = []
+		var ret
+		var type
+		var result
 		for alvo in affected:
 			dead.append(false)
 			if not alvo.is_dead() or skill.type == "RESSURECTION":
 				targets.append(alvo)
-				var result
+				result
 				var stat_change = []
 				for eff in skill.effect:
 					var times = eff[3]
 					for i in range(times):
 						result = apply_effect(current_entity, eff, alvo,  alvo.index)
 						if result[0] != -1:
-							var ret = result[0]
-							var type = result[1]
+							ret = result[0]
+							type = result[1]
 							stat_change.append([ret, type])
 				if (skill.status != []):
 					for st in skill.status:
 						var ailment = apply_status(st, alvo, current_entity)
 						ailments.append(ailment)
-				if alvo.get_health() <= 0:
+				var dies = alvo.get_health() <= 0
+				if dies:
 					alvo.die()
 					dead[-1] = true
 				stats_change.append(stat_change)
+				print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		var mp = current_entity.get_mp()
 		
 		# Spends the MP
@@ -355,10 +371,12 @@ func execute_action(action, target):
 		AUDIO.play_se("RUN")
 		randomize()
 		var chance = rand_range(0,100)
+		print("[BATTLE] Run, success="+str(chance<=75))
 		return [0, [boss, chance<=75]]
 	
 	# Literally does nothing
 	elif action == "Pass":
+		print("[BATTLE] Pass")
 		return [0, 0]
 	
 	

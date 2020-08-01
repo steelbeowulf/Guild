@@ -47,24 +47,25 @@ tile_data = PoolIntArray( -65540, 11, 0, -65539, 11, 0, -65538, 9, 0, -65537, 9,
 
 [node name="Treasure" type="Node2D" parent="."]
 
-[node name="Party" type="Node2D" parent="."]
-scale = Vector2( 0.85, 0.85 )
+[node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2( 528.874, 514.232 )
 scale = Vector2( 1.2, 1.2 )
 
-[node name="Borboleta" parent="Enemies" instance=ExtResource( 3 )]
+[node name="Bat" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -265.875, -8.4451 )
 scale = Vector2( 0.5, 0.5 )
 id = 7
-radius = 100.0
+movement = 1
+radius = 40.0
 
-[node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
+[node name="Slime" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -272.079, -197.176 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
-radius = 100.0
+movement = 1
+radius = 40.0
 
 [node name="Limits" type="MarginContainer" parent="."]
 margin_top = -21.0
@@ -93,3 +94,4 @@ next = 24
 visible = false
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+

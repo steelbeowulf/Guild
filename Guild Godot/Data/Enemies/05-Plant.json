@@ -5,6 +5,7 @@
 	"IMG":{"path": "res://Assets/Animations/plant spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-3"], 
+			"move": [true, "0-3"],
 			"attack": [false, "0-7"],
 			"death":[false, "8-15"],
 			"dead":[true, "15"],

@@ -22,15 +22,50 @@ var dead = false
 var prev_velocity = Vector2(-1,0) # else random gets stuck forever
 const tolerance = 0.0
 
+func set_animations(sprite, animations):
+	var img = sprite['path']
+	var vf = sprite['vframes']
+	var hf = sprite['hframes']
+	var sc = sprite['scale']
+	
+	for k in animations.keys():
+		var v = animations[k]
+		var animation = Sprite.new()
+		animation.texture = load(img)
+		animation.set_name(k)
+		#print(k)
+		animation.set_script(load('res://Battle/Spritesheet.gd'))
+		animation.loop = v[0]
+		animation.physical_frames = v[1]
+		animation.vframes = vf
+		animation.hframes = hf
+		animation.scale = Vector2(sc[0], sc[1])
+		animation.fps = 10
+		#animation.speed = BATTLE_MANAGER.animation_speed
+		animation.hide()
+		animation.playing = false
+		$Animations.add_child(animation)
+
+func play(name):
+	if $Animations.get_node(name).playing:
+		return
+	print("[MONSTRO MUNDO] playing animation "+name)
+	var node = $Animations
+	for c in $Animations.get_children():
+		c.playing = false
+		c.hide()
+ 	node.get_node(name).show()
+	node.get_node(name).play(true)
+
 # Initializes speed, position and animation
 func _ready():
 	velocities = [Vector2(-SPEED, 0), Vector2(0, -SPEED),
 				  Vector2(SPEED, 0), Vector2(0, SPEED)]
 	base_pos = self.get_global_position()
 	map = get_parent().get_parent()
-	if id == 11:
-		$AnimatedSprite.scale = Vector2(3,3)
-	$AnimatedSprite.play(str(id))
+	var Enemy = GLOBAL.ENEMIES[id]
+	set_animations(Enemy.sprite, Enemy.animations)
+	play("idle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -74,14 +109,13 @@ func _physics_process(delta):
 
 	# Deal with animations and FOV angles
 	if velocity == Vector2(0,0):
-		$AnimatedSprite.frame = 0
-		$AnimatedSprite.stop()
+		play("idle")
 	else:
 		if velocity.x > 0:
-			$AnimatedSprite.scale.x = -1
+			$Animations.scale.x = -1
 		else:
-			$AnimatedSprite.scale.x = 1
-		$AnimatedSprite.play(str(id))
+			$Animations.scale.x = 1
+		play("move")
 		if mode == MODE.moving:
 			if velocity.x != 0:
 				$View.rotation = PI - velocity.angle()

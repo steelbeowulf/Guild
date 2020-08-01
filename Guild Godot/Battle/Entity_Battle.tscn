@@ -80,3 +80,4 @@ anims/Damage = SubResource( 2 )
 [node name="Target" parent="." instance=ExtResource( 3 )]
 visible = false
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

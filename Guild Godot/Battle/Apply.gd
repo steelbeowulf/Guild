@@ -64,7 +64,7 @@ func apply_status(status, target, attacker):
 	var type = sstats[status[1]]
 	var value = status[0]
 	var atkm = attacker.get_atkm()
-	print("APPLYING STATUS "+type)
+	print("[APPLY] APPLYING STATUS "+type+str(value))
 	if typeof(value) != TYPE_BOOL:
 		randomize()
 		var chance = rand_range(0, 99)

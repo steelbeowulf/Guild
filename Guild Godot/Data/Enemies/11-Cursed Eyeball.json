@@ -5,6 +5,7 @@
 	"IMG":{"path": "res://Assets/Animations/eyeball spritesheet.png",
 		   "vframes": 3, "hframes":8, "scale":[3,3]},
 	"ANIM":{"idle": [true, "0-15"], 
+			"move": [true, "8-15"],
 			"attack": [false, "16-23"],
 			"death":[false, "16-20"],
 			"dead":[true, "20"],

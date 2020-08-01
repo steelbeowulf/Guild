@@ -45,15 +45,14 @@ tile_data = PoolIntArray( -65537, 11, 0, -131072, 11, 0, -131071, 11, 0, -131070
 position = Vector2( 623.384, 497.048 )
 scale = Vector2( 1.2, 1.2 )
 
-[node name="Borboleta" parent="Enemies" instance=ExtResource( 3 )]
+[node name="Butterfly" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -100.218, -276.861 )
-rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 id = 6
 movement = 2
 radius = 100.0
 
-[node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
+[node name="Slime" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 91.6663, -106.331 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
@@ -82,3 +81,4 @@ next = 3
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+

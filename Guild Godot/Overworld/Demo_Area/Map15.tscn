@@ -45,27 +45,31 @@ scale = Vector2( 1.2, 1.2 )
 
 [node name="Borboleta" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 49.5655, -106.389 )
-id = 5
+movement = 3
 radius = 100.0
 
 [node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -259.356, 284.247 )
-id = 5
+id = 4
+movement = 1
 radius = 100.0
 
 [node name="Borboleta3" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -195.579, 230.435 )
 id = 5
+movement = 1
 radius = 100.0
 
 [node name="Borboleta4" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -183.62, 298.199 )
 id = 5
+movement = 1
 radius = 100.0
 
 [node name="Borboleta5" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( -388.904, -28.6604 )
-id = 5
+id = 4
+movement = 4
 radius = 100.0
 
 [node name="Borboleta6" parent="Enemies" instance=ExtResource( 3 )]
@@ -75,12 +79,13 @@ radius = 100.0
 
 [node name="Borboleta7" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 501.815, -48.6095 )
-id = 5
+id = 4
+movement = 2
 radius = 100.0
 
 [node name="Borboleta8" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 368.962, -365.83 )
-id = 5
+id = 3
 radius = 100.0
 
 [node name="Limits" type="MarginContainer" parent="."]
@@ -88,6 +93,9 @@ margin_left = -44.0
 margin_top = -63.0
 margin_right = 1229.0
 margin_bottom = 1062.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Objects" type="Node2D" parent="."]
 

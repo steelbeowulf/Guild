@@ -42,26 +42,26 @@ tile_data = PoolIntArray( -262148, 11, 0, -196612, 11, 0, -196611, 11, 0, -19661
 [node name="Enemies" type="Node2D" parent="."]
 scale = Vector2( 1.2, 1.2 )
 
-[node name="Borboleta" parent="Enemies" instance=ExtResource( 3 )]
+[node name="Slime" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 439.679, 215.631 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
 movement = 4
-radius = 100.0
+radius = 20.0
 
-[node name="Borboleta2" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 197.362, 303.942 )
+[node name="Slime2" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( 266.448, 335.345 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
 movement = 4
-radius = 100.0
+radius = 20.0
 
-[node name="Borboleta3" parent="Enemies" instance=ExtResource( 3 )]
+[node name="Slime3" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 302.905, 79.9343 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
 movement = 4
-radius = 100.0
+radius = 20.0
 
 [node name="Limits" type="MarginContainer" parent="."]
 margin_top = -41.0

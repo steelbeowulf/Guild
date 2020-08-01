@@ -32,9 +32,14 @@ func remove_aura():
 		anim.material.set_shader_param("outline_color", "")
 
 func revive():
+	print("REVIVING")
+	$Animations.get_node("dead").stop()
+	$Animations.get_node("dead").hide()
+	$Animations.get_node("idle").show()
 	$Animations.get_node("idle").play()
 
 func set_spell(sprite, v, k):
+	print("[ENTITY BATTLE] Setting Spell "+str(k))
 	var img = sprite['path']
 	var vf = sprite['vframes']
 	var hf = sprite['hframes']
@@ -51,8 +56,9 @@ func set_spell(sprite, v, k):
 	animation.fps = 10
 	#animation.speed = BATTLE_MANAGER.animation_speed
 	animation.playing = false
-	#animation.hide()
+	animation.hide()
 	animation.connect('animation_finished', self, "_on_Spell_animation_finished")
+	animation.z_index = 20
 	$Spells.add_child(animation)
 
 func set_animations(sprite, animations, data_arg):
@@ -86,6 +92,7 @@ func set_animations(sprite, animations, data_arg):
 
 func play(name, options=[]):
 	print("[ENTITY BATTLE] playing animation "+name)
+	print("Options="+str(options))
 	var node = $Animations
 	if name == 'Damage':
 		take_damage(options, 0)
@@ -95,7 +102,8 @@ func play(name, options=[]):
 	else:
 		for c in $Animations.get_children():
 			c.hide()
- 	node.get_node(name).show()
+	print(node.get_name())
+	node.get_node(name).show()
 	node.get_node(name).play(true)
 
 func turn(keep=false):
@@ -121,20 +129,45 @@ func update_bounds(bounds):
 	self.bounds = bounds
 	
 func take_damage(value, type):
-	var bad_heal = (str(value) == "-0")
-	if type == 0:
-		if value < 0 or bad_heal:
-			value = abs(value)
-			$Damage.self_modulate = Color(0, 255, 30)
-		else:
-			$Damage.self_modulate = Color(255, 255, 255)
+	print("[ENTITY BATTLE] Taking damage, value="+str(value)+", type="+str(type))
+	if typeof(value) == TYPE_ARRAY:
+		for val in value:
+			type = val[1]
+			val = val[0]
+			var bad_heal = (str(val) == "-0")
+			$Damage.text = str(val)
+			if type == 0:
+				if val < 0 or bad_heal:
+					val = abs(val)
+					$Damage.text = "+"+str(val)
+					$Damage.self_modulate = Color(0, 255, 30)
+				else:
+					$Damage.self_modulate = Color(255, 255, 255)
+			else:
+				if val < 0 or bad_heal:
+					val = abs(val)
+					$Damage.text = "+"+str(val)
+					$Damage.self_modulate = Color(0, 0, 255)
+				else:
+					$Damage.self_modulate = Color(125, 0, 160)
 	else:
-		if value < 0 or bad_heal:
-			value = abs(value)
-			$Damage.self_modulate = Color(0, 0, 255)
+		var bad_heal = (str(value) == "-0")
+		$Damage.text = str(value)
+		if type == 0:
+			if value < 0 or bad_heal:
+				value = abs(value)
+				$Damage.text = "+"+str(value)
+				$Damage.self_modulate = Color(0, 255, 30)
+			else:
+				$Damage.self_modulate = Color(255, 255, 255)
 		else:
-			$Damage.self_modulate = Color(125, 0, 160)
-	$Damage.text = str(value)
+			if value < 0 or bad_heal:
+				value = abs(value)
+				$Damage.text = "+"+str(value)
+				$Damage.self_modulate = Color(0, 0, 255)
+			else:
+				$Damage.self_modulate = Color(125, 0, 160)
+	
 	$Damage.show()
 	$AnimationPlayer.play("Damage")
 
@@ -156,3 +189,9 @@ func _on_Spell_animation_finished(name):
 	print("[ENTITY BATTLE] finished spell animation "+name)
 	emit_signal("finish_anim", name)
 	$Spells.get_node(name).hide()
+	$Spells.get_node(name).playing = false
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if(anim_name == "Damage"):
+		$Damage.hide()

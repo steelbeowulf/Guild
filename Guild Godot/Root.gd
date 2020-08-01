@@ -21,6 +21,7 @@ func _ready():
 	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
 	self.add_child(start.instance())
 	map = get_node("Map"+str(GLOBAL.MAP))
+	set_effect(GLOBAL.MAP)
 
 
 # Watches for inputs and deals with state changes
@@ -173,6 +174,7 @@ func use_skill(name, playerid):
 func transition(next, fake=false):
 	var new = load("res://Overworld/Demo_Area/Map"+str(next)+".tscn")
 	GLOBAL.MAP = next
+	set_effect(GLOBAL.MAP)
 	self.add_child(new.instance())
 	if map:
 		remove_child(map)
@@ -182,6 +184,37 @@ func transition(next, fake=false):
 		GLOBAL.TRANSITION = GLOBAL.MAP
 	map = get_node("Map"+str(next))
 
+var darkness = [
+	0,
+	0,#1
+	0,#2
+	0,#3
+	0,#4
+	0,#5
+	.05,#6
+	.05,#7
+	.1,#8
+	.1,#9
+	.1,#10
+	.2,#11
+	.2,#12
+	.3,#13
+	.4,#14
+	.4,#15
+	.4,#16
+	.4,#17
+	.4,#18
+	.4,#19
+	.4,#20
+	.4,#21
+	.5,#22
+	0,#23
+	0,#24
+	.15#25
+]
+
+func set_effect(map):
+	$Effects/Corruption.color = Color(.05, 0, .15, darkness[map])
 
 # Adds to the total playtime (in seconds)
 func _on_Timer_timeout():

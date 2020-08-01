@@ -89,6 +89,7 @@ func _physics_process(delta):
 
 func resolve(current_entity, action, target, result, bounds, next, skill):
 	print("[ANIMATION PLAYER] Resolving current turn")
+	print(action)
 	# TODO Deal with ailments
 	if typeof(action) == TYPE_STRING:
 		if action == "Attack":
@@ -108,29 +109,67 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 		elif action == "Skills":
 			var node
 			var targets = target[0]
-			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
-			for i in range(len(targets)):
-				node = targets[i].graphics
-				print(skill.name)
-				node.set_spell(skill.img, skill.anim, skill.nome)
-				enqueue(node, skill.nome, 'Skill')
 			var mp = target[1]
 			var dies_on_attack = result[0]
 			var ailments = result[1]
 			var stats = result[2]
+			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
+			for i in range(len(targets)):
+				node = targets[i].graphics
+				print(skill.name)
+				print(stats[i])
+				node.set_spell(skill.img, skill.anim, skill.nome)
+				enqueue(node, skill.nome, 'Skill') #spell anim
+				enqueue(node, "Damage", stats[i]) #take damage
 			$Log.display_text(skill.nome)
 			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
 			#enqueue(target.graphics, "Damage") # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
 			#enqueue(info[target], target, null) # lifebar
 
-			if current_entity.tipo == 'Player':
-				enqueue(current_entity.info, "UpdateMP", mp)
 			for i in range(len(targets)):
 				if targets[i].tipo == 'Player':
 					for st in stats[i]:
 						#enqueue(targets[i].graphics, "Damage") # dano no alvo
 						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
+				if dies_on_attack[i]:
+					enqueue(targets[i].graphics, "death", null) #death animaton
+
+		elif action == "Item":
+			var node
+
+			print("Result")
+			print(result)
+			var targets = target
+			#var mp = target[1]
+			print("Targets")
+			print(targets)
+			var dies_on_attack = result[0]
+			var ailments = result[1]
+			var stats = result[2]
+			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
+			for i in range(len(targets)):
+				node = targets[i].graphics
+				print(skill.name)
+				print(stats[i])
+				#node.set_spell(skill.img, skill.anim, skill.nome)
+				#enqueue(node, skill.nome, 'Skill') #spell anim
+				enqueue(node, "Damage", stats[i]) #take damage
+			$Log.display_text(skill.nome)
+			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
+			#enqueue(target.graphics, "Damage") # dano no alvo
+			#enqueue(target.graphics, "Damage", dmg) # valor do dano
+			#enqueue(info[target], target, null) # lifebar
+
+			for i in range(len(targets)):
+				if targets[i].tipo == 'Player':
+					print(stats)
+					for st in stats[i]:
+						#enqueue(targets[i].graphics, "Damage") # dano no alvo
+						if st[1] == 0:
+							enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
+						if st[1] == 1:
+							enqueue(targets[i].info, "UpdateMP", st[0]) # lifebar
 				if dies_on_attack[i]:
 					enqueue(targets[i].graphics, "death", null) #death animaton
 

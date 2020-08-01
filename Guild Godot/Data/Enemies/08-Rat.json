@@ -5,6 +5,7 @@
 	"IMG":{"path": "res://Assets/Animations/rat and bat spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
 	"ANIM":{"idle": [true, "0-9"], 
+			"move": [true, "20-29"],
 			"attack": [false, "30-39"],
 			"death":[false, "40-49"],
 			"dead":[true, "49"],

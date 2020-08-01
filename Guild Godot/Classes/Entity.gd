@@ -91,7 +91,7 @@ func remove_status(effect):
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
 	elif effect == "KO":
 		dead = false
-		#self.graphics.revive()
+		self.graphics.revive()
 	if status.has(effect):
 		status.erase(effect)
 	if GLOBAL.STATUS.has(effect):
@@ -113,6 +113,7 @@ func decrement_turns():
 				remove_status(st)
 
 func take_damage(type, damage):
+	print("[ENTITY] Taking damage "+str(type)+", "+str(damage))
 	var dmg = 0
 	var resistance = 1.0
 	if type == PHYSIC:
@@ -127,7 +128,7 @@ func take_damage(type, damage):
 		dmg = 0
 	#set_stats(HP, get_health()-dmg)
 	stats[HP] = get_health() - dmg
-	self.graphics.take_damage(0, dmg)
+	#self.graphics.take_damage(0, dmg)
 	if get_health() < 0.2*get_max_health() and get_health() > 0:
 		self.add_status("HP_CRITICAL", 0, 999)
 	if get_health() <= 0:

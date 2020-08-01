@@ -24,7 +24,7 @@ tile_data = PoolIntArray( -327681, 0, 0, -393216, 0, 1, -393215, 0, 1, -393214, 
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 262149, 6, 65537, 1179653, 6, 65537 )
+tile_data = PoolIntArray( 1179653, 6, 65537 )
 
 [node name="Overlay" type="TileMap" parent="Tiles"]
 z_index = 10
