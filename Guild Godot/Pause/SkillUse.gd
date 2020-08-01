@@ -3,10 +3,7 @@ extends Control
 onready var location = "OUTSIDE"
 var recoverHP = 0
 var recoverMP = 0
-var hp_char = GLOBAL.PLAYERS[0].stats[0]
-var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
-var mp_char = GLOBAL.PLAYERS[0].stats[2]
-var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
+
 var current_player
 var spell_list
 onready var identification
@@ -50,8 +47,12 @@ func _process(delta):
 		queue_free()
 
 func _on_Char0_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[0].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
+	var mp_char = GLOBAL.PLAYERS[0].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
+	hp_char = max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
@@ -67,8 +68,12 @@ func _on_Char0_pressed():
 	queue_free()
 
 func _on_Char1_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[1].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[1].stats[1]
+	var mp_char = GLOBAL.PLAYERS[1].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[1].stats[3]
+	hp_char = max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
@@ -84,8 +89,12 @@ func _on_Char1_pressed():
 	queue_free()
 
 func _on_Char2_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[2].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[2].stats[1]
+	var mp_char = GLOBAL.PLAYERS[2].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[2].stats[3]
+	hp_char = max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
@@ -102,8 +111,12 @@ func _on_Char2_pressed():
 	queue_free()
 
 func _on_Char3_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[3].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[3].stats[1]
+	var mp_char = GLOBAL.PLAYERS[3].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[3].stats[3]
+	hp_char = max(0, hp_char  + recoverHP)
+	mp_char =  max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:

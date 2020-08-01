@@ -55,7 +55,6 @@ focus_neighbour_top = NodePath("../Char2")
 focus_neighbour_bottom = NodePath("../Char0")
 
 [node name="Right" type="VBoxContainer" parent="Panel/All"]
-editor/display_folded = true
 margin_left = 739.0
 margin_right = 1009.0
 margin_bottom = 768.0

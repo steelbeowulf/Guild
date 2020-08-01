@@ -4,9 +4,9 @@ onready var id = -1
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
-		enter((id + 1) % 4)
+		enter((id + 1) % len(GLOBAL.PLAYERS))
 	elif Input.is_action_just_pressed("ui_left"):
-		enter((id - 1) % 4)
+		enter((id - 1) % len(GLOBAL.PLAYERS))
 
 
 func enter(player_id):

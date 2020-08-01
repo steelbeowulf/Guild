@@ -3,10 +3,6 @@ extends Control
 onready var location = "OUTSIDE"
 var recoverHP = 0
 var recoverMP = 0
-var hp_char = GLOBAL.PLAYERS[0].stats[0]
-var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
-var mp_char = GLOBAL.PLAYERS[0].stats[2]
-var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
 
 func enter(itemx):
 	location = "TARGETS"
@@ -42,48 +38,72 @@ func _process(delta):
 		queue_free()
 
 func _on_Char0_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[0].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[0].stats[1]
+	var mp_char = GLOBAL.PLAYERS[0].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[0].stats[3]
+	hp_char =  max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
+	GLOBAL.PLAYERS[0].set_stats(0, hp_char)
+	GLOBAL.PLAYERS[0].set_stats(2, mp_char)
 	location = "OUTSIDE"
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()
 
 
 func _on_Char1_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[1].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[1].stats[1]
+	var mp_char = GLOBAL.PLAYERS[1].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[1].stats[3]
+	hp_char =  max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
+	GLOBAL.PLAYERS[1].set_stats(0, hp_char)
+	GLOBAL.PLAYERS[1].set_stats(2, mp_char)
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()
 
 
 func _on_Char2_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[2].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[2].stats[1]
+	var mp_char = GLOBAL.PLAYERS[2].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[2].stats[3]
+	hp_char =  max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
+	GLOBAL.PLAYERS[2].set_stats(0, hp_char)
+	GLOBAL.PLAYERS[2].set_stats(2, mp_char)
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()
 
 
 func _on_Char3_pressed():
-	hp_char =  hp_char  + recoverHP
-	mp_char  =  mp_char  + recoverMP
+	var hp_char = GLOBAL.PLAYERS[3].stats[0]
+	var hpmax_char = GLOBAL.PLAYERS[3].stats[1]
+	var mp_char = GLOBAL.PLAYERS[3].stats[2]
+	var mpmax_char = GLOBAL.PLAYERS[3].stats[3]
+	hp_char =  max(0, hp_char  + recoverHP)
+	mp_char = max(0, mp_char  + recoverMP)
 	if hp_char > hpmax_char:
 		hp_char = hpmax_char
 	if mp_char > mpmax_char:
 		mp_char = mpmax_char
 	location = "OUTSIDE"
+	GLOBAL.PLAYERS[3].set_stats(0, hp_char)
+	GLOBAL.PLAYERS[3].set_stats(2, mp_char)
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()

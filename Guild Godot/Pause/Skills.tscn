@@ -8,8 +8,6 @@
 [ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=6]
 
 [node name="Skills" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 rect_scale = Vector2( 1.865, 1.4 )
 script = ExtResource( 1 )
 
@@ -19,20 +17,25 @@ margin_bottom = 770.0
 custom_styles/panel = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-margin_right = 1024.0
-margin_bottom = 744.0
-size_flags_horizontal = 2
+anchor_right = 0.4
+margin_left = -1.0
+margin_top = -4.0
+margin_right = 759.0
+margin_bottom = 767.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_right = 473.0
-margin_bottom = 744.0
+margin_right = 448.0
+margin_bottom = 771.0
 rect_min_size = Vector2( 300, 50 )
 
 [node name="CurrentMenu" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_right = 473.0
+margin_right = 448.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
 focus_mode = 0
@@ -45,7 +48,7 @@ text = "Skills"
 "text",
 ]]
 margin_top = 74.0
-margin_right = 473.0
+margin_right = 448.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
@@ -58,8 +61,9 @@ text = "Skill Type 1"
 [node name="SkillType2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
+visible = false
 margin_top = 148.0
-margin_right = 473.0
+margin_right = 448.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
@@ -72,9 +76,9 @@ text = "SkillType 2"
 [node name="Back" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_top = 222.0
-margin_right = 473.0
-margin_bottom = 292.0
+margin_top = 148.0
+margin_right = 448.0
+margin_bottom = 218.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
@@ -84,28 +88,28 @@ custom_fonts/font = ExtResource( 3 )
 text = "Back"
 
 [node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Options"]
-margin_top = 296.0
-margin_right = 473.0
-margin_bottom = 516.0
+margin_top = 222.0
+margin_right = 448.0
+margin_bottom = 442.0
 rect_min_size = Vector2( 0, 220 )
 
-[node name="Money" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
+[node name="Description" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
 "text",
 ]]
-margin_right = 473.0
+margin_right = 448.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
 text = " This is where the skill effect should appear
- for now its just have this text until each skill
+ for now its just this text until each skill
  has its own description"
 
 [node name="Skills" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 477.0
-margin_right = 1197.0
-margin_bottom = 744.0
-rect_min_size = Vector2( 720, 0 )
+margin_left = 452.0
+margin_right = 1032.0
+margin_bottom = 771.0
+rect_min_size = Vector2( 580, 0 )
 
 [node name="SkillSlot0" type="Button" parent="Panel/HBoxContainer/Skills" groups=[
 "text",

@@ -35,6 +35,8 @@ func show_skills(players):
 			e.set_focus_mode(0)
 
 func update_skills(skills):#Ainda mantendo a solução temporaria de esconder o node quando nao houver mais mana para as skills
+	if !skills:
+		return
 	for i in range(len(skills)):
 		var node = get_node("Panel/HBoxContainer/Skills/SkillSlot" + str(i))
 		mpleft = player.get_mp()
@@ -64,6 +66,7 @@ func _on_Skill_Type_1_pressed():
 	get_node("Panel/HBoxContainer/Skills/SkillSlot1").grab_focus()
 
 func _process(delta):
+	#if skills:
 	update_skills(skills)
 	if Input.is_action_pressed("ui_cancel") and location == "SKIILS":
 		location == "SUBMENU"
