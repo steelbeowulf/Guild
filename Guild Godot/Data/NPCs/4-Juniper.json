@@ -9,5 +9,5 @@
         "But please be careful my friends, the corruption will be stronger past this.",
         "Expect even stronger enemies from now on!"
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[4,4]}
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
 }

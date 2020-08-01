@@ -47,22 +47,27 @@ scale = Vector2( 1.2, 1.2 )
 
 [node name="Ranger1" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 252.984, 129.821 )
+scale = Vector2( 0.5, 0.5 )
 id = 9
 
 [node name="Ranger2" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 334.24, 190.762 )
+scale = Vector2( 0.5, 0.5 )
 id = 9
 
 [node name="Ranger3" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 182.809, 194.456 )
+scale = Vector2( 0.5, 0.5 )
 id = 9
 
 [node name="Ranger4" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 189.42, 60.9113 )
+scale = Vector2( 0.5, 0.5 )
 id = 9
 
 [node name="Ranger5" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 336.187, 56.9447 )
+scale = Vector2( 0.5, 0.5 )
 id = 9
 
 [node name="Limits" type="MarginContainer" parent="."]

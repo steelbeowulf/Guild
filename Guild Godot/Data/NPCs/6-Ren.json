@@ -13,5 +13,5 @@
         "Well, the talk is nice, but don't you have somewhere else to be?, Don't let me be on your way to fix this.",
         "Maybe after this we can have a proper talk. No need to fight beforehand either"
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[4,4]}
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
 }
