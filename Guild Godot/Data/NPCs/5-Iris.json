@@ -12,5 +12,5 @@
         "As well any other of them you find..",
         "..."
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[4,4]}
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
 }

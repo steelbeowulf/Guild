@@ -10,5 +10,5 @@
         "Anyway, please hurry up, we can't let the fiend that's causing this go unpunished",
         "(hope my date doesn't notice these bruises...)"
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[4,4]}
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
 }
