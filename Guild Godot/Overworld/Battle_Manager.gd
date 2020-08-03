@@ -253,7 +253,7 @@ func end_battle(Players, Enemies, Inventory):
 				p.set_stats(10, lck + stat_up)
 				lvup_lck += stat_up
 
-			Play.append(p)
+		Play.append(p)
 
 	GLOBAL.PLAYERS = Play
 	GLOBAL.INVENTORY = Inventory
