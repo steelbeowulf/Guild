@@ -15,7 +15,7 @@ __meta__ = {
 Transitions = {
 4: Vector2( 60, 103 ),
 6: Vector2( 622.823, 103 ),
-24: Vector2( 390, 423.51 )
+24: Vector2( 305, 540 )
 }
 Doors = {
 "Door": "Activate Switch",
@@ -86,7 +86,7 @@ scale = Vector2( 1, 4 )
 next = 6
 
 [node name="Transition3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 304.913, 591.713 )
+position = Vector2( 305, 590 )
 scale = Vector2( 7, 1 )
 next = 24
 
