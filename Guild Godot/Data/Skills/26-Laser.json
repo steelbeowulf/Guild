@@ -1,7 +1,7 @@
 {
 	"ID":26,	
 	"NAME":"LASER", 
-	"QUANT":20, 
+	"QUANT":80, 
 	"TARGET":"ALL", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-65, "TYPE":"PHYSIC", "TURNS":1}],
