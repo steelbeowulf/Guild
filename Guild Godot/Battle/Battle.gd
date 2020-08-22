@@ -483,7 +483,7 @@ func _on_Skills_button_down():
 		else:
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(skills[i].nome)
+		itens.get_node(str(i)).set_text(skills[i].nome+"  "+str(skills[i].quantity))
 	for i in range(Players.size()):
 		players.get_node("P"+str(i)).show()
 		players.get_node("P"+str(i)).set_text("")
