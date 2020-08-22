@@ -16,8 +16,8 @@ signal animation_finished
 
 func initialize(Players, Enemies):
 # Graphics stuff
-	Menu = self.get_parent().get_node("Menu")
-	Info = self.get_parent().get_node("Info")
+	Menu = self.get_parent().get_node("Interface/Menu")
+	Info = self.get_parent().get_node("Interface/Info")
 	for i in range(len(Players)):
 		var lane = Players[i].get_pos()
 		var node = get_node("Players/P"+str(i))
@@ -122,6 +122,8 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 				enqueue(node, skill.nome, 'Skill') #spell anim
 				enqueue(node, "Damage", stats[i]) #take damage
 			$Log.display_text(skill.nome)
+			if current_entity.tipo == "Player":
+				enqueue(current_entity.info, "UpdateMP", mp) # manabar
 			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
 			#enqueue(target.graphics, "Damage") # dano no alvo
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
@@ -161,7 +163,9 @@ func resolve(current_entity, action, target, result, bounds, next, skill):
 			#enqueue(target.graphics, "Damage", dmg) # valor do dano
 			#enqueue(info[target], target, null) # lifebar
 
+			print("[ANIM MANAGER] DANO TIME!")
 			for i in range(len(targets)):
+				print("VENDO TARGET "+targets[i].get_name())
 				if targets[i].tipo == 'Player':
 					print(stats)
 					for st in stats[i]:

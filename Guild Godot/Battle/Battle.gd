@@ -5,7 +5,6 @@ var Players
 var Enemies
 var Inventory
 var current_entity
-var menu_state
 var battle_over
 var skill
 
@@ -32,8 +31,8 @@ func _ready():
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
 	
-	for c in get_node("Menu").get_children():
-		c.focus_previous = NodePath("Menu/Attack")
+	for c in get_node("Interface/Menu").get_children():
+		c.focus_previous = NodePath("Interface/Menu/Attack")
 	
 	for i in range(Players.size()):
 		Players[i].index = i
@@ -117,18 +116,18 @@ func rounds():
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
 				if not current_entity.skills or current_entity.get_mp() == 0:
-					get_node("Menu/Skills").disabled = true
+					get_node("Interface/Menu/Skills").disabled = true
 				else:
-					get_node("Menu/Skills").disabled = false
+					get_node("Interface/Menu/Skills").disabled = false
 				if Inventory.size() == 0:
-					get_node("Menu/Itens").disabled = true
+					get_node("Interface/Menu/Itens").disabled = true
 				
 				# Show the Menu and wait until action is selected
-				get_node("Menu").show()
-				for c in get_node("Menu").get_children():
+				get_node("Interface/Menu").show()
+				for c in get_node("Interface/Menu").get_children():
 					c.show()
-				$Menu/Attack.grab_focus()
-				yield($Menu, "turn_finished")
+				$Interface/Menu/Attack.grab_focus()
+				yield($Interface, "turn_finished")
 				action = current_action
 				target = current_target
 				
@@ -169,15 +168,15 @@ func rounds():
 		skill = null
 		yield($AnimationManager, "animation_finished")
 		
-		get_node("Menu/Attack").grab_focus()
-		get_node("Menu/Attack").disabled = false
-		get_node("Menu/Attack").set_focus_mode(2)
+		get_node("Interface/Menu/Attack").grab_focus()
+		get_node("Interface/Menu/Attack").disabled = false
+		get_node("Interface/Menu/Attack").set_focus_mode(2)
 		
-		get_node("Menu/Skills").disabled = false
-		get_node("Menu/Skills").set_focus_mode(2)
+		get_node("Interface/Menu/Skills").disabled = false
+		get_node("Interface/Menu/Skills").set_focus_mode(2)
 		
-		get_node("Menu/Itens").disabled = false
-		get_node("Menu/Itens").set_focus_mode(2)
+		get_node("Interface/Menu/Itens").disabled = false
+		get_node("Interface/Menu/Itens").set_focus_mode(2)
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
@@ -388,145 +387,6 @@ func set_current_action(action):
 func set_current_target(target):
 	current_target = target
 
-
-func _process(delta):
-	for i in range(len(Players)):
-		var p = Players[i]
-		if not p.is_dead():
-			var index = p.index
-			var lane = p.get_pos()
-	if Input.is_action_pressed("ui_cancel") and menu_state != null:
-		for c in $Menu.get_children():
-			c.hide_stuff()
-		get_node("Menu/"+str(menu_state)).grab_focus()
-		get_node("Menu/"+str(menu_state)).disabled = false
-		get_node("Menu/"+str(menu_state)).set_focus_mode(2)
-
-
-func _on_Lane_button_down():
-	menu_state = "Lane"
-	for i in range(3):
-		get_node("Menu/Lane/Targets/"+str(i)).hide()
-	get_node("Menu/Lane/Targets").show()
-	if current_entity.get_pos() != 2: 
-		get_node("Menu/Lane/Targets/2").show()
-		get_node("Menu/Lane/Targets/2").grab_focus()
-		get_node("Menu/Lane/Targets/2").set_text("FRONT")
-	if current_entity.get_pos() != 1: 
-		get_node("Menu/Lane/Targets/1").show()
-		get_node("Menu/Lane/Targets/1").grab_focus()
-		get_node("Menu/Lane/Targets/1").set_text("MID")
-	if current_entity.get_pos() != 0: 
-		get_node("Menu/Lane/Targets/0").show()
-		get_node("Menu/Lane/Targets/0").grab_focus()
-		get_node("Menu/Lane/Targets/0").set_text("BACK")
-	get_node("Menu/Lane/")._on_Action_pressed()
-
-func _on_Itens_button_down():
-	menu_state = "Itens"
-	LOADER.List = Inventory
-	get_node("Menu/Attack").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Skills").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Itens").disabled = true
-	get_node("Menu/Itens").set_focus_mode(0)
-	var itens = get_node("Menu/Itens/Targets/ItemContainer/HBoxContainer/Itens")
-	var players = get_node("Menu/Itens/Targets/PlayerContainer")
-	var enemies = get_node("Menu/Itens/Targets/EnemiesContainer")
-	for i in range(Inventory.size()):
-		itens.get_node(str(i)).hide()
-	for i in range(4):
-		players.get_node("P"+str(i)).hide()
-	for i in range(5):
-		enemies.get_node("E"+str(i)).hide()
-	for i in range(Inventory.size()):
-		if Inventory[i].quantity == 0:
-			itens.get_node(str(i)).disabled = true
-		else:
-			itens.get_node(str(i)).disabled = false
-		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(Inventory[i].nome+" x"+str(Inventory[i].quantity))
-	for i in range(Players.size()):
-		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).set_text("")
-	for i in range(Enemies.size()):
-		if not Enemies[i].is_dead():
-			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).set_text("")
-	itens.get_node("0").grab_focus()
-	LOADER.List = Inventory
-	get_node("Menu/Itens/")._on_Action_pressed()
-
-func _on_Skills_button_down():
-	menu_state = "Skills"
-	LOADER.List = current_entity.get_skills()
-	get_node("Menu/Attack").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Itens").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Skills").disabled = true
-	get_node("Menu/Skills").set_focus_mode(0)
-	var skills = current_entity.get_skills()
-	var itens = get_node("Menu/Skills/Targets/ItemContainer/HBoxContainer/Itens")
-	var players = get_node("Menu/Skills/Targets/PlayerContainer/")
-	var enemies = get_node("Menu/Skills/Targets/EnemiesContainer/")
-	for i in range(5):
-		itens.get_node(str(i)).hide()
-	for i in range(4):
-		players.get_node("P"+str(i)).hide()
-	for i in range(5):
-		enemies.get_node("E"+str(i)).hide()
-	for i in range(skills.size()):
-		if current_entity.get_mp() < skills[i].quantity:
-			itens.get_node(str(i)).disabled = true
-		else:
-			itens.get_node(str(i)).disabled = false
-		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(skills[i].nome+"  "+str(skills[i].quantity))
-	for i in range(Players.size()):
-		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).set_text("")
-	for i in range(Enemies.size()):
-		if not Enemies[i].is_dead():
-			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).set_text("")
-	itens.get_node("0").grab_focus()
-	LOADER.List = current_entity.get_skills()
-	get_node("Menu/Skills/")._on_Action_pressed()
-
-func _on_Attack_button_down():
-	menu_state = "Attack"
-	var unfocus = true
-	get_node("Menu/Skills").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Itens").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Attack").disabled = true
-	get_node("Menu/Attack").set_focus_mode(0)
-	var players = get_node("Menu/Attack/Targets/HBoxContainer/Players")
-	var enemies = get_node("Menu/Attack/Targets/HBoxContainer/Enemies")
-	for i in range(4):
-		players.get_node("P"+str(i)).hide()
-	for i in range(5):
-		enemies.get_node("E"+str(i)).hide()
-	for i in range(Players.size()):
-		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).disabled = false
-		players.get_node("P"+str(i)).set_text("")
-	for i in range(Enemies.size()):
-		if not Enemies[i].is_dead():
-			if unfocus:
-				enemies.get_node("E"+str(i)).grab_focus()
-				unfocus = false
-			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).disabled = false
-			enemies.get_node("E"+str(i)).set_text("")
-	#enemies.get_node("E0").grab_focus()
-	get_node("Menu/Attack/").set_pressed(true)
-	get_node("Menu/Attack/")._on_Action_pressed()
-	get_node("Menu/Attack/").set_pressed(true)
-
 func end_battle():
 	print("[BATTLE] Battle End!")
 	$AnimationManager/Log.display_text("Fim de jogo!")
@@ -545,6 +405,77 @@ func recalculate_bounds():
 		bounds.append(hatemax)
 	return bounds
 
+# Interface 
 func _on_Run_button_down():
-	menu_state = "Run"
-	get_node("Menu/Run/")._on_Action_pressed()
+	$Interface.prepare_run_action()
+
+func _on_Lane_button_down():
+	$Interface.prepare_lane_action(current_entity.get_pos())
+
+
+func _on_Itens_button_down():
+	LOADER.List = Inventory
+#	var players = get_node("Interface/Menu/Itens/Targets/PlayerContainer")
+#	var enemies = get_node("Interface/Menu/Itens/Targets/EnemiesContainer")
+#	for i in range(4):
+#		players.get_node("P"+str(i)).hide()
+#	for i in range(5):
+#		enemies.get_node("E"+str(i)).hide()
+#	for i in range(Players.size()):
+#		players.get_node("P"+str(i)).show()
+#		players.get_node("P"+str(i)).set_text("")
+#	for i in range(Enemies.size()):
+#		if not Enemies[i].is_dead():
+#			enemies.get_node("E"+str(i)).show()
+#			enemies.get_node("E"+str(i)).set_text("")
+	$Interface.prepare_itens_action(Inventory)
+
+func _on_Skills_button_down():
+	var skills = current_entity.get_skills()
+	LOADER.List = skills
+	$Interface.prepare_skills_action(skills, current_entity.get_mp())
+#	var players = get_node("Interface/Menu/Skills/Targets/PlayerContainer/")
+#	var enemies = get_node("Interface/Menu/Skills/Targets/EnemiesContainer/")
+#	for i in range(4):
+#		players.get_node("P"+str(i)).hide()
+#	for i in range(5):
+#		enemies.get_node("E"+str(i)).hide()
+#	for i in range(Players.size()):
+#		players.get_node("P"+str(i)).show()
+#		players.get_node("P"+str(i)).set_text("")
+#	for i in range(Enemies.size()):
+#		if not Enemies[i].is_dead():
+#			enemies.get_node("E"+str(i)).show()
+#			enemies.get_node("E"+str(i)).set_text("")
+
+func _on_Attack_button_down():
+	$Interface.prepare_attack_action()
+#	var unfocus = true
+#	get_node("Interface/Menu/Skills").hide()
+#	get_node("Interface/Menu/Lane").hide()
+#	get_node("Interface/Menu/Itens").hide()
+#	get_node("Interface/Menu/Run").hide()
+#	get_node("Interface/Menu/Attack").disabled = true
+#	get_node("Interface/Menu/Attack").set_focus_mode(0)
+#	var players = get_node("Interface/Menu/Attack/Targets/HBoxContainer/Players")
+#	var enemies = get_node("Interface/Menu/Attack/Targets/HBoxContainer/Enemies")
+#	for i in range(4):
+#		players.get_node("P"+str(i)).hide()
+#	for i in range(5):
+#		enemies.get_node("E"+str(i)).hide()
+#	for i in range(Players.size()):
+#		players.get_node("P"+str(i)).show()
+#		players.get_node("P"+str(i)).disabled = false
+#		players.get_node("P"+str(i)).set_text("")
+#	for i in range(Enemies.size()):
+#		if not Enemies[i].is_dead():
+#			if unfocus:
+#				enemies.get_node("E"+str(i)).grab_focus()
+#				unfocus = false
+#			enemies.get_node("E"+str(i)).show()
+#			enemies.get_node("E"+str(i)).disabled = false
+#			enemies.get_node("E"+str(i)).set_text("")
+#	#enemies.get_node("E0").grab_focus()
+#	get_node("Interface/Menu/Attack/").set_pressed(true)
+#	get_node("Interface/Menu/Attack/")._on_Action_pressed()
+#	get_node("Interface/Menu/Attack/").set_pressed(true)
