@@ -4,17 +4,17 @@ extends "Apply.gd"
 var Players
 var Enemies
 var Inventory
-var current_entity
 var battle_over
 var skill
 
+var current_entity
 var current_action
-var current_target
 
 var total_enemies = 0
 var total_allies = 0
 
 var boss = false
+const RUN_CHANCE = 0.75
 
 signal round_finished
 signal finish_anim
@@ -77,9 +77,9 @@ func rounds():
 			next = turnorder[i+1]
 		else:
 			next = turnorder[0]
-		
 		var id = current_entity.index
 
+		# TODO: Refactor all this
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
 		var can_actually_move = 0
@@ -129,7 +129,6 @@ func rounds():
 				$Interface/Menu/Attack.grab_focus()
 				yield($Interface, "turn_finished")
 				action = current_action
-				target = current_target
 				
 				# Checks if the battle is over and exits the main loop
 				if battle_over:
@@ -153,19 +152,19 @@ func rounds():
 			action = "Attack"
 
 		# Actually executes the actions for the turn and animates it
-		result = execute_action(action, target)
-		target = result[0]
-		result = result[1]
-		if action == "Run":
-			var is_boss = result[0]
-			var run_successful = result[1]
-			if not is_boss and run_successful:
-				battle_over = true
-				emit_signal("round_finished")
-				return
-		print(skill)
-		$AnimationManager.resolve(current_entity, action, target, result, bounds, next, skill)
-		skill = null
+		result = execute_action(action)
+		#target = result[0]
+		#result = result[1]
+		#if action == "Run":
+		#	var is_boss = result[0]
+		#	var run_successful = result[1]
+		#	if not is_boss and run_successful:
+		#		battle_over = true
+		#		emit_signal("round_finished")
+		#		return
+		#print(skill)
+		$AnimationManager.resolve(current_entity, result)
+		#skill = null
 		yield($AnimationManager, "animation_finished")
 		
 		get_node("Interface/Menu/Attack").grab_focus()
@@ -202,42 +201,41 @@ func stackagility(a,b):
 	return a.get_agi() > b.get_agi()
 
 # Executes an action on a given target
-func execute_action(action, target):
-	print("[BATTLE] Executing action "+str(action))
+func execute_action(action: Action):
+	var action_type = action.get_type()
+	print("[BATTLE] Executing action "+str(action.get_type()))
 	# Attack: the target takes PHYSICAL damage
-	if action == "Attack":
+	if action_type == "Attack":
 		AUDIO.play_se("HIT")
-		var dies_on_attack = false
+		var death = false
 		var entities = []
-		var alvo = target[1]
-		var skitem = int(target[0])
-		if alvo.left(1) == "P":
+		var target_id = action.get_targets()[0]
+		if target_id < 0:
+			target_id += 1
 			entities = Players
 		else:
 			entities = Enemies
-		alvo = int(alvo.right(1))
-		alvo = entities[alvo]
+		var target = entities[target_id]
 		var atk = current_entity.get_atk()
-		var dmg = alvo.take_damage(PHYSIC, atk)
-		if alvo.classe == "boss" and current_entity.classe != "boss":
-			var hate = current_entity.update_hate(dmg, alvo.index)
-		if alvo.get_health() <= 0:
-			dies_on_attack = true
-			alvo.die()
-		print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies_on_attack)+", dmg="+str(dmg))
-		return [alvo, [dies_on_attack, dmg]]
+		var dmg = target.take_damage(PHYSIC, atk)
+		if target.classe == "boss" and current_entity.classe != "boss":
+			var hate = current_entity.update_hate(dmg, target.index)
+		if target.get_health() <= 0:
+			death = true
+			target.die()
+		print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(death)+", dmg="+str(dmg))
+		return StatsActionResult.new("Attack", [target], [dmg], [death])
 	
 	# Lane: only the player characters may change lanes
-	elif action == "Lane":
+	elif action_type == "Lane":
 		AUDIO.play_se("RUN")
-		var id = current_entity.index
-		var lane = int(target)
+		var lane = action.get_action()
 		current_entity.set_pos(lane)
 		print("[BATTLE] lane="+str(lane))
-		return [0, lane]
+		return LaneActionResult.new(lane)
 	
 	# Item: only the player characters may use items
-	elif action == "Item":
+	elif action_type == "Item":
 		AUDIO.play_se("SPELL")
 		# Quick trick to identify if target is friend or foe
 		var entities = []
@@ -305,7 +303,7 @@ func execute_action(action, target):
 			Inventory.remove(int(target[0]))
 		return [targets, [dead, ailments, stat_change]]
 
-	elif action == "Skills":
+	elif action_type == "Skill":
 		AUDIO.play_se("SPELL")
 		var entities = []
 		var alvo = target[1]
@@ -367,25 +365,21 @@ func execute_action(action, target):
 		current_entity.set_stats(MP, mp-skill.quantity)
 		return [[targets, skill.quantity], [dead, ailments, stats_change]]
 	
-	elif action == "Run":
+	elif action_type == "Run":
 		AUDIO.play_se("RUN")
 		randomize()
-		var chance = rand_range(0,100)
-		print("[BATTLE] Run, success="+str(chance<=75))
-		return [0, [boss, chance<=75]]
+		var success = (rand_range(0,100) <= RUN_CHANCE)
+		return RunActionResult(boss, success)
 	
 	# Literally does nothing
-	elif action == "Pass":
+	elif action_type == "Pass":
 		print("[BATTLE] Pass")
-		return [0, 0]
+		return ActionResult.new("Pass")
 	
 	
 # Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action
-	
-func set_current_target(target):
-	current_target = target
 
 func end_battle():
 	print("[BATTLE] Battle End!")

@@ -1,4 +1,5 @@
 extends "Stats.gd"
+class_name Entity
 
 var id
 var index

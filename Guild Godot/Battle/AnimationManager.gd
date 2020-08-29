@@ -87,130 +87,57 @@ func _physics_process(delta):
 	if not queue and can_play:
 		emit_signal("animation_finished")
 
-func resolve(current_entity, action, target, result, bounds, next, skill):
+func resolve(current_entity: Entity, action_result: ActionResult):
 	print("[ANIMATION PLAYER] Resolving current turn")
-	print(action)
+	var action_type = action_result.get_type()
 	# TODO Deal with ailments
-	if typeof(action) == TYPE_STRING:
-		if action == "Attack":
-			var dies_on_attack = result[0]
-			var dmg = result[1]
-			$Log.display_text("Attack")
-			enqueue(current_entity.graphics, "attack", null) # ataque do current_entity
-			enqueue(target.graphics, "Damage", dmg) # dano no alvo
-			#enqueue(target.graphics, "Damage", dmg) # valor do dano
-			if target.tipo == 'Player':
-				enqueue(target.info, "UpdateHP", dmg) # lifebar
-			if dies_on_attack:
-				enqueue(target.graphics, "death", null) #death animaton
-				target.graphics
-		
-		#[targets, skill.quantity, [dead, ailments, stats_change]]
-		elif action == "Skills":
-			var node
-			var targets = target[0]
-			var mp = target[1]
-			var dies_on_attack = result[0]
-			var ailments = result[1]
-			var stats = result[2]
-			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
-			for i in range(len(targets)):
-				node = targets[i].graphics
-				print(skill.name)
-				print(stats[i])
-				node.set_spell(skill.img, skill.anim, skill.nome)
-				enqueue(node, skill.nome, 'Skill') #spell anim
-				enqueue(node, "Damage", stats[i]) #take damage
-			$Log.display_text(skill.nome)
-			if current_entity.tipo == "Player":
-				enqueue(current_entity.info, "UpdateMP", mp) # manabar
-			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
-			#enqueue(target.graphics, "Damage") # dano no alvo
-			#enqueue(target.graphics, "Damage", dmg) # valor do dano
-			#enqueue(info[target], target, null) # lifebar
-
-			for i in range(len(targets)):
-				if targets[i].tipo == 'Player':
-					for st in stats[i]:
-						#enqueue(targets[i].graphics, "Damage") # dano no alvo
-						enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
-				if dies_on_attack[i]:
-					enqueue(targets[i].graphics, "death", null) #death animaton
-
-		elif action == "Item":
-			var node
-
-			print("Result")
-			print(result)
-			var targets = target
-			#var mp = target[1]
-			print("Targets")
-			print(targets)
-			var dies_on_attack = result[0]
-			var ailments = result[1]
-			var stats = result[2]
-			enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
-			for i in range(len(targets)):
-				node = targets[i].graphics
-				print(skill.name)
-				print(stats[i])
-				#node.set_spell(skill.img, skill.anim, skill.nome)
-				#enqueue(node, skill.nome, 'Skill') #spell anim
-				enqueue(node, "Damage", stats[i]) #take damage
-			$Log.display_text(skill.nome)
-			#enqueue(target[0].graphics, "Damage", dmg) # dano no alvo
-			#enqueue(target.graphics, "Damage") # dano no alvo
-			#enqueue(target.graphics, "Damage", dmg) # valor do dano
-			#enqueue(info[target], target, null) # lifebar
-
-			print("[ANIM MANAGER] DANO TIME!")
-			for i in range(len(targets)):
-				print("VENDO TARGET "+targets[i].get_name())
-				if targets[i].tipo == 'Player':
-					print(stats)
-					for st in stats[i]:
-						#enqueue(targets[i].graphics, "Damage") # dano no alvo
-						if st[1] == 0:
-							enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
-						if st[1] == 1:
-							enqueue(targets[i].info, "UpdateMP", st[0]) # lifebar
-				if dies_on_attack[i]:
-					enqueue(targets[i].graphics, "death", null) #death animaton
-
-		
-		elif action == "Lane":
-			var lane = result
-			$Log.display_text("Lane change")
-			current_entity.graphics.change_lane(lane)
-			#emit_signal("animation_finished")
-		
-		elif action == "Run":
-			var is_boss = result[0]
-			var run_successful = result[1]
-			if not is_boss and run_successful:
-				$Log.display_text("Ran away safely")
-				enqueue(current_entity.graphics, "Run", null) #run animation
-			elif is_boss:
-				$Log.display_text("Can't escape")
-			else:
-				$Log.display_text("Failed to run")
+	if action_type == "Attack":
+		$Log.display_text("Attack")
+		var target = action_result.get_targets()[0]
+		var dies = action_result.get_deaths()[0]
+		var dmg = action_result.get_stats_change()[0]
+		enqueue(current_entity.graphics, "attack", null) # ataque do current_entity
+		enqueue(target.graphics, "Damage", dmg) # dano no alvo
+		if target.tipo == 'Player':
+			enqueue(target.info, "UpdateHP", dmg) # lifebar
+		if dies:
+			enqueue(target.graphics, "death", null) #death animation
+	elif action_type == "Lane":
+		$Log.display_text("Lane change")
+		var lane = action_result.get_lane()
+		current_entity.graphics.change_lane(lane)
+	elif action_type == "Run":
+		var is_boss = action_result.is_boss()
+		var is_run_successful = action_result.is_run_successful()
+		if not is_boss and is_run_successful:
+			$Log.display_text("Ran away safely")
+		elif is_boss:
+			$Log.display_text("Can't escape")
+		else:
+			$Log.display_text("Failed to run")
 	else:
-		var dead_people_list = result[0]
-		var all_ailments = result[1]
-		var stats_change = result[2]
-		
-#		for ailment in all_ailments:
-#			enqueue(target.graphics, ailment, action.target) #ailment effect anim
-#		for stat_change in stats_change:
-#			enqueue(target.graphics, stat_change, action.target) #stat effect anim
-#		for dead in dead_people_list:
-#			enqueue(dead.graphics, "death", null) #kill people
+		var skitem = action_result.get_spell()
+		$Log.display_text(skitem.nome)
+		var targets = action_result.get_targets()
+		var dies_on_attack = action_result.get_deaths()
+		var stats = action_result.get_stats_change()
+		enqueue(current_entity.graphics, "skill", null) # ataque do current_entity
+		for i in range(len(targets)):
+			var graphics = targets[i].graphics
+			if action_type == "Skill":
+				graphics.set_spell(skitem.img, skitem.anim, skitem.nome)
+				enqueue(graphics, skitem.nome, 'Skill') #spell anim
+			enqueue(graphics, "Damage", stats[i]) #take damage
+			if dies_on_attack[i]:
+				enqueue(graphics, "death", null) #death animaton
+			if targets[i].tipo == 'Player':
+				for st in stats[i]:
+					enqueue(targets[i].info, "UpdateHP", st[0]) # lifebar
+		if current_entity.tipo == "Player" and action_type == "Skill":
+			var mp = skitem.get_cost()
+			enqueue(current_entity.info, "UpdateMP", mp) # manabar
 
 	current_entity.graphics.end_turn()
-	next.graphics.turn()
-	# TODO MUDAR bounds should be on the logical part
-	#for i in range(len(Players_img)):
-	#	Players_img[i].update_bounds(bounds)
 
 # TODO: there are graphical parts in this, move to ANimationManager
 func manage_hate(type, target):

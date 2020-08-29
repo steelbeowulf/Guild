@@ -11,9 +11,9 @@ func _ready():
 		c.connect("action_picked", self, "_on_Action_Picked")
 
 # Repass info to parent
-func _on_Action_Picked(action: String, target: String) -> void:
+func _on_Action_Picked(action_type: String, action_id: int, targets: PoolIntArray) -> void:
+	var action = Action.new(action_type, action_id, targets)
 	Battle.set_current_action(action)
-	Battle.set_current_target(target)
 	menu_state = ""
 	emit_signal("turn_finished")
 
