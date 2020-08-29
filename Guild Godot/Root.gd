@@ -38,12 +38,12 @@ func _process(delta):
 	elif Input.is_action_just_pressed("menu") and STATE == "Menu":
 		close_menu()
 	# Closes submenus and returns to menu
+	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Submenu":
+		print("happened")
+		return_menu()
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
-		for c in $Menu_Area/SubMenus.get_children():
-			c.free()
-		menu.enter(GLOBAL.PLAYERS)
-		menu.show()
-		menu.give_focus()
+		
+		close_menu()
 	# Cheap hack to test money
 	elif Input.is_action_just_pressed("debug"):
 		if(menu.get_focus_owner()):
@@ -72,6 +72,13 @@ func close_menu():
 	STATE = "Map"
 	get_tree().paused = false
 
+func return_menu():
+	for c in $Menu_Area/SubMenus.get_children():
+		c.queue_free()
+	menu.enter(GLOBAL.PLAYERS)
+	menu.show()
+	menu.give_focus()
+	STATE = "Menu"
 
 func player_clicked(num):
 	if char_screen == -1:
@@ -92,6 +99,7 @@ func player_clicked(num):
 
 # Opens the save submenu
 func open_save():
+	STATE = "SaveSubmenu"
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(save.instance())
@@ -101,6 +109,7 @@ func open_save():
 
 # Opens the options submenu
 func open_options():
+	STATE = "Submenu"
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(options.instance())
@@ -109,6 +118,7 @@ func open_options():
 
 # Opens the inventory submenu
 func open_inventory():
+	STATE = "ItemSubmenu"
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(itens.instance())
@@ -119,6 +129,7 @@ func open_inventory():
 
 # Opens the inventory submenu
 func back_to_inventory():
+	STATE = "ItemSubmenu"
 	get_node("Menu_Area/SubMenus/ItemUse").hide()
 	get_node("Menu_Area/SubMenus/Itens").show()
 	get_node("Menu_Area/SubMenus/Itens").just_entered()
@@ -126,12 +137,14 @@ func back_to_inventory():
 
 # Opens the skill submenu
 func back_to_skills(id):
+	STATE = "SkillSubmenu"
 	get_node("Menu_Area/SubMenus/SkillUse").hide()
 	get_node("Menu_Area/SubMenus/Skills").show()
 	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
 	get_node("Menu_Area/SubMenus/Skills").give_focus()
 
 func open_skills(id):
+	STATE = "SkillSubmenu"
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(skills.instance())
@@ -148,6 +161,7 @@ func toggle_status():
 
 # Opens the status submenu
 func open_status(char_id):
+	STATE = "StatusSubmenu"
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
 	get_node("Menu_Area/SubMenus").add_child(status.instance())
@@ -156,6 +170,7 @@ func open_status(char_id):
 
 # Opens the use item submenu
 func use_item(item):
+	STATE = "ItemUseSubmenu"
 	get_node("Menu_Area/SubMenus/Itens").hide()
 	get_node("Menu_Area/SubMenus").add_child(use_itens.instance())
 	get_node("Menu_Area/SubMenus/ItemUse").show()
@@ -164,6 +179,7 @@ func use_item(item):
 
 # Opens the use skill submenu
 func use_skill(skill, player):
+	STATE = "SkillUseSubmenu"
 	get_node("Menu_Area/SubMenus/Skills").hide()
 	get_node("Menu_Area/SubMenus").add_child(use_skills.instance())
 	get_node("Menu_Area/SubMenus/SkillUse").show()

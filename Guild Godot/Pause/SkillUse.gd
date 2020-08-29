@@ -32,8 +32,8 @@ func _process(delta):
 	if Input.is_action_pressed("ui_cancel") and location == "TARGETS":
 		get_parent().get_parent().get_parent().back_to_skills(player.id)
 		queue_free()
-	elif Input.is_action_just_pressed("ui_accept") and type=="ALL":
-		use_item()
+	#if Input.is_action_just_pressed("ui_accept") and type=="ALL":
+	#	use_item()
 
 func use_item():
 	var mp = player.get_mp()

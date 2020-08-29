@@ -35,14 +35,14 @@ func _on_Use_pressed():
 
 
 func _process(delta):
-	if Input.is_action_pressed("ui_cancel"):
-		$HBoxContainer/Options/Use.set_focus_mode(2)
-		$HBoxContainer/Options/Organize.set_focus_mode(2)
-		$HBoxContainer/Options/KeyItens.set_focus_mode(2)
-		$HBoxContainer/Options/Back.set_focus_mode(2)
-		for e in $HBoxContainer/Itens.get_children():
-			e.set_focus_mode(0)
-		get_node("HBoxContainer/Options/Use").grab_focus()
+	#if Input.is_action_pressed("ui_cancel"):
+	#	$HBoxContainer/Options/Use.set_focus_mode(2)
+	#	$HBoxContainer/Options/Organize.set_focus_mode(2)
+	#	$HBoxContainer/Options/KeyItens.set_focus_mode(2)
+	#	$HBoxContainer/Options/Back.set_focus_mode(2)
+	#	for e in $HBoxContainer/Itens.get_children():
+	#		e.set_focus_mode(0)
+	#	get_node("HBoxContainer/Options/Use").grab_focus()
 
 	#another placeholder until itens can be used in menus
 	if x == 1:

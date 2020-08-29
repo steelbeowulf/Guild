@@ -38,5 +38,4 @@ margin_top = -2059.0
 margin_right = 2205.0
 margin_bottom = 1263.0
 color = Color( 0.0196078, 0, 0.0588235, 0 )
-
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

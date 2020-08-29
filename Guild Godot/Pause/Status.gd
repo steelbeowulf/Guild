@@ -7,9 +7,12 @@ func _process(delta):
 		enter((id + 1) % len(GLOBAL.PLAYERS))
 	elif Input.is_action_just_pressed("ui_left"):
 		enter((id - 1) % len(GLOBAL.PLAYERS))
+	elif Input.is_action_just_pressed("ui_cancel"):
+		get_parent().get_parent().get_parent().return_menu()
 
 
 func enter(player_id):
+	print(player_id)
 	id = player_id
 	var player = GLOBAL.PLAYERS[player_id]
 	# Sets player name

@@ -20,18 +20,23 @@ func show_itens(bag):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
 		node.set_text(str(bag[i].nome) + " x " + str(bag[i].quantity))
 		node.show()
-		if bag[i].quantity == 0:
+		if bag[i].quantity <= 0:
 			node.hide()
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 	for e in $Panel/HBoxContainer/Itens.get_children():
 			e.set_focus_mode(0)
+	
 
 func update_itens(bag):
 	for i in range(len(bag)):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
 		node.set_text(str(bag[i].nome) + " x " + str(bag[i].quantity))
 		if bag[i].quantity == 0:
+			node.disabled = true
 			node.hide()
+		else:
+			node.disabled = false
+			node.show()
 
 func _on_Item_selected(id):
 	item = GLOBAL.INVENTORY[id]
@@ -61,16 +66,21 @@ func _on_Use_pressed():
 	for e in $Panel/HBoxContainer/Itens.get_children():
 		e.set_focus_mode(2)
 	location = "ITENS"
-	get_node("Panel/HBoxContainer/Itens/ItemSlot0").grab_focus()
+	for i in range(len(GLOBAL.INVENTORY)):
+		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
+		if node.disabled == false:
+			get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i)).grab_focus()
+			break
+	#get_node("Panel/HBoxContainer/Itens/ItemSlot0").grab_focus()
 
 func _process(delta):
 	update_itens(GLOBAL.INVENTORY)
-	if Input.is_action_pressed("ui_cancel") and location == "ITENS":
-		location == "SUBMENU"
+	if Input.is_action_just_pressed("ui_cancel") and location == "ITENS":
+		location = "SUBMENU"
 		give_focus()
-	elif Input.is_action_pressed("ui_cancel") and location == "SUBMENU":
-		location == "OUTSIDE"
-		get_parent().get_parent().open_menu()
+	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
+		location = "OUTSIDE"
+		get_parent().get_parent().get_parent().return_menu()
 
 
 func give_focus():
@@ -81,3 +91,8 @@ func give_focus():
 	for e in $Panel/HBoxContainer/Itens.get_children():
 		e.set_focus_mode(0)
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
+
+func _on_Back_pressed():
+	print(location)
+	location == "OUTSIDE"
+	get_parent().get_parent().get_parent().return_menu()
