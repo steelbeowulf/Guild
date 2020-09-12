@@ -3,10 +3,10 @@ class_name StatsActionResult
 
 var stats_change : Array
 var deaths : PoolIntArray
-var targets : PoolIntArray
+var targets : Array
 var spell : Item
 
-func _init(type_arg: String, targets_arg: PoolIntArray, 
+func _init(type_arg: String, targets_arg: Array, 
 			stats_arg: Array, deaths_arg: PoolIntArray,
 			spell_arg = null):
 	self.type = type_arg
@@ -24,7 +24,7 @@ func get_stats_change() -> Array:
 func get_deaths() -> PoolIntArray:
 	return deaths
 
-func get_targets() -> PoolIntArray:
+func get_targets() -> Array:
 	return targets
 
 func get_spell() -> Item:

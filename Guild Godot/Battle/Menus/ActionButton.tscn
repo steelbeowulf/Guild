@@ -26,7 +26,6 @@ text = "Action"
 script = ExtResource( 5 )
 
 [node name="SubActions" type="VBoxContainer" parent="."]
-editor/display_folded = true
 visible = false
 margin_left = 320.0
 margin_right = 520.0
@@ -51,19 +50,62 @@ margin_top = 93.0
 margin_right = 200.0
 margin_bottom = 120.0
 
+[node name="4" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="5" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="6" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="7" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="8" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="9" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="10" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="11" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
+[node name="12" parent="SubActions" instance=ExtResource( 6 )]
+margin_top = 93.0
+margin_right = 200.0
+margin_bottom = 120.0
+
 [node name="PlayerContainer" type="Node2D" parent="."]
-editor/display_folded = true
 
-[node name="0" parent="PlayerContainer" instance=ExtResource( 7 )]
+[node name="-1" parent="PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="1" parent="PlayerContainer" instance=ExtResource( 7 )]
+[node name="-2" parent="PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="2" parent="PlayerContainer" instance=ExtResource( 7 )]
+[node name="-3" parent="PlayerContainer" instance=ExtResource( 7 )]
 
-[node name="3" parent="PlayerContainer" instance=ExtResource( 7 )]
+[node name="-4" parent="PlayerContainer" instance=ExtResource( 7 )]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="0" parent="EnemyContainer" instance=ExtResource( 7 )]
 
@@ -74,4 +116,5 @@ editor/display_folded = true
 [node name="3" parent="EnemyContainer" instance=ExtResource( 7 )]
 
 [node name="4" parent="EnemyContainer" instance=ExtResource( 7 )]
+
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

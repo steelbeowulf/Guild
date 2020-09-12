@@ -111,16 +111,17 @@ func rounds():
 				var decision = current_entity.AI(Players, Enemies)
 				target = decision[1]
 				action = decision[0]
+				action = Action.new("Pass", 0, [0])
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
 				if not current_entity.skills or current_entity.get_mp() == 0:
-					get_node("Interface/Menu/Skills").disabled = true
+					get_node("Interface/Menu/Skill").disabled = true
 				else:
-					get_node("Interface/Menu/Skills").disabled = false
+					get_node("Interface/Menu/Skill").disabled = false
 				if Inventory.size() == 0:
-					get_node("Interface/Menu/Itens").disabled = true
+					get_node("Interface/Menu/Item").disabled = true
 				
 				# Show the Menu and wait until action is selected
 				get_node("Interface/Menu").show()
@@ -171,11 +172,11 @@ func rounds():
 		get_node("Interface/Menu/Attack").disabled = false
 		get_node("Interface/Menu/Attack").set_focus_mode(2)
 		
-		get_node("Interface/Menu/Skills").disabled = false
-		get_node("Interface/Menu/Skills").set_focus_mode(2)
+		get_node("Interface/Menu/Skill").disabled = false
+		get_node("Interface/Menu/Skill").set_focus_mode(2)
 		
-		get_node("Interface/Menu/Itens").disabled = false
-		get_node("Interface/Menu/Itens").set_focus_mode(2)
+		get_node("Interface/Menu/Item").disabled = false
+		get_node("Interface/Menu/Item").set_focus_mode(2)
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
@@ -210,6 +211,8 @@ func execute_action(action: Action):
 		var death = false
 		var entities = []
 		var target_id = action.get_targets()[0]
+		print("TARGET ID")
+		print(target_id)
 		if target_id < 0:
 			target_id += 1
 			entities = Players
@@ -237,144 +240,139 @@ func execute_action(action: Action):
 	# Item: only the player characters may use items
 	elif action_type == "Item":
 		AUDIO.play_se("SPELL")
-		# Quick trick to identify if target is friend or foe
-		var entities = []
-		var alvo = target[1]
-		var skitem = int(target[0])
-		if alvo.left(1) == "P":
-			entities = Players
-		else:
-			entities = Enemies
-		alvo = int(alvo.right(1))
-		alvo = entities[alvo]
-		skill = Inventory[skitem]
-		var item = Inventory[skitem]
-		
-		# Itens may target entities, lanes or everyone
-		var affected = []
-		if item.get_target() == "ONE":
-			affected.append(alvo)
-		elif item.get_target() == "LANE":
-			var affected_lane = alvo.get_pos()
-			for p in entities:
-				if p.get_pos() == affected_lane:
-					affected.append(p)
-		elif item.get_target() == "ALL":
-			for p in entities:
-				affected.append(p)
-		
+		var targets = action.get_targets()
+		var item_id = action.get_action()
+		var item = Inventory[item_id]
+
+#		# Itens may target entities, lanes or everyone
+#		var affected = []
+#		if item.get_target() == "ONE":
+#			affected.append(alvo)
+#		elif item.get_target() == "LANE":
+#			var affected_lane = alvo.get_pos()
+#			for p in entities:
+#				if p.get_pos() == affected_lane:
+#					affected.append(p)
+#		elif item.get_target() == "ALL":
+#			for p in entities:
+#				affected.append(p)
+#
 		var dead = []
 		var stat_change = []
 		var ailments = []
-		var targets = []
+		var valid_targets = []
 		# Apply the effect on all affected
-		for alvo in affected:
+		for target_id in targets:
+			var target
+			if target_id < 0:
+				target_id += 1
+				target = Players[target_id]
+			else:
+				target = Enemies[target_id]
 			# Checks if alvo may be targeted by the item
 			var result
 			var ret
 			var type
-			if not alvo.is_dead() or item.type == "RESSURECTION":
+			if not target.is_dead() or item.type == "RESSURECTION":
 				item.quantity = item.quantity - 1
-				targets.append(alvo)
+				valid_targets.append(target)
 				stat_change.append([])
 				if (item.effect != []):
 					for eff in item.effect:
 						var times = eff[3]
 						for i in range(times):
-							result = apply_effect(current_entity, eff, alvo,  alvo.index)
+							result = apply_effect(current_entity, eff, target,  target.index)
 							if result[0] != -1:
 								ret = result[0]
 								type = result[1]
 								stat_change[-1].append([ret, type])
 				if (item.status != []):
 					for st in item.status:
-						var ailment = apply_status(st, alvo, current_entity)
+						var ailment = apply_status(st, target, current_entity)
 						ailments.append(ailment)
-				var dies = alvo.get_health() <= 0
-				dead.append(false)
-				if dies:
-					alvo.die()
-					dead.append(alvo)
-					dead[-1] = true
-				print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
+				var dies = target.get_health() <= 0
+				dead.append(dies)
+				print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		
 		# No more of the item used
 		if item.quantity == 0:
-			Inventory.remove(int(target[0]))
-		return [targets, [dead, ailments, stat_change]]
+			Inventory.remove(item_id)
+		
+		return StatsActionResult.new("Item", valid_targets, stat_change, dead, item)
+		#return [targets, [dead, ailments, stat_change]]
 
 	elif action_type == "Skill":
 		AUDIO.play_se("SPELL")
-		var entities = []
-		var alvo = target[1]
-		var skitem = int(target[0])
-		if alvo.left(1) == "P":
-			entities = Players
-		else:
-			entities = Enemies
-		alvo = int(alvo.right(1))
-		alvo = entities[alvo]
-		skill = current_entity.get_skills()[skitem]
-		
-		var affected = []
-		if skill.get_target() == "ONE":
-			affected.append(alvo)
-		elif skill.get_target() == "LANE":
-			var affected_lane = alvo.get_pos()
-			for p in entities:
-				if p.get_pos() == affected_lane:
-					affected.append(p)
-		elif skill.get_target() == "ALL":
-			for p in entities:
-				affected.append(p)
+		var targets = action.get_targets()
+		var skill_id = action.get_action()
+		var skill = current_entity.get_skill(skill_id)
 
+#		# Itens may target entities, lanes or everyone
+#		var affected = []
+#		if item.get_target() == "ONE":
+#			affected.append(alvo)
+#		elif item.get_target() == "LANE":
+#			var affected_lane = alvo.get_pos()
+#			for p in entities:
+#				if p.get_pos() == affected_lane:
+#					affected.append(p)
+#		elif item.get_target() == "ALL":
+#			for p in entities:
+#				affected.append(p)
+#
 		var dead = []
+		var stat_change = []
 		var ailments = []
-		var stats_change = []
-		var targets = []
-		var ret
-		var type
-		var result
-		for alvo in affected:
-			dead.append(false)
-			if not alvo.is_dead() or skill.type == "RESSURECTION":
-				targets.append(alvo)
-				result
-				var stat_change = []
-				for eff in skill.effect:
-					var times = eff[3]
-					for i in range(times):
-						result = apply_effect(current_entity, eff, alvo,  alvo.index)
-						if result[0] != -1:
-							ret = result[0]
-							type = result[1]
-							stat_change.append([ret, type])
+		var valid_targets = []
+		# Apply the effect on all affected
+		for target_id in targets:
+			var target
+			if target_id < 0:
+				target_id += 1
+				target = Players[target_id]
+			else:
+				target = Enemies[target_id]
+			# Checks if alvo may be targeted by the item
+			var result
+			var ret
+			var type
+			if not target.is_dead() or skill.type == "RESSURECTION":
+				valid_targets.append(target)
+				stat_change.append([])
+				if (skill.effect != []):
+					for eff in skill.effect:
+						var times = eff[3]
+						for i in range(times):
+							result = apply_effect(current_entity, eff, target,  target.index)
+							if result[0] != -1:
+								ret = result[0]
+								type = result[1]
+								stat_change[-1].append([ret, type])
 				if (skill.status != []):
 					for st in skill.status:
-						var ailment = apply_status(st, alvo, current_entity)
+						var ailment = apply_status(st, target, current_entity)
 						ailments.append(ailment)
-				var dies = alvo.get_health() <= 0
-				if dies:
-					alvo.die()
-					dead[-1] = true
-				stats_change.append(stat_change)
-				print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
-		var mp = current_entity.get_mp()
+				var dies = target.get_health() <= 0
+				dead.append(dies)
+				print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		
 		# Spends the MP
+		var mp = current_entity.get_mp()
 		current_entity.set_stats(MP, mp-skill.quantity)
-		return [[targets, skill.quantity], [dead, ailments, stats_change]]
+		return StatsActionResult.new("Skill", valid_targets, stat_change, dead, skill)
 	
 	elif action_type == "Run":
 		AUDIO.play_se("RUN")
 		randomize()
 		var success = (rand_range(0,100) <= RUN_CHANCE)
-		return RunActionResult(boss, success)
+		return RunActionResult.new(boss, success)
 	
 	# Literally does nothing
 	elif action_type == "Pass":
 		print("[BATTLE] Pass")
-		return ActionResult.new("Pass")
+		var passAction = ActionResult.new()
+		passAction.type = "Pass"
+		return passAction
 	
 	
 # Auxiliary functions for the action selection
@@ -445,9 +443,9 @@ func _on_Skills_button_down():
 func _on_Attack_button_down():
 	$Interface.prepare_attack_action()
 #	var unfocus = true
-#	get_node("Interface/Menu/Skills").hide()
+#	get_node("Interface/Menu/Skill").hide()
 #	get_node("Interface/Menu/Lane").hide()
-#	get_node("Interface/Menu/Itens").hide()
+#	get_node("Interface/Menu/Item").hide()
 #	get_node("Interface/Menu/Run").hide()
 #	get_node("Interface/Menu/Attack").disabled = true
 #	get_node("Interface/Menu/Attack").set_focus_mode(0)
@@ -473,3 +471,14 @@ func _on_Attack_button_down():
 #	get_node("Interface/Menu/Attack/").set_pressed(true)
 #	get_node("Interface/Menu/Attack/")._on_Action_pressed()
 #	get_node("Interface/Menu/Attack/").set_pressed(true)
+
+func get_skitem(action_type: String, skitem_id: int) -> Item:
+	if action_type == 'Item':
+		return Inventory[skitem_id]
+	elif action_type == 'Skill':
+		return current_entity.get_skill(skitem_id)
+	else:
+		return null
+
+func _on_Attack_pressed():
+	pass # Replace with function body.

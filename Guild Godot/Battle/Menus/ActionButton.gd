@@ -13,10 +13,10 @@ func _ready():
 	for c in $SubActions.get_children():
 		c.connect("subaction_picked", self, "_on_SubAction_Picked")
 	for c in $PlayerContainer.get_children():
-		c.connect("target_picked", self, "_on_Target_Picked")
+		c.connect("target_picked", self, "_on_Targets_Picked")
 		c.disabled = true
 	for c in $EnemyContainer.get_children():
-		c.connect("target_picked", self, "_on_Target_Picked")
+		c.connect("target_picked", self, "_on_Targets_Picked")
 		c.disabled = true
 
 
@@ -28,27 +28,35 @@ func _on_SubAction_Picked(subaction_arg: int) -> void:
 		return
 	else:
 		#removing focus on options of the menu, preventing the focus to go on unwanted places
-		for e in $ToolContainer/HBoxContainer/Tools.get_children():
+		for e in $SubActions.get_children():
 			e.disabled = true
 			e.set_focus_mode(0)
 		var skitem = LOADER.List[subaction_arg]
 		if skitem.get_target() == "ALL":
 			for e in $EnemyContainer.get_children():
 				e.set_focus_mode(2)
-			for p in $PlayerContainer.get_children():
-				p.set_focus_mode(2)
-				$EnemyContainer/"E0".set_all()
-				$EnemyContainer/"E0".disabled = false
-				$EnemyContainer/"E0".show()
-				$PlayerContainer/"P0".set_all()
-				$PlayerContainer/"P0".disabled = false
-				$PlayerContainer/"P0".show()
-		else:
-			for e in $EnemyContainer.get_children():
+				e.show()
 				e.disabled = false
 			for p in $PlayerContainer.get_children():
+				p.set_focus_mode(2)
+				p.show()
 				p.disabled = false
-		$PlayerContainer/"P0".grab_focus()
+				#$EnemyContainer/"0".set_all()
+				#$EnemyContainer/"0".disabled = false
+				#$EnemyContainer/"0".show()
+				#$PlayerContainer/"0".set_all()
+				#$PlayerContainer/"0".disabled = false
+				#$PlayerContainer/"0".show()
+		else:
+			for e in $EnemyContainer.get_children():
+				e.set_focus_mode(2)
+				e.show()
+				e.disabled = false
+			for p in $PlayerContainer.get_children():
+				p.set_focus_mode(2)
+				p.show()
+				p.disabled = false
+		$PlayerContainer/"-1".grab_focus()
 
 
 func hide_stuff():
@@ -90,6 +98,9 @@ func _on_Action_pressed():
 #		p.disabled = true
 
 func _on_Targets_Picked(targets: PoolIntArray):
+	print("ACTIONBUTTON TARGETS")
+	print(subaction)
+	print(targets)
 	if subaction != -1:
 		$SubActions.hide()
 		$PlayerContainer.hide()

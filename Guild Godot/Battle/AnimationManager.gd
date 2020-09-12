@@ -48,8 +48,8 @@ func initialize(Players, Enemies):
 	
 	# Link target buttons with visual targets
 	Menu.get_node("Attack").connect_targets(Players_img, Enemies_img, self)
-	Menu.get_node("Skills").connect_targets(Players_img, Enemies_img, self)
-	Menu.get_node("Itens").connect_targets(Players_img, Enemies_img, self)
+	Menu.get_node("Skill").connect_targets(Players_img, Enemies_img, self)
+	Menu.get_node("Item").connect_targets(Players_img, Enemies_img, self)
 	
 	# Initializes player info on the UI
 	Players_status = [Info.get_node("P0"), Info.get_node("P1"), Info.get_node("P2"), Info.get_node("P3")]
@@ -87,11 +87,13 @@ func _physics_process(delta):
 	if not queue and can_play:
 		emit_signal("animation_finished")
 
-func resolve(current_entity: Entity, action_result: ActionResult):
+func resolve(current_entity: Entity, action_result):
 	print("[ANIMATION PLAYER] Resolving current turn")
 	var action_type = action_result.get_type()
 	# TODO Deal with ailments
-	if action_type == "Attack":
+	if action_type == "Pass":
+		return
+	elif action_type == "Attack":
 		$Log.display_text("Attack")
 		var target = action_result.get_targets()[0]
 		var dies = action_result.get_deaths()[0]
