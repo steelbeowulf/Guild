@@ -14,7 +14,7 @@ var total_enemies = 0
 var total_allies = 0
 
 var boss = false
-const RUN_CHANCE = 0.75
+const RUN_CHANCE = 75
 
 signal round_finished
 signal finish_anim
@@ -50,7 +50,7 @@ func _ready():
 	$AnimationManager.initialize(Players, Enemies)
 
 	# Change later: demo specific TODO
-	if Enemies[0].id == 9:
+	if Enemies[0].id == 9 or Enemies[0].id == 11:
 		boss = true
 		AUDIO.play_bgm('BOSS_THEME')
 	else:
@@ -108,10 +108,7 @@ func rounds():
 		if can_actually_move == 0:
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
-				var decision = current_entity.AI(Players, Enemies)
-				target = decision[1]
-				action = decision[0]
-				action = Action.new("Pass", 0, [0])
+				action = current_entity.AI(Players, Enemies)
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)
@@ -139,33 +136,25 @@ func rounds():
 
 		# Current entity cannot move
 		elif can_actually_move == -1:
-			action = "Pass"
-			target = 0
+			action = Action.new("Pass", 0, [0])
 			emit_signal("turn_finished")
 		# Current entity is forced to attack a random enemy
 		elif can_actually_move == -2:
-			var pref = "E"
-			if current_entity.classe == "boss":
-				pref = "P"
 			randomize()
-			target = rand_range(0,LOADER.List.size())
-			target = pref+str(floor(target))
-			action = "Attack"
+			if current_entity.classe == "boss":
+				target = rand_range(0, Players.size())
+			else:
+				target = rand_range(0, Enemies.size())
+			action = Action.new("Attack", 1, [target])
 
 		# Actually executes the actions for the turn and animates it
 		result = execute_action(action)
-		#target = result[0]
-		#result = result[1]
-		#if action == "Run":
-		#	var is_boss = result[0]
-		#	var run_successful = result[1]
-		#	if not is_boss and run_successful:
-		#		battle_over = true
-		#		emit_signal("round_finished")
-		#		return
-		#print(skill)
+		if action.get_type() == "Run":
+			if not result.is_boss() and result.is_run_successful():
+				battle_over = true
+				emit_signal("round_finished")
+				return
 		$AnimationManager.resolve(current_entity, result)
-		#skill = null
 		yield($AnimationManager, "animation_finished")
 		
 		get_node("Interface/Menu/Attack").grab_focus()

@@ -17,7 +17,7 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.resist["MAGIC"] = 1.0
 	self.tipo = "Enemy"
 
-func AI(player_list, enemies_list):
+func AI(player_list, enemies_list) -> Action:
 	var possible_target = -1
 	for e in enemies_list:
 		if not e.is_dead():
@@ -27,24 +27,31 @@ func AI(player_list, enemies_list):
 					for i in range(self.skills.size()):
 						var sk = self.skills[i]
 						if sk.type == "RECOVERY" and self.get_mp() >= sk.get_cost():
-							return ["Skills", [i, "E"+str(e.index)]]
-	var max_hate = 0
-	for p in player_list:
-		if p.get_hate()[self.index] > max_hate:
-			max_hate = p.get_hate()[self.index]
-			possible_target = p.index
-			
+							return Action.new("Skill", i, [e.index])
 
-		randomize()
-		possible_target = floor(rand_range(0,player_list.size()))
-		while player_list[possible_target].is_dead():
+	var max_self_hate = 0
+	var max_accumulated_hate = 0
+	var alternative_target = -1
+	for p in player_list:
+		if p.get_hate()[self.index] > max_self_hate:
+			max_self_hate = p.get_hate()[self.index]
+			possible_target = p.index
+		#if p.get_hate().sum() > max_accumulated_hate:
+		#	max_accumulated_hate = p.get_hate().sum()
+		#	alternative_target = p.index
+
+	if possible_target == -1:
+		possible_target = alternative_target
+		if possible_target == -1:
 			randomize()
 			possible_target = floor(rand_range(0,player_list.size()))
+			while player_list[possible_target].is_dead():
+				randomize()
+				possible_target = floor(rand_range(0,player_list.size()))
 	
 
 	var best_skill = -1
 	var best_dmg = 0
-	possible_target = "P"+str(possible_target)
 	for i in range(self.skills.size()):
 		var sk = self.skills[i]
 		if sk.type == "OFFENSE":
@@ -53,8 +60,8 @@ func AI(player_list, enemies_list):
 					best_dmg = ef[1]
 					best_skill = i
 	if best_skill == -1:
-		return ["Attack", [1, possible_target]]
-	return ["Skills", [best_skill, possible_target]]
+		return Action.new("Attack", 1, [-possible_target])
+	return Action.new("Skill", best_skill, [-possible_target])
 
 func get_xp():
 	return self.xp
