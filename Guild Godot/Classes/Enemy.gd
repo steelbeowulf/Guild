@@ -40,6 +40,7 @@ func AI(player_list, enemies_list) -> Action:
 		#	max_accumulated_hate = p.get_hate().sum()
 		#	alternative_target = p.index
 
+
 	if possible_target == -1:
 		possible_target = alternative_target
 		if possible_target == -1:

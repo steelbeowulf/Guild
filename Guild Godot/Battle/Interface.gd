@@ -80,6 +80,7 @@ func prepare_itens_action(inventory: Array) -> void:
 	#	if not Enemies[i].is_dead():
 	#		enemies.get_node(str(i)).show()
 	#		enemies.get_node(str(i)).set_text("")
+	
 	itens.get_node("0").grab_focus()
 	get_node("Menu/Item")._on_Action_pressed()
 

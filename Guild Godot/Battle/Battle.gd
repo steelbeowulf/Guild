@@ -171,7 +171,6 @@ func rounds():
 		if check_battle_end():
 			battle_over = true
 			break
-	
 	# Everyones' turn has finished
 	emit_signal("round_finished")
 
