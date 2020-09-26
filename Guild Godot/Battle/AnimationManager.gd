@@ -18,38 +18,47 @@ func initialize(Players, Enemies):
 # Graphics stuff
 	Menu = self.get_parent().get_node("Interface/Menu")
 	Info = self.get_parent().get_node("Interface/Info")
-	for i in range(len(Players)):
-		var lane = Players[i].get_pos()
-		var node = get_node("Players/P"+str(i))
-		Players_img.append(node)
-		node.change_lane(lane)
-		node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
-		
-		if not Players[i].is_dead():
-			node.play("idle")
+	var i = 0
+	for node in get_node("Players").get_children():
+		if i < len(Players):
+			var lane = Players[i].get_pos()
+			Players_img.append(node)
+			node.change_lane(lane)
+			node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
+			
+			if not Players[i].is_dead():
+				node.play("idle")
+			else:
+				node.play("dead")
+			node.show()
+			node.connect("finish_anim", self, "_on_animation_finished")
+			Players[i].graphics = node
+			Players[i].info = Info.get_node("P"+str(i))
+			Players[i].info.set_initial_hp(Players[i].get_health(), Players[i].get_max_health())
+			Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
+			i += 1
 		else:
-			node.play("dead")
-		node.show()
-		node.connect("finish_anim", self, "_on_animation_finished")
-		Players[i].graphics = node
-		Players[i].info = Info.get_node("P"+str(i))
-		Players[i].info.set_initial_hp(Players[i].get_health(), Players[i].get_max_health())
-		Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
-		
-	for i in range(len(Enemies)):
-		var lane = Enemies[i].get_pos()
-		var node = get_node("Enemies/E"+str(i))
-		Enemies_img.append(node)
-		node.set_animations(Enemies[i].sprite, Enemies[i].animations, Enemies[i])
-		node.play("idle")
-		node.show()
-		node.connect("finish_anim", self, "_on_animation_finished")
-		Enemies[i].graphics = node
+			node.queue_free()
+	i = 0
+	for node in get_node("Enemies").get_children():
+		if i < len(Enemies):
+			var lane = Enemies[i].get_pos()
+			Enemies_img.append(node)
+			node.set_animations(Enemies[i].sprite, Enemies[i].animations, Enemies[i])
+			node.play("idle")
+			node.show()
+			node.connect("finish_anim", self, "_on_animation_finished")
+			Enemies[i].graphics = node
+			i += 1
+		else:
+			node.queue_free()
 	
 	# Link target buttons with visual targets
-	Menu.get_node("Attack").connect_targets(Players_img, Enemies_img, self)
-	Menu.get_node("Skill").connect_targets(Players_img, Enemies_img, self)
-	Menu.get_node("Item").connect_targets(Players_img, Enemies_img, self)
+	var allPlayers = get_node("Players")
+	var allEnemies = get_node("Enemies")
+	Menu.get_node("Attack").connect_targets(Players_img, Enemies_img, self, allPlayers, allEnemies)
+	Menu.get_node("Skill").connect_targets(Players_img, Enemies_img, self, allPlayers, allEnemies)
+	Menu.get_node("Item").connect_targets(Players_img, Enemies_img, self, allPlayers, allEnemies)
 	
 	# Initializes player info on the UI
 	Players_status = [Info.get_node("P0"), Info.get_node("P1"), Info.get_node("P2"), Info.get_node("P3")]

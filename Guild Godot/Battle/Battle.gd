@@ -470,3 +470,7 @@ func get_skitem(action_type: String, skitem_id: int) -> Item:
 
 func _on_Attack_pressed():
 	pass # Replace with function body.
+
+
+func _on_All_focus_exited():
+	pass # Replace with function body.

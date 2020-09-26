@@ -10,8 +10,12 @@ func _ready():
 	for c in $Menu.get_children():
 		c.connect("action_picked", self, "_on_Action_Picked")
 
+
 # Repass info to parent
 func _on_Action_Picked(action_type: String, action_id: int, targets: PoolIntArray) -> void:
+	if action_type != menu_state:
+		print("NOPE")
+		return
 	var action = Action.new(action_type, action_id, targets)
 	Battle.set_current_action(action)
 	menu_state = ""
@@ -58,14 +62,8 @@ func prepare_itens_action(inventory: Array) -> void:
 	get_node("Menu/Item").disabled = true
 	get_node("Menu/Item").set_focus_mode(0)
 	var itens = get_node("Menu/Item/SubActions")
-	#var players = get_node("Menu/Item/Targets/PlayerContainer")
-	#var enemies = get_node("Menu/Item/Targets/EnemiesContainer")
 	for i in range(inventory.size()):
 		itens.get_node(str(i)).hide()
-#	for i in range(4):
-#		players.get_node(str(i)).hide()
-#	for i in range(5):
-#		enemies.get_node(str(i)).hide()
 	for i in range(inventory.size()):
 		if inventory[i].quantity <= 0:
 			itens.get_node(str(i)).disabled = true
@@ -73,13 +71,6 @@ func prepare_itens_action(inventory: Array) -> void:
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(inventory[i].nome+" x"+str(inventory[i].quantity))
-	#for i in range(Players.size()):
-	#	players.get_node(str(i)).show()
-	#	players.get_node(str(i)).set_text("")
-	#for i in range(Enemies.size()):
-	#	if not Enemies[i].is_dead():
-	#		enemies.get_node(str(i)).show()
-	#		enemies.get_node(str(i)).set_text("")
 	
 	itens.get_node("0").grab_focus()
 	get_node("Menu/Item")._on_Action_pressed()
@@ -93,14 +84,9 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 	get_node("Menu/Skill").disabled = true
 	get_node("Menu/Skill").set_focus_mode(0)
 	var itens = get_node("Menu/Skill/SubActions")
-	#var players = get_node("Menu/Skill/Targets/PlayerContainer/")
-	#var enemies = get_node("Menu/Skill/Targets/EnemiesContainer/")
 	for i in range(5):
 		itens.get_node(str(i)).hide()
-	#for i in range(4):
-	#	players.get_node(str(i)).hide()
-	#for i in range(5):
-	#	enemies.get_node(str(i)).hide()
+
 	for i in range(skills.size()):
 		if current_mp < skills[i].quantity:
 			itens.get_node(str(i)).disabled = true
@@ -108,13 +94,7 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(skills[i].nome+"  "+str(skills[i].quantity))
-	#for i in range(Players.size()):
-	#	players.get_node(str(i)).show()
-	#	players.get_node(str(i)).set_text("")
-	#for i in range(Enemies.size()):
-	#	if not Enemies[i].is_dead():
-	#		enemies.get_node(str(i)).show()
-	#		enemies.get_node(str(i)).set_text("")
+
 	itens.get_node("0").grab_focus()
 	get_node("Menu/Skill")._on_Action_pressed()
 

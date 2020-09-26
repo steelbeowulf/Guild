@@ -96,6 +96,8 @@ margin_right = 200.0
 margin_bottom = 120.0
 
 [node name="PlayerContainer" type="Node2D" parent="."]
+editor/display_folded = true
+visible = false
 
 [node name="-1" parent="PlayerContainer" instance=ExtResource( 7 )]
 
@@ -106,6 +108,8 @@ margin_bottom = 120.0
 [node name="-4" parent="PlayerContainer" instance=ExtResource( 7 )]
 
 [node name="EnemyContainer" type="Node2D" parent="."]
+editor/display_folded = true
+visible = false
 
 [node name="0" parent="EnemyContainer" instance=ExtResource( 7 )]
 
@@ -118,3 +122,6 @@ margin_bottom = 120.0
 [node name="4" parent="EnemyContainer" instance=ExtResource( 7 )]
 
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]
+[connection signal="focus_exited" from="SubActions/3" to="." method="_on_3_focus_exited"]
+[connection signal="focus_entered" from="SubActions/4" to="." method="_on_4_focus_entered"]
+[connection signal="focus_exited" from="SubActions/4" to="." method="_on_4_focus_exited"]

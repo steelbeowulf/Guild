@@ -17,4 +17,5 @@ custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 5 )
 script = ExtResource( 6 )
+
 [connection signal="pressed" from="." to="." method="_on_SubAction_pressed"]
