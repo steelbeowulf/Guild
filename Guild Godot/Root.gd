@@ -41,8 +41,10 @@ func _process(delta):
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Submenu":
 		print("happened")
 		return_menu()
+	#elif Input.is_action_just_pressed("ui_cancel") and STATE == "StatusSubmenu":
+	#	print("happenedagain")
+	#	return_menu()
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
-		
 		close_menu()
 	# Cheap hack to test money
 	elif Input.is_action_just_pressed("debug"):
@@ -74,6 +76,7 @@ func close_menu():
 
 func return_menu():
 	for c in $Menu_Area/SubMenus.get_children():
+		print(c)
 		c.queue_free()
 	menu.enter(GLOBAL.PLAYERS)
 	menu.show()
@@ -151,7 +154,6 @@ func open_skills(id):
 	get_node("Menu_Area/SubMenus/Skills").show()
 	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
 	get_node("Menu_Area/SubMenus/Skills").enter()
-	get_node("Menu_Area/SubMenus/Skills").give_focus()
 
 # Toggles status submenu
 func toggle_status():

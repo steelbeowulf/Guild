@@ -1,5 +1,6 @@
 extends Control
 onready var id = -1
+onready var location = "OUTSIDE"
 
 
 func _process(delta):
@@ -7,11 +8,14 @@ func _process(delta):
 		enter((id + 1) % len(GLOBAL.PLAYERS))
 	elif Input.is_action_just_pressed("ui_left"):
 		enter((id - 1) % len(GLOBAL.PLAYERS))
-	elif Input.is_action_just_pressed("ui_cancel"):
+	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
+		location = "OUTSIDE"
 		get_parent().get_parent().get_parent().return_menu()
 
 
 func enter(player_id):
+	print("hello")
+	location = "SUBMENU"
 	print(player_id)
 	id = player_id
 	var player = GLOBAL.PLAYERS[player_id]

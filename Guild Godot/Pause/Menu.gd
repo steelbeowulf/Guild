@@ -4,17 +4,21 @@ onready var location = "MENU"
 
 func enter(players):
 	location = "MENU"
-	give_focus()
+	give_focus(len(players))
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(players[i])
 		node.connect("pressed", self, "_on_Player_chosen", [i])
 
+func _process(delta):
+	pass
+	#print()
 
 func _on_Player_chosen(binds):
 	if location == "SKILLS":
 		get_parent().get_parent().open_skills(binds)
-	get_parent().get_parent().player_clicked(binds)
+	else:
+		get_parent().get_parent().player_clicked(binds)
 
 
 func update_info():
@@ -36,10 +40,12 @@ func format_playtime(T):
 
 
 func force_char_focus():
+	print("forço foco no char")
 	var options = $Panel/All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(0)
 	var chars = $Panel/All/Left/Chars.get_children()
+	print(chars)
 	for c in chars:
 		c.set_focus_mode(2)
 		c.disabled = false
@@ -48,13 +54,17 @@ func force_char_focus():
 	chars[0].grab_focus()
 
 
-func give_focus():
+func give_focus(players_avaliable):
+	print("deu foco")
 	var options = $Panel/All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(2)
 		b.disabled = false
 	var chars = $Panel/All/Left/Chars.get_children()
-	for c in chars:
+	var n = []
+	for i in range(players_avaliable):
+		n.insert(i, chars[i])
+	for c in n:
 		c.set_focus_mode(0)
 		c.disabled = true
 		for l in c.get_node("Lanes").get_children():
@@ -62,6 +72,7 @@ func give_focus():
 	options[0].grab_focus()
 
 func change_focus():
+	print("troca foco")
 	var options = $Panel/All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(0)
@@ -75,23 +86,28 @@ func change_focus():
 	chars[0].grab_focus()
 
 func _on_Item_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().open_inventory()
 
 
 func _on_Skill_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	location = "SKILLS"
 	change_focus()
 	
 
 func _on_Options_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().open_options()
 
 
 func _on_Save_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().open_save()
 
 
 func _on_Status_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	location = "STATUS"
 	get_parent().get_parent().toggle_status()
 
