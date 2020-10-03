@@ -5,8 +5,8 @@
 
 [node name="Target" type="Button"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 592.0
-margin_bottom = 642.0
+margin_right = 12.0
+margin_bottom = 20.0
 rect_scale = Vector2( 0.1, 0.1 )
 flat = true
 script = ExtResource( 1 )
