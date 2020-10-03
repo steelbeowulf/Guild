@@ -4,18 +4,17 @@ extends "Apply.gd"
 var Players
 var Enemies
 var Inventory
-var current_entity
-var menu_state
 var battle_over
 var skill
 
+var current_entity
 var current_action
-var current_target
 
 var total_enemies = 0
 var total_allies = 0
 
 var boss = false
+const RUN_CHANCE = 75
 
 signal round_finished
 signal finish_anim
@@ -32,8 +31,8 @@ func _ready():
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
 	
-	for c in get_node("Menu").get_children():
-		c.focus_previous = NodePath("Menu/Attack")
+	for c in get_node("Interface/Menu").get_children():
+		c.focus_previous = NodePath("Interface/Menu/Attack")
 	
 	for i in range(Players.size()):
 		Players[i].index = i
@@ -51,7 +50,7 @@ func _ready():
 	$AnimationManager.initialize(Players, Enemies)
 
 	# Change later: demo specific TODO
-	if Enemies[0].id == 9:
+	if Enemies[0].id == 9 or Enemies[0].id == 11:
 		boss = true
 		AUDIO.play_bgm('BOSS_THEME')
 	else:
@@ -71,6 +70,8 @@ func rounds():
 	
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
+		for e in Enemies:
+			e.update_target(Players)
 		current_entity = turnorder[i]
 		print("[BATTLE] Turno de "+current_entity.nome)
 		var next = null
@@ -78,9 +79,9 @@ func rounds():
 			next = turnorder[i+1]
 		else:
 			next = turnorder[0]
-		
 		var id = current_entity.index
 
+		# TODO: Refactor all this
 		# If the entity is currently affected by a status, apply its effect
 		var can_move = []
 		var can_actually_move = 0
@@ -107,30 +108,28 @@ func rounds():
 		var bounds = []
 
 		if can_actually_move == 0:
+			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
-				var decision = current_entity.AI(Players, Enemies)
-				target = decision[1]
-				action = decision[0]
+				action = current_entity.AI(Players, Enemies)
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
 				if not current_entity.skills or current_entity.get_mp() == 0:
-					get_node("Menu/Skills").disabled = true
+					get_node("Interface/Menu/Skill").disabled = true
 				else:
-					get_node("Menu/Skills").disabled = false
+					get_node("Interface/Menu/Skill").disabled = false
 				if Inventory.size() == 0:
-					get_node("Menu/Itens").disabled = true
+					get_node("Interface/Menu/Item").disabled = true
 				
 				# Show the Menu and wait until action is selected
-				get_node("Menu").show()
-				for c in get_node("Menu").get_children():
+				get_node("Interface/Menu").show()
+				for c in get_node("Interface/Menu").get_children():
 					c.show()
-				$Menu/Attack.grab_focus()
-				yield($Menu, "turn_finished")
+				$Interface/Menu/Attack.grab_focus()
+				yield($Interface, "turn_finished")
 				action = current_action
-				target = current_target
 				
 				# Checks if the battle is over and exits the main loop
 				if battle_over:
@@ -140,50 +139,41 @@ func rounds():
 
 		# Current entity cannot move
 		elif can_actually_move == -1:
-			action = "Pass"
-			target = 0
+			action = Action.new("Pass", 0, [0])
 			emit_signal("turn_finished")
 		# Current entity is forced to attack a random enemy
 		elif can_actually_move == -2:
-			var pref = "E"
-			if current_entity.classe == "boss":
-				pref = "P"
 			randomize()
-			target = rand_range(0,LOADER.List.size())
-			target = pref+str(floor(target))
-			action = "Attack"
+			if current_entity.classe == "boss":
+				target = rand_range(0, Players.size())
+			else:
+				target = rand_range(0, Enemies.size())
+			action = Action.new("Attack", 1, [target])
 
 		# Actually executes the actions for the turn and animates it
-		result = execute_action(action, target)
-		target = result[0]
-		result = result[1]
-		if action == "Run":
-			var is_boss = result[0]
-			var run_successful = result[1]
-			if not is_boss and run_successful:
+		result = execute_action(action)
+		if action.get_type() == "Run":
+			if not result.is_boss() and result.is_run_successful():
 				battle_over = true
 				emit_signal("round_finished")
 				return
-		print(skill)
-		$AnimationManager.resolve(current_entity, action, target, result, bounds, next, skill)
-		skill = null
+		$AnimationManager.resolve(current_entity, result)
 		yield($AnimationManager, "animation_finished")
 		
-		get_node("Menu/Attack").grab_focus()
-		get_node("Menu/Attack").disabled = false
-		get_node("Menu/Attack").set_focus_mode(2)
+		get_node("Interface/Menu/Attack").grab_focus()
+		get_node("Interface/Menu/Attack").disabled = false
+		get_node("Interface/Menu/Attack").set_focus_mode(2)
 		
-		get_node("Menu/Skills").disabled = false
-		get_node("Menu/Skills").set_focus_mode(2)
+		get_node("Interface/Menu/Skill").disabled = false
+		get_node("Interface/Menu/Skill").set_focus_mode(2)
 		
-		get_node("Menu/Itens").disabled = false
-		get_node("Menu/Itens").set_focus_mode(2)
+		get_node("Interface/Menu/Item").disabled = false
+		get_node("Interface/Menu/Item").set_focus_mode(2)
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
 			battle_over = true
 			break
-	
 	# Everyones' turn has finished
 	emit_signal("round_finished")
 
@@ -203,335 +193,160 @@ func stackagility(a,b):
 	return a.get_agi() > b.get_agi()
 
 # Executes an action on a given target
-func execute_action(action, target):
-	print("[BATTLE] Executing action "+str(action))
+func execute_action(action: Action):
+	var action_type = action.get_type()
+	print("[BATTLE] Executing action "+str(action.get_type()))
 	# Attack: the target takes PHYSICAL damage
-	if action == "Attack":
+	if action_type == "Attack":
 		AUDIO.play_se("HIT")
-		var dies_on_attack = false
+		var death = false
 		var entities = []
-		var alvo = target[1]
-		var skitem = int(target[0])
-		if alvo.left(1) == "P":
+		var target_id = action.get_targets()[0]
+		print("TARGET ID")
+		print(target_id)
+		if target_id < 0:
+			target_id += 1
 			entities = Players
 		else:
 			entities = Enemies
-		alvo = int(alvo.right(1))
-		alvo = entities[alvo]
+		var target = entities[abs(target_id)]
 		var atk = current_entity.get_atk()
-		var dmg = alvo.take_damage(PHYSIC, atk)
-		if alvo.classe == "boss" and current_entity.classe != "boss":
-			var hate = current_entity.update_hate(dmg, alvo.index)
-		if alvo.get_health() <= 0:
-			dies_on_attack = true
-			alvo.die()
-		print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies_on_attack)+", dmg="+str(dmg))
-		return [alvo, [dies_on_attack, dmg]]
+		var dmg = target.take_damage(PHYSIC, atk)
+		if target.classe == "boss" and current_entity.classe != "boss":
+			var hate = current_entity.update_hate(dmg, target.index)
+		if target.get_health() <= 0:
+			death = true
+			target.die()
+		print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(death)+", dmg="+str(dmg))
+		return StatsActionResult.new("Attack", [target], [dmg], [death])
 	
 	# Lane: only the player characters may change lanes
-	elif action == "Lane":
+	elif action_type == "Lane":
 		AUDIO.play_se("RUN")
-		var id = current_entity.index
-		var lane = int(target)
+		var lane = action.get_action()
 		current_entity.set_pos(lane)
 		print("[BATTLE] lane="+str(lane))
-		return [0, lane]
+		return LaneActionResult.new(lane)
 	
 	# Item: only the player characters may use items
-	elif action == "Item":
+	elif action_type == "Item":
 		AUDIO.play_se("SPELL")
-		# Quick trick to identify if target is friend or foe
-		var entities = []
-		var alvo = target[1]
-		var skitem = int(target[0])
-		if alvo.left(1) == "P":
-			entities = Players
-		else:
-			entities = Enemies
-		alvo = int(alvo.right(1))
-		alvo = entities[alvo]
-		skill = Inventory[skitem]
-		var item = Inventory[skitem]
-		
-		# Itens may target entities, lanes or everyone
-		var affected = []
-		if item.get_target() == "ONE":
-			affected.append(alvo)
-		elif item.get_target() == "LANE":
-			var affected_lane = alvo.get_pos()
-			for p in entities:
-				if p.get_pos() == affected_lane:
-					affected.append(p)
-		elif item.get_target() == "ALL":
-			for p in entities:
-				affected.append(p)
-		
+		var targets = action.get_targets()
+		var item_id = action.get_action()
+		var item = Inventory[item_id]
+#
 		var dead = []
 		var stat_change = []
 		var ailments = []
-		var targets = []
+		var valid_targets = []
 		# Apply the effect on all affected
-		for alvo in affected:
+		for target_id in targets:
+			var target
+			if target_id < 0:
+				target_id += 1
+				target = Players[abs(target_id)]
+			else:
+				target = Enemies[target_id]
 			# Checks if alvo may be targeted by the item
 			var result
 			var ret
 			var type
-			if not alvo.is_dead() or item.type == "RESSURECTION":
+			if not target.is_dead() or item.type == "RESSURECTION":
 				item.quantity = item.quantity - 1
-				targets.append(alvo)
+				valid_targets.append(target)
 				stat_change.append([])
 				if (item.effect != []):
 					for eff in item.effect:
 						var times = eff[3]
 						for i in range(times):
-							result = apply_effect(current_entity, eff, alvo,  alvo.index)
+							result = apply_effect(current_entity, eff, target,  target.index)
 							if result[0] != -1:
 								ret = result[0]
 								type = result[1]
 								stat_change[-1].append([ret, type])
 				if (item.status != []):
 					for st in item.status:
-						var ailment = apply_status(st, alvo, current_entity)
+						var ailment = apply_status(st, target, current_entity)
 						ailments.append(ailment)
-				var dies = alvo.get_health() <= 0
-				dead.append(false)
-				if dies:
-					alvo.die()
-					dead.append(alvo)
-					dead[-1] = true
-				print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
+				var dies = target.get_health() <= 0
+				dead.append(dies)
+				print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		
 		# No more of the item used
 		if item.quantity == 0:
-			Inventory.remove(int(target[0]))
-		return [targets, [dead, ailments, stat_change]]
-
-	elif action == "Skills":
-		AUDIO.play_se("SPELL")
-		var entities = []
-		var alvo = target[1]
-		var skitem = int(target[0])
-		if alvo.left(1) == "P":
-			entities = Players
-		else:
-			entities = Enemies
-		alvo = int(alvo.right(1))
-		alvo = entities[alvo]
-		skill = current_entity.get_skills()[skitem]
+			Inventory.remove(item_id)
 		
-		var affected = []
-		if skill.get_target() == "ONE":
-			affected.append(alvo)
-		elif skill.get_target() == "LANE":
-			var affected_lane = alvo.get_pos()
-			for p in entities:
-				if p.get_pos() == affected_lane:
-					affected.append(p)
-		elif skill.get_target() == "ALL":
-			for p in entities:
-				affected.append(p)
+		return StatsActionResult.new("Item", valid_targets, stat_change, dead, item)
+
+	elif action_type == "Skill":
+		AUDIO.play_se("SPELL")
+		var targets = action.get_targets()
+		var skill_id = action.get_action()
+		var skill = current_entity.get_skill(skill_id)
 
 		var dead = []
+		var stat_change = []
 		var ailments = []
-		var stats_change = []
-		var targets = []
-		var ret
-		var type
-		var result
-		for alvo in affected:
-			dead.append(false)
-			if not alvo.is_dead() or skill.type == "RESSURECTION":
-				targets.append(alvo)
-				result
-				var stat_change = []
-				for eff in skill.effect:
-					var times = eff[3]
-					for i in range(times):
-						result = apply_effect(current_entity, eff, alvo,  alvo.index)
-						if result[0] != -1:
-							ret = result[0]
-							type = result[1]
-							stat_change.append([ret, type])
+		var valid_targets = []
+		# Apply the effect on all affected
+		for target_id in targets:
+			var target
+			if target_id < 0:
+				target_id += 1
+				target = Players[abs(target_id)]
+			else:
+				target = Enemies[abs(target_id)]
+			# Checks if alvo may be targeted by the item
+			var result
+			var ret
+			var type
+			if not target.is_dead() or skill.type == "RESSURECTION":
+				valid_targets.append(target)
+				stat_change.append([])
+				if (skill.effect != []):
+					for eff in skill.effect:
+						var times = eff[3]
+						for i in range(times):
+							result = apply_effect(current_entity, eff, target,  target.index)
+							if result[0] != -1:
+								ret = result[0]
+								type = result[1]
+								stat_change[-1].append([ret, type])
 				if (skill.status != []):
 					for st in skill.status:
-						var ailment = apply_status(st, alvo, current_entity)
+						var ailment = apply_status(st, target, current_entity)
 						ailments.append(ailment)
-				var dies = alvo.get_health() <= 0
-				if dies:
-					alvo.die()
-					dead[-1] = true
-				stats_change.append(stat_change)
-				print("[BATTLE] alvo="+str(alvo.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
-		var mp = current_entity.get_mp()
+				var dies = target.get_health() <= 0
+				dead.append(dies)
+				print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		
 		# Spends the MP
+		var mp = current_entity.get_mp()
 		current_entity.set_stats(MP, mp-skill.quantity)
-		return [[targets, skill.quantity], [dead, ailments, stats_change]]
+		return StatsActionResult.new("Skill", valid_targets, stat_change, dead, skill)
 	
-	elif action == "Run":
+	elif action_type == "Run":
 		AUDIO.play_se("RUN")
 		randomize()
-		var chance = rand_range(0,100)
-		print("[BATTLE] Run, success="+str(chance<=75))
-		return [0, [boss, chance<=75]]
+		var success = (rand_range(0,100) <= RUN_CHANCE)
+		return RunActionResult.new(boss, success)
 	
 	# Literally does nothing
-	elif action == "Pass":
+	elif action_type == "Pass":
 		print("[BATTLE] Pass")
-		return [0, 0]
+		var passAction = ActionResult.new()
+		passAction.type = "Pass"
+		return passAction
 	
 	
 # Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action
-	
-func set_current_target(target):
-	current_target = target
-
-
-func _process(delta):
-	for i in range(len(Players)):
-		var p = Players[i]
-		if not p.is_dead():
-			var index = p.index
-			var lane = p.get_pos()
-	if Input.is_action_pressed("ui_cancel") and menu_state != null:
-		for c in $Menu.get_children():
-			c.hide_stuff()
-		get_node("Menu/"+str(menu_state)).grab_focus()
-		get_node("Menu/"+str(menu_state)).disabled = false
-		get_node("Menu/"+str(menu_state)).set_focus_mode(2)
-
-
-func _on_Lane_button_down():
-	menu_state = "Lane"
-	for i in range(3):
-		get_node("Menu/Lane/Targets/"+str(i)).hide()
-	get_node("Menu/Lane/Targets").show()
-	if current_entity.get_pos() != 2: 
-		get_node("Menu/Lane/Targets/2").show()
-		get_node("Menu/Lane/Targets/2").grab_focus()
-		get_node("Menu/Lane/Targets/2").set_text("FRONT")
-	if current_entity.get_pos() != 1: 
-		get_node("Menu/Lane/Targets/1").show()
-		get_node("Menu/Lane/Targets/1").grab_focus()
-		get_node("Menu/Lane/Targets/1").set_text("MID")
-	if current_entity.get_pos() != 0: 
-		get_node("Menu/Lane/Targets/0").show()
-		get_node("Menu/Lane/Targets/0").grab_focus()
-		get_node("Menu/Lane/Targets/0").set_text("BACK")
-	get_node("Menu/Lane/")._on_Action_pressed()
-
-func _on_Itens_button_down():
-	menu_state = "Itens"
-	LOADER.List = Inventory
-	get_node("Menu/Attack").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Skills").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Itens").disabled = true
-	get_node("Menu/Itens").set_focus_mode(0)
-	var itens = get_node("Menu/Itens/Targets/ItemContainer/HBoxContainer/Itens")
-	var players = get_node("Menu/Itens/Targets/PlayerContainer")
-	var enemies = get_node("Menu/Itens/Targets/EnemiesContainer")
-	for i in range(Inventory.size()):
-		itens.get_node(str(i)).hide()
-	for i in range(4):
-		players.get_node("P"+str(i)).hide()
-	for i in range(5):
-		enemies.get_node("E"+str(i)).hide()
-	for i in range(Inventory.size()):
-		if Inventory[i].quantity == 0:
-			itens.get_node(str(i)).disabled = true
-		else:
-			itens.get_node(str(i)).disabled = false
-		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(Inventory[i].nome+" x"+str(Inventory[i].quantity))
-	for i in range(Players.size()):
-		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).set_text("")
-	for i in range(Enemies.size()):
-		if not Enemies[i].is_dead():
-			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).set_text("")
-	itens.get_node("0").grab_focus()
-	LOADER.List = Inventory
-	get_node("Menu/Itens/")._on_Action_pressed()
-
-func _on_Skills_button_down():
-	menu_state = "Skills"
-	LOADER.List = current_entity.get_skills()
-	get_node("Menu/Attack").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Itens").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Skills").disabled = true
-	get_node("Menu/Skills").set_focus_mode(0)
-	var skills = current_entity.get_skills()
-	var itens = get_node("Menu/Skills/Targets/ItemContainer/HBoxContainer/Itens")
-	var players = get_node("Menu/Skills/Targets/PlayerContainer/")
-	var enemies = get_node("Menu/Skills/Targets/EnemiesContainer/")
-	for i in range(5):
-		itens.get_node(str(i)).hide()
-	for i in range(4):
-		players.get_node("P"+str(i)).hide()
-	for i in range(5):
-		enemies.get_node("E"+str(i)).hide()
-	for i in range(skills.size()):
-		if current_entity.get_mp() < skills[i].quantity:
-			itens.get_node(str(i)).disabled = true
-		else:
-			itens.get_node(str(i)).disabled = false
-		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(skills[i].nome)
-	for i in range(Players.size()):
-		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).set_text("")
-	for i in range(Enemies.size()):
-		if not Enemies[i].is_dead():
-			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).set_text("")
-	itens.get_node("0").grab_focus()
-	LOADER.List = current_entity.get_skills()
-	get_node("Menu/Skills/")._on_Action_pressed()
-
-func _on_Attack_button_down():
-	menu_state = "Attack"
-	var unfocus = true
-	get_node("Menu/Skills").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Itens").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Attack").disabled = true
-	get_node("Menu/Attack").set_focus_mode(0)
-	var players = get_node("Menu/Attack/Targets/HBoxContainer/Players")
-	var enemies = get_node("Menu/Attack/Targets/HBoxContainer/Enemies")
-	for i in range(4):
-		players.get_node("P"+str(i)).hide()
-	for i in range(5):
-		enemies.get_node("E"+str(i)).hide()
-	for i in range(Players.size()):
-		players.get_node("P"+str(i)).show()
-		players.get_node("P"+str(i)).disabled = false
-		players.get_node("P"+str(i)).set_text("")
-	for i in range(Enemies.size()):
-		if not Enemies[i].is_dead():
-			if unfocus:
-				enemies.get_node("E"+str(i)).grab_focus()
-				unfocus = false
-			enemies.get_node("E"+str(i)).show()
-			enemies.get_node("E"+str(i)).disabled = false
-			enemies.get_node("E"+str(i)).set_text("")
-	#enemies.get_node("E0").grab_focus()
-	get_node("Menu/Attack/").set_pressed(true)
-	get_node("Menu/Attack/")._on_Action_pressed()
-	get_node("Menu/Attack/").set_pressed(true)
 
 func end_battle():
 	print("[BATTLE] Battle End!")
 	$AnimationManager/Log.display_text("Fim de jogo!")
 	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
-	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 
 
 func recalculate_bounds():
@@ -545,6 +360,30 @@ func recalculate_bounds():
 		bounds.append(hatemax)
 	return bounds
 
+# Interface 
 func _on_Run_button_down():
-	menu_state = "Run"
-	get_node("Menu/Run/")._on_Action_pressed()
+	$Interface.prepare_run_action()
+
+func _on_Lane_button_down():
+	$Interface.prepare_lane_action(current_entity.get_pos())
+
+
+func _on_Itens_button_down():
+	LOADER.List = Inventory
+	$Interface.prepare_itens_action(Inventory)
+
+func _on_Skills_button_down():
+	var skills = current_entity.get_skills()
+	LOADER.List = skills
+	$Interface.prepare_skills_action(skills, current_entity.get_mp())
+
+func _on_Attack_button_down():
+	$Interface.prepare_attack_action()
+
+func get_skitem(action_type: String, skitem_id: int) -> Item:
+	if action_type == 'Item':
+		return Inventory[skitem_id]
+	elif action_type == 'Skill':
+		return current_entity.get_skill(skitem_id)
+	else:
+		return null
