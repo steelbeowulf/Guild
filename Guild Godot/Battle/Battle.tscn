@@ -23,10 +23,10 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Players" type="Button" parent="AnimationManager"]
-margin_left = 174.24
-margin_top = 141.823
-margin_right = 974.24
-margin_bottom = 941.823
+margin_left = 175.0
+margin_top = 140.0
+margin_right = 975.0
+margin_bottom = 940.0
 rect_scale = Vector2( 0.75, 0.75 )
 focus_neighbour_right = NodePath("../Enemies")
 disabled = true
@@ -34,46 +34,47 @@ flat = true
 script = ExtResource( 3 )
 
 [node name="P0" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 303.469
-margin_top = 74.6234
-margin_right = 315.469
-margin_bottom = 94.6234
+margin_left = 300.0
+margin_top = 75.0
+margin_right = 312.0
+margin_bottom = 95.0
 focus_neighbour_top = NodePath("../P3")
 focus_neighbour_right = NodePath("../../Enemies/E0")
 focus_neighbour_bottom = NodePath("../P1")
 Player = true
 
 [node name="P1" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 313.418
-margin_top = 313.418
-margin_right = 325.418
-margin_bottom = 333.418
+margin_left = 300.0
+margin_top = 300.0
+margin_right = 312.0
+margin_bottom = 320.0
 focus_neighbour_top = NodePath("../P0")
 focus_neighbour_right = NodePath("../../Enemies/E1")
 focus_neighbour_bottom = NodePath("../P2")
 Player = true
 
 [node name="P2" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 308.443
-margin_top = 552.213
-margin_right = 320.443
-margin_bottom = 572.213
+margin_left = 300.0
+margin_top = 550.0
+margin_right = 312.0
+margin_bottom = 570.0
 focus_neighbour_top = NodePath("../P1")
 focus_neighbour_right = NodePath("../../Enemies/E1")
 focus_neighbour_bottom = NodePath("../P3")
 Player = true
 
 [node name="P3" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 308.443
-margin_top = 776.084
-margin_right = 320.443
-margin_bottom = 796.084
+margin_left = 300.0
+margin_top = 775.0
+margin_right = 312.0
+margin_bottom = 795.0
 focus_neighbour_top = NodePath("../P2")
 focus_neighbour_right = NodePath("../../Enemies/E2")
 focus_neighbour_bottom = NodePath("../P0")
 Player = true
 
 [node name="Enemies" type="Button" parent="AnimationManager"]
+editor/display_folded = true
 margin_left = 1112.27
 margin_top = 102.869
 margin_right = 2012.27
@@ -194,6 +195,7 @@ margin_bottom = 160.0
 focus_neighbour_bottom = NodePath("../Attack")
 
 [node name="Info" type="VBoxContainer" parent="Interface"]
+editor/display_folded = true
 margin_left = 1080.0
 margin_top = 925.0
 margin_right = 1756.0

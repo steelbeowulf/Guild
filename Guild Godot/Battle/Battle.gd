@@ -373,7 +373,7 @@ func end_battle():
 	print("[BATTLE] Battle End!")
 	$AnimationManager/Log.display_text("Fim de jogo!")
 	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
-	get_tree().change_scene("res://battle_overworld/Map.tscn")
+	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 
 
 func recalculate_bounds():

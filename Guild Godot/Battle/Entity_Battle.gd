@@ -17,9 +17,10 @@ func _on_P0_focus_exited():
 
 func _on_Activate_Targets():
 	print("ACTIVATING TARGETS")
-	self.disabled = false
-	self.set_focus_mode(2)
-	self.grab_focus()
+	if not dead:
+		self.disabled = false
+		self.set_focus_mode(2)
+		self.grab_focus()
 
 func _on_Deactivate_Targets():
 	print("DEACTIVATING TARGETS")

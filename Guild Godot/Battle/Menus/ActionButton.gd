@@ -38,6 +38,7 @@ func _on_SubAction_Picked(subaction_arg: int) -> void:
 
 
 func hide_stuff():
+	print("Hiding stuff")
 	for c in get_parent().get_children():
 		c.show()
 	$ScrollContainer.hide()
@@ -68,7 +69,7 @@ func _on_Targets_Picked(target_args: PoolIntArray):
 	print(targets)
 	targets = target_args
 	print(action_type)
-	if subaction != -1:
+	if subaction != -1 and action_type == get_parent().get_parent().menu_state:
 		$ScrollContainer.hide()
 		emit_signal("deactivate_targets")
 		emit_signal("deactivate_targets_all")
