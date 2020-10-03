@@ -1,0 +1,188 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Hover_Menu_Info_Panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Battle/Menus/BigActionButtonAttack.gd" type="Script" id=5]
+[ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=6]
+
+[node name="Action" type="Button" groups=[
+"text",
+]]
+margin_right = 296.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "Action"
+script = ExtResource( 5 )
+
+[node name="Targets" type="Node2D" parent="."]
+z_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Targets"]
+light_mask = 2
+margin_left = 320.0
+margin_right = 1043.0
+margin_bottom = 124.0
+
+[node name="Players" type="Node2D" parent="Targets/HBoxContainer"]
+
+[node name="P0" parent="Targets/HBoxContainer/Players" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_right = 359.0
+margin_bottom = 124.0
+focus_neighbour_left = NodePath("../../Itens/0")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="P1" parent="Targets/HBoxContainer/Players" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_right = 359.0
+margin_bottom = 124.0
+focus_neighbour_left = NodePath("../../Itens/0")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="P2" parent="Targets/HBoxContainer/Players" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_right = 359.0
+margin_bottom = 124.0
+focus_neighbour_left = NodePath("../../Itens/0")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="P3" parent="Targets/HBoxContainer/Players" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_right = 359.0
+margin_bottom = 124.0
+focus_neighbour_left = NodePath("../../Itens/0")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="P4" parent="Targets/HBoxContainer/Players" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_right = 359.0
+margin_bottom = 124.0
+focus_neighbour_left = NodePath("../../Itens/0")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "1"
+
+[node name="Enemies" type="Node2D" parent="Targets/HBoxContainer"]
+
+[node name="E0" parent="Targets/HBoxContainer/Enemies" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_right = 360.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "-1"
+
+[node name="E1" parent="Targets/HBoxContainer/Enemies" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_top = 48.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "-1"
+
+[node name="E2" parent="Targets/HBoxContainer/Enemies" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_top = 48.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "-1"
+
+[node name="E3" parent="Targets/HBoxContainer/Enemies" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_top = 48.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "-1"
+
+[node name="E4" parent="Targets/HBoxContainer/Enemies" groups=[
+"text",
+] instance=ExtResource( 6 )]
+visible = false
+margin_top = 48.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+text = "-1"
+
+[connection signal="pressed" from="." to="." method="_on_Action_pressed"]

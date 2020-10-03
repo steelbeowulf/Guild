@@ -1,10 +1,12 @@
 extends Control
 
 onready var location = "MENU"
+onready var x
 
 func enter(players):
 	location = "MENU"
-	give_focus(len(players))
+	x = len(players)
+	give_focus()
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(players[i])
@@ -54,8 +56,9 @@ func force_char_focus():
 	chars[0].grab_focus()
 
 
-func give_focus(players_avaliable):
+func give_focus():
 	print("deu foco")
+	var players_avaliable = x
 	var options = $Panel/All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(2)
@@ -64,6 +67,7 @@ func give_focus(players_avaliable):
 	var n = []
 	for i in range(players_avaliable):
 		n.insert(i, chars[i])
+	print(n)
 	for c in n:
 		c.set_focus_mode(0)
 		c.disabled = true
