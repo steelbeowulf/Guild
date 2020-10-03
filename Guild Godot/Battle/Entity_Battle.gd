@@ -17,7 +17,7 @@ func _on_P0_focus_exited():
 
 func _on_Activate_Targets():
 	print("ACTIVATING TARGETS")
-	if not dead:
+	if not dead or self.data.tipo == "Player":
 		self.disabled = false
 		self.set_focus_mode(2)
 		self.grab_focus()

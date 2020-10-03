@@ -134,6 +134,7 @@ func take_damage(type, damage):
 	if get_health() < 0.2*get_max_health() and get_health() > 0:
 		self.add_status("HP_CRITICAL", 0, 999)
 	if get_health() <= 0:
+		stats[HP] = 0
 		self.add_status("KO", 0, 999)
 		self.remove_status("HP_CRITICAL")
 	return dmg

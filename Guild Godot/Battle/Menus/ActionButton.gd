@@ -56,9 +56,10 @@ func _on_Action_pressed():
 	print("ACTION PRESSED ", action_type)
 	if action_type == "Run":
 		emit_signal("action_picked", action_type, 0, [])
-		return
 	elif action_type == "Attack":
 		subaction = 1
+		emit_signal("deactivate_targets")
+		emit_signal("deactivate_targets_all")
 		emit_signal("activate_targets")
 	else:
 		for c in get_parent().get_children():

@@ -37,6 +37,6 @@ func _on_All_pressed():
 
 func _on_Focus_First():
 	for c in get_children():
-		if not c.dead:
+		if not c.dead or c.data.tipo == "Player":
 			c.grab_focus()
 			break
