@@ -167,7 +167,6 @@ margin_left = 128.0
 margin_right = 198.0
 margin_bottom = 35.0
 focus_neighbour_left = NodePath("../Mid")
-focus_neighbour_right = NodePath("../Back")
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 1 )

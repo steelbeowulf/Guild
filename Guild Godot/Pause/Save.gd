@@ -3,6 +3,7 @@ extends Control
 onready var state = 0
 onready var chosen_slot = -1
 onready var loader = get_node("/root/LOADER")
+onready var location = "OUTSIDE"
 
 var slots = null
 
@@ -18,9 +19,16 @@ func _ready():
 		tmp += 1
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel") and location == "SAVE":
+		location = "OUTSIDE"
 		state = 0
 		remove_focus()
+	elif  Input.is_action_just_pressed("ui_cancel") and location == "LOAD":
+		location = "OUTSIDE"
+		state = 0
+		remove_focus()
+	elif  Input.is_action_just_pressed("ui_cancel") and location == "OUTSIDE":
+		get_parent().get_parent().get_parent().return_menu()
 
 func _on_Slot_chosen(binds):
 	chosen_slot = binds
@@ -30,11 +38,13 @@ func _on_Slot_chosen(binds):
 		$LoadDialog.popup()
 
 func _on_Save_pressed():
+	location = "SAVE"
 	state = 1
 	slots.enable_focus(true)
 
 
 func _on_Load_pressed():
+	location = "LOAD"
 	state = 2
 	slots.enable_focus(false)
 
@@ -54,11 +64,13 @@ func remove_focus():
 
 
 func _on_SaveDialog_confirmed():
+	location = "OUTSIDE"
 	GLOBAL.save(chosen_slot)
 	slots.load_saves(LOADER.load_save_info())
 
 
 func _on_LoadDialog_confirmed():
+	location = "OUTSIDE"
 	GLOBAL.INVENTORY = loader.load_inventory(chosen_slot)
 	GLOBAL.PLAYERS = loader.load_players(chosen_slot)
 	GLOBAL.reload_state()
@@ -66,3 +78,4 @@ func _on_LoadDialog_confirmed():
 	GLOBAL.get_root().close_menu()
 	GLOBAL.get_root().transition(GLOBAL.MAP, true)
 	get_tree().change_scene("res://Root.tscn")
+

@@ -186,6 +186,7 @@ margin_bottom = 327.0
 rect_min_size = Vector2( 0, 40 )
 min_value = -10.0
 max_value = 10.0
+ticks_on_borders = true
 
 [node name="BGM" type="HSlider" parent="Overview/Values" groups=[
 "text",
@@ -244,7 +245,6 @@ rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = ExtResource( 3 )
 text = "Reset"
 flat = true
-
 [connection signal="item_selected" from="Overview/Values/Resolution" to="." method="_on_Resolution_item_selected"]
 [connection signal="item_selected" from="Overview/Values/Display" to="." method="_on_Display_item_selected"]
 [connection signal="value_changed" from="Overview/Values/Volume" to="." method="_on_Volume_value_changed"]

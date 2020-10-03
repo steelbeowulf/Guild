@@ -32,9 +32,12 @@ func show_skills():
 		if mpleft < skills[i].quantity:
 			node.disabled = true
 			#node.hide() #Hide por enquanto, depois vai ser so impossibilitado de usar, mas mostrando que a skill existe
+		elif skills[i].type == "OFFENSE" :
+			node.disabled = true
 		get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 		for e in $Panel/HBoxContainer/Skills.get_children():
 			e.set_focus_mode(0)
+
 
 func update_skills(skills):#Ainda mantendo a solução temporaria de esconder o node quando nao houver mais mana para as skills
 	if !skills:
@@ -71,12 +74,14 @@ func use_item(item):
 func _process(delta):
 	#if skills:
 	update_skills(skills)
-	if Input.is_action_pressed("ui_cancel") and location == "SKIILS":
-		location == "SUBMENU"
+	if Input.is_action_just_pressed("ui_cancel") and location == "SKILLS":
+		print("a")
+		location = "SUBMENU"
 		give_focus()
-	elif Input.is_action_pressed("ui_cancel") and location == "SUBMENU":
-		location == "OUTSIDE"
-		get_parent().get_parent().open_menu()
+	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
+		print("b")
+		location = "OUTSIDE"
+		get_parent().get_parent().get_parent().return_menu()
 
 func give_focus():
 	$Panel/HBoxContainer/Options/SkillType1.set_focus_mode(2)
@@ -110,6 +115,10 @@ func _on_Skill_Type_1_pressed():
 	for e in $Panel/HBoxContainer/Skills.get_children():
 		e.set_focus_mode(2)
 	location = "SKILLS"
-	get_node("Panel/HBoxContainer/Skills/SkillSlot1").grab_focus()
+	get_node("Panel/HBoxContainer/Skills/SkillSlot0").grab_focus()
 
+func _on_Back_pressed():
+	print(location)
+	location == "OUTSIDE"
+	get_parent().get_parent().get_parent().return_menu()
 

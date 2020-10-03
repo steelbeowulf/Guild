@@ -14,11 +14,15 @@ var BOSS_THEME = load("res://Assets/BGM/Heavy Concept A Bass Master (online-audi
 var SPELL = load("res://Assets/SFX/Powerup 4 - Sound effects Pack 2.ogg")
 var RUN = load("res://Assets/SFX/Fantozzi-SandL1.ogg")
 var HIT = load("res://Assets/SFX/Explosion 3 - Sound effects Pack 2.ogg")
+var ENTER_MENU = load("res://Assets/SFX/Menu Confirm.ogg")
+var EXIT_MENU = load("res://Assets/SFX/Menu Error.ogg")
+var MOVE_MENU = load("res://Assets/SFX/Menu Move.ogg")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
 'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME}
-var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT}
+var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT,
+'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU}
 
 # Base volumes
 onready var base_master = -10

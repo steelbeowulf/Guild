@@ -305,8 +305,8 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
-
 [connection signal="pressed" from="Panel/HBoxContainer/Options/SkillType1" to="." method="_on_Skill_Type_1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot1" to="Panel/HBoxContainer/Skills/SkillSlot1" method="_on_ItemSlot0_focus_entered"]

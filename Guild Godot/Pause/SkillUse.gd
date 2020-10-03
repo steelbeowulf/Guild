@@ -32,8 +32,8 @@ func _process(delta):
 	if Input.is_action_pressed("ui_cancel") and location == "TARGETS":
 		get_parent().get_parent().get_parent().back_to_skills(player.id)
 		queue_free()
-	elif Input.is_action_just_pressed("ui_accept") and type=="ALL":
-		use_item()
+	#if Input.is_action_just_pressed("ui_accept") and type=="ALL":
+	#	use_item()
 
 func use_item():
 	var mp = player.get_mp()
@@ -44,10 +44,12 @@ func use_item():
 		for status in item.get_status():
 			apply_status(status, player, player)
 	location = "OUTSIDE"
+	AUDIO.play_se("SPELL")
 	get_parent().get_parent().get_parent().back_to_skills(player.id)
 	queue_free()
 
 func _on_Char_pressed(id):
 	print("[ITEM USE] pressei "+str(id))
-	targets.append(GLOBAL.PLAYERS[id])
+	if type != "ALL":
+		targets.append(GLOBAL.PLAYERS[id])
 	use_item()
