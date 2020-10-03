@@ -150,19 +150,10 @@ func resolve(current_entity: Entity, action_result):
 
 	current_entity.graphics.end_turn()
 
-# TODO: there are graphical parts in this, move to ANimationManager
+
 func manage_hate(type, target):
-	var max_hate = -1
-	var index = -1
+	var index = Enemies_img[target].data.get_target()
 	if type == 0:
-		# Focus entered
-		for i in range(len(Players_img)):
-			#var img = Players_img[i]
-			var p = Players_img[i]
-			if p.data.hate[target] >= max_hate:
-				max_hate = p.data.hate[target]
-				index = i
-			#img.display_hate(p.data.hate[target], target)
 		$Path2D.create_curve(Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32)
 
 

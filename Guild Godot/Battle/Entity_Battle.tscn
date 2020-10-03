@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/cursor.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Damage:rect_position")
 tracks/0/interp = 1
@@ -42,7 +42,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 42
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -62,7 +62,7 @@ color = Color( 0.0470588, 0.407843, 0.929412, 1 )
 polygon = PoolVector2Array( -1.35055, -21.03, 4.29088, -21.0182, 1.72063, -17.0343 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Damage = SubResource( 2 )
+anims/Damage = SubResource( 1 )
 
 [node name="Animations" type="Node2D" parent="."]
 scale = Vector2( 3, 3 )
@@ -84,7 +84,7 @@ margin_top = -20.0
 margin_right = 79.0
 margin_bottom = 16.0
 rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "250"
 
 [connection signal="focus_entered" from="." to="." method="_on_P0_focus_entered"]

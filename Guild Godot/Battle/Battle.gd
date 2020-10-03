@@ -70,6 +70,8 @@ func rounds():
 	
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
+		for e in Enemies:
+			e.update_target(Players)
 		current_entity = turnorder[i]
 		print("[BATTLE] Turno de "+current_entity.nome)
 		var next = null
@@ -371,7 +373,7 @@ func end_battle():
 	print("[BATTLE] Battle End!")
 	$AnimationManager/Log.display_text("Fim de jogo!")
 	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
-	#get_tree().change_scene("res://battle_overworld/Map.tscn")
+	get_tree().change_scene("res://battle_overworld/Map.tscn")
 
 
 func recalculate_bounds():
@@ -395,70 +397,15 @@ func _on_Lane_button_down():
 
 func _on_Itens_button_down():
 	LOADER.List = Inventory
-#	var players = get_node("Interface/Menu/Itens/Targets/PlayerContainer")
-#	var enemies = get_node("Interface/Menu/Itens/Targets/EnemiesContainer")
-#	for i in range(4):
-#		players.get_node("P"+str(i)).hide()
-#	for i in range(5):
-#		enemies.get_node("E"+str(i)).hide()
-#	for i in range(Players.size()):
-#		players.get_node("P"+str(i)).show()
-#		players.get_node("P"+str(i)).set_text("")
-#	for i in range(Enemies.size()):
-#		if not Enemies[i].is_dead():
-#			enemies.get_node("E"+str(i)).show()
-#			enemies.get_node("E"+str(i)).set_text("")
 	$Interface.prepare_itens_action(Inventory)
 
 func _on_Skills_button_down():
 	var skills = current_entity.get_skills()
 	LOADER.List = skills
 	$Interface.prepare_skills_action(skills, current_entity.get_mp())
-#	var players = get_node("Interface/Menu/Skills/Targets/PlayerContainer/")
-#	var enemies = get_node("Interface/Menu/Skills/Targets/EnemiesContainer/")
-#	for i in range(4):
-#		players.get_node("P"+str(i)).hide()
-#	for i in range(5):
-#		enemies.get_node("E"+str(i)).hide()
-#	for i in range(Players.size()):
-#		players.get_node("P"+str(i)).show()
-#		players.get_node("P"+str(i)).set_text("")
-#	for i in range(Enemies.size()):
-#		if not Enemies[i].is_dead():
-#			enemies.get_node("E"+str(i)).show()
-#			enemies.get_node("E"+str(i)).set_text("")
 
 func _on_Attack_button_down():
 	$Interface.prepare_attack_action()
-#	var unfocus = true
-#	get_node("Interface/Menu/Skill").hide()
-#	get_node("Interface/Menu/Lane").hide()
-#	get_node("Interface/Menu/Item").hide()
-#	get_node("Interface/Menu/Run").hide()
-#	get_node("Interface/Menu/Attack").disabled = true
-#	get_node("Interface/Menu/Attack").set_focus_mode(0)
-#	var players = get_node("Interface/Menu/Attack/Targets/HBoxContainer/Players")
-#	var enemies = get_node("Interface/Menu/Attack/Targets/HBoxContainer/Enemies")
-#	for i in range(4):
-#		players.get_node("P"+str(i)).hide()
-#	for i in range(5):
-#		enemies.get_node("E"+str(i)).hide()
-#	for i in range(Players.size()):
-#		players.get_node("P"+str(i)).show()
-#		players.get_node("P"+str(i)).disabled = false
-#		players.get_node("P"+str(i)).set_text("")
-#	for i in range(Enemies.size()):
-#		if not Enemies[i].is_dead():
-#			if unfocus:
-#				enemies.get_node("E"+str(i)).grab_focus()
-#				unfocus = false
-#			enemies.get_node("E"+str(i)).show()
-#			enemies.get_node("E"+str(i)).disabled = false
-#			enemies.get_node("E"+str(i)).set_text("")
-#	#enemies.get_node("E0").grab_focus()
-#	get_node("Interface/Menu/Attack/").set_pressed(true)
-#	get_node("Interface/Menu/Attack/")._on_Action_pressed()
-#	get_node("Interface/Menu/Attack/").set_pressed(true)
 
 func get_skitem(action_type: String, skitem_id: int) -> Item:
 	if action_type == 'Item':
@@ -467,10 +414,3 @@ func get_skitem(action_type: String, skitem_id: int) -> Item:
 		return current_entity.get_skill(skitem_id)
 	else:
 		return null
-
-func _on_Attack_pressed():
-	pass # Replace with function body.
-
-
-func _on_All_focus_exited():
-	pass # Replace with function body.

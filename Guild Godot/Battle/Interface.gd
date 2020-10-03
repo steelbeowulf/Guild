@@ -39,18 +39,18 @@ func prepare_run_action() -> void:
 func prepare_lane_action(current_lane : int) -> void:
 	menu_state = "Lane"
 	
-	for c in get_node("Menu/Lane/SubActions").get_children():
+	for c in get_node("Menu/Lane/ScrollContainer/SubActions").get_children():
 		c.hide()
 	
 	for i in range(len(lanes_text)):
-		get_node("Menu/Lane/SubActions/"+str(i)).hide()
+		get_node("Menu/Lane/ScrollContainer/SubActions/"+str(i)).hide()
 		if current_lane != i:
-			var lane = get_node("Menu/Lane/SubActions/"+str(i))
+			var lane = get_node("Menu/Lane/ScrollContainer/SubActions/"+str(i))
 			lane.show()
 			lane.grab_focus()
 			lane.set_text(lanes_text[i])
 	
-	get_node("Menu/Lane/SubActions").show()
+	get_node("Menu/Lane/ScrollContainer/SubActions").show()
 	get_node("Menu/Lane")._on_Action_pressed()
 
 func prepare_itens_action(inventory: Array) -> void:
@@ -61,9 +61,9 @@ func prepare_itens_action(inventory: Array) -> void:
 	get_node("Menu/Run").hide()
 	get_node("Menu/Item").disabled = true
 	get_node("Menu/Item").set_focus_mode(0)
-	var itens = get_node("Menu/Item/SubActions")
-	for i in range(inventory.size()):
-		itens.get_node(str(i)).hide()
+	var itens = get_node("Menu/Item/ScrollContainer/SubActions")
+	for item in itens.get_children():
+		item.hide()
 	for i in range(inventory.size()):
 		if inventory[i].quantity <= 0:
 			itens.get_node(str(i)).disabled = true
@@ -72,7 +72,6 @@ func prepare_itens_action(inventory: Array) -> void:
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(inventory[i].nome+" x"+str(inventory[i].quantity))
 	
-	itens.get_node("0").grab_focus()
 	get_node("Menu/Item")._on_Action_pressed()
 
 func prepare_skills_action(skills: Array, current_mp: int) -> void:
@@ -83,19 +82,20 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 	get_node("Menu/Run").hide()
 	get_node("Menu/Skill").disabled = true
 	get_node("Menu/Skill").set_focus_mode(0)
-	var itens = get_node("Menu/Skill/SubActions")
-	for i in range(5):
-		itens.get_node(str(i)).hide()
+	var itens = get_node("Menu/Skill/ScrollContainer/SubActions")
+	for item in itens.get_children():
+		item.hide()
 
 	for i in range(skills.size()):
 		if current_mp < skills[i].quantity:
+			itens.get_node(str(i)).set_focus_mode(0)
 			itens.get_node(str(i)).disabled = true
 		else:
+			itens.get_node(str(i)).set_focus_mode(2)
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(skills[i].nome+"  "+str(skills[i].quantity))
-
-	itens.get_node("0").grab_focus()
+	
 	get_node("Menu/Skill")._on_Action_pressed()
 
 func prepare_attack_action() -> void:
