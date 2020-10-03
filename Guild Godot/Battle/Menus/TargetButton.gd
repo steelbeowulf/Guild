@@ -1,28 +1,27 @@
 extends Button
 
 signal target_picked
-var target_id : int
+var all = false
 
-func set_target_id(id: int):
-	target_id = id
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		all = false
 
 func _on_Target_pressed():
-	print("a")
-	emit_signal("target_picked", [target_id])
+	emit_signal("target_picked", get_name())
+	all = false
 
 func _on_Target_focus_entered():
 	$Sprite.show()
+	if all:
+		for target in get_parent().get_children():
+			target.get_node("Sprite").show()
 
 func _on_Target_focus_exited():
 	$Sprite.hide()
+	if all:
+		for target in get_parent().get_children():
+			target.get_node("Sprite").hide()
 
-func _on_Activate_Targets():
-	self.disabled = false
-	self.set_focus_mode(2)
-	self.show()
-	self.grab_focus()
-
-func _on_Deactivate_Targets():
-	self.disabled = true
-	self.set_focus_mode(0)
-	self.hide()
+func set_all():
+	all = true

@@ -1,32 +1,4 @@
-extends Button
-
-signal target_picked
-
-func _on_P0_pressed():
-	emit_signal("target_picked", [get_id()])
-
-
-func _on_P0_focus_entered():
-	$Sprite.show()
-	
-
-
-func _on_P0_focus_exited():
-	$Sprite.hide()
-
-
-func _on_Activate_Targets():
-	print("ACTIVATING TARGETS")
-	if not dead:
-		self.disabled = false
-		self.set_focus_mode(2)
-		self.grab_focus()
-
-func _on_Deactivate_Targets():
-	print("DEACTIVATING TARGETS")
-	self.disabled = true
-	self.set_focus_mode(0)
-
+extends Node2D
 
 var OFFSET_LANE = Vector2(140, 0)
 var current_lane = 0
@@ -34,7 +6,6 @@ var initial_position
 var my_turn = false
 var bounds = [0,0,0,0,0]
 var data = null
-var dead = false
 var SHADER = preload("res://Assets/Shaders/outline.shader")
 export(bool) var Player = false
 
@@ -43,12 +14,6 @@ var COLORS = {"RED": Color(1,0,0), "BLUE": Color(0,1,0),
 "PINK": Color(0.25,0,0), "YELLOW": Color(1,1,0)}
 
 signal finish_anim
-
-func get_id():
-	if Player:
-		return -(int(get_name()[1])+1)
-	else:
-		return int(get_name()[1])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -65,9 +30,6 @@ func remove_aura():
 	for anim in $Animations.get_children():
 		anim.material.set_shader_param("outline_width", 0)
 		anim.material.set_shader_param("outline_color", "")
-
-func set_turn(visible: bool):
-	$Turn.visible = visible
 
 func revive():
 	print("REVIVING")
@@ -132,10 +94,7 @@ func play(name, options=[]):
 	print("[ENTITY BATTLE] playing animation "+name)
 	print("Options="+str(options))
 	var node = $Animations
-	if name == 'end_turn':
-		set_turn(false)
-		return
-	elif name == 'Damage':
+	if name == 'Damage':
 		take_damage(options, 0)
 		return
 	if typeof(options) == TYPE_STRING and options == 'Skill':
@@ -217,7 +176,6 @@ func _on_Sprite_animation_finished(name):
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
 	if name == "death":
-		dead = true
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
 	elif name == "dead":
@@ -237,5 +195,3 @@ func _on_Spell_animation_finished(name):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if(anim_name == "Damage"):
 		$Damage.hide()
-
-
