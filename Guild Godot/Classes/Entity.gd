@@ -1,5 +1,4 @@
 extends "Stats.gd"
-class_name Entity
 
 var id
 var index
@@ -155,9 +154,6 @@ func get_graphics():
 
 func get_skills():
 	return self.skills
-
-func get_skill(id):
-	return self.skills[id]
 
 func get_name():
 	return self.nome

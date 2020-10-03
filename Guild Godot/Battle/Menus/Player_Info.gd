@@ -67,9 +67,6 @@ func play(name, options=[]):
 	elif name == 'UpdateMP':
 		self.Mp = Mp - options
 		self.set_mp(Mp)
-	else:
-		print("UPDATE DUNNO WHAT")
-		print(options)
 
 func _on_Tween_tween_started(object, key):
 	pass

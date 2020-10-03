@@ -1,19 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Hover_Menu_Info_Panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://Assets/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Battle/Menus/ActionButton.gd" type="Script" id=5]
-[ext_resource path="res://Battle/Menus/SubActionButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Battle/Menus/TargetButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Battle/Menus/SkillButton.tscn" type="PackedScene" id=6]
 
 [node name="Action" type="Button" groups=[
 "text",
 ]]
 margin_right = 296.0
 margin_bottom = 44.0
-focus_next = NodePath("ScrollContainer/SubActions/0")
+focus_next = NodePath("Targets/0")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = ExtResource( 1 )
@@ -25,105 +24,16 @@ custom_fonts/font = ExtResource( 4 )
 text = "Action"
 script = ExtResource( 5 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Targets" type="VBoxContainer" parent="."]
 visible = false
 margin_left = 320.0
 margin_right = 520.0
-margin_bottom = 90.0
-scroll_horizontal_enabled = false
-
-[node name="SubActions" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 6.0
-margin_bottom = 399.0
-
-[node name="0" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_right = 200.0
-margin_bottom = 27.0
-
-[node name="1" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 31.0
-margin_right = 200.0
-margin_bottom = 58.0
-
-[node name="2" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 62.0
-margin_right = 200.0
 margin_bottom = 89.0
 
-[node name="3" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 93.0
-margin_right = 200.0
-margin_bottom = 120.0
+[node name="0" parent="Targets" instance=ExtResource( 6 )]
 
-[node name="4" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 124.0
-margin_right = 200.0
-margin_bottom = 151.0
+[node name="1" parent="Targets" instance=ExtResource( 6 )]
 
-[node name="5" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 155.0
-margin_right = 200.0
-margin_bottom = 182.0
-
-[node name="6" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 186.0
-margin_right = 200.0
-margin_bottom = 213.0
-
-[node name="7" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 217.0
-margin_right = 200.0
-margin_bottom = 244.0
-
-[node name="8" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 248.0
-margin_right = 200.0
-margin_bottom = 275.0
-
-[node name="9" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 279.0
-margin_right = 200.0
-margin_bottom = 306.0
-
-[node name="10" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 310.0
-margin_right = 200.0
-margin_bottom = 337.0
-
-[node name="11" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 341.0
-margin_right = 200.0
-margin_bottom = 368.0
-
-[node name="12" parent="ScrollContainer/SubActions" instance=ExtResource( 6 )]
-margin_top = 372.0
-margin_right = 200.0
-margin_bottom = 399.0
-
-[node name="PlayerContainer" type="Node2D" parent="."]
-editor/display_folded = true
-visible = false
-
-[node name="-1" parent="PlayerContainer" instance=ExtResource( 7 )]
-
-[node name="-2" parent="PlayerContainer" instance=ExtResource( 7 )]
-
-[node name="-3" parent="PlayerContainer" instance=ExtResource( 7 )]
-
-[node name="-4" parent="PlayerContainer" instance=ExtResource( 7 )]
-
-[node name="EnemyContainer" type="Node2D" parent="."]
-editor/display_folded = true
-visible = false
-
-[node name="0" parent="EnemyContainer" instance=ExtResource( 7 )]
-
-[node name="1" parent="EnemyContainer" instance=ExtResource( 7 )]
-
-[node name="2" parent="EnemyContainer" instance=ExtResource( 7 )]
-
-[node name="3" parent="EnemyContainer" instance=ExtResource( 7 )]
-
-[node name="4" parent="EnemyContainer" instance=ExtResource( 7 )]
+[node name="2" parent="Targets" instance=ExtResource( 6 )]
 
 [connection signal="pressed" from="." to="." method="_on_Action_pressed"]

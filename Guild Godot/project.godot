@@ -10,39 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "Action",
-"language": "GDScript",
-"path": "res://Battle/Action.gd"
-}, {
-"base": "Node",
-"class": "ActionResult",
-"language": "GDScript",
-"path": "res://Battle/ActionResult.gd"
-}, {
-"base": "",
-"class": "Entity",
-"language": "GDScript",
-"path": "res://Classes/Entity.gd"
-}, {
-"base": "Node",
-"class": "Item",
-"language": "GDScript",
-"path": "res://Classes/Itens.gd"
-}, {
-"base": "Node",
 "class": "LOADER",
 "language": "GDScript",
 "path": "res://Classes/Loader.gd"
-}, {
-"base": "ActionResult",
-"class": "LaneActionResult",
-"language": "GDScript",
-"path": "res://Battle/LaneActionResult.gd"
-}, {
-"base": "ActionResult",
-"class": "RunActionResult",
-"language": "GDScript",
-"path": "res://Battle/RunActionResult.gd"
 }, {
 "base": "Node",
 "class": "STATS",
@@ -53,23 +23,11 @@ _global_script_classes=[ {
 "class": "SmoothPath",
 "language": "GDScript",
 "path": "res://Assets/Shaders/Smooth.gd"
-}, {
-"base": "ActionResult",
-"class": "StatsActionResult",
-"language": "GDScript",
-"path": "res://Battle/StatsActionResult.gd"
 } ]
 _global_script_class_icons={
-"Action": "",
-"ActionResult": "",
-"Entity": "",
-"Item": "",
 "LOADER": "",
-"LaneActionResult": "",
-"RunActionResult": "",
 "STATS": "",
-"SmoothPath": "",
-"StatsActionResult": ""
+"SmoothPath": ""
 }
 
 [application]

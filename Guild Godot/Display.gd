@@ -21,7 +21,6 @@ func _ready():
 		i += 1
 	resolution = i-1
 	set_resolution(resolution)
-	set_mode(1)
 
 
 func get_current_res():
