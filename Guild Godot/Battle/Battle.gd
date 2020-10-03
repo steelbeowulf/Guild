@@ -108,6 +108,7 @@ func rounds():
 		var bounds = []
 
 		if can_actually_move == 0:
+			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
 				action = current_entity.AI(Players, Enemies)
@@ -208,7 +209,7 @@ func execute_action(action: Action):
 			entities = Players
 		else:
 			entities = Enemies
-		var target = entities[target_id]
+		var target = entities[abs(target_id)]
 		var atk = current_entity.get_atk()
 		var dmg = target.take_damage(PHYSIC, atk)
 		if target.classe == "boss" and current_entity.classe != "boss":
@@ -233,19 +234,6 @@ func execute_action(action: Action):
 		var targets = action.get_targets()
 		var item_id = action.get_action()
 		var item = Inventory[item_id]
-
-#		# Itens may target entities, lanes or everyone
-#		var affected = []
-#		if item.get_target() == "ONE":
-#			affected.append(alvo)
-#		elif item.get_target() == "LANE":
-#			var affected_lane = alvo.get_pos()
-#			for p in entities:
-#				if p.get_pos() == affected_lane:
-#					affected.append(p)
-#		elif item.get_target() == "ALL":
-#			for p in entities:
-#				affected.append(p)
 #
 		var dead = []
 		var stat_change = []
@@ -256,7 +244,7 @@ func execute_action(action: Action):
 			var target
 			if target_id < 0:
 				target_id += 1
-				target = Players[target_id]
+				target = Players[abs(target_id)]
 			else:
 				target = Enemies[target_id]
 			# Checks if alvo may be targeted by the item
@@ -289,7 +277,6 @@ func execute_action(action: Action):
 			Inventory.remove(item_id)
 		
 		return StatsActionResult.new("Item", valid_targets, stat_change, dead, item)
-		#return [targets, [dead, ailments, stat_change]]
 
 	elif action_type == "Skill":
 		AUDIO.play_se("SPELL")
@@ -297,19 +284,6 @@ func execute_action(action: Action):
 		var skill_id = action.get_action()
 		var skill = current_entity.get_skill(skill_id)
 
-#		# Itens may target entities, lanes or everyone
-#		var affected = []
-#		if item.get_target() == "ONE":
-#			affected.append(alvo)
-#		elif item.get_target() == "LANE":
-#			var affected_lane = alvo.get_pos()
-#			for p in entities:
-#				if p.get_pos() == affected_lane:
-#					affected.append(p)
-#		elif item.get_target() == "ALL":
-#			for p in entities:
-#				affected.append(p)
-#
 		var dead = []
 		var stat_change = []
 		var ailments = []
@@ -319,9 +293,9 @@ func execute_action(action: Action):
 			var target
 			if target_id < 0:
 				target_id += 1
-				target = Players[target_id]
+				target = Players[abs(target_id)]
 			else:
-				target = Enemies[target_id]
+				target = Enemies[abs(target_id)]
 			# Checks if alvo may be targeted by the item
 			var result
 			var ret
@@ -373,7 +347,6 @@ func end_battle():
 	print("[BATTLE] Battle End!")
 	$AnimationManager/Log.display_text("Fim de jogo!")
 	BATTLE_MANAGER.end_battle(Players, Enemies, Inventory)
-	#get_tree().change_scene("res://battle_overworld/Map.tscn")
 
 
 func recalculate_bounds():

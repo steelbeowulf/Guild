@@ -5,6 +5,8 @@ signal activate_targets
 signal deactivate_targets
 signal activate_targets_all
 signal deactivate_targets_all
+signal player_focus
+signal enemy_focus
 
 export(String) var action_type : String
 var subaction : int = -1
@@ -35,6 +37,11 @@ func _on_SubAction_Picked(subaction_arg: int) -> void:
 			emit_signal("activate_targets_all")
 		else:
 			emit_signal("activate_targets")
+		
+		if skitem.get_type() != "OFFENSE":
+			emit_signal("player_focus")
+		else:
+			emit_signal("enemy_focus")
 
 
 func hide_stuff():
@@ -96,6 +103,9 @@ func connect_targets(list_players: Array, list_enemies: Array, manager: Node, al
 	self.connect("activate_targets_all", allEnemies, "_on_Activate_Targets")
 	self.connect("deactivate_targets_all", allPlayers, "_on_Deactivate_Targets")
 	self.connect("deactivate_targets_all", allEnemies, "_on_Deactivate_Targets")
+	
+	self.connect("player_focus", allPlayers, "_on_Focus_First")
+	self.connect("enemy_focus", allEnemies, "_on_Focus_First")
 	allPlayers.connect("target_picked", self, "_on_Targets_Picked") 
 	allEnemies.connect("target_picked", self, "_on_Targets_Picked") 
 

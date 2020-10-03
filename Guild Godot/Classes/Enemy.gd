@@ -44,8 +44,8 @@ func AI(player_list, enemies_list) -> Action:
 					best_dmg = ef[1]
 					best_skill = i
 	if best_skill == -1:
-		return Action.new("Attack", 1, [-possible_target])
-	return Action.new("Skill", best_skill, [-possible_target])
+		return Action.new("Attack", 1, [possible_target])
+	return Action.new("Skill", best_skill, [possible_target])
 
 func sum(array: Array):
 	var total = 0
@@ -81,7 +81,7 @@ func update_target(player_list):
 				randomize()
 				possible_target = int(rand_range(0,player_list.size()))
 	
-	self.target = possible_target
+	self.target = -(possible_target + 1)
 
 func _duplicate():
 	var new_stats = [] + self.stats

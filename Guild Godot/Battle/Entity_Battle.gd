@@ -67,10 +67,7 @@ func remove_aura():
 		anim.material.set_shader_param("outline_color", "")
 
 func set_turn(visible: bool):
-	$Turn.visibility = visible
-
-func set_selected(visible: bool):
-	$Target.visibility = visible
+	$Turn.visible = visible
 
 func revive():
 	print("REVIVING")
@@ -135,7 +132,10 @@ func play(name, options=[]):
 	print("[ENTITY BATTLE] playing animation "+name)
 	print("Options="+str(options))
 	var node = $Animations
-	if name == 'Damage':
+	if name == 'end_turn':
+		set_turn(false)
+		return
+	elif name == 'Damage':
 		take_damage(options, 0)
 		return
 	if typeof(options) == TYPE_STRING and options == 'Skill':

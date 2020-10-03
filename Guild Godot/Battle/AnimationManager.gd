@@ -8,6 +8,7 @@ var info = []
 var Menu = null
 var Info = null
 var timer = 0.0
+var last = false
 
 var queue = []
 var can_play = true
@@ -73,6 +74,8 @@ func _on_animation_finished(anim):
 	print("[ANIMATION MANAGER] finished animation "+anim)
 	can_play = true
 	if not queue:
+		last = true
+	if last:
 		emit_signal("animation_finished")
 
 func play(anim):
@@ -98,6 +101,7 @@ func _physics_process(delta):
 
 func resolve(current_entity: Entity, action_result):
 	print("[ANIMATION PLAYER] Resolving current turn")
+	last = false
 	var action_type = action_result.get_type()
 	# TODO Deal with ailments
 	if action_type == "Pass":
@@ -148,11 +152,11 @@ func resolve(current_entity: Entity, action_result):
 			var mp = skitem.get_cost()
 			enqueue(current_entity.info, "UpdateMP", mp) # manabar
 
-	current_entity.graphics.end_turn()
+	enqueue(current_entity.graphics, "end_turn", [])
 
 
 func manage_hate(type, target):
-	var index = Enemies_img[target].data.get_target()
+	var index = -(Enemies_img[target].data.get_target() + 1)
 	if type == 0:
 		$Path2D.create_curve(Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32)
 

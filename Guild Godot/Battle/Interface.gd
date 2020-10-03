@@ -66,8 +66,10 @@ func prepare_itens_action(inventory: Array) -> void:
 		item.hide()
 	for i in range(inventory.size()):
 		if inventory[i].quantity <= 0:
+			itens.get_node(str(i)).set_focus_mode(0)
 			itens.get_node(str(i)).disabled = true
 		else:
+			itens.get_node(str(i)).set_focus_mode(2)
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(inventory[i].nome+" x"+str(inventory[i].quantity))

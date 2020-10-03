@@ -34,3 +34,9 @@ func _on_All_focus_exited():
 func _on_All_pressed():
 	print("ALL PRESED")
 	emit_signal("target_picked", targets)
+
+func _on_Focus_First():
+	for c in get_children():
+		if not c.dead:
+			c.grab_focus()
+			break
