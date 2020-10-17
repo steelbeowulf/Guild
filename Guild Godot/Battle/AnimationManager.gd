@@ -73,6 +73,7 @@ func initialize(Players, Enemies):
 func _on_animation_finished(anim):
 	print("[ANIMATION MANAGER] finished animation "+anim)
 	can_play = true
+	
 	if not queue:
 		last = true
 	if last:
@@ -96,8 +97,6 @@ func _physics_process(delta):
 	if queue and can_play:
 		var current_animation = queue.pop_back()
 		play(current_animation)
-	if not queue and can_play:
-		emit_signal("animation_finished")
 
 func resolve(current_entity: Entity, action_result):
 	print("[ANIMATION PLAYER] Resolving current turn")
@@ -105,7 +104,7 @@ func resolve(current_entity: Entity, action_result):
 	var action_type = action_result.get_type()
 	# TODO Deal with ailments
 	if action_type == "Pass":
-		return
+		emit_signal("animation_finished")
 	elif action_type == "Attack":
 		$Log.display_text("Attack")
 		var target = action_result.get_targets()[0]
@@ -130,6 +129,7 @@ func resolve(current_entity: Entity, action_result):
 			$Log.display_text("Can't escape")
 		else:
 			$Log.display_text("Failed to run")
+		emit_signal("animation_finished")
 	else:
 		var skitem = action_result.get_spell()
 		$Log.display_text(skitem.nome)

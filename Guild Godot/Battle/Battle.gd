@@ -88,6 +88,8 @@ func rounds():
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
 		if status:
+			print("STATUS")
+			print(status)
 			var result
 			for st in status.keys():
 				result = result_status(st, status[st], current_entity, $AnimationManager/Log)
@@ -107,6 +109,8 @@ func rounds():
 		var result = null
 		var bounds = []
 
+		print("CAN YOU MOVE??")
+		print(can_actually_move)
 		if can_actually_move == 0:
 			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
@@ -158,7 +162,9 @@ func rounds():
 				emit_signal("round_finished")
 				return
 		$AnimationManager.resolve(current_entity, result)
+		print("WAITING FOR ANIMATIONS")
 		yield($AnimationManager, "animation_finished")
+		print("ANIMATIONS HAVE FINISHED")
 		
 		get_node("Interface/Menu/Attack").grab_focus()
 		get_node("Interface/Menu/Attack").disabled = false
@@ -269,6 +275,8 @@ func execute_action(action: Action):
 						var ailment = apply_status(st, target, current_entity)
 						ailments.append(ailment)
 				var dies = target.get_health() <= 0
+				if dies:
+					target.die()
 				dead.append(dies)
 				print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		
@@ -317,6 +325,8 @@ func execute_action(action: Action):
 						var ailment = apply_status(st, target, current_entity)
 						ailments.append(ailment)
 				var dies = target.get_health() <= 0
+				if dies:
+					target.die()
 				dead.append(dies)
 				print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(dies)+", ret="+str(ret)+", type="+str(type))
 		

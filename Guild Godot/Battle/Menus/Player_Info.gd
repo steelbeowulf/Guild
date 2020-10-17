@@ -44,8 +44,8 @@ func set_hp(hp):
 	$HPText.set_text(str(hp)+"/"+str(maxHp))
 	var scale = $HP/Fill.get_scale()
 	$Tween.interpolate_property($HP/Fill, "rect_scale",
-        scale, Vector2(hp/maxHp, 1), 1,
-        Tween.TRANS_CIRC, Tween.EASE_OUT)
+		scale, Vector2(hp/maxHp, 1), 1,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	$Tween.start()
 
 func set_mp(mp):
@@ -55,8 +55,8 @@ func set_mp(mp):
 	$MPText.set_text(str(mp)+"/"+str(maxMp))
 	var scale = $MP/Fill.get_scale()
 	$Tween.interpolate_property($MP/Fill, "rect_scale",
-        scale, Vector2(mp/maxMp, 1), 1,
-        Tween.TRANS_CIRC, Tween.EASE_OUT)
+		scale, Vector2(mp/maxMp, 1), 1,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	$Tween.start()
 
 

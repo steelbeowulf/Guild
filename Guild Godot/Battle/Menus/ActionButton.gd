@@ -33,15 +33,16 @@ func _on_SubAction_Picked(subaction_arg: int) -> void:
 			e.set_focus_mode(0)
 		var skitem = LOADER.List[subaction_arg]
 		
+		var is_ress = skitem.get_type() == "RESSURECTION"
 		if skitem.get_target() == "ALL":
-			emit_signal("activate_targets_all")
+			emit_signal("activate_targets_all", skitem.get_type())
 		else:
-			emit_signal("activate_targets")
+			emit_signal("activate_targets", is_ress)
 		
 		if skitem.get_type() != "OFFENSE":
-			emit_signal("player_focus")
+			emit_signal("player_focus", is_ress)
 		else:
-			emit_signal("enemy_focus")
+			emit_signal("enemy_focus", is_ress)
 
 
 func hide_stuff():
@@ -60,7 +61,7 @@ func _on_Action_pressed():
 		subaction = 1
 		emit_signal("deactivate_targets")
 		emit_signal("deactivate_targets_all")
-		emit_signal("activate_targets")
+		emit_signal("activate_targets", false)
 	else:
 		for c in get_parent().get_children():
 			if c.get_name() != action_type:

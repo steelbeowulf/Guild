@@ -10,7 +10,6 @@ var animations
 var nome
 var stats
 var buffs
-var alive
 var health
 var position
 var classe
@@ -28,8 +27,19 @@ enum {PHYSIC, MAGIC, FIRE, WATER, ELECTRIC, ICE, EARTH, WIND, HOLY, DARKNESS}
 enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, EVA, LCK}
 
 func die():
+	print("OH NO, "+self.nome+" HAS DIED!")
 	self.set_stats(HP, 0)
-	add_status("KO", 999, 999)
+	self.remove_all_status()
+	self.status["KO"] = [9999, 9999]
+	self.dead = true
+
+func ressurect():
+	print("RESSURECT")
+	self.dead = false
+	if GLOBAL.IN_BATTLE:
+		print("INBATTLE")
+		self.graphics.revive()
+	self.remove_all_status()
 
 func get_status():
 	return status
@@ -38,6 +48,7 @@ func remove_all_status():
 	status = {}
 
 func remove_status(effect):
+	print("WILL REMOVE STATUS "+str(effect)+" ON "+str(self.nome))
 	if effect == "SLOW":
 		var agi = self.get_agi()
 		self.set_stats(AGI, agi*2)
@@ -91,9 +102,7 @@ func remove_status(effect):
 		self.set_stats(ACC, acc*10)
 		#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
 	elif effect == "KO":
-		dead = false
-		if GLOBAL.IN_BATTLE:
-			self.graphics.revive()
+		ressurect()
 	if status.has(effect):
 		status.erase(effect)
 	if GLOBAL.STATUS.has(effect):
@@ -101,8 +110,7 @@ func remove_status(effect):
 
 func add_status(effect, atkm, turns):
 	if effect == "KO":
-		status = {}
-		dead = true
+		self.die()
 	if GLOBAL.STATUS.has(effect) and GLOBAL.IN_BATTLE:
 		self.graphics.set_aura(GLOBAL.STATUS[effect])
 	status[effect] = [turns, atkm]
@@ -134,9 +142,8 @@ func take_damage(type, damage):
 	if get_health() < 0.2*get_max_health() and get_health() > 0:
 		self.add_status("HP_CRITICAL", 0, 999)
 	if get_health() <= 0:
-		stats[HP] = 0
-		self.add_status("KO", 0, 999)
-		self.remove_status("HP_CRITICAL")
+		print(self.nome+" IS GOING TO DIIE")
+		self.die()
 	return dmg
 
 func is_dead():
