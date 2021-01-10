@@ -5,7 +5,7 @@
 	"TARGET":"ONE", 
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-75, "TYPE":"FIRE", "TURNS":1}],
-	"STATUS":[{"BOOL":0.15, "STATUS":"BURN"}],
+	"STATUS":[{"BOOL":0.25, "STATUS":"BURN"}],
 	"IMG":{"path": "res://Assets/Animations/Spells/Fire - Done/Fireball.png",
 		   "vframes": 4, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "14, 15, 0-13"]}

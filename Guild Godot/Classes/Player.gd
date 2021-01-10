@@ -13,7 +13,6 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.level = int(lv)
 	self.xp = int(experience)
 	self.stats = valores
-	self.alive = true
 	self.position = pos
 	self.nome = identificacao
 	self.skills = habilidades
@@ -83,10 +82,12 @@ func reset_hate():
 	hate = []
 
 func die():
-	remove_all_status()
-	zero_hate()
-	add_status("KO", 999, 999)
-	set_stats(HP, 0)
+	print("OH NO, "+self.nome+" HAS DIED!")
+	self.set_stats(HP, 0)
+	self.remove_all_status()
+	self.status["KO"] = [9999, 9999]
+	self.dead = true
+	self.zero_hate()
 
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)

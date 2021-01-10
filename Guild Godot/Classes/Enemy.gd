@@ -10,7 +10,6 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.animations = animation
 	self.classe = "boss"
 	self.stats = valores
-	self.alive = true
 	self.position = 0
 	self.nome = identificacao
 	self.skills = habilidades
