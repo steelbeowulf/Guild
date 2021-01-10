@@ -135,9 +135,11 @@ func play(name, options=[]):
 	var node = $Animations
 	if name == 'end_turn':
 		set_turn(false)
+		emit_signal("finish_anim", "end_turn")
 		return
 	elif name == 'Damage':
 		take_damage(options, 0)
+		emit_signal("finish_anim", "Damage")
 		return
 	elif name == 'Death':
 		dead = true

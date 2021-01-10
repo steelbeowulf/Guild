@@ -144,7 +144,7 @@ func rounds():
 		# Current entity cannot move
 		elif can_actually_move == -1:
 			action = Action.new("Pass", 0, [0])
-			emit_signal("turn_finished")
+			#emit_signal("turn_finished")
 		# Current entity is forced to attack a random enemy
 		elif can_actually_move == -2:
 			randomize()

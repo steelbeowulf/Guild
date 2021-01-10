@@ -115,8 +115,8 @@ func save(slot):
 	# Saves the map information
 	var save_dict = {
 		"area" : get_area_dict(),
-        "gold" : get_gold(),
-        "playtime" : get_playtime(),
+		"gold" : get_gold(),
+		"playtime" : get_playtime(),
 		"events" : get_events()
 	}
 	savegame.open(save_path+str(slot)+"/Info.json", File.WRITE)

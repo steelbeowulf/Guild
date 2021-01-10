@@ -37,6 +37,7 @@ func initialize(Players, Enemies):
 			Players[i].info = Info.get_node("P"+str(i))
 			Players[i].info.set_initial_hp(Players[i].get_health(), Players[i].get_max_health())
 			Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
+			Players[i].info.connect("finish_anim", self, "_on_animation_finished")
 			i += 1
 		else:
 			node.queue_free()
@@ -73,9 +74,6 @@ func initialize(Players, Enemies):
 func _on_animation_finished(anim):
 	print("[ANIMATION MANAGER] finished animation "+anim)
 	can_play = true
-	
-	if not queue:
-		last = true
 	if last:
 		emit_signal("animation_finished")
 
@@ -84,9 +82,9 @@ func play(anim):
 	var scope = anim[0]
 	var animation_name = anim[1]
 	var info = anim[2]
-
-	if typeof(info) == TYPE_STRING and info != "ALL" and info != "LANE":
-		can_play = false
+	print("[ANIMATION MANAGER] info "+str(info))
+	if typeof(info) == TYPE_STRING and (info == "ALL" or info == "LANE"):
+		can_play = true
 	scope.play(animation_name, info)
 
 func enqueue(scope, animation_name, additional_info):
@@ -96,7 +94,13 @@ func enqueue(scope, animation_name, additional_info):
 func _physics_process(delta):
 	if queue and can_play:
 		var current_animation = queue.pop_back()
+		can_play = false
 		play(current_animation)
+	elif not queue and last:
+		last = false
+		emit_signal("animation_finished")
+	elif not queue:
+		last = true
 
 func resolve(current_entity: Entity, action_result):
 	print("[ANIMATION PLAYER] Resolving current turn")
@@ -104,7 +108,7 @@ func resolve(current_entity: Entity, action_result):
 	var action_type = action_result.get_type()
 	# TODO Deal with ailments
 	if action_type == "Pass":
-		emit_signal("animation_finished")
+		pass
 	elif action_type == "Attack":
 		$Log.display_text("Attack")
 		var target = action_result.get_targets()[0]

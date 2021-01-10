@@ -193,6 +193,7 @@ func transition(next, fake=false):
 	var new = load("res://Overworld/Demo_Area/Map"+str(next)+".tscn")
 	GLOBAL.MAP = next
 	set_effect(GLOBAL.MAP)
+	#call_deferred("add_child", new.instance())
 	self.add_child(new.instance())
 	if map:
 		remove_child(map)

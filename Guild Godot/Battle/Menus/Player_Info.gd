@@ -8,6 +8,8 @@ var maxMp = 0
 var Hp = 0
 var Mp = 0
 
+signal finish_anim
+
 func _ready():
 	$HP/Fill.set_scale(Vector2(1,1))
 	$MP/Fill.set_scale(Vector2(1,1))
@@ -77,5 +79,5 @@ func _on_Tween_tween_started(object, key):
 
 
 func _on_Tween_tween_completed(object, key):
-	pass
-
+	var anim_name = "Update" + object.get_parent().get_name()
+	emit_signal("finish_anim", anim_name)
