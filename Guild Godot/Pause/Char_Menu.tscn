@@ -138,11 +138,13 @@ margin_right = 77.0
 margin_bottom = 35.0
 focus_neighbour_left = NodePath("../Front")
 focus_neighbour_right = NodePath("../Mid")
+focus_mode = 0
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
+enabled_focus_mode = 0
 text = "BACK"
 
 [node name="Mid" type="Button" parent="Lanes" groups=[
@@ -153,11 +155,13 @@ margin_right = 124.0
 margin_bottom = 35.0
 focus_neighbour_left = NodePath("../Back")
 focus_neighbour_right = NodePath("../Front")
+focus_mode = 0
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
+enabled_focus_mode = 0
 text = "MID"
 
 [node name="Front" type="Button" parent="Lanes" groups=[
@@ -167,11 +171,13 @@ margin_left = 128.0
 margin_right = 198.0
 margin_bottom = 35.0
 focus_neighbour_left = NodePath("../Mid")
+focus_mode = 0
 custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
+enabled_focus_mode = 0
 text = "FRONT"
 [connection signal="pressed" from="Lanes/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Lanes/Mid" to="." method="_on_Mid_pressed"]

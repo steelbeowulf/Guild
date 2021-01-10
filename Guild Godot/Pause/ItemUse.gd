@@ -4,6 +4,7 @@ onready var location = "OUTSIDE"
 var targets = []
 var item = null
 var type = "ONE"
+var whatdo = "RECOVERY"
 
 func enter(item_arg):
 	location = "TARGETS"
@@ -13,12 +14,14 @@ func enter(item_arg):
 		node.update_info(GLOBAL.PLAYERS[i])
 		node.connect("pressed", self, "_on_Char_pressed", [i])
 	item = item_arg
+	whatdo = item.type
 	if item.target == "ALL":
 		$Panel/All/Right/Options_Panel/Panel/Question.set_text("Usar "+item.nome+" \nem todos os personagens?")
 		targets = GLOBAL.PLAYERS
 		type = "ALL"
 
 func give_focus():
+	var i = 0;
 	for c in $Panel/All/Left/Chars.get_children():
 		c.set_focus_mode(2)
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
@@ -33,7 +36,6 @@ func _process(delta):
 	#	use_item()
 
 func use_item():
-	item.quantity = item.quantity - 1
 	for player in targets:
 		for effect in item.get_effects():
 			apply_effect(null, effect, player, null)
@@ -41,11 +43,16 @@ func use_item():
 			apply_status(status, player, player)
 	location = "OUTSIDE"
 	AUDIO.play_se("SPELL")
+	item.quantity = item.quantity - 1
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()
 
 func _on_Char_pressed(id):
 	print("[ITEM USE] pressei "+str(id))
+	if whatdo == "RESSURECTION":
+		if GLOBAL.PLAYERS[id].status != "KO":
+			get_parent().get_parent().get_parent().back_to_inventory()
+			queue_free()
 	if type != "ALL":
 		targets.append(GLOBAL.PLAYERS[id])
 	use_item()

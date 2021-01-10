@@ -50,6 +50,7 @@ func use_item():
 
 func _on_Char_pressed(id):
 	print("[ITEM USE] pressei "+str(id))
+	print(GLOBAL.PLAYERS[id].status)
 	if type != "ALL":
 		targets.append(GLOBAL.PLAYERS[id])
 	use_item()
