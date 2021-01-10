@@ -20,12 +20,31 @@ var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
 func apply_effect(who, effect, target, t_id):
+	print("batendo em vagabundo")
+	print("\n\n\n\n\n\n\n\n\n\n\n")
 	var ret = -1
 	var tipo = -1
 	var stat = effect[0]
 	var value = effect[1]
 	var type = effect[2]
 	var TargetStat = target.get_stats(stat)
+	var atk = who.get_stats(ATK)
+	var atkm = who.get_stats(ATKM)
+	var def = target.get_stats(DEF)
+	var defm = target.get_stats(DEFM)
+	var acc = who.get_stats(ACC)
+	var lck = who.get_stats(LCK)
+	var lv = who.level
+	print(who.position)
+	if (type == PHYSIC):
+		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
+		var maxdamage = ((value*(512-def)*basedamage)/(33*512))
+		var truedamage
+		truedamage = ceil(maxdamage)
+		truedamage = truedamage*rand_range(89, 100)/100
+		print("dano base: -" ,ceil(basedamage))
+		print("dano maximo: " , ceil(maxdamage))
+		print("resultado: " , ceil(truedamage))
 	var finalval = TargetStat + value
 	var valmax = 9999
 	if stat == HP and value < 0:

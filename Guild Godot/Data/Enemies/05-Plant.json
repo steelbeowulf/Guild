@@ -1,7 +1,7 @@
 {
 	"ID":5,
 	"LEVEL":8,
-	"EXPERIENCE":300,
+	"EXPERIENCE":80,
 	"IMG":{"path": "res://Assets/Animations/plant spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-3"], 

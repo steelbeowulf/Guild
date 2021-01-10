@@ -1,7 +1,7 @@
 {
 	"ID":10,
 	"LEVEL":12,
-	"EXPERIENCE":5000,
+	"EXPERIENCE":100,
 	"IMG":{"path": "res://Assets/Animations/eyeball spritesheet.png",
 		   "vframes": 3, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-7"], 
