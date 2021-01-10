@@ -8,6 +8,8 @@ var maxMp = 0
 var Hp = 0
 var Mp = 0
 
+signal finish_anim
+
 func _ready():
 	$HP/Fill.set_scale(Vector2(1,1))
 	$MP/Fill.set_scale(Vector2(1,1))
@@ -44,8 +46,8 @@ func set_hp(hp):
 	$HPText.set_text(str(hp)+"/"+str(maxHp))
 	var scale = $HP/Fill.get_scale()
 	$Tween.interpolate_property($HP/Fill, "rect_scale",
-        scale, Vector2(hp/maxHp, 1), 1,
-        Tween.TRANS_CIRC, Tween.EASE_OUT)
+		scale, Vector2(hp/maxHp, 1), 1,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	$Tween.start()
 
 func set_mp(mp):
@@ -55,8 +57,8 @@ func set_mp(mp):
 	$MPText.set_text(str(mp)+"/"+str(maxMp))
 	var scale = $MP/Fill.get_scale()
 	$Tween.interpolate_property($MP/Fill, "rect_scale",
-        scale, Vector2(mp/maxMp, 1), 1,
-        Tween.TRANS_CIRC, Tween.EASE_OUT)
+		scale, Vector2(mp/maxMp, 1), 1,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	$Tween.start()
 
 
@@ -77,5 +79,5 @@ func _on_Tween_tween_started(object, key):
 
 
 func _on_Tween_tween_completed(object, key):
-	pass
-
+	var anim_name = "Update" + object.get_parent().get_name()
+	emit_signal("finish_anim", anim_name)

@@ -81,18 +81,13 @@ func apply_status(status, target, attacker):
 	var value = status[0]
 	var atkm = attacker.get_atkm()
 	print("[APPLY] APPLYING STATUS "+type+str(value))
-	if typeof(value) != TYPE_BOOL:
+	if value > 0:
 		randomize()
 		var chance = rand_range(0, 99)
 		if chance <= value*100:
 			value = 1
 		else:
 			value = 0
-	else:
-		if value:
-			value = 1
-		else:
-			value = -1
 	if value == 1:
 		#logs.display_text(target.get_name()+" agora está sob o efeito de "+type)
 		target.add_status(type, atkm, 3)
@@ -221,6 +216,8 @@ func apply_status(status, target, attacker):
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	elif value == -1:
+		print("WILL REMOVE STATUS "+str(type))
+		target.remove_status(type)
 		if type == "ATTACK_UP":
 			var atk = target.get_atk()
 			target.set_stats(ATK, 5*atk/6)
@@ -315,8 +312,9 @@ func apply_status(status, target, attacker):
 			var atk = target.get_atk()
 			target.set_stats(AGI, 4*agi/3)
 			target.set_stats(ATK, 4*atk/3)
+		elif type == "KO":
+			target.remove_all_status()
 		#logs.display_text(target.get_name()+" não está mais sob o efeito de "+type)
-		target.remove_status(type)
 
 func result_status(status, values, target, logs):
 	var can_move = 0

@@ -15,9 +15,9 @@ func _on_P0_focus_exited():
 	$Sprite.hide()
 
 
-func _on_Activate_Targets():
+func _on_Activate_Targets(is_ress: bool):
 	print("ACTIVATING TARGETS")
-	if not dead or self.data.tipo == "Player":
+	if (not dead and not is_ress) or (dead and self.data.tipo == "Player" and is_ress):
 		self.disabled = false
 		self.set_focus_mode(2)
 		self.grab_focus()
@@ -71,6 +71,7 @@ func set_turn(visible: bool):
 
 func revive():
 	print("REVIVING")
+	dead = false
 	$Animations.get_node("dead").stop()
 	$Animations.get_node("dead").hide()
 	$Animations.get_node("idle").show()
@@ -134,10 +135,14 @@ func play(name, options=[]):
 	var node = $Animations
 	if name == 'end_turn':
 		set_turn(false)
+		emit_signal("finish_anim", "end_turn")
 		return
 	elif name == 'Damage':
 		take_damage(options, 0)
+		emit_signal("finish_anim", "Damage")
 		return
+	elif name == 'Death':
+		dead = true
 	if typeof(options) == TYPE_STRING and options == 'Skill':
 		node = $Spells
 	else:
@@ -218,9 +223,14 @@ func _on_Sprite_animation_finished(name):
 	$Animations.get_node(name).hide()
 	if name == "death":
 		dead = true
+		$Animations.get_node("idle").hide()
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
 	elif name == "dead":
+		$Animations.get_node("dead").show()
+		$Animations.get_node("dead").play(true)
+	elif dead:
+		$Animations.get_node("idle").hide()
 		$Animations.get_node("dead").show()
 		$Animations.get_node("dead").play(true)
 	else:
@@ -237,5 +247,3 @@ func _on_Spell_animation_finished(name):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if(anim_name == "Damage"):
 		$Damage.hide()
-
-
