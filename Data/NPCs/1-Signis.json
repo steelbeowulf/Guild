@@ -1,0 +1,16 @@
+{
+	"ID":1,
+	"IMG":{"path": "res://Assets/Animations/Entities/signs.png",
+		   "vframes": 5, "hframes":3, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0"]},
+	"NAME":"Signis",
+    "DIALOGUE":[
+        "Tired of being puny and lame? Try EXP!",
+        "What's EXP? Well, glad you asked!",
+        "EXP is short for 'Experience Points'. By accumulating them, you will increase your power and resistance",
+        "That's called 'Leveling Up'. Pretty great, right? But HOW do you get EXP?",
+        "That's simple enough. You get them by defeating the enemies you'll encounter on your journey!",
+        "Now get out there and stop being lame today!"
+    ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/sign.png", "scale":[4,4]}
+}

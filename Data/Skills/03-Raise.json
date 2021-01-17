@@ -1,0 +1,12 @@
+{
+	"ID":3,
+	"NAME":"RAISE",
+	"QUANT":50,
+	"TARGET":"ONE",
+	"TYPE":"RESSURECTION",
+	"EFFECTS":[{"STAT":"HP", "VALUE":35, "TYPE":"", "TURNS":1}],
+	"STATUS":[{"BOOL":-1, "STATUS":"KO"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Raise.png",
+		   "vframes": 2, "hframes":3, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-28"]}
+}
