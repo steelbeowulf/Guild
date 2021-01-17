@@ -1,0 +1,12 @@
+{	
+	"ID":5,	
+	"NAME":"HI ETHER",
+	"QUANT":1,
+	"TARGET":"ONE",
+	"TYPE":"RECOVERY",
+	"EFFECTS":[{"STAT":"MP", "VALUE":50, "TYPE":"", "TURNS":1}],
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png",
+		   "vframes": 5, "hframes":6, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-28"]}
+}
