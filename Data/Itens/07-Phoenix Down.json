@@ -1,0 +1,12 @@
+{
+	"ID":7,
+	"NAME":"PHOENIX DOWN",
+	"QUANT":1,
+	"TARGET":"ONE",
+	"TYPE":"RESSURECTION",
+	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
+	"STATUS":[{"BOOL":false, "STATUS":"KO"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png",
+		   "vframes": 5, "hframes":6, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-28"]}
+}

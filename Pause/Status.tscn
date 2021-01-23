@@ -1,0 +1,565 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Pause/Status.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets/Fonts/Menu_Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/Portraits/cleric.png" type="Texture" id=4]
+
+
+
+[node name="Status" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 1.86, 1.4 )
+script = ExtResource( 1 )
+
+[node name="Top_Panel" type="Panel" parent="."]
+margin_right = 1024.0
+margin_bottom = 66.0
+rect_pivot_offset = Vector2( 1520, -10 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Char_name" type="Label" parent="Top_Panel" groups=[
+"text",
+]]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -43.0
+margin_top = -10.5
+margin_right = 43.0
+margin_bottom = 10.5
+custom_fonts/font = ExtResource( 3 )
+text = "Papu_Kweh"
+
+[node name="Left_Arrow" type="Label" parent="Top_Panel" groups=[
+"text",
+]]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 40.0
+margin_top = -10.5
+margin_right = 23.0
+margin_bottom = 10.5
+custom_fonts/font = ExtResource( 3 )
+text = "<<"
+
+[node name="Right_Arrow" type="Label" parent="Top_Panel" groups=[
+"text",
+]]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -10.5
+margin_bottom = 10.5
+custom_fonts/font = ExtResource( 3 )
+text = ">>"
+
+[node name="Overview" type="Panel" parent="."]
+margin_top = 66.0
+margin_right = 1024.0
+margin_bottom = 299.0
+rect_pivot_offset = Vector2( 1520, -10 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Overview"]
+position = Vector2( 107.407, 100.951 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 4 )
+
+[node name="Labels" type="VBoxContainer" parent="Overview"]
+editor/display_folded = true
+margin_left = 280.0
+margin_top = 55.0
+margin_right = 320.0
+margin_bottom = 151.0
+alignment = 1
+
+[node name="HP_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
+margin_right = 40.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 3 )
+text = "HP"
+align = 1
+
+[node name="MP_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
+margin_top = 25.0
+margin_right = 40.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 3 )
+text = "MP"
+align = 1
+
+[node name="EXP_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
+margin_top = 50.0
+margin_right = 40.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 3 )
+text = "EXP"
+align = 1
+
+[node name="LV_Label" type="Label" parent="Overview/Labels" groups=[
+"text",
+]]
+margin_top = 75.0
+margin_right = 40.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 3 )
+text = "LV"
+align = 1
+
+[node name="Values" type="VBoxContainer" parent="Overview"]
+margin_left = 760.0
+margin_top = 55.0
+margin_right = 800.0
+margin_bottom = 151.0
+alignment = 1
+
+[node name="HP" type="Label" parent="Overview/Values" groups=[
+"text",
+]]
+margin_right = 40.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 3 )
+text = "50"
+align = 2
+
+[node name="MP" type="Label" parent="Overview/Values" groups=[
+"text",
+]]
+margin_top = 25.0
+margin_right = 40.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 3 )
+text = "20"
+align = 2
+
+[node name="EXP" type="Label" parent="Overview/Values" groups=[
+"text",
+]]
+margin_top = 50.0
+margin_right = 40.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 3 )
+text = "100"
+align = 2
+
+[node name="LV" type="Label" parent="Overview/Values" groups=[
+"text",
+]]
+margin_top = 75.0
+margin_right = 40.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 3 )
+text = "10"
+align = 2
+
+[node name="Columns" type="HBoxContainer" parent="."]
+margin_top = 300.0
+margin_right = 1026.0
+margin_bottom = 775.0
+rect_min_size = Vector2( 1024, 475 )
+
+[node name="Stats" type="Panel" parent="Columns"]
+margin_right = 508.0
+margin_bottom = 475.0
+rect_min_size = Vector2( 508, 0 )
+rect_pivot_offset = Vector2( 1520, -10 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Labels" type="VBoxContainer" parent="Columns/Stats"]
+editor/display_folded = true
+anchor_bottom = 1.0
+margin_left = 45.0
+margin_top = 45.0
+margin_right = 53.0
+
+[node name="ATK_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_right = 53.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 3 )
+text = "ATK
+"
+align = 1
+
+[node name="ATKM_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 49.0
+margin_right = 53.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 3 )
+text = "ATKM
+"
+align = 1
+
+[node name="DEF_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 98.0
+margin_right = 53.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 3 )
+text = "DEF
+"
+align = 1
+
+[node name="DEFM_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 147.0
+margin_right = 53.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 3 )
+text = "DEFM
+"
+align = 1
+
+[node name="AGI_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 196.0
+margin_right = 53.0
+margin_bottom = 241.0
+custom_fonts/font = ExtResource( 3 )
+text = "AGI
+"
+align = 1
+
+[node name="ACC_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 245.0
+margin_right = 53.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 3 )
+text = "ACC
+"
+align = 1
+
+[node name="EVA_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 294.0
+margin_right = 53.0
+margin_bottom = 339.0
+custom_fonts/font = ExtResource( 3 )
+text = "EVA
+"
+align = 1
+
+[node name="LCK_Label" type="Label" parent="Columns/Stats/Labels" groups=[
+"text",
+]]
+margin_top = 343.0
+margin_right = 53.0
+margin_bottom = 388.0
+custom_fonts/font = ExtResource( 3 )
+text = "LCK
+"
+align = 1
+
+[node name="Values" type="VBoxContainer" parent="Columns/Stats"]
+editor/display_folded = true
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -78.0
+margin_top = 45.0
+
+[node name="ATK" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_right = 78.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="ATKM" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 49.0
+margin_right = 78.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="DEF" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 98.0
+margin_right = 78.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="DEFM" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 147.0
+margin_right = 78.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="AGI" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 196.0
+margin_right = 78.0
+margin_bottom = 241.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="ACC" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 245.0
+margin_right = 78.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="EVA" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 294.0
+margin_right = 78.0
+margin_bottom = 339.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="LCK" type="Label" parent="Columns/Stats/Values" groups=[
+"text",
+]]
+margin_top = 343.0
+margin_right = 78.0
+margin_bottom = 388.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="Resistances" type="Panel" parent="Columns"]
+margin_left = 512.0
+margin_right = 1024.0
+margin_bottom = 475.0
+rect_min_size = Vector2( 512, 0 )
+rect_pivot_offset = Vector2( 1520, -10 )
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Labels" type="VBoxContainer" parent="Columns/Resistances"]
+editor/display_folded = true
+anchor_bottom = 1.0
+margin_left = 45.0
+margin_top = 45.0
+margin_right = 53.0
+
+[node name="FIRE_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_right = 65.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 3 )
+text = "FIRE
+"
+align = 1
+
+[node name="WATER_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 49.0
+margin_right = 65.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 3 )
+text = "WATER
+"
+align = 1
+
+[node name="ELECTRIC_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 98.0
+margin_right = 65.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 3 )
+text = "ELEC
+"
+align = 1
+
+[node name="ICE_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 147.0
+margin_right = 65.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 3 )
+text = "ICE
+"
+align = 1
+
+[node name="EARTH_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 196.0
+margin_right = 65.0
+margin_bottom = 241.0
+custom_fonts/font = ExtResource( 3 )
+text = "EARTH
+"
+align = 1
+
+[node name="WIND_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 245.0
+margin_right = 65.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 3 )
+text = "WIND
+"
+align = 1
+
+[node name="HOLY_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 294.0
+margin_right = 65.0
+margin_bottom = 339.0
+custom_fonts/font = ExtResource( 3 )
+text = "HOLY
+"
+align = 1
+
+[node name="DARKNESS_Label" type="Label" parent="Columns/Resistances/Labels" groups=[
+"text",
+]]
+margin_top = 343.0
+margin_right = 65.0
+margin_bottom = 412.0
+custom_fonts/font = ExtResource( 3 )
+text = "DARK
+
+"
+align = 1
+
+[node name="Values" type="VBoxContainer" parent="Columns/Resistances"]
+editor/display_folded = true
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -78.0
+margin_top = 45.0
+
+[node name="FIRE" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_right = 78.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="WATER" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 49.0
+margin_right = 78.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="ELECTRIC" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 98.0
+margin_right = 78.0
+margin_bottom = 143.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="ICE" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 147.0
+margin_right = 78.0
+margin_bottom = 192.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="EARTH" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 196.0
+margin_right = 78.0
+margin_bottom = 241.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="WIND" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 245.0
+margin_right = 78.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="HOLY" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 294.0
+margin_right = 78.0
+margin_bottom = 339.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
+
+[node name="DARKNESS" type="Label" parent="Columns/Resistances/Values" groups=[
+"text",
+]]
+margin_top = 343.0
+margin_right = 78.0
+margin_bottom = 388.0
+custom_fonts/font = ExtResource( 3 )
+text = "250
+"
+align = 1
