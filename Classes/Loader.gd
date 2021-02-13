@@ -207,8 +207,9 @@ func parse_inventory(path):
 	if result_json.error == OK:
 		var data = result_json.result
 		for item in data:
-			itens.append(GLOBAL.ITENS[item["ID"]])
-			itens[-1].quantity = item["QUANT"]
+			var item_copy = GLOBAL.ITENS[item["ID"]]._duplicate()
+			itens.append(item_copy)
+			item_copy.quantity = item["QUANT"]
 	return itens
 
 

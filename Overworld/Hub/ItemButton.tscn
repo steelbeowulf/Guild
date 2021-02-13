@@ -19,6 +19,7 @@ margin_right = 930.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "ITEM NAME"
 valign = 1
 
@@ -27,6 +28,7 @@ margin_right = 920.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "ITEM COST"
 align = 2
 valign = 1

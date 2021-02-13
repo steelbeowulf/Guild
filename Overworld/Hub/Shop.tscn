@@ -52,19 +52,19 @@ alignment = 1
 [node name="Money" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 139.0
+margin_left = 148.0
 margin_top = 73.0
-margin_right = 229.0
+margin_right = 246.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
-text = "Money:"
+text = "MONEY:"
 
 [node name="MoneyValue" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 233.0
+margin_left = 250.0
 margin_top = 73.0
-margin_right = 291.0
+margin_right = 308.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "500G"
@@ -72,9 +72,9 @@ text = "500G"
 [node name="Padding" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 295.0
+margin_left = 312.0
 margin_top = 73.0
-margin_right = 665.0
+margin_right = 682.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "                                     "
@@ -82,19 +82,19 @@ text = "                                     "
 [node name="Stock" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 669.0
+margin_left = 686.0
 margin_top = 73.0
-margin_right = 779.0
+margin_right = 770.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
-text = "In Stock:"
+text = "STOCK:"
 
 [node name="StockValue" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 783.0
+margin_left = 774.0
 margin_top = 73.0
-margin_right = 813.0
+margin_right = 804.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "0x"
@@ -108,26 +108,23 @@ custom_styles/panel = ExtResource( 2 )
 [node name="Text" type="Label" parent="Dialogue" groups=[
 "text",
 ]]
-margin_left = 29.5796
-margin_top = 42.0596
-margin_right = 359.58
-margin_bottom = 70.0596
+margin_left = 36.7546
+margin_top = 54.0179
+margin_right = 366.755
+margin_bottom = 82.0179
+rect_scale = Vector2( 1.25, 1.25 )
 custom_fonts/font = ExtResource( 3 )
 text = "Is this the one you want?"
 
-[node name="Confirmation" type="Panel" parent="."]
+[node name="Confirmation" type="VBoxContainer" parent="."]
+visible = false
 margin_left = 1575.0
 margin_top = 940.0
-margin_right = 1925.0
-margin_bottom = 1080.0
-custom_styles/panel = ExtResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Confirmation"]
-margin_right = 346.0
-margin_bottom = 134.0
+margin_right = 1921.0
+margin_bottom = 1074.0
 alignment = 1
 
-[node name="Yes" type="Button" parent="Confirmation/VBoxContainer" groups=[
+[node name="Yes" type="Button" parent="Confirmation" groups=[
 "text",
 ]]
 margin_top = 25.0
@@ -138,7 +135,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "YES"
 flat = true
 
-[node name="No" type="Button" parent="Confirmation/VBoxContainer" groups=[
+[node name="No" type="Button" parent="Confirmation" groups=[
 "text",
 ]]
 margin_top = 69.0
@@ -149,3 +146,5 @@ custom_fonts/font = ExtResource( 3 )
 text = "NO"
 flat = true
 
+[connection signal="pressed" from="Confirmation/Yes" to="." method="_on_Yes_pressed"]
+[connection signal="pressed" from="Confirmation/No" to="." method="_on_No_pressed"]

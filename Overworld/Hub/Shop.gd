@@ -4,10 +4,17 @@ var itens = []
 
 onready var item_container = $ItemList/ScrollContainer/VBoxContainer
 onready var item_button = load("res://Overworld/Hub/ItemButton.tscn")
+onready var dialogue = $Dialogue/Text
+onready var stock = $PlayerInfo/HBoxContainer/StockValue
+onready var money = $PlayerInfo/HBoxContainer/MoneyValue
+onready var confirmation = $Confirmation
+
+var selected_item = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	dialogue.set_text("Welcome!")
+	money.set_text(str(GLOBAL.gold)+"G")
 
 # Enter shop with specified id
 func enter(id: int):
@@ -22,7 +29,43 @@ func enter(id: int):
 			item_btn.set_name(item.nome)
 			item_btn.set_cost(item.quantity)
 			item_btn.connect("pressed", self, "_on_Item_Selected", [count])
+			item_btn.connect("focus_entered", self, "_on_Item_Hovered", [count])
 			count += 1
+	update_items()
+	item_container.get_child(0).grab_focus()
+
+func update_items():
+	money.set_text(str(GLOBAL.gold)+"G")
+	for i in range(len(itens)):
+		if itens[i].quantity > GLOBAL.get_gold():
+			item_container.get_child(i).disable()
 
 func _on_Item_Selected(id: int):
 	print("ITEM SELECTED", id)
+	if selected_item.quantity > GLOBAL.get_gold():
+		dialogue.set_text("Oops, not enough money!")
+	dialogue.set_text("You buying a "+selected_item.nome+" for "+str(selected_item.quantity)+"G?")
+	confirmation.show()
+	confirmation.get_node("Yes").grab_focus()
+
+func _on_Item_Hovered(id: int):
+	print("ITEM HOVERED", id)
+	selected_item = itens[id]
+	# TODO: Fix check for item on inventory
+	if selected_item.id < len(GLOBAL.INVENTORY):
+		stock.set_text(str(GLOBAL.INVENTORY[selected_item.id].quantity)+"x")
+	else:
+		stock.set_text("0x")
+
+func _on_Yes_pressed():
+	# TODO: Play ka-ching!
+	dialogue.set_text("Thank you! Anything else you need?")
+	GLOBAL.add_item(selected_item.id, 1)
+	GLOBAL.gold -= selected_item.quantity
+	update_items()
+	confirmation.hide()
+	item_container.get_child(0).grab_focus()
+
+
+func _on_No_pressed():
+	dialogue.set_text("Oh, ok, take your time choosing then")
