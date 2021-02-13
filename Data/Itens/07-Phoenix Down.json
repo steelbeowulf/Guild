@@ -1,7 +1,7 @@
 {
 	"ID":7,
 	"NAME":"PHOENIX DOWN",
-	"QUANT":1,
+	"QUANT":300,
 	"TARGET":"ONE",
 	"TYPE":"RESSURECTION",
 	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],

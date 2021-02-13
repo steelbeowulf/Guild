@@ -1,7 +1,7 @@
 {	
 	"ID":6,	
 	"NAME":"ELIXIR",
-	"QUANT":1,
+	"QUANT":500,
 	"TARGET":"ONE",
 	"TYPE":"RECOVERY",
 	"EFFECTS":[{"STAT":"MP", "VALUE":50, "TYPE":"", "TURNS":1},

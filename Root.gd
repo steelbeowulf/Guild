@@ -7,6 +7,7 @@ onready var map = null
 
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
+onready var shop = get_node("Menu_Area/Shop")
 onready var save = load("res://Pause/Save.tscn")
 onready var itens = load("res://Pause/Itens.tscn")
 onready var use_itens = load("res://Pause/ItemUse.tscn")
@@ -18,10 +19,11 @@ onready var skills = load("res://Pause/Skills.tscn")
 
 # Loads the correct map
 func _ready():
-	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	#var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	var start = load("res://Overworld/Hub/Hub.tscn")
 	self.add_child(start.instance())
-	map = get_node("Map"+str(GLOBAL.MAP))
-	set_effect(GLOBAL.MAP)
+	map = get_node("Hub")
+	#set_effect(GLOBAL.MAP)
 
 
 # Watches for inputs and deals with state changes
@@ -62,6 +64,15 @@ func open_menu():
 	STATE = "Menu"
 	get_tree().paused = true
 
+# Opens shop and pauses map
+func open_shop(id: int):
+	AUDIO.play_bgm("MAP_THEME", true, -5)
+	shop.show()
+	map.hide_hud()
+	get_node("Menu_Area/Camera2D").make_current()
+	shop.enter(id)
+	STATE = "Shop"
+	get_tree().paused = true
 
 # Closes the main pause menu (unpauses map)
 func close_menu():

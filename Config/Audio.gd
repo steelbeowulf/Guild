@@ -25,7 +25,7 @@ var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT,
 'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU}
 
 # Base volumes
-onready var base_master = -10
+onready var base_master = -120
 onready var base_bgm = 5
 onready var base_se = 5
 

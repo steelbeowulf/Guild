@@ -6,6 +6,7 @@ var SKILLS
 var STATUS
 var ENEMIES
 var NPCS
+var SHOPS
 var ENCOUNTERS
 
 # Global variables containing current players info (party and inventory)
@@ -153,7 +154,9 @@ func load_info(save_slot):
 		reload_state()
 		gold = 100
 		playtime = 0
-		AREA = "Demo_Area"
+		# TODO: Change this back
+		#AREA = "Demo_Area"
+		AREA = "Hub"
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())
@@ -180,6 +183,9 @@ func load_game(save_slot):
 
 	ENCOUNTERS = loader.load_encounters(area_info["ENCOUNTERS"])
 	print(ENCOUNTERS)
+	
+	SHOPS = loader.load_shops(area_info["SHOPS"])
+	print(SHOPS)
 
 	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
 	print(ENEMIES)
@@ -231,9 +237,13 @@ func set_event_status(id, status):
 ### Dialogue
 var caller = null
 
-func play_dialogues(id, callback):
+func play_dialogues(id, callback, shop=false):
 	var node = NODES["Dialogue"]
-	var npc = NPCS[id]
+	var npc = null
+	if shop:
+		npc = SHOPS[id]
+	else:
+		npc = NPCS[id]
 	var dials = npc.get_dialogues()
 	node.set_talker(npc.get_name(), npc.get_portrait())
 	for dial in dials:

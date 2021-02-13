@@ -114,5 +114,3 @@ func _on_Status_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	location = "STATUS"
 	get_parent().get_parent().toggle_status()
-
-

@@ -7,8 +7,6 @@
 [ext_resource path="res://Assets/Panels/Hover_Menu_Info_Panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/Panels/Menu_Info_Dark.tres" type="StyleBox" id=6]
 
-
-
 [node name="Char0" type="Button" groups=[
 "text",
 ]]
@@ -181,6 +179,7 @@ custom_fonts/font = ExtResource( 2 )
 toggle_mode = true
 enabled_focus_mode = 0
 text = "FRONT"
+
 [connection signal="pressed" from="Lanes/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="Lanes/Mid" to="." method="_on_Mid_pressed"]
 [connection signal="pressed" from="Lanes/Front" to="." method="_on_Front_pressed"]

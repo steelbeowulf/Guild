@@ -8,9 +8,14 @@ var interacting = false
 var delay = 0.0
 
 export(int) var id
+export(bool) var shop = false
 
 func _ready():
-	var npc = GLOBAL.NPCS[id]
+	var npc = null
+	if not shop:
+		npc = GLOBAL.NPCS[id]
+	else:
+		npc = GLOBAL.SHOPS[id]
 	set_animations(npc.get_sprite(), npc.get_animation())
 
 # Initializes position
@@ -45,7 +50,7 @@ func _physics_process(delta):
 	delay = delay - delta
 	if delay <= 0:
 		if inbody and Input.is_action_just_pressed("ui_accept") and not interacting:
-			GLOBAL.play_dialogues(id, self)
+			GLOBAL.play_dialogues(id, self, shop)
 			interacting = true
 			inbody.stop.append(self)
 
@@ -54,6 +59,8 @@ func _on_Dialogue_Ended():
 	inbody.stop.pop_front()
 	interacting = false
 	delay = 0.5
+	if shop:
+		GLOBAL.get_root().open_shop(id)
 
 
 func _on_Interactable_body_entered(body):

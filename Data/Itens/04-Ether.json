@@ -1,7 +1,7 @@
 {	
 	"ID":4,	
 	"NAME":"ETHER",
-	"QUANT":1,
+	"QUANT":100,
 	"TARGET":"ONE",
 	"TYPE":"RECOVERY",
 	"EFFECTS":[{"STAT":"MP", "VALUE":25, "TYPE":"", "TURNS":1}],

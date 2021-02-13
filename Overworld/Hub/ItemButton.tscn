@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Overworld/Hub/ItemButton.gd" type="Script" id=2]
+
+[node name="ItemButton" type="Button" groups=[
+"text",
+]]
+margin_right = 930.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 1 )
+flat = true
+script = ExtResource( 2 )
+
+[node name="Name" type="Label" parent="."]
+margin_left = 10.0
+margin_right = 930.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "ITEM NAME"
+valign = 1
+
+[node name="Cost" type="Label" parent="."]
+margin_right = 920.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "ITEM COST"
+align = 2
+valign = 1
+

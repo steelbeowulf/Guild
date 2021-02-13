@@ -1,7 +1,7 @@
 {
 	"ID":2,
 	"NAME":"MEGA POTION",
-	"QUANT":1,
+	"QUANT":200,
 	"TARGET":"ALL",
 	"TYPE":"RECOVERY",
 	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
