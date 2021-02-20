@@ -20,8 +20,6 @@ var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
 var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
 
 func apply_effect(who, effect, target, t_id):
-	print("batendo em vagabundo")
-	print("\n\n\n\n\n\n\n\n\n\n\n")
 	var ret = -1
 	var tipo = -1
 	var stat = effect[0]

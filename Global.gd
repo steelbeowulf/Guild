@@ -93,18 +93,21 @@ func reload_state():
 
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
-func add_item(item_id, item_quantity):
-	var done = false
+func add_item(item_id: int, item_quantity: int):
 	for item in INVENTORY:
-		if item == ITENS[item_id]:
+		if item.id == item_id:
 			item.quantity += item_quantity
-			done = true
-			break
-	if not done:
-		var item = ITENS[item_id]
-		item.quantity += item_quantity
-		INVENTORY.append(item)
+			return
+	var item = ITENS[item_id]._duplicate()
+	item.quantity = item_quantity
+	INVENTORY.append(item)
 
+# Check if item_id is in inventory
+func check_item(item_id: int):
+	for item in INVENTORY:
+		if item.id == item_id:
+			return item.quantity
+	return 0
 
 # Save file variables
 var savegame = File.new() 

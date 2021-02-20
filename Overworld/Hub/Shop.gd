@@ -54,10 +54,9 @@ func _on_Item_Hovered(id: int):
 	print("ITEM HOVERED", id)
 	selected_item = itens[id]
 	# TODO: Fix check for item on inventory
-	if selected_item.id < len(GLOBAL.INVENTORY):
-		stock.set_text(str(GLOBAL.INVENTORY[selected_item.id].quantity)+"x")
-	else:
-		stock.set_text("0x")
+	var qty_in_stock = GLOBAL.check_item(selected_item.id)
+	stock.set_text(str(qty_in_stock)+"x")
+
 
 func _on_Yes_pressed():
 	# TODO: Play ka-ching!

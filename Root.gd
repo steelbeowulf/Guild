@@ -49,6 +49,7 @@ func _process(delta):
 		close_menu()
 	# Cheap hack to test money
 	elif Input.is_action_just_pressed("debug"):
+		GLOBAL.gold += 100
 		if(menu.get_focus_owner()):
 			print(menu.get_focus_owner().get_name())
 
