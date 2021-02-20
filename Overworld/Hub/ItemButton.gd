@@ -13,6 +13,11 @@ func disable():
 	$Name.set("custom_colors/font_color", GRAY)
 	$Cost.set("custom_colors/font_color", GRAY)
 
+func enable():
+	self.disabled = false
+	$Name.set("custom_colors/font_color", WHITE)
+	$Cost.set("custom_colors/font_color", WHITE)
+
 func set_name(name: String):
 	$Name.set_text(name)
 

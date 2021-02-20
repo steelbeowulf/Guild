@@ -52,6 +52,8 @@ func _process(delta):
 		GLOBAL.gold += 100
 		if(menu.get_focus_owner()):
 			print(menu.get_focus_owner().get_name())
+		elif(shop.get_focus_owner()):
+			print(shop.get_focus_owner().get_name())
 
 
 # Opens the main pause menu (pauses map)
