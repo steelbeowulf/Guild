@@ -91,6 +91,13 @@ func reload_state():
 	POSITION = Vector2(454, 446)
 	#POSITION = Vector2(300, 600)
 
+# Get item ids from inventory
+func get_item_ids():
+	var item_ids = []
+	for item in INVENTORY:
+		item_ids.append(item.id)
+	return item_ids
+
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
 func add_item(item_id: int, item_quantity: int):

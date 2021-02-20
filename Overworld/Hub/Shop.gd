@@ -9,28 +9,34 @@ onready var stock = $PlayerInfo/HBoxContainer/StockValue
 onready var money = $PlayerInfo/HBoxContainer/MoneyValue
 onready var confirmation = $Confirmation
 onready var quantity = $Quantity
+onready var mode = $Mode
 
 var selected_item = null
 var last_selected = 0
 var item_quantity = 1
 var last_shop_visited = -1
+var shop_id = -1
+var MODE = "BUY"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	dialogue.set_text("Welcome!")
+	dialogue.set_text("Welcome! How can I help you?")
 	money.set_text(str(GLOBAL.gold)+"G")
 
 # Enter shop with specified id
 func enter(id: int):
-	if last_shop_visited != -1 and last_shop_visited == id:
-		update_items()
-		dialogue.set_text("Welcome!")
-		money.set_text(str(GLOBAL.gold)+"G")
-		return
+	print("entering...")
+	shop_id = id
+	dialogue.set_text("Welcome! How can I help you?")
+	money.set_text(str(GLOBAL.gold)+"G")
+	mode.show()
+	mode.get_node("Buy").grab_focus()
+	print("vou limpar")
+	clear_items()
+
+func load_items(item_ids):
 	var count = 0
-	var item_ids = GLOBAL.SHOPS[id].get_itens()
-	while len(item_container.get_children()) > 0:
-		item_container.get_child(0).queue_free()
 	for i in range(1, len(GLOBAL.ITENS)):
 		var item = GLOBAL.ITENS[i]
 		if item.id in item_ids:
@@ -39,22 +45,33 @@ func enter(id: int):
 			var item_btn = item_container.get_child(count)
 			item_btn.set_name(item.nome)
 			item_btn.set_cost(item.quantity)
+			if MODE == "SELL":
+				item_btn.set_cost(floor(item.quantity / 2))
 			item_btn.connect("pressed", self, "_on_Item_Selected", [count])
 			item_btn.connect("focus_entered", self, "_on_Item_Hovered", [count])
 			count += 1
 	update_items()
-	last_shop_visited = id
+
+func clear_items():
+	print("clearing items")
+	while len(item_container.get_children()) > 0:
+		print("deleted!")
+		item_container.get_child(0).queue_free()
 
 func update_items(has_focus=false):
 	money.set_text(str(GLOBAL.gold)+"G")
 	for i in range(len(itens)):
 		item_container.get_child(i).disable()
-		if itens[i].quantity <= GLOBAL.get_gold():
-			item_container.get_child(i).enable()
-			if not has_focus:
-				has_focus = true
-				print("Setting focus: ", i)
-				item_container.get_child(i).grab_focus()
+		if MODE == "BUY":
+			if itens[i].quantity <= GLOBAL.get_gold():
+				item_container.get_child(i).enable()
+				if not has_focus:
+					has_focus = true
+					print("Setting focus: ", i)
+					item_container.get_child(i).grab_focus()
+		elif MODE == "SELL":
+			if GLOBAL.check_item(itens[i].id) <= 0:
+				item_container.get_child(i).hide()
 
 func _on_Item_Selected(id: int):
 	last_selected = id
@@ -64,7 +81,10 @@ func _on_Item_Selected(id: int):
 	item_quantity = 1
 	quantity.get_node("SpinBox").value = 1
 	quantity.show()
-	quantity.get_node("SpinBox").max_value = floor(GLOBAL.get_gold() / selected_item.quantity)
+	if MODE == "BUY":
+		quantity.get_node("SpinBox").max_value = floor(GLOBAL.get_gold() / selected_item.quantity)
+	elif MODE == "SELL":
+		quantity.get_node("SpinBox").max_value = GLOBAL.check_item(selected_item.id)
 	quantity.get_node("SpinBox").grab_focus()
 
 func _on_Item_Hovered(id: int):
@@ -77,13 +97,21 @@ func _on_Item_Hovered(id: int):
 func _on_Yes_pressed():
 	# TODO: Play ka-ching!
 	dialogue.set_text("Thank you! Anything else you need?")
-	GLOBAL.add_item(selected_item.id, item_quantity)
-	GLOBAL.gold -= item_quantity*selected_item.quantity
 	var has_focus = false
-	if GLOBAL.gold >= selected_item.quantity:
-		print("Setting focus: ", last_selected)
-		item_container.get_child(last_selected).grab_focus()
-		has_focus = true
+	if MODE == "BUY":
+		GLOBAL.add_item(selected_item.id, item_quantity)
+		GLOBAL.gold -= item_quantity*selected_item.quantity
+		if GLOBAL.gold >= selected_item.quantity:
+			print("Setting focus: ", last_selected)
+			item_container.get_child(last_selected).grab_focus()
+			has_focus = true
+	elif MODE == "SELL":
+		GLOBAL.add_item(selected_item.id, -item_quantity)
+		GLOBAL.gold += item_quantity*selected_item.quantity
+		if GLOBAL.check_item(selected_item.id) >= 0:
+			print("Setting focus: ", last_selected)
+			item_container.get_child(last_selected).grab_focus()
+			has_focus = true
 	update_items(has_focus)
 	confirmation.hide()
 	quantity.hide()
@@ -106,12 +134,17 @@ func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
 		if confirmation.visible or quantity.visible:
 			_on_No_pressed()
-		else:
+		elif mode.visible:
 			_exit_Store()
+		else:
+			enter(shop_id)
 	elif quantity.visible and not confirmation.visible:
 		if event.is_action_pressed("ui_accept"):
 			print("Ya buying??")
-			dialogue.set_text("You buying "+str(item_quantity)+" "+selected_item.nome+" for "+str(selected_item.quantity*item_quantity)+"G?")
+			var verb = "buying"
+			if MODE == "SELL":
+				verb = "selling"
+			dialogue.set_text("You "+str(verb)+" "+str(item_quantity)+" "+selected_item.nome+" for "+str(selected_item.quantity*item_quantity)+"G?")
 			confirmation.show()
 			$Timer.wait_time = 0.1
 			$Timer.start()
@@ -125,3 +158,17 @@ func _input(event: InputEvent):
 
 func _on_SpinBox_value_changed(value):
 	item_quantity = value
+
+
+func _on_Buy_pressed():
+	MODE = "BUY"
+	var item_ids = GLOBAL.SHOPS[shop_id].get_itens()
+	load_items(item_ids)
+	mode.hide()
+
+
+func _on_Sell_pressed():
+	MODE = "SELL"
+	var item_ids = GLOBAL.get_item_ids()
+	load_items(item_ids)
+	mode.hide()

@@ -175,9 +175,41 @@ custom_fonts/font = ExtResource( 3 )
 text = "NO"
 flat = true
 
+[node name="Mode" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 1575.0
+margin_top = 940.0
+margin_right = 1921.0
+margin_bottom = 1074.0
+alignment = 1
+
+[node name="Buy" type="Button" parent="Mode" groups=[
+"text",
+]]
+margin_top = 25.0
+margin_right = 346.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 3 )
+text = "BUY"
+flat = true
+
+[node name="Sell" type="Button" parent="Mode" groups=[
+"text",
+]]
+margin_top = 69.0
+margin_right = 346.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 3 )
+text = "SELL"
+flat = true
+
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="focus_entered" from="Quantity/SpinBox" to="." method="_on_SpinBox_focus_entered"]
 [connection signal="value_changed" from="Quantity/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Confirmation/Yes" to="." method="_on_Yes_pressed"]
 [connection signal="pressed" from="Confirmation/No" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="Mode/Buy" to="." method="_on_Buy_pressed"]
+[connection signal="pressed" from="Mode/Sell" to="." method="_on_Sell_pressed"]
