@@ -41,7 +41,6 @@ func _process(delta):
 		close_menu()
 	# Closes submenus and returns to menu
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Submenu":
-		print("happened")
 		return_menu()
 	#elif Input.is_action_just_pressed("ui_cancel") and STATE == "StatusSubmenu":
 	#	print("happenedagain")
@@ -73,6 +72,15 @@ func open_shop(id: int):
 	shop.enter(id)
 	STATE = "Shop"
 	get_tree().paused = true
+
+# Closes shop menu(unpauses map)
+func close_shop():
+	AUDIO.play_bgm("MAP_THEME", true, 0)
+	shop.hide()
+	map.get_node("Party").get_child(0).get_node("Camera2D").make_current()
+	map.show_hud()
+	STATE = "Map"
+	get_tree().paused = false
 
 # Closes the main pause menu (unpauses map)
 func close_menu():

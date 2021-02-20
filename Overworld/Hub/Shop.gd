@@ -10,6 +10,7 @@ onready var money = $PlayerInfo/HBoxContainer/MoneyValue
 onready var confirmation = $Confirmation
 
 var selected_item = null
+var last_selected = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,6 +43,7 @@ func update_items():
 
 func _on_Item_Selected(id: int):
 	print("ITEM SELECTED", id)
+	last_selected = id
 	if selected_item.quantity > GLOBAL.get_gold():
 		dialogue.set_text("Oops, not enough money!")
 	dialogue.set_text("You buying a "+selected_item.nome+" for "+str(selected_item.quantity)+"G?")
@@ -69,3 +71,18 @@ func _on_Yes_pressed():
 
 func _on_No_pressed():
 	dialogue.set_text("Oh, ok, take your time choosing then")
+	item_container.get_child(last_selected).grab_focus()
+	confirmation.hide()
+
+func _exit_Store():
+	dialogue.set_text("Thanks, come back anytime!")
+	$Timer.start()
+	yield($Timer, "timeout")
+	get_parent().get_parent().close_shop()
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("ui_cancel"):
+		if confirmation.visible:
+			_on_No_pressed()
+		else:
+			_exit_Store()

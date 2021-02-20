@@ -146,5 +146,8 @@ custom_fonts/font = ExtResource( 3 )
 text = "NO"
 flat = true
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+
 [connection signal="pressed" from="Confirmation/Yes" to="." method="_on_Yes_pressed"]
 [connection signal="pressed" from="Confirmation/No" to="." method="_on_No_pressed"]
