@@ -177,6 +177,15 @@ func open_skills(id):
 	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
 	get_node("Menu_Area/SubMenus/Skills").enter()
 
+func open_equips(id):
+	STATE = "EquipSubmenu"
+	menu.hide()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(skills.instance())
+	get_node("Menu_Area/SubMenus/Skills").show()
+	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
+	get_node("Menu_Area/SubMenus/Skills").enter()
+
 # Toggles status submenu
 func toggle_status():
 	char_screen = 2

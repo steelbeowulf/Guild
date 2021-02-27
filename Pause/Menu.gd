@@ -22,6 +22,8 @@ func _on_Player_chosen(binds):
 	AUDIO.play_se("ENTER_MENU")
 	if location == "SKILLS":
 		get_parent().get_parent().open_skills(binds)
+	elif location == "EQUIPS":
+		get_parent().get_parent().open_equips(binds)
 	else:
 		get_parent().get_parent().player_clicked(binds)
 
@@ -118,5 +120,12 @@ func _on_Status_pressed():
 	location = "STATUS"
 	get_parent().get_parent().toggle_status()
 
+
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")
+
+func _on_Equip_pressed():
+	AUDIO.play_se("ENTER_MENU")
+	location = "EQUIPS"
+	change_focus()
+

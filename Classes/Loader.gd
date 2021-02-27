@@ -4,6 +4,7 @@ class_name LOADER
 # Path to all persistent game data we're going to load
 const ENEMY_PATH = "res://Data/Enemies/"
 const ITENS_PATH = "res://Data/Itens/"
+const EQUIPS_PATH = "res://Data/Equipaments/"
 const SKILLS_PATH = "res://Data/Skills/"
 const STATUS_PATH = "res://Data/Status/"
 const AREAS_PATH = "res://Data/Maps/"
@@ -15,6 +16,7 @@ const SHOPS_PATH = "res://Data/NPCs/Shops/"
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
 const INVENTORY_PATH = "res://Demo_data/Inventory.json"
+#const EQUIPAMENT_PATH = "res://Demo_data/Equipament.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -23,6 +25,7 @@ const SAVE_PATH = "res://Save_data/"
 var PLAYER_CLASS = load("res://Classes/Player.gd")
 var ENEMY_CLASS = load("res://Classes/Enemy.gd")
 var ITEM_CLASS = load("res://Classes/Itens.gd")
+var EQUIP_CLASS = load("res://Classes/Equip.gd")
 var NPC_CLASS = load("res://Classes/NPC.gd")
 var ENCOUNTER_CLASS = load("res://Classes/Encounter.gd")
 var SHOP_CLASS = load("res://Classes/Shop.gd")
@@ -130,6 +133,36 @@ func load_all_itens():
 				data["TYPE"], effects, status, data["IMG"], data["ANIM"]))
 
 	return [0] + ret
+	
+
+# Loads all equipament found in the ITENS_PATH directory.
+# TODO: eventually will be changed to loading only itens
+# that are in inventory/area chests, to not kill a PC's memory
+# Cloned from the item loaded
+func load_all_equips():
+	var ret = []
+	var equips = list_files_in_directory(EQUIPS_PATH)
+	equips.sort()
+	for i in equips:
+		var file = File.new()
+		file.open(EQUIPS_PATH+i, file.READ)
+		var text = file.get_as_text()
+		var result_json = JSON.parse(text)
+		if result_json.error == OK:
+			var data = result_json.result
+			var effects = []
+			for ef in data["EFFECTS"]:
+				effects.append([STATS.DSTAT[ef["STAT"]], int(ef["VALUE"]), 
+				STATS.TYPE[ef["TYPE"]]]) 
+			var status = []
+			for st in data["STATUS"]:
+				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
+			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"],
+				data["TYPE"], data["CLASS"], effects, status, data["PRICE"], data["IMG"]))
+
+	return [0] + ret
+
+
 
 
 # Loads all skills found in the SKILLS_PATH directory.
@@ -195,6 +228,12 @@ func load_inventory(slot):
 		path = SAVE_PATH+"Slot"+str(slot)+"/Inventory.json"
 	return parse_inventory(path)
 
+func load_equip(slot):
+	var path = EQUIPS_PATH
+	if slot >= 0:
+		path = SAVE_PATH+"Slot"+str(slot)+"/Equipament.json"
+	return parse_inventory(path)
+
 
 # Uses information from load_inventory to build the actual inventory,
 # TODO: Fix dependency on load_all_itens when it doesn't load everything.
@@ -211,6 +250,23 @@ func parse_inventory(path):
 			itens.append(item_copy)
 			item_copy.quantity = item["QUANT"]
 	return itens
+
+
+
+#THIS MIGHT BE INCORRECT, BUT WILL BE FIXED LATER - Z
+func parse_equipaments(path):
+	var file = File.new()
+	file.open(path, file.READ)
+	var equips = []
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK:
+		var data = result_json.result
+		for equip in data:
+			equips.append(GLOBAL.EQUIPAMENT[equip["ID"]])
+	return equips
+
+
 
 
 # Loads information regarding the players' characters.

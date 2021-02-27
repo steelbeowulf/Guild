@@ -339,6 +339,7 @@ uppercase = true
 [connection signal="pressed" from="Panel/All/Left/Chars/Char3" to="." method="_on_Char3_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Item" to="." method="_on_Item_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Skill" to="." method="_on_Skill_pressed"]
+[connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Equip" to="." method="_on_Equip_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Status" to="." method="_on_Status_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Save" to="." method="_on_Save_pressed"]
