@@ -7,10 +7,12 @@ var STATUS
 var ENEMIES
 var NPCS
 var ENCOUNTERS
+var EQUIPAMENT
 
 # Global variables containing current players info (party and inventory)
 var PLAYERS
 var INVENTORY
+var EQUIP_INVENTORY
 
 var NODES = {}
 
@@ -104,6 +106,17 @@ func add_item(item_id, item_quantity):
 		item.quantity += item_quantity
 		INVENTORY.append(item)
 
+# Clone of the add_item function, but for equipaments
+func add_equip(item_id):
+	var done = false
+	#for equip in INVENTORY:
+	#	if equip == EQUIPAMENT[item_id]:
+	#		equip.quantity += equip_quantity
+	#		done = true
+	#		break
+	#if not done:
+	var equip = EQUIPAMENT[item_id]
+	EQUIP_INVENTORY.append(equip)
 
 # Save file variables
 var savegame = File.new() 
