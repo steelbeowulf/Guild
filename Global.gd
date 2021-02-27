@@ -120,15 +120,12 @@ func check_item(item_id: int):
 	return 0
 
 # Clone of the add_item function, but for equipaments
-func add_equip(item_id):
-	var done = false
-	#for equip in INVENTORY:
-	#	if equip == EQUIPAMENT[item_id]:
-	#		equip.quantity += equip_quantity
-	#		done = true
-	#		break
-	#if not done:
-	var equip = EQUIPAMENT[item_id]
+func add_equip(equip_id: int, equip_quantity: int):
+	for equip in INVENTORY:
+		if equip == EQUIPAMENT[equip_id]:
+			equip.quantity += equip_quantity
+			return
+	var equip = EQUIPAMENT[equip_id]
 	EQUIP_INVENTORY.append(equip)
 
 
@@ -197,24 +194,24 @@ func load_game(save_slot):
 	STATUS = loader.load_all_statuses()
 	SKILLS = loader.load_all_skills()
 	ITENS = loader.load_all_itens()
+	EQUIPAMENT = loader.load_all_equips()
+	print("Equips ", EQUIPAMENT)
 	
 	INVENTORY = loader.load_inventory(save_slot)
+	EQUIP_INVENTORY = loader.load_equip(save_slot)
+	print("Equips in inventory ", EQUIP_INVENTORY)
 	PLAYERS = loader.load_players(save_slot)
 	
 	load_info(save_slot)
 	var area_info = loader.load_area_info(AREA)
 	ENEMIES_IN_AREA = area_info["ENEMIES_BY_AREA"]
 	NPCS = loader.load_npcs(area_info["NPCS"])
-	print(NPCS)
 
 	ENCOUNTERS = loader.load_encounters(area_info["ENCOUNTERS"])
-	print(ENCOUNTERS)
 	
 	SHOPS = loader.load_shops(area_info["SHOPS"])
-	print(SHOPS)
 
 	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
-	print(ENEMIES)
 
 # Returns state from the current map
 func get_state():

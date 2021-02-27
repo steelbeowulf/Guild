@@ -2,9 +2,10 @@
 	"ID":1,	
 	"NAME":"PLATE ARMOR",
 	"TYPE":"NORMAL",
+	"LOCATION": "BODY",
 	"CLASS": "KNIGHT",
-	"EFFECTS":[{"STAT":"DEF", "VALUE":25, "TYPE":"PHYS"}],
+	"EFFECTS":[{"STAT":"DEF", "VALUE":25, "TYPE":"PHYSIC"}],
 	"STATUS":[],
 	"PRICE": 50,
-	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"},
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}
 }

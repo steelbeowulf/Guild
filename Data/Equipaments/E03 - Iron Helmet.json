@@ -1,10 +1,10 @@
 {	
-	"ID":1,	
-	"NAME":"SWORD",
+	"ID":3,	
+	"NAME":"IRON HELMET",
 	"TYPE":"NORMAL",
-	"LOCATION": "HANDS",
+	"LOCATION": "HEAD",
 	"CLASS": "KNIGHT",
-	"EFFECTS":[{"STAT":"ATK", "VALUE":25, "TYPE":"PHYSIC"}],
+	"EFFECTS":[{"STAT":"DEF", "VALUE":25, "TYPE":"PHYSIC"}],
 	"STATUS":[],
 	"PRICE": 50,
 	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}
