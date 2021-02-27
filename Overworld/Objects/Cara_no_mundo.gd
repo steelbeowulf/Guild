@@ -94,6 +94,7 @@ func _physics_process(delta):
 		#$AnimatedSprite.frame = 0
 		#$AnimatedSprite.stop()
 	else:
+		AUDIO.play_se("GRASS", -16)
 		play("move")
 
 	move_and_slide(velocity*delta)

@@ -49,7 +49,7 @@ func apply_effect(who, effect, target, t_id):
 		tipo = 0
 		var dmg = target.take_damage(type, abs(value))
 		ret = dmg
-		if target.classe == "boss" and who.classe != "boss":
+		if GLOBAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
 			who.update_hate(dmg, t_id)
 	else:
 		if stat == HP:

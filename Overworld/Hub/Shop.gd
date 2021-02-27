@@ -80,6 +80,7 @@ func update_items(has_focus=false):
 					item_container.get_child(i).grab_focus()
 
 func _on_Item_Selected(id: int):
+	AUDIO.play_se("ENTER_MENU")
 	last_selected = id
 	if selected_item.quantity > GLOBAL.get_gold():
 		dialogue.set_text("Oops, not enough money!")
@@ -94,6 +95,7 @@ func _on_Item_Selected(id: int):
 	quantity.get_node("SpinBox").grab_focus()
 
 func _on_Item_Hovered(id: int):
+	AUDIO.play_se("MOVE_MENU")
 	print("Item hovered ", id)
 	selected_item = itens[id]
 	var qty_in_stock = GLOBAL.check_item(selected_item.id)
@@ -105,7 +107,7 @@ func _on_Item_Hovered(id: int):
 
 
 func _on_Yes_pressed():
-	# TODO: Play ka-ching!
+	AUDIO.play_se("MONEY", 4)
 	dialogue.set_text("Thank you! Anything else you need?")
 	var has_focus = false
 	if MODE == "BUY":
@@ -118,7 +120,7 @@ func _on_Yes_pressed():
 	elif MODE == "SELL":
 		GLOBAL.add_item(selected_item.id, -item_quantity)
 		GLOBAL.gold += item_quantity*(selected_item.quantity/2)
-		if GLOBAL.check_item(selected_item.id) >= 0:
+		if GLOBAL.check_item(selected_item.id) > 0:
 			print("Setting focus: ", last_selected)
 			item_container.get_child(last_selected).grab_focus()
 			has_focus = true
@@ -142,6 +144,7 @@ func _exit_Store():
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
+		AUDIO.play_se("EXIT_MENU")
 		print("cancel pressed")
 		if confirmation.visible or quantity.visible:
 			print("no no")
@@ -154,6 +157,7 @@ func _input(event: InputEvent):
 			enter(shop_id)
 	elif quantity.visible and not confirmation.visible:
 		if event.is_action_pressed("ui_accept"):
+			AUDIO.play_se("ENTER_MENU")
 			print("Ya buying??")
 			var price = selected_item.quantity
 			var verb = "buying"
@@ -173,10 +177,12 @@ func _input(event: InputEvent):
 
 
 func _on_SpinBox_value_changed(value):
+	AUDIO.play_se("MOVE_MENU")
 	item_quantity = value
 
 
 func _on_Buy_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	MODE = "BUY"
 	var item_ids = GLOBAL.SHOPS[shop_id].get_itens()
 	load_items(item_ids)
@@ -184,7 +190,16 @@ func _on_Buy_pressed():
 
 
 func _on_Sell_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	MODE = "SELL"
 	var item_ids = GLOBAL.get_item_ids()
 	load_items(item_ids)
 	mode.hide()
+
+
+func _on_Buy_focus_entered():
+	AUDIO.play_se("MOVE_MENU")
+
+
+func _on_Sell_focus_entered():
+	AUDIO.play_se("MOVE_MENU")

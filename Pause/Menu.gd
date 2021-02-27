@@ -3,6 +3,10 @@ extends Control
 onready var location = "MENU"
 onready var x
 
+func _ready():
+	for btn in $Panel/All/Right/Options_Panel/Options.get_children():
+		btn.connect("focus_entered", self, "_on_Focus_Entered")
+
 func enter(players):
 	location = "MENU"
 	x = len(players)
@@ -11,12 +15,11 @@ func enter(players):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(players[i])
 		node.connect("pressed", self, "_on_Player_chosen", [i])
+		node.connect("focus_entered", self, "_on_Focus_Entered")
 
-func _process(delta):
-	pass
-	#print()
 
 func _on_Player_chosen(binds):
+	AUDIO.play_se("ENTER_MENU")
 	if location == "SKILLS":
 		get_parent().get_parent().open_skills(binds)
 	else:
@@ -114,3 +117,6 @@ func _on_Status_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	location = "STATUS"
 	get_parent().get_parent().toggle_status()
+
+func _on_Focus_Entered():
+	AUDIO.play_se("MOVE_MENU")

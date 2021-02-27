@@ -58,7 +58,7 @@ func _process(delta):
 
 # Opens the main pause menu (pauses map)
 func open_menu():
-	AUDIO.play_bgm("MAP_THEME", true, -5)
+	AUDIO.play_bgm("MAP_THEME", true, -8)
 	menu.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
@@ -68,7 +68,7 @@ func open_menu():
 
 # Opens shop and pauses map
 func open_shop(id: int):
-	AUDIO.play_bgm("MAP_THEME", true, -5)
+	AUDIO.play_bgm("MAP_THEME", true, -8)
 	shop.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
@@ -78,7 +78,7 @@ func open_shop(id: int):
 
 # Closes shop menu(unpauses map)
 func close_shop():
-	AUDIO.play_bgm("MAP_THEME", true, 0)
+	AUDIO.play_bgm("MAP_THEME", true, -4)
 	shop.hide()
 	map.get_node("Party").get_child(0).get_node("Camera2D").make_current()
 	map.show_hud()
@@ -87,7 +87,7 @@ func close_shop():
 
 # Closes the main pause menu (unpauses map)
 func close_menu():
-	AUDIO.play_bgm("MAP_THEME", true, 0)
+	AUDIO.play_bgm("MAP_THEME", true, -4)
 	for c in $Menu_Area.get_children():
 		c.hide()
 	menu.hide()

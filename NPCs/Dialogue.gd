@@ -73,6 +73,7 @@ func set_dialogue(text):
 
 
 func set_text(value):
+	AUDIO.play_se("MOVE_MENU")
 	$Text.set_text(dialogue.substr(0,floor(value)))
 
 

@@ -14,6 +14,7 @@ func enter(item_arg, player_arg):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(GLOBAL.PLAYERS[i])
 		node.connect("pressed", self, "_on_Char_pressed", [i])
+		node.connect("focus_entered", self, "_on_Focus_Entered")
 	item = item_arg
 	player = player_arg
 	if item.target == "ALL":
@@ -44,13 +45,17 @@ func use_item():
 		for status in item.get_status():
 			apply_status(status, player, player)
 	location = "OUTSIDE"
-	AUDIO.play_se("SPELL")
+	AUDIO.play_se("SPELL", -12)
 	get_parent().get_parent().get_parent().back_to_skills(player.id)
 	queue_free()
 
 func _on_Char_pressed(id):
+	AUDIO.play_se("ENTER_MENU")
 	print("[ITEM USE] pressei "+str(id))
 	print(GLOBAL.PLAYERS[id].status)
 	if type != "ALL":
 		targets.append(GLOBAL.PLAYERS[id])
 	use_item()
+
+func _on_Focus_Entered():
+	AUDIO.play_se("MOVE_MENU")

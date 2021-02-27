@@ -165,6 +165,7 @@ margin_top = 25.0
 margin_right = 346.0
 margin_bottom = 65.0
 rect_min_size = Vector2( 0, 40 )
+focus_neighbour_top = NodePath("../No")
 custom_fonts/font = ExtResource( 3 )
 text = "YES"
 flat = true
@@ -176,6 +177,7 @@ margin_top = 69.0
 margin_right = 346.0
 margin_bottom = 109.0
 rect_min_size = Vector2( 0, 40 )
+focus_neighbour_bottom = NodePath("../Yes")
 custom_fonts/font = ExtResource( 3 )
 text = "NO"
 flat = true
@@ -195,6 +197,7 @@ margin_top = 25.0
 margin_right = 346.0
 margin_bottom = 65.0
 rect_min_size = Vector2( 0, 40 )
+focus_neighbour_top = NodePath("../Sell")
 custom_fonts/font = ExtResource( 3 )
 text = "BUY"
 flat = true
@@ -206,6 +209,7 @@ margin_top = 69.0
 margin_right = 346.0
 margin_bottom = 109.0
 rect_min_size = Vector2( 0, 40 )
+focus_neighbour_bottom = NodePath("../Buy")
 custom_fonts/font = ExtResource( 3 )
 text = "SELL"
 flat = true
@@ -215,5 +219,7 @@ flat = true
 [connection signal="value_changed" from="Quantity/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Confirmation/Yes" to="." method="_on_Yes_pressed"]
 [connection signal="pressed" from="Confirmation/No" to="." method="_on_No_pressed"]
+[connection signal="focus_entered" from="Mode/Buy" to="." method="_on_Buy_focus_entered"]
 [connection signal="pressed" from="Mode/Buy" to="." method="_on_Buy_pressed"]
+[connection signal="focus_entered" from="Mode/Sell" to="." method="_on_Sell_focus_entered"]
 [connection signal="pressed" from="Mode/Sell" to="." method="_on_Sell_pressed"]
