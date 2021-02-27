@@ -39,3 +39,10 @@ func get_effects():
 
 func get_status():
 	return status
+
+func _duplicate():
+	var new_effects = [] + self.effect
+	var new_status = [] + self.status
+	var new_anim = {"skill": self.anim}
+	return self.get_script().new(self.id, self.nome, self.quantity, 
+	self.target, self.type, new_effects, new_status, self.img, new_anim)

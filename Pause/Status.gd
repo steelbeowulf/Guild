@@ -5,10 +5,13 @@ onready var location = "OUTSIDE"
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
+		AUDIO.play_se("MOVE_MENU")
 		enter((id + 1) % len(GLOBAL.PLAYERS))
 	elif Input.is_action_just_pressed("ui_left"):
+		AUDIO.play_se("MOVE_MENU")
 		enter((id - 1) % len(GLOBAL.PLAYERS))
 	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
+		AUDIO.play_se("EXIT_MENU")
 		location = "OUTSIDE"
 		get_parent().get_parent().get_parent().return_menu()
 

@@ -27,6 +27,7 @@ func _physics_process(delta):
 	if loader == null:
 		update_progress(100)
 		if Input.is_action_just_pressed("ui_accept"):
+			AUDIO.play_se("ENTER_MENU")
 			set_new_scene(resource)
 		return
 

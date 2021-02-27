@@ -20,7 +20,6 @@ func _process(delta):
 	else:
 		$Tween.set_speed_scale(1.0)
 
-
 func start_dialogue():
 	if len(dialogues) > 0 or dialogue != "":
 		self.show()
@@ -74,6 +73,7 @@ func set_dialogue(text):
 
 
 func set_text(value):
+	AUDIO.play_se("MOVE_MENU")
 	$Text.set_text(dialogue.substr(0,floor(value)))
 
 

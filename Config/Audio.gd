@@ -17,23 +17,26 @@ var HIT = load("res://Assets/SFX/Explosion 3 - Sound effects Pack 2.ogg")
 var ENTER_MENU = load("res://Assets/SFX/Menu Confirm.ogg")
 var EXIT_MENU = load("res://Assets/SFX/Menu Error.ogg")
 var MOVE_MENU = load("res://Assets/SFX/Menu Move.ogg")
+var MONEY = load("res://Assets/SFX/338260__philsavlem__money-bag.wav")
+var GRASS = load("res://Assets/SFX/151229__owlstorm__grassy-footstep-2.wav")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
 'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME}
 var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT,
-'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU}
+'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU,
+'MONEY': MONEY, 'GRASS': GRASS}
 
 # Base volumes
 onready var base_master = -10
-onready var base_bgm = 5
-onready var base_se = 5
+onready var base_bgm = 4
+onready var base_se = 12
 
 
 # Initializes or resets the sounds system
 func initSound():
 	if audio.size() == 0:
-		for i in range(10):
+		for i in range(15):
 			audio.push_back(AudioStreamPlayer.new())
 			self.add_child(audio[i])
 			audio[i].volume_db = base_master
@@ -58,7 +61,7 @@ func initSound():
 # Resets the volume on all audio streams
 func recalibrate():
 	music.volume_db = base_master + base_bgm
-	for i in range(10):
+	for i in range(15):
 		audio[i].volume_db = base_master + base_se
 
 
@@ -85,7 +88,7 @@ func play_bgm(bgm, keep=false, loud=0):
 # Plays a sound effect. The loud argument is an extra to raise volume.
 func play_se(sound, loud=0):
 	sound = sounds[sound]
-	for i in range(10):
+	for i in range(15):
 		if get_tree().paused and i >= 3:
 			audio[i].playing = false
 		if audio[i].playing and audio[i].stream == sound and !get_tree().paused:

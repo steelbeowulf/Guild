@@ -11,6 +11,7 @@ const AREAS_PATH = "res://Data/Maps/"
 const NPCS_PATH = "res://Data/NPCs/"
 const LORES_PATH = "res://Data/Lore/"
 const ENCOUNTERS_PATH = "res://Data/NPCs/Encounters/"
+const SHOPS_PATH = "res://Data/NPCs/Shops/"
 
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
@@ -27,6 +28,7 @@ var ITEM_CLASS = load("res://Classes/Itens.gd")
 var EQUIP_CLASS = load("res://Classes/Equip.gd")
 var NPC_CLASS = load("res://Classes/NPC.gd")
 var ENCOUNTER_CLASS = load("res://Classes/Encounter.gd")
+var SHOP_CLASS = load("res://Classes/Shop.gd")
 
 var List
 
@@ -244,8 +246,9 @@ func parse_inventory(path):
 	if result_json.error == OK:
 		var data = result_json.result
 		for item in data:
-			itens.append(GLOBAL.ITENS[item["ID"]])
-			itens[-1].quantity = item["QUANT"]
+			var item_copy = GLOBAL.ITENS[item["ID"]]._duplicate()
+			itens.append(item_copy)
+			item_copy.quantity = item["QUANT"]
 	return itens
 
 
@@ -321,6 +324,31 @@ func load_encounters(filter_array):
 
 	return ret
 
+func load_shops(filter_array):
+	print(filter_array)
+	print("LOADING SHOPS")
+	var shops = list_files_in_directory(SHOPS_PATH)
+	shops.sort()
+	var ret = []
+	for shop in shops:
+		print(shop)
+		var file = File.new()
+		file.open(SHOPS_PATH+shop, file.READ)
+		var text = file.get_as_text()
+		var result_json = JSON.parse(text)
+		if result_json.error == OK: 
+			var data = result_json.result
+			if int(data["ID"]) in filter_array:
+				ret.append(SHOP_CLASS.new(data["ID"], data["NAME"], 
+					data["IMG"], data["ANIM"], 
+					data["DIALOGUE"], data["PORTRAIT"], 
+					data["ITENS"]))
+		else:  # If parse has errors
+			print("Error: ", result_json.error)
+			print("Error Line: ", result_json.error_line)
+			print("Error String: ", result_json.error_string)
+
+	return ret
 
 # Uses information from load_players to build the actual players.
 # TODO: Fix dependency on load_all_skills when it doesn't load everything.

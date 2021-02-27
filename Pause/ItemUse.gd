@@ -13,6 +13,7 @@ func enter(item_arg):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(GLOBAL.PLAYERS[i])
 		node.connect("pressed", self, "_on_Char_pressed", [i])
+		node.connect("focus_entered", self, "_on_Focus_Entered")
 	item = item_arg
 	whatdo = item.type
 	if item.target == "ALL":
@@ -38,16 +39,17 @@ func _process(delta):
 func use_item():
 	for player in targets:
 		for effect in item.get_effects():
-			apply_effect(null, effect, player, null)
+			apply_effect(player, effect, player, 0)
 		for status in item.get_status():
 			apply_status(status, player, player)
 	location = "OUTSIDE"
-	AUDIO.play_se("SPELL")
+	AUDIO.play_se("SPELL", -12)
 	item.quantity = item.quantity - 1
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()
 
 func _on_Char_pressed(id):
+	AUDIO.play_se("ENTER_MENU")
 	print("[ITEM USE] pressei "+str(id))
 	if whatdo == "RESSURECTION":
 		if GLOBAL.PLAYERS[id].status != "KO":
@@ -56,3 +58,6 @@ func _on_Char_pressed(id):
 	if type != "ALL":
 		targets.append(GLOBAL.PLAYERS[id])
 	use_item()
+
+func _on_Focus_Entered():
+	AUDIO.play_se("MOVE_MENU")

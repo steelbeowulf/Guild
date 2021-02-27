@@ -7,6 +7,7 @@ onready var map = null
 
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
+onready var shop = get_node("Menu_Area/Shop")
 onready var save = load("res://Pause/Save.tscn")
 onready var itens = load("res://Pause/Itens.tscn")
 onready var use_itens = load("res://Pause/ItemUse.tscn")
@@ -18,10 +19,11 @@ onready var skills = load("res://Pause/Skills.tscn")
 
 # Loads the correct map
 func _ready():
-	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	#var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	var start = load("res://Overworld/Hub/Hub.tscn")
 	self.add_child(start.instance())
-	map = get_node("Map"+str(GLOBAL.MAP))
-	set_effect(GLOBAL.MAP)
+	map = get_node("Hub")
+	#set_effect(GLOBAL.MAP)
 
 
 # Watches for inputs and deals with state changes
@@ -39,7 +41,6 @@ func _process(delta):
 		close_menu()
 	# Closes submenus and returns to menu
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Submenu":
-		print("happened")
 		return_menu()
 	#elif Input.is_action_just_pressed("ui_cancel") and STATE == "StatusSubmenu":
 	#	print("happenedagain")
@@ -48,13 +49,16 @@ func _process(delta):
 		close_menu()
 	# Cheap hack to test money
 	elif Input.is_action_just_pressed("debug"):
+		GLOBAL.gold += 100
 		if(menu.get_focus_owner()):
 			print(menu.get_focus_owner().get_name())
+		elif(shop.get_focus_owner()):
+			print(shop.get_focus_owner().get_name())
 
 
 # Opens the main pause menu (pauses map)
 func open_menu():
-	AUDIO.play_bgm("MAP_THEME", true, -5)
+	AUDIO.play_bgm("MAP_THEME", true, -8)
 	menu.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
@@ -62,10 +66,28 @@ func open_menu():
 	STATE = "Menu"
 	get_tree().paused = true
 
+# Opens shop and pauses map
+func open_shop(id: int):
+	AUDIO.play_bgm("MAP_THEME", true, -8)
+	shop.show()
+	map.hide_hud()
+	get_node("Menu_Area/Camera2D").make_current()
+	shop.enter(id)
+	STATE = "Shop"
+	get_tree().paused = true
+
+# Closes shop menu(unpauses map)
+func close_shop():
+	AUDIO.play_bgm("MAP_THEME", true, -4)
+	shop.hide()
+	map.get_node("Party").get_child(0).get_node("Camera2D").make_current()
+	map.show_hud()
+	STATE = "Map"
+	get_tree().paused = false
 
 # Closes the main pause menu (unpauses map)
 func close_menu():
-	AUDIO.play_bgm("MAP_THEME", true, 0)
+	AUDIO.play_bgm("MAP_THEME", true, -4)
 	for c in $Menu_Area.get_children():
 		c.hide()
 	menu.hide()

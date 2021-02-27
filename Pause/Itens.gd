@@ -9,6 +9,8 @@ func _ready():
 		var c = itemNodes[i]
 		c.connect("target_picked", self, "_on_Item_selected", [i])
 		c.connect("target_selected", self, "_on_Item_hover", [i])
+	for btn in $Panel/HBoxContainer/Options.get_children():
+		btn.connect("focus_entered", self, "_on_Focus_Entered")
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 	show_itens(GLOBAL.INVENTORY)
 
@@ -39,6 +41,7 @@ func update_itens(bag):
 			node.show()
 
 func _on_Item_selected(id):
+	AUDIO.play_se("ENTER_MENU")
 	item = GLOBAL.INVENTORY[id]
 	var nome = item.get_name()
 	print("SELECTED "+str(nome))
@@ -46,6 +49,7 @@ func _on_Item_selected(id):
 	use_item(item)
 
 func _on_Item_hover(id):
+	AUDIO.play_se("MOVE_MENU")
 	item = GLOBAL.INVENTORY[id]
 	var nome = item.get_name()
 	print("SELECTED "+str(nome))
@@ -61,6 +65,7 @@ func use_item(item):
 	get_parent().get_parent().get_parent().use_item(item)
 
 func _on_Use_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Itens.get_children():
@@ -94,5 +99,9 @@ func give_focus():
 
 func _on_Back_pressed():
 	print(location)
+	AUDIO.play_se("EXIT_MENU")
 	location == "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
+
+func _on_Focus_Entered():
+	AUDIO.play_se("MOVE_MENU")

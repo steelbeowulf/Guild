@@ -14,6 +14,8 @@ func _ready():
 		var c = itemNodes[i]
 		c.connect("target_picked", self, "_on_Skill_selected", [i])
 		c.connect("target_selected", self, "_on_Skill_hover", [i])
+	for btn in $Panel/HBoxContainer/Options.get_children():
+		btn.connect("focus_entered", self, "_on_Focus_Entered")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 
 func just_entered(id):
@@ -50,6 +52,7 @@ func update_skills(skills):#Ainda mantendo a solução temporaria de esconder o 
 			#node.hide()
 
 func _on_Skill_selected(id):
+	AUDIO.play_se("ENTER_MENU")
 	skill = player.get_skills()[id]
 	var nome = skill.get_name()
 	print("SELECTED "+str(nome))
@@ -57,6 +60,7 @@ func _on_Skill_selected(id):
 	use_skill(skill)
 
 func _on_Skill_hover(id):
+	AUDIO.play_se("MOVE_MENU")
 	skill = player.get_skills()[id]
 	var nome = skill.get_name()
 	print("SELECTED "+str(skill))
@@ -69,17 +73,18 @@ func set_description(skill):
 	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
 
 func use_item(item):
+	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().get_parent().use_item(item)
 
 func _process(delta):
 	#if skills:
 	update_skills(skills)
 	if Input.is_action_just_pressed("ui_cancel") and location == "SKILLS":
-		print("a")
+		AUDIO.play_se("EXIT_MENU")
 		location = "SUBMENU"
 		give_focus()
 	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
-		print("b")
+		AUDIO.play_se("EXIT_MENU")
 		location = "OUTSIDE"
 		get_parent().get_parent().get_parent().return_menu()
 
@@ -101,6 +106,7 @@ func enter():
 	#show_skills(GLOBAL.PLAYERS)
 
 func use_skill(skill):
+	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().get_parent().use_skill(skill, player)
 	#for i in range(skills):#The MP spend will be made here instead of on the other menu
 	#	if namex == skills[i].name:
@@ -110,6 +116,7 @@ func use_skill(skill):
 	#	mpleft = 0
 
 func _on_Skill_Type_1_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Skills.get_children():
@@ -118,7 +125,10 @@ func _on_Skill_Type_1_pressed():
 	get_node("Panel/HBoxContainer/Skills/SkillSlot0").grab_focus()
 
 func _on_Back_pressed():
+	AUDIO.play_se("EXIT_MENU")
 	print(location)
 	location == "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
 
+func _on_Focus_Entered():
+	AUDIO.play_se("MOVE_MENU")

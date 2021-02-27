@@ -300,7 +300,7 @@ custom_styles/panel = ExtResource( 2 )
 [node name="Money_text" type="Label" parent="Panel/All/Right/Info/Money" groups=[
 "text",
 ]]
-margin_top = -6.10352e-005
+margin_top = -6.10352e-05
 margin_right = 270.0
 margin_bottom = 79.9999
 rect_min_size = Vector2( 0, 80 )
@@ -332,6 +332,7 @@ text = "20:00:01"
 align = 1
 valign = 1
 uppercase = true
+
 [connection signal="pressed" from="Panel/All/Left/Chars/Char0" to="." method="_on_Char0_pressed"]
 [connection signal="pressed" from="Panel/All/Left/Chars/Char1" to="." method="_on_Char1_pressed"]
 [connection signal="pressed" from="Panel/All/Left/Chars/Char2" to="." method="_on_Char2_pressed"]

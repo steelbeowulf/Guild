@@ -16,21 +16,28 @@ func _ready():
 	var tmp = 0
 	for c in slots.get_children():
 		c.connect("button_down", self, "_on_Slot_chosen", [tmp])
+		c.connect("focus_entered", self, "_on_Focus_Entered")
 		tmp += 1
+	for btn in $Panel/All/Right/Options_Panel.get_children():
+		btn.connect("focus_entered", self, "_on_Focus_Entered")
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel") and location == "SAVE":
+func _input(event: InputEvent):
+	if event.is_action_pressed("ui_cancel") and location == "SAVE":
+		AUDIO.play_se("EXIT_MENU")
 		location = "OUTSIDE"
 		state = 0
 		remove_focus()
-	elif  Input.is_action_just_pressed("ui_cancel") and location == "LOAD":
+	elif event.is_action_pressed("ui_cancel") and location == "LOAD":
+		AUDIO.play_se("EXIT_MENU")
 		location = "OUTSIDE"
 		state = 0
 		remove_focus()
-	elif  Input.is_action_just_pressed("ui_cancel") and location == "OUTSIDE":
+	elif event.is_action_pressed("ui_cancel") and location == "OUTSIDE":
+		AUDIO.play_se("EXIT_MENU")
 		get_parent().get_parent().get_parent().return_menu()
 
 func _on_Slot_chosen(binds):
+	AUDIO.play_se("ENTER_MENU")
 	chosen_slot = binds
 	if state == 1:
 		$SaveDialog.popup()
@@ -38,22 +45,26 @@ func _on_Slot_chosen(binds):
 		$LoadDialog.popup()
 
 func _on_Save_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	location = "SAVE"
 	state = 1
 	slots.enable_focus(true)
 
 
 func _on_Load_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	location = "LOAD"
 	state = 2
 	slots.enable_focus(false)
 
 
 func _on_Quit_pressed():
+	AUDIO.play_se("ENTER_MENU")
 	$QuitDialog.popup()
 
 
 func _on_QuitDialog_confirmed():
+	AUDIO.play_se("EXIT_MENU")
 	get_tree().quit()
 
 func remove_focus():
@@ -64,6 +75,7 @@ func remove_focus():
 
 
 func _on_SaveDialog_confirmed():
+	AUDIO.play_se("ENTER_MENU")
 	location = "OUTSIDE"
 	GLOBAL.save(chosen_slot)
 	slots.load_saves(LOADER.load_save_info())
@@ -71,6 +83,7 @@ func _on_SaveDialog_confirmed():
 
 func _on_LoadDialog_confirmed():
 	location = "OUTSIDE"
+	AUDIO.play_se("ENTER_MENU")
 	GLOBAL.INVENTORY = loader.load_inventory(chosen_slot)
 	GLOBAL.PLAYERS = loader.load_players(chosen_slot)
 	GLOBAL.reload_state()
@@ -79,3 +92,5 @@ func _on_LoadDialog_confirmed():
 	GLOBAL.get_root().transition(GLOBAL.MAP, true)
 	get_tree().change_scene("res://Root.tscn")
 
+func _on_Focus_Entered():
+	AUDIO.play_se("MOVE_MENU")

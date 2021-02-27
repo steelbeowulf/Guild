@@ -236,7 +236,7 @@ func execute_action(action: Action):
 	
 	# Item: only the player characters may use items
 	elif action_type == "Item":
-		AUDIO.play_se("SPELL")
+		AUDIO.play_se("SPELL", -12)
 		var targets = action.get_targets()
 		var item_id = action.get_action()
 		var item = Inventory[item_id]
@@ -287,7 +287,7 @@ func execute_action(action: Action):
 		return StatsActionResult.new("Item", valid_targets, stat_change, dead, item)
 
 	elif action_type == "Skill":
-		AUDIO.play_se("SPELL")
+		AUDIO.play_se("SPELL", -12)
 		var targets = action.get_targets()
 		var skill_id = action.get_action()
 		var skill = current_entity.get_skill(skill_id)

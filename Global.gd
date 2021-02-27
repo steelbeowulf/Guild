@@ -6,6 +6,7 @@ var SKILLS
 var STATUS
 var ENEMIES
 var NPCS
+var SHOPS
 var ENCOUNTERS
 var EQUIPAMENT
 
@@ -92,19 +93,31 @@ func reload_state():
 	POSITION = Vector2(454, 446)
 	#POSITION = Vector2(300, 600)
 
+# Get item ids from inventory
+func get_item_ids():
+	var item_ids = []
+	for item in INVENTORY:
+		item_ids.append(item.id)
+	return item_ids
+
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
-func add_item(item_id, item_quantity):
-	var done = false
+func add_item(item_id: int, item_quantity: int):
 	for item in INVENTORY:
-		if item == ITENS[item_id]:
+		if item.id == item_id:
 			item.quantity += item_quantity
-			done = true
-			break
-	if not done:
-		var item = ITENS[item_id]
-		item.quantity += item_quantity
-		INVENTORY.append(item)
+			return
+	var item = ITENS[item_id]._duplicate()
+	item.quantity = item_quantity
+	INVENTORY.append(item)
+
+
+# Check if item_id is in inventory
+func check_item(item_id: int):
+	for item in INVENTORY:
+		if item.id == item_id:
+			return item.quantity
+	return 0
 
 # Clone of the add_item function, but for equipaments
 func add_equip(item_id):
@@ -117,6 +130,7 @@ func add_equip(item_id):
 	#if not done:
 	var equip = EQUIPAMENT[item_id]
 	EQUIP_INVENTORY.append(equip)
+
 
 # Save file variables
 var savegame = File.new() 
@@ -166,7 +180,9 @@ func load_info(save_slot):
 		reload_state()
 		gold = 100
 		playtime = 0
-		AREA = "Demo_Area"
+		# TODO: Change this back
+		#AREA = "Demo_Area"
+		AREA = "Hub"
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())
@@ -193,6 +209,9 @@ func load_game(save_slot):
 
 	ENCOUNTERS = loader.load_encounters(area_info["ENCOUNTERS"])
 	print(ENCOUNTERS)
+	
+	SHOPS = loader.load_shops(area_info["SHOPS"])
+	print(SHOPS)
 
 	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
 	print(ENEMIES)
@@ -244,9 +263,13 @@ func set_event_status(id, status):
 ### Dialogue
 var caller = null
 
-func play_dialogues(id, callback):
+func play_dialogues(id, callback, shop=false):
 	var node = NODES["Dialogue"]
-	var npc = NPCS[id]
+	var npc = null
+	if shop:
+		npc = SHOPS[id]
+	else:
+		npc = NPCS[id]
 	var dials = npc.get_dialogues()
 	node.set_talker(npc.get_name(), npc.get_portrait())
 	for dial in dials:
