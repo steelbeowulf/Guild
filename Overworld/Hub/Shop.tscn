@@ -36,6 +36,11 @@ margin_right = 971.0
 margin_bottom = 787.0
 custom_styles/panel = ExtResource( 2 )
 
+[node name="Description" type="Label" parent="ItemInfo"]
+margin_right = 967.0
+margin_bottom = 783.0
+custom_fonts/font = ExtResource( 3 )
+
 [node name="PlayerInfo" type="Panel" parent="."]
 margin_top = 792.0
 margin_right = 975.0
@@ -56,9 +61,9 @@ alignment = 1
 [node name="Money" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 148.0
+margin_left = 91.0
 margin_top = 73.0
-margin_right = 246.0
+margin_right = 189.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "MONEY:"
@@ -66,9 +71,9 @@ text = "MONEY:"
 [node name="MoneyValue" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 250.0
+margin_left = 193.0
 margin_top = 73.0
-margin_right = 308.0
+margin_right = 251.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "500G"
@@ -76,9 +81,9 @@ text = "500G"
 [node name="Padding" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 312.0
+margin_left = 255.0
 margin_top = 73.0
-margin_right = 682.0
+margin_right = 625.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "                                     "
@@ -86,19 +91,19 @@ text = "                                     "
 [node name="Stock" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 686.0
+margin_left = 629.0
 margin_top = 73.0
-margin_right = 770.0
+margin_right = 827.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
-text = "STOCK:"
+text = "IN INVENTORY:"
 
 [node name="StockValue" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 774.0
+margin_left = 831.0
 margin_top = 73.0
-margin_right = 804.0
+margin_right = 861.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "0x"
@@ -207,7 +212,6 @@ flat = true
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="focus_entered" from="Quantity/SpinBox" to="." method="_on_SpinBox_focus_entered"]
 [connection signal="value_changed" from="Quantity/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="pressed" from="Confirmation/Yes" to="." method="_on_Yes_pressed"]
 [connection signal="pressed" from="Confirmation/No" to="." method="_on_No_pressed"]

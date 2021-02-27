@@ -35,8 +35,9 @@ func enter(id: int):
 	print("vou limpar")
 	clear_items()
 
-func load_items(item_ids):
+func load_items(item_ids: Array):
 	var count = 0
+	itens = []
 	for i in range(1, len(GLOBAL.ITENS)):
 		var item = GLOBAL.ITENS[i]
 		if item.id in item_ids:
@@ -54,9 +55,8 @@ func load_items(item_ids):
 
 func clear_items():
 	print("clearing items")
-	while len(item_container.get_children()) > 0:
-		print("deleted!")
-		item_container.get_child(0).queue_free()
+	for i in item_container.get_children():
+		i.queue_free()
 
 func update_items(has_focus=false):
 	money.set_text(str(GLOBAL.gold)+"G")
@@ -72,6 +72,12 @@ func update_items(has_focus=false):
 		elif MODE == "SELL":
 			if GLOBAL.check_item(itens[i].id) <= 0:
 				item_container.get_child(i).hide()
+			else:
+				item_container.get_child(i).enable()
+				if not has_focus:
+					has_focus = true
+					print("Setting focus: ", i)
+					item_container.get_child(i).grab_focus()
 
 func _on_Item_Selected(id: int):
 	last_selected = id
@@ -92,6 +98,10 @@ func _on_Item_Hovered(id: int):
 	selected_item = itens[id]
 	var qty_in_stock = GLOBAL.check_item(selected_item.id)
 	stock.set_text(str(qty_in_stock)+"x")
+	var description = "  "+selected_item.get_name()+\
+	"\n  Type: "+selected_item.get_type()+"\n  Targets: "+\
+	selected_item.get_target()
+	$ItemInfo/Description.set_text(description)
 
 
 func _on_Yes_pressed():
@@ -107,7 +117,7 @@ func _on_Yes_pressed():
 			has_focus = true
 	elif MODE == "SELL":
 		GLOBAL.add_item(selected_item.id, -item_quantity)
-		GLOBAL.gold += item_quantity*selected_item.quantity
+		GLOBAL.gold += item_quantity*(selected_item.quantity/2)
 		if GLOBAL.check_item(selected_item.id) >= 0:
 			print("Setting focus: ", last_selected)
 			item_container.get_child(last_selected).grab_focus()
@@ -132,19 +142,25 @@ func _exit_Store():
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
+		print("cancel pressed")
 		if confirmation.visible or quantity.visible:
+			print("no no")
 			_on_No_pressed()
 		elif mode.visible:
+			print("will exit")
 			_exit_Store()
 		else:
+			print("will enter")
 			enter(shop_id)
 	elif quantity.visible and not confirmation.visible:
 		if event.is_action_pressed("ui_accept"):
 			print("Ya buying??")
+			var price = selected_item.quantity
 			var verb = "buying"
 			if MODE == "SELL":
 				verb = "selling"
-			dialogue.set_text("You "+str(verb)+" "+str(item_quantity)+" "+selected_item.nome+" for "+str(selected_item.quantity*item_quantity)+"G?")
+				price = selected_item.quantity / 2
+			dialogue.set_text("You "+str(verb)+" "+str(item_quantity)+" "+selected_item.nome+" for "+str(price*item_quantity)+"G?")
 			confirmation.show()
 			$Timer.wait_time = 0.1
 			$Timer.start()
