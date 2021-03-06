@@ -364,8 +364,14 @@ func parse_players(path):
 		var datas = result_json.result
 		for data in datas:
 			var skills = []
+			var equips = []
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.SKILLS[id])
+			for id in data["EQUIPS"]:
+				if id > -1:
+					equips.append(GLOBAL.EQUIPAMENT[id])
+				else:
+					equips.append(null)
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
 			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
@@ -373,18 +379,19 @@ func parse_players(path):
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
-			data["LANE"], data["NAME"], skills, data["RESISTANCE"]))
+			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"]))
+			for i in range(len(equips)):
+				if data["EQUIPS"][i] > -1:
+					players[-1].equip(i, equips[i])
 	return players
 
 
 func get_random_lore():
 	var lores = list_files_in_directory(LORES_PATH)
 	lores.shuffle()
-	print(lores)
 	var file = File.new()
 	file.open(LORES_PATH+lores[0], file.READ)
 	var text = file.get_as_text()
-	print(text)
 	var result_json = JSON.parse(text)
 	if result_json.error == OK:
 		return result_json.result

@@ -15,6 +15,7 @@ onready var use_skills = load("res://Pause/SkillUse.tscn")
 onready var status = load("res://Pause/Status.tscn")
 onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
+onready var equips = load("res://Pause/Equips.tscn")
 
 
 # Loads the correct map
@@ -181,10 +182,10 @@ func open_equips(id):
 	STATE = "EquipSubmenu"
 	menu.hide()
 	get_node("Menu_Area/SubMenus").show()
-	get_node("Menu_Area/SubMenus").add_child(skills.instance())
-	get_node("Menu_Area/SubMenus/Skills").show()
-	get_node("Menu_Area/SubMenus/Skills").just_entered(id)
-	get_node("Menu_Area/SubMenus/Skills").enter()
+	get_node("Menu_Area/SubMenus").add_child(equips.instance())
+	get_node("Menu_Area/SubMenus/Equips").show()
+	get_node("Menu_Area/SubMenus/Equips").just_entered(id)
+	get_node("Menu_Area/SubMenus/Equips").enter()
 
 # Toggles status submenu
 func toggle_status():

@@ -1,11 +1,14 @@
 extends "Entity.gd"
 
+#const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3, 'ACCESSORY':4}
+
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
+var equips = [] # Head, Body, Hands, Acc1, Acc2
 
 var portrait
 
-func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, resistances):
+func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, equipamentos, resistances):
 	self.id = id
 	self.sprite = img
 	self.animations = anim
@@ -16,6 +19,7 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.position = pos
 	self.nome = identificacao
 	self.skills = habilidades
+	self.equips = equipamentos
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
@@ -41,9 +45,10 @@ func save_data():
 	dict["ACC"] = get_acc()
 	dict["EVA"] = get_eva()
 	dict["LCK"] = get_lck()
-	dict["LANE"] = 0 # TODO
+	dict["LANE"] = 0
 	dict["NAME"] = get_name()
 	dict["SKILLS"] = get_skill_ids()
+	dict["EQUIPS"] = get_equip_ids()
 	dict["RESISTANCE"] = get_resistance()
 	return dict
 
@@ -59,11 +64,31 @@ func get_portrait():
 func get_skills():
 	return self.skills
 
+func get_equips():
+	return self.equips
+
 func get_skill_ids():
 	var ids = []
 	for skill in get_skills():
 		ids.append(skill.id)
 	return ids
+
+func get_equip_ids():
+	var ids = []
+	for equip in get_equips():
+		ids.append(equip.id)
+	return ids
+
+func unequip(slot: int):
+	for effect in self.equips[slot].get_effects():
+		self.stats[effect[0]] -= effect[1]
+	self.equips[slot] = null
+
+func equip(slot: int, equipament):
+	self.equips[slot] = equipament
+	for effect in self.equips[slot].get_effects():
+		self.stats[effect[0]] += effect[1]
+
 
 func get_resistance():
 	return self.resist
@@ -96,4 +121,4 @@ func update_hate(dmg, enemy):
 func _duplicate():
 	var new_stats = [] + self.stats
 	return self.get_script().new(self.id, self.level, self.xp, 
-	self.sprite, self.animations, new_stats, self.position, self.nome, self.skills, self.resist)
+	self.sprite, self.animations, new_stats, self.position, self.nome, self.skills, self.equips, self.resist)

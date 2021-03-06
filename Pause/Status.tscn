@@ -5,8 +5,6 @@
 [ext_resource path="res://Assets/Fonts/Menu_Font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/Portraits/cleric.png" type="Texture" id=4]
 
-
-
 [node name="Status" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
@@ -563,3 +561,4 @@ custom_fonts/font = ExtResource( 3 )
 text = "250
 "
 align = 1
+

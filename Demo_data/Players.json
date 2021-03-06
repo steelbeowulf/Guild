@@ -28,6 +28,7 @@
 	"NAME":"Siegfried",
 	"CLASS": "KNIGHT",
 	"SKILLS":[5, 6, 7],
+	"EQUIPS":[-1, 2, 1, -1, -1],
 	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 
 	{"ID":1,
@@ -59,6 +60,7 @@
 	"NAME":"Robin",
 	"CLASS": "ROGUE",
 	"SKILLS":[8,9,10],
+	"EQUIPS":[-1, -1, -1, -1, -1],
 	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 	{"ID":2,
 	"LEVEL":1,
@@ -89,5 +91,6 @@
 	"NAME":"Sebastian",
 	"CLASS": "CLERIC",
 	"SKILLS":[1,2,3,23,25],
+	"EQUIPS":[-1, -1, -1, -1, -1],
 	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 ]
