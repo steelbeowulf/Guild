@@ -1,22 +1,19 @@
 extends Control
-onready var skill = null
+onready var equip = null
 onready var player = null
 onready var identification
-#onready var player
-onready var skills
-onready var mpleft
 onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
 
 func _ready():
 	give_focus()
-	var itemNodes = $Panel/HBoxContainer/Skills.get_children()
+	var itemNodes = $Panel/HBoxContainer/Equips.get_children()
 	for i in range(len(itemNodes)):
 		var c = itemNodes[i]
-		c.connect("target_picked", self, "_on_Skill_selected", [i])
-		c.connect("target_selected", self, "_on_Skill_hover", [i])
+		c.connect("target_picked", self, "_on_Equip_selected", [i])
+		c.connect("target_selected", self, "_on_Equip_hover", [i])
 	for btn in $Panel/HBoxContainer/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
-	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
+	get_node("Panel/HBoxContainer/Options/Weapon").grab_focus()
 
 func just_entered(id):
 	print("[EQUIP] just entered "+str(id))
