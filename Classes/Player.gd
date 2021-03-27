@@ -1,14 +1,15 @@
 extends "Entity.gd"
 
-#const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3, 'ACCESSORY':4}
+const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3}
 
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
 var equips = [] # Head, Body, Hands, Acc1, Acc2
+var job
 
 var portrait
 
-func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, equipamentos, resistances):
+func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, equipamentos, resistances, classe):
 	self.id = id
 	self.sprite = img
 	self.animations = anim
@@ -24,6 +25,7 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
 	self.tipo = "Player"
+	self.job = classe
 
 func save_data():
 	var dict = {}
@@ -87,8 +89,11 @@ func unequip(slot: int):
 func equip(slot: int, equipament):
 	self.equips[slot] = equipament
 	for effect in self.equips[slot].get_effects():
-		self.stats[effect[0]] += effect[1]
+		self.stats[effect.get_id()] += effect.get_value()
 
+func get_equip(location: String):
+	var slot = equip_dict[location]
+	return self.equips[slot]
 
 func get_resistance():
 	return self.resist
@@ -98,6 +103,9 @@ func get_resist(type):
 
 func get_hate():
 	return self.hate
+
+func get_job():
+	return self.job
 
 func zero_hate():
 	for i in range(len(hate)):

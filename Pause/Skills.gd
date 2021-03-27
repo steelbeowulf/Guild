@@ -1,29 +1,32 @@
 extends Control
-onready var equip = null
+onready var skill = null
 onready var player = null
 onready var identification
-onready var equips
+#onready var player
+onready var skills
+onready var mpleft
 onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
 
 func _ready():
 	give_focus()
-	var itemNodes = $Panel/HBoxContainer/Equips.get_children()
+	var itemNodes = $Panel/HBoxContainer/Skills.get_children()
 	for i in range(len(itemNodes)):
 		var c = itemNodes[i]
-		c.connect("target_picked", self, "_on_Equip_selected", [i])
-		c.connect("target_selected", self, "_on_Equip_hover", [i])
+		c.connect("target_picked", self, "_on_Skill_selected", [i])
+		c.connect("target_selected", self, "_on_Skill_hover", [i])
 	for btn in $Panel/HBoxContainer/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
-	get_node("Panel/HBoxContainer/Options/Head").grab_focus()
+	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 
 func just_entered(id):
 	print("[SKILL] just entered "+str(id))
 	player = GLOBAL.PLAYERS[id]
 	location = "SUBMENU"
-	show_equips()
+	show_skills()
 
-func show_equips():
-	equips = player.get_equips()
+func show_skills():
+	skills = player.get_skills()
+	mpleft = player.get_mp()
 	for i in range(len(skills)):
 		var node = get_node("Panel/HBoxContainer/Skills/SkillSlot" + str(i))
 		node.set_text(str(skills[i].nome) + " - " + str(skills[i].quantity) + "mp")
@@ -48,7 +51,7 @@ func update_skills(skills):#Ainda mantendo a solução temporaria de esconder o 
 			node.disabled = true
 			#node.hide()
 
-func _on_Equip_selected(id):
+func _on_Skill_selected(id):
 	AUDIO.play_se("ENTER_MENU")
 	skill = player.get_skills()[id]
 	var nome = skill.get_name()
@@ -56,7 +59,7 @@ func _on_Equip_selected(id):
 	#set_description(item)
 	use_skill(skill)
 
-func _on_Equip_hover(id):
+func _on_Skill_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	skill = player.get_skills()[id]
 	var nome = skill.get_name()

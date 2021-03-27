@@ -73,7 +73,7 @@ func open_shop(id: int):
 	shop.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
-	shop.enter(id)
+	shop.enter(id, "EQUIP")
 	STATE = "Shop"
 	get_tree().paused = true
 

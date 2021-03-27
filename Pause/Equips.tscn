@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Pause/Skills.gd" type="Script" id=1]
+[ext_resource path="res://Pause/Equips.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/Panels/Hover_Menu_Info_Panel.tres" type="StyleBox" id=4]
@@ -28,6 +28,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 margin_right = 448.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 300, 50 )

@@ -29,6 +29,7 @@ var EQUIP_CLASS = load("res://Classes/Equip.gd")
 var NPC_CLASS = load("res://Classes/NPC.gd")
 var ENCOUNTER_CLASS = load("res://Classes/Encounter.gd")
 var SHOP_CLASS = load("res://Classes/Shop.gd")
+var STATS_CLASS = load("res://Classes/StatEffect.gd")
 
 var List
 
@@ -152,8 +153,8 @@ func load_all_equips():
 			var data = result_json.result
 			var effects = []
 			for ef in data["EFFECTS"]:
-				effects.append([STATS.DSTAT[ef["STAT"]], int(ef["VALUE"]), 
-				STATS.TYPE[ef["TYPE"]]]) 
+				var eff = STATS_CLASS.new(STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"])
+				effects.append(eff) 
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
@@ -344,7 +345,7 @@ func load_shops(filter_array):
 				ret.append(SHOP_CLASS.new(data["ID"], data["NAME"], 
 					data["IMG"], data["ANIM"], 
 					data["DIALOGUE"], data["PORTRAIT"], 
-					data["ITENS"]))
+					data["ITENS"], data["EQUIPAMENTS"]))
 		else:  # If parse has errors
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
@@ -379,7 +380,7 @@ func parse_players(path):
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
-			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"]))
+			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"], data["CLASS"]))
 			for i in range(len(equips)):
 				if data["EQUIPS"][i] > -1:
 					players[-1].equip(i, equips[i])

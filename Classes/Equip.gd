@@ -1,5 +1,6 @@
-extends Node
 class_name Equip
+
+const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3}
 
 var id
 var nome
@@ -39,12 +40,20 @@ func get_name():
 func get_effects():
 	return effect
 
+func get_effect(stat_id: int):
+	for eff in effect:
+		if eff.get_id() == stat_id:
+			return eff.get_value()
+	return 0
+
 func get_status():
 	return status
 
 func get_cost():
 	return quantity
 
+func get_slot():
+	return equip_dict[self.location]
 
 func _duplicate():
 	var new_effects = [] + self.effect

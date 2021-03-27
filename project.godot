@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/Entity.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Equip",
 "language": "GDScript",
 "path": "res://Classes/Equip.gd"
@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Assets/Shaders/Smooth.gd"
 }, {
+"base": "Reference",
+"class": "StatEffect",
+"language": "GDScript",
+"path": "res://Classes/StatEffect.gd"
+}, {
 "base": "ActionResult",
 "class": "StatsActionResult",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_class_icons={
 "RunActionResult": "",
 "STATS": "",
 "SmoothPath": "",
+"StatEffect": "",
 "StatsActionResult": ""
 }
 

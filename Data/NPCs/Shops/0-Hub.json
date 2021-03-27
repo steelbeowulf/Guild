@@ -20,5 +20,11 @@
         6,
         7
     ],
+    "EQUIPAMENTS": [
+        1,
+        2,
+        3,
+        4
+    ],
 	"PORTRAIT": {"sprite":"res://Assets/Portraits/wizard.png", "scale":[8,8]}
 }

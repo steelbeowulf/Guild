@@ -91,6 +91,6 @@
 	"NAME":"Sebastian",
 	"CLASS": "CLERIC",
 	"SKILLS":[1,2,3,23,25],
-	"EQUIPS":[-1, -1, -1, -1, -1],
+	"EQUIPS":[-1, -1, -1, 4, -1],
 	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}},
 ]
