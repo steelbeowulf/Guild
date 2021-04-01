@@ -25,11 +25,14 @@ func just_entered(id):
 func show_equips():
 	equips = player.get_equips()
 	for i in range(len(equips)):
-		var node = get_node("Panel/HBoxContainer/Equips/equipslot" + str(i))
-		node.set_text(str(equips[i].nome) + " - " + str(equips[i].quantity) + "mp")
+		var node = get_node("Panel/HBoxContainer/Equips/SkillSlot" + str(i))
+		if equips[i] != null:
+			node.set_text(str(equips[i].get_name()) + " - " + str(equips[i].quantity) + "mp")
+		else:
+			node.set_text("NONE")
 		node.show()
 		get_node("Panel/HBoxContainer/Options/Head").grab_focus()
-		for e in $Panel/HBoxContainer/equips.get_children():
+		for e in $Panel/HBoxContainer/Equips.get_children():
 			e.set_focus_mode(0)
 
 
@@ -86,7 +89,7 @@ func give_focus():
 
 func enter():
 	give_focus()
-	for c in $Panel/HBoxContainer/equips.get_children():
+	for c in $Panel/HBoxContainer/Equips.get_children():
 		c.connect("target_picked", self, "_on_Skill_selected")
 		c.connect("target_selected", self, "_on_Skill_hover")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()

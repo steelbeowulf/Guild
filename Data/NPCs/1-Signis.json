@@ -1,7 +1,7 @@
 {
 	"ID":1,
-	"IMG":{"path": "res://Assets/Animations/Entities/signs.png",
-		   "vframes": 5, "hframes":3, "scale":[2,2]},
+	"IMG":{"path": "res://Assets/Portraits/sign.png",
+		   "vframes":1, "hframes":1, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0"]},
 	"NAME":"Signis",
     "DIALOGUE":[

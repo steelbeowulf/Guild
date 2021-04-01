@@ -13,7 +13,7 @@ func _process(delta):
 			GLOBAL.add_item(item_id, item_quantity)
 			var nome = GLOBAL.ITENS[item_id].nome
 			closed = false
-			$Sprite.play("open")
+			$Sprite.frame = 3
 			get_parent().get_parent().send_message("Encontrou "+nome+" x"+str(item_quantity+1))
 			get_parent().get_parent().save_state("TREASURE", self.get_name())
 
@@ -24,7 +24,7 @@ func _on_Area2D_area_entered(area):
 func _update(value):
 	if value:
 		closed = false
-		$Sprite.animation = "opened"
+		$Sprite.frame = 3
 
 
 func _on_Area2D_area_exited(area):

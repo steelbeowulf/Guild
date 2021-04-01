@@ -178,8 +178,8 @@ func load_info(save_slot):
 		gold = 100
 		playtime = 0
 		# TODO: Change this back
-		#AREA = "Demo_Area"
-		AREA = "Hub"
+		AREA = "Demo_Area"
+		#AREA = "Hub"
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())

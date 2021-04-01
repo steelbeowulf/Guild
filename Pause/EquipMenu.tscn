@@ -28,6 +28,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 margin_right = 448.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 300, 50 )
@@ -466,6 +467,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
+
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Weapon" to="." method="_on_Weapon_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Head" to="." method="_on_Head_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Body" to="." method="_on_Body_pressed"]

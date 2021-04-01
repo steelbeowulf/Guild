@@ -30,7 +30,7 @@ func show_equips(equipaments, type):
 	equipped.show()
 	for i in range(len(equipaments)):
 		var node = get_node("Panel/HBoxContainer/Equips/EquipSlot" + str(i+1))
-		node.set_text(str(equipaments[i][type].nome))
+		node.set_text(str(equipaments[i][type].get_name()))
 		node.show()
 		if equipaments[i][type].classe != player.classe:
 			node.disabled = true

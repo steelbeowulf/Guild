@@ -6,8 +6,6 @@
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
 
-
-
 [node name="Map12" type="Node2D"]
 script = ExtResource( 1 )
 Transitions = {
