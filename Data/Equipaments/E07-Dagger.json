@@ -1,10 +1,10 @@
 {	
 	"ID":1,	
-	"NAME":"SWORD",
+	"NAME":"DAGGER",
 	"TYPE":"NORMAL",
-	"LOCATION": "HANDS",
-	"CLASS": "KNIGHT",
-	"EFFECTS":[{"STAT":"ATK", "VALUE":25, "TYPE":"PHYSIC"}],
+	"LOCATION": "WEAPON",
+	"CLASS": "ROGUE",
+	"EFFECTS":[{"STAT":"ATK", "VALUE":15, "TYPE":"PHYSIC"}],
 	"STATUS":[],
 	"PRICE": 50,
 	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}

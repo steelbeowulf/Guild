@@ -1,6 +1,6 @@
 extends "Entity.gd"
 
-const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3}
+const equip_dict = {'HEAD':0, 'BODY':1, 'WEAPON':2, 'ACCESSORY1':3, 'ACCESSORY2':4}
 
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
@@ -86,7 +86,9 @@ func unequip(slot: int):
 		self.stats[effect[0]] -= effect[1]
 	self.equips[slot] = null
 
-func equip(slot: int, equipament):
+func equip(equipament, slot=-1):
+	if slot == -1:
+		slot = equip_dict[equipament.location]
 	self.equips[slot] = equipament
 	for effect in self.equips[slot].get_effects():
 		self.stats[effect.get_id()] += effect.get_value()

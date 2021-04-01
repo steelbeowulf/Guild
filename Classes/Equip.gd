@@ -3,7 +3,7 @@ class_name Equip
 const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3}
 
 var id
-var nome
+var name
 var quantity
 var type #Melee, Ranged, Magic
 var job #Knight, Rogue, Cleric
@@ -16,7 +16,7 @@ var img
 func _init(id: int, name: String, tipo: String, local: String,
 	classe: String, efeito: Array, statusEffects: Array, preco: int, img: Dictionary):
 	self.id = id
-	self.nome = name
+	self.name = name
 	self.type = tipo
 	self.job = classe
 	self.location = local
@@ -35,7 +35,7 @@ func get_location():
 	return location
 
 func get_name():
-	return nome
+	return name
 
 func get_effects():
 	return effect
@@ -58,5 +58,5 @@ func get_slot():
 func _duplicate():
 	var new_effects = [] + self.effect
 	var new_status = [] + self.status
-	return self.get_script().new(self.id, self.nome, self.type, self.location, 
+	return self.get_script().new(self.id, self.name, self.type, self.location, 
 	self.job, new_effects, new_status, self.quantity, self.img)

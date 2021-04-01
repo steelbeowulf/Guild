@@ -15,7 +15,7 @@ onready var use_skills = load("res://Pause/SkillUse.tscn")
 onready var status = load("res://Pause/Status.tscn")
 onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
-onready var equips = load("res://Pause/Equips.tscn")
+onready var equips = load("res://Pause/EquipMenu.tscn")
 
 
 # Loads the correct map

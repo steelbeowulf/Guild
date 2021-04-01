@@ -383,7 +383,7 @@ func parse_players(path):
 			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"], data["CLASS"]))
 			for i in range(len(equips)):
 				if data["EQUIPS"][i] > -1:
-					players[-1].equip(i, equips[i])
+					players[-1].equip(equips[i], i)
 	return players
 
 

@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=6]
 
-[node name="Skills" type="Control"]
+[node name="Equips" type="Control"]
 rect_scale = Vector2( 1.865, 1.4 )
 script = ExtResource( 1 )
 
@@ -28,7 +28,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
-editor/display_folded = true
 margin_right = 448.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 300, 50 )
@@ -87,7 +86,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Body"
 
-[node name="Acessory1" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Accessory1" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_top = 296.0
@@ -99,9 +98,9 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
-text = "Acessory"
+text = "Accessory"
 
-[node name="Acessory2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Accessory2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_top = 370.0
@@ -113,7 +112,7 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
-text = "Acessory"
+text = "Accessory"
 
 [node name="Back" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
@@ -471,8 +470,8 @@ script = ExtResource( 6 )
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Weapon" to="." method="_on_Weapon_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Head" to="." method="_on_Head_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Body" to="." method="_on_Body_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Acessory1" to="." method="_on_Acessory1_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Acessory2" to="." method="_on_Acessory2_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Accessory1" to="." method="_on_Acessory1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Accessory2" to="." method="_on_Acessory2_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Equips/EquipSlot0" to="Panel/HBoxContainer/Equips/EquipSlot0" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Equips/EquipSlot0" to="Panel/HBoxContainer/Equips/EquipSlot0" method="_on_ItemSlot0_pressed"]

@@ -1,0 +1,11 @@
+{	
+	"ID":1,	
+	"NAME":"STAFF",
+	"TYPE":"NORMAL",
+	"LOCATION": "WEAPON",
+	"CLASS": "CLERIC",
+	"EFFECTS":[{"STAT":"ATKM", "VALUE":25, "TYPE":"MAGIC"}],
+	"STATUS":[],
+	"PRICE": 50,
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}
+}
