@@ -5,6 +5,10 @@ const WHITE = Color(1.0, 1.0, 1.0)
 const GREEN = Color(0.0, 1.0, 0.0)
 const RED = Color(1.0, 0.0, 0.0)
 
+func zero():
+	for stat_id in stats:
+		set_diff(stat_id, 0)
+
 func init(current_equip, new_equip):
 	for stat_id in stats:
 		var diff = new_equip.get_effect(stat_id)

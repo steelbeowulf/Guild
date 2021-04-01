@@ -1,5 +1,6 @@
 extends Control
 onready var player = null
+onready var current_equip = null
 onready var equips = []
 onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
 
@@ -39,6 +40,7 @@ func show_equips(equipaments, type):
 		equipped.disabled = false
 		equipped.set_focus_mode(2)
 		player_equip_name = player_equip.get_name()
+		current_equip = player_equip
 	equipped.set_text("EQUIPPED: "+player_equip_name)
 	equipped.show()
 	equips = [player_equip]
@@ -69,8 +71,10 @@ func _on_Equip_selected(id):
 func _on_Equip_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	set_description(equips[id])
+	$Panel/HBoxContainer/Options/Info/Comparison.init(current_equip, equips[id])
 
 func reset_description():
+	$Panel/HBoxContainer/Options/Info/Comparison.zero()
 	$Panel/HBoxContainer/Options/Info/Description.set_text("")
 
 func set_description(equip_hover):
