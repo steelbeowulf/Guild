@@ -9,7 +9,7 @@ func init(current_equip, new_equip):
 	for stat_id in stats:
 		var diff = new_equip.get_effect(stat_id)
 		if current_equip != null:
-			diff = current_equip.get_effect(stat_id) - new_equip.get_effect(stat_id)
+			diff = new_equip.get_effect(stat_id) - current_equip.get_effect(stat_id)
 		set_diff(stat_id, diff)
 
 func set_diff(stat: int, diff: int):

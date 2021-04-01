@@ -20,11 +20,11 @@ onready var equips = load("res://Pause/EquipMenu.tscn")
 
 # Loads the correct map
 func _ready():
-	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
-	#var start = load("res://Overworld/Hub/Hub.tscn")
+	#var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	var start = load("res://Overworld/Hub/Hub.tscn")
 	self.add_child(start.instance())
-	#map = get_node("Hub")
-	map = get_node("Map"+str(GLOBAL.MAP))
+	map = get_node("Hub")
+	#map = get_node("Map"+str(GLOBAL.MAP))
 	set_effect(GLOBAL.MAP)
 
 
@@ -44,9 +44,6 @@ func _process(delta):
 	# Closes submenus and returns to menu
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Submenu":
 		return_menu()
-	#elif Input.is_action_just_pressed("ui_cancel") and STATE == "StatusSubmenu":
-	#	print("happenedagain")
-	#	return_menu()
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
 		close_menu()
 	# Cheap hack to test money

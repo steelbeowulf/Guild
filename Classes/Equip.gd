@@ -1,6 +1,6 @@
 class_name Equip
 
-const equip_dict = {'HEAD':0, 'BODY':1, 'HANDS':2, 'ACCESSORY':3}
+const equip_dict = {'HEAD':0, 'BODY':1, 'WEAPON':2, 'ACCESSORY1':3, 'ACCESSORY2':4}
 
 var id
 var name
@@ -11,6 +11,7 @@ var location #Body, Head, Accessory, Hands
 var effect = [] #["ATK", +25, PHYS]
 var status = [] #causa confuse [true, "Confuse"]
 var img
+var equipped = -1
 
 
 func _init(id: int, name: String, tipo: String, local: String,
@@ -54,6 +55,9 @@ func get_cost():
 
 func get_slot():
 	return equip_dict[self.location]
+
+func get_equipped():
+	return equipped
 
 func _duplicate():
 	var new_effects = [] + self.effect

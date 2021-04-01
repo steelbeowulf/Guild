@@ -81,19 +81,48 @@ func get_equip_ids():
 		ids.append(equip.id)
 	return ids
 
-func unequip(slot: int):
+
+func unequip(equipament, slot=-1):
+	print("Unequipping ", equipament.get_name(), " on ", self.get_name())
+	if slot == -1:
+		if equipament.location == "ACCESSORY":
+			if not self.equips[3]:
+				slot = 3
+			elif not self.equips[4]:
+				slot = 4
+		else:
+			slot = equip_dict[equipament.location]
 	for effect in self.equips[slot].get_effects():
-		self.stats[effect[0]] -= effect[1]
+		self.stats[effect.get_id()] -= effect.get_value()
+	self.equips[slot].equipped = -1
 	self.equips[slot] = null
 
+
 func equip(equipament, slot=-1):
+	print("Equipping ", equipament.get_name(), " on ", self.get_name())
 	if slot == -1:
-		slot = equip_dict[equipament.location]
+		if equipament.location == "ACCESSORY":
+			if not self.equips[3]:
+				slot = 3
+			elif not self.equips[4]:
+				slot = 4
+		else:
+			slot = equip_dict[equipament.location]
+	if self.equips[slot]:
+		self.unequip(self.equips[slot], slot)
 	self.equips[slot] = equipament
+	equipament.equipped = id
+	print("Agora "+str(slot)+" tem um "+self.equips[slot].get_name())
 	for effect in self.equips[slot].get_effects():
 		self.stats[effect.get_id()] += effect.get_value()
 
 func get_equip(location: String):
+	if location == "ACCESSORY":
+		if self.equips[3]:
+			return self.equips[3]
+		if self.equips[4]:
+			return self.equips[4]
+		return null
 	var slot = equip_dict[location]
 	return self.equips[slot]
 

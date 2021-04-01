@@ -100,6 +100,23 @@ func get_item_ids():
 		item_ids.append(item.id)
 	return item_ids
 
+# Get item ids from equip_inventory
+func get_equip_ids():
+	var item_ids = []
+	for item in EQUIP_INVENTORY:
+		item_ids.append(item.id)
+	return item_ids
+
+
+# Check if item_id is in inventory
+func check_item(item_id: int, type="ITEM"):
+	var inventory = INVENTORY
+	if type == "EQUIP":
+		inventory = EQUIP_INVENTORY
+	for item in inventory:
+		if item.id == item_id:
+			return item.quantity
+	return 0
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
 func add_item(item_id: int, item_quantity: int):
@@ -111,23 +128,20 @@ func add_item(item_id: int, item_quantity: int):
 	item.quantity = item_quantity
 	INVENTORY.append(item)
 
-
-# Check if item_id is in inventory
-func check_item(item_id: int):
-	for item in INVENTORY:
-		if item.id == item_id:
-			return item.quantity
-	return 0
-
 # Clone of the add_item function, but for equipaments
 func add_equip(equip_id: int, equip_quantity: int):
-	for equip in INVENTORY:
-		if equip == EQUIPAMENT[equip_id]:
+	for equip in EQUIP_INVENTORY:
+		if equip.id == equip_id:
 			equip.quantity += equip_quantity
 			return
-	var equip = EQUIPAMENT[equip_id]
+	var equip = EQUIPAMENT[equip_id]._duplicate()
+	equip.quantity = equip_quantity
 	EQUIP_INVENTORY.append(equip)
 
+func is_equipped(equip_id: int):
+	for e in EQUIP_INVENTORY:
+		if e.id == equip_id:
+			return e.equipped
 
 # Save file variables
 var savegame = File.new() 
@@ -178,8 +192,8 @@ func load_info(save_slot):
 		gold = 100
 		playtime = 0
 		# TODO: Change this back
-		AREA = "Demo_Area"
-		#AREA = "Hub"
+		#AREA = "Demo_Area"
+		AREA = "Hub"
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())

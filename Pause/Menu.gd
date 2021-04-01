@@ -6,6 +6,10 @@ onready var x
 func _ready():
 	for btn in $Panel/All/Right/Options_Panel/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
+	for i in range(4):
+		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
+		node.connect("pressed", self, "_on_Player_chosen", [i])
+		node.connect("focus_entered", self, "_on_Focus_Entered")
 
 func enter(players):
 	location = "MENU"
@@ -14,8 +18,6 @@ func enter(players):
 	for i in range(len(players)):
 		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
 		node.update_info(players[i])
-		node.connect("pressed", self, "_on_Player_chosen", [i])
-		node.connect("focus_entered", self, "_on_Focus_Entered")
 
 
 func _on_Player_chosen(binds):

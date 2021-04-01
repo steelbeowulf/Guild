@@ -60,7 +60,7 @@ func load_items(item_ids: Array):
 			count += 1
 	update_items()
 
-func load_equips(item_ids: Array):
+func load_equips(item_ids: Array, sell=false):
 	var count = 0
 	itens = []
 	for i in range(1, len(GLOBAL.EQUIPAMENT)):
@@ -69,8 +69,11 @@ func load_equips(item_ids: Array):
 			itens.append(item)
 			item_container.add_child(item_button.instance())
 			var item_btn = item_container.get_child(count)
-			item_btn.set_name(item.nome)
-			item_btn.set_cost(item.quantity)
+			var additional = ""
+			if sell and item.equipped > -1:
+				additional = " (E)"
+			item_btn.set_name(item.get_name()+additional)
+			item_btn.set_cost(item.get_cost())
 			if MODE == "SELL":
 				item_btn.set_cost(floor(item.quantity / 2))
 			item_btn.connect("pressed", self, "_on_Item_Selected", [count])
@@ -96,7 +99,7 @@ func update_items(has_focus=false):
 					print("Setting focus: ", i)
 					item_container.get_child(i).grab_focus()
 		elif MODE == "SELL":
-			if GLOBAL.check_item(itens[i].id) <= 0:
+			if GLOBAL.check_item(itens[i].id, SHOP_TYPE) <= 0:
 				item_container.get_child(i).hide()
 			else:
 				item_container.get_child(i).enable()
@@ -175,8 +178,8 @@ func _select_player(id: int, again=true):
 func _on_Yes_pressed():
 	AUDIO.play_se("MONEY", 4)
 	if SHOP_TYPE == "EQUIP" and should_equip:
-		GLOBAL.PLAYERS[selected_player].equip(selected_item.get_slot(), selected_item)
-	elif SHOP_TYPE == "EQUIP":
+		GLOBAL.PLAYERS[selected_player].equip(selected_item)
+	elif SHOP_TYPE == "EQUIP" and MODE == "BUY":
 		dialogue.set_text("Would you like to equip that?")
 		should_equip = true
 		return
@@ -189,15 +192,27 @@ func _on_Yes_pressed():
 
 func sell_item():
 	var has_focus = false
-	GLOBAL.add_item(selected_item.id, -item_quantity)
+	if SHOP_TYPE == "EQUIP":
+		GLOBAL.add_equip(selected_item.id, -item_quantity)
+		var is_equipped = selected_item.equipped
+		if is_equipped > -1:
+			GLOBAL.PLAYERS[is_equipped].unequip(selected_item)
+	elif SHOP_TYPE == "ITEM":
+		GLOBAL.add_item(selected_item.id, -item_quantity)
 	GLOBAL.gold += item_quantity*(selected_item.quantity/2)
-	if GLOBAL.check_item(selected_item.id) > 0:
+	if GLOBAL.check_item(selected_item.id, SHOP_TYPE) > 0:
 		item_container.get_child(last_selected).grab_focus()
 		has_focus = true
+	update_items(has_focus)
+	confirmation.hide()
+	quantity.hide()
 
 func buy_item():
 	var has_focus = false
-	GLOBAL.add_item(selected_item.id, item_quantity)
+	if SHOP_TYPE == "EQUIP":
+		GLOBAL.add_equip(selected_item.id, item_quantity)
+	elif SHOP_TYPE == "ITEM":
+		GLOBAL.add_item(selected_item.id, item_quantity)
 	GLOBAL.gold -= item_quantity*selected_item.quantity
 	if GLOBAL.gold >= selected_item.quantity:
 		item_container.get_child(last_selected).grab_focus()
@@ -239,7 +254,7 @@ func _process(delta):
 			if MODE == "SELL":
 				verb = "selling"
 				price = selected_item.quantity / 2
-			dialogue.set_text("You "+str(verb)+" "+str(item_quantity)+" "+selected_item.nome+" for "+str(price*item_quantity)+"G?")
+			dialogue.set_text("You "+str(verb)+" "+str(item_quantity)+" "+selected_item.get_name()+" for "+str(price*item_quantity)+"G?")
 			confirmation.show()
 			$Timer.wait_time = 0.1
 			$Timer.start()
@@ -271,10 +286,11 @@ func _on_Buy_pressed():
 func _on_Sell_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	MODE = "SELL"
-	var item_ids = GLOBAL.get_item_ids()
 	if SHOP_TYPE == "EQUIP":
-		load_equips(item_ids)
+		var item_ids = GLOBAL.get_equip_ids()
+		load_equips(item_ids, true)
 	else:
+		var item_ids = GLOBAL.get_item_ids()
 		load_items(item_ids)
 	mode.hide()
 

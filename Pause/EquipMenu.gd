@@ -43,9 +43,9 @@ func show_equips(equipaments, type):
 	equipped.show()
 	equips = [player_equip]
 	var i = 1
-	for j in range(1, len(equipaments)):
+	for j in range(len(equipaments)):
 		var equip = equipaments[j]
-		if equip.location == type and player_equip_name != equip.get_name():
+		if equip.quantity > 0 and equip.location == type and player_equip_name != equip.get_name():
 			var node = get_node("Panel/HBoxContainer/Equips/EquipSlot" + str(i))
 			i += 1
 			equips.append(equip)
