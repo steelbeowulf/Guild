@@ -2,7 +2,6 @@ extends Control
 onready var skill = null
 onready var player = null
 onready var identification
-#onready var player
 onready var skills
 onready var mpleft
 onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
@@ -19,7 +18,7 @@ func _ready():
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 
 func just_entered(id):
-	print("[EQUIP] just entered "+str(id))
+	print("[SKILL] just entered "+str(id))
 	player = GLOBAL.PLAYERS[id]
 	location = "SUBMENU"
 	show_equips()

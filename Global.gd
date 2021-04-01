@@ -100,6 +100,23 @@ func get_item_ids():
 		item_ids.append(item.id)
 	return item_ids
 
+# Get item ids from equip_inventory
+func get_equip_ids():
+	var item_ids = []
+	for item in EQUIP_INVENTORY:
+		item_ids.append(item.id)
+	return item_ids
+
+
+# Check if item_id is in inventory
+func check_item(item_id: int, type="ITEM"):
+	var inventory = INVENTORY
+	if type == "EQUIP":
+		inventory = EQUIP_INVENTORY
+	for item in inventory:
+		if item.id == item_id:
+			return item.quantity
+	return 0
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
 func add_item(item_id: int, item_quantity: int):
@@ -111,26 +128,20 @@ func add_item(item_id: int, item_quantity: int):
 	item.quantity = item_quantity
 	INVENTORY.append(item)
 
-
-# Check if item_id is in inventory
-func check_item(item_id: int):
-	for item in INVENTORY:
-		if item.id == item_id:
-			return item.quantity
-	return 0
-
 # Clone of the add_item function, but for equipaments
-func add_equip(item_id):
-	var done = false
-	#for equip in INVENTORY:
-	#	if equip == EQUIPAMENT[item_id]:
-	#		equip.quantity += equip_quantity
-	#		done = true
-	#		break
-	#if not done:
-	var equip = EQUIPAMENT[item_id]
+func add_equip(equip_id: int, equip_quantity: int):
+	for equip in EQUIP_INVENTORY:
+		if equip.id == equip_id:
+			equip.quantity += equip_quantity
+			return
+	var equip = EQUIPAMENT[equip_id]._duplicate()
+	equip.quantity = equip_quantity
 	EQUIP_INVENTORY.append(equip)
 
+func is_equipped(equip_id: int):
+	for e in EQUIP_INVENTORY:
+		if e.id == equip_id:
+			return e.equipped
 
 # Save file variables
 var savegame = File.new() 
@@ -197,24 +208,24 @@ func load_game(save_slot):
 	STATUS = loader.load_all_statuses()
 	SKILLS = loader.load_all_skills()
 	ITENS = loader.load_all_itens()
+	EQUIPAMENT = loader.load_all_equips()
+	print("Equips ", EQUIPAMENT)
 	
 	INVENTORY = loader.load_inventory(save_slot)
+	EQUIP_INVENTORY = loader.load_equip(save_slot)
+	print("Equips in inventory ", EQUIP_INVENTORY)
 	PLAYERS = loader.load_players(save_slot)
 	
 	load_info(save_slot)
 	var area_info = loader.load_area_info(AREA)
 	ENEMIES_IN_AREA = area_info["ENEMIES_BY_AREA"]
 	NPCS = loader.load_npcs(area_info["NPCS"])
-	print(NPCS)
 
 	ENCOUNTERS = loader.load_encounters(area_info["ENCOUNTERS"])
-	print(ENCOUNTERS)
 	
 	SHOPS = loader.load_shops(area_info["SHOPS"])
-	print(SHOPS)
 
 	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
-	print(ENEMIES)
 
 # Returns state from the current map
 func get_state():

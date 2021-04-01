@@ -7,7 +7,6 @@
 [ext_resource path="res://Assets/Panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=6]
 
-
 [node name="Skills" type="Control"]
 rect_scale = Vector2( 1.865, 1.4 )
 script = ExtResource( 1 )
@@ -31,14 +30,14 @@ size_flags_vertical = 0
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
 margin_right = 448.0
 margin_bottom = 771.0
-rect_min_size = Vector2( 300, 50 )
+rect_min_size = Vector2( 250, 50 )
 
 [node name="CurrentMenu" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_right = 448.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 0, 70 )
+rect_min_size = Vector2( 400, 70 )
 focus_mode = 0
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
@@ -51,7 +50,7 @@ text = "Skills"
 margin_top = 74.0
 margin_right = 448.0
 margin_bottom = 144.0
-rect_min_size = Vector2( 0, 70 )
+rect_min_size = Vector2( 400, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
@@ -66,7 +65,7 @@ visible = false
 margin_top = 148.0
 margin_right = 448.0
 margin_bottom = 218.0
-rect_min_size = Vector2( 0, 70 )
+rect_min_size = Vector2( 400, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
@@ -80,7 +79,7 @@ text = "SkillType 2"
 margin_top = 148.0
 margin_right = 448.0
 margin_bottom = 218.0
-rect_min_size = Vector2( 0, 70 )
+rect_min_size = Vector2( 400, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
@@ -92,7 +91,7 @@ text = "Back"
 margin_top = 222.0
 margin_right = 448.0
 margin_bottom = 442.0
-rect_min_size = Vector2( 0, 220 )
+rect_min_size = Vector2( 400, 220 )
 
 [node name="Description" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
 "text",
@@ -306,6 +305,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
+
 [connection signal="pressed" from="Panel/HBoxContainer/Options/SkillType1" to="." method="_on_Skill_Type_1_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_focus_entered"]

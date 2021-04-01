@@ -20,7 +20,6 @@ func set_animations(sprite, animations):
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
-		#print(k)
 		animation.set_script(load('res://Battle/Spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
@@ -48,7 +47,6 @@ func play(name):
 func _initialize():
 	if GLOBAL.POSITION:
 		position = GLOBAL.POSITION
-	#$AnimatedSprite.animation = "walk_down"
 	self.set_z_index(1)
 	var margin = get_parent().get_parent().get_map_margin()
 	$Camera2D.set_limit(MARGIN_BOTTOM, margin[0])
@@ -67,32 +65,21 @@ func _physics_process(delta):
 	if stop == []:
 		if Input.is_action_pressed("ui_up"):
 			velocity.y = -SPEED
-			#$AnimatedSprite.play("walk_up")
-			#play("move")
 			$Head.rotation_degrees = 0
 		elif Input.is_action_pressed("ui_down"):
 			velocity.y = SPEED
-			#play("move")
-			#$AnimatedSprite.play("walk_down")
 			$Head.rotation_degrees = 180
 		if Input.is_action_pressed("ui_left"):
 			velocity.x = -SPEED
 			$Animations.scale.x = -SCALE
-			if velocity.y == 0:
-				pass#play("move")
-				#$AnimatedSprite.play("walk_right")
 			$Head.rotation_degrees = 270
 		elif Input.is_action_pressed("ui_right"):
 			velocity.x = SPEED
 			$Animations.scale.x = SCALE
-			if velocity.y == 0:
-				pass#play("move")
 			$Head.rotation_degrees = 90
 
 	if velocity == Vector2(0,0):
 		play("idle")
-		#$AnimatedSprite.frame = 0
-		#$AnimatedSprite.stop()
 	else:
 		AUDIO.play_se("GRASS", -16)
 		play("move")

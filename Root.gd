@@ -15,7 +15,7 @@ onready var use_skills = load("res://Pause/SkillUse.tscn")
 onready var status = load("res://Pause/Status.tscn")
 onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
-onready var equips = load("res://Pause/Equips.tscn")
+onready var equips = load("res://Pause/EquipMenu.tscn")
 
 
 # Loads the correct map
@@ -24,7 +24,8 @@ func _ready():
 	var start = load("res://Overworld/Hub/Hub.tscn")
 	self.add_child(start.instance())
 	map = get_node("Hub")
-	#set_effect(GLOBAL.MAP)
+	#map = get_node("Map"+str(GLOBAL.MAP))
+	set_effect(GLOBAL.MAP)
 
 
 # Watches for inputs and deals with state changes
@@ -43,9 +44,6 @@ func _process(delta):
 	# Closes submenus and returns to menu
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Submenu":
 		return_menu()
-	#elif Input.is_action_just_pressed("ui_cancel") and STATE == "StatusSubmenu":
-	#	print("happenedagain")
-	#	return_menu()
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
 		close_menu()
 	# Cheap hack to test money
@@ -73,7 +71,7 @@ func open_shop(id: int):
 	shop.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
-	shop.enter(id)
+	shop.enter(id, "EQUIP")
 	STATE = "Shop"
 	get_tree().paused = true
 

@@ -16,7 +16,7 @@ const SHOPS_PATH = "res://Data/NPCs/Shops/"
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Demo_data/Players.json"
 const INVENTORY_PATH = "res://Demo_data/Inventory.json"
-#const EQUIPAMENT_PATH = "res://Demo_data/Equipament.json"
+const EQUIPAMENT_PATH = "res://Demo_data/Equipament.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -29,6 +29,7 @@ var EQUIP_CLASS = load("res://Classes/Equip.gd")
 var NPC_CLASS = load("res://Classes/NPC.gd")
 var ENCOUNTER_CLASS = load("res://Classes/Encounter.gd")
 var SHOP_CLASS = load("res://Classes/Shop.gd")
+var STATS_CLASS = load("res://Classes/StatEffect.gd")
 
 var List
 
@@ -152,13 +153,13 @@ func load_all_equips():
 			var data = result_json.result
 			var effects = []
 			for ef in data["EFFECTS"]:
-				effects.append([STATS.DSTAT[ef["STAT"]], int(ef["VALUE"]), 
-				STATS.TYPE[ef["TYPE"]]]) 
+				var eff = STATS_CLASS.new(STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"])
+				effects.append(eff) 
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
-			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"],
-				data["TYPE"], data["CLASS"], effects, status, data["PRICE"], data["IMG"]))
+			ret.append(EQUIP_CLASS.new(data["ID"], data["NAME"],
+				data["TYPE"], data["LOCATION"], data["CLASS"], effects, status, data["PRICE"], data["IMG"]))
 
 	return [0] + ret
 
@@ -229,10 +230,11 @@ func load_inventory(slot):
 	return parse_inventory(path)
 
 func load_equip(slot):
-	var path = EQUIPS_PATH
+	var path = EQUIPAMENT_PATH
+	print("LOADING EQUIPS", path)
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Equipament.json"
-	return parse_inventory(path)
+	return parse_equipaments(path)
 
 
 # Uses information from load_inventory to build the actual inventory,
@@ -255,6 +257,7 @@ func parse_inventory(path):
 
 #THIS MIGHT BE INCORRECT, BUT WILL BE FIXED LATER - Z
 func parse_equipaments(path):
+	print("PARSING EQUIP ", path)
 	var file = File.new()
 	file.open(path, file.READ)
 	var equips = []
@@ -263,10 +266,10 @@ func parse_equipaments(path):
 	if result_json.error == OK:
 		var data = result_json.result
 		for equip in data:
-			equips.append(GLOBAL.EQUIPAMENT[equip["ID"]])
+			var equip_copy = GLOBAL.EQUIPAMENT[equip["ID"]]._duplicate()
+			equips.append(equip_copy)
+			equip_copy.quantity = equip["QUANT"]
 	return equips
-
-
 
 
 # Loads information regarding the players' characters.
@@ -342,7 +345,7 @@ func load_shops(filter_array):
 				ret.append(SHOP_CLASS.new(data["ID"], data["NAME"], 
 					data["IMG"], data["ANIM"], 
 					data["DIALOGUE"], data["PORTRAIT"], 
-					data["ITENS"]))
+					data["ITENS"], data["EQUIPAMENTS"]))
 		else:  # If parse has errors
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
@@ -362,8 +365,14 @@ func parse_players(path):
 		var datas = result_json.result
 		for data in datas:
 			var skills = []
+			var equips = []
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.SKILLS[id])
+			for id in data["EQUIPS"]:
+				if id > -1:
+					equips.append(GLOBAL.EQUIPAMENT[id])
+				else:
+					equips.append(null)
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
 			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
@@ -371,18 +380,19 @@ func parse_players(path):
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
-			data["LANE"], data["NAME"], skills, data["RESISTANCE"]))
+			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"], data["CLASS"]))
+			for i in range(len(equips)):
+				if data["EQUIPS"][i] > -1:
+					players[-1].equip(equips[i], i)
 	return players
 
 
 func get_random_lore():
 	var lores = list_files_in_directory(LORES_PATH)
 	lores.shuffle()
-	print(lores)
 	var file = File.new()
 	file.open(LORES_PATH+lores[0], file.READ)
 	var text = file.get_as_text()
-	print(text)
 	var result_json = JSON.parse(text)
 	if result_json.error == OK:
 		return result_json.result
