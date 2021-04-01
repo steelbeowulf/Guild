@@ -33,7 +33,6 @@ margin_right = 965.0
 margin_bottom = 400.0
 
 [node name="Attributes-Left" type="VBoxContainer" parent="HBoxContainer"]
-editor/display_folded = true
 margin_right = 48.0
 margin_bottom = 400.0
 
@@ -79,7 +78,6 @@ custom_fonts/font = ExtResource( 2 )
 text = "AGI"
 
 [node name="Attributes-Right" type="VBoxContainer" parent="HBoxContainer"]
-editor/display_folded = true
 margin_left = 52.0
 margin_right = 122.0
 margin_bottom = 400.0

@@ -20,11 +20,12 @@ onready var equips = load("res://Pause/EquipMenu.tscn")
 
 # Loads the correct map
 func _ready():
-	#var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
-	var start = load("res://Overworld/Hub/Hub.tscn")
+	# TODO: Area management
+	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	#var start = load("res://Overworld/Hub/Hub.tscn")
 	self.add_child(start.instance())
-	map = get_node("Hub")
-	#map = get_node("Map"+str(GLOBAL.MAP))
+	#map = get_node("Hub")
+	map = get_node("Map"+str(GLOBAL.MAP))
 	set_effect(GLOBAL.MAP)
 
 

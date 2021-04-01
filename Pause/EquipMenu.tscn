@@ -152,6 +152,7 @@ margin_right = 300.0
 margin_bottom = 84.0
 
 [node name="Equips" type="VBoxContainer" parent="Panel/HBoxContainer"]
+editor/display_folded = true
 margin_left = 304.0
 margin_right = 884.0
 margin_bottom = 771.0

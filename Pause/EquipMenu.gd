@@ -29,13 +29,15 @@ func reset_equips():
 
 func show_equips(equipaments, type):
 	reset_equips()
-	reset_description()
+	reset_info()
 	# Ponto inicial da lista
 	var equipped = get_node("Panel/HBoxContainer/Equips/EquipSlot0")
 	equipped.disabled = true
 	equipped.set_focus_mode(0)
 	var player_equip = player.get_equip(type)
 	var player_equip_name = "NONE"
+	
+	# Player has item equiped on this slot: show it
 	if player_equip:
 		equipped.disabled = false
 		equipped.set_focus_mode(2)
@@ -43,6 +45,8 @@ func show_equips(equipaments, type):
 		current_equip = player_equip
 	equipped.set_text("EQUIPPED: "+player_equip_name)
 	equipped.show()
+	
+	# Iterate through equip_inventory and populate list
 	equips = [player_equip]
 	var i = 1
 	for j in range(len(equipaments)):
@@ -54,15 +58,18 @@ func show_equips(equipaments, type):
 			node.set_text(str(equipaments[j].get_name()))
 			node.show()
 			node.disabled = false
+			# Disable if wrong job
 			if equipaments[j].job != player.job:
 				node.disabled = true
 
+# Get first equippable item from equip list
+# Avoids giving focus to wrong job itens
 func get_first_equippable():
 	for i in range(len(equips)):
 		if equips[i] != null and equips[i].job == player.job:
 			return get_node("Panel/HBoxContainer/Equips/EquipSlot" + str(i))
 
-
+# Equip item with id
 func _on_Equip_selected(id):
 	AUDIO.play_se("ENTER_MENU")
 	use_equip(equips[id])
@@ -73,16 +80,18 @@ func _on_Equip_hover(id):
 	set_description(equips[id])
 	$Panel/HBoxContainer/Options/Info/Comparison.init(current_equip, equips[id])
 
-func reset_description():
+# Reset info panel
+func reset_info():
 	$Panel/HBoxContainer/Options/Info/Comparison.zero()
 	$Panel/HBoxContainer/Options/Info/Description.set_text("")
 
+# Sets description
 func set_description(equip_hover):
 	print("Set description")
 	var description = "  "+equip_hover.name+"\n  Type: "+equip_hover.type
 	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
 
-#not done yet
+# TODO: Arrumar location (minuscula? maiuscula? idk)
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel") and location in ["WEAPON", "HEAD", "BODY", "ACCESSORY1", "ACCESSORY2"]:
 		AUDIO.play_se("EXIT_MENU")
@@ -90,7 +99,7 @@ func _process(delta):
 		give_focus()
 	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
 		AUDIO.play_se("EXIT_MENU")
-		location = "OUTSIDE"
+		location = "MENU"
 		get_parent().get_parent().get_parent().return_menu()
 
 
@@ -106,7 +115,7 @@ func give_focus():
 		e.set_focus_mode(0)
 		e.hide()
 	get_node("Panel/HBoxContainer/Options/Weapon").grab_focus()
-	reset_description()
+	reset_info()
 
 
 func enter():

@@ -88,10 +88,10 @@ func reload_state():
 	for i in range(26):
 		STATE.append({})
 	TRANSITION = -1
-	MAP = 1
-	#MAP = 10
-	POSITION = Vector2(454, 446)
-	#POSITION = Vector2(300, 600)
+	#MAP = 1
+	MAP = 10
+	#POSITION = Vector2(454, 446)
+	POSITION = Vector2(300, 600)
 
 # Get item ids from inventory
 func get_item_ids():
@@ -192,8 +192,8 @@ func load_info(save_slot):
 		gold = 100
 		playtime = 0
 		# TODO: Change this back
-		#AREA = "Demo_Area"
-		AREA = "Hub"
+		AREA = "Demo_Area"
+		#AREA = "Hub"
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())
