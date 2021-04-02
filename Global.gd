@@ -88,10 +88,10 @@ func reload_state():
 	for i in range(26):
 		STATE.append({})
 	TRANSITION = -1
-	#MAP = 1
-	MAP = 10
-	#POSITION = Vector2(454, 446)
-	POSITION = Vector2(300, 600)
+	MAP = 1
+	#MAP = 10
+	POSITION = Vector2(454, 446)
+	#POSITION = Vector2(300, 600)
 
 # Get item ids from inventory
 func get_item_ids():
