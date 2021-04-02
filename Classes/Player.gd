@@ -86,9 +86,9 @@ func unequip(equipament, slot=-1):
 	print("Unequipping ", equipament.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipament.location == "ACCESSORY":
-			if not self.equips[3]:
+			if self.equips[3]:
 				slot = 3
-			elif not self.equips[4]:
+			elif self.equips[4]:
 				slot = 4
 		else:
 			slot = equip_dict[equipament.location]
