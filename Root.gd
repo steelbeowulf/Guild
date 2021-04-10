@@ -21,13 +21,25 @@ onready var equips = load("res://Pause/EquipMenu.tscn")
 # Loads the correct map
 func _ready():
 	# TODO: Area management
-	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
-	#var start = load("res://Overworld/Hub/Hub.tscn")
+	#var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
+	var start = load("res://Overworld/Hub/Hub.tscn")
 	self.add_child(start.instance())
-	#map = get_node("Hub")
-	map = get_node("Map"+str(GLOBAL.MAP))
+	map = get_node("Hub")
+	#map = get_node("Map"+str(GLOBAL.MAP))
 	set_effect(GLOBAL.MAP)
 
+
+func change_area(area_name: String, next: int = 1):
+	var new = load("res://Overworld/"+area_name+"/Map"+str(next)+".tscn")
+	GLOBAL.MAP = next
+	set_effect(GLOBAL.MAP)
+	GLOBAL.load_area_info(area_name)
+	self.add_child(new.instance())
+	if map:
+		remove_child(map)
+		map.queue_free()
+	GLOBAL.TRANSITION = -1
+	map = get_node("Map"+str(next))
 
 # Watches for inputs and deals with state changes
 func _process(delta):

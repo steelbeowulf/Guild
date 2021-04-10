@@ -9,6 +9,7 @@ var delay = 0.0
 
 export(int) var id
 export(bool) var shop = false
+export(bool) var teleporter = false
 
 func _ready():
 	var npc = null
@@ -61,6 +62,9 @@ func _on_Dialogue_Ended():
 	delay = 0.5
 	if shop:
 		GLOBAL.get_root().open_shop(id)
+	elif teleporter:
+		print("Imma teleport you")
+		GLOBAL.get_root().change_area("Demo_Area")
 
 
 func _on_Interactable_body_entered(body):

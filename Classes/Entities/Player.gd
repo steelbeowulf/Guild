@@ -52,6 +52,7 @@ func save_data():
 	dict["SKILLS"] = get_skill_ids()
 	dict["EQUIPS"] = get_equip_ids()
 	dict["RESISTANCE"] = get_resistance()
+	dict["CLASS"] = get_job()
 	return dict
 
 func get_sprite():
@@ -78,7 +79,10 @@ func get_skill_ids():
 func get_equip_ids():
 	var ids = []
 	for equip in get_equips():
-		ids.append(equip.id)
+		if equip != null:
+			ids.append(equip.id)
+		else:
+			ids.append(-1)
 	return ids
 
 

@@ -24,16 +24,15 @@ var IN_BATTLE = false
 # TODO: make it not hardcoded and generic
 var POSITION = Vector2(454, 446)
 var STATE = {'1':{}, '2':{}, '3':{}, '4':{}, '5':{}, 
-			 '6':{}, '7':{}, '8':{}, '9':{}, '10':{},
-			 '11':{}, '12':{}, '13':{}, '14':{}, '15':{},
-			 '16':{}, '17':{}, '18':{}, '19':{}, '20':{},
-			  '21':{}, '22':{}, '23':{}, '24':{}, '25':{}, '26':{}}
+	 '6':{}, '7':{}, '8':{}, '9':{}, '10':{},
+	 '11':{}, '12':{}, '13':{}, '14':{}, '15':{},
+	 '16':{}, '17':{}, '18':{}, '19':{}, '20':{},
+	  '21':{}, '22':{}, '23':{}, '24':{}, '25':{}, '26':{}
+}
 
 var TRANSITION = -1
 var MAP = 1
 var WIN
-onready var MATCH = false
-onready var ROOM = false
 
 # Loading stuff
 var NEXT_SCENE = "res://Root.tscn"
@@ -177,6 +176,14 @@ func save(slot):
 	savegame.store_line(to_json(itens_data))
 	savegame.close()
 
+	# Saves equip inventory information
+	var equip_data = []
+	for item in INVENTORY:
+		equip_data.append({"ID":item.id, "QUANT":item.quantity})
+	savegame.open(save_path+str(slot)+"/Equipament.json", File.WRITE)
+	savegame.store_line(to_json(equip_data))
+	savegame.close()
+
 # Global state variables
 var AREA
 var gold
@@ -192,8 +199,8 @@ func load_info(save_slot):
 		gold = 100
 		playtime = 0
 		# TODO: Change this back
-		AREA = "Demo_Area"
-		#AREA = "Hub"
+		#AREA = "Demo_Area"
+		AREA = "Hub"
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())
@@ -202,7 +209,6 @@ func load_info(save_slot):
 		events = dict["events"]
 		AREA = load_area(dict["area"])
 		savegame.close()
-
 
 func load_game(save_slot):
 	STATUS = loader.load_all_statuses()
@@ -217,14 +223,14 @@ func load_game(save_slot):
 	PLAYERS = loader.load_players(save_slot)
 	
 	load_info(save_slot)
-	var area_info = loader.load_area_info(AREA)
+	load_area_info(AREA)
+
+func load_area_info(area_name: String):
+	var area_info = loader.load_area_info(area_name)
 	ENEMIES_IN_AREA = area_info["ENEMIES_BY_AREA"]
 	NPCS = loader.load_npcs(area_info["NPCS"])
-
 	ENCOUNTERS = loader.load_encounters(area_info["ENCOUNTERS"])
-	
 	SHOPS = loader.load_shops(area_info["SHOPS"])
-
 	ENEMIES = loader.load_enemies(area_info["ENEMIES"])
 
 # Returns state from the current map
@@ -273,6 +279,9 @@ func set_event_status(id, status):
 
 ### Dialogue
 var caller = null
+
+var start_event(event):
+	if 
 
 func play_dialogues(id, callback, shop=false):
 	var node = NODES["Dialogue"]

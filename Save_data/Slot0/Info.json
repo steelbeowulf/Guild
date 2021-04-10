@@ -1,1 +1,1 @@
-{"area":{"MAP":2,"NAME":"Demo_Area","POSITION":"(515, 442.539978)","STATE":[{},{},{"Enemies/Slime":[true,"(0, 0)"]},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],"WIN":false},"events":{"boss_defeated":false,"eyeballs_defeated":0,"rangers_defeated":false},"gold":100,"playtime":23}
+{"area":{"MAP":1,"NAME":"Demo_Area","POSITION":"(454, 337.25)","STATE":[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],"WIN":false},"events":{"boss_defeated":false,"eyeballs_defeated":0,"rangers_defeated":false},"gold":100,"playtime":7}

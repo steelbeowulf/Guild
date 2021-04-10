@@ -22,12 +22,17 @@ _global_script_classes=[ {
 "base": "",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://Classes/Entity.gd"
+"path": "res://Classes/Entities/Entity.gd"
 }, {
 "base": "Reference",
 "class": "Equip",
 "language": "GDScript",
 "path": "res://Classes/Equip.gd"
+}, {
+"base": "Reference",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Classes/Events/Event.gd"
 }, {
 "base": "Node",
 "class": "Item",
@@ -62,7 +67,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "StatEffect",
 "language": "GDScript",
-"path": "res://Classes/StatEffect.gd"
+"path": "res://Classes/Events/StatEffect.gd"
 }, {
 "base": "ActionResult",
 "class": "StatsActionResult",
@@ -74,6 +79,7 @@ _global_script_class_icons={
 "ActionResult": "",
 "Entity": "",
 "Equip": "",
+"Event": "",
 "Item": "",
 "LOADER": "",
 "LaneActionResult": "",

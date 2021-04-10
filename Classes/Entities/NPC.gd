@@ -1,20 +1,16 @@
 extends "Entity.gd"
 
-var dialogues
+var events
 var portrait
-var itens
-var equips
 
-func _init(id, name, img, anim, dialogue, portrait, itens, equips):
+func _init(id, name, img, anim, event, portrait):
 	self.id = id
 	self.nome = name
 	self.sprite = img
 	self.animations = anim
-	self.dialogues = dialogue
+	self.events = event
 	self.portrait = portrait
-	self.itens = itens
-	self.equips = equips
-	self.tipo = "SHOP"
+	self.tipo = "NPC"
 
 func save_data():
 	var dict = {}
@@ -29,14 +25,8 @@ func get_sprite():
 func get_animation():
 	return self.animations
 
-func get_dialogues():
-	return dialogues
+func get_events():
+	return events
 
 func get_portrait():
 	return portrait
-
-func get_itens():
-	return itens
-
-func get_equips():
-	return equips
