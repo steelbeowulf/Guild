@@ -13,11 +13,11 @@ export(bool) var teleporter = false
 
 func _ready():
 	var npc = null
-	if not shop:
-		npc = GLOBAL.NPCS[id]
-	else:
-		npc = GLOBAL.SHOPS[id]
-	set_animations(npc.get_sprite(), npc.get_animation())
+	#if not shop:
+	#	npc = GLOBAL.NPCS[id]
+	#else:
+	#	npc = GLOBAL.SHOPS[id]
+	#set_animations(npc.get_sprite(), npc.get_animation())
 
 # Initializes position
 func set_animations(sprite, animations):

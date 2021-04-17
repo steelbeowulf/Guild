@@ -10,6 +10,7 @@ pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Menu_Area" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="SubMenus" type="Node2D" parent="Menu_Area"]
 visible = false
@@ -33,6 +34,7 @@ scale = Vector2( 4.40551, 4.37599 )
 texture = ExtResource( 4 )
 
 [node name="Effects" type="Node2D" parent="."]
+editor/display_folded = true
 z_index = 50
 z_as_relative = false
 

@@ -100,11 +100,14 @@ config/icon="res://Assets/Others/Logo.png"
 
 STATS="*res://Classes/Stats.gd"
 LOADER="*res://Classes/Loader.gd"
-GLOBAL="*res://Global.gd"
 AUDIO="*res://Config/Audio.gd"
 BATTLE_MANAGER="*res://Overworld/Battle_Manager.gd"
 DISPLAY="*res://Config/Display.gd"
 TEXT="*res://Config/Text.gd"
+GLOBAL="*res://State/Global.gd"
+EVENTS="*res://State/Events.gd"
+LOCAL="*res://State/Local.gd"
+SAVE="*res://State/Save.gd"
 
 [debug]
 

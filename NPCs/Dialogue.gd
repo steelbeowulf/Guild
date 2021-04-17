@@ -7,7 +7,7 @@ var max_lines = 3
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
-	GLOBAL.register_node("Dialogue", self)
+	EVENTS.register_node("Dialogue", self)
 
 
 func _process(delta):

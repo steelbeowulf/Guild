@@ -37,11 +37,11 @@ func _ready():
 	# Arbitrary stuff hardcoded for the demo
 	# TODO: fix it
 	
-	if GLOBAL.WIN:
-		get_tree().change_scene("res://Menu/Victory.tscn")
+	#if GLOBAL.WIN:
+	#	get_tree().change_scene("res://Menu/Victory.tscn")
 	
 	# TODO: Limit Enemies to enemies on this area
-	Enemies = GLOBAL.get_enemies()
+	Enemies = GLOBAL.ENEMIES#GLOBAL.get_enemies()
 	Player_pos = GLOBAL.POSITION
 	
 	# Gets current map state from global area state

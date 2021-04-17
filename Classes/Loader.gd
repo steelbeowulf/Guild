@@ -22,14 +22,19 @@ const EQUIPAMENT_PATH = "res://Demo_data/Equipament.json"
 const SAVE_PATH = "res://Save_data/"
 
 # Some shortcuts for important classes we're going to use
-var PLAYER_CLASS = load("res://Classes/Player.gd")
-var ENEMY_CLASS = load("res://Classes/Enemy.gd")
+var PLAYER_CLASS = load("res://Classes/Entities/Player.gd")
+var ENEMY_CLASS = load("res://Classes/Entities/Enemy.gd")
 var ITEM_CLASS = load("res://Classes/Itens.gd")
 var EQUIP_CLASS = load("res://Classes/Equip.gd")
-var NPC_CLASS = load("res://Classes/NPC.gd")
-var ENCOUNTER_CLASS = load("res://Classes/Encounter.gd")
-var SHOP_CLASS = load("res://Classes/Shop.gd")
-var STATS_CLASS = load("res://Classes/StatEffect.gd")
+var NPC_CLASS = load("res://Classes/Entities/NPC.gd")
+
+var SHOP_CLASS = load("res://Classes/Events/Shop.gd")
+var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
+var STATUS_CLASS = load("res://Classes/Events/StatusEffect.gd")
+var DIALOGUE_CLASS = load("res://Classes/Events/Dialogue.gd")
+var OPTION_CLASS = load("res://Classes/Events/Option.gd")
+var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
+var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
 
 var List
 
@@ -295,7 +300,7 @@ func load_npcs(filter_array):
 			var data = result_json.result
 			if int(data["ID"]) in filter_array:
 				ret.append(NPC_CLASS.new(data["ID"], data["NAME"],
-				data["IMG"], data["ANIM"], data["DIALOGUE"], data["PORTRAIT"]))
+				data["IMG"], data["ANIM"], parse_events(data["EVENTS"]), data["PORTRAIT"]))
 		else:  # If parse has errors
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
@@ -303,29 +308,28 @@ func load_npcs(filter_array):
 
 	return ret
 
-func load_encounters(filter_array):
-	print(filter_array)
-	print("LOADING ENCOUNTERS")
-	var encounters = list_files_in_directory(ENCOUNTERS_PATH)
-	encounters.sort()
-	var ret = []
-	for encounter in encounters:
-		print(encounter)
-		var file = File.new()
-		file.open(ENCOUNTERS_PATH+encounter, file.READ)
-		var text = file.get_as_text()
-		var result_json = JSON.parse(text)
-		if result_json.error == OK: 
-			var data = result_json.result
-			if int(data["ID"]) in filter_array:
-				ret.append(ENCOUNTER_CLASS.new(data["ID"], data["NAME"],
-				data["DIALOGUE"]))
-		else:  # If parse has errors
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
 
-	return ret
+func parse_events(events):
+	print(events)
+	var parsed_events = []
+	for event in events:
+		if event.has("DIALOGUE"):
+			if typeof(event["DIALOGUE"]) == TYPE_ARRAY:
+				for dialogue in event["DIALOGUE"]:
+					parsed_events.append(DIALOGUE_CLASS.new(dialogue))
+			else:
+				parsed_events.append(DIALOGUE_CLASS.new(
+					event["DIALOGUE"]["MESSAGE"],
+					event["DIALOGUE"]["NAME"],
+					event["DIALOGUE"]["PORTRAIT"]
+				))
+		elif event.has("OPTIONS"):
+			for option in event["OPTIONS"]:
+				parsed_events.append(OPTION_CLASS.new(
+					option["OPTION"],
+					parse_events(option["RESULTS"])
+				))
+	return parsed_events
 
 func load_shops(filter_array):
 	print(filter_array)
