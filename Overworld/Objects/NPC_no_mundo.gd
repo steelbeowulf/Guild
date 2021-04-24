@@ -6,18 +6,15 @@ var velocity = Vector2(0,0)
 var inbody = null
 var interacting = false
 var delay = 0.0
+var npc = null
 
 export(int) var id
 export(bool) var shop = false
 export(bool) var teleporter = false
 
 func _ready():
-	var npc = null
-	#if not shop:
-	#	npc = GLOBAL.NPCS[id]
-	#else:
-	#	npc = GLOBAL.SHOPS[id]
-	#set_animations(npc.get_sprite(), npc.get_animation())
+	npc = LOCAL.get_npc(id)
+	set_animations(npc.get_sprite(), npc.get_animation())
 
 # Initializes position
 func set_animations(sprite, animations):
@@ -29,8 +26,6 @@ func set_animations(sprite, animations):
 
 	for k in animations.keys():
 		var v = animations[k]
-		
-
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
@@ -51,7 +46,7 @@ func _physics_process(delta):
 	delay = delay - delta
 	if delay <= 0:
 		if inbody and Input.is_action_just_pressed("ui_accept") and not interacting:
-			GLOBAL.play_dialogues(id, self, shop)
+			EVENTS.play_dialogues(npc.get_name(), npc.get_portrait(), npc.get_events(), self)
 			interacting = true
 			inbody.stop.append(self)
 

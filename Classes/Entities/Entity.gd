@@ -36,7 +36,7 @@ func die():
 func ressurect():
 	print("RESSURECT")
 	self.dead = false
-	if GLOBAL.IN_BATTLE:
+	if LOCAL.IN_BATTLE:
 		print("INBATTLE")
 		self.graphics.revive()
 	self.remove_all_status()

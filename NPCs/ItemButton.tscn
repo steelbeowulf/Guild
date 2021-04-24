@@ -4,7 +4,8 @@
 [ext_resource path="res://Assets/Panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Overworld/Hub/ItemButton.gd" type="Script" id=5]
+[ext_resource path="res://NPCs/ItemButton.gd" type="Script" id=5]
+
 
 [node name="ItemButton" type="Button" groups=[
 "text",

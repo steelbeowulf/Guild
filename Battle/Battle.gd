@@ -20,8 +20,8 @@ signal round_finished
 signal finish_anim
 
 func _ready():
-	GLOBAL.entering_battle = false
-	GLOBAL.IN_BATTLE = true
+	LOCAL.entering_battle = false
+	LOCAL.IN_BATTLE = true
 	battle_over = false
 	Players = GLOBAL.PLAYERS
 	Inventory =  GLOBAL.INVENTORY

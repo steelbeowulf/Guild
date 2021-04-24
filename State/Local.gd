@@ -12,9 +12,8 @@ var STATE = {'1':{}, '2':{}, '3':{}, '4':{}, '5':{},
 
 # Global state variables
 var AREA
-var gold
-var playtime
-var ENEMIES_IN_AREA
+var ENEMIES
+var NPCs
 
 var TRANSITION = -1
 var MAP = 1
@@ -25,24 +24,41 @@ var IN_BATTLE = false
 
 
 var events = {}
+onready var loader = get_node("/root/LOADER")
 
 # Returns state from the current map
 func get_state():
 	return STATE[MAP]
 
 # Returns Enemies from current map
-#func get_enemies():
-#	var enem = []
-#	var filter_array = ENEMIES_IN_AREA[MAP]
-#	for i in range(1, len(ENEMIES) -1):
-#		var enemy = ENEMIES[i]
-#		if enemy.id in filter_array:
-#			enem.append(enemy)
-#	return enem
+func load_enemies(filter_array):
+	var enem = []
+	ENEMIES = loader.load_enemies(filter_array)
+	print("LOADEI INIMIGOS: ", ENEMIES)
+
+
+# Return enemy with enemy_id (if loaded)
+func get_enemy(enemy_id):
+	for e in ENEMIES:
+		if e.id == enemy_id:
+			return e
+
+
+# Return NPC with npc_id (if loaded)
+func get_npc(npc_id):
+	for npc in NPCs:
+		if npc.id == npc_id:
+			return npc
+
+
+# Returns NPCs from current map
+func load_npcs(filter_array):
+	var enem = []
+	NPCs = loader.load_npcs(filter_array)
 
 # Update state on the current map
 func set_state(state_arg):
-	GLOBAL.STATE[GLOBAL.MAP] = state_arg
+	STATE[MAP] = state_arg
 
 func get_area():
 	return AREA
@@ -55,8 +71,9 @@ func get_events():
 
 # Resets state to the default Demo_Area state
 # TODO: make it generic
-func reload_state():
+func load_initial_area():
 	WIN = false
+	AREA = "Demo_Area"
 	STATE = []
 	events = {
 		"rangers_defeated": false, 
@@ -88,7 +105,7 @@ func load_area(area_dict):
 	STATE = area_dict["STATE"]
 	MAP = area_dict["MAP"]
 	POSITION = parse_position(area_dict["POSITION"])
-	return area_dict["NAME"]
+	AREA = area_dict["NAME"]
 
 
 # Helper function to parse a Vector2 from a string

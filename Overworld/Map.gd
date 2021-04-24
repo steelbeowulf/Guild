@@ -40,24 +40,23 @@ func _ready():
 	#if GLOBAL.WIN:
 	#	get_tree().change_scene("res://Menu/Victory.tscn")
 	
-	# TODO: Limit Enemies to enemies on this area
-	Enemies = GLOBAL.ENEMIES#GLOBAL.get_enemies()
-	Player_pos = GLOBAL.POSITION
+	Enemies = LOCAL.ENEMIES
+	Player_pos = LOCAL.POSITION
 	
 	# Gets current map state from global area state
-	state = GLOBAL.get_state()
+	state = LOCAL.get_state()
 
 	# Sets player position on map
 	var pos = Player_pos
-	if GLOBAL.POSITION:
-		pos = GLOBAL.POSITION
-	if GLOBAL.TRANSITION != -1:
-		pos = Transitions[int(GLOBAL.TRANSITION)]
-		GLOBAL.TRANSITION = -1
+	if LOCAL.POSITION:
+		pos = LOCAL.POSITION
+	if LOCAL.TRANSITION != -1:
+		pos = Transitions[int(LOCAL.TRANSITION)]
+		LOCAL.TRANSITION = -1
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
 	cara.position = pos
-	GLOBAL.POSITION = pos
+	LOCAL.POSITION = pos
 	cara._initialize()
 	
 	# Connects battle manager to monsters
@@ -77,7 +76,7 @@ func _ready():
 # on each frame
 # TODO: make check_doors be event driven
 func _physics_process(delta):
-	GLOBAL.POSITION = $Party.get_child(0).get_global_position()
+	LOCAL.POSITION = $Party.get_child(0).get_global_position()
 	#check_doors()
 
 
@@ -91,7 +90,7 @@ func check_doors():
 			get_node("Objects/"+str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ''
-		elif Doors[d] == 'Matching puzzle' and GLOBAL.MATCH:
+		elif Doors[d] == 'Matching puzzle' and LOCAL.MATCH:
 			get_node("Objects/"+str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ''
@@ -125,7 +124,7 @@ func save_state(type, node, open=false, pos=Vector2(0,0)):
 	elif type == "OBJ_POS":
 		state["Objects/"+str(node)] = [open, pos]
 	# Saves current map state on the game's memory (not persistent)
-	GLOBAL.set_state(state)
+	LOCAL.set_state(state)
 
 
 ###### HUD FUNCTIONS #####

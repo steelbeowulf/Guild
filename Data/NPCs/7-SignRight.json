@@ -4,8 +4,12 @@
 		   "vframes": 5, "hframes":3, "scale":[2,2]},
 	"ANIM":{"idle": [true, "2"]},
 	"NAME":"Sign",
-    "DIALOGUE":[
-        "Forest Maze"
+	"EVENTS": [
+        {
+            "DIALOGUE":[
+        		"Forest Maze"
+    		],
+        }
     ],
 	"PORTRAIT": {"sprite":"res://Assets/Portraits/sign.png", "scale":[4,4]}
 }

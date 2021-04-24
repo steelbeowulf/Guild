@@ -4,11 +4,15 @@
 		   "vframes":1, "hframes":1, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0"]},
 	"NAME":"Sign",
-    "DIALOGUE":[
-        "Hello! Welcome to Guild!",
-        "Use the arrow keys to move",
-        "P opens the pause menu",
-        "Fight the enemies and solve puzzles to make your way through the demo"
-    ],
+	"EVENTS": [
+		{
+			"DIALOGUE":[
+		        "Hello! Welcome to Guild!",
+		        "Use the arrow keys to move",
+		        "P opens the pause menu",
+		        "Fight the enemies and solve puzzles to make your way through the demo"
+    		]
+		}
+	],
 	"PORTRAIT": {"sprite":"res://Assets/Portraits/sign.png", "scale":[4,4]}
 }

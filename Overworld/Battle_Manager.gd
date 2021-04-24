@@ -39,8 +39,8 @@ onready var speed_index = 0
 func init(enemies_arg, map_arg):
 	Enemies = enemies_arg
 	Map = map_arg
-	GLOBAL.TRANSITION = -1
-	print("[BATTLE INIT] current map: "+str(GLOBAL.get_map()))
+	LOCAL.TRANSITION = -1
+	print("[BATTLE INIT] current map: "+str(LOCAL.get_map()))
 	background = load("res://Assets/Backgrounds/forest2.png")
 
 ######### CONFIG FUCTIONS #########
@@ -72,7 +72,7 @@ func get_speed_opts():
 # Updates the Encounter and Kill variables based on 
 # enemy visibility
 func _encounter_management(value, id, name):
-	if GLOBAL.entering_battle:
+	if LOCAL.entering_battle:
 		return
 	print("[BM] Encounter Management "+str(value)+", "+name)
 	if value:
@@ -124,9 +124,9 @@ func generate_enemies():
 	Encounter.shuffle()
 	while current <= total:
 		if Encounter:
-			print("OLD: "+GLOBAL.ENEMIES[Encounter[0]].get_name())
-			newEnemy.append(GLOBAL.ENEMIES[Encounter[0]]._duplicate())
-			print(GLOBAL.ENEMIES[Encounter.pop_front()].get_name())
+			print("OLD: "+LOCAL.ENEMIES[Encounter[0]].get_name())
+			newEnemy.append(LOCAL.ENEMIES[Encounter[0]]._duplicate())
+			print(LOCAL.ENEMIES[Encounter.pop_front()].get_name())
 		else:
 			var enemy_id = 1 + (randi() % (len(Enemies)-2))
 			print("NEW: "+Enemies[enemy_id].get_name())
@@ -150,7 +150,7 @@ func initiate_battle():
 
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(Players, Enemies, Inventory):
-	GLOBAL.IN_BATTLE = false
+	LOCAL.IN_BATTLE = false
 	var total_exp = 0
 	
 	# Calculates total EXP based on the enemies killed

@@ -69,7 +69,7 @@ func set_dialogue(text):
 	else:
 		self.hide()
 		dialogue = ""
-		GLOBAL.dialogue_ended()
+		EVENTS.dialogue_ended()
 
 
 func set_text(value):

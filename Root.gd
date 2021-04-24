@@ -20,25 +20,22 @@ onready var equips = load("res://Pause/EquipMenu.tscn")
 
 # Loads the correct map
 func _ready():
-	# TODO: Area management
-	#var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
-	var start = load("res://Overworld/Hub/Hub.tscn")
+	var start = load("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
 	self.add_child(start.instance())
-	map = get_node("Hub")
-	#map = get_node("Map"+str(GLOBAL.MAP))
-	set_effect(GLOBAL.MAP)
+	map = get_child(get_child_count()-1)
+	set_effect(LOCAL.MAP)
 
 
 func change_area(area_name: String, next: int = 1):
 	var new = load("res://Overworld/"+area_name+"/Map"+str(next)+".tscn")
-	GLOBAL.MAP = next
-	set_effect(GLOBAL.MAP)
-	GLOBAL.load_area_info(area_name)
+	LOCAL.MAP = next
+	set_effect(LOCAL.MAP)
+	LOCAL.load_area_info(area_name)
 	self.add_child(new.instance())
 	if map:
 		remove_child(map)
 		map.queue_free()
-	GLOBAL.TRANSITION = -1
+	LOCAL.TRANSITION = -1
 	map = get_node("Map"+str(next))
 
 # Watches for inputs and deals with state changes
@@ -116,23 +113,6 @@ func return_menu():
 	menu.show()
 	menu.give_focus()
 	STATE = "Menu"
-
-func player_clicked(num):
-	if char_screen == -1:
-		# TODO: change lanes somehow
-		pass
-	elif char_screen == 0:
-		# TODO: skill screen
-		pass
-	elif char_screen == 1:
-		# TODO: equip screen
-		pass
-	elif char_screen == 2:
-		open_status(num)
-	elif char_screen == 3:
-		# TODO: job tree screen
-		pass
-
 
 # Opens the save submenu
 func open_save():
@@ -234,16 +214,16 @@ func use_skill(skill, player):
 # Transitions from current area to next area
 func transition(next, fake=false):
 	var new = load("res://Overworld/Demo_Area/Map"+str(next)+".tscn")
-	GLOBAL.MAP = next
-	set_effect(GLOBAL.MAP)
+	LOCAL.MAP = next
+	set_effect(LOCAL.MAP)
 	#call_deferred("add_child", new.instance())
 	self.add_child(new.instance())
 	if map:
 		remove_child(map)
 		map.queue_free()
-	GLOBAL.TRANSITION = -1
+	LOCAL.TRANSITION = -1
 	if not fake:
-		GLOBAL.TRANSITION = GLOBAL.MAP
+		LOCAL.TRANSITION = LOCAL.MAP
 	map = get_node("Map"+str(next))
 
 var darkness = [

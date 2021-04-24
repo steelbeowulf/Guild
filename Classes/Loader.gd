@@ -14,9 +14,9 @@ const ENCOUNTERS_PATH = "res://Data/NPCs/Encounters/"
 const SHOPS_PATH = "res://Data/NPCs/Shops/"
 
 # Path to load from on a new game (player data)
-const PLAYERS_PATH = "res://Demo_data/Players.json"
-const INVENTORY_PATH = "res://Demo_data/Inventory.json"
-const EQUIPAMENT_PATH = "res://Demo_data/Equipament.json"
+const PLAYERS_PATH = "res://Data/Seeds/Players.json"
+const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
+const EQUIPAMENT_PATH = "res://Data/Seeds/Equipament.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -87,6 +87,7 @@ static func load_save_info():
 
 # Loads all enemies found in the ENEMY_PATH directory.
 func load_enemies(filter_array):
+	print("[LOADER] loading enemies: ", filter_array)
 	var ret = []
 	var enemies = list_files_in_directory(ENEMY_PATH)
 	enemies.sort()
@@ -110,7 +111,7 @@ func load_enemies(filter_array):
 				data["DEF"], data["DEFM"], 
 				data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 				data["NAME"], skills, data["RESISTANCE"]))
-	return [0] + ret
+	return ret
 
 
 # Loads all itens found in the ITENS_PATH directory.
@@ -286,12 +287,11 @@ func load_players(slot):
 	return parse_players(path)
 
 func load_npcs(filter_array):
-	print(filter_array)
+	print("[LOADER] loading NPCs: ", filter_array)
 	var npcs = list_files_in_directory(NPCS_PATH)
 	npcs.sort()
 	var ret = []
 	for npc in npcs:
-		print(npc)
 		var file = File.new()
 		file.open(NPCS_PATH+npc, file.READ)
 		var text = file.get_as_text()
@@ -360,6 +360,7 @@ func load_shops(filter_array):
 # Uses information from load_players to build the actual players.
 # TODO: Fix dependency on load_all_skills when it doesn't load everything.
 func parse_players(path):
+	print("[LOADER] loading players from ", path)
 	var file = File.new()
 	file.open(path, file.READ)
 	var players = []
@@ -388,6 +389,8 @@ func parse_players(path):
 			for i in range(len(equips)):
 				if data["EQUIPS"][i] > -1:
 					players[-1].equip(equips[i], i)
+	else:
+		print("Error loading players", result_json.error)
 	return players
 
 

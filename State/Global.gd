@@ -4,8 +4,6 @@ extends Node
 var ITENS
 var SKILLS
 var STATUS
-var ENEMIES
-var NPCS
 var EQUIPAMENT
 
 var gold
@@ -26,31 +24,32 @@ func load_game(slot):
 	ITENS = loader.load_all_itens()
 	EQUIPAMENT = loader.load_all_equips()
 	
-	#ENEMIES = loader.load_enemies()
-	
 	# Saved data
 	var saved_data = SAVE.load_game(slot)
+	print("[GLOBAL load_game] ", saved_data)
+	playtime = saved_data["Area_Info"]["Playtime"]
+	gold = saved_data["Area_Info"]["Gold"]
 	INVENTORY = saved_data["Inventory"]
 	EQUIP_INVENTORY = saved_data["Equip_Inventory"]
 	PLAYERS = saved_data["Players"]
-#{
-#	"Inventory": loader.load_inventory(save_slot),
-#	"Equip_Inventory": loader.load_equip(save_slot),
-#	"Players": loader.load_players(save_slot),
-#	"Area_Info": load_info(save_slot),
-#	"Enemies_in_area": area_info["ENEMIES"],
-#	"NPCs_in_area": area_info["NPCS"]
-#}
+	LOCAL.load_enemies(saved_data["Enemies_in_area"])
+	LOCAL.load_npcs(saved_data["NPCs_in_area"])
+
 
 # Helper function to get the Root node
 func get_root():
 	return get_node("/root/Root")
 
+
+# Get playtime
 func get_playtime():
 	return playtime
 
+
+# Get gold
 func get_gold():
 	return gold
+
 
 # Get item ids from inventory
 func get_item_ids():

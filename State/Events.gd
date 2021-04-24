@@ -20,7 +20,7 @@ func play_dialogues(name, portrait, dialogues, callback):
 	var node = NODES["Dialogue"]
 	node.set_talker(name, portrait)
 	for dial in dialogues:
-		node.push_dialogue(dial)
+		node.push_dialogue(dial.message)
 	caller = callback
 	node.start_dialogue()
 

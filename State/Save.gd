@@ -9,41 +9,34 @@ var save_path = "./Save_data/Slot"
 # Loads all information from save_slot argument
 func load_info(save_slot):
 	if save_slot == -1:
-		#reload_state()
+		LOCAL.load_initial_area()
 		return {
 			"Gold": 100,
 			"Playtime": 0,
-			"Area": "Hub"
+			"Area": "Demo_Area"
 		}
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())
 		savegame.close()
+		LOCAL.load_area(dict["area"])
 		return {
 			"Gold": dict["gold"],
 			"Playtime": dict["playtime"],
-			"Area": LOCAL.load_area(dict["area"])
+			"Area": dict["area"]["NAME"]
 		}
 
 # Load game saved on save_slot
 func load_game(save_slot):
 	var info = load_info(save_slot)
-	var area_info = load_area_info(info["Area"])
+	var area_info = loader.load_area_info(info["Area"])
 	return {
 		"Inventory": loader.load_inventory(save_slot),
 		"Equip_Inventory": loader.load_equip(save_slot),
 		"Players": loader.load_players(save_slot),
-		"Area_Info": load_info(save_slot),
+		"Area_Info": info,
 		"Enemies_in_area": area_info["ENEMIES"],
-		"NPCs_in_area": area_info["NPCS"]
-	}
-
-# Load area info for area_name
-func load_area_info(area_name: String):
-	var area_info = loader.load_area_info(area_name)
-	return {
-		"ENEMIES": loader.load_enemies(area_info["ENEMIES"]),
-		"NPCS": loader.load_npcs(area_info["NPCS"])
+		"NPCs_in_area": area_info["NPCS"],
 	}
 
 # Saves all information on the argument slot
@@ -51,7 +44,7 @@ func save(slot):
 	# Saves the map information
 	var save_dict = {
 		"area" : LOCAL.get_area_dict(),
-		"gold" : LOCAL.get_gold(),
+		"gold" : GLOBAL.get_gold(),
 		"playtime" : GLOBAL.get_playtime(),
 		"events" : LOCAL.get_events()
 	}
