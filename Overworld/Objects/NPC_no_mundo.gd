@@ -59,7 +59,7 @@ func _on_Dialogue_Ended():
 		GLOBAL.get_root().open_shop(id)
 	elif teleporter:
 		print("Imma teleport you")
-		GLOBAL.get_root().change_area("Demo_Area")
+		GLOBAL.get_root().change_area("Forest")
 
 
 func _on_Interactable_body_entered(body):

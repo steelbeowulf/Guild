@@ -8,6 +8,7 @@ func _init(message_arg: String, name_arg: String = "", portrait_arg: String = ""
 	self.name = name_arg
 	self.portrait = portrait_arg
 	self.message = message_arg
+	self.type = "Dialogue"
 
 func set_portrait(portrait_arg):
 	self.portrait = portrait_arg

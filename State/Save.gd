@@ -13,7 +13,7 @@ func load_info(save_slot):
 		return {
 			"Gold": 100,
 			"Playtime": 0,
-			"Area": "Demo_Area"
+			"Area": "Forest"
 		}
 	else:
 		savegame.open(save_path+str(save_slot)+"/Info.json", File.READ)

@@ -6,8 +6,9 @@
 [ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Overworld/Demo_Area/Event.gd" type="Script" id=7]
+[ext_resource path="res://Overworld/Forest/Event.gd" type="Script" id=7]
 [ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=8]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 86.3931, 38.7192 )

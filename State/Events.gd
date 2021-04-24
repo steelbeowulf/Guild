@@ -16,13 +16,21 @@ func set_event_status(id, status):
 ### Dialogue
 var caller = null
 
+func play_event(event):
+	pass
+
 func play_dialogues(name, portrait, dialogues, callback):
 	var node = NODES["Dialogue"]
 	node.set_talker(name, portrait)
 	for dial in dialogues:
-		node.push_dialogue(dial.message)
+		if dial.type == "Dialogue":
+			node.push_dialogue(dial.message)
+			node.start_dialogue()
+		elif dial.type == "DialogueOption":
+			node = NODES["DialogueOptions"]
+			node.push_option(dial)
 	caller = callback
-	node.start_dialogue()
+	#node.start_dialogue()
 
 func play_dialogue(dialogue, callback):
 	var node = NODES["Dialogue"]

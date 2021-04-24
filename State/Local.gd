@@ -69,11 +69,11 @@ func get_map():
 func get_events():
 	return events
 
-# Resets state to the default Demo_Area state
+# Resets state to the default Forest state
 # TODO: make it generic
 func load_initial_area():
 	WIN = false
-	AREA = "Demo_Area"
+	AREA = "Forest"
 	STATE = []
 	events = {
 		"rangers_defeated": false, 

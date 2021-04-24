@@ -213,7 +213,7 @@ func use_skill(skill, player):
 
 # Transitions from current area to next area
 func transition(next, fake=false):
-	var new = load("res://Overworld/Demo_Area/Map"+str(next)+".tscn")
+	var new = load("res://Overworld/Forest/Map"+str(next)+".tscn")
 	LOCAL.MAP = next
 	set_effect(LOCAL.MAP)
 	#call_deferred("add_child", new.instance())
