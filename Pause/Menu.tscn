@@ -29,7 +29,7 @@ alignment = 1
 [node name="Left" type="Panel" parent="Panel/All"]
 margin_left = 15.0
 margin_right = 735.0
-margin_bottom = 768.0
+margin_bottom = 808.0
 rect_min_size = Vector2( 720, 0 )
 custom_styles/panel = ExtResource( 2 )
 
@@ -123,20 +123,21 @@ focus_neighbour_bottom = NodePath("../../../Char0/Lanes/Front")
 [node name="Right" type="VBoxContainer" parent="Panel/All"]
 margin_left = 739.0
 margin_right = 1009.0
-margin_bottom = 768.0
+margin_bottom = 808.0
 
 [node name="Options_Panel" type="Panel" parent="Panel/All/Right"]
 margin_right = 270.0
-margin_bottom = 390.0
+margin_bottom = 437.16
 grow_horizontal = 0
 grow_vertical = 0
-rect_min_size = Vector2( 270, 390 )
+rect_min_size = Vector2( 270, 437.16 )
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 2 )
 
 [node name="Options" type="VBoxContainer" parent="Panel/All/Right/Options_Panel"]
-margin_right = 270.0
-margin_bottom = 374.0
+margin_top = -0.751866
+margin_right = 270.47
+margin_bottom = 474.0
 size_flags_vertical = 0
 
 [node name="Item" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
@@ -188,12 +189,28 @@ toggle_mode = true
 text = "Equipment"
 flat = true
 
-[node name="Status" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
+[node name="Change" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
 "text",
 ]]
 margin_top = 162.0
 margin_right = 270.0
 margin_bottom = 212.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_left = NodePath("../../../../Left/Chars/Char1/Lanes/Front")
+focus_neighbour_top = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../Item")
+custom_styles/hover = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
+text = "Change"
+flat = true
+
+[node name="Status" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
+"text",
+]]
+margin_top = 216.0
+margin_right = 270.0
+margin_bottom = 266.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_left = NodePath("../../../../Left/Chars/Char0/Lanes/Front")
 focus_neighbour_top = NodePath("../Equip")
@@ -208,9 +225,9 @@ flat = true
 [node name="Tree" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
 "text",
 ]]
-margin_top = 216.0
+margin_top = 270.0
 margin_right = 270.0
-margin_bottom = 266.0
+margin_bottom = 320.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_left = NodePath("../../../../Left/Chars/Char1/Lanes/Front")
 focus_neighbour_top = NodePath("../Status")
@@ -225,9 +242,9 @@ flat = true
 [node name="Options" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
 "text",
 ]]
-margin_top = 270.0
+margin_top = 324.0
 margin_right = 270.0
-margin_bottom = 320.0
+margin_bottom = 374.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_left = NodePath("../../../../Left/Chars/Char1/Lanes/Front")
 focus_neighbour_top = NodePath("../Tree")
@@ -241,9 +258,9 @@ flat = true
 [node name="Save" type="Button" parent="Panel/All/Right/Options_Panel/Options" groups=[
 "text",
 ]]
-margin_top = 324.0
+margin_top = 378.0
 margin_right = 270.0
-margin_bottom = 374.0
+margin_bottom = 428.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_left = NodePath("../../../../Left/Chars/Char1/Lanes/Front")
 focus_neighbour_top = NodePath("../Options")
@@ -255,15 +272,15 @@ text = "Save/Load"
 flat = true
 
 [node name="Gap" type="Panel" parent="Panel/All/Right"]
-margin_top = 394.0
+margin_top = 441.0
 margin_right = 270.0
-margin_bottom = 509.0
+margin_bottom = 556.0
 rect_min_size = Vector2( 0, 115 )
 
 [node name="Info" type="VBoxContainer" parent="Panel/All/Right"]
-margin_top = 513.0
+margin_top = 560.0
 margin_right = 270.0
-margin_bottom = 761.0
+margin_bottom = 808.0
 rect_min_size = Vector2( 0, 220 )
 
 [node name="Area" type="Panel" parent="Panel/All/Right/Info" groups=[
@@ -339,6 +356,7 @@ uppercase = true
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Item" to="." method="_on_Item_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Skill" to="." method="_on_Skill_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Equip" to="." method="_on_Equip_pressed"]
+[connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Change" to="." method="_on_Change_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Status" to="." method="_on_Status_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Panel/All/Right/Options_Panel/Options/Save" to="." method="_on_Save_pressed"]

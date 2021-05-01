@@ -131,3 +131,7 @@ func _on_Equip_pressed():
 	location = "EQUIPS"
 	change_focus()
 
+
+func _on_Change_pressed():
+	AUDIO.play_se("ENTER_MENU")
+	get_parent().get_parent().open_inventory()
