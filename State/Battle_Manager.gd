@@ -9,6 +9,7 @@ onready var Map = null
 # Battle variables
 onready var Battled_Enemies = []
 onready var background
+onready var music = "BATTLE_THEME"
 
 # Level up variables
 onready var leveled_up = [0,0,0,0]
@@ -139,6 +140,19 @@ func generate_enemies():
 
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
+
+func _load_enemies(enemy_ids: Array):
+	var enemies = []
+	for id in enemy_ids:
+		enemies.append(LOCAL.get_enemy(id))
+	return enemies
+
+func initiate_event_battle(battle: Event):
+	Battled_Enemies = _load_enemies(battle.get_enemies())
+	leveled_up = [0,0,0,0]
+	background = load(battle.get_background())
+	music = battle.get_bgm()
+	get_tree().change_scene("res://Battle/Battle.tscn")
 
 # Generates enemies and begins the battle
 func initiate_battle():

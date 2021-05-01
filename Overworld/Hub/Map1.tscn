@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesets/New_Tileset_Floresta.tres" type="TileSet" id=2]
 [ext_resource path="res://Assets/Tilesets/Tileset_Floresta.tres" type="TileSet" id=3]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=5]
 
 [node name="Map1" type="Node2D"]
 script = ExtResource( 1 )
@@ -57,22 +56,21 @@ __meta__ = {
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Transition" parent="." instance=ExtResource( 5 )]
-position = Vector2( 440, 0 )
-scale = Vector2( 20, 1 )
-next = 2
-
 [node name="Party" type="Node" parent="."]
 
-[node name="Shopkeeper" parent="." instance=ExtResource( 6 )]
+[node name="Shopkeeper" parent="." instance=ExtResource( 5 )]
 position = Vector2( 536.213, 222.863 )
 id = 10
 
-[node name="Blacksmith" parent="." instance=ExtResource( 6 )]
+[node name="Blacksmith" parent="." instance=ExtResource( 5 )]
 position = Vector2( 430.763, 312.163 )
 id = 11
 
-[node name="Teleporter" parent="." instance=ExtResource( 6 )]
+[node name="Teleporter" parent="." instance=ExtResource( 5 )]
 position = Vector2( 566.048, 303.812 )
 id = 12
+
+[node name="Fighter" parent="." instance=ExtResource( 5 )]
+position = Vector2( 546.568, 416.797 )
+id = 13
 

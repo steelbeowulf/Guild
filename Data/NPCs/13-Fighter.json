@@ -1,0 +1,43 @@
+{
+	"ID":13,
+	"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME": "Fighter",
+  "EVENTS": [
+    {
+      "DIALOGUE":[
+        "Hey there!",
+        "I challenge you to a duel!"
+      ]
+    },
+    {
+      "OPTIONS": [
+        {
+          "OPTION": "Ok", 
+          "RESULTS": [
+            {
+              "DIALOGUE": [ "Kay, here we go! :D" ]
+            },
+            {
+              "BATTLE": {
+                "ENEMIES": [7,8],
+                "MUSIC": "BOSS_THEME",
+                "BACKGROUND": "res://Assets/Backgrounds/forest1.png"
+              }
+            }
+          ]
+        },
+        {
+          "OPTION": "No",
+          "RESULTS": [
+            {
+              "DIALOGUE": [ "Aww, what a bummer >:("]
+            },
+          ]
+        }
+      ]
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}
+}

@@ -55,6 +55,8 @@ func _ready():
 		AUDIO.play_bgm('BOSS_THEME')
 	else:
 		AUDIO.play_bgm('BATTLE_THEME')
+	
+	AUDIO.play_bgm(BATTLE_MANAGER.music)
 
 	# Main battle loop: calls rounds() while the battle isn't battle_over
 	while (not battle_over):

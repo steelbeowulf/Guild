@@ -346,6 +346,13 @@ func parse_events(events):
 				subtype = "EQUIP"
 				itens_sold = shop["EQUIPAMENTS"]
 			parsed_events.append(SHOP_CLASS.new(subtype, itens_sold))
+		elif event.has("BATTLE"):
+			var battle = event["BATTLE"]
+			parsed_events.append(BATTLE_CLASS.new(
+				battle["ENEMIES"],
+				battle["BACKGROUND"],
+				battle["MUSIC"]
+			))
 	return parsed_events
 
 # Uses information from load_players to build the actual players.

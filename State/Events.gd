@@ -43,8 +43,7 @@ func play_event(event: Event):
 	elif event.type == "SHOP":
 		GLOBAL.get_root().open_shop(event)
 	elif event.type == "BATTLE":
-		# start battle
-		pass
+		BATTLE_MANAGER.initiate_event_battle(event)
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
 
