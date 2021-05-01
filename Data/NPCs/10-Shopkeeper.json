@@ -1,0 +1,32 @@
+{
+	"ID":10,
+	"IMG":{"path": "res://Assets/Animations/Entities/wizard spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
+	"ANIM":{"idle": [true, "0"]},
+	"NAME":"Shopkeeper",
+    "EVENTS":[
+        {
+            "DIALOGUE":[
+                "Hey there, new blood!",
+                "First time in the hub?",
+                "This is the place we prepare for our adventures",
+                "You don't wanna go out there without the means to defend yourself, you know?",
+                "Come check out my wares!"
+            ]
+        },
+        {
+            "SHOP": {
+                "ITENS": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                ],
+            }
+        }
+    ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/wizard.png", "scale":[8,8]}
+}

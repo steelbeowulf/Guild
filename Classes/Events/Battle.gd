@@ -10,3 +10,4 @@ func _init(enemies_arg: Array, background_arg: String, bgm_arg: String, is_boss_
 	self.background = background_arg
 	self.bgm = bgm_arg
 	self.is_boss = is_boss_arg
+	self.type = "BATTLE"

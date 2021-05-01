@@ -3,7 +3,7 @@ extends Control
 var itens = []
 
 onready var item_container = $ItemList/ScrollContainer/VBoxContainer
-onready var item_button = load("res://Overworld/Hub/ItemButton.tscn")
+onready var item_button = load("res://NPCs/ItemButton.tscn")
 onready var dialogue = $Dialogue/Text
 onready var stock = $PlayerInfo/HBoxContainer/StockValue
 onready var money = $PlayerInfo/HBoxContainer/MoneyValue
@@ -16,8 +16,8 @@ var last_selected = 0
 var last_hovered = 0
 var selected_player = -1
 var item_quantity = 1
-var last_shop_visited = -1
-var shop_id = -1
+var last_shop_visited = null
+var goods_ids = []
 var should_equip = false
 var MODE = "BUY"
 var SHOP_TYPE = "ITEM"
@@ -32,9 +32,10 @@ func _ready():
 		$ItemInfo/PartyPortraits.get_child(i).connect("button_down", self, "_select_player", [i])
 
 # Enter shop with specified id
-func enter(id: int, type: String):
-	shop_id = id
-	SHOP_TYPE = type
+func enter(shop: Event):
+	last_shop_visited = shop
+	goods_ids = shop.get_goods()
+	SHOP_TYPE = shop.get_subtype()
 	dialogue.set_text("Welcome! How can I help you?")
 	money.set_text(str(GLOBAL.gold)+"G")
 	mode.show()
@@ -245,7 +246,7 @@ func _process(delta):
 		elif mode.visible:
 			_exit_Store()
 		else:
-			enter(shop_id, SHOP_TYPE)
+			enter(last_shop_visited)
 	elif quantity.visible and not confirmation.visible:
 		if Input.is_action_just_pressed("ui_accept"):
 			AUDIO.play_se("ENTER_MENU")
@@ -274,12 +275,10 @@ func _on_SpinBox_value_changed(value):
 func _on_Buy_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	MODE = "BUY"
-	var item_ids = GLOBAL.SHOPS[shop_id].get_itens()
-	var equip_ids = GLOBAL.SHOPS[shop_id].get_equips()
 	if SHOP_TYPE == "EQUIP":
-		load_equips(item_ids)
+		load_equips(goods_ids)
 	else:
-		load_items(item_ids)
+		load_items(goods_ids)
 	mode.hide()
 
 

@@ -2,13 +2,13 @@ extends "Event.gd"
 
 var name: String
 var portrait: String
-var message: String
+var messages: Array
 
-func _init(message_arg: String, name_arg: String = "", portrait_arg: String = ""):
+func _init(message_arg: Array, name_arg: String = "", portrait_arg: String = ""):
 	self.name = name_arg
 	self.portrait = portrait_arg
-	self.message = message_arg
-	self.type = "Dialogue"
+	self.messages = message_arg
+	self.type = "DIALOGUE"
 
 func set_portrait(portrait_arg):
 	self.portrait = portrait_arg

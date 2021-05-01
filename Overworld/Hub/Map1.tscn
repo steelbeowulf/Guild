@@ -7,7 +7,7 @@
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=6]
 
-[node name="Hub" type="Node2D"]
+[node name="Map1" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ -84.0824 ]
@@ -66,9 +66,13 @@ next = 2
 
 [node name="Shopkeeper" parent="." instance=ExtResource( 6 )]
 position = Vector2( 536.213, 222.863 )
-shop = true
+id = 10
+
+[node name="Blacksmith" parent="." instance=ExtResource( 6 )]
+position = Vector2( 430.763, 312.163 )
+id = 11
 
 [node name="Teleporter" parent="." instance=ExtResource( 6 )]
-position = Vector2( 430.763, 312.163 )
-teleporter = true
+position = Vector2( 566.048, 303.812 )
+id = 12
 

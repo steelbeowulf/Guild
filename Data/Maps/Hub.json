@@ -5,9 +5,9 @@
 		[],
 		[]
 	],
-	"NPCS": [9],
+	"NPCS": [10, 11, 12],
 	"ENCOUNTERS": [],
-	"SHOPS": [0],
+	"SHOPS": [],
 	"BACKGROUNDS": [
 		"res://Assets/Backgrounds/forest.png",
 		"res://Assets/Backgrounds/forest2.png",

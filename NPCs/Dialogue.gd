@@ -66,11 +66,16 @@ func set_dialogue(text):
 		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
 		$Tween.set_speed_scale(1.0)
 		$Tween.start()
+	elif len(EVENTS.events) > 0:
+		EVENTS.dialogue_ended()
 	else:
+		EVENTS.dialogue_ended()
 		self.hide()
 		dialogue = ""
-		EVENTS.dialogue_ended()
 
+func reset():
+	self.hide()
+	dialogue = ""
 
 func set_text(value):
 	AUDIO.play_se("MOVE_MENU")

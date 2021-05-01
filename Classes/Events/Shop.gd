@@ -1,8 +1,15 @@
 extends "Event.gd"
 
-var itens : Array
-var equips : Array
+var goods : Array
+var subtype : String
 
-func _init(itens_arg: Array, equips_arg: Array):
-	self.itens = itens
-	self.equips = equips
+func _init(type_arg: String, goods_arg: Array):
+	self.goods = goods_arg
+	self.type = "SHOP"
+	self.subtype = type_arg
+
+func get_subtype():
+	return self.subtype
+
+func get_goods():
+	return self.goods

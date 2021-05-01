@@ -17,6 +17,7 @@ onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
 onready var equips = load("res://Pause/EquipMenu.tscn")
 
+onready var loader = get_node("/root/LOADER")
 
 # Loads the correct map
 func _ready():
@@ -26,17 +27,24 @@ func _ready():
 	set_effect(LOCAL.MAP)
 
 
-func change_area(area_name: String, next: int = 1):
+func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0,0)):
+	print("[ROOT] Changing area! ", area_name)
+	if pos != Vector2(0,0):
+		LOCAL.POSITION = pos
 	var new = load("res://Overworld/"+area_name+"/Map"+str(next)+".tscn")
 	LOCAL.MAP = next
+	LOCAL.AREA = area_name
 	set_effect(LOCAL.MAP)
-	LOCAL.load_area_info(area_name)
+	var area_info = loader.load_area_info(area_name)
+	LOCAL.load_npcs(area_info["NPCS"])
+	LOCAL.load_enemies(area_info["ENEMIES"])
 	self.add_child(new.instance())
 	if map:
+		map.hide()
 		remove_child(map)
 		map.queue_free()
 	LOCAL.TRANSITION = -1
-	map = get_node("Map"+str(next))
+	map = get_child(len(get_children()) - 1)
 
 # Watches for inputs and deals with state changes
 func _process(delta):
@@ -76,12 +84,13 @@ func open_menu():
 	get_tree().paused = true
 
 # Opens shop and pauses map
-func open_shop(id: int):
+func open_shop(shop_event: Event):
+	EVENTS.dialogue_ended(true)
 	AUDIO.play_bgm("MAP_THEME", true, -8)
 	shop.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
-	shop.enter(id, "EQUIP")
+	shop.enter(shop_event)
 	STATE = "Shop"
 	get_tree().paused = true
 

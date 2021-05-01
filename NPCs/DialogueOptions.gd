@@ -7,8 +7,11 @@ func _ready():
 		opt.add_font_override("font", TEXT.get_font())
 	EVENTS.register_node("DialogueOptions", self)
 
-func push_option(opt):
+func show_options():
+	$Options.get_child(0).grab_focus()
 	self.show()
+
+func push_option(opt):
 	var optionBtn = $Options.get_child(options.size())
 	options[opt.get_option()] = opt.get_results()
 	optionBtn.show()
@@ -18,5 +21,8 @@ func push_option(opt):
 
 func _on_Option_Selected(option: String):
 	print("[OPTION] ", option, " selected!")
-	pass
-	#EVENTS.play_dialogue(options[option])
+	self.hide()
+	for opt in $Options.get_children():
+		opt.hide()
+	EVENTS.play_events(options[option])
+	options = {}

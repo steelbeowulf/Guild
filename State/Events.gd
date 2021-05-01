@@ -1,7 +1,7 @@
 extends Node
 
 var NODES = {}
-var events = {}
+
 
 func register_node(name, node):
 	NODES[name] = node
@@ -15,30 +15,53 @@ func set_event_status(id, status):
 
 ### Dialogue
 var caller = null
+var events = []
+var npc_name = ""
+var npc_portrait = ""
 
-func play_event(event):
-	pass
+func play_events(events: Array):
+	self.events = events.duplicate(true)
+	play_event(self.events.pop_front())
 
-func play_dialogues(name, portrait, dialogues, callback):
+func play_event(event: Event):
+	print("[EVENTS] Playing event ", event.type)
+	if event.type == "DIALOGUE":
+		var node = NODES["Dialogue"]
+		node.set_talker(npc_name, npc_portrait)
+		for dial in event.messages:
+			node.push_dialogue(dial)
+		node.start_dialogue()
+	elif event.type == "DIALOGUE_OPTION":
+		var node = NODES["DialogueOptions"]
+		node.push_option(event)
+		for ev in events:
+			if ev.type != "DIALOGUE_OPTION":
+				break
+			events.pop_front()
+			node.push_option(ev)
+		node.show_options()
+	elif event.type == "SHOP":
+		GLOBAL.get_root().open_shop(event)
+	elif event.type == "BATTLE":
+		# start battle
+		pass
+	elif event.type == "TRANSITION":
+		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
+
+func start_npc_dialogue(name, portrait, events, callback):
 	var node = NODES["Dialogue"]
+	npc_name = name
+	npc_portrait = portrait
 	node.set_talker(name, portrait)
-	for dial in dialogues:
-		if dial.type == "Dialogue":
-			node.push_dialogue(dial.message)
-			node.start_dialogue()
-		elif dial.type == "DialogueOption":
-			node = NODES["DialogueOptions"]
-			node.push_option(dial)
+	play_events(events)
 	caller = callback
-	#node.start_dialogue()
 
-func play_dialogue(dialogue, callback):
-	var node = NODES["Dialogue"]
-	node.set_talker(dialogue.name, dialogue.portrait)
-	for dial in dialogue.message:
-		node.push_dialogue(dial)
-	caller = callback
-	node.start_dialogue()
-
-func dialogue_ended():
-	caller._on_Dialogue_Ended()
+func dialogue_ended(force_hide = false):
+	print("[EVENTS] Dialogue ended")
+	if force_hide:
+		NODES["Dialogue"].reset()
+	if len(self.events) == 0:
+		print("[EVENTS] Callback time")
+		caller._on_Dialogue_Ended()
+	else:
+		play_event(self.events.pop_front())

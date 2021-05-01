@@ -315,8 +315,7 @@ func parse_events(events):
 	for event in events:
 		if event.has("DIALOGUE"):
 			if typeof(event["DIALOGUE"]) == TYPE_ARRAY:
-				for dialogue in event["DIALOGUE"]:
-					parsed_events.append(DIALOGUE_CLASS.new(dialogue))
+				parsed_events.append(DIALOGUE_CLASS.new(event["DIALOGUE"]))
 			else:
 				parsed_events.append(DIALOGUE_CLASS.new(
 					event["DIALOGUE"]["MESSAGE"],
@@ -329,33 +328,25 @@ func parse_events(events):
 					option["OPTION"],
 					parse_events(option["RESULTS"])
 				))
+		elif event.has("TRANSITION"):
+			var transition = event["TRANSITION"]
+			parsed_events.append(TRANSITION_CLASS.new(
+				transition["AREA"],
+				transition["MAP"],
+				LOCAL.parse_position(transition["POSITION"])
+			))
+		elif event.has("SHOP"):
+			var shop = event["SHOP"]
+			var subtype = ""
+			var itens_sold = []
+			if shop.has("ITENS"):
+				subtype = "ITEM"
+				itens_sold = shop["ITENS"]
+			else:
+				subtype = "EQUIP"
+				itens_sold = shop["EQUIPAMENTS"]
+			parsed_events.append(SHOP_CLASS.new(subtype, itens_sold))
 	return parsed_events
-
-func load_shops(filter_array):
-	print(filter_array)
-	print("LOADING SHOPS")
-	var shops = list_files_in_directory(SHOPS_PATH)
-	shops.sort()
-	var ret = []
-	for shop in shops:
-		print(shop)
-		var file = File.new()
-		file.open(SHOPS_PATH+shop, file.READ)
-		var text = file.get_as_text()
-		var result_json = JSON.parse(text)
-		if result_json.error == OK: 
-			var data = result_json.result
-			if int(data["ID"]) in filter_array:
-				ret.append(SHOP_CLASS.new(data["ID"], data["NAME"], 
-					data["IMG"], data["ANIM"], 
-					data["DIALOGUE"], data["PORTRAIT"], 
-					data["ITENS"], data["EQUIPAMENTS"]))
-		else:  # If parse has errors
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
-
-	return ret
 
 # Uses information from load_players to build the actual players.
 # TODO: Fix dependency on load_all_skills when it doesn't load everything.

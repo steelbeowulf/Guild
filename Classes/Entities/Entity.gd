@@ -111,7 +111,7 @@ func remove_status(effect):
 func add_status(effect, atkm, turns):
 	if effect == "KO":
 		self.die()
-	if GLOBAL.STATUS.has(effect) and GLOBAL.IN_BATTLE:
+	if GLOBAL.STATUS.has(effect) and LOCAL.IN_BATTLE:
 		self.graphics.set_aura(GLOBAL.STATUS[effect])
 	status[effect] = [turns, atkm]
 
