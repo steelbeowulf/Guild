@@ -45,7 +45,7 @@ custom_fonts/font = ExtResource( 3 )
 enabled_focus_mode = 0
 text = "Party"
 
-[node name="Player 1" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Player1" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_top = 74.0
@@ -59,7 +59,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Player 1"
 
-[node name="Player 2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Player2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_top = 148.0
@@ -71,9 +71,9 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
-text = "Player 2"
+text = "Player 1"
 
-[node name="Player 3" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Player3" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_top = 222.0
@@ -85,9 +85,9 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
-text = "Player 3"
+text = "Player 1"
 
-[node name="Player 4" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Player4" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
 margin_top = 296.0
@@ -99,7 +99,7 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 5 )
 custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
-text = "Player 4"
+text = "Player 1"
 
 [node name="Back" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
@@ -292,10 +292,10 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 7 )
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player 1" to="." method="_on_Weapon_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player 2" to="." method="_on_Head_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player 3" to="." method="_on_Body_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player 4" to="." method="_on_Acessory1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Player1" to="." method="_on_Player1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Player2" to="." method="_on_Player1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Player3" to="." method="_on_Player1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/Player4" to="." method="_on_Player1_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Reserve/ReserveSlot1" to="Panel/HBoxContainer/Reserve/ReserveSlot1" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Reserve/ReserveSlot1" to="Panel/HBoxContainer/Reserve/ReserveSlot1" method="_on_ItemSlot0_pressed"]
