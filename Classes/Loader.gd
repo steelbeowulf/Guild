@@ -14,22 +14,27 @@ const ENCOUNTERS_PATH = "res://Data/NPCs/Encounters/"
 const SHOPS_PATH = "res://Data/NPCs/Shops/"
 
 # Path to load from on a new game (player data)
-const PLAYERS_PATH = "res://Demo_data/Players.json"
-const INVENTORY_PATH = "res://Demo_data/Inventory.json"
-const EQUIPAMENT_PATH = "res://Demo_data/Equipament.json"
+const PLAYERS_PATH = "res://Data/Seeds/Players.json"
+const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
+const EQUIPAMENT_PATH = "res://Data/Seeds/Equipament.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
 
 # Some shortcuts for important classes we're going to use
-var PLAYER_CLASS = load("res://Classes/Player.gd")
-var ENEMY_CLASS = load("res://Classes/Enemy.gd")
+var PLAYER_CLASS = load("res://Classes/Entities/Player.gd")
+var ENEMY_CLASS = load("res://Classes/Entities/Enemy.gd")
 var ITEM_CLASS = load("res://Classes/Itens.gd")
 var EQUIP_CLASS = load("res://Classes/Equip.gd")
-var NPC_CLASS = load("res://Classes/NPC.gd")
-var ENCOUNTER_CLASS = load("res://Classes/Encounter.gd")
-var SHOP_CLASS = load("res://Classes/Shop.gd")
-var STATS_CLASS = load("res://Classes/StatEffect.gd")
+var NPC_CLASS = load("res://Classes/Entities/NPC.gd")
+
+var SHOP_CLASS = load("res://Classes/Events/Shop.gd")
+var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
+var STATUS_CLASS = load("res://Classes/Events/StatusEffect.gd")
+var DIALOGUE_CLASS = load("res://Classes/Events/Dialogue.gd")
+var OPTION_CLASS = load("res://Classes/Events/Option.gd")
+var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
+var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
 
 var List
 
@@ -82,6 +87,7 @@ static func load_save_info():
 
 # Loads all enemies found in the ENEMY_PATH directory.
 func load_enemies(filter_array):
+	print("[LOADER] loading enemies: ", filter_array)
 	var ret = []
 	var enemies = list_files_in_directory(ENEMY_PATH)
 	enemies.sort()
@@ -105,7 +111,7 @@ func load_enemies(filter_array):
 				data["DEF"], data["DEFM"], 
 				data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 				data["NAME"], skills, data["RESISTANCE"]))
-	return [0] + ret
+	return ret
 
 
 # Loads all itens found in the ITENS_PATH directory.
@@ -281,12 +287,11 @@ func load_players(slot):
 	return parse_players(path)
 
 func load_npcs(filter_array):
-	print(filter_array)
+	print("[LOADER] loading NPCs: ", filter_array)
 	var npcs = list_files_in_directory(NPCS_PATH)
 	npcs.sort()
 	var ret = []
 	for npc in npcs:
-		print(npc)
 		var file = File.new()
 		file.open(NPCS_PATH+npc, file.READ)
 		var text = file.get_as_text()
@@ -295,7 +300,7 @@ func load_npcs(filter_array):
 			var data = result_json.result
 			if int(data["ID"]) in filter_array:
 				ret.append(NPC_CLASS.new(data["ID"], data["NAME"],
-				data["IMG"], data["ANIM"], data["DIALOGUE"], data["PORTRAIT"]))
+				data["IMG"], data["ANIM"], parse_events(data["EVENTS"]), data["PORTRAIT"]))
 		else:  # If parse has errors
 			print("Error: ", result_json.error)
 			print("Error Line: ", result_json.error_line)
@@ -303,59 +308,57 @@ func load_npcs(filter_array):
 
 	return ret
 
-func load_encounters(filter_array):
-	print(filter_array)
-	print("LOADING ENCOUNTERS")
-	var encounters = list_files_in_directory(ENCOUNTERS_PATH)
-	encounters.sort()
-	var ret = []
-	for encounter in encounters:
-		print(encounter)
-		var file = File.new()
-		file.open(ENCOUNTERS_PATH+encounter, file.READ)
-		var text = file.get_as_text()
-		var result_json = JSON.parse(text)
-		if result_json.error == OK: 
-			var data = result_json.result
-			if int(data["ID"]) in filter_array:
-				ret.append(ENCOUNTER_CLASS.new(data["ID"], data["NAME"],
-				data["DIALOGUE"]))
-		else:  # If parse has errors
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
 
-	return ret
-
-func load_shops(filter_array):
-	print(filter_array)
-	print("LOADING SHOPS")
-	var shops = list_files_in_directory(SHOPS_PATH)
-	shops.sort()
-	var ret = []
-	for shop in shops:
-		print(shop)
-		var file = File.new()
-		file.open(SHOPS_PATH+shop, file.READ)
-		var text = file.get_as_text()
-		var result_json = JSON.parse(text)
-		if result_json.error == OK: 
-			var data = result_json.result
-			if int(data["ID"]) in filter_array:
-				ret.append(SHOP_CLASS.new(data["ID"], data["NAME"], 
-					data["IMG"], data["ANIM"], 
-					data["DIALOGUE"], data["PORTRAIT"], 
-					data["ITENS"], data["EQUIPAMENTS"]))
-		else:  # If parse has errors
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
-
-	return ret
+func parse_events(events):
+	print(events)
+	var parsed_events = []
+	for event in events:
+		if event.has("DIALOGUE"):
+			if typeof(event["DIALOGUE"]) == TYPE_ARRAY:
+				parsed_events.append(DIALOGUE_CLASS.new(event["DIALOGUE"]))
+			else:
+				parsed_events.append(DIALOGUE_CLASS.new(
+					event["DIALOGUE"]["MESSAGE"],
+					event["DIALOGUE"]["NAME"],
+					event["DIALOGUE"]["PORTRAIT"]
+				))
+		elif event.has("OPTIONS"):
+			for option in event["OPTIONS"]:
+				parsed_events.append(OPTION_CLASS.new(
+					option["OPTION"],
+					parse_events(option["RESULTS"])
+				))
+		elif event.has("TRANSITION"):
+			var transition = event["TRANSITION"]
+			parsed_events.append(TRANSITION_CLASS.new(
+				transition["AREA"],
+				transition["MAP"],
+				LOCAL.parse_position(transition["POSITION"])
+			))
+		elif event.has("SHOP"):
+			var shop = event["SHOP"]
+			var subtype = ""
+			var itens_sold = []
+			if shop.has("ITENS"):
+				subtype = "ITEM"
+				itens_sold = shop["ITENS"]
+			else:
+				subtype = "EQUIP"
+				itens_sold = shop["EQUIPAMENTS"]
+			parsed_events.append(SHOP_CLASS.new(subtype, itens_sold))
+		elif event.has("BATTLE"):
+			var battle = event["BATTLE"]
+			parsed_events.append(BATTLE_CLASS.new(
+				battle["ENEMIES"],
+				battle["BACKGROUND"],
+				battle["MUSIC"]
+			))
+	return parsed_events
 
 # Uses information from load_players to build the actual players.
 # TODO: Fix dependency on load_all_skills when it doesn't load everything.
 func parse_players(path):
+	print("[LOADER] loading players from ", path)
 	var file = File.new()
 	file.open(path, file.READ)
 	var players = []
@@ -384,6 +387,8 @@ func parse_players(path):
 			for i in range(len(equips)):
 				if data["EQUIPS"][i] > -1:
 					players[-1].equip(equips[i], i)
+	else:
+		print("Error loading players", result_json.error)
 	return players
 
 

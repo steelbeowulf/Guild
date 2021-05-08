@@ -32,7 +32,7 @@ func _on_Player_chosen(binds):
 
 func update_info():
 	var info = get_node("Panel/All/Right/Info")
-	info.get_node("Area/Area_text").set_text(GLOBAL.AREA)
+	info.get_node("Area/Area_text").set_text(LOCAL.AREA)
 	info.get_node("Money/Money_text").set_text(format_gold(GLOBAL.gold))
 	info.get_node("Playtime/Playtime_text").set_text(format_playtime(GLOBAL.playtime))
 

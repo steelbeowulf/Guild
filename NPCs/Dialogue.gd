@@ -7,7 +7,7 @@ var max_lines = 3
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
-	GLOBAL.register_node("Dialogue", self)
+	EVENTS.register_node("Dialogue", self)
 
 
 func _process(delta):
@@ -66,11 +66,16 @@ func set_dialogue(text):
 		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
 		$Tween.set_speed_scale(1.0)
 		$Tween.start()
+	elif len(EVENTS.events) > 0:
+		EVENTS.dialogue_ended()
 	else:
+		EVENTS.dialogue_ended()
 		self.hide()
 		dialogue = ""
-		GLOBAL.dialogue_ended()
 
+func reset():
+	self.hide()
+	dialogue = ""
 
 func set_text(value):
 	AUDIO.play_se("MOVE_MENU")

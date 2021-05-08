@@ -17,17 +17,34 @@ onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
 onready var equips = load("res://Pause/EquipMenu.tscn")
 
+onready var loader = get_node("/root/LOADER")
 
 # Loads the correct map
 func _ready():
-	# TODO: Area management
-	var start = load("res://Overworld/Demo_Area/Map"+str(GLOBAL.MAP)+".tscn")
-	#var start = load("res://Overworld/Hub/Hub.tscn")
+	var start = load("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
 	self.add_child(start.instance())
-	#map = get_node("Hub")
-	map = get_node("Map"+str(GLOBAL.MAP))
-	set_effect(GLOBAL.MAP)
+	map = get_child(get_child_count()-1)
+	set_effect(LOCAL.MAP)
 
+
+func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0,0)):
+	print("[ROOT] Changing area! ", area_name)
+	if pos != Vector2(0,0):
+		LOCAL.POSITION = pos
+	var new = load("res://Overworld/"+area_name+"/Map"+str(next)+".tscn")
+	LOCAL.MAP = next
+	LOCAL.AREA = area_name
+	set_effect(LOCAL.MAP)
+	var area_info = loader.load_area_info(area_name)
+	LOCAL.load_npcs(area_info["NPCS"])
+	LOCAL.load_enemies(area_info["ENEMIES"])
+	self.add_child(new.instance())
+	if map:
+		map.hide()
+		remove_child(map)
+		map.queue_free()
+	LOCAL.TRANSITION = -1
+	map = get_child(len(get_children()) - 1)
 
 # Watches for inputs and deals with state changes
 func _process(delta):
@@ -67,12 +84,13 @@ func open_menu():
 	get_tree().paused = true
 
 # Opens shop and pauses map
-func open_shop(id: int):
+func open_shop(shop_event: Event):
+	EVENTS.dialogue_ended(true)
 	AUDIO.play_bgm("MAP_THEME", true, -8)
 	shop.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
-	shop.enter(id, "EQUIP")
+	shop.enter(shop_event)
 	STATE = "Shop"
 	get_tree().paused = true
 
@@ -104,23 +122,6 @@ func return_menu():
 	menu.show()
 	menu.give_focus()
 	STATE = "Menu"
-
-func player_clicked(num):
-	if char_screen == -1:
-		# TODO: change lanes somehow
-		pass
-	elif char_screen == 0:
-		# TODO: skill screen
-		pass
-	elif char_screen == 1:
-		# TODO: equip screen
-		pass
-	elif char_screen == 2:
-		open_status(num)
-	elif char_screen == 3:
-		# TODO: job tree screen
-		pass
-
 
 # Opens the save submenu
 func open_save():
@@ -221,17 +222,17 @@ func use_skill(skill, player):
 
 # Transitions from current area to next area
 func transition(next, fake=false):
-	var new = load("res://Overworld/Demo_Area/Map"+str(next)+".tscn")
-	GLOBAL.MAP = next
-	set_effect(GLOBAL.MAP)
+	var new = load("res://Overworld/Forest/Map"+str(next)+".tscn")
+	LOCAL.MAP = next
+	set_effect(LOCAL.MAP)
 	#call_deferred("add_child", new.instance())
 	self.add_child(new.instance())
 	if map:
 		remove_child(map)
 		map.queue_free()
-	GLOBAL.TRANSITION = -1
+	LOCAL.TRANSITION = -1
 	if not fake:
-		GLOBAL.TRANSITION = GLOBAL.MAP
+		LOCAL.TRANSITION = LOCAL.MAP
 	map = get_node("Map"+str(next))
 
 var darkness = [

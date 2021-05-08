@@ -45,8 +45,8 @@ func play(name):
 
 # Initializes player on map - sets position and camera
 func _initialize():
-	if GLOBAL.POSITION:
-		position = GLOBAL.POSITION
+	if LOCAL.POSITION:
+		position = LOCAL.POSITION
 	self.set_z_index(1)
 	var margin = get_parent().get_parent().get_map_margin()
 	$Camera2D.set_limit(MARGIN_BOTTOM, margin[0])

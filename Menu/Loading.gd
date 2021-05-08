@@ -5,6 +5,8 @@ var wait_frames
 var time_max = 100 # msec
 var current_scene
 
+var ROOT_SCENE = "res://Root.tscn"
+
 func _ready(): # game requests to switch to this scene
 	var loader_class = get_tree().get_root().get_node("LOADER")
 	var lore = loader_class.get_random_lore()
@@ -12,12 +14,9 @@ func _ready(): # game requests to switch to this scene
 	$Panel/Text.set_text(lore["Text"])
 	$Panel/Title.set_text(lore["Title"])
 
-	var path = GLOBAL.NEXT_SCENE
-	loader = ResourceLoader.load_interactive(path)
-	print("LOADER")
-	#print(loader)
+	loader = ResourceLoader.load_interactive(ROOT_SCENE)
 	if loader == null: # check for errors
-		print("LOADER - deu ruim")
+		print("[LOADER] Erro ao carregar")
 		return
 
 	wait_frames = 10
@@ -62,7 +61,4 @@ func update_progress(progress):
 
 
 func set_new_scene(scene_resource):
-	get_tree().change_scene(GLOBAL.NEXT_SCENE)
-	#current_scene = scene_resource.instance()
-	#get_node("/root").add_child(current_scene)
-	#queue_free()
+	get_tree().change_scene(ROOT_SCENE)

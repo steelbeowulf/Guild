@@ -77,7 +77,7 @@ func remove_focus():
 func _on_SaveDialog_confirmed():
 	AUDIO.play_se("ENTER_MENU")
 	location = "OUTSIDE"
-	GLOBAL.save(chosen_slot)
+	SAVE.save(chosen_slot)
 	slots.load_saves(LOADER.load_save_info())
 
 
@@ -86,10 +86,10 @@ func _on_LoadDialog_confirmed():
 	AUDIO.play_se("ENTER_MENU")
 	GLOBAL.INVENTORY = loader.load_inventory(chosen_slot)
 	GLOBAL.PLAYERS = loader.load_players(chosen_slot)
-	GLOBAL.reload_state()
+	LOCAL.reload_state()
 	GLOBAL.load_game(chosen_slot)
 	GLOBAL.get_root().close_menu()
-	GLOBAL.get_root().transition(GLOBAL.MAP, true)
+	GLOBAL.get_root().transition(LOCAL.MAP, true)
 	get_tree().change_scene("res://Root.tscn")
 
 func _on_Focus_Entered():

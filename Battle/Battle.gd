@@ -20,8 +20,8 @@ signal round_finished
 signal finish_anim
 
 func _ready():
-	GLOBAL.entering_battle = false
-	GLOBAL.IN_BATTLE = true
+	LOCAL.entering_battle = false
+	LOCAL.IN_BATTLE = true
 	battle_over = false
 	Players = GLOBAL.PLAYERS
 	Inventory =  GLOBAL.INVENTORY
@@ -55,6 +55,8 @@ func _ready():
 		AUDIO.play_bgm('BOSS_THEME')
 	else:
 		AUDIO.play_bgm('BATTLE_THEME')
+	
+	AUDIO.play_bgm(BATTLE_MANAGER.music)
 
 	# Main battle loop: calls rounds() while the battle isn't battle_over
 	while (not battle_over):

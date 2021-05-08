@@ -17,5 +17,5 @@ func _on_Area2D_body_exited(body):
 
 func _process(delta):
 	if TYPE != 0 and player and Input.is_action_just_pressed("ui_accept"):
-		GLOBAL.TRANSITION = GLOBAL.MAP
+		LOCAL.TRANSITION = LOCAL.MAP
 		GLOBAL.get_root().transition(next)

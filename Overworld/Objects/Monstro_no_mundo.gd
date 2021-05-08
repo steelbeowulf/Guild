@@ -64,7 +64,7 @@ func _ready():
 				  Vector2(SPEED, 0), Vector2(0, SPEED)]
 	base_pos = self.get_global_position()
 	map = get_parent().get_parent()
-	var Enemy = GLOBAL.ENEMIES[id]
+	var Enemy = LOCAL.get_enemy(id)
 	set_animations(Enemy.sprite, Enemy.animations)
 	play("idle")
 
@@ -200,9 +200,9 @@ func _on_View_body_exited(body):
 # Notifies map to save its state and battle manager
 # to start the battle
 func _on_Battle_body_entered(body):
-	if body.is_in_group("player") and not GLOBAL.entering_battle:
+	if body.is_in_group("player") and not LOCAL.entering_battle:
 		self.dead = true
-		GLOBAL.entering_battle = true
+		LOCAL.entering_battle = true
 		map.get_node("HUD/Transition").play("Battle")
 		yield(map.get_node("HUD/Transition"), "animation_finished")
 		BATTLE_MANAGER.initiate_battle()
@@ -215,7 +215,7 @@ func norm(vec):
 
 # Updates itself according to map state
 func _update(value):
-	var pos = GLOBAL.parse_position(value[1])
+	var pos = LOCAL.parse_position(value[1])
 	value = value[0]
 	if value:
 		self.queue_free()

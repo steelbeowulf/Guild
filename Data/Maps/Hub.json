@@ -1,13 +1,13 @@
 {
 	"NAME": "Hub",
-	"ENEMIES": [],
+	"ENEMIES": [7,8],
 	"ENEMIES_BY_AREA": [
 		[],
 		[]
 	],
-	"NPCS": [],
+	"NPCS": [10, 11, 12, 13],
 	"ENCOUNTERS": [],
-	"SHOPS": [0],
+	"SHOPS": [],
 	"BACKGROUNDS": [
 		"res://Assets/Backgrounds/forest.png",
 		"res://Assets/Backgrounds/forest2.png",
