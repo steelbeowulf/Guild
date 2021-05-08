@@ -93,6 +93,7 @@ func open_shop(shop_event: Event):
 	shop.enter(shop_event)
 	STATE = "Shop"
 	get_tree().paused = true
+	shop.set_process(true)
 
 # Closes shop menu(unpauses map)
 func close_shop():
@@ -102,6 +103,7 @@ func close_shop():
 	map.show_hud()
 	STATE = "Map"
 	get_tree().paused = false
+	shop.set_process(false)
 
 # Closes the main pause menu (unpauses map)
 func close_menu():

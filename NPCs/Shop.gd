@@ -30,6 +30,7 @@ func _ready():
 	for i in range(len(GLOBAL.PLAYERS)):
 		$ItemInfo/PartyPortraits.get_child(i).init(i)
 		$ItemInfo/PartyPortraits.get_child(i).connect("button_down", self, "_select_player", [i])
+	set_process(false)
 
 # Enter shop with specified id
 func enter(shop: Event):

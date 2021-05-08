@@ -17,6 +17,7 @@ const SHOPS_PATH = "res://Data/NPCs/Shops/"
 const PLAYERS_PATH = "res://Data/Seeds/Players.json"
 const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
 const EQUIPAMENT_PATH = "res://Data/Seeds/Equipament.json"
+const JOBS_PATH = "res://Data/Seeds/Jobs.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -27,6 +28,7 @@ var ENEMY_CLASS = load("res://Classes/Entities/Enemy.gd")
 var ITEM_CLASS = load("res://Classes/Itens.gd")
 var EQUIP_CLASS = load("res://Classes/Equip.gd")
 var NPC_CLASS = load("res://Classes/Entities/NPC.gd")
+var JOB_CLASS = load("res://Classes/Jobs.gd")
 
 var SHOP_CLASS = load("res://Classes/Events/Shop.gd")
 var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
@@ -260,8 +262,6 @@ func parse_inventory(path):
 	return itens
 
 
-
-#THIS MIGHT BE INCORRECT, BUT WILL BE FIXED LATER - Z
 func parse_equipaments(path):
 	print("PARSING EQUIP ", path)
 	var file = File.new()
@@ -310,7 +310,6 @@ func load_npcs(filter_array):
 
 
 func parse_events(events):
-	print(events)
 	var parsed_events = []
 	for event in events:
 		if event.has("DIALOGUE"):
@@ -369,6 +368,7 @@ func parse_players(path):
 		for data in datas:
 			var skills = []
 			var equips = []
+			var jobs = []
 			for id in data["SKILLS"]:
 				skills.append(GLOBAL.SKILLS[id])
 			for id in data["EQUIPS"]:
@@ -376,6 +376,10 @@ func parse_players(path):
 					equips.append(GLOBAL.EQUIPAMENT[id])
 				else:
 					equips.append(null)
+			for job in data["JOBS"]:
+				var job_instance = GLOBAL.JOBS[job["ID"]]._duplicate()
+				job_instance.set_level(job["LEVEL"])
+				jobs.append(job_instance)
 			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
 			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
 			[data["HP"], data["HP_MAX"], 
@@ -383,7 +387,7 @@ func parse_players(path):
 			data["ATK"], data["ATKM"], 
 			data["DEF"], data["DEFM"], 
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
-			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"], data["CLASS"]))
+			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"], jobs))
 			for i in range(len(equips)):
 				if data["EQUIPS"][i] > -1:
 					players[-1].equip(equips[i], i)
@@ -391,7 +395,7 @@ func parse_players(path):
 		print("Error loading players", result_json.error)
 	return players
 
-
+# Get random lore (fetches just the one atm)
 func get_random_lore():
 	var lores = list_files_in_directory(LORES_PATH)
 	lores.shuffle()
@@ -405,3 +409,25 @@ func get_random_lore():
 		print("Error: ", result_json.error)
 		print("Error Line: ", result_json.error_line)
 		print("Error String: ", result_json.error_string)
+
+# Load job info
+func load_all_jobs():
+	print("[LOADER] loading jobs")
+	var file = File.new()
+	file.open(JOBS_PATH, file.READ)
+	var jobs = []
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK:  
+		var datas = result_json.result
+		for data in datas:
+			var skills = {}
+			for lv in data["SKILLS"].keys():
+				var lv_parsed = int(lv.replace("LV", ""))
+				skills[lv_parsed] = GLOBAL.SKILLS[data["SKILLS"][lv]]
+			jobs.append(JOB_CLASS.new(
+				data["ID"], data["NAME"], data["PROFICIENCIES"], skills
+			))
+	else:
+		print("Error loading jobs", result_json.error)
+	return jobs

@@ -5,11 +5,11 @@ const equip_dict = {'HEAD':0, 'BODY':1, 'WEAPON':2, 'ACCESSORY1':3, 'ACCESSORY2'
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
 var equips = [] # Head, Body, Hands, Acc1, Acc2
-var job
+var jobs = []
 
 var portrait
 
-func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, equipamentos, resistances, classe):
+func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, equipamentos, resistances, classes):
 	self.id = id
 	self.sprite = img
 	self.animations = anim
@@ -25,7 +25,7 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
 	self.tipo = "Player"
-	self.job = classe
+	self.jobs = classes
 
 func save_data():
 	var dict = {}
@@ -52,7 +52,7 @@ func save_data():
 	dict["SKILLS"] = get_skill_ids()
 	dict["EQUIPS"] = get_equip_ids()
 	dict["RESISTANCE"] = get_resistance()
-	dict["CLASS"] = get_job()
+	dict["JOBS"] = get_jobs()
 	return dict
 
 func get_sprite():
@@ -139,8 +139,12 @@ func get_resist(type):
 func get_hate():
 	return self.hate
 
+# Return current (active) job
 func get_job():
-	return self.job
+	return self.jobs[0].get_name()
+
+func get_jobs():
+	return self.jobs
 
 func zero_hate():
 	for i in range(len(hate)):
