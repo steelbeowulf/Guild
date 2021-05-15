@@ -19,7 +19,8 @@ func set_lane(lane):
 	for l in $Lanes.get_children():
 		l.pressed = false
 	$Lanes.get_child(lane).pressed = true
-	GLOBAL.PLAYERS[id].position = lane
+	var player = GLOBAL.get_player(id)
+	player.position = lane
 
 
 func _on_Back_pressed():

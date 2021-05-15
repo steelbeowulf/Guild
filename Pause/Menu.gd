@@ -6,13 +6,14 @@ onready var x
 func _ready():
 	for btn in $Panel/All/Right/Options_Panel/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
-	for i in range(4):
-		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
-		node.connect("pressed", self, "_on_Player_chosen", [i])
-		node.connect("focus_entered", self, "_on_Focus_Entered")
+
 
 func enter(players):
 	location = "MENU"
+	for i in range(len(GLOBAL.PLAYERS)):
+		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
+		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.PLAYERS[i].id])
+		node.connect("focus_entered", self, "_on_Focus_Entered")
 	x = len(players)
 	give_focus()
 	for i in range(len(players)):
@@ -134,4 +135,4 @@ func _on_Equip_pressed():
 
 func _on_Change_pressed():
 	AUDIO.play_se("ENTER_MENU")
-	get_parent().get_parent().open_inventory()
+	get_parent().get_parent().open_change()

@@ -39,11 +39,11 @@ func _process(delta):
 func use_item():
 	var mp = player.get_mp()
 	player.set_stats(2, mp - item.quantity)
-	for player in targets:
+	for target in targets:
 		for effect in item.get_effects():
-			apply_effect(null, effect, player, null)
+			apply_effect(player, effect, target, null)
 		for status in item.get_status():
-			apply_status(status, player, player)
+			apply_status(status, target, player)
 	location = "OUTSIDE"
 	AUDIO.play_se("SPELL", -12)
 	get_parent().get_parent().get_parent().back_to_skills(player.id)
