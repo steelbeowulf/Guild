@@ -366,11 +366,12 @@ func parse_players(path):
 	if result_json.error == OK:  
 		var datas = result_json.result
 		for data in datas:
-			var skills = []
 			var equips = []
 			var jobs = []
-			for id in data["SKILLS"]:
-				skills.append(GLOBAL.SKILLS[id])
+			var skills = {}
+			for lv in data["SKILLS"].keys():
+				var lv_parsed = int(lv.replace("LV", ""))
+				skills[lv_parsed] = GLOBAL.SKILLS[data["SKILLS"][lv]]
 			for id in data["EQUIPS"]:
 				if id > -1:
 					equips.append(GLOBAL.EQUIPAMENT[id])
@@ -380,12 +381,12 @@ func parse_players(path):
 				var job_instance = GLOBAL.JOBS[job["ID"]]._duplicate()
 				job_instance.set_level(job["LEVEL"])
 				jobs.append(job_instance)
-			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"], 
+			players.append(PLAYER_CLASS.new(data["ID"], data["LEVEL"],
 			data["EXPERIENCE"], data["IMG"], data["PORTRAIT"], data["ANIM"],
-			[data["HP"], data["HP_MAX"], 
+			[data["HP"], data["HP_MAX"],
 			data["MP"], data["MP_MAX"],
-			data["ATK"], data["ATKM"], 
-			data["DEF"], data["DEFM"], 
+			data["ATK"], data["ATKM"],
+			data["DEF"], data["DEFM"],
 			data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 			data["LANE"], data["NAME"], skills, equips, data["RESISTANCE"], jobs))
 			for i in range(len(equips)):

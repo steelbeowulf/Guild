@@ -6,6 +6,7 @@ var hate = []
 var multiplier = [0.5, 1.0, 3.0]
 var equips = [] # Head, Body, Hands, Acc1, Acc2
 var jobs = []
+var possible_skills = {}
 
 var portrait
 
@@ -19,7 +20,9 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.stats = valores
 	self.position = pos
 	self.nome = identificacao
-	self.skills = habilidades
+	self.skills = learn_correct_skills(self.level, habilidades)
+	self.skills = self.skills + learn_correct_skills(classes[0].get_level(), classes[0].get_skills())
+	self.possible_skills = habilidades
 	self.equips = equipamentos
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
@@ -66,6 +69,9 @@ func get_portrait():
 
 func get_skills():
 	return self.skills
+
+func get_possible_skills():
+	return self.possible_skills
 
 func get_equips():
 	return self.equips
@@ -164,6 +170,47 @@ func die():
 func update_hate(dmg, enemy):
 	self.hate[enemy] += multiplier[position]*abs(dmg)
 	return self.hate
+
+func learn_correct_skills(current_level: int, skills_arg: Dictionary):
+	var correct_skills = []
+	for s in skills_arg.keys():
+		if s <= current_level:
+			correct_skills.append(skills_arg[s])
+	return correct_skills
+
+func get_exp_to_level_up():
+	return ceil(pow(1.8, self.level)*5.0)
+
+func gain_exp(experience: int):
+	self.xp += experience
+	var xp_to_level_up = get_exp_to_level_up()
+	
+	while self.xp >= xp_to_level_up:
+		self.level_up()
+		self.xp -= xp_to_level_up
+		xp_to_level_up = get_exp_to_level_up()
+
+func level_up():
+	self.level += 1
+	# Learn new skills from job
+	var current_job_skills = self.jobs[0].get_skills()
+	if current_job_skills.has(self.level):
+		self.skills.append(current_job_skills[self.level])
+	# Learn new skills from character
+	var character_skills = self.get_possible_skills()
+	if character_skills.has(self.level):
+		self.skills.append(character_skills[self.level])
+	# Raise stats according to job
+	var stat_raise_chance = self.jobs[0].get_proficiencies()
+	randomize()
+	for stat in stat_raise_chance.keys():
+		var stat_key = STATS.DSTATS[stat]
+		var stat_up = 0
+		if stat_raise_chance[stat]:
+			stat_up += floor(rand_range(2, 5))
+		else:
+			stat_up += floor(rand_range(1, 3))
+		self.set_stats(stat_key, self.get_stats(stat_key) + stat_up)
 
 func _duplicate():
 	var new_stats = [] + self.stats

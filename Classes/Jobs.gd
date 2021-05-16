@@ -29,7 +29,7 @@ func get_level():
 	return level
 
 func set_level(level_arg: int):
-	level = level_arg
+	self.level = level_arg
 
 func _duplicate():
 	return self.get_script().new(self.id, self.name, self.proficiencies, self.skills)
