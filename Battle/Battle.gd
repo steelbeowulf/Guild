@@ -64,6 +64,7 @@ func _ready():
 		yield(self, "round_finished")
 	end_battle()
 
+
 # A round is comprised of the turns of all entities participating in battle
 func rounds():
 	# The status "AGILITY" is used to determine the turn order

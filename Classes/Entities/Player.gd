@@ -20,8 +20,9 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.stats = valores
 	self.position = pos
 	self.nome = identificacao
-	self.skills = learn_correct_skills(self.level, habilidades)
-	self.skills = self.skills + learn_correct_skills(classes[0].get_level(), classes[0].get_skills())
+	self.skills = []
+	learn_correct_skills(classes[0].get_level(), classes[0].get_skills())
+	learn_correct_skills(self.level, habilidades)
 	self.possible_skills = habilidades
 	self.equips = equipamentos
 	self.resist = resistances
@@ -172,45 +173,64 @@ func update_hate(dmg, enemy):
 	return self.hate
 
 func learn_correct_skills(current_level: int, skills_arg: Dictionary):
-	var correct_skills = []
 	for s in skills_arg.keys():
 		if s <= current_level:
-			correct_skills.append(skills_arg[s])
-	return correct_skills
+			learn_skill(skills_arg[s])
 
 func get_exp_to_level_up():
 	return ceil(pow(1.8, self.level)*5.0)
 
 func gain_exp(experience: int):
+	var leveled_up = 0
+	var level_up_dict = {}
 	self.xp += experience
 	var xp_to_level_up = get_exp_to_level_up()
 	
 	while self.xp >= xp_to_level_up:
-		self.level_up()
+		level_up_dict = self.level_up(level_up_dict)
 		self.xp -= xp_to_level_up
 		xp_to_level_up = get_exp_to_level_up()
+		leveled_up += 1
+	return [leveled_up, level_up_dict]
 
-func level_up():
+func has_skill(id: int):
+	for sk in self.skills:
+		if sk.id == id:
+			return true
+	return false
+
+func learn_skill(skill):
+	if not has_skill(skill.id):
+		self.skills.append(skill)
+
+func level_up(level_up_dict: Dictionary):
 	self.level += 1
 	# Learn new skills from job
 	var current_job_skills = self.jobs[0].get_skills()
 	if current_job_skills.has(self.level):
-		self.skills.append(current_job_skills[self.level])
+		learn_skill(current_job_skills[self.level])
+
 	# Learn new skills from character
 	var character_skills = self.get_possible_skills()
 	if character_skills.has(self.level):
-		self.skills.append(character_skills[self.level])
+		learn_skill(character_skills[self.level])
+
 	# Raise stats according to job
 	var stat_raise_chance = self.jobs[0].get_proficiencies()
 	randomize()
 	for stat in stat_raise_chance.keys():
-		var stat_key = STATS.DSTATS[stat]
+		var stat_key = DSTAT[stat]
 		var stat_up = 0
 		if stat_raise_chance[stat]:
 			stat_up += floor(rand_range(2, 5))
 		else:
 			stat_up += floor(rand_range(1, 3))
 		self.set_stats(stat_key, self.get_stats(stat_key) + stat_up)
+		if level_up_dict.has(stat_key):
+			level_up_dict[stat] += stat_up
+		else:	
+			level_up_dict[stat] = stat_up
+	return level_up_dict
 
 func _duplicate():
 	var new_stats = [] + self.stats

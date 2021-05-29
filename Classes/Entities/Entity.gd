@@ -41,6 +41,9 @@ func ressurect():
 		self.graphics.revive()
 	self.remove_all_status()
 
+func get_level():
+	return level
+
 func get_status():
 	return status
 
@@ -177,6 +180,8 @@ func set_pos(pos):
 	self.position = pos
 
 func get_stats(stat):
+	if typeof(stat) == TYPE_STRING:
+		stat = DSTAT[stat]
 	return self.stats[stat]
 
 func get_health():
