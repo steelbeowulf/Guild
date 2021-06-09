@@ -1,0 +1,18 @@
+{
+	"ID":3,
+	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+		   "vframes": 10, "hframes":10, "scale":[2,2]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME": "Bravo",
+	"EVENTS": [
+        {
+            "DIALOGUE":[
+		        "Look, I'm really glad that you are not cursing our beloved forest...",
+		        "But man, you guys really pack a punch, maybe hold back a bit next time. I can't let this pretty face be ruined",
+		        "Anyway, please hurry up, we can't let the fiend that's causing this go unpunished",
+		        "(Hope my date doesn't notice these bruises...)"
+    		],
+        }
+    ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
+}

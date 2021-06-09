@@ -1,0 +1,11 @@
+{	
+	"ID":6,	
+	"NAME":"SWORD OF FIRE",
+	"TYPE":"FIRE",
+	"LOCATION": "WEAPON",
+	"CLASS": "KNIGHT",
+	"EFFECTS":[{"STAT":"ATK", "VALUE":35, "TYPE":"FIRE"}],
+	"STATUS":[],
+	"PRICE": 100,
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}
+}
