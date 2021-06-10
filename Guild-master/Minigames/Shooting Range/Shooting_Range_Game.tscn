@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Minigames/Shooting Range/Shooting_Range_Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Portraits/rogue.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Portraits/ranger.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
 
 [node name="Shooting_Range_Game" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Bow_Position" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 1890, 1060 )
 
 [node name="Sprite" type="Sprite" parent="Bow_Position"]
@@ -15,9 +20,17 @@ scale = Vector2( 5.33334, 7.42308 )
 texture = ExtResource( 2 )
 
 [node name="Start_Timer" type="Timer" parent="."]
+pause_mode = 2
 wait_time = 4.0
 one_shot = true
 autostart = true
+
+[node name="Bow_Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Shot_Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="GO" type="Label" parent="."]
 visible = false
@@ -35,5 +48,18 @@ margin_right = 50.0
 margin_bottom = 990.0
 rect_scale = Vector2( 5, 5 )
 text = "Quit"
+
+[node name="Area2D" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 640, 420 )
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+scale = Vector2( 5.58333, 6.78846 )
+texture = ExtResource( 3 )
 [connection signal="timeout" from="Start_Timer" to="." method="_on_Start_Timer_timeout"]
+[connection signal="timeout" from="Bow_Timer" to="." method="_on_Bow_Timer_timeout"]
 [connection signal="button_down" from="Quit" to="." method="_on_Quit_button_down"]

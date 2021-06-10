@@ -21,13 +21,14 @@ var MOVE_MENU = load("res://Assets/SFX/Menu Move.ogg")
 var MONEY = load("res://Assets/SFX/338260__philsavlem__money-bag.wav")
 var GRASS = load("res://Assets/SFX/151229__owlstorm__grassy-footstep-2.wav")
 var BELL = load("res://Assets/SFX/Bell-Sounds.wav")
+var ARROW = load("res://Assets/SFX/arrowHit01.wav")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
 'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME, 'MINIGAME_THEME': MINIGAME_THEME}
 var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT,
 'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU,
-'MONEY': MONEY, 'GRASS': GRASS, 'BELL': BELL}
+'MONEY': MONEY, 'GRASS': GRASS, 'BELL': BELL, 'ARROW': ARROW}
 
 # Base volumes
 onready var base_master = -10
