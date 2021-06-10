@@ -4,6 +4,9 @@ extends Node2D
 var strength_value = 0
 
 func _ready():
+	# test
+	AUDIO.initSound()
+	AUDIO.play_bgm("MINIGAME_THEME")
 	get_tree().paused = true
 
 func _process(_delta):
@@ -35,6 +38,8 @@ func _on_Start_Timer_timeout():
 func _on_Game_Timer_timeout():
 	get_tree().paused = true
 	if strength_value == 25:
+		AUDIO.play_se("BELL")
 		$Win_Label.visible = true
 	else:
+		AUDIO.play_bgm("GAME_OVER_THEME")
 		$Lose_Label.visible = true
