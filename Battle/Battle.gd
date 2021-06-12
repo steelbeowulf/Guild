@@ -272,6 +272,7 @@ func execute_action(action: Action):
 				stat_change.append([])
 
 				for eff in item.effect:
+					# TODO: Add times attribute back to StatEffect
 					var times = 1#eff[3]
 					for i in range(times):
 						result = apply_effect(current_entity, eff, target)

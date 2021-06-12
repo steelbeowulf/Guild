@@ -54,6 +54,8 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity):
 	if stat == HP and base_value < 0:
 		print("[APPLY EFFECT] Offensive")
 		tipo = 0
+		
+		# TODO: Make skill type consistent
 		if (typeof(type) == TYPE_STRING and type == "PHYSIC" or typeof(type) == TYPE_INT and type == PHYSIC):
 			print("[APPLY EFFECT] Physical attack")
 			atk_scalar = target.get_stats(ATK)
@@ -90,7 +92,7 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity):
 		# Cannot heal above MAX MP
 		max_value = target.get_stats(MP_MAX)
 		tipo = 1
-		ret = abs(value)
+		final_value = affected_stat + base_value
 		if final_value > max_value:
 			final_value = max_value
 			ret = abs(max_value - target.get_mp())
