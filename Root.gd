@@ -16,6 +16,7 @@ onready var status = load("res://Pause/Status.tscn")
 onready var options = load("res://Pause/Options.tscn")
 onready var skills = load("res://Pause/Skills.tscn")
 onready var equips = load("res://Pause/EquipMenu.tscn")
+onready var change = load("res://Pause/ChangeMenu.tscn")
 
 onready var loader = get_node("/root/LOADER")
 
@@ -153,6 +154,16 @@ func open_inventory():
 	get_node("Menu_Area/SubMenus/Itens").show()
 	get_node("Menu_Area/SubMenus/Itens").just_entered()
 	get_node("Menu_Area/SubMenus/Itens").give_focus()
+	
+	
+func open_change():
+	STATE = "ChangesSubmenu"
+	menu.hide()
+	get_node("Menu_Area/SubMenus").show()
+	get_node("Menu_Area/SubMenus").add_child(change.instance())
+	get_node("Menu_Area/SubMenus/Change").show()
+	get_node("Menu_Area/SubMenus/Change").just_entered()
+	get_node("Menu_Area/SubMenus/Change").give_focus()
 
 
 # Opens the inventory submenu
@@ -188,6 +199,8 @@ func open_equips(id):
 	get_node("Menu_Area/SubMenus/Equips").show()
 	get_node("Menu_Area/SubMenus/Equips").just_entered(id)
 	get_node("Menu_Area/SubMenus/Equips").enter()
+	
+
 
 # Toggles status submenu
 func toggle_status():

@@ -246,8 +246,8 @@ func _process(delta):
 			_on_No_pressed()
 		elif mode.visible:
 			_exit_Store()
-		else:
-			enter(last_shop_visited)
+		#else:
+		#	enter(last_shop_visited)
 	elif quantity.visible and not confirmation.visible:
 		if Input.is_action_just_pressed("ui_accept"):
 			AUDIO.play_se("ENTER_MENU")

@@ -14,6 +14,7 @@ var playtime
 var PLAYERS
 var INVENTORY
 var EQUIP_INVENTORY
+var RESERVE_PLAYERS
 
 onready var loader = get_node("/root/LOADER")
 
@@ -33,6 +34,7 @@ func load_game(slot):
 	gold = saved_data["Area_Info"]["Gold"]
 	INVENTORY = saved_data["Inventory"]
 	EQUIP_INVENTORY = saved_data["Equip_Inventory"]
+	RESERVE_PLAYERS = saved_data["Reserve_Players"]
 	PLAYERS = saved_data["Players"]
 	LOCAL.load_enemies(saved_data["Enemies_in_area"])
 	LOCAL.load_npcs(saved_data["NPCs_in_area"])
@@ -60,6 +62,10 @@ func get_item_ids():
 		item_ids.append(item.id)
 	return item_ids
 
+func get_player(player_id):
+	for p in PLAYERS:
+		if p.id == player_id:
+			return p
 
 # Get item ids from equip_inventory
 func get_equip_ids():

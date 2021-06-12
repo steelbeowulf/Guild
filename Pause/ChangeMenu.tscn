@@ -5,10 +5,10 @@
 [ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/Panels/Hover_Menu_Info_Panel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=5]
-[ext_resource path="res://Overworld/Hub/Comparison.tscn" type="PackedScene" id=6]
+[ext_resource path="res://NPCs/Comparison.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Pause/ItemSlot0.gd" type="Script" id=7]
 
-[node name="Equips" type="Control"]
+[node name="Change" type="Control"]
 rect_scale = Vector2( 1.865, 1.4 )
 script = ExtResource( 1 )
 
@@ -48,6 +48,7 @@ text = "Party"
 [node name="Player1" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
+visible = false
 margin_top = 74.0
 margin_right = 300.0
 margin_bottom = 144.0
@@ -62,9 +63,10 @@ text = "Player 1"
 [node name="Player2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_top = 148.0
+visible = false
+margin_top = 74.0
 margin_right = 300.0
-margin_bottom = 218.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
@@ -76,9 +78,10 @@ text = "Player 1"
 [node name="Player3" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_top = 222.0
+visible = false
+margin_top = 74.0
 margin_right = 300.0
-margin_bottom = 292.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
@@ -90,9 +93,10 @@ text = "Player 1"
 [node name="Player4" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_top = 296.0
+visible = false
+margin_top = 74.0
 margin_right = 300.0
-margin_bottom = 366.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
@@ -104,9 +108,9 @@ text = "Player 1"
 [node name="Back" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_top = 370.0
+margin_top = 74.0
 margin_right = 300.0
-margin_bottom = 440.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 0, 70 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
@@ -116,9 +120,9 @@ custom_fonts/font = ExtResource( 3 )
 text = "Back"
 
 [node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Options"]
-margin_top = 444.0
+margin_top = 148.0
 margin_right = 300.0
-margin_bottom = 664.0
+margin_bottom = 368.0
 rect_min_size = Vector2( 0, 220 )
 
 [node name="Description" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
@@ -292,10 +296,6 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 7 )
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player1" to="." method="_on_Player1_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player2" to="." method="_on_Player1_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player3" to="." method="_on_Player1_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Player4" to="." method="_on_Player1_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Reserve/ReserveSlot1" to="Panel/HBoxContainer/Reserve/ReserveSlot1" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Reserve/ReserveSlot1" to="Panel/HBoxContainer/Reserve/ReserveSlot1" method="_on_ItemSlot0_pressed"]
