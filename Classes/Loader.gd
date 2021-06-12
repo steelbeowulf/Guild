@@ -12,6 +12,7 @@ const NPCS_PATH = "res://Data/NPCs/"
 const LORES_PATH = "res://Data/Lore/"
 const ENCOUNTERS_PATH = "res://Data/NPCs/Encounters/"
 const SHOPS_PATH = "res://Data/NPCs/Shops/"
+const RESERVE_PLAYERS_PATH = "res://Data/Seeds/Reserve Players.json"
 
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Data/Seeds/Players.json"
@@ -284,6 +285,12 @@ func load_players(slot):
 	var path = PLAYERS_PATH
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
+	return parse_players(path)
+
+func load_reserve_players(slot):
+	var path = RESERVE_PLAYERS_PATH
+	if slot >= 0:
+		path = SAVE_PATH+"Slot"+str(slot)+"/Reserve_Players.json"
 	return parse_players(path)
 
 func load_npcs(filter_array):

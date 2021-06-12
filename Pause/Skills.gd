@@ -19,7 +19,7 @@ func _ready():
 
 func just_entered(id):
 	print("[SKILL] just entered "+str(id))
-	player = GLOBAL.PLAYERS[id]
+	player = GLOBAL.get_player(id)
 	location = "SUBMENU"
 	show_equips()
 
