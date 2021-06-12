@@ -98,7 +98,7 @@ func update_items(has_focus=false):
 				item_container.get_child(i).enable()
 				if not has_focus:
 					has_focus = true
-					print("Setting focus: ", i)
+					print("[SHOP] Setting focus: ", i)
 					item_container.get_child(i).grab_focus()
 		elif MODE == "SELL":
 			if GLOBAL.check_item(itens[i].id, SHOP_TYPE) <= 0:
@@ -107,7 +107,7 @@ func update_items(has_focus=false):
 				item_container.get_child(i).enable()
 				if not has_focus:
 					has_focus = true
-					print("Setting focus: ", i)
+					print("[SHOP] Setting focus: ", i)
 					item_container.get_child(i).grab_focus()
 
 func _on_Item_Selected(id: int):
@@ -127,7 +127,7 @@ func _on_Item_Selected(id: int):
 
 func _on_Item_Hovered(id: int):
 	AUDIO.play_se("MOVE_MENU")
-	print("Item hovered ", id)
+	print("[SHOP] Item hovered ", id)
 	selected_item = itens[id]
 	last_hovered = id
 	var qty_in_stock = GLOBAL.check_item(selected_item.id)
@@ -139,7 +139,7 @@ func _on_Item_Hovered(id: int):
 
 func _on_Equip_Hovered(id: int):
 	AUDIO.play_se("MOVE_MENU")
-	print("Equip hovered ", id)
+	print("[SHOP] Equip hovered ", id)
 	selected_item = itens[id]
 	last_hovered = id
 	var qty_in_stock = GLOBAL.check_item(selected_item.id)

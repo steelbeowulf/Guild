@@ -91,8 +91,7 @@ func rounds():
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
 		if status:
-			print("STATUS")
-			print(status)
+			print("[BATTLE] " + current_entity.get_name() + " status: "+ status)
 			var result
 			for st in status.keys():
 				result = result_status(st, status[st], current_entity, $AnimationManager/Log)
@@ -112,8 +111,7 @@ func rounds():
 		var result = null
 		var bounds = []
 
-		print("CAN YOU MOVE??")
-		print(can_actually_move)
+		print("[BATTLE] " + current_entity.get_name() + " can move? "+ str(can_actually_move))
 		if can_actually_move == 0:
 			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
@@ -165,9 +163,9 @@ func rounds():
 				emit_signal("round_finished")
 				return
 		$AnimationManager.resolve(current_entity, result)
-		print("WAITING FOR ANIMATIONS")
+		print("[BATTLE] Waiting for animations...")
 		yield($AnimationManager, "animation_finished")
-		print("ANIMATIONS HAVE FINISHED")
+		print("[BATTLE] Animations have finished!")
 		
 		get_node("Interface/Menu/Attack").grab_focus()
 		get_node("Interface/Menu/Attack").disabled = false
@@ -211,16 +209,22 @@ func execute_action(action: Action):
 		var death = false
 		var entities = []
 		var target_id = action.get_targets()[0]
-		print("TARGET ID")
-		print(target_id)
+		
+		# Get target from entity list
+		print("[BATTLE] Target_id: ", target_id)
 		if target_id < 0:
 			target_id += 1
 			entities = Players
 		else:
 			entities = Enemies
 		var target = entities[abs(target_id)]
-		var atk = current_entity.get_atk()
-		var dmg = target.take_damage(PHYSIC, atk)
+		
+		# Create BaseStatEffect
+		var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
+		var attackEffect = STATS_CLASS.new(0, "HP", current_entity.get_atk(), "PHYSIC")
+		var result = apply_effect(current_entity, attackEffect, target)
+		var dmg = result[0]
+		#var dmg = target.take_damage(PHYSIC, atk)
 		if target.classe == "boss" and current_entity.classe != "boss":
 			var hate = current_entity.update_hate(dmg, target.index)
 		if target.get_health() <= 0:
@@ -250,13 +254,15 @@ func execute_action(action: Action):
 		var valid_targets = []
 		# Apply the effect on all affected
 		for target_id in targets:
+			# Get correct target
 			var target
 			if target_id < 0:
 				target_id += 1
 				target = Players[abs(target_id)]
 			else:
 				target = Enemies[target_id]
-			# Checks if alvo may be targeted by the item
+			
+			# Checks if target may be targeted by the item
 			var result
 			var ret
 			var type
@@ -264,19 +270,19 @@ func execute_action(action: Action):
 				item.quantity = item.quantity - 1
 				valid_targets.append(target)
 				stat_change.append([])
-				if (item.effect != []):
-					for eff in item.effect:
-						var times = eff[3]
-						for i in range(times):
-							result = apply_effect(current_entity, eff, target,  target.index)
-							if result[0] != -1:
-								ret = result[0]
-								type = result[1]
-								stat_change[-1].append([ret, type])
-				if (item.status != []):
-					for st in item.status:
-						var ailment = apply_status(st, target, current_entity)
-						ailments.append(ailment)
+
+				for eff in item.effect:
+					var times = 1#eff[3]
+					for i in range(times):
+						result = apply_effect(current_entity, eff, target)
+						if result[0] != -1:
+							ret = result[0]
+							type = result[1]
+							stat_change[-1].append([ret, type])
+
+				for st in item.status:
+					var ailment = apply_status(st, target, current_entity)
+					ailments.append(ailment)
 				var dies = target.get_health() <= 0
 				if dies:
 					target.die()
@@ -314,19 +320,19 @@ func execute_action(action: Action):
 			if not target.is_dead() or skill.type == "RESSURECTION":
 				valid_targets.append(target)
 				stat_change.append([])
-				if (skill.effect != []):
-					for eff in skill.effect:
-						var times = eff[3]
-						for i in range(times):
-							result = apply_effect(current_entity, eff, target,  target.index)
-							if result[0] != -1:
-								ret = result[0]
-								type = result[1]
-								stat_change[-1].append([ret, type])
-				if (skill.status != []):
-					for st in skill.status:
-						var ailment = apply_status(st, target, current_entity)
-						ailments.append(ailment)
+
+				for eff in skill.effect:
+					var times = 1#eff[3]
+					for i in range(times):
+						result = apply_effect(current_entity, eff, target)
+						if result[0] != -1:
+							ret = result[0]
+							type = result[1]
+							stat_change[-1].append([ret, type])
+
+				for st in skill.status:
+					var ailment = apply_status(st, target, current_entity)
+					ailments.append(ailment)
 				var dies = target.get_health() <= 0
 				if dies:
 					target.die()

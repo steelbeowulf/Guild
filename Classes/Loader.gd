@@ -133,8 +133,8 @@ func load_all_itens():
 			var data = result_json.result
 			var effects = []
 			for ef in data["EFFECTS"]:
-				effects.append([STATS.DSTAT[ef["STAT"]], int(ef["VALUE"]), 
-				STATS.TYPE[ef["TYPE"]], int(ef["TURNS"])]) 
+				var eff = STATS_CLASS.new(STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"])
+				effects.append(eff)
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
@@ -162,7 +162,7 @@ func load_all_equips():
 			var effects = []
 			for ef in data["EFFECTS"]:
 				var eff = STATS_CLASS.new(STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"])
-				effects.append(eff) 
+				effects.append(eff)
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
@@ -192,8 +192,8 @@ func load_all_skills():
 			var data = result_json.result
 			var effects = []
 			for ef in data["EFFECTS"]:
-				effects.append([STATS.DSTAT[ef["STAT"]], int(ef["VALUE"]), 
-				STATS.TYPE[ef["TYPE"]], int(ef["TURNS"])]) 
+				var eff = STATS_CLASS.new(STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"])
+				effects.append(eff)
 			var status = []
 			for st in data["STATUS"]:
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])

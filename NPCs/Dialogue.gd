@@ -33,7 +33,6 @@ func start_dialogue():
 
 func push_dialogue(text):
 	var num_lines = max(len(text)/max_cols + 1, 1)
-	print(num_lines) 
 	var new_text = ""
 	var current_line = 0
 	var words = text.split(" ")

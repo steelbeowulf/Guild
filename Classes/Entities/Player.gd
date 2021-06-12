@@ -161,7 +161,7 @@ func reset_hate():
 	hate = []
 
 func die():
-	print("OH NO, "+self.nome+" HAS DIED!")
+	print("[PLAYER] "+self.nome+" has died!")
 	self.set_stats(HP, 0)
 	self.remove_all_status()
 	self.status["KO"] = [9999, 9999]

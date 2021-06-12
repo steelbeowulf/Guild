@@ -15,60 +15,64 @@ var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW",
 	43:"ACCURACY_DOWN", 44:"AGILITY_UP", 45:"AGILITY_DOWN", 46:"LUCK_UP", 47:"LUCK_DOWN", 48:"FEAR"}
 
 # Attack type
-enum {PHYSIC, MAGIC, FIRE}
-var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
-var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
+enum {PHYSIC, MAGIC}
 
-func apply_effect(who, effect, target, t_id):
-	var ret = -1
-	var tipo = -1
-	var stat = effect[0]
-	var value = effect[1]
-	var type = effect[2]
-	var TargetStat = target.get_stats(stat)
+func apply_effect(who: Entity, effect: StatEffect, target: Entity):
+	var ret = -1 # Stat difference for displaying numbers
+	var tipo = -1 # 0 for HP, 1 for MP
+	
+	var stat = effect.get_id()
+	var value = effect.get_value()
+	var type = effect.get_type()
+	
+	# Should be HP or MP
+	var affected_stat = target.get_stats(stat)
 	var atk = who.get_stats(ATK)
 	var atkm = who.get_stats(ATKM)
 	var def = target.get_stats(DEF)
 	var defm = target.get_stats(DEFM)
-	var acc = who.get_stats(ACC)
-	var lck = who.get_stats(LCK)
-	var lv = who.level
-	print(who.position)
-	if (type == PHYSIC):
-		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
-		var maxdamage = ((value*(512-def)*basedamage)/(33*512))
-		var truedamage
-		truedamage = ceil(maxdamage)
-		truedamage = truedamage*rand_range(89, 100)/100
-		print("dano base: -" ,ceil(basedamage))
-		print("dano maximo: " , ceil(maxdamage))
-		print("resultado: " , ceil(truedamage))
-	var finalval = TargetStat + value
-	var valmax = 9999
+	var lv = who.get_level()
+#
+#	if (typeof(type) == TYPE_STRING and type == "PHYSIC" or typeof(type) == TYPE_INT and type == PHYSIC):
+#		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
+#		var maxdamage = ((value*(512-def)*basedamage)/(33*512))
+#		var truedamage
+#		truedamage = ceil(maxdamage)
+#		truedamage = truedamage*rand_range(89, 100)/100
+#		print("[APPLY] dano base: -" ,ceil(basedamage))
+#		print("[APPLY] dano maximo: " , ceil(maxdamage))
+#		print("[APPLY] resultado: " , ceil(truedamage))
+	
+	var final_value = affected_stat + value
+	var max_value = 9999
+	
+	# Offensive case: Damages HP
 	if stat == HP and value < 0:
 		tipo = 0
 		var dmg = target.take_damage(type, abs(value))
 		ret = dmg
 		if LOCAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
-			who.update_hate(dmg, t_id)
-	else:
-		if stat == HP:
-			valmax = target.get_stats(HP_MAX)
-			tipo = 0
-			ret = -value
-			if finalval > valmax:
-				finalval = valmax
-				ret = -(valmax - target.get_health())
+			who.update_hate(dmg, target.id)
+	# Support case: Heals HP
+	elif stat == HP:
+		# Cannot heal above MAX HP
+		max_value = target.get_stats(HP_MAX)
+		tipo = 0
+		ret = abs(value)
+		if final_value > max_value:
+			final_value = max_value
+			ret = abs(max_value - target.get_health())
 		elif stat == MP:
-			valmax = target.get_stats(MP_MAX)
+			# Cannot heal above MAX MP
+			max_value = target.get_stats(MP_MAX)
 			tipo = 1
-			ret = -value
-			if finalval > valmax:
-				finalval = valmax
-				ret = -(valmax - target.get_mp())
-			if finalval < 0:
-				finalval = 0
-		target.set_stats(stat, finalval)
+			ret = abs(value)
+			if final_value > max_value:
+				final_value = max_value
+				ret = abs(max_value - target.get_mp())
+			if final_value < 0:
+				final_value = 0
+		target.set_stats(stat, final_value)
 		if target.get_health() > 0.2*target.get_max_health():
 			target.remove_status("HP_CRITICAL")
 	

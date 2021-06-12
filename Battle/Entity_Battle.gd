@@ -16,14 +16,14 @@ func _on_P0_focus_exited():
 
 
 func _on_Activate_Targets(is_ress: bool):
-	print("ACTIVATING TARGETS")
+	print("[Entity Battle] Activating targets")
 	if (not dead and not is_ress) or (dead and self.data.tipo == "Player" and is_ress):
 		self.disabled = false
 		self.set_focus_mode(2)
 		self.grab_focus()
 
 func _on_Deactivate_Targets():
-	print("DEACTIVATING TARGETS")
+	print("[Entity Battle] Deactivating targets")
 	self.disabled = true
 	self.set_focus_mode(0)
 
@@ -70,7 +70,7 @@ func set_turn(visible: bool):
 	$Turn.visible = visible
 
 func revive():
-	print("REVIVING")
+	print("[Entity Battle] Reviving...")
 	dead = false
 	$Animations.get_node("dead").stop()
 	$Animations.get_node("dead").hide()
@@ -115,7 +115,6 @@ func set_animations(sprite, animations, data_arg):
 		mat.set_shader(SHADER)
 		animation.set_material(mat)
 		animation.set_name(k)
-		#print(k)
 		animation.set_script(load('res://Battle/Spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]

@@ -7,7 +7,6 @@ func set_target_id(id: int):
 	target_id = id
 
 func _on_Target_pressed():
-	print("a")
 	emit_signal("target_picked", [target_id])
 
 func _on_Target_focus_entered():

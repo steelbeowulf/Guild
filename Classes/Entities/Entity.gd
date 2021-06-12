@@ -27,17 +27,16 @@ enum {PHYSIC, MAGIC, FIRE, WATER, ELECTRIC, ICE, EARTH, WIND, HOLY, DARKNESS}
 enum {HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, EVA, LCK}
 
 func die():
-	print("OH NO, "+self.nome+" HAS DIED!")
+	print("[ENTITY] "+self.nome+" has died!")
 	self.set_stats(HP, 0)
 	self.remove_all_status()
 	self.status["KO"] = [9999, 9999]
 	self.dead = true
 
 func ressurect():
-	print("RESSURECT")
+	print("[ENTITY] Ressurecting... ", self.nome)
 	self.dead = false
 	if LOCAL.IN_BATTLE:
-		print("INBATTLE")
 		self.graphics.revive()
 	self.remove_all_status()
 

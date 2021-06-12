@@ -3,6 +3,8 @@ class_name StatsActionResult
 
 var stats_change : Array
 var deaths : PoolIntArray
+var misses : PoolIntArray
+var criticals : PoolIntArray
 var targets : Array
 var spell : Item
 
@@ -23,6 +25,12 @@ func get_stats_change() -> Array:
 
 func get_deaths() -> PoolIntArray:
 	return deaths
+
+func get_misses() -> PoolIntArray:
+	return misses
+
+func get_criticals() -> PoolIntArray:
+	return criticals
 
 func get_targets() -> Array:
 	return targets

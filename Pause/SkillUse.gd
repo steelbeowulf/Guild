@@ -41,7 +41,7 @@ func use_item():
 	player.set_stats(2, mp - item.quantity)
 	for player in targets:
 		for effect in item.get_effects():
-			apply_effect(null, effect, player, null)
+			apply_effect(null, effect, player)
 		for status in item.get_status():
 			apply_status(status, player, player)
 	location = "OUTSIDE"

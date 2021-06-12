@@ -4,7 +4,7 @@ var targets = []
 signal target_picked
 
 func _on_Activate_Targets(skill_type: String):
-	print("ACTIVATING ALL TARGETS")
+	print("[TARGETS] Activating all")
 	self.disabled = false
 	self.set_focus_mode(2)
 	if skill_type == "OFFENSE" and self.get_name() == "Enemies":
@@ -13,14 +13,14 @@ func _on_Activate_Targets(skill_type: String):
 		self.grab_focus()
 
 func _on_Deactivate_Targets():
-	print("DEACTIVATING ALL TARGETS")
+	print("[TARGETS] Deactivating all")
 	self.disabled = true
 	self.set_focus_mode(0)
 	_on_All_focus_exited()
 
 
 func _on_All_focus_entered():
-	print("all ennter ", get_name())
+	print("[TARGETS] All enter ", get_name())
 	for c in get_children():
 		if not c.dead:
 			c._on_P0_focus_entered()
@@ -29,14 +29,13 @@ func _on_All_focus_entered():
 
 
 func _on_All_focus_exited():
-	print("all exit ", get_name())
+	print("[TARGETS] All exit ", get_name())
 	for c in get_children():
 		c._on_P0_focus_exited()
 	targets = []
 
 
 func _on_All_pressed():
-	print("ALL PRESED")
 	emit_signal("target_picked", targets)
 
 func _on_Focus_First(is_ress: bool):

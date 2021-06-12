@@ -34,7 +34,6 @@ func set_animations(sprite, animations):
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
-		#print(k)
 		animation.set_script(load('res://Battle/Spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
