@@ -31,8 +31,12 @@
 	"LCK":30,
 	"LANE":1,
 	"NAME":"Basil",
-	"JOBS": {"ID": 3, "LEVEL": 10},
-	"SKILLS":[11,12,13],
+	"JOBS": [{"ID": 3, "LEVEL": 10}],
+	"SKILLS":{
+        "LV1": 11,
+        "LV5": 13,
+        "LV10": 12,
+    },
 	"EQUIPS":[-1, -1, -1, -1, -1],
 	"RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}}
 ]
