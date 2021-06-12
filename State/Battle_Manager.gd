@@ -79,6 +79,7 @@ func generate_enemies():
 	var newEnemy = []
 	
 	# Randomizes the number of monsters on the encounter
+	# TODO: uncomment this (it was tiring testing things with 4-5 enemies every battle)
 	var total = 1 #+ (randi() % 4)
 	
 	# Checks if it's the demo boss
