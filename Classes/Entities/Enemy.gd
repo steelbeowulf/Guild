@@ -39,8 +39,8 @@ func AI(player_list, enemies_list) -> Action:
 		var sk = self.skills[i]
 		if sk.type == "OFFENSE":
 			for ef in sk.effect:
-				if ef[0] == HP and ef[1] < best_dmg and self.get_mp() >= sk.get_cost():
-					best_dmg = ef[1]
+				if ef.get_id() == HP and ef.get_value() < best_dmg and self.get_mp() >= sk.get_cost():
+					best_dmg = ef.get_value()
 					best_skill = i
 	if best_skill == -1:
 		return Action.new("Attack", 1, [possible_target])

@@ -93,10 +93,8 @@ func dir():
 
 
 func _on_Battle_body_entered(body):
-	print("BODY ENTERED")
-	print(body)
 	if body.is_in_group("enemy"):
-		print("ENEMY")
+		print("[CARA MUNDO] Entered body is enemy")
 		body.in_encounter()
 
 

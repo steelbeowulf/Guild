@@ -1,29 +1,33 @@
 extends Node2D
-var Players
-var Players_img = []
 
 func _ready():
-	Players = GLOBAL.PLAYERS
-	$AnimationManager.initialize(Players, [])
+	$AnimationManager.initialize(GLOBAL.PLAYERS, [])
 	
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
 	
 	$AnimationManager/Log.display_text("Enemies defeated!")
-	for p in Players:
-		var max_hp = p.get_max_health()
-		var max_mp = p.get_max_mp()
-		var agi = p.get_agi()
-		var atk = p.get_atk()
-		var atkm = p.get_atkm()
-		var def = p.get_def()
-		var defm = p.get_defm()
-		var acc = p.get_acc()
-		var lck = p.get_lck()
-		var up = pow(1.8, p.level)*5.0
-		if BATTLE_MANAGER.leveled_up[p.id]:
+	for i in range(len(GLOBAL.PLAYERS)):
+		var player = GLOBAL.PLAYERS[i]
+		var leveled_up = BATTLE_MANAGER.leveled_up[i]
+		if leveled_up[0] > 0:
+			var current = player.get_level()
+			var prev = current - leveled_up[0]
+			var level_up_text = player.get_name() + " has leveled up! (" + str(prev) + " -> " + str(current) + ")\n"
+			for stat in leveled_up[1].keys():
+				if stat == "skills":
+					continue
+				var stat_value = player.get_stats(stat)
+				var stat_up = leveled_up[1][stat]
+				level_up_text += (stat + ": " + str(stat_value) +" + "+ str(stat_up) +"\n")
+			
+			if len(leveled_up[1]["skills"]) > 0:
+				level_up_text += "New skill(s): \n"
+				for skill in leveled_up[1]["skills"]:
+					level_up_text += skill.get_name() + "\n"
 			$LevelUpLog.show()
-			$LevelUpLog.display_text(p.nome + " subiu de nivel!\n"+ "HP:" + str(max_hp) +"+"+ str(BATTLE_MANAGER.lvup_max_hp) +"\n"+ "MP:" +str(max_mp) +"+"+ str(BATTLE_MANAGER.lvup_max_mp) + "\n" + "ATK:" +str(atk) +"+"+ str(BATTLE_MANAGER.lvup_atk) + "\n" +"ATKM:" +str(atkm) +"+"+ str(BATTLE_MANAGER.lvup_atkm)+ "\n" + "DEF:" +str(def) +"+"+ str(BATTLE_MANAGER.lvup_def)+ "\n" + "DEFM:" +str(defm) +"+"+ str(BATTLE_MANAGER.lvup_defm)+ "\n" + "ACC:" +str(acc) +"+"+ str(BATTLE_MANAGER.lvup_acc)+ "\n" + "LCK:" +str(lck) +"+"+ str(BATTLE_MANAGER.lvup_lck)+ "\n" + "AGI:" +str(agi) +"+"+ str(BATTLE_MANAGER.lvup_agi))
+			$LevelUpLog.display_text(level_up_text)
+	BATTLE_MANAGER.leveled_up = []
 
 func _process(delta):
 	if $Timer.time_left == 0:

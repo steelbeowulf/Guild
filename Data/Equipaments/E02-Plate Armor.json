@@ -3,7 +3,7 @@
 	"NAME":"PLATE ARMOR",
 	"TYPE":"NORMAL",
 	"LOCATION": "BODY",
-	"CLASS": "KNIGHT",
+	"CLASS": "Paladin",
 	"EFFECTS":[{"STAT":"DEF", "VALUE":25, "TYPE":"PHYSIC"}],
 	"STATUS":[],
 	"PRICE": 50,

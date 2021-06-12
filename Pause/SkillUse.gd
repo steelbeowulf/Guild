@@ -41,9 +41,9 @@ func use_item():
 	player.set_stats(2, mp - item.quantity)
 	for target in targets:
 		for effect in item.get_effects():
-			apply_effect(player, effect, target, null)
+			apply_effect(player, effect, target)
 		for status in item.get_status():
-			apply_status(status, target, player)
+			apply_status(status, player, target)
 	location = "OUTSIDE"
 	AUDIO.play_se("SPELL", -12)
 	get_parent().get_parent().get_parent().back_to_skills(player.id)

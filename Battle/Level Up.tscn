@@ -12,7 +12,6 @@
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
 
-
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -79,10 +78,10 @@ z_index = -1
 texture = ExtResource( 6 )
 
 [node name="LevelUpLog" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1299.63, 260.148 )
+position = Vector2( 1318.51, 119.891 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 
 [node name="Interface" type="Control" parent="."]
 margin_right = 40.0

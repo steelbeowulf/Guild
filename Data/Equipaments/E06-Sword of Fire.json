@@ -3,7 +3,7 @@
 	"NAME":"SWORD OF FIRE",
 	"TYPE":"FIRE",
 	"LOCATION": "WEAPON",
-	"CLASS": "KNIGHT",
+	"CLASS": "Paladin",
 	"EFFECTS":[{"STAT":"ATK", "VALUE":35, "TYPE":"FIRE"}],
 	"STATUS":[],
 	"PRICE": 100,

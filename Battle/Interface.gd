@@ -14,7 +14,6 @@ func _ready():
 # Repass info to parent
 func _on_Action_Picked(action_type: String, action_id: int, targets: PoolIntArray) -> void:
 	if action_type != menu_state:
-		print("NOPE")
 		return
 	var action = Action.new(action_type, action_id, targets)
 	Battle.set_current_action(action)

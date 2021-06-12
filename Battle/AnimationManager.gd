@@ -82,7 +82,6 @@ func play(anim):
 	var scope = anim[0]
 	var animation_name = anim[1]
 	var info = anim[2]
-	print("[ANIMATION MANAGER] info "+str(info))
 	if typeof(info) == TYPE_STRING and (info == "ALL" or info == "LANE"):
 		can_play = true
 	scope.play(animation_name, info)

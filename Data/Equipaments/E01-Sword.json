@@ -3,7 +3,7 @@
 	"NAME":"SWORD",
 	"TYPE":"NORMAL",
 	"LOCATION": "WEAPON",
-	"CLASS": "KNIGHT",
+	"CLASS": "Paladin",
 	"EFFECTS":[{"STAT":"ATK", "VALUE":25, "TYPE":"PHYSIC"}],
 	"STATUS":[],
 	"PRICE": 50,

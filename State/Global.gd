@@ -5,6 +5,7 @@ var ITENS
 var SKILLS
 var STATUS
 var EQUIPAMENT
+var JOBS
 
 var gold
 var playtime
@@ -24,6 +25,7 @@ func load_game(slot):
 	SKILLS = loader.load_all_skills()
 	ITENS = loader.load_all_itens()
 	EQUIPAMENT = loader.load_all_equips()
+	JOBS = loader.load_all_jobs()
 	
 	# Saved data
 	var saved_data = SAVE.load_game(slot)
