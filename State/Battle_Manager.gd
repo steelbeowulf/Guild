@@ -175,6 +175,7 @@ func end_battle(Players, Enemies, Inventory):
 				level_up = true
 			leveled_up.append(levelup_data)
 		else:
+			leveled_up.append([0, {}])
 			death += 1
 
 	GLOBAL.PLAYERS = Players

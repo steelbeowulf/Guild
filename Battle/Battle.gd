@@ -91,7 +91,7 @@ func rounds():
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
 		if status:
-			print("[BATTLE] " + current_entity.get_name() + " status: "+ status)
+			print("[BATTLE] " + current_entity.get_name() + " status: "+ str(status))
 			var result
 			for st in status.keys():
 				result = result_status(st, status[st], current_entity, $AnimationManager/Log)
@@ -221,7 +221,7 @@ func execute_action(action: Action):
 		
 		# Create BaseStatEffect
 		var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
-		var attackEffect = STATS_CLASS.new(0, "HP", current_entity.get_atk(), "PHYSIC")
+		var attackEffect = STATS_CLASS.new(HP, "HP", -current_entity.get_atk(), "PHYSIC")
 		var result = apply_effect(current_entity, attackEffect, target)
 		var dmg = result[0]
 		#var dmg = target.take_damage(PHYSIC, atk)

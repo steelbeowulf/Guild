@@ -15,10 +15,16 @@ func _ready():
 			var prev = current - leveled_up[0]
 			var level_up_text = player.get_name() + " has leveled up! (" + str(prev) + " -> " + str(current) + ")\n"
 			for stat in leveled_up[1].keys():
+				if stat == "skills":
+					continue
 				var stat_value = player.get_stats(stat)
 				var stat_up = leveled_up[1][stat]
 				level_up_text += (stat + ": " + str(stat_value) +" + "+ str(stat_up) +"\n")
 			
+			if len(leveled_up[1]["skills"]) > 0:
+				level_up_text += "New skill(s): \n"
+				for skill in leveled_up[1]["skills"]:
+					level_up_text += skill.get_name() + "\n"
 			$LevelUpLog.show()
 			$LevelUpLog.display_text(level_up_text)
 	BATTLE_MANAGER.leveled_up = []

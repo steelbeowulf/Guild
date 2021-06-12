@@ -182,7 +182,7 @@ func get_exp_to_level_up():
 
 func gain_exp(experience: int):
 	var leveled_up = 0
-	var level_up_dict = {}
+	var level_up_dict = {"skills": []}
 	self.xp += experience
 	var xp_to_level_up = get_exp_to_level_up()
 	
@@ -202,18 +202,23 @@ func has_skill(id: int):
 func learn_skill(skill):
 	if not has_skill(skill.id):
 		self.skills.append(skill)
+		return skill
 
 func level_up(level_up_dict: Dictionary):
 	self.level += 1
 	# Learn new skills from job
 	var current_job_skills = self.jobs[0].get_skills()
 	if current_job_skills.has(self.level):
-		learn_skill(current_job_skills[self.level])
+		var skill = learn_skill(current_job_skills[self.level])
+		if skill:
+			level_up_dict["skills"].append(skill)
 
 	# Learn new skills from character
 	var character_skills = self.get_possible_skills()
 	if character_skills.has(self.level):
-		learn_skill(character_skills[self.level])
+		var skill = learn_skill(character_skills[self.level])
+		if skill:
+			level_up_dict["skills"].append(skill)
 
 	# Raise stats according to job
 	var stat_raise_chance = self.jobs[0].get_proficiencies()
