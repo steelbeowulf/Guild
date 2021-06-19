@@ -2,8 +2,8 @@ class_name Event
 
 var condition
 var argument
-var recurrence
-var automatic: bool
+var recurrence: String = "ONCE"
+var played = false
 var type: String
 
 func get_type():
@@ -18,6 +18,18 @@ func add_condition(condition_arg):
 		self.argument = condition_arg[1]
 	else:
 		self.condition = condition_arg
+
+func add_recurrence(recurrence_arg: String):
+	self.recurrence = recurrence_arg
+
+func set_played(played_arg: bool):
+	self.played = played_arg
+
+func has_played() -> bool:
+	return self.played
+
+func should_repeat() -> bool:
+	return self.recurrence != "ONCE"
 
 func get_argument():
 	return self.argument

@@ -9,6 +9,8 @@ func _init(message_arg: Array, name_arg: String = "", portrait_arg: Dictionary =
 	self.portrait = portrait_arg
 	self.messages = message_arg
 	self.type = "DIALOGUE"
+	self.played = false
+	self.recurrence = "ONCE"
 
 func set_portrait(portrait_arg):
 	self.portrait = portrait_arg

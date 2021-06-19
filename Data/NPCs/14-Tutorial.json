@@ -44,6 +44,48 @@
               ]
             },
           },
+          {
+            "CONDITION": ["on_item_use", "POTION"],
+            "RECURRENCE": "REPEATS",
+            "DIALOGUE":{
+              "NAME": "Shanta",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "Don't waste potions when I can heal you!"
+              ]
+            },
+          },
+          {
+            "CONDITION": ["on_skill_use", "HEAL"],
+            "RECURRENCE": "REPEATS",
+            "DIALOGUE":{
+              "NAME": "Shanta",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "*Sigh* you all would be doomed without me..."
+              ],
+            },
+          },
+          {
+            "CONDITION": ["on_target_damage", "Rat"],
+            "DIALOGUE":{
+              "NAME": "Maui",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "You learn fast!"
+              ]
+            },
+          },
+          {
+            "CONDITION": ["on_target_critical_health", "Maui"],
+            "DIALOGUE":{
+              "NAME": "Maui",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "I'm kinda dying over here..."
+              ]
+            },
+          },
         ]
       }
     }

@@ -4,13 +4,17 @@ var enemies : Array
 var bgm : String
 var background : String
 var events : Dictionary
+var original_events : Array
 
 func _init(enemies_arg: Array, background_arg: String, bgm_arg: String, events_arg = []):
 	self.enemies = enemies_arg
 	self.background = background_arg
 	self.bgm = bgm_arg
 	self.type = "BATTLE"
+	self.original_events = events_arg
 	self.events = _create_event_dict(events_arg)
+	self.played = false
+	self.recurrence = "ONCE"
 	print("[BATTLE EVENT PARSE] "+str(self.events))
 
 func get_events():
@@ -34,3 +38,7 @@ func _create_event_dict(events: Array) -> Dictionary:
 	for e in events:
 		event_dict[e.get_condition()] = e
 	return event_dict
+
+func _duplicate():
+	var new_events = self.original_events.duplicate(true)
+	return self.get_script().new(self.enemies, self.background, self.bgm, new_events)

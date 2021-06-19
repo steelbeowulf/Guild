@@ -23,8 +23,14 @@ func play_events(events: Array):
 	self.events = events.duplicate(true)
 	play_event(self.events.pop_front())
 
-func play_event(event: Event):
+func play_event(event: Event) -> bool:
 	print("[EVENTS] Playing event ", event.type)
+	print("[EVENTS] Has played: "+str(event.has_played()))
+	print("[EVENTS] Should repeat: "+str(event.should_repeat()))
+	if LOCAL.IN_BATTLE and event.has_played() and not event.should_repeat():
+		get_node("/root/Battle").resume()
+		return false
+	event.set_played(true)
 	if LOCAL.IN_BATTLE:
 		get_node("/root/Battle").pause()
 		caller = BATTLE_MANAGER
@@ -52,6 +58,7 @@ func play_event(event: Event):
 		BATTLE_MANAGER.initiate_event_battle(event)
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
+	return true
 
 func start_npc_dialogue(name, portrait, events, callback):
 	var node = NODES["Dialogue"]

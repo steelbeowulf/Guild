@@ -142,7 +142,7 @@ func initiate_event_battle(battle: Event):
 	Battled_Enemies = _load_enemies(battle.get_enemies())
 	background = load(battle.get_background())
 	music = battle.get_bgm()
-	current_battle = battle
+	current_battle = battle._duplicate()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
 # Generates enemies and begins the battle

@@ -76,6 +76,15 @@ func check_for_events(result: ActionResult):
 	print("[BATTLE EVENT CHECK] "+result.format())
 	if result.get_type() == "Pass" or result.get_type() == "Lane":
 		return false
+	if result.get_type() == "Item" and BATTLE_MANAGER.current_battle.get_event("on_item_use"):
+		var event = BATTLE_MANAGER.current_battle.get_event("on_item_use")
+		if result.get_spell().get_name() == event.get_argument():
+			return EVENTS.play_event(event)
+	if result.get_type() == "Skill" and BATTLE_MANAGER.current_battle.get_event("on_skill_use"):
+		var event = BATTLE_MANAGER.current_battle.get_event("on_skill_use")
+		if result.get_spell().get_name() == event.get_argument():
+			return EVENTS.play_event(event)
+	
 	var deaths = result.get_deaths()
 	if BATTLE_MANAGER.current_battle.get_event("on_target_death") and deaths.has(true):
 		var event = BATTLE_MANAGER.current_battle.get_event("on_target_death")
@@ -83,8 +92,16 @@ func check_for_events(result: ActionResult):
 			if deaths[i]:
 				var target: Entity = result.get_targets()[i]
 				if target.get_name() == event.get_argument():
-					EVENTS.play_event(event)
-					return true
+					return EVENTS.play_event(event)
+	if BATTLE_MANAGER.current_battle.get_event("on_target_damage") or BATTLE_MANAGER.current_battle.get_event("on_target_critical_health"):
+		var event = BATTLE_MANAGER.current_battle.get_event("on_target_damage")
+		for target in result.get_targets():
+			if BATTLE_MANAGER.current_battle.get_event("on_target_critical_health"):
+				var critical_event = BATTLE_MANAGER.current_battle.get_event("on_target_critical_health")
+				if target.get_name() == critical_event.get_argument() and target.is_critical_health():
+					return EVENTS.play_event(critical_event)
+			if event and target.get_name() == event.get_argument():
+				return EVENTS.play_event(event)
 	return false
 
 func pause():

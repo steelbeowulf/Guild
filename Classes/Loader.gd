@@ -364,6 +364,8 @@ func parse_events(events):
 			)
 		if event.has("CONDITION"):
 			event_instance.add_condition(event["CONDITION"])
+		if event.has("RECURRENCE"):
+			event_instance.add_recurrence(event["RECURRENCE"])
 		parsed_events.append(event_instance)
 	return parsed_events
 
