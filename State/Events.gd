@@ -25,9 +25,15 @@ func play_events(events: Array):
 
 func play_event(event: Event):
 	print("[EVENTS] Playing event ", event.type)
+	if LOCAL.IN_BATTLE:
+		get_node("/root/Battle").pause()
+		caller = BATTLE_MANAGER
 	if event.type == "DIALOGUE":
 		var node = NODES["Dialogue"]
-		node.set_talker(npc_name, npc_portrait)
+		if event.portrait and event.name:
+			node.set_talker(event.name, event.portrait)
+		else:
+			node.set_talker(npc_name, npc_portrait)
 		for dial in event.messages:
 			node.push_dialogue(dial)
 		node.start_dialogue()

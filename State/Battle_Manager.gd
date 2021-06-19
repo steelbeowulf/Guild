@@ -10,6 +10,7 @@ onready var Map = null
 onready var Battled_Enemies = []
 onready var background
 onready var music = "BATTLE_THEME"
+onready var current_battle = null
 
 # Level up variable
 onready var leveled_up = []
@@ -141,6 +142,7 @@ func initiate_event_battle(battle: Event):
 	Battled_Enemies = _load_enemies(battle.get_enemies())
 	background = load(battle.get_background())
 	music = battle.get_bgm()
+	current_battle = battle
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
 # Generates enemies and begins the battle
@@ -194,3 +196,8 @@ func end_battle(Players, Enemies, Inventory):
 	else:
 		print("[BM] Back to the map")
 		get_tree().change_scene("res://Root.tscn")
+
+
+func _on_Dialogue_Ended():
+	get_node("/root/Battle").resume()
+	get_node("/root/Battle").emit_signal("event_finished")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=8]
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
-
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -21,6 +21,7 @@ _data = {
 script = ExtResource( 1 )
 
 [node name="AnimationManager" type="Node2D" parent="."]
+editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="Players" type="Button" parent="AnimationManager"]
@@ -150,6 +151,7 @@ scale = Vector2( 1.96703, 1.51696 )
 z_index = -1
 
 [node name="Interface" type="Control" parent="."]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 7 )
@@ -236,6 +238,10 @@ margin_right = 676.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
+
+[node name="HUD" parent="." instance=ExtResource( 11 )]
+pause_mode = 2
+
 [connection signal="focus_entered" from="AnimationManager/Players" to="AnimationManager/Players" method="_on_All_focus_entered"]
 [connection signal="focus_exited" from="AnimationManager/Players" to="AnimationManager/Players" method="_on_All_focus_exited"]
 [connection signal="pressed" from="AnimationManager/Players" to="AnimationManager/Players" method="_on_All_pressed"]

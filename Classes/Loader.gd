@@ -319,28 +319,29 @@ func load_npcs(filter_array):
 func parse_events(events):
 	var parsed_events = []
 	for event in events:
+		var event_instance: Event = null
 		if event.has("DIALOGUE"):
 			if typeof(event["DIALOGUE"]) == TYPE_ARRAY:
-				parsed_events.append(DIALOGUE_CLASS.new(event["DIALOGUE"]))
+				event_instance = DIALOGUE_CLASS.new(event["DIALOGUE"])
 			else:
-				parsed_events.append(DIALOGUE_CLASS.new(
+				event_instance = DIALOGUE_CLASS.new(
 					event["DIALOGUE"]["MESSAGE"],
 					event["DIALOGUE"]["NAME"],
 					event["DIALOGUE"]["PORTRAIT"]
-				))
+				)
 		elif event.has("OPTIONS"):
 			for option in event["OPTIONS"]:
-				parsed_events.append(OPTION_CLASS.new(
+				event_instance = OPTION_CLASS.new(
 					option["OPTION"],
 					parse_events(option["RESULTS"])
-				))
+				)
 		elif event.has("TRANSITION"):
 			var transition = event["TRANSITION"]
-			parsed_events.append(TRANSITION_CLASS.new(
+			event_instance = TRANSITION_CLASS.new(
 				transition["AREA"],
 				transition["MAP"],
 				LOCAL.parse_position(transition["POSITION"])
-			))
+			)
 		elif event.has("SHOP"):
 			var shop = event["SHOP"]
 			var subtype = ""
@@ -351,14 +352,19 @@ func parse_events(events):
 			else:
 				subtype = "EQUIP"
 				itens_sold = shop["EQUIPAMENTS"]
-			parsed_events.append(SHOP_CLASS.new(subtype, itens_sold))
+			event_instance = SHOP_CLASS.new(subtype, itens_sold)
 		elif event.has("BATTLE"):
 			var battle = event["BATTLE"]
-			parsed_events.append(BATTLE_CLASS.new(
+			var battle_events = parse_events(battle["EVENTS"])
+			event_instance = BATTLE_CLASS.new(
 				battle["ENEMIES"],
 				battle["BACKGROUND"],
-				battle["MUSIC"]
-			))
+				battle["MUSIC"],
+				battle_events
+			)
+		if event.has("CONDITION"):
+			event_instance.add_condition(event["CONDITION"])
+		parsed_events.append(event_instance)
 	return parsed_events
 
 # Uses information from load_players to build the actual players.

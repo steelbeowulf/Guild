@@ -58,11 +58,11 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity):
 		# TODO: Make skill type consistent
 		if (typeof(type) == TYPE_STRING and type == "PHYSIC" or typeof(type) == TYPE_INT and type == PHYSIC):
 			print("[APPLY EFFECT] Physical attack")
-			atk_scalar = target.get_stats(ATK)
+			atk_scalar = who.get_stats(ATK)
 			def_scalar = target.get_stats(DEF)
 		else:
 			print("[APPLY EFFECT] Magic attack")
-			atk_scalar = target.get_stats(ATKM)
+			atk_scalar = who.get_stats(ATKM)
 			def_scalar = target.get_stats(DEFM)
 			
 		var ceil_value = ceil(base_value*(atk_scalar/150.0 + 1.0) + (def_scalar * target_lv / 2.0))

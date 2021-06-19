@@ -1,0 +1,52 @@
+{
+	"ID":14,
+	"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME": "Fighter",
+  "EVENTS": [
+    {
+      "DIALOGUE":[
+        "Hey there!",
+        "Tutorial time"
+      ]
+    },
+    {
+      "BATTLE": {
+        "ENEMIES": [8],
+        "MUSIC": "BOSS_THEME",
+        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+        "EVENTS": [
+          {
+            "CONDITION": "on_begin",
+            "DIALOGUE":{
+              "NAME": "Maui",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "Oh look, a rat",
+                "Try attacking it!"
+              ]
+            },
+          },
+          {
+            "CONDITION": "on_end",
+            "DIALOGUE":[
+              "Nicely done!"
+            ]
+          },
+          {
+            "CONDITION": ["on_target_death", "Siegfried"],
+            "DIALOGUE":{
+              "NAME": "Shanta",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "Come on, Sieg, keep it together!"
+              ]
+            },
+          },
+        ]
+      }
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}
+}

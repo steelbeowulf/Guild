@@ -1,10 +1,10 @@
 extends "Event.gd"
 
 var name: String
-var portrait: String
+var portrait: Dictionary
 var messages: Array
 
-func _init(message_arg: Array, name_arg: String = "", portrait_arg: String = ""):
+func _init(message_arg: Array, name_arg: String = "", portrait_arg: Dictionary = {}):
 	self.name = name_arg
 	self.portrait = portrait_arg
 	self.messages = message_arg

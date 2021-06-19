@@ -18,6 +18,7 @@ const RUN_CHANCE = 75
 
 signal round_finished
 signal finish_anim
+signal event_finished
 
 func _ready():
 	LOCAL.entering_battle = false
@@ -59,11 +60,38 @@ func _ready():
 	AUDIO.play_bgm(BATTLE_MANAGER.music)
 
 	# Main battle loop: calls rounds() while the battle isn't battle_over
+	trigger_event("on_begin")
 	while (not battle_over):
 		rounds()
 		yield(self, "round_finished")
+	trigger_event("on_end")
+	yield(self, "event_finished")
 	end_battle()
 
+func trigger_event(condition: String):
+	if BATTLE_MANAGER.current_battle.get_event(condition):
+		EVENTS.play_event(BATTLE_MANAGER.current_battle.get_event(condition))
+
+func check_for_events(result: ActionResult):
+	print("[BATTLE EVENT CHECK] "+result.format())
+	if result.get_type() == "Pass" or result.get_type() == "Lane":
+		return false
+	var deaths = result.get_deaths()
+	if BATTLE_MANAGER.current_battle.get_event("on_target_death") and deaths.has(true):
+		var event = BATTLE_MANAGER.current_battle.get_event("on_target_death")
+		for i in range(len(deaths)):
+			if deaths[i]:
+				var target: Entity = result.get_targets()[i]
+				if target.get_name() == event.get_argument():
+					EVENTS.play_event(event)
+					return true
+	return false
+
+func pause():
+	get_tree().paused = true
+
+func resume():
+	get_tree().paused = false
 
 # A round is comprised of the turns of all entities participating in battle
 func rounds():
@@ -166,6 +194,8 @@ func rounds():
 		print("[BATTLE] Waiting for animations...")
 		yield($AnimationManager, "animation_finished")
 		print("[BATTLE] Animations have finished!")
+		if check_for_events(result):
+			yield(self, "event_finished")
 		
 		get_node("Interface/Menu/Attack").grab_focus()
 		get_node("Interface/Menu/Attack").disabled = false

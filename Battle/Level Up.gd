@@ -30,12 +30,7 @@ func _ready():
 	BATTLE_MANAGER.leveled_up = []
 
 func _process(delta):
-	if $Timer.time_left == 0:
-		if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_action_just_pressed("ui_accept"):
+		if $LevelUpLog.next():
 			AUDIO.play_bgm('MAP_THEME', false)
 			get_tree().change_scene("Root.tscn")
-
-
-
-func _on_Timer_timeout():
-	pass # Replace with function body.
