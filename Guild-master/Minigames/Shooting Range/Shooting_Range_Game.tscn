@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Minigames/Shooting Range/Shooting_Range_Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Portraits/rogue.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Portraits/ranger.png" type="Texture" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 30 )
+[ext_resource path="res://Minigames/End_MiniGame.tscn" type="PackedScene" id=3]
 
 [node name="Shooting_Range_Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,6 +29,15 @@ one_shot = true
 [node name="Shot_Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Target_Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="End_Timer" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+autostart = true
+
 [node name="GO" type="Label" parent="."]
 visible = false
 margin_left = 750.0
@@ -41,6 +47,21 @@ margin_bottom = 64.0
 rect_scale = Vector2( 10, 10 )
 text = "GO!"
 
+[node name="Hits_counter" type="Label" parent="."]
+margin_left = 1360.0
+margin_top = 20.0
+margin_right = 1394.0
+margin_bottom = 34.0
+rect_scale = Vector2( 10, 10 )
+text = "Hits: "
+
+[node name="Time" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 40.0
+margin_right = 88.0
+margin_bottom = 54.0
+rect_scale = Vector2( 10, 10 )
+
 [node name="Quit" type="Button" parent="."]
 margin_left = 10.0
 margin_top = 970.0
@@ -49,17 +70,10 @@ margin_bottom = 990.0
 rect_scale = Vector2( 5, 5 )
 text = "Quit"
 
-[node name="Area2D" type="Area2D" parent="."]
-editor/display_folded = true
-position = Vector2( 640, 420 )
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Area2D"]
-scale = Vector2( 5.58333, 6.78846 )
-texture = ExtResource( 3 )
+[node name="End_MiniGame" parent="." instance=ExtResource( 3 )]
+visible = false
 [connection signal="timeout" from="Start_Timer" to="." method="_on_Start_Timer_timeout"]
 [connection signal="timeout" from="Bow_Timer" to="." method="_on_Bow_Timer_timeout"]
+[connection signal="timeout" from="Target_Timer" to="." method="_on_Target_Timer_timeout"]
+[connection signal="timeout" from="End_Timer" to="." method="_on_End_Timer_timeout"]
 [connection signal="button_down" from="Quit" to="." method="_on_Quit_button_down"]

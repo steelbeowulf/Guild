@@ -4,6 +4,7 @@
 [ext_resource path="res://Assets/Portraits/wizard.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.6667, 16.6667 )
 
 [node name="Target" type="Area2D"]
 collision_layer = 2
@@ -14,7 +15,10 @@ scale = Vector2( 1.2, 1.2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -3.125 )
-scale = Vector2( 2.45833, 2.59615 )
+scale = Vector2( 3.33333, 3.34135 )
 texture = ExtResource( 2 )
+
+[node name="SelfDestruction_Timer" type="Timer" parent="."]
+wait_time = 5.0
 [connection signal="area_entered" from="." to="." method="_on_Target_area_entered"]
+[connection signal="timeout" from="SelfDestruction_Timer" to="." method="_on_SelfDestruction_Timer_timeout"]

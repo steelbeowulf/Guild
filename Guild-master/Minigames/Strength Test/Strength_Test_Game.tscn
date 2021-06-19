@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Minigames/Strength Test/Strength_Test_Game.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/End_MiniGame.tscn" type="PackedScene" id=2]
 
 [node name="Strength_Test_Game" type="Node2D"]
 scale = Vector2( 0.99071, 1 )
@@ -62,6 +63,9 @@ margin_right = 710.607
 margin_bottom = 57.0615
 rect_scale = Vector2( 20, 20 )
 text = "Go!"
+
+[node name="End_MiniGame" parent="." instance=ExtResource( 2 )]
+visible = false
 [connection signal="button_down" from="Strength_Button" to="." method="_on_Strength_Button_button_down"]
 [connection signal="button_down" from="Exit" to="." method="_on_Exit_button_down"]
 [connection signal="timeout" from="Start_Timer" to="." method="_on_Start_Timer_timeout"]
