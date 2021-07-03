@@ -151,7 +151,6 @@ scale = Vector2( 1.96703, 1.51696 )
 z_index = -1
 
 [node name="Interface" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 7 )
@@ -172,27 +171,27 @@ margin_right = 328.0
 margin_bottom = 1073.08
 
 [node name="Attack" parent="Interface/Menu" instance=ExtResource( 9 )]
-visible = false
 margin_right = 318.0
 margin_bottom = 28.0
 focus_neighbour_top = NodePath("../Run")
 
 [node name="Skill" parent="Interface/Menu" instance=ExtResource( 9 )]
+margin_top = 32.0
 margin_right = 318.0
-margin_bottom = 37.0
+margin_bottom = 60.0
 
 [node name="Item" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 41.0
+margin_top = 64.0
 margin_right = 318.0
-margin_bottom = 78.0
+margin_bottom = 92.0
 
 [node name="Lane" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 82.0
+margin_top = 96.0
 margin_right = 318.0
-margin_bottom = 119.0
+margin_bottom = 124.0
 
 [node name="Run" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 123.0
+margin_top = 128.0
 margin_right = 318.0
 margin_bottom = 160.0
 focus_neighbour_bottom = NodePath("../Attack")

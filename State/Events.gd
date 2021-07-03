@@ -1,7 +1,20 @@
 extends Node
 
 var NODES = {}
+var flags = {}
 
+func load_flags(flags_arg: Dictionary):
+	flags = flags_arg
+
+func set_flag(event: Event):
+	var key = event.get_key()
+	var value = event.get_value()
+	flags[key] = value
+
+func get_flag(key: String):
+	if flags.has(key):
+		return flags[key]
+	return null
 
 func register_node(name, node):
 	NODES[name] = node
@@ -21,7 +34,7 @@ var npc_portrait = ""
 
 func play_events(events: Array):
 	self.events = events.duplicate(true)
-	play_event(self.events.pop_front())
+	return play_event(self.events.pop_front())
 
 func play_event(event: Event) -> bool:
 	print("[EVENTS] Playing event ", event.type)
@@ -52,12 +65,18 @@ func play_event(event: Event) -> bool:
 			events.pop_front()
 			node.push_option(ev)
 		node.show_options()
+	elif event.type == "FLAG":
+		EVENTS.set_flag(event)
+		get_node("/root/Battle").resume()
+		return false
 	elif event.type == "SHOP":
 		GLOBAL.get_root().open_shop(event)
 	elif event.type == "BATTLE":
 		BATTLE_MANAGER.initiate_event_battle(event)
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
+	#if self.events:
+	#	return play_events(self.events)
 	return true
 
 func start_npc_dialogue(name, portrait, events, callback):

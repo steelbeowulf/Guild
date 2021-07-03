@@ -20,6 +20,12 @@ signal round_finished
 signal finish_anim
 signal event_finished
 
+func show_enabled_actions():
+	for action in get_node("Interface/Menu").get_children():
+		var key = "can_battle_" + action.get_name().to_lower()
+		if EVENTS.get_flag(key):
+			action.show()
+
 func _ready():
 	LOCAL.entering_battle = false
 	LOCAL.IN_BATTLE = true
@@ -59,6 +65,11 @@ func _ready():
 	
 	AUDIO.play_bgm(BATTLE_MANAGER.music)
 
+	# Hide actions that are still locked
+	for action in $Interface/Menu.get_children():
+		action.hide()
+	show_enabled_actions()
+
 	# Main battle loop: calls rounds() while the battle isn't battle_over
 	trigger_event("on_begin")
 	while (not battle_over):
@@ -68,41 +79,55 @@ func _ready():
 	yield(self, "event_finished")
 	end_battle()
 
+
 func trigger_event(condition: String):
-	if BATTLE_MANAGER.current_battle.get_event(condition):
-		EVENTS.play_event(BATTLE_MANAGER.current_battle.get_event(condition))
+	if BATTLE_MANAGER.current_battle.get_events(condition):
+		EVENTS.play_events(BATTLE_MANAGER.current_battle.get_events(condition))
+
 
 func check_for_events(result: ActionResult):
 	print("[BATTLE EVENT CHECK] "+result.format())
+	var should_play = []
 	if result.get_type() == "Pass" or result.get_type() == "Lane":
 		return false
-	if result.get_type() == "Item" and BATTLE_MANAGER.current_battle.get_event("on_item_use"):
-		var event = BATTLE_MANAGER.current_battle.get_event("on_item_use")
-		if result.get_spell().get_name() == event.get_argument():
-			return EVENTS.play_event(event)
-	if result.get_type() == "Skill" and BATTLE_MANAGER.current_battle.get_event("on_skill_use"):
-		var event = BATTLE_MANAGER.current_battle.get_event("on_skill_use")
-		if result.get_spell().get_name() == event.get_argument():
-			return EVENTS.play_event(event)
+	if result.get_type() == "Item" and BATTLE_MANAGER.current_battle.get_events("on_item_use"):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_item_use")
+		for event in events:
+			if result.get_spell().get_name() == event.get_argument(0):
+				should_play.append(event)
+	if result.get_type() == "Skill" and BATTLE_MANAGER.current_battle.get_events("on_skill_use"):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_skill_use")
+		for event in events:
+			if result.get_spell().get_name() == event.get_argument(0):
+				should_play.append(event)
 	
 	var deaths = result.get_deaths()
-	if BATTLE_MANAGER.current_battle.get_event("on_target_death") and deaths.has(true):
-		var event = BATTLE_MANAGER.current_battle.get_event("on_target_death")
-		for i in range(len(deaths)):
-			if deaths[i]:
-				var target: Entity = result.get_targets()[i]
-				if target.get_name() == event.get_argument():
-					return EVENTS.play_event(event)
-	if BATTLE_MANAGER.current_battle.get_event("on_target_damage") or BATTLE_MANAGER.current_battle.get_event("on_target_critical_health"):
-		var event = BATTLE_MANAGER.current_battle.get_event("on_target_damage")
-		for target in result.get_targets():
-			if BATTLE_MANAGER.current_battle.get_event("on_target_critical_health"):
-				var critical_event = BATTLE_MANAGER.current_battle.get_event("on_target_critical_health")
-				if target.get_name() == critical_event.get_argument() and target.is_critical_health():
-					return EVENTS.play_event(critical_event)
-			if event and target.get_name() == event.get_argument():
-				return EVENTS.play_event(event)
-	return false
+	var actor = result.get_actor()
+	if BATTLE_MANAGER.current_battle.get_events("on_target_death") and deaths.has(true):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_target_death")
+		for event in events:
+			for i in range(len(deaths)):
+				if deaths[i]:
+					var target: Entity = result.get_targets()[i]
+					if target.get_name() == event.get_argument(0):
+						if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
+							should_play.append(event)
+	if BATTLE_MANAGER.current_battle.get_events("on_target_damage") or BATTLE_MANAGER.current_battle.get_event("on_target_critical_health"):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_target_damage")
+		for event in events:
+			for target in result.get_targets():
+				if BATTLE_MANAGER.current_battle.get_events("on_target_critical_health"):
+					var critical_events = BATTLE_MANAGER.current_battle.get_events("on_target_critical_health")
+					for critical_event in critical_events:
+						if target.get_name() == critical_event.get_argument(0) and target.is_critical_health():
+							if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
+								should_play.append(critical_event)
+				if event and target.get_name() == event.get_argument(0):
+					if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
+						should_play.append(event)
+	if len(should_play) == 0:
+		return false
+	return EVENTS.play_events(should_play)
 
 func pause():
 	get_tree().paused = true
@@ -175,8 +200,7 @@ func rounds():
 				
 				# Show the Menu and wait until action is selected
 				get_node("Interface/Menu").show()
-				for c in get_node("Interface/Menu").get_children():
-					c.show()
+				show_enabled_actions()
 				$Interface/Menu/Attack.grab_focus()
 				yield($Interface, "turn_finished")
 				action = current_action
@@ -278,7 +302,7 @@ func execute_action(action: Action):
 			death = true
 			target.die()
 		print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(death)+", dmg="+str(dmg))
-		return StatsActionResult.new("Attack", [target], [dmg], [death])
+		return StatsActionResult.new("Attack", current_entity, [target], [dmg], [death])
 	
 	# Lane: only the player characters may change lanes
 	elif action_type == "Lane":
@@ -341,7 +365,7 @@ func execute_action(action: Action):
 		if item.quantity == 0:
 			Inventory.remove(item_id)
 		
-		return StatsActionResult.new("Item", valid_targets, stat_change, dead, item)
+		return StatsActionResult.new("Item", current_entity, valid_targets, stat_change, dead, item)
 
 	elif action_type == "Skill":
 		AUDIO.play_se("SPELL", -12)
@@ -390,7 +414,7 @@ func execute_action(action: Action):
 		# Spends the MP
 		var mp = current_entity.get_mp()
 		current_entity.set_stats(MP, mp-skill.quantity)
-		return StatsActionResult.new("Skill", valid_targets, stat_change, dead, skill)
+		return StatsActionResult.new("Skill", current_entity, valid_targets, stat_change, dead, skill)
 	
 	elif action_type == "Run":
 		AUDIO.play_se("RUN")

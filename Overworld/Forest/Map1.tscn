@@ -17,7 +17,6 @@ Transitions = {
 }
 
 [node name="Tiles" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Ground" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 2 )

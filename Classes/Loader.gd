@@ -19,6 +19,7 @@ const PLAYERS_PATH = "res://Data/Seeds/Players.json"
 const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
 const EQUIPAMENT_PATH = "res://Data/Seeds/Equipament.json"
 const JOBS_PATH = "res://Data/Seeds/Jobs.json"
+const FLAGS_PATH = "res://Data/Seeds/Flags.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -38,6 +39,7 @@ var DIALOGUE_CLASS = load("res://Classes/Events/Dialogue.gd")
 var OPTION_CLASS = load("res://Classes/Events/Option.gd")
 var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
 var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
+var FLAG_CLASS = load("res://Classes/Events/Flag.gd")
 
 var List
 
@@ -229,6 +231,22 @@ func load_all_statuses():
 	print(ret)
 	return ret
 
+# Loads various flags related to the state of the world
+func load_flags(slot):
+	var path = FLAGS_PATH
+	if slot >= 0:
+		path = SAVE_PATH+"Slot"+str(slot)+"/Flags.json"
+	var file = File.new()
+	file.open(path, file.READ)
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK: 
+		return result_json.result
+	else:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)
+
 
 # Loads information regarding the players' inventory.
 # If it's a new game, loads it from Demo_Data.
@@ -316,7 +334,7 @@ func load_npcs(filter_array):
 	return ret
 
 
-func parse_events(events):
+func parse_events(events: Array):
 	var parsed_events = []
 	for event in events:
 		var event_instance: Event = null
@@ -331,6 +349,8 @@ func parse_events(events):
 				)
 		elif event.has("OPTIONS"):
 			for option in event["OPTIONS"]:
+				if event_instance != null:
+					parsed_events.append(event_instance)
 				event_instance = OPTION_CLASS.new(
 					option["OPTION"],
 					parse_events(option["RESULTS"])
@@ -362,6 +382,9 @@ func parse_events(events):
 				battle["MUSIC"],
 				battle_events
 			)
+		elif event.has("FLAG"):
+			var flag = event["FLAG"]
+			event_instance = FLAG_CLASS.new(flag["KEY"], flag["VALUE"])
 		if event.has("CONDITION"):
 			event_instance.add_condition(event["CONDITION"])
 		if event.has("RECURRENCE"):

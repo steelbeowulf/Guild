@@ -17,10 +17,11 @@ func _init(enemies_arg: Array, background_arg: String, bgm_arg: String, events_a
 	self.recurrence = "ONCE"
 	print("[BATTLE EVENT PARSE] "+str(self.events))
 
-func get_events():
+func get_all_events():
 	return self.events
 
-func get_event(key: String):
+
+func get_events(key: String):
 	if events.has(key):
 		return events[key]
 
@@ -36,7 +37,11 @@ func get_bgm():
 func _create_event_dict(events: Array) -> Dictionary:
 	var event_dict = {}
 	for e in events:
-		event_dict[e.get_condition()] = e
+		var k = e.get_condition()
+		if event_dict.has(k):
+			event_dict[k].append(e)
+		else:
+			event_dict[k] = [e]
 	return event_dict
 
 func _duplicate():

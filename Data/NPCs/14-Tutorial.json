@@ -29,24 +29,41 @@
             },
           },
           {
-            "CONDITION": "on_end",
-            "DIALOGUE":[
-              "Nicely done!"
-            ]
-          },
-          {
-            "CONDITION": ["on_target_death", "Siegfried"],
+            "CONDITION": "on_begin",
             "DIALOGUE":{
               "NAME": "Shanta",
               "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
               "MESSAGE": [
-                "Come on, Sieg, keep it together!"
+                "Don't screw this up, alright?"
               ]
             },
           },
           {
-            "CONDITION": ["on_item_use", "POTION"],
-            "RECURRENCE": "REPEATS",
+            "CONDITION": "on_end",
+            "DIALOGUE":[
+              "Great job, guys!"
+            ]
+          },
+          {
+            "CONDITION": ["on_target_death", ["Siegfried"]],
+            "DIALOGUE":{
+              "NAME": "Shanta",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "Come on, man, keep it together!"
+              ]
+            },
+          },
+          {
+            "CONDITION": ["on_target_death", ["Shanta"]],
+            "FLAG": {
+              "KEY": "can_battle_skill",
+              "VALUE": true
+            }
+          },
+          {
+            "CONDITION": ["on_item_use", ["POTION"]],
+            "RECURRENCE": "ONCE",
             "DIALOGUE":{
               "NAME": "Shanta",
               "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
@@ -56,8 +73,8 @@
             },
           },
           {
-            "CONDITION": ["on_skill_use", "HEAL"],
-            "RECURRENCE": "REPEATS",
+            "CONDITION": ["on_skill_use", ["HEAL"]],
+            "RECURRENCE": "ONCE",
             "DIALOGUE":{
               "NAME": "Shanta",
               "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
@@ -67,17 +84,17 @@
             },
           },
           {
-            "CONDITION": ["on_target_damage", "Rat"],
+            "CONDITION": ["on_target_damage", ["Rat", "Siegfried"]],
             "DIALOGUE":{
               "NAME": "Maui",
               "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
               "MESSAGE": [
-                "You learn fast!"
+                "Nice one, you learn fast!"
               ]
             },
           },
           {
-            "CONDITION": ["on_target_critical_health", "Maui"],
+            "CONDITION": ["on_target_critical_health", ["Maui"]],
             "DIALOGUE":{
               "NAME": "Maui",
               "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 

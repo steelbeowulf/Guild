@@ -38,6 +38,7 @@ func load_game(slot):
 	PLAYERS = saved_data["Players"]
 	LOCAL.load_enemies(saved_data["Enemies_in_area"])
 	LOCAL.load_npcs(saved_data["NPCs_in_area"])
+	EVENTS.load_flags(saved_data["Flags"])
 
 
 # Helper function to get the Root node

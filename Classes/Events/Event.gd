@@ -1,7 +1,7 @@
 class_name Event
 
 var condition
-var argument
+var arguments: Array
 var recurrence: String = "ONCE"
 var played = false
 var type: String
@@ -15,7 +15,7 @@ func get_condition():
 func add_condition(condition_arg):
 	if typeof(condition_arg) == TYPE_ARRAY:
 		self.condition = condition_arg[0]
-		self.argument = condition_arg[1]
+		self.arguments = condition_arg[1]
 	else:
 		self.condition = condition_arg
 
@@ -31,5 +31,10 @@ func has_played() -> bool:
 func should_repeat() -> bool:
 	return self.recurrence != "ONCE"
 
-func get_argument():
-	return self.argument
+func get_arguments():
+	return self.arguments
+
+func get_argument(num: int):
+	if num < len(self.arguments):
+		return self.arguments[num]
+	return null
