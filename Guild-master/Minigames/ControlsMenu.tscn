@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="ControlsMenu" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 720.0
+margin_top = 940.0
+margin_right = 773.0
+margin_bottom = 954.0
+rect_scale = Vector2( 8, 8 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+text = "Quit"
+flat = true
+
+[node name="Controls_Title" type="Label" parent="."]
+margin_left = 670.0
+margin_top = 80.0
+margin_right = 710.0
+margin_bottom = 94.0
+rect_scale = Vector2( 10, 10 )
+text = "Controls"
+
+[node name="Controls_Description" type="Label" parent="."]
+margin_left = 740.0
+margin_top = 320.0
+margin_right = 780.0
+margin_bottom = 334.0
+rect_scale = Vector2( 5, 5 )
+align = 1
+valign = 1

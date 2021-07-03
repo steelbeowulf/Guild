@@ -36,25 +36,6 @@ one_shot = true
 [node name="Decrease_Strength" type="Timer" parent="."]
 wait_time = 0.35
 
-[node name="Win_Label" type="Label" parent="."]
-visible = false
-margin_left = 306.916
-margin_top = 329.307
-margin_right = 370.916
-margin_bottom = 343.307
-rect_scale = Vector2( 20, 20 )
-rect_pivot_offset = Vector2( 0.669458, -2.01709 )
-text = "YOU WIN!"
-
-[node name="Lose_Label" type="Label" parent="."]
-visible = false
-margin_left = 297.008
-margin_top = 364.572
-margin_right = 365.008
-margin_bottom = 378.572
-rect_scale = Vector2( 20, 20 )
-text = "YOU LOSE!"
-
 [node name="GO" type="Label" parent="."]
 visible = false
 margin_left = 670.607

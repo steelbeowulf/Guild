@@ -15,8 +15,7 @@ func _process(_delta):
 	$Strength_Button.text = str(strength_value)
 
 func _on_Strength_Button_button_down():
-	if strength_value < 25:
-		strength_value += 1
+	strength_value += 1
 
 func _on_Decrease_Strength_timeout():
 # the strength_value needs to be positive
@@ -41,9 +40,3 @@ func _on_Game_Timer_timeout():
 	End_MiniGame.visible = true
 	End_MiniGame._end(strength_value)
 	get_tree().paused = true
-	if strength_value == 25:
-		AUDIO.play_se("BELL")
-		$Win_Label.visible = true
-	else:
-		AUDIO.play_bgm("GAME_OVER_THEME")
-		$Lose_Label.visible = true

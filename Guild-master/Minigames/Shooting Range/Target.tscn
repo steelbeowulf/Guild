@@ -20,5 +20,6 @@ texture = ExtResource( 2 )
 
 [node name="SelfDestruction_Timer" type="Timer" parent="."]
 wait_time = 5.0
+autostart = true
 [connection signal="area_entered" from="." to="." method="_on_Target_area_entered"]
 [connection signal="timeout" from="SelfDestruction_Timer" to="." method="_on_SelfDestruction_Timer_timeout"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Minigames/MiniGame_Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Minigames/Racing Game/Racing_Game_Menu.gd" type="Script" id=2]
+
+[node name="Racing_Game_Menu" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" parent="." index="0"]
+margin_left = 701.688
+margin_top = 380.648
+margin_right = 754.688
+margin_bottom = 430.648
+
+[node name="Title" parent="." index="1"]
+margin_left = 510.0
+margin_top = 120.0
+margin_right = 593.0
+margin_bottom = 134.0
+text = "Racing Game"

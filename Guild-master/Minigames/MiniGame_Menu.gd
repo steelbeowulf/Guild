@@ -12,13 +12,8 @@ func _on_Start_button_down():
 # show the ControlMenu's screen
 func _on_Controls_button_down():
 	AUDIO.play_se("ENTER_MENU")
-	$ControlMenu.visible = true
+	get_tree().change_scene("res://Minigames/ControlsMenu.tscn")
 
-func _on_Exit_button_down():
+func _on_Quit_button_down():
 	AUDIO.play_se("EXIT_MENU")
 	get_tree().quit()
-	
-# close the ControlMenu's screen
-func _on_Close_button_down():
-	AUDIO.play_se("ENTER_MENU")
-	$ControlMenu.visible = false
