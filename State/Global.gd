@@ -68,6 +68,11 @@ func get_player(player_id):
 		if p.id == player_id:
 			return p
 
+func get_reserve_player(player_id):
+	for p in RESERVE_PLAYERS:
+		if p.id == player_id:
+			return p
+
 # Get item ids from equip_inventory
 func get_equip_ids():
 	var item_ids = []

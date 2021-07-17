@@ -75,9 +75,14 @@ func play_event(event: Event) -> bool:
 		BATTLE_MANAGER.initiate_event_battle(event)
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
-	#if self.events:
-	#	return play_events(self.events)
+	elif event.type == "REINFORCEMENTS":
+		caller = get_node("/root/Battle")
+		if event.group == "ALLIES":
+			get_node("/root/Battle").add_players(event.entities)
+		else:
+			get_node("/root/Battle").add_enemies(event.entities)
 	return true
+
 
 func start_npc_dialogue(name, portrait, events, callback):
 	var node = NODES["Dialogue"]
@@ -87,12 +92,22 @@ func start_npc_dialogue(name, portrait, events, callback):
 	play_events(events)
 	caller = callback
 
+
+func event_ended():
+	if len(self.events) == 0:
+		print("[EVENTS] Callback event time")
+		caller.resume()
+		caller.emit_signal("event_finished")
+	else:
+		play_event(self.events.pop_front())
+
+
 func dialogue_ended(force_hide = false):
 	print("[EVENTS] Dialogue ended")
 	if force_hide:
 		NODES["Dialogue"].reset()
 	if len(self.events) == 0:
-		print("[EVENTS] Callback time")
+		print("[EVENTS] Callback dialogue time")
 		caller._on_Dialogue_Ended()
 	else:
 		play_event(self.events.pop_front())

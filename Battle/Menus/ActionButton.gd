@@ -84,6 +84,19 @@ func _on_Targets_Picked(target_args: PoolIntArray):
 		emit_signal("deactivate_targets_all")
 		emit_signal("action_picked", action_type, subaction, targets)
 
+func connect_target_player(p: Button):
+	p.connect("target_picked", self, "_on_Targets_Picked")  
+	self.connect("activate_targets", p, "_on_Activate_Targets")
+	self.connect("deactivate_targets", p, "_on_Deactivate_Targets")
+
+
+func connect_target_enemy(e: Button, manager: Node, id: int):
+	e.connect("focus_entered", manager, "manage_hate", [0, id])
+	e.connect("focus_exited", manager, "hide_hate")
+	e.connect("target_picked", self, "_on_Targets_Picked")  
+	self.connect("activate_targets", e, "_on_Activate_Targets")
+	self.connect("deactivate_targets", e, "_on_Deactivate_Targets")
+
 
 func connect_targets(list_players: Array, list_enemies: Array, manager: Node, allPlayers: Button, allEnemies: Button) -> void:
 	var id = 0

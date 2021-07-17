@@ -29,7 +29,7 @@ func start_dialogue():
 	else:
 		self.hide()
 		dialogue = ""
-		GLOBAL.dialogue_ended()
+		EVENTS.dialogue_ended()
 
 
 func push_dialogue(text):

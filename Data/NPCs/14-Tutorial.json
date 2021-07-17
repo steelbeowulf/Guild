@@ -3,7 +3,7 @@
 	"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
    "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
 	"ANIM":{"idle": [true, "0-19"]},
-	"NAME": "Fighter",
+	"NAME": "Maui",
   "EVENTS": [
     {
       "DIALOGUE":[
@@ -17,6 +17,31 @@
         "MUSIC": "BOSS_THEME",
         "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
         "EVENTS": [
+          {
+            "CONDITION": ["on_target_death", ["Rat"]],
+            "REINFORCEMENTS":{
+              "TYPE": "ENEMIES",
+              "ENTITIES": [8, 8]
+            },
+          },
+          {
+            "CONDITION": ["on_target_damage", ["Rat", "Maui"]],
+            "REINFORCEMENTS":{
+              "TYPE": "ALLIES",
+              "ENTITIES": [3]
+            },
+          },
+          {
+            "CONDITION": "on_reinforcements",
+            "DIALOGUE":{
+              "NAME": "Maui",
+              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "MESSAGE": [
+                "Oh shit, now there's a bunch of rats!",
+                "And a cool ranger!"
+              ]
+            },
+          },
           {
             "CONDITION": "on_begin",
             "DIALOGUE":{

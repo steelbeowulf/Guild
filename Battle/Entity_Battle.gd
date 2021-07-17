@@ -77,6 +77,23 @@ func revive():
 	$Animations.get_node("idle").show()
 	$Animations.get_node("idle").play()
 
+func enter_scene():
+	var final_pos = get_position()
+	print("[ENTER SCENE] final pos: ", final_pos)
+	if Player:
+		self.set_position(Vector2(0, final_pos.y))
+	else:
+		self.set_position(Vector2(1080, final_pos.y))
+	$Animations.get_node("idle").stop()
+	$Animations.get_node("idle").hide()
+	$Animations.get_node("move").show()
+	$Animations.get_node("move").play()
+	show()
+	print("[ENTER SCENE] current pos: ", get_position())
+	$Tween.interpolate_property(self, "rect_position", null, final_pos, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+
 func set_spell(sprite, v, k):
 	print("[ENTITY BATTLE] Setting Spell "+str(k))
 	var img = sprite['path']
@@ -135,6 +152,9 @@ func play(name, options=[]):
 	if name == 'end_turn':
 		set_turn(false)
 		emit_signal("finish_anim", "end_turn")
+		return
+	elif name == 'Entrance':
+		enter_scene()
 		return
 	elif name == 'Damage':
 		take_damage(options, 0)
@@ -246,3 +266,12 @@ func _on_Spell_animation_finished(name):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if(anim_name == "Damage"):
 		$Damage.hide()
+
+
+func _on_Tween_tween_completed(object, key):
+	print("[ENTER SCENE] tween completed!")
+	$Animations.get_node("move").hide()
+	$Animations.get_node("move").stop()
+	$Animations.get_node("idle").show()
+	$Animations.get_node("idle").play()
+	emit_signal("finish_anim", "Entrance")

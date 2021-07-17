@@ -1,10 +1,21 @@
 extends Node2D
 
+func show_enabled_actions():
+	for action in get_node("Interface/Menu").get_children():
+		var key = "can_battle_" + action.get_name().to_lower()
+		if EVENTS.get_flag(key):
+			action.show()
+
 func _ready():
 	$AnimationManager.initialize(GLOBAL.PLAYERS, [])
 	
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
+	
+	# Hide actions that are still locked
+	for action in $Interface/Menu.get_children():
+		action.hide()
+	show_enabled_actions()
 	
 	$AnimationManager/Log.display_text("Enemies defeated!")
 	for i in range(len(GLOBAL.PLAYERS)):

@@ -9,6 +9,7 @@ var skill
 
 var current_entity
 var current_action
+var turnorder = []
 
 var total_enemies = 0
 var total_allies = 0
@@ -25,6 +26,47 @@ func show_enabled_actions():
 		var key = "can_battle_" + action.get_name().to_lower()
 		if EVENTS.get_flag(key):
 			action.show()
+
+func update_turnorder():
+	turnorder = Players + Enemies
+	turnorder.sort_custom(self, "stackagility")
+
+func add_players(players):
+	players.sort_custom(self, "stackagility")
+	for p in players:
+		Players.append(p)
+		$AnimationManager.add_player(p)
+		for e in Enemies:
+			p.hate.append(0)
+		p.index = total_allies
+		total_allies += 1
+		turnorder.append(p)
+	print("[BATTLE REINFORCEMENTS] awaiting animations")
+	yield($AnimationManager, "animation_finished")
+	print("[BATTLE REINFORCEMENTS] animations finished")
+	$AnimationManager.entering = false
+	if(len(EVENTS.events) > 0 or !call_deferred("trigger_event", "on_reinforcements")):
+		EVENTS.event_ended()
+
+
+func add_enemies(enemies):
+	enemies.sort_custom(self, "stackagility")
+	battle_over = false
+	for e in enemies:
+		Enemies.append(e)
+		$AnimationManager.add_enemy(e)
+		e.index = total_enemies
+		total_enemies += 1
+		for p in Players:
+			p.hate.append(0)
+		turnorder.append(e)
+	print("[BATTLE REINFORCEMENTS] awaiting animations")
+	yield($AnimationManager, "animation_finished")
+	print("[BATTLE REINFORCEMENTS] animations finished")
+	$AnimationManager.entering = false
+	if(len(EVENTS.events) > 0 or !call_deferred("trigger_event", "on_reinforcements")):
+		EVENTS.event_ended()
+
 
 func _ready():
 	LOCAL.entering_battle = false
@@ -70,12 +112,17 @@ func _ready():
 		action.hide()
 	show_enabled_actions()
 
+	print("[BATTLE] waiting for entrance animations")
+	yield($AnimationManager, "animation_finished")
+	$AnimationManager.entering = false
+	print("[BATTLE] entrance animations finished")
+
 	# Main battle loop: calls rounds() while the battle isn't battle_over
-	trigger_event("on_begin")
+	call_deferred("trigger_event", "on_begin")
 	while (not battle_over):
 		rounds()
 		yield(self, "round_finished")
-	trigger_event("on_end")
+	call_deferred("trigger_event", "on_end")
 	yield(self, "event_finished")
 	end_battle()
 
@@ -83,7 +130,8 @@ func _ready():
 func trigger_event(condition: String):
 	if BATTLE_MANAGER.current_battle.get_events(condition):
 		EVENTS.play_events(BATTLE_MANAGER.current_battle.get_events(condition))
-
+		return true
+	return false
 
 func check_for_events(result: ActionResult):
 	print("[BATTLE EVENT CHECK] "+result.format())
@@ -127,6 +175,7 @@ func check_for_events(result: ActionResult):
 						should_play.append(event)
 	if len(should_play) == 0:
 		return false
+	print("[BATTLE EVENTS] Will try to play: ", should_play)
 	return EVENTS.play_events(should_play)
 
 func pause():
@@ -138,8 +187,7 @@ func resume():
 # A round is comprised of the turns of all entities participating in battle
 func rounds():
 	# The status "AGILITY" is used to determine the turn order
-	var turnorder = Players + Enemies
-	turnorder.sort_custom(self, "stackagility")
+	update_turnorder()
 	
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
@@ -235,8 +283,10 @@ func rounds():
 		print("[BATTLE] Waiting for animations...")
 		yield($AnimationManager, "animation_finished")
 		print("[BATTLE] Animations have finished!")
-		if check_for_events(result):
+		if call_deferred("check_for_events", result):
+			print("[BATTLE] Waiting for events...")
 			yield(self, "event_finished")
+			print("[BATTLE] Events have finished!")
 		
 		get_node("Interface/Menu/Attack").grab_focus()
 		get_node("Interface/Menu/Attack").disabled = false

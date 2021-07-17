@@ -40,6 +40,7 @@ var OPTION_CLASS = load("res://Classes/Events/Option.gd")
 var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
 var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
 var FLAG_CLASS = load("res://Classes/Events/Flag.gd")
+var REINFORCEMENT_CLASS = load("res://Classes/Events/Reinforcements.gd")
 
 var List
 
@@ -385,6 +386,9 @@ func parse_events(events: Array):
 		elif event.has("FLAG"):
 			var flag = event["FLAG"]
 			event_instance = FLAG_CLASS.new(flag["KEY"], flag["VALUE"])
+		elif event.has("REINFORCEMENTS"):
+			var reinforcement = event["REINFORCEMENTS"]
+			event_instance = REINFORCEMENT_CLASS.new(reinforcement["TYPE"], reinforcement["ENTITIES"])
 		if event.has("CONDITION"):
 			event_instance.add_condition(event["CONDITION"])
 		if event.has("RECURRENCE"):
