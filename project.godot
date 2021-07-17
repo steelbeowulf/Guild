@@ -100,7 +100,7 @@ _global_script_class_icons={
 
 config/name="Guild"
 run/main_scene="res://Menu/Title Screen.tscn"
-config/icon="res://Assets/Crappy Logo.png"
+config/icon="res://Assets/Others/Logo.png"
 
 [autoload]
 
