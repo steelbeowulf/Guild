@@ -314,7 +314,12 @@ func check_battle_end():
 	for e in Enemies:
 		if e.is_dead():
 			dead_enemies += 1
-	return dead_allies == total_allies or dead_enemies == total_enemies
+	var death_events = BATTLE_MANAGER.current_battle.get_events("on_target_death")
+	var can_end = true
+	for e in death_events:
+		if e.get_type() == "REINFORCEMENTS" and !e.has_played():
+			can_end = false
+	return (dead_allies == total_allies) or (can_end and dead_enemies == total_enemies)
 
 # Auxiliary function to sort the turnorder vector
 func stackagility(a,b):
