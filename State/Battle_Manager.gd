@@ -132,14 +132,32 @@ func generate_enemies():
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
 
+var NAME = [
+	"A", "B", "C", "D", "E", "F", 
+	"G", "H", "I", "J", "K", "L", 
+	"M", "N", "O", "P", "Q", "R",
+	"S", "T", "U", "V", "W", "X",
+	"Y", "Z"
+]
+
 func _load_enemies(enemy_ids: Array):
 	var enemies = []
+	enemy_ids.sort()
+	var count = 0
+	var prev = -1
 	for id in enemy_ids:
-		enemies.append(LOCAL.get_enemy(id))
+		if id == prev:
+			count += 1
+		else:
+			count = 0
+		prev = id
+		var enemy = LOCAL.get_enemy(id)
+		enemy.nome = enemy.get_name() + " " + NAME[count]
+		enemies.append(enemy)
 	return enemies
 
 func initiate_event_battle(battle: Event):
-	Battled_Enemies = _load_enemies(battle.get_enemies())
+	Battled_Enemies = battle.get_enemies()
 	background = load(battle.get_background())
 	music = battle.get_bgm()
 	current_battle = battle._duplicate()

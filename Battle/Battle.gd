@@ -373,7 +373,7 @@ func execute_action(action: Action):
 		var targets = action.get_targets()
 		var item_id = action.get_action()
 		var item = Inventory[item_id]
-#
+
 		var dead = []
 		var stat_change = []
 		var ailments = []

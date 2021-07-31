@@ -1,6 +1,9 @@
 extends "Entity.gd"
 
-var target : int
+var target : int = -1
+var action: Action = null
+
+var turns : int = 0
 
 func _init(id, lv, experience, img, animation, valores, identificacao, habilidades, resistances):
 	self.id = id
@@ -19,8 +22,20 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.tipo = "Enemy"
 	self.target = -1
 
-func AI(player_list, enemies_list) -> Action:
-	var possible_target = -1
+func AI(player_list: Array, enemies_list: Array) -> Action:
+	# Get previously defined target
+	var target = get_target()
+	
+	turns -= 1
+	if turns == 0:
+		self.action = null
+	
+	# Get previously defined action and execute it if exists
+	var action = get_action()
+	if action != null:
+		return action
+	
+	# Check if allies need healing
 	for e in enemies_list:
 		if not e.is_dead():
 			var status = e.get_status()
@@ -31,8 +46,7 @@ func AI(player_list, enemies_list) -> Action:
 						if sk.type == "RECOVERY" and self.get_mp() >= sk.get_cost():
 							return Action.new("Skill", i, [e.index])
 
-	possible_target = get_target()
-
+	# Try to use skill with highest damage
 	var best_skill = -1
 	var best_dmg = 0
 	for i in range(self.skills.size()):
@@ -42,9 +56,12 @@ func AI(player_list, enemies_list) -> Action:
 				if ef.get_id() == HP and ef.get_value() < best_dmg and self.get_mp() >= sk.get_cost():
 					best_dmg = ef.get_value()
 					best_skill = i
-	if best_skill == -1:
-		return Action.new("Attack", 1, [possible_target])
-	return Action.new("Skill", best_skill, [possible_target])
+	if best_skill != -1:
+		return Action.new("Skill", best_skill, [target])
+	
+	# Not enough MP, simply use attack
+	return Action.new("Attack", 1, [target])
+
 
 func sum(array: Array):
 	var total = 0
@@ -58,7 +75,24 @@ func get_xp():
 func get_target():
 	return self.target
 
-func update_target(player_list):
+func get_action():
+	return self.action
+
+func set_next_action(action_arg: Action, number_of_turns = 1):
+	self.action = action_arg
+	for i in range(len(self.action.targets)):
+		self.action.targets[i] = -(self.action.targets[i] + 1)
+	self.turns = number_of_turns
+
+func set_next_target(player_id: int, number_of_turns = 1):
+	self.target = player_id
+	self.turns = number_of_turns
+
+func update_target(player_list: Array):
+	turns -= 1
+	if turns > 0:
+		print("[AI "+self.nome+"] won't update target")
+		return
 	var max_self_hate = 0
 	var max_accumulated_hate = 0
 	var alternative_target = -1

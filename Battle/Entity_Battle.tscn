@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Battle/Entity_Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Others/cursor.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=4]
 
 [sub_resource type="Animation" id=1]
 tracks/0/type = "value"
@@ -42,7 +43,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 42
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -91,11 +92,19 @@ margin_top = -20.0
 margin_right = 79.0
 margin_bottom = 16.0
 rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "250"
 
 [node name="Tween" type="Tween" parent="."]
 pause_mode = 2
+
+[node name="Name" type="Label" parent="."]
+margin_left = -33.4376
+margin_top = 92.5964
+margin_right = 34.5624
+margin_bottom = 120.596
+custom_fonts/font = ExtResource( 4 )
+text = "Rat A"
 
 [connection signal="focus_entered" from="." to="." method="_on_P0_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_P0_focus_exited"]

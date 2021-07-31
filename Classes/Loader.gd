@@ -41,6 +41,8 @@ var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
 var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
 var FLAG_CLASS = load("res://Classes/Events/Flag.gd")
 var REINFORCEMENT_CLASS = load("res://Classes/Events/Reinforcements.gd")
+var SET_ACTION_CLASS = load("res://Classes/Events/SetAction.gd")
+var SET_TARGET_CLASS = load("res://Classes/Events/SetTarget.gd")
 
 var List
 
@@ -335,7 +337,7 @@ func load_npcs(filter_array):
 	return ret
 
 
-func parse_events(events: Array):
+func parse_events(events: Array, in_battle = null):
 	var parsed_events = []
 	for event in events:
 		var event_instance: Event = null
@@ -376,12 +378,24 @@ func parse_events(events: Array):
 			event_instance = SHOP_CLASS.new(subtype, itens_sold)
 		elif event.has("BATTLE"):
 			var battle = event["BATTLE"]
-			var battle_events = parse_events(battle["EVENTS"])
 			event_instance = BATTLE_CLASS.new(
 				battle["ENEMIES"],
 				battle["BACKGROUND"],
-				battle["MUSIC"],
-				battle_events
+				battle["MUSIC"]
+			)
+			var battle_events = parse_events(battle["EVENTS"], event_instance)
+			event_instance.add_events(battle_events)
+		elif event.has("SET_TARGET"):
+			var set_target = event["SET_TARGET"]
+			var entity = in_battle.find_entity_by_name(set_target["ENTITY"])
+			var target = in_battle.find_entity_by_name(set_target["TARGET"])
+			event_instance = SET_TARGET_CLASS.new(entity, target, set_target["TURNS"])
+		elif event.has("SET_ACTION"):
+			var set_action = event["SET_ACTION"]
+			var entity = in_battle.find_entity_by_name(set_action["ENTITY"])
+			var action = event["SET_ACTION"]["ACTION"]
+			event_instance = SET_ACTION_CLASS.new(
+				entity, action["TYPE"], action["ARG"], action["TARGETS"], set_action["TURNS"], false
 			)
 		elif event.has("FLAG"):
 			var flag = event["FLAG"]

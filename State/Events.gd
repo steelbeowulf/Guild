@@ -67,8 +67,8 @@ func play_event(event: Event) -> bool:
 		node.show_options()
 	elif event.type == "FLAG":
 		EVENTS.set_flag(event)
-		get_node("/root/Battle").resume()
-		return false
+		if LOCAL.IN_BATTLE:
+			get_node("/root/Battle").resume()
 	elif event.type == "SHOP":
 		GLOBAL.get_root().open_shop(event)
 	elif event.type == "BATTLE":
@@ -81,8 +81,30 @@ func play_event(event: Event) -> bool:
 			get_node("/root/Battle").add_players(event.entities)
 		else:
 			get_node("/root/Battle").add_enemies(event.entities)
+	elif event.type == "SET_TARGET":
+		if LOCAL.IN_BATTLE:
+			get_node("/root/Battle").resume()
+		event.entity.set_next_target(event.get_target().index, event.get_turns())
+	elif event.type == "SET_ACTION":
+		if LOCAL.IN_BATTLE:
+			get_node("/root/Battle").resume()
+		event.entity.set_next_action(
+			build_action(event.action_type, event.action_arg, event.action_targets),
+			event.turns
+		)
+		if event.is_forced():
+			# FORCE_ACTION
+			pass
+	if len(events) > 0:
+		play_event(events.pop_front())
 	return true
 
+
+func build_action(type_arg: String, action_id: int, args: Array) -> Action:
+	var targets = []
+	for a in args:
+		targets.append(BATTLE_MANAGER.current_battle.find_entity_by_name(a).index)
+	return Action.new(type_arg, action_id, targets)
 
 func start_npc_dialogue(name, portrait, events, callback):
 	var node = NODES["Dialogue"]

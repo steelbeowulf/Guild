@@ -16,14 +16,14 @@ func _on_P0_focus_exited():
 
 
 func _on_Activate_Targets(is_ress: bool):
-	print("[Entity Battle] Activating targets")
+	#print("[Entity Battle] Activating targets")
 	if (not dead and not is_ress) or (dead and self.data.tipo == "Player" and is_ress):
 		self.disabled = false
 		self.set_focus_mode(2)
 		self.grab_focus()
 
 func _on_Deactivate_Targets():
-	print("[Entity Battle] Deactivating targets")
+	#print("[Entity Battle] Deactivating targets")
 	self.disabled = true
 	self.set_focus_mode(0)
 
@@ -79,7 +79,8 @@ func revive():
 
 func enter_scene():
 	var final_pos = get_position()
-	print("[ENTER SCENE] final pos: ", final_pos)
+	#print("[ENTER SCENE] final pos: ", final_pos)
+	$Name.set_text(data.get_name())
 	if Player:
 		self.set_position(Vector2(0, final_pos.y))
 	else:
@@ -89,7 +90,7 @@ func enter_scene():
 	$Animations.get_node("move").show()
 	$Animations.get_node("move").play()
 	show()
-	print("[ENTER SCENE] current pos: ", get_position())
+	#print("[ENTER SCENE] current pos: ", get_position())
 	$Tween.interpolate_property(self, "rect_position", null, final_pos, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
@@ -146,7 +147,7 @@ func set_animations(sprite, animations, data_arg):
 		$Animations.add_child(animation)
 
 func play(name, options=[]):
-	print("[ENTITY BATTLE] playing animation "+name)
+	#print("[ENTITY BATTLE] playing animation "+name)
 	print("Options="+str(options))
 	var node = $Animations
 	if name == 'end_turn':
@@ -237,7 +238,7 @@ func take_damage(value, type):
 	$AnimationPlayer.play("Damage")
 
 func _on_Sprite_animation_finished(name):
-	print("[ENTITY BATTLE] finished animation "+name)
+	#print("[ENTITY BATTLE] finished animation "+name)
 	emit_signal("finish_anim", name)
 	$Animations.get_node(name).hide()
 	if name == "death":
@@ -257,7 +258,7 @@ func _on_Sprite_animation_finished(name):
 		$Animations.get_node("idle").play(true)
 
 func _on_Spell_animation_finished(name):
-	print("[ENTITY BATTLE] finished spell animation "+name)
+	#print("[ENTITY BATTLE] finished spell animation "+name)
 	emit_signal("finish_anim", name)
 	$Spells.get_node(name).hide()
 	$Spells.get_node(name).playing = false
@@ -269,7 +270,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_Tween_tween_completed(object, key):
-	print("[ENTER SCENE] tween completed!")
+	#print("[ENTER SCENE] tween completed!")
 	$Animations.get_node("move").hide()
 	$Animations.get_node("move").stop()
 	$Animations.get_node("idle").show()
