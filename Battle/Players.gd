@@ -22,7 +22,7 @@ func _on_Deactivate_Targets():
 func _on_All_focus_entered():
 	print("[TARGETS] All enter ", get_name())
 	for c in get_children():
-		if not c.dead:
+		if c.data != null and not c.dead:
 			c._on_P0_focus_entered()
 			targets.append(c.get_id())
 	self.grab_focus()
@@ -40,6 +40,6 @@ func _on_All_pressed():
 
 func _on_Focus_First(is_ress: bool):
 	for c in get_children():
-		if not c.dead or (c.dead and c.data.tipo == "Player" and is_ress):
+		if c.data != null and (not c.dead or (c.dead and c.data.tipo == "Player" and is_ress)):
 			c.grab_focus()
 			break

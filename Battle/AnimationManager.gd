@@ -50,7 +50,7 @@ func add_enemy(e):
 	node.enter_scene()
 
 func initialize(Players, Enemies):
-# Graphics stuff
+	# Graphics stuff
 	Menu = self.get_parent().get_node("Interface/Menu")
 	Info = self.get_parent().get_node("Interface/Info")
 	var i = 0

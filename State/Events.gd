@@ -41,8 +41,7 @@ func play_event(event: Event) -> bool:
 	print("[EVENTS] Has played: "+str(event.has_played()))
 	print("[EVENTS] Should repeat: "+str(event.should_repeat()))
 	if LOCAL.IN_BATTLE and event.has_played() and not event.should_repeat():
-		get_node("/root/Battle").resume()
-		return false
+		event_ended()
 	event.set_played(true)
 	if LOCAL.IN_BATTLE:
 		get_node("/root/Battle").pause()
@@ -67,8 +66,7 @@ func play_event(event: Event) -> bool:
 		node.show_options()
 	elif event.type == "FLAG":
 		EVENTS.set_flag(event)
-		if LOCAL.IN_BATTLE:
-			get_node("/root/Battle").resume()
+		event_ended()
 	elif event.type == "SHOP":
 		GLOBAL.get_root().open_shop(event)
 	elif event.type == "BATTLE":
@@ -76,18 +74,14 @@ func play_event(event: Event) -> bool:
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
 	elif event.type == "REINFORCEMENTS":
-		caller = get_node("/root/Battle")
 		if event.group == "ALLIES":
 			get_node("/root/Battle").add_players(event.entities)
 		else:
 			get_node("/root/Battle").add_enemies(event.entities)
 	elif event.type == "SET_TARGET":
-		if LOCAL.IN_BATTLE:
-			get_node("/root/Battle").resume()
 		event.entity.set_next_target(event.get_target().index, event.get_turns())
+		event_ended()
 	elif event.type == "SET_ACTION":
-		if LOCAL.IN_BATTLE:
-			get_node("/root/Battle").resume()
 		event.entity.set_next_action(
 			build_action(event.action_type, event.action_arg, event.action_targets),
 			event.turns
@@ -95,8 +89,9 @@ func play_event(event: Event) -> bool:
 		if event.is_forced():
 			# FORCE_ACTION
 			pass
-	if len(events) > 0:
-		play_event(events.pop_front())
+		event_ended()
+	#if len(events) > 0:
+	#	play_event(events.pop_front())
 	return true
 
 
@@ -116,10 +111,10 @@ func start_npc_dialogue(name, portrait, events, callback):
 
 
 func event_ended():
+	print("[EVENTS] Event finished!")
 	if len(self.events) == 0:
 		print("[EVENTS] Callback event time")
-		caller.resume()
-		caller.emit_signal("event_finished")
+		caller._on_Dialogue_Ended()
 	else:
 		play_event(self.events.pop_front())
 

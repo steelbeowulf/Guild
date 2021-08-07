@@ -22,10 +22,22 @@ signal finish_anim
 signal event_finished
 
 func show_enabled_actions():
-	for action in get_node("Interface/Menu").get_children():
+	var menu_children = get_node("Interface/Menu").get_children()
+	menu_children.invert()
+	for action in menu_children:
+		action.hide()
 		var key = "can_battle_" + action.get_name().to_lower()
 		if EVENTS.get_flag(key):
+			action.allowed = true
+			action.disabled = false
+			action.set_focus_mode(2)
+			action.grab_focus()
 			action.show()
+
+func block_player_input():
+	var menu_children = get_node("Interface/Menu").get_children()
+	for c in menu_children:
+		c.disabled = true
 
 func update_turnorder():
 	turnorder = Players + Enemies
@@ -108,9 +120,8 @@ func _ready():
 	AUDIO.play_bgm(BATTLE_MANAGER.music)
 
 	# Hide actions that are still locked
-	for action in $Interface/Menu.get_children():
-		action.hide()
 	show_enabled_actions()
+	block_player_input()
 
 	print("[BATTLE] waiting for entrance animations")
 	yield($AnimationManager, "animation_finished")
@@ -175,8 +186,15 @@ func check_for_events(result: ActionResult):
 						should_play.append(event)
 	if len(should_play) == 0:
 		return false
-	print("[BATTLE EVENTS] Will try to play: ", should_play)
+	print("[BATTLE EVENTS] Will try to play: ", format_events(should_play))
 	return EVENTS.play_events(should_play)
+
+func format_events(events):
+	var formatted = ""
+	for e in events:
+		formatted += e.get_type() + str(e.get_arguments()) + "\n"
+	return formatted 
+
 
 func pause():
 	get_tree().paused = true
@@ -234,6 +252,7 @@ func rounds():
 			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
+				block_player_input()
 				action = current_entity.AI(Players, Enemies)
 				emit_signal("turn_finished")
 
@@ -249,7 +268,6 @@ func rounds():
 				# Show the Menu and wait until action is selected
 				get_node("Interface/Menu").show()
 				show_enabled_actions()
-				$Interface/Menu/Attack.grab_focus()
 				yield($Interface, "turn_finished")
 				action = current_action
 				
@@ -288,15 +306,10 @@ func rounds():
 			yield(self, "event_finished")
 			print("[BATTLE] Events have finished!")
 		
-		get_node("Interface/Menu/Attack").grab_focus()
-		get_node("Interface/Menu/Attack").disabled = false
-		get_node("Interface/Menu/Attack").set_focus_mode(2)
-		
-		get_node("Interface/Menu/Skill").disabled = false
-		get_node("Interface/Menu/Skill").set_focus_mode(2)
-		
-		get_node("Interface/Menu/Item").disabled = false
-		get_node("Interface/Menu/Item").set_focus_mode(2)
+		# Hide actions that are still locked
+		for action in $Interface/Menu.get_children():
+			action.hide()
+		show_enabled_actions()
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
@@ -483,8 +496,8 @@ func execute_action(action: Action):
 		var passAction = ActionResult.new()
 		passAction.type = "Pass"
 		return passAction
-	
-	
+
+
 # Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action
