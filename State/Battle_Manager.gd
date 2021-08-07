@@ -140,19 +140,26 @@ var NAME = [
 	"Y", "Z"
 ]
 
+# Dictionary: { enemy_id: count on current battle }
+var COUNT_IN_BATTLE = {}
+
+func reset_count_in_battle():
+	COUNT_IN_BATTLE = {}
+
+func get_next_name_in_battle(id: int) -> String:
+	var enemy = LOCAL.get_enemy(id)
+	if COUNT_IN_BATTLE.has(id):
+		COUNT_IN_BATTLE[id] = COUNT_IN_BATTLE[id] + 1
+	else:
+		COUNT_IN_BATTLE[id] = 0
+	return enemy.nome + " " + NAME[COUNT_IN_BATTLE[id]]
+
 func _load_enemies(enemy_ids: Array):
 	var enemies = []
 	enemy_ids.sort()
-	var count = 0
-	var prev = -1
 	for id in enemy_ids:
-		if id == prev:
-			count += 1
-		else:
-			count = 0
-		prev = id
 		var enemy = LOCAL.get_enemy(id)
-		enemy.nome = enemy.get_name() + " " + NAME[count]
+		enemy.nome = get_next_name_in_battle(id)
 		enemies.append(enemy)
 	return enemies
 
@@ -173,6 +180,7 @@ func initiate_battle():
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(Players, Enemies, Inventory):
 	LOCAL.IN_BATTLE = false
+	COUNT_IN_BATTLE = {}
 	var total_exp = 0
 	
 	# Calculates total EXP based on the enemies killed

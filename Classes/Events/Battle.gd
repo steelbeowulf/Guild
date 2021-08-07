@@ -9,6 +9,7 @@ var original_events : Array
 
 func _init(enemies_arg: Array, background_arg: String, bgm_arg: String, events_arg = []):
 	self.enemy_ids = enemies_arg
+	BATTLE_MANAGER.reset_count_in_battle()
 	self.enemies = BATTLE_MANAGER._load_enemies(enemies_arg)
 	self.background = background_arg
 	self.bgm = bgm_arg

@@ -65,6 +65,7 @@ func add_enemies(enemies):
 	enemies.sort_custom(self, "stackagility")
 	battle_over = false
 	for e in enemies:
+		e.nome = BATTLE_MANAGER.get_next_name_in_battle(e.id)
 		Enemies.append(e)
 		$AnimationManager.add_enemy(e)
 		e.index = total_enemies
