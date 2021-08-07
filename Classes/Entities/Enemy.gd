@@ -1,6 +1,6 @@
 extends "Entity.gd"
 
-var target : int = -1
+var target : int = -10
 var action: Action = null
 
 var turns : int = 0
@@ -20,7 +20,7 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
 	self.tipo = "Enemy"
-	self.target = -1
+	self.target = -10
 
 func AI(player_list: Array, enemies_list: Array) -> Action:
 	# Get previously defined target
@@ -88,15 +88,28 @@ func set_next_target(player_id: int, number_of_turns = 1):
 	self.target = player_id
 	self.turns = number_of_turns
 
-func update_target(player_list: Array):
+func update_target(player_list: Array, enemy_list: Array):
 	turns -= 1
 	if turns > 0:
-		print("[AI "+self.nome+"] won't update target")
-		return
+		var target = self.target
+		if self.action != null and len(self.action.targets) == 1:
+			target = self.action.targets[0]
+		var index = target
+		var list = enemy_list
+		if self.target < 0 and self.target != -10:
+			index = -(target + 1)
+			list = player_list
+		if not list[index].dead:
+			print("[AI "+self.nome+"] won't update target")
+			return
+		else:
+			turns = 0
+			self.action = null
+
 	var max_self_hate = 0
 	var max_accumulated_hate = 0
-	var alternative_target = -1
-	var possible_target = -1
+	var alternative_target = -10
+	var possible_target = -10
 	for p in player_list:
 		if p.get_hate()[self.index] > max_self_hate:
 			max_self_hate = p.get_hate()[self.index]
@@ -105,9 +118,9 @@ func update_target(player_list: Array):
 			max_accumulated_hate = sum(p.get_hate())
 			alternative_target = p.index
 
-	if possible_target == -1:
+	if possible_target == -10:
 		possible_target = alternative_target
-		if possible_target == -1:
+		if possible_target == -10:
 			randomize()
 			possible_target = int(rand_range(0,player_list.size()))
 			while player_list[possible_target].is_dead():

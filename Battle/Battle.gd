@@ -210,7 +210,7 @@ func rounds():
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
 		for e in Enemies:
-			e.update_target(Players)
+			e.update_target(Players, Enemies)
 		current_entity = turnorder[i]
 		print("[BATTLE] Turno de "+current_entity.nome)
 		var next = null
