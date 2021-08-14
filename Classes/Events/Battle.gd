@@ -43,6 +43,7 @@ func get_all_events():
 func get_events(key: String):
 	if events.has(key):
 		return events[key]
+	return []
 
 func get_enemies():
 	return self.enemies

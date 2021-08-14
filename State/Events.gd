@@ -3,6 +3,8 @@ extends Node
 var NODES = {}
 var flags = {}
 
+var dialogue_count = 0
+
 func load_flags(flags_arg: Dictionary):
 	flags = flags_arg
 
@@ -32,10 +34,13 @@ var events = []
 var npc_name = ""
 var npc_portrait = ""
 
-var playing_dialogue = false
 
 func play_events(events: Array):
+	dialogue_count = 0
 	self.events = events.duplicate(true)
+	for e in events:
+		if e.type == 'DIALOGUE':
+			dialogue_count += 1
 	return play_event(self.events.pop_front())
 
 func play_event(event: Event) -> bool:
@@ -116,7 +121,6 @@ func event_ended():
 		play_event(self.events.pop_front())
 	else:
 		print("[EVENTS] Callback event time")
-		playing_dialogue = false
 		caller._on_Dialogue_Ended()
 
 
@@ -128,5 +132,4 @@ func dialogue_ended(force_hide = false):
 		play_event(self.events.pop_front())
 	else:
 		print("[EVENTS] Callback dialogue time")
-		playing_dialogue = false
 		caller._on_Dialogue_Ended()

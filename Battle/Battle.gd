@@ -134,16 +134,16 @@ func _ready():
 	print("[BATTLE] entrance animations finished")
 
 	# Main battle loop: calls rounds() while the battle isn't battle_over
-	call_deferred("trigger_event", "on_begin")
-	yield(self, "event_finished")
-	if forced_agent != null:
-		next = forced_agent
-		forced_agent = null
+	if(call_deferred("trigger_event", "on_begin")):
+		yield(self, "event_finished")
+		if forced_agent != null:
+			next = forced_agent
+			forced_agent = null
 	while (not battle_over):
 		rounds()
 		yield(self, "round_finished")
-	call_deferred("trigger_event", "on_end")
-	yield(self, "event_finished")
+	if(call_deferred("trigger_event", "on_end")):
+		yield(self, "event_finished")
 	end_battle()
 
 
@@ -185,7 +185,7 @@ func check_for_events(result: ActionResult):
 					if target.get_name() == event.get_argument(0):
 						if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
 							should_play.append(event)
-	if BATTLE_MANAGER.current_battle.get_events("on_target_damage") or BATTLE_MANAGER.current_battle.get_event("on_target_critical_health"):
+	if BATTLE_MANAGER.current_battle.get_events("on_target_damage") or BATTLE_MANAGER.current_battle.get_events("on_target_critical_health"):
 		var events = BATTLE_MANAGER.current_battle.get_events("on_target_damage")
 		for event in events:
 			for target in result.get_targets():

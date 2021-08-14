@@ -66,12 +66,13 @@ func set_dialogue(text):
 		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
 		$Tween.set_speed_scale(1.0)
 		$Tween.start()
-	elif len(EVENTS.events) > 0:
-		EVENTS.dialogue_ended()
 	else:
+		EVENTS.dialogue_count -= 1
 		EVENTS.dialogue_ended()
-		self.hide()
-		dialogue = ""
+		if EVENTS.dialogue_count <= 0:
+			EVENTS.dialogue_ended()
+			self.hide()
+			dialogue = ""
 
 func reset():
 	self.hide()

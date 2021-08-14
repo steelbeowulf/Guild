@@ -116,13 +116,15 @@ func generate_enemies():
 	Encounter.shuffle()
 	while current <= total:
 		if Encounter:
-			print("OLD: "+LOCAL.ENEMIES[Encounter[0]].get_name())
-			newEnemy.append(LOCAL.ENEMIES[Encounter[0]]._duplicate())
-			print(LOCAL.ENEMIES[Encounter.pop_front()].get_name())
+			newEnemy.append(Encounter[0])
+			#print("OLD: "+LOCAL.ENEMIES[Encounter[0]].get_name())
+			#newEnemy.append(LOCAL.ENEMIES[Encounter[0]]._duplicate())
+			#print(LOCAL.ENEMIES[Encounter.pop_front()].get_name())
 		else:
 			var enemy_id = 1 + (randi() % (len(Enemies)-2))
-			print("NEW: "+Enemies[enemy_id].get_name())
-			newEnemy.append(Enemies[enemy_id]._duplicate())
+			newEnemy.append(enemy_id)
+			#print("NEW: "+Enemies[enemy_id].get_name())
+			#newEnemy.append(Enemies[enemy_id]._duplicate())
 		current+=1
 
 	Encounter = []
@@ -131,6 +133,11 @@ func generate_enemies():
 
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
+
+const DEFAULT_BATTLE_BACKGROUND = 'res://Assets/Backgrounds/forest1.png'
+const DEFAULT_BATTLE_MUSIC = 'BATTLE_THEME'
+
+var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
 
 var NAME = [
 	"A", "B", "C", "D", "E", "F", 
@@ -173,7 +180,9 @@ func initiate_event_battle(battle: Event):
 # Generates enemies and begins the battle
 func initiate_battle():
 	print("[BATTLE INIT] initiating battle")
-	Battled_Enemies = generate_enemies()
+	var battle = BATTLE_CLASS.new(generate_enemies(), DEFAULT_BATTLE_BACKGROUND, DEFAULT_BATTLE_MUSIC)
+	current_battle = battle._duplicate()
+	Battled_Enemies = battle.get_enemies()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
 
