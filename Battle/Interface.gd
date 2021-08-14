@@ -23,8 +23,7 @@ func _on_Action_Picked(action_type: String, action_id: int, targets: PoolIntArra
 # Update State
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") and menu_state != "":
-		for c in $Menu.get_children():
-			c.hide_stuff()
+		get_node("Menu/"+str(menu_state)).hide_stuff()
 		get_node("Menu/"+str(menu_state)).disabled = false
 		get_node("Menu/"+str(menu_state)).set_focus_mode(2)
 		get_node("Menu/"+str(menu_state)).grab_focus()
@@ -37,9 +36,6 @@ func prepare_run_action() -> void:
 
 func prepare_lane_action(current_lane : int) -> void:
 	menu_state = "Lane"
-	
-	for c in get_node("Menu/Lane/ScrollContainer/SubActions").get_children():
-		c.hide()
 	
 	for i in range(len(lanes_text)):
 		get_node("Menu/Lane/ScrollContainer/SubActions/"+str(i)).hide()
@@ -54,12 +50,7 @@ func prepare_lane_action(current_lane : int) -> void:
 
 func prepare_itens_action(inventory: Array) -> void:
 	menu_state = "Item"
-	get_node("Menu/Attack").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Skill").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Item").disabled = true
-	get_node("Menu/Item").set_focus_mode(0)
+	disable_all_except("item")
 	var itens = get_node("Menu/Item/ScrollContainer/SubActions")
 	for item in itens.get_children():
 		item.hide()
@@ -77,12 +68,7 @@ func prepare_itens_action(inventory: Array) -> void:
 
 func prepare_skills_action(skills: Array, current_mp: int) -> void:
 	menu_state = "Skill"
-	get_node("Menu/Attack").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Item").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Skill").disabled = true
-	get_node("Menu/Skill").set_focus_mode(0)
+	disable_all_except("Skill")
 	var itens = get_node("Menu/Skill/ScrollContainer/SubActions")
 	for item in itens.get_children():
 		item.hide()
@@ -99,15 +85,15 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 	
 	get_node("Menu/Skill")._on_Action_pressed()
 
+func disable_all_except(exception: String) -> void:
+	for c in get_node("Menu").get_children():
+		if c.get_name() != exception:
+			c.disabled = true
+
 func prepare_attack_action() -> void:
 	menu_state = "Attack"
 	var unfocus = true
-	get_node("Menu/Skill").hide()
-	get_node("Menu/Lane").hide()
-	get_node("Menu/Item").hide()
-	get_node("Menu/Run").hide()
-	get_node("Menu/Attack").disabled = true
-	get_node("Menu/Attack").set_focus_mode(0)
+	disable_all_except("Attack")
 	var players = get_node("Menu/Attack/PlayerContainer")
 	var enemies = get_node("Menu/Attack/EnemyContainer")
 	for i in range(1,5):

@@ -8,7 +8,8 @@
     {
       "DIALOGUE":[
         "Hey there!",
-        "I challenge you to a duel!"
+        "How about a fight with some weak enemies?",
+        "It's great for practice!"
       ]
     },
     {
@@ -17,14 +18,37 @@
           "OPTION": "Ok", 
           "RESULTS": [
             {
-              "DIALOGUE": [ "Kay, here we go! :D" ]
+              "DIALOGUE": [ "Cool, time to pick your enemies" ]
             },
             {
-              "BATTLE": {
-                "ENEMIES": [7,8],
-                "MUSIC": "BOSS_THEME",
-                "BACKGROUND": "res://Assets/Backgrounds/forest1.png"
-              }
+              "OPTIONS": [
+                {
+                  "OPTION": "Bats and rats", 
+                  "RESULTS": [
+                    {
+                      "BATTLE": {
+                        "ENEMIES": [7,8],
+                        "MUSIC": "BOSS_THEME",
+                        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+                        "EVENTS": []
+                      }
+                    }
+                  ]
+                },
+                {
+                  "OPTION": "Minotaur",
+                  "RESULTS": [
+                    {
+                      "BATTLE": {
+                        "ENEMIES": [3],
+                        "MUSIC": "BOSS_THEME",
+                        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+                        "EVENTS": []
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=8]
 [ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
-
+[ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -35,9 +35,7 @@ flat = true
 script = ExtResource( 3 )
 
 [node name="P0" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 300.0
 margin_top = 75.0
-margin_right = 312.0
 margin_bottom = 95.0
 focus_neighbour_top = NodePath("../P3")
 focus_neighbour_right = NodePath("../../Enemies/E0")
@@ -45,9 +43,7 @@ focus_neighbour_bottom = NodePath("../P1")
 Player = true
 
 [node name="P1" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 300.0
 margin_top = 300.0
-margin_right = 312.0
 margin_bottom = 320.0
 focus_neighbour_top = NodePath("../P0")
 focus_neighbour_right = NodePath("../../Enemies/E1")
@@ -55,9 +51,7 @@ focus_neighbour_bottom = NodePath("../P2")
 Player = true
 
 [node name="P2" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 300.0
 margin_top = 550.0
-margin_right = 312.0
 margin_bottom = 570.0
 focus_neighbour_top = NodePath("../P1")
 focus_neighbour_right = NodePath("../../Enemies/E1")
@@ -65,9 +59,7 @@ focus_neighbour_bottom = NodePath("../P3")
 Player = true
 
 [node name="P3" parent="AnimationManager/Players" instance=ExtResource( 4 )]
-margin_left = 300.0
 margin_top = 775.0
-margin_right = 312.0
 margin_bottom = 795.0
 focus_neighbour_top = NodePath("../P2")
 focus_neighbour_right = NodePath("../../Enemies/E2")
@@ -75,7 +67,6 @@ focus_neighbour_bottom = NodePath("../P0")
 Player = true
 
 [node name="Enemies" type="Button" parent="AnimationManager"]
-editor/display_folded = true
 margin_left = 1112.27
 margin_top = 102.869
 margin_right = 2012.27
@@ -150,6 +141,7 @@ scale = Vector2( 1.96703, 1.51696 )
 z_index = -1
 
 [node name="Interface" type="Control" parent="."]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 7 )
@@ -170,27 +162,27 @@ margin_right = 328.0
 margin_bottom = 1073.08
 
 [node name="Attack" parent="Interface/Menu" instance=ExtResource( 9 )]
-visible = false
 margin_right = 318.0
 margin_bottom = 28.0
 focus_neighbour_top = NodePath("../Run")
 
 [node name="Skill" parent="Interface/Menu" instance=ExtResource( 9 )]
+margin_top = 32.0
 margin_right = 318.0
-margin_bottom = 37.0
+margin_bottom = 60.0
 
 [node name="Item" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 41.0
+margin_top = 64.0
 margin_right = 318.0
-margin_bottom = 78.0
+margin_bottom = 92.0
 
 [node name="Lane" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 82.0
+margin_top = 96.0
 margin_right = 318.0
-margin_bottom = 119.0
+margin_bottom = 124.0
 
 [node name="Run" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 123.0
+margin_top = 128.0
 margin_right = 318.0
 margin_bottom = 160.0
 focus_neighbour_bottom = NodePath("../Attack")
@@ -236,6 +228,10 @@ margin_right = 676.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 664, 30 )
 alignment = 2
+
+[node name="HUD" parent="." instance=ExtResource( 11 )]
+pause_mode = 2
+
 [connection signal="focus_entered" from="AnimationManager/Players" to="AnimationManager/Players" method="_on_All_focus_entered"]
 [connection signal="focus_exited" from="AnimationManager/Players" to="AnimationManager/Players" method="_on_All_focus_exited"]
 [connection signal="pressed" from="AnimationManager/Players" to="AnimationManager/Players" method="_on_All_pressed"]

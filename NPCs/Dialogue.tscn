@@ -1,23 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://NPCs/Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Portraits/warrior.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/Fonts/Font28.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Fonts/Menu_Font.tres" type="DynamicFont" id=6]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-extra_spacing_char = 2
-extra_spacing_space = 2
-font_data = ExtResource( 4 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "Float"
+[sub_resource type="Animation" id=1]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -54,8 +44,8 @@ margin_left = 300.0
 margin_top = 45.0
 margin_right = 501.0
 margin_bottom = 73.0
-custom_fonts/font = SubResource( 1 )
-text = "BEEFY BOI"
+custom_fonts/font = ExtResource( 4 )
+text = "STABBY BOI"
 
 [node name="Text" type="Label" parent="."]
 margin_left = 300.0
@@ -81,6 +71,6 @@ custom_fonts/font = ExtResource( 6 )
 text = "V"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Float = SubResource( 2 )
+anims/Float = SubResource( 1 )
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

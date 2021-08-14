@@ -28,7 +28,7 @@ func _on_Player_chosen(binds):
 	elif location == "EQUIPS":
 		get_parent().get_parent().open_equips(binds)
 	else:
-		get_parent().get_parent().player_clicked(binds)
+		get_parent().get_parent().open_status(binds)
 
 
 func update_info():

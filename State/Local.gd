@@ -41,7 +41,7 @@ func load_enemies(filter_array):
 func get_enemy(enemy_id):
 	for e in ENEMIES:
 		if e.id == enemy_id:
-			return e
+			return e._duplicate()
 
 
 # Return NPC with npc_id (if loaded)

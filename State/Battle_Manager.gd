@@ -10,6 +10,7 @@ onready var Map = null
 onready var Battled_Enemies = []
 onready var background
 onready var music = "BATTLE_THEME"
+onready var current_battle = null
 
 # Level up variable
 onready var leveled_up = []
@@ -131,16 +132,42 @@ func generate_enemies():
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
 
+var NAME = [
+	"A", "B", "C", "D", "E", "F", 
+	"G", "H", "I", "J", "K", "L", 
+	"M", "N", "O", "P", "Q", "R",
+	"S", "T", "U", "V", "W", "X",
+	"Y", "Z"
+]
+
+# Dictionary: { enemy_id: count on current battle }
+var COUNT_IN_BATTLE = {}
+
+func reset_count_in_battle():
+	COUNT_IN_BATTLE = {}
+
+func get_next_name_in_battle(id: int) -> String:
+	var enemy = LOCAL.get_enemy(id)
+	if COUNT_IN_BATTLE.has(id):
+		COUNT_IN_BATTLE[id] = COUNT_IN_BATTLE[id] + 1
+	else:
+		COUNT_IN_BATTLE[id] = 0
+	return enemy.nome + " " + NAME[COUNT_IN_BATTLE[id]]
+
 func _load_enemies(enemy_ids: Array):
 	var enemies = []
+	enemy_ids.sort()
 	for id in enemy_ids:
-		enemies.append(LOCAL.get_enemy(id))
+		var enemy = LOCAL.get_enemy(id)
+		enemy.nome = get_next_name_in_battle(id)
+		enemies.append(enemy)
 	return enemies
 
 func initiate_event_battle(battle: Event):
-	Battled_Enemies = _load_enemies(battle.get_enemies())
+	Battled_Enemies = battle.get_enemies()
 	background = load(battle.get_background())
 	music = battle.get_bgm()
+	current_battle = battle._duplicate()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
 # Generates enemies and begins the battle
@@ -153,6 +180,7 @@ func initiate_battle():
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(Players, Enemies, Inventory):
 	LOCAL.IN_BATTLE = false
+	COUNT_IN_BATTLE = {}
 	var total_exp = 0
 	
 	# Calculates total EXP based on the enemies killed
@@ -194,3 +222,8 @@ func end_battle(Players, Enemies, Inventory):
 	else:
 		print("[BM] Back to the map")
 		get_tree().change_scene("res://Root.tscn")
+
+
+func _on_Dialogue_Ended():
+	get_node("/root/Battle").resume()
+	get_node("/root/Battle").emit_signal("event_finished")

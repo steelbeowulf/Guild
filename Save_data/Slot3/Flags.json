@@ -1,0 +1,12 @@
+{
+	"can_attack": true,
+	"can_use_skill": true,
+	"can_use_itens": true,
+	"can_change_lane": true,
+	"can_run": true,
+	"can_open_save_menu": true,
+	"can_open_item_menu": true,
+	"can_open_skill_menu": true,
+	"can_open_options": true,
+	"can_open_status_menu": true
+}
