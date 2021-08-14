@@ -389,14 +389,17 @@ func execute_action(action: Action):
 		var hate = 0
 		var accuracy = current_entity.get_acc()
 		var evasion = target.get_eva()
+		print("ACC = " + str(accuracy) + "EVA = " + str(evasion))
+		
+		#TO DO: REALMENTE CALCULAR ACERTO
 		if(evasion < accuracy):
 			hit = true
 		elif(floor(rand_range(0, 101)) > 80):
 			hit = true
 		else:
-			false
-		if(hit):
-			AUDIO.play_se("HIT")
+			print("DOH, I MISSED")
+			hit = false
+		if (hit):
 			result = apply_effect(current_entity, attackEffect, target, action_type, hit)
 			dmg = 0
 			#var dmg = target.take_damage(PHYSIC, atk)
@@ -404,10 +407,10 @@ func execute_action(action: Action):
 				hate = current_entity.update_hate(dmg, target.index)
 		else:
 			#Doesn't exist yet
-			AUDIO.play_se("MISS")
+			AUDIO.play_se("HIT")
 			result = apply_effect(current_entity, attackEffect, target, action_type, hit)
 			dmg = 0
-			return StatsActionResult.new("Miss", [target], [dmg], [death])
+			return StatsActionResult.new("Miss", current_entity, [target], [dmg], [death])
 		if target.get_health() <= 0:
 			death = true
 			target.die()
