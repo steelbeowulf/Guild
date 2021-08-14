@@ -140,6 +140,10 @@ func play(name, options=[]):
 		take_damage(options, 0)
 		emit_signal("finish_anim", "Damage")
 		return
+	elif name == 'Miss':
+		take_damage(options, -1)
+		emit_signal("finish_anim", "Damage")
+		return
 	elif name == 'Death':
 		dead = true
 	if typeof(options) == TYPE_STRING and options == 'Skill':
@@ -175,7 +179,10 @@ func update_bounds(bounds):
 	
 func take_damage(value, type):
 	print("[ENTITY BATTLE] Taking damage, value="+str(value)+", type="+str(type))
-	if typeof(value) == TYPE_ARRAY:
+	if(type == -1):
+		$Damage.text = 'MISS'
+		$Damage.self_modulate = Color(255, 255, 255)
+	elif typeof(value) == TYPE_ARRAY:
 		for val in value:
 			type = val[1]
 			val = val[0]

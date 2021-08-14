@@ -19,8 +19,8 @@ enum {PHYSIC, MAGIC}
 
 const MAX_VALUE = 9999
 
-func apply_effect(who: Entity, effect: StatEffect, target: Entity):
-	var ret = -1 # Stat difference for displaying numbers
+func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit):
+	var ret = 0 # Stat difference for displaying numbers
 	var tipo = -1 # 0 for HP, 1 for MP
 	
 	var stat = effect.get_id()
@@ -30,7 +30,9 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity):
 	# Should be HP or MP
 	var affected_stat = target.get_stats(stat)
 	var lv = who.get_level()
-	var target_lv = who.get_level()
+	var target_lv = target.get_level()
+	var user_luck = who.get_lck()
+	var target_luck = target.get_lck()
 
 #	Previous calculation: commented in case we want to reuse it
 #		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
@@ -49,61 +51,68 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity):
 	var def_scalar = 1.0
 	
 	print("[APPLY EFFECT] "+effect.format())
-	
-	# Offensive case: Damages HP
-	if stat == HP and base_value < 0:
-		print("[APPLY EFFECT] Offensive")
-		tipo = 0
-		
-		# TODO: Make skill type consistent
-		if (typeof(type) == TYPE_STRING and type == "PHYSIC" or typeof(type) == TYPE_INT and type == PHYSIC):
-			print("[APPLY EFFECT] Physical attack")
-			atk_scalar = target.get_stats(ATK)
-			def_scalar = target.get_stats(DEF)
-		else:
-			print("[APPLY EFFECT] Magic attack")
-			atk_scalar = target.get_stats(ATKM)
-			def_scalar = target.get_stats(DEFM)
+	if hit:
+		# Offensive case: Damages HP
+		if stat == HP and base_value < 0:
+			print("[APPLY EFFECT] Offensive")
+			tipo = 0
 			
-		var ceil_value = ceil(base_value*(atk_scalar/150.0 + 1.0) + (def_scalar * target_lv / 2.0))
-		value = floor(ceil_value*rand_range(89, 100)/100)
-		value = min(0, value)
-		final_value = affected_stat + value
-		ret = abs(value)
-		if LOCAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
-			who.update_hate(value, target.index)
-	# Support case: Heals HP
-	elif stat == HP:
-		print("[APPLY EFFECT] Recovery")
-		# Cannot heal above MAX HP
-		atk_scalar = target.get_stats(ATKM)
-		var ceil_value = base_value*(atk_scalar/200.0 + 1.0)
-		value = floor(ceil_value*rand_range(89, 100)/100)
-		value = min(MAX_VALUE, value)
-		max_value = target.get_stats(HP_MAX)
-		final_value = affected_stat + value
-		tipo = 0
-		ret = -ceil(value)
-		if final_value > max_value:
-			final_value = max_value
-			ret = -ceil(max_value - target.get_health())
-	elif stat == MP:
-		print("[APPLY EFFECT] MP")
-		# Cannot heal above MAX MP
-		max_value = target.get_stats(MP_MAX)
-		tipo = 1
-		final_value = affected_stat + base_value
-		if final_value > max_value:
-			final_value = max_value
-			ret = abs(max_value - target.get_mp())
-		if final_value < 0:
-			final_value = 0
-	print("[APPLY EFFECT] Final value: "+str(final_value))
-	target.set_stats(stat, final_value)
-
-	if target.get_health() > 0.2*target.get_max_health():
-		target.remove_status("HP_CRITICAL")
+			# TODO: Make skill type consistent
+			if (typeof(type) == TYPE_STRING and type == "PHYSIC" or typeof(type) == TYPE_INT and type == PHYSIC):
+				print("[APPLY EFFECT] Physical attack")
+				atk_scalar = target.get_stats(ATK)
+				def_scalar = target.get_stats(DEF)
+			else:
+				print("[APPLY EFFECT] Magic attack")
+				atk_scalar = target.get_stats(ATKM)
+				def_scalar = target.get_stats(DEFM)
+				
+			var ceil_value = ceil(base_value*(atk_scalar/150.0 + 1.0) + (def_scalar * target_lv / 2.0))
+			value = floor(ceil_value*rand_range(89, 100)/100)
+			value = min(0, value)
+			final_value = affected_stat + value
+			ret = abs(value)
+			if LOCAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
+				who.update_hate(value, target.index)
+		# Support case: Heals HP
+		elif stat == HP:
+			print("[APPLY EFFECT] Recovery")
+			# Cannot heal above MAX HP
+			atk_scalar = target.get_stats(ATKM)
+			var ceil_value = base_value*(atk_scalar/200.0 + 1.0)
+			value = floor(ceil_value*rand_range(89, 100)/100)
+			value = min(MAX_VALUE, value)
+			max_value = target.get_stats(HP_MAX)
+			final_value = affected_stat + value
+			tipo = 0
+			ret = -ceil(value)
+			if final_value > max_value:
+				final_value = max_value
+				ret = -ceil(max_value - target.get_health())
+		elif stat == MP:
+			print("[APPLY EFFECT] MP")
+			# Cannot heal above MAX MP
+			max_value = target.get_stats(MP_MAX)
+			tipo = 1
+			final_value = affected_stat + base_value
+			if final_value > max_value:
+				final_value = max_value
+				ret = abs(max_value - target.get_mp())
+			if final_value < 0:
+				final_value = 0
+				
+		#Fix this later with the correct critical hit cap
+		var crit_chance = min(100, floor((user_luck + lv - target_lv)/3.53))
+		if(floor(rand_range(0,100.99)) <= crit_chance):
+			final_value = final_value * 2
+		#critical hit flag needed
+		
+		
+		print("[APPLY EFFECT] Final value: "+str(final_value))
+		target.set_stats(stat, final_value)
 	
+		if target.get_health() > 0.2*target.get_max_health():
+			target.remove_status("HP_CRITICAL")
 	return [ret, tipo]
 
 func apply_status(status, target, attacker):
