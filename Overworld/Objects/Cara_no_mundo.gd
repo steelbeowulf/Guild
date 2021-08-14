@@ -54,9 +54,11 @@ func _initialize():
 	$Camera2D.set_limit(MARGIN_TOP, margin[2])
 	$Camera2D.set_limit(MARGIN_RIGHT, margin[3])
 	print("[PLAYER POSITION] "+str(position))
-	var Play = GLOBAL.PLAYERS[0]
-	set_animations(Play.sprite, Play.animations)
-	play("idle")
+	for p in GLOBAL.PLAYERS:
+		if not p.dead:
+			set_animations(p.sprite, p.animations)
+			play("idle")
+			return
 
 
 # Deals with input and moves player

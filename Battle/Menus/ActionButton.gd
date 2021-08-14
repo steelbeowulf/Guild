@@ -12,6 +12,8 @@ export(String) var action_type : String
 var subaction : int = -1
 var targets : PoolIntArray = []
 
+var allowed : bool = false
+
 func _ready():
 	action_type = get_name()
 	self.text = get_name()
@@ -46,15 +48,16 @@ func _on_SubAction_Picked(subaction_arg: int) -> void:
 
 
 func hide_stuff():
-	print("Hiding stuff")
+	print("[ACTION BUTTON] Hiding stuff")
 	for c in get_parent().get_children():
-		c.show()
+		if c.allowed:
+			c.show()
 	$ScrollContainer.hide()
 	emit_signal("deactivate_targets")
 	emit_signal("deactivate_targets_all")
 
 func _on_Action_pressed():
-	print("ACTION PRESSED ", action_type)
+	print("[ACTION BUTTON] Action pressed: ", action_type)
 	if action_type == "Run":
 		emit_signal("action_picked", action_type, 0, [])
 	elif action_type == "Attack":
@@ -73,16 +76,26 @@ func _on_Action_pressed():
 				break
 
 func _on_Targets_Picked(target_args: PoolIntArray):
-	print("ACTIONBUTTON TARGETS")
-	print(subaction)
-	print(targets)
+	print("[ACTION BUTTON] subaction: ", subaction, " targets: ", targets)
 	targets = target_args
-	print(action_type)
 	if subaction != -1 and action_type == get_parent().get_parent().menu_state:
 		$ScrollContainer.hide()
 		emit_signal("deactivate_targets")
 		emit_signal("deactivate_targets_all")
 		emit_signal("action_picked", action_type, subaction, targets)
+
+func connect_target_player(p: Button):
+	p.connect("target_picked", self, "_on_Targets_Picked")  
+	self.connect("activate_targets", p, "_on_Activate_Targets")
+	self.connect("deactivate_targets", p, "_on_Deactivate_Targets")
+
+
+func connect_target_enemy(e: Button, manager: Node, id: int):
+	e.connect("focus_entered", manager, "manage_hate", [0, id])
+	e.connect("focus_exited", manager, "hide_hate")
+	e.connect("target_picked", self, "_on_Targets_Picked")  
+	self.connect("activate_targets", e, "_on_Activate_Targets")
+	self.connect("deactivate_targets", e, "_on_Deactivate_Targets")
 
 
 func connect_targets(list_players: Array, list_enemies: Array, manager: Node, allPlayers: Button, allEnemies: Button) -> void:
@@ -113,5 +126,4 @@ func connect_targets(list_players: Array, list_enemies: Array, manager: Node, al
 
 func _on_Focus_Entered(button):
 	var num = int(button.get_name())
-	print(num)
 	$ScrollContainer.scroll_vertical = num * 30

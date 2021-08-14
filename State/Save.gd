@@ -37,7 +37,8 @@ func load_game(save_slot):
 		"Area_Info": info,
 		"Enemies_in_area": area_info["ENEMIES"],
 		"NPCs_in_area": area_info["NPCS"],
-		"Reserve_Players": loader.load_reserve_players(save_slot)
+		"Reserve_Players": loader.load_reserve_players(save_slot),
+		"Flags": loader.load_flags(save_slot)
 	}
 
 # Saves all information on the argument slot

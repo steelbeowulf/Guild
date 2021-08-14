@@ -119,7 +119,7 @@ func apply_status(status, target, attacker):
 	var type = sstats[status[1]]
 	var value = status[0]
 	var atkm = attacker.get_atkm()
-	print("[APPLY] APPLYING STATUS "+type+str(value))
+	print("[APPLY] Applying status ", type, " ", str(value), " on ", target.get_name())
 	if value > 0:
 		randomize()
 		var chance = rand_range(0, 99)
@@ -255,7 +255,7 @@ func apply_status(status, target, attacker):
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	elif value == -1:
-		print("WILL REMOVE STATUS "+str(type))
+		print("[APPLY] Will remove status "+str(type))
 		target.remove_status(type)
 		if type == "ATTACK_UP":
 			var atk = target.get_atk()

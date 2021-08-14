@@ -19,6 +19,7 @@ const PLAYERS_PATH = "res://Data/Seeds/Players.json"
 const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
 const EQUIPAMENT_PATH = "res://Data/Seeds/Equipament.json"
 const JOBS_PATH = "res://Data/Seeds/Jobs.json"
+const FLAGS_PATH = "res://Data/Seeds/Flags.json"
 
 # Path where player data is saved on
 const SAVE_PATH = "res://Save_data/"
@@ -38,6 +39,10 @@ var DIALOGUE_CLASS = load("res://Classes/Events/Dialogue.gd")
 var OPTION_CLASS = load("res://Classes/Events/Option.gd")
 var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
 var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
+var FLAG_CLASS = load("res://Classes/Events/Flag.gd")
+var REINFORCEMENT_CLASS = load("res://Classes/Events/Reinforcements.gd")
+var SET_ACTION_CLASS = load("res://Classes/Events/SetAction.gd")
+var SET_TARGET_CLASS = load("res://Classes/Events/SetTarget.gd")
 
 var List
 
@@ -229,6 +234,22 @@ func load_all_statuses():
 	print(ret)
 	return ret
 
+# Loads various flags related to the state of the world
+func load_flags(slot):
+	var path = FLAGS_PATH
+	if slot >= 0:
+		path = SAVE_PATH+"Slot"+str(slot)+"/Flags.json"
+	var file = File.new()
+	file.open(path, file.READ)
+	var text = file.get_as_text()
+	var result_json = JSON.parse(text)
+	if result_json.error == OK: 
+		return result_json.result
+	else:  # If parse has errors
+		print("Error: ", result_json.error)
+		print("Error Line: ", result_json.error_line)
+		print("Error String: ", result_json.error_string)
+
 
 # Loads information regarding the players' inventory.
 # If it's a new game, loads it from Demo_Data.
@@ -316,31 +337,34 @@ func load_npcs(filter_array):
 	return ret
 
 
-func parse_events(events):
+func parse_events(events: Array, in_battle = null):
 	var parsed_events = []
 	for event in events:
+		var event_instance: Event = null
 		if event.has("DIALOGUE"):
 			if typeof(event["DIALOGUE"]) == TYPE_ARRAY:
-				parsed_events.append(DIALOGUE_CLASS.new(event["DIALOGUE"]))
+				event_instance = DIALOGUE_CLASS.new(event["DIALOGUE"])
 			else:
-				parsed_events.append(DIALOGUE_CLASS.new(
+				event_instance = DIALOGUE_CLASS.new(
 					event["DIALOGUE"]["MESSAGE"],
 					event["DIALOGUE"]["NAME"],
 					event["DIALOGUE"]["PORTRAIT"]
-				))
+				)
 		elif event.has("OPTIONS"):
 			for option in event["OPTIONS"]:
-				parsed_events.append(OPTION_CLASS.new(
+				if event_instance != null:
+					parsed_events.append(event_instance)
+				event_instance = OPTION_CLASS.new(
 					option["OPTION"],
 					parse_events(option["RESULTS"])
-				))
+				)
 		elif event.has("TRANSITION"):
 			var transition = event["TRANSITION"]
-			parsed_events.append(TRANSITION_CLASS.new(
+			event_instance = TRANSITION_CLASS.new(
 				transition["AREA"],
 				transition["MAP"],
 				LOCAL.parse_position(transition["POSITION"])
-			))
+			)
 		elif event.has("SHOP"):
 			var shop = event["SHOP"]
 			var subtype = ""
@@ -351,14 +375,40 @@ func parse_events(events):
 			else:
 				subtype = "EQUIP"
 				itens_sold = shop["EQUIPAMENTS"]
-			parsed_events.append(SHOP_CLASS.new(subtype, itens_sold))
+			event_instance = SHOP_CLASS.new(subtype, itens_sold)
 		elif event.has("BATTLE"):
 			var battle = event["BATTLE"]
-			parsed_events.append(BATTLE_CLASS.new(
+			event_instance = BATTLE_CLASS.new(
 				battle["ENEMIES"],
 				battle["BACKGROUND"],
 				battle["MUSIC"]
-			))
+			)
+			var battle_events = parse_events(battle["EVENTS"], event_instance)
+			event_instance.add_events(battle_events)
+		elif event.has("SET_TARGET"):
+			var set_target = event["SET_TARGET"]
+			var entity = in_battle.find_entity_by_name(set_target["ENTITY"])
+			var target = in_battle.find_entity_by_name(set_target["TARGET"])
+			event_instance = SET_TARGET_CLASS.new(entity, target, set_target["TURNS"])
+		elif event.has("SET_ACTION"):
+			var set_action = event["SET_ACTION"]
+			var entity = in_battle.find_entity_by_name(set_action["ENTITY"])
+			var forced = event["SET_ACTION"].get("FORCE", false)
+			var action = event["SET_ACTION"]["ACTION"]
+			event_instance = SET_ACTION_CLASS.new(
+				entity, action["TYPE"], action["ARG"], action["TARGETS"], set_action["TURNS"], forced
+			)
+		elif event.has("FLAG"):
+			var flag = event["FLAG"]
+			event_instance = FLAG_CLASS.new(flag["KEY"], flag["VALUE"])
+		elif event.has("REINFORCEMENTS"):
+			var reinforcement = event["REINFORCEMENTS"]
+			event_instance = REINFORCEMENT_CLASS.new(reinforcement["TYPE"], reinforcement["ENTITIES"])
+		if event.has("CONDITION"):
+			event_instance.add_condition(event["CONDITION"])
+		if event.has("RECURRENCE"):
+			event_instance.add_recurrence(event["RECURRENCE"])
+		parsed_events.append(event_instance)
 	return parsed_events
 
 # Uses information from load_players to build the actual players.

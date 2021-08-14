@@ -38,6 +38,7 @@ func load_game(slot):
 	PLAYERS = saved_data["Players"]
 	LOCAL.load_enemies(saved_data["Enemies_in_area"])
 	LOCAL.load_npcs(saved_data["NPCs_in_area"])
+	EVENTS.load_flags(saved_data["Flags"])
 
 
 # Helper function to get the Root node
@@ -64,6 +65,11 @@ func get_item_ids():
 
 func get_player(player_id):
 	for p in PLAYERS:
+		if p.id == player_id:
+			return p
+
+func get_reserve_player(player_id):
+	for p in RESERVE_PLAYERS:
 		if p.id == player_id:
 			return p
 

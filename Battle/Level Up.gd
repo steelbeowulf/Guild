@@ -1,10 +1,21 @@
 extends Node2D
 
+func show_enabled_actions():
+	for action in get_node("Interface/Menu").get_children():
+		var key = "can_battle_" + action.get_name().to_lower()
+		if EVENTS.get_flag(key):
+			action.show()
+
 func _ready():
 	$AnimationManager.initialize(GLOBAL.PLAYERS, [])
 	
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
+	
+	# Hide actions that are still locked
+	for action in $Interface/Menu.get_children():
+		action.hide()
+	show_enabled_actions()
 	
 	$AnimationManager/Log.display_text("Enemies defeated!")
 	for i in range(len(GLOBAL.PLAYERS)):
@@ -30,12 +41,7 @@ func _ready():
 	BATTLE_MANAGER.leveled_up = []
 
 func _process(delta):
-	if $Timer.time_left == 0:
-		if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_action_just_pressed("ui_accept"):
+		if $LevelUpLog.next():
 			AUDIO.play_bgm('MAP_THEME', false)
 			get_tree().change_scene("Root.tscn")
-
-
-
-func _on_Timer_timeout():
-	pass # Replace with function body.

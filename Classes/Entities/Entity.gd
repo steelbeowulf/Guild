@@ -148,6 +148,9 @@ func take_damage(type, damage):
 		self.die()
 	return dmg
 
+func is_critical_health():
+	return get_health() < 0.2*get_max_health() and get_health() > 0
+
 func is_dead():
 	return dead
 

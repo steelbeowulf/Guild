@@ -1,6 +1,7 @@
 extends Node2D
 
 var buf = []
+var timeout = false
 
 func _ready():
 	hide()
