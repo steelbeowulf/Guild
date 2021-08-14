@@ -32,6 +32,8 @@ var events = []
 var npc_name = ""
 var npc_portrait = ""
 
+var playing_dialogue = false
+
 func play_events(events: Array):
 	self.events = events.duplicate(true)
 	return play_event(self.events.pop_front())
@@ -87,11 +89,8 @@ func play_event(event: Event) -> bool:
 			event.turns
 		)
 		if event.is_forced():
-			# FORCE_ACTION
-			pass
+			get_node("/root/Battle").force_next_action(event.entity)
 		event_ended()
-	#if len(events) > 0:
-	#	play_event(events.pop_front())
 	return true
 
 
@@ -100,6 +99,7 @@ func build_action(type_arg: String, action_id: int, args: Array) -> Action:
 	for a in args:
 		targets.append(BATTLE_MANAGER.current_battle.find_entity_by_name(a).index)
 	return Action.new(type_arg, action_id, targets)
+
 
 func start_npc_dialogue(name, portrait, events, callback):
 	var node = NODES["Dialogue"]
@@ -111,20 +111,22 @@ func start_npc_dialogue(name, portrait, events, callback):
 
 
 func event_ended():
-	print("[EVENTS] Event finished!")
-	if len(self.events) == 0:
-		print("[EVENTS] Callback event time")
-		caller._on_Dialogue_Ended()
-	else:
+	print("[EVENTS] Event finished! ")
+	if len(self.events) > 0:
 		play_event(self.events.pop_front())
+	else:
+		print("[EVENTS] Callback event time")
+		playing_dialogue = false
+		caller._on_Dialogue_Ended()
 
 
 func dialogue_ended(force_hide = false):
 	print("[EVENTS] Dialogue ended")
 	if force_hide:
 		NODES["Dialogue"].reset()
-	if len(self.events) == 0:
-		print("[EVENTS] Callback dialogue time")
-		caller._on_Dialogue_Ended()
-	else:
+	if len(self.events) > 0:
 		play_event(self.events.pop_front())
+	else:
+		print("[EVENTS] Callback dialogue time")
+		playing_dialogue = false
+		caller._on_Dialogue_Ended()

@@ -51,14 +51,15 @@
             },
           },
           {
-            "CONDITION": "on_begin",
+            "CONDITION": "on_reinforcements",
             "SET_ACTION":{
               "ENTITY": "Rat B",
               "ACTION" : {
-                "TYPE": "Attack",
-                "ARG": 1,
+                "TYPE": "Skill",
+                "ARG": 0,
                 "TARGETS": ["Shanta"],
               },
+              "FORCE": true,
               "TURNS": 20
             },
           },

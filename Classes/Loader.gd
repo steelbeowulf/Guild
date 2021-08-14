@@ -393,9 +393,10 @@ func parse_events(events: Array, in_battle = null):
 		elif event.has("SET_ACTION"):
 			var set_action = event["SET_ACTION"]
 			var entity = in_battle.find_entity_by_name(set_action["ENTITY"])
+			var forced = event["SET_ACTION"].get("FORCE", false)
 			var action = event["SET_ACTION"]["ACTION"]
 			event_instance = SET_ACTION_CLASS.new(
-				entity, action["TYPE"], action["ARG"], action["TARGETS"], set_action["TURNS"], false
+				entity, action["TYPE"], action["ARG"], action["TARGETS"], set_action["TURNS"], forced
 			)
 		elif event.has("FLAG"):
 			var flag = event["FLAG"]

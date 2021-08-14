@@ -17,6 +17,10 @@ var total_allies = 0
 var boss = false
 const RUN_CHANCE = 75
 
+
+var forced_agent = null
+var next = null
+
 signal round_finished
 signal finish_anim
 signal event_finished
@@ -131,6 +135,10 @@ func _ready():
 
 	# Main battle loop: calls rounds() while the battle isn't battle_over
 	call_deferred("trigger_event", "on_begin")
+	yield(self, "event_finished")
+	if forced_agent != null:
+		next = forced_agent
+		forced_agent = null
 	while (not battle_over):
 		rounds()
 		yield(self, "round_finished")
@@ -144,6 +152,11 @@ func trigger_event(condition: String):
 		EVENTS.play_events(BATTLE_MANAGER.current_battle.get_events(condition))
 		return true
 	return false
+
+
+func force_next_action(agent: Entity):
+	forced_agent = agent
+
 
 func check_for_events(result: ActionResult):
 	print("[BATTLE EVENT CHECK] "+result.format())
@@ -212,13 +225,19 @@ func rounds():
 	for i in range(turnorder.size()):
 		for e in Enemies:
 			e.update_target(Players, Enemies)
+		
 		current_entity = turnorder[i]
+		
+		if next != null:
+			current_entity = next
+			next = null
+		
 		print("[BATTLE] Turno de "+current_entity.nome)
-		var next = null
 		if i < turnorder.size() - 1:
 			next = turnorder[i+1]
 		else:
 			next = turnorder[0]
+		
 		var id = current_entity.index
 
 		# TODO: Refactor all this
@@ -305,6 +324,9 @@ func rounds():
 		if call_deferred("check_for_events", result):
 			print("[BATTLE] Waiting for events...")
 			yield(self, "event_finished")
+			if forced_agent != null:
+				next = forced_agent
+				forced_agent = null
 			print("[BATTLE] Events have finished!")
 		
 		# Hide actions that are still locked

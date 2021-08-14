@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Fonts/Font28.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Fonts/Menu_Font.tres" type="DynamicFont" id=6]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -71,6 +71,6 @@ custom_fonts/font = ExtResource( 6 )
 text = "V"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Float = SubResource( 2 )
+anims/Float = SubResource( 1 )
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
