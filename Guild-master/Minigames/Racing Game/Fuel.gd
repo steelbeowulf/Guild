@@ -2,7 +2,7 @@ extends Area2D
 
 signal fuel_catch
 
-func ready():
+func _ready():
 	connect("fuel_catch", self.get_parent(),"fuel_plus")
 
 #when the player entered in the fuel's area he gets more 1 fuel to use the boost

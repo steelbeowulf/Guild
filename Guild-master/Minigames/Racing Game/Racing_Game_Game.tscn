@@ -19,6 +19,10 @@ margin_bottom = 1071.41
 wait_time = 3.0
 one_shot = true
 
+[node name="Slip_Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Fuel_Label" type="Label" parent="."]
 margin_left = 1698.87
 margin_top = 11.1037
