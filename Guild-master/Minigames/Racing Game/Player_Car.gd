@@ -9,11 +9,12 @@ onready var Sprite = $Sprite
 func _physics_process(delta):
 	var mouse = get_global_mouse_position() - self.global_position
 	#see the func car_slipped() in Racing_Game_Game.gd
-	mouse.rotated(slip_rotation)
-	# if < 5 the cursor is very next to the car, then the sprite will shake
-	if mouse.length() > 5:
+	mouse = mouse.rotated(slip_rotation)
+	# if < 17.5 the cursor is very next to the car, then the sprite will shake
+	if mouse.length() > 17.5:
 		velocity = mouse.normalized()*speed
 		Sprite.rotate(mouse.angle() - Sprite.global_rotation)
 	else:
 		velocity = Vector2(0,0)
+		Sprite.rotate(0)
 	move_and_slide(velocity)

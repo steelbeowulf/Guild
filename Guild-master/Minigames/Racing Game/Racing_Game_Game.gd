@@ -3,7 +3,10 @@ extends Node2D
 onready var Boost_Timer = $Boost_Timer
 onready var Player_Car = $Player_Car
 onready var Fuel_Label = $Fuel_Label
+onready var Slip_Timer = $Slip_Timer
+onready var Score_Label = $Score_Label
 var fuel: int = 0
+var score: int = 0
 
 func _on_Button_button_down():
 	get_tree().quit()
@@ -28,15 +31,31 @@ func fuel_plus() -> void:
 	fuel += 1
 	Fuel_Label.text = "Fuel: " + str(fuel)
 
-#when the player entered the car will slip
+#when the player entered the car will slip, 
+#then the speed is increase and the car will not follow the cursor
 func car_slipped() -> void:
 	# rotation in radians of the velocity
 	var slip_rotation: float
 	print("Vish estou escorregando!")
+	#is the boost is active the slip effecet will be different
 	if Boost_Timer.is_stopped():
 		slip_rotation = rand_range(PI/12,PI/6)
-		Player_Car.speed = Player_Car.speed*3
 	else:
 		slip_rotation = rand_range(PI/6,PI/2)
-		Player_Car.speed = Player_Car.speed*5
+	Player_Car.speed = 900.0
 	Player_Car.slip_rotation = slip_rotation
+	Slip_Timer.start()
+
+#end of the slip 
+func _on_Slip_Timer_timeout():
+	Player_Car.speed = 300.0
+	Player_Car.slip_rotation = 0.0
+
+func player_death():
+	$Death_Label.visible = true
+	get_tree().paused = true
+
+#change the player's score
+func change_score(amount):
+	score += amount
+	Score_Label.text = "Score: " + str(score)
