@@ -163,28 +163,28 @@ margin_bottom = 1073.08
 
 [node name="Attack" parent="Interface/Menu" instance=ExtResource( 9 )]
 margin_right = 318.0
-margin_bottom = 28.0
+margin_bottom = 33.0
 focus_neighbour_top = NodePath("../Run")
 
 [node name="Skill" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 32.0
+margin_top = 37.0
 margin_right = 318.0
-margin_bottom = 60.0
+margin_bottom = 70.0
 
 [node name="Item" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 64.0
+margin_top = 74.0
 margin_right = 318.0
-margin_bottom = 92.0
+margin_bottom = 107.0
 
 [node name="Lane" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 96.0
+margin_top = 111.0
 margin_right = 318.0
-margin_bottom = 124.0
+margin_bottom = 144.0
 
 [node name="Run" parent="Interface/Menu" instance=ExtResource( 9 )]
-margin_top = 128.0
+margin_top = 148.0
 margin_right = 318.0
-margin_bottom = 160.0
+margin_bottom = 181.0
 focus_neighbour_bottom = NodePath("../Attack")
 
 [node name="Info" type="VBoxContainer" parent="Interface"]
