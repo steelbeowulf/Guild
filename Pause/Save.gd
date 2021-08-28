@@ -11,14 +11,14 @@ signal slot_chosen
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	slots = get_node("Panel/All/Left/Save Slots")
+	slots = get_node("All/Left/Save Slots")
 	remove_focus()
 	var tmp = 0
 	for c in slots.get_children():
 		c.connect("button_down", self, "_on_Slot_chosen", [tmp])
 		c.connect("focus_entered", self, "_on_Focus_Entered")
 		tmp += 1
-	for btn in $Panel/All/Right/Options_Panel.get_children():
+	for btn in $All/Right/Options_Panel.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
 
 func _input(event: InputEvent):
@@ -69,9 +69,9 @@ func _on_QuitDialog_confirmed():
 
 func remove_focus():
 	slots.remove_focus()
-	get_node("Panel/All/Right/Options_Panel/Save").grab_focus()
-	get_node("Panel/All/Right/Options_Panel/Save").pressed = false
-	get_node("Panel/All/Right/Options_Panel/Load").pressed = false
+	get_node("All/Right/Options_Panel/Save").grab_focus()
+	get_node("All/Right/Options_Panel/Save").pressed = false
+	get_node("All/Right/Options_Panel/Load").pressed = false
 
 
 func _on_SaveDialog_confirmed():
