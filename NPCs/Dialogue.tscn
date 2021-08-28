@@ -3,8 +3,8 @@
 [ext_resource path="res://NPCs/Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://Assets/Portraits/warrior.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Assets/Fonts/Font28.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Fonts/FontBold.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/Fonts/Font21.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Fonts/Menu_Font.tres" type="DynamicFont" id=6]
 
 [sub_resource type="Animation" id=1]
@@ -49,9 +49,9 @@ text = "STABBY BOI"
 
 [node name="Text" type="Label" parent="."]
 margin_left = 300.0
-margin_top = 95.0
+margin_top = 84.5028
 margin_right = 1258.0
-margin_bottom = 176.0
+margin_bottom = 187.503
 custom_fonts/font = ExtResource( 5 )
 text = "Wow! Could it really be?
 Let's see how much I can speak before the text box gets filled!"

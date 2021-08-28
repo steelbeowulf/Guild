@@ -1,9 +1,9 @@
 extends Node
 
-var font_size = "24"
+var font_size = "21"
 var text_speed = 10
 
-var size_opts = ["24", "26", "28", "30", "32"]
+var size_opts = ["20", "21", "22", "23", "24"]
 var size_index = 0
 
 var speed_opts = ["Slow", "Medium", "Fast"]

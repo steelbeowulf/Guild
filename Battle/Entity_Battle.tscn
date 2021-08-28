@@ -3,7 +3,7 @@
 [ext_resource path="res://Battle/Entity_Battle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Others/cursor.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/Fonts/FontBold.tres" type="DynamicFont" id=4]
 
 [sub_resource type="Animation" id=1]
 tracks/0/type = "value"

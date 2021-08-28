@@ -3,8 +3,8 @@
 [ext_resource path="res://Menu/Loading.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Others/Title_Screen.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=3]
-[ext_resource path="res://Assets/Fonts/Font28.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Assets/Fonts/Font32.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Assets/Fonts/Font21.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Assets/Others/Logo.png" type="Texture" id=6]
 
 [node name="Loading" type="Node2D"]
