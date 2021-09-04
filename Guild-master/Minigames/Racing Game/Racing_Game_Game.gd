@@ -5,7 +5,10 @@ onready var Player_Car = $Player_Car
 onready var Fuel_Label = $Fuel_Label
 onready var Slip_Timer = $Slip_Timer
 onready var Score_Label = $Score_Label
-var fuel: int = 10
+onready var Camera = get_node("Player_Car/Camera2D")
+var Obstacles_position = []
+var Obstacle_counter: int = 0 #number of obstacles
+var fuel: int = 0
 var score: int = 0
 
 func _on_Button_button_down():
@@ -59,3 +62,39 @@ func player_death():
 func change_score(amount):
 	score += amount
 	Score_Label.text = "Score: " + str(score)
+
+#WARNING: i NEVER test this!
+func create_map() -> void:
+	var Block = load("res://Minigames/Racing Game/Block.tscn")
+	var Fuel = load("res://Minigames/Racing Game/Fuel.tscn")
+	var Hole = load("res://Minigames/Racing Game/Hole.tscn")
+	var Oil = load("res://Minigames/RacingGame/Oil.tcsn")
+	var Sprite1 = load("res://Minigames/RacingGame/Sprite1.tcsn")
+	var Sprite2 = load("res://Minigames/RacingGame/Sprite2.tcsn")
+	var Star = load("res://Minigames/Racing Game/Star.tscn")
+	var Obstacles = [Block, Fuel, Hole, Oil, Sprite1, Sprite2, Star]
+	var number_of_objects = rand_range(100,200)
+	var obstacle: Object
+	for i in number_of_objects:
+		obstacle = Obstacles[rand_range(0,6)].new()
+		#random position
+		var positionx: float = rand_range(Player_Car.position.x, 
+		Camera.get_camera_screen_center().x + Player_Car.camera_rect_size.x/2)
+		var positiony: float = rand_range(0, Camera.limit_bottom)
+		obstacle.position = get_obstacle_position(positionx, positiony)
+		self.add_child(obstacle)
+
+func get_obstacle_position(positionx: float, positiony: float) -> Vector2:
+	for i in range(Obstacle_counter):
+		if Obstacles_position[i].x - 200 <= positionx and positionx <= Obstacles_position[i].x + 620:
+			if Obstacles_position[i].y - 200 <= positiony and positiony <= Obstacles_position[i].y + 200:
+					#exists a target in same position so choose another random position and try again 
+					var positionx_ : float = 0
+					var positiony_ : float = 0
+					positionx_ = rand_range(40,1880)
+					positiony_ = rand_range(40,1040)
+					get_obstacle_position(positionx_,positiony_) 
+	Obstacle_counter += 1
+	#put the new position in the array
+	Obstacles_position.push_back(Vector2(positionx,positiony))
+	return Vector2(positionx,positiony)

@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-const regular_speed = 500.0
+const regular_speed = 800.0
 var velocity = Vector2(0,0)
-var speed: float = 500.0
+var speed: float = 800.0
 var slip_rotation: float = 0
 var prev_player_position_x: float = 0
 onready var Sprite = $Sprite
@@ -14,6 +14,7 @@ func _ready():
 	self.position.y = camera_rect_size.y/2
 	Camera2D.limit_bottom = get_viewport().size.y
 	Camera2D.limit_left = Camera2D.get_camera_screen_center().x - camera_rect_size.x/2
+	Camera2D.limit_right = regular_speed*60
 
 func _process(_delta):
 	#prevent the player to come back in the minigame
