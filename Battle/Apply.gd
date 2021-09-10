@@ -19,7 +19,7 @@ enum {PHYSIC, MAGIC}
 
 const MAX_VALUE = 9999
 
-func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit):
+func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit, crit):
 	var ret = 0 # Stat difference for displaying numbers
 	var tipo = -1 # 0 for HP, 1 for MP
 	
@@ -31,8 +31,8 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit)
 	var affected_stat = target.get_stats(stat)
 	var lv = who.get_level()
 	var target_lv = target.get_level()
-	var user_luck = who.get_lck()
-	var target_luck = target.get_lck()
+	#var user_luck = who.get_lck()
+	#var target_luck = target.get_lck()
 
 #	Previous calculation: commented in case we want to reuse it
 #		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
@@ -102,9 +102,9 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit)
 				final_value = 0
 				
 		#Fix this later with the correct critical hit cap
-		var crit_chance = min(100, floor((user_luck + lv - target_lv)/3.53))
-		if(floor(rand_range(0,100.99)) <= crit_chance):
-			final_value = final_value * 2
+		#var crit_chance = min(100, floor((user_luck + lv - target_lv)/3.53))
+		#if(floor(rand_range(0,100.99)) <= crit_chance):
+		#	final_value = final_value * 2
 		#critical hit flag needed
 		
 		
@@ -113,7 +113,15 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit)
 	
 		if target.get_health() > 0.2*target.get_max_health():
 			target.remove_status("HP_CRITICAL")
+	if crit:
+		ret = ret * 2
 	return [ret, tipo]
+
+
+
+
+
+
 
 func apply_status(status, target, attacker):
 	var type = sstats[status[1]]

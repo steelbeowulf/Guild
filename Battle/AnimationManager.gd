@@ -143,7 +143,7 @@ func resolve(current_entity: Entity, action_result):
 	# TODO Deal with ailments
 	if action_type == "Pass":
 		pass
-	elif action_type == "Attack" || action_type == "Miss":
+	elif action_type == "Attack" || action_type == "Miss" || action_type == "Critical Attack":
 		$Log.display_text("Attack")
 		var target = action_result.get_targets()[0]
 		var dies = action_result.get_deaths()[0]
@@ -151,8 +151,10 @@ func resolve(current_entity: Entity, action_result):
 		enqueue(current_entity.graphics, "attack", null) # ataque do current_entity
 		if action_type == "Attack":
 			enqueue(target.graphics, "Damage", dmg) # dano no alvo
-		else:
+		elif action_type == "Miss":
 			enqueue(target.graphics, "Miss", dmg) # erro no alvo
+		elif action_type == "Critical Attack":
+			enqueue(target.graphics, "Critical", dmg) # critico no alvo
 		if target.tipo == 'Player':
 			enqueue(target.info, "UpdateHP", dmg) # lifebar
 		if dies:

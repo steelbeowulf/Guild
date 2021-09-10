@@ -67,7 +67,7 @@
 		"AGI":45,
 		"ACC":101,
 		"EVA":15, 
-		"LCK":75,
+		"LCK":1000,
 		"LANE":1,
 		"NAME":"Maui",
 		"JOBS": [{"ID": 1, "LEVEL": 1}],
