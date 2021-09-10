@@ -367,7 +367,6 @@ func execute_action(action: Action):
 	print("[BATTLE] Executing action "+str(action.get_type()))
 	# Attack: the target takes PHYSICAL damage
 	if action_type == "Attack":
-		AUDIO.play_se("HIT")
 		var death = false
 		var entities = []
 		var target_id = action.get_targets()[0]
@@ -384,16 +383,62 @@ func execute_action(action: Action):
 		# Create BaseStatEffect
 		var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
 		var attackEffect = STATS_CLASS.new(HP, "HP", -current_entity.get_atk(), "PHYSIC")
-		var result = apply_effect(current_entity, attackEffect, target)
-		var dmg = result[0]
-		#var dmg = target.take_damage(PHYSIC, atk)
-		if target.classe == "boss" and current_entity.classe != "boss":
-			var hate = current_entity.update_hate(dmg, target.index)
+		var hit = true
+		var crit = false
+		var dmg = 0
+		var result = 0
+		var hate = 0
+		var accuracy = current_entity.get_acc()
+		var evasion = target.get_eva()
+		var entityluck = current_entity.get_lck()
+		var targetluck = target.get_lck()
+		var critchance = min((entityluck - targetluck), 100)
+		if(floor(rand_range(0, 100)) < critchance):
+			crit = true
+		print("ACC = " + str(accuracy) + "EVA = " + str(evasion))
+		
+		#TO DO: REALMENTE CALCULAR ACERTO
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		if(evasion < accuracy):
+			hit = true
+		elif(floor(rand_range(0, 101)) > 80):
+			hit = true
+		else:
+			print("DOH, I MISSED")
+			hit = false
+		if (hit):
+			result = apply_effect(current_entity, attackEffect, target, action_type, hit, crit)
+			dmg = 0
+			#var dmg = target.take_damage(PHYSIC, atk)
+			if target.classe == "boss" and current_entity.classe != "boss":
+				hate = current_entity.update_hate(dmg, target.index)
+		else:
+			#Doesn't exist yet
+			AUDIO.play_se("HIT")
+			result = apply_effect(current_entity, attackEffect, target, action_type, hit, crit)
+			dmg = 0
+			return StatsActionResult.new("Miss", current_entity, [target], [dmg], [death])
 		if target.get_health() <= 0:
 			death = true
 			target.die()
 		print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(death)+", dmg="+str(dmg))
-		return StatsActionResult.new("Attack", current_entity, [target], [dmg], [death])
+		if not crit:
+			return StatsActionResult.new("Attack", current_entity, [target], [dmg], [death])
+		else:
+			return StatsActionResult.new("Critical Attack", current_entity, [target], [dmg], [death])
+	
+	
+	
 	
 	# Lane: only the player characters may change lanes
 	elif action_type == "Lane":
@@ -437,7 +482,7 @@ func execute_action(action: Action):
 					# TODO: Add times attribute back to StatEffect
 					var times = 1#eff[3]
 					for i in range(times):
-						result = apply_effect(current_entity, eff, target)
+						result = apply_effect(current_entity, eff, target, action_type, true, false)
 						if result[0] != -1:
 							ret = result[0]
 							type = result[1]
@@ -468,6 +513,7 @@ func execute_action(action: Action):
 		var stat_change = []
 		var ailments = []
 		var valid_targets = []
+		var hit = true
 		# Apply the effect on all affected
 		for target_id in targets:
 			var target
@@ -487,7 +533,7 @@ func execute_action(action: Action):
 				for eff in skill.effect:
 					var times = 1#eff[3]
 					for i in range(times):
-						result = apply_effect(current_entity, eff, target)
+						result = apply_effect(current_entity, eff, target, action_type, hit, false)
 						if result[0] != -1:
 							ret = result[0]
 							type = result[1]

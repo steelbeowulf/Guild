@@ -156,6 +156,14 @@ func play(name, options=[]):
 		take_damage(options, 0)
 		emit_signal("finish_anim", "Damage")
 		return
+	elif name == 'Critical':
+		take_damage(options, 1)
+		emit_signal("finish_anim", "Critical")
+		return
+	elif name == 'Miss':
+		take_damage(options, -1)
+		emit_signal("finish_anim", "Damage")
+		return
 	elif name == 'Death':
 		dead = true
 	if typeof(options) == TYPE_STRING and options == 'Skill':
@@ -190,19 +198,30 @@ func update_bounds(bounds):
 	
 func take_damage(value, type):
 	print("[ENTITY BATTLE] Taking damage, value="+str(value)+", type="+str(type))
-	if typeof(value) == TYPE_ARRAY:
+	if(type == -1):
+		$Damage.text = 'MISS'
+		$Damage.self_modulate = Color(255, 255, 255)
+	elif typeof(value) == TYPE_ARRAY:
 		for val in value:
 			type = val[1]
 			val = val[0]
 			var bad_heal = (str(val) == "-0")
 			$Damage.text = str(val)
-			if type == 0:
+			if type >= 0:
 				if val < 0 or bad_heal:
 					val = abs(val)
 					$Damage.text = "+"+str(val)
-					$Damage.self_modulate = Color(0, 255, 30)
+					if (type == 0):
+						$Damage.self_modulate = Color(0, 255, 30)
+					else:
+						$Damage.text = $Damage.text + "!"
+						$Damage.self_modulate = Color(0, 100, 0)
 				else:
-					$Damage.self_modulate = Color(255, 255, 255)
+					if (type == 0):
+						$Damage.self_modulate = Color(255, 255, 255)
+					else:
+						$Damage.text = $Damage.text + "!"
+						$Damage.self_modulate = Color(255, 100, 0)
 			else:
 				if val < 0 or bad_heal:
 					val = abs(val)
@@ -213,13 +232,21 @@ func take_damage(value, type):
 	else:
 		var bad_heal = (str(value) == "-0")
 		$Damage.text = str(value)
-		if type == 0:
+		if type >= 0:
 			if value < 0 or bad_heal:
 				value = abs(value)
 				$Damage.text = "+"+str(value)
-				$Damage.self_modulate = Color(0, 255, 30)
+				if (type == 0):
+					$Damage.self_modulate = Color(0, 255, 30)
+				else:
+					$Damage.text = $Damage.text + "!"
+					$Damage.self_modulate = Color(0, 100, 0)
 			else:
-				$Damage.self_modulate = Color(255, 255, 255)
+				if (type == 0):
+					$Damage.self_modulate = Color(255, 255, 255)
+				else:
+					$Damage.text = $Damage.text + "!"
+					$Damage.self_modulate = Color(255, 100, 0)
 		else:
 			if value < 0 or bad_heal:
 				value = abs(value)
