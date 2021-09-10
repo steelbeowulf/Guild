@@ -73,3 +73,4 @@ id = 12
 [node name="Fighter" parent="." instance=ExtResource( 5 )]
 position = Vector2( 546.568, 416.797 )
 id = 13
+
