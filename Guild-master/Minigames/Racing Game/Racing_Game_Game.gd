@@ -2,10 +2,19 @@ extends Node2D
 
 onready var Boost_Timer = $Boost_Timer
 onready var Player_Car = $Player_Car
-onready var Fuel_Label = $Fuel_Label
+onready var Fuel_Label = get_node("CanvasLayer/Fuel_Label")
 onready var Slip_Timer = $Slip_Timer
-onready var Score_Label = $Score_Label
+onready var Score_Label = get_node("CanvasLayer/Score_Label")
 onready var Camera = get_node("Player_Car/Camera2D")
+onready var Map_Timer = $Map_Timer
+var Block = load("res://Minigames/Racing Game/Block.tscn")
+var Fuel = load("res://Minigames/Racing Game/Fuel.tscn")
+var Hole = load("res://Minigames/Racing Game/Hole.tscn")
+var Oil = load("res://Minigames/Racing Game/Oil.tscn")
+var Sprite1 = load("res://Minigames/Racing Game/Sprite1.tscn")
+var Sprite2 = load("res://Minigames/Racing Game/Sprite2.tscn")
+var Star = load("res://Minigames/Racing Game/Star.tscn")
+var Matrix_Map = []
 var Obstacles_position = []
 var Obstacle_counter: int = 0 #number of obstacles
 var fuel: int = 0
@@ -23,6 +32,8 @@ func _unhandled_key_input(event):
 			fuel -= 1
 			Fuel_Label.text = "Fuel: " + str(fuel)
 			print("oia q velocidade meu!")
+		if event.pressed and event.is_action_pressed("end"):
+			get_tree().quit() 
 
 #boost end
 func _on_Boost_Timer_timeout():
@@ -54,47 +65,49 @@ func _on_Slip_Timer_timeout():
 	Player_Car.speed = Player_Car.regular_speed
 	Player_Car.slip_rotation = 0.0
 
-func player_death():
-	$Death_Label.visible = true
-	get_tree().paused = true
+func player_death() -> void:
+	#get_node("CanvasLayer/Death_Label").visible = true
+	#get_tree().paused = true
+	get_tree().quit()
 
 #change the player's score
-func change_score(amount):
+func change_score(amount) -> void:
 	score += amount
 	Score_Label.text = "Score: " + str(score)
 
-#WARNING: i NEVER test this!
+#instance the obstacles
 func create_map() -> void:
-	var Block = load("res://Minigames/Racing Game/Block.tscn")
-	var Fuel = load("res://Minigames/Racing Game/Fuel.tscn")
-	var Hole = load("res://Minigames/Racing Game/Hole.tscn")
-	var Oil = load("res://Minigames/RacingGame/Oil.tcsn")
-	var Sprite1 = load("res://Minigames/RacingGame/Sprite1.tcsn")
-	var Sprite2 = load("res://Minigames/RacingGame/Sprite2.tcsn")
-	var Star = load("res://Minigames/Racing Game/Star.tscn")
+	create_matrix_map()
 	var Obstacles = [Block, Fuel, Hole, Oil, Sprite1, Sprite2, Star]
-	var number_of_objects = rand_range(100,200)
+	var obstacle_position: Vector2
 	var obstacle: Object
-	for i in number_of_objects:
-		obstacle = Obstacles[rand_range(0,6)].new()
-		#random position
-		var positionx: float = rand_range(Player_Car.position.x, 
-		Camera.get_camera_screen_center().x + Player_Car.camera_rect_size.x/2)
-		var positiony: float = rand_range(0, Camera.limit_bottom)
-		obstacle.position = get_obstacle_position(positionx, positiony)
-		self.add_child(obstacle)
+	obstacle = Obstacles[rand_range(0,6)].instance()
+	obstacle_position = get_obstacle_position()
+	while(obstacle_position == Vector2(0,0)):
+		obstacle_position = get_obstacle_position()
+	obstacle.global_position = obstacle_position
+	add_child(obstacle)
 
-func get_obstacle_position(positionx: float, positiony: float) -> Vector2:
+func get_obstacle_position() -> Vector2:
+	var obstacle_index = rand_range(0, 325)
+	#prevent obstacle overlap
 	for i in range(Obstacle_counter):
-		if Obstacles_position[i].x - 200 <= positionx and positionx <= Obstacles_position[i].x + 620:
-			if Obstacles_position[i].y - 200 <= positiony and positiony <= Obstacles_position[i].y + 200:
-					#exists a target in same position so choose another random position and try again 
-					var positionx_ : float = 0
-					var positiony_ : float = 0
-					positionx_ = rand_range(40,1880)
-					positiony_ = rand_range(40,1040)
-					get_obstacle_position(positionx_,positiony_) 
-	Obstacle_counter += 1
+		if Matrix_Map[obstacle_index][0] == Obstacles_position[i][0] && Matrix_Map[obstacle_index][1] == Obstacles_position[i][1]:
+			return Vector2(0,0)
 	#put the new position in the array
-	Obstacles_position.push_back(Vector2(positionx,positiony))
-	return Vector2(positionx,positiony)
+	Obstacle_counter += 1
+	Obstacles_position.push_back(Matrix_Map[obstacle_index])
+	return Vector2(Matrix_Map[obstacle_index][0] + Player_Car.camera_rect_size.y/40,
+	Matrix_Map[obstacle_index][1] + Player_Car.camera_rect_size.x/40)
+
+func _on_Map_Timer_timeout():
+	Map_Timer.wait_time *= 0.99
+	create_map()
+
+#determine the possible positions to instance a obstacle
+func create_matrix_map() -> void:
+	var sizey: int = Player_Car.camera_rect_size.y/20
+	var sizex: int = Player_Car.camera_rect_size.x/20
+	Matrix_Map = []
+	for i in range(326):
+		Matrix_Map.push_back([Player_Car.position.x + sizex*(i%20), 100 + sizey*(i%20)])

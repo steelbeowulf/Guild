@@ -11,6 +11,7 @@ onready var camera_rect_size = Camera2D.get_viewport_rect().size
 
 func _ready():
 	#adjust Camera2D's limits and car position
+	print(camera_rect_size)
 	self.position.y = camera_rect_size.y/2
 	Camera2D.limit_bottom = get_viewport().size.y
 	Camera2D.limit_left = Camera2D.get_camera_screen_center().x - camera_rect_size.x/2
