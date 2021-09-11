@@ -35,7 +35,6 @@ func set_animations(sprite, animations):
 func play(name):
 	if $Animations.get_node(name).playing:
 		return
-	print("[CARA MUNDO] playing animation "+name)
 	var node = $Animations
 	for c in $Animations.get_children():
 		c.playing = false
@@ -96,7 +95,6 @@ func dir():
 
 func _on_Battle_body_entered(body):
 	if body.is_in_group("enemy"):
-		print("[CARA MUNDO] Entered body is enemy")
 		body.in_encounter()
 
 

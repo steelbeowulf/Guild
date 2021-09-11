@@ -4,6 +4,7 @@ var NODES = {}
 var flags = {}
 
 var dialogue_count = 0
+var waiting_for_choice = false
 
 func load_flags(flags_arg: Dictionary):
 	flags = flags_arg
@@ -71,6 +72,7 @@ func play_event(event: Event) -> bool:
 			events.pop_front()
 			node.push_option(ev)
 		node.show_options()
+		waiting_for_choice = true
 	elif event.type == "FLAG":
 		EVENTS.set_flag(event)
 		event_ended()
@@ -125,7 +127,7 @@ func event_ended():
 
 
 func dialogue_ended(force_hide = false):
-	print("[EVENTS] Dialogue ended")
+	print("[EVENTS] Dialogue ended, force_hide = ", force_hide)
 	if force_hide:
 		NODES["Dialogue"].reset()
 	if len(self.events) > 0:

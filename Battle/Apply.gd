@@ -118,11 +118,6 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit,
 	return [ret, tipo]
 
 
-
-
-
-
-
 func apply_status(status, target, attacker):
 	var type = sstats[status[1]]
 	var value = status[0]

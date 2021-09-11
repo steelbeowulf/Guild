@@ -3,7 +3,6 @@
 [ext_resource path="res://NPCs/Comparison.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/Font24.tres" type="DynamicFont" id=2]
 
-
 [node name="Comparison" type="Control"]
 margin_top = 350.0
 margin_right = 40.0
@@ -34,7 +33,8 @@ margin_right = 965.0
 margin_bottom = 400.0
 
 [node name="Attributes-Left" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 48.0
+editor/display_folded = true
+margin_right = 47.0
 margin_bottom = 400.0
 
 [node name="HP" type="Label" parent="HBoxContainer/Attributes-Left"]
@@ -45,42 +45,42 @@ custom_fonts/font = ExtResource( 2 )
 text = "HP"
 
 [node name="HP_MAX" type="Label" parent="HBoxContainer/Attributes-Left"]
-margin_right = 48.0
-margin_bottom = 28.0
+margin_right = 47.0
+margin_bottom = 27.0
 custom_fonts/font = ExtResource( 2 )
 text = "HP"
 
 [node name="ATK" type="Label" parent="HBoxContainer/Attributes-Left"]
-margin_top = 32.0
-margin_right = 48.0
-margin_bottom = 60.0
+margin_top = 31.0
+margin_right = 47.0
+margin_bottom = 58.0
 custom_fonts/font = ExtResource( 2 )
 text = "ATK"
 
 [node name="DEF" type="Label" parent="HBoxContainer/Attributes-Left"]
-margin_top = 64.0
-margin_right = 48.0
-margin_bottom = 92.0
+margin_top = 62.0
+margin_right = 47.0
+margin_bottom = 89.0
 custom_fonts/font = ExtResource( 2 )
 text = "DEF"
 
 [node name="ACC" type="Label" parent="HBoxContainer/Attributes-Left"]
-margin_top = 96.0
-margin_right = 48.0
-margin_bottom = 124.0
+margin_top = 93.0
+margin_right = 47.0
+margin_bottom = 120.0
 custom_fonts/font = ExtResource( 2 )
 text = "ACC"
 
 [node name="AGI" type="Label" parent="HBoxContainer/Attributes-Left"]
-margin_top = 128.0
-margin_right = 48.0
-margin_bottom = 156.0
+margin_top = 124.0
+margin_right = 47.0
+margin_bottom = 151.0
 custom_fonts/font = ExtResource( 2 )
 text = "AGI"
 
 [node name="Attributes-Right" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 52.0
-margin_right = 122.0
+margin_left = 51.0
+margin_right = 117.0
 margin_bottom = 400.0
 
 [node name="MP" type="Label" parent="HBoxContainer/Attributes-Right"]
@@ -91,36 +91,36 @@ custom_fonts/font = ExtResource( 2 )
 text = "MP"
 
 [node name="MP_MAX" type="Label" parent="HBoxContainer/Attributes-Right"]
-margin_right = 70.0
-margin_bottom = 28.0
+margin_right = 66.0
+margin_bottom = 27.0
 custom_fonts/font = ExtResource( 2 )
 text = "MP"
 
 [node name="ATKM" type="Label" parent="HBoxContainer/Attributes-Right"]
-margin_top = 32.0
-margin_right = 70.0
-margin_bottom = 60.0
+margin_top = 31.0
+margin_right = 66.0
+margin_bottom = 58.0
 custom_fonts/font = ExtResource( 2 )
 text = "ATKM"
 
 [node name="DEFM" type="Label" parent="HBoxContainer/Attributes-Right"]
-margin_top = 64.0
-margin_right = 70.0
-margin_bottom = 92.0
+margin_top = 62.0
+margin_right = 66.0
+margin_bottom = 89.0
 custom_fonts/font = ExtResource( 2 )
 text = "DEFM"
 
 [node name="EVA" type="Label" parent="HBoxContainer/Attributes-Right"]
-margin_top = 96.0
-margin_right = 70.0
-margin_bottom = 124.0
+margin_top = 93.0
+margin_right = 66.0
+margin_bottom = 120.0
 custom_fonts/font = ExtResource( 2 )
 text = "EVA"
 
 [node name="LCK" type="Label" parent="HBoxContainer/Attributes-Right"]
-margin_top = 128.0
-margin_right = 70.0
-margin_bottom = 156.0
+margin_top = 124.0
+margin_right = 66.0
+margin_bottom = 151.0
 custom_fonts/font = ExtResource( 2 )
 text = "LCK"
 

@@ -241,13 +241,14 @@ func _exit_Store():
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
+		print("quero sair AAA")
 		AUDIO.play_se("EXIT_MENU")
 		if confirmation.visible or quantity.visible:
 			_on_No_pressed()
 		elif mode.visible:
 			_exit_Store()
-		#else:
-		#	enter(last_shop_visited)
+		else:
+			enter(last_shop_visited)
 	elif quantity.visible and not confirmation.visible:
 		if Input.is_action_just_pressed("ui_accept"):
 			AUDIO.play_se("ENTER_MENU")
