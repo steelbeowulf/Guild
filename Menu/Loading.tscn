@@ -56,7 +56,7 @@ margin_right = 721.892
 margin_bottom = 719.989
 rect_pivot_offset = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 5 )
-text = "Aperte [ESPAÇO] para continuar"
+text = "Press [SPACE] to continue"
 align = 1
 
 [node name="Sprite" type="Sprite" parent="Panel"]
