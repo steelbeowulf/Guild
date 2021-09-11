@@ -39,11 +39,14 @@ margin_bottom = 787.0
 custom_styles/panel = ExtResource( 2 )
 
 [node name="Description" type="Label" parent="ItemInfo"]
-margin_right = 967.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 947.0
 margin_bottom = 287.0
 custom_fonts/font = ExtResource( 3 )
 
 [node name="PartyPortraits" type="HBoxContainer" parent="ItemInfo"]
+editor/display_folded = true
 margin_top = 235.027
 margin_right = 40.0
 margin_bottom = 275.027
@@ -75,6 +78,8 @@ margin_right = 492.0
 margin_bottom = 110.0
 
 [node name="Comparison" parent="ItemInfo" instance=ExtResource( 5 )]
+margin_left = 20.0
+margin_top = 370.0
 
 [node name="PlayerInfo" type="Panel" parent="."]
 margin_top = 792.0
@@ -96,9 +101,9 @@ alignment = 1
 [node name="Money" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 91.0
-margin_top = 73.0
-margin_right = 189.0
+margin_left = 167.0
+margin_top = 74.0
+margin_right = 257.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "MONEY:"
@@ -106,9 +111,9 @@ text = "MONEY:"
 [node name="MoneyValue" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 193.0
-margin_top = 73.0
-margin_right = 251.0
+margin_left = 261.0
+margin_top = 74.0
+margin_right = 317.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "500G"
@@ -116,9 +121,9 @@ text = "500G"
 [node name="Padding" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 255.0
-margin_top = 73.0
-margin_right = 625.0
+margin_left = 321.0
+margin_top = 74.0
+margin_right = 580.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "                                     "
@@ -126,9 +131,9 @@ text = "                                     "
 [node name="Stock" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 629.0
-margin_top = 73.0
-margin_right = 827.0
+margin_left = 584.0
+margin_top = 74.0
+margin_right = 757.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "IN INVENTORY:"
@@ -136,9 +141,9 @@ text = "IN INVENTORY:"
 [node name="StockValue" type="Label" parent="PlayerInfo/HBoxContainer" groups=[
 "text",
 ]]
-margin_left = 831.0
-margin_top = 73.0
-margin_right = 861.0
+margin_left = 761.0
+margin_top = 74.0
+margin_right = 785.0
 margin_bottom = 101.0
 custom_fonts/font = ExtResource( 3 )
 text = "0x"

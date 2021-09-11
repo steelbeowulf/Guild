@@ -37,8 +37,8 @@ func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0,0)):
 	LOCAL.AREA = area_name
 	set_effect(LOCAL.MAP)
 	var area_info = loader.load_area_info(area_name)
-	LOCAL.load_npcs(area_info["NPCS"])
 	LOCAL.load_enemies(area_info["ENEMIES"])
+	LOCAL.load_npcs(area_info["NPCS"])
 	self.add_child(new.instance())
 	if map:
 		map.hide()

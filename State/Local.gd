@@ -56,7 +56,6 @@ func get_npc(npc_id):
 
 # Returns NPCs from current map
 func load_npcs(filter_array):
-	var enem = []
 	NPCs = loader.load_npcs(filter_array)
 
 # Update state on the current map

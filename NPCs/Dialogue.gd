@@ -69,7 +69,7 @@ func set_dialogue(text):
 	else:
 		EVENTS.dialogue_count -= 1
 		EVENTS.dialogue_ended()
-		if EVENTS.dialogue_count <= 0:
+		if EVENTS.dialogue_count <= 0 and not EVENTS.waiting_for_choice:
 			EVENTS.dialogue_ended()
 			self.hide()
 			dialogue = ""
