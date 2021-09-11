@@ -395,38 +395,25 @@ func execute_action(action: Action):
 		var critchance = min((entityluck - targetluck), 100)
 		if(floor(rand_range(0, 100)) < critchance):
 			crit = true
-		print("ACC = " + str(accuracy) + "EVA = " + str(evasion))
+		print("[BATTLE] Attacker ACC = " + str(accuracy) + "Target EVA = " + str(evasion))
 		
 		#TO DO: REALMENTE CALCULAR ACERTO
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		if(evasion < accuracy):
 			hit = true
 		elif(floor(rand_range(0, 101)) > 80):
 			hit = true
 		else:
-			print("DOH, I MISSED")
+			print("[BATTLE] Missed!")
 			hit = false
-		if (hit):
+		
+		if hit:
 			result = apply_effect(current_entity, attackEffect, target, action_type, hit, crit)
-			dmg = 0
-			#var dmg = target.take_damage(PHYSIC, atk)
+			dmg = result[0]
 			if target.classe == "boss" and current_entity.classe != "boss":
 				hate = current_entity.update_hate(dmg, target.index)
 		else:
-			#Doesn't exist yet
-			AUDIO.play_se("HIT")
-			result = apply_effect(current_entity, attackEffect, target, action_type, hit, crit)
-			dmg = 0
+			# TODO: Add sound effect
+			# AUDIO.play_se("MISS")
 			return StatsActionResult.new("Miss", current_entity, [target], [dmg], [death])
 		if target.get_health() <= 0:
 			death = true
@@ -436,9 +423,6 @@ func execute_action(action: Action):
 			return StatsActionResult.new("Attack", current_entity, [target], [dmg], [death])
 		else:
 			return StatsActionResult.new("Critical Attack", current_entity, [target], [dmg], [death])
-	
-	
-	
 	
 	# Lane: only the player characters may change lanes
 	elif action_type == "Lane":
