@@ -2,8 +2,11 @@ extends Control
 
 var dialogues = []
 var dialogue = ""
-var max_cols = 70
+var max_cols = 100
 var max_lines = 3
+
+const NORMAL_SPEED = 2.0
+const FAST_SPEED = 8.0
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
@@ -16,9 +19,9 @@ func _process(delta):
 		$AnimationPlayer.stop()
 		start_dialogue()
 	elif Input.is_action_pressed("ui_accept"):
-		$Tween.set_speed_scale(5.0)
+		$Tween.set_speed_scale(FAST_SPEED)
 	else:
-		$Tween.set_speed_scale(1.0)
+		$Tween.set_speed_scale(NORMAL_SPEED)
 
 
 func start_dialogue():
@@ -64,13 +67,13 @@ func set_dialogue(text):
 	if dialogue:
 		var speed = max(len(dialogue)/TEXT.get_speed(), 1.0)
 		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
-		$Tween.set_speed_scale(1.0)
+		$Tween.set_speed_scale(NORMAL_SPEED)
 		$Tween.start()
 	else:
 		EVENTS.dialogue_count -= 1
 		EVENTS.dialogue_ended()
 		if EVENTS.dialogue_count <= 0 and not EVENTS.waiting_for_choice:
-			EVENTS.dialogue_ended()
+			EVENTS.dialogue_ended(true)
 			self.hide()
 			dialogue = ""
 

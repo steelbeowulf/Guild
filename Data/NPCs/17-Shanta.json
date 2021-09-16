@@ -1,0 +1,56 @@
+{
+	"ID":17,
+	"IMG":{"path": "res://Assets/Animations/Entities/cleric spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
+	"ANIM":{"idle": [true, "50-69"]},
+	"NAME": "Shanta",
+  "EVENTS": [
+    {
+      "DIALOGUE": {
+        "NAME": "Radostaw",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "The monsters are being more relentless than ever... Be careful..."
+        ]
+      },
+    },
+    {
+      "DIALOGUE":  {
+        "NAME": "Shanta",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "Commander, with all due respect... I don't think it would be an efficient use of my energy to babysit this moron"
+        ]
+      },
+    },
+    {
+      "DIALOGUE": {
+        "NAME": "Maui",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "If you really wish to help this world, you need to start thinking before you act"
+        ]
+      },
+    },
+    {
+      "DIALOGUE": {
+        "NAME": "Carolus",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/ranger-f.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "I not only wish to help you... I consider it my duty to do so!",
+          "We not only have the same goals, you are also my saviors!"
+        ]
+      },
+    },
+    {
+      "DIALOGUE": {
+        "NAME": "????",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/mistery.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "Sieg... How could you..."
+        ]
+      },
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}
+}

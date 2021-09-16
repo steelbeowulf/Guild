@@ -66,28 +66,8 @@ next = 2
 
 [node name="Party" type="Node" parent="."]
 
-[node name="Teleporter" parent="." instance=ExtResource( 6 )]
+[node name="Octavian" parent="." instance=ExtResource( 6 )]
 position = Vector2( 607.442, 302.726 )
 scale = Vector2( -2, 2 )
-id = 9
-
-[node name="Carolus" parent="." instance=ExtResource( 6 )]
-position = Vector2( 416.99, 265.495 )
-scale = Vector2( -2, 2 )
-id = 18
-
-[node name="Rogue" parent="." instance=ExtResource( 6 )]
-position = Vector2( 196.68, 126.264 )
-id = 14
-
-[node name="Signis" parent="." instance=ExtResource( 6 )]
-position = Vector2( 536.213, 222.863 )
-id = 1
-
-[node name="Signus" parent="." instance=ExtResource( 6 )]
-position = Vector2( 383.316, 147.103 )
-id = 2
-
-[node name="Sign" parent="." instance=ExtResource( 6 )]
-position = Vector2( 375.828, 372.384 )
+id = 15
 

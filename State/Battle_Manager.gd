@@ -159,6 +159,7 @@ func get_next_name_in_battle(id: int) -> String:
 		COUNT_IN_BATTLE[id] = COUNT_IN_BATTLE[id] + 1
 	else:
 		COUNT_IN_BATTLE[id] = 0
+		return enemy.nome
 	return enemy.nome + " " + NAME[COUNT_IN_BATTLE[id]]
 
 func _load_enemies(enemy_ids: Array):

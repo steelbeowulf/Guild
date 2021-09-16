@@ -1,0 +1,48 @@
+{
+	"ID":15,
+	"IMG":{"path": "res://Assets/Animations/Entities/warrior spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
+	"ANIM":{"idle": [true, "50-59"]},
+	"NAME": "Octavian",
+  "EVENTS": [
+    {
+      "DIALOGUE": {
+        "NAME": "Siegfried",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/sieg-portrait.png", "scale":[2,2]}, 
+        "MESSAGE": [
+          "Our family was murdered before our very eyes... Yet you wish to do nothing!?"
+        ]
+      },
+    },
+    {
+      "DIALOGUE":  {
+        "NAME": "Octavian",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/warrior-f.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "It is not a matter of wishing or not, brother, believe me...",
+          "You are being too reckless!"
+        ]
+      },
+    },
+    {
+      "DIALOGUE": {
+        "NAME": "Siegfried",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/sieg-portrait.png", "scale":[2,2]}, 
+        "MESSAGE": [
+          "Then help me! You know I can't do this by myself!"
+        ]
+      },
+    },
+    {
+      "DIALOGUE": {
+        "NAME": "Octavian",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/warrior-f.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "...",
+          "So why don't you join the Guild?"
+        ]
+      },
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior-f.png", "scale":[8,8]}
+}

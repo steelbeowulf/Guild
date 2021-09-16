@@ -1,11 +1,11 @@
 {
-	"NAME": "Hub",
-	"ENEMIES": [3,7,8],
+	"NAME": "Intro",
+	"ENEMIES": [],
 	"ENEMIES_BY_AREA": [
 		[],
 		[]
 	],
-	"NPCS": [10, 11, 12, 13, 16, 17],
+	"NPCS": [15],
 	"ENCOUNTERS": [],
 	"SHOPS": [],
 	"BACKGROUNDS": [
