@@ -1,16 +1,21 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Battle/Level Up.gd" type="Script" id=1]
+[ext_resource path="res://Battle/PostBattle/Level Up.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
-[ext_resource path="res://Battle/Players.gd" type="Script" id=3]
+[ext_resource path="res://Battle/UI/TargetAll.gd" type="Script" id=3]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Battle/UI/Log.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Backgrounds/forest2.png" type="Texture" id=6]
-[ext_resource path="res://Battle/Level Up Log.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Battle/Interface.gd" type="Script" id=8]
+[ext_resource path="res://Battle/PostBattle/Level Up Log.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Battle/UI/Interface.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=9]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Battle/UI/ActionButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/UI/Player_Info.tscn" type="PackedScene" id=11]
+
+
+
+
+
 
 [node name="Battle" type="Node2D"]
 script = ExtResource( 1 )

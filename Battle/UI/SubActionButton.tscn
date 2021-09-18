@@ -5,7 +5,8 @@
 [ext_resource path="res://Assets/Panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=3]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Fonts/Menu_Font.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Battle/Menus/SubActionButton.gd" type="Script" id=6]
+[ext_resource path="res://Battle/UI/SubActionButton.gd" type="Script" id=6]
+
 
 
 

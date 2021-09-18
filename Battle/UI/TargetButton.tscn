@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Battle/Menus/TargetButton.gd" type="Script" id=1]
+[ext_resource path="res://Battle/UI/TargetButton.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Others/cursor.png" type="Texture" id=2]
+
 
 
 [node name="Target" type="Button"]

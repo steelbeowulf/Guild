@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Action",
 "language": "GDScript",
-"path": "res://Battle/Action.gd"
+"path": "res://Battle/Classes/Action.gd"
 }, {
 "base": "Node",
 "class": "ActionResult",
 "language": "GDScript",
-"path": "res://Battle/ActionResult.gd"
+"path": "res://Battle/Classes/ActionResult.gd"
 }, {
 "base": "",
 "class": "Enemy",
@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "ActionResult",
 "class": "LaneActionResult",
 "language": "GDScript",
-"path": "res://Battle/LaneActionResult.gd"
+"path": "res://Battle/Classes/LaneActionResult.gd"
 }, {
 "base": "",
 "class": "Player",
@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "ActionResult",
 "class": "RunActionResult",
 "language": "GDScript",
-"path": "res://Battle/RunActionResult.gd"
+"path": "res://Battle/Classes/RunActionResult.gd"
 }, {
 "base": "Node",
 "class": "STATS",
@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "ActionResult",
 "class": "StatsActionResult",
 "language": "GDScript",
-"path": "res://Battle/StatsActionResult.gd"
+"path": "res://Battle/Classes/StatsActionResult.gd"
 } ]
 _global_script_class_icons={
 "Action": "",

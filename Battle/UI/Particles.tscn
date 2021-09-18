@@ -1,11 +1,12 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 4
 emission_point_count = 1
 flag_disable_z = true
 spread = 10.0
 gravity = Vector3( 0, 0, 0 )
+angular_velocity = 1.05
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 10.0
@@ -18,5 +19,5 @@ speed_scale = 20.0
 fract_delta = false
 visibility_rect = Rect2( -100, -100, 1000, 200 )
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 1 )
 

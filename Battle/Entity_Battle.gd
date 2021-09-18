@@ -63,7 +63,7 @@ func _on_Spell_animation_finished(animation_name: String):
 	$Spells.get_node(animation_name).hide()
 	$Spells.get_node(animation_name).playing = false
 
-func set_spell(sprite: Dictionary, animation_name: String, animation_data: Array):
+func set_spell(sprite: Dictionary, animation_data: Array, animation_name: String):
 	"""
 		Setup spell animations for this entity
 		Sprite parameter has a path, frames and scale option
@@ -74,7 +74,7 @@ func set_spell(sprite: Dictionary, animation_name: String, animation_data: Array
 	var animation = Sprite.new()
 	animation.texture = load(sprite['path'])
 	animation.set_name(animation_name)
-	animation.set_script(load('res://Battle/Spritesheet.gd'))
+	animation.set_script(load('res://Classes/Spritesheet.gd'))
 	animation.loop = animation_data[0]
 	animation.physical_frames = animation_data[1]
 	animation.vframes = sprite['vframes']
@@ -107,7 +107,7 @@ func set_animations(sprite: Dictionary, animations: Dictionary, data_arg: Entity
 		mat.set_shader(SHADER)
 		animation.set_material(mat)
 		animation.set_name(k)
-		animation.set_script(load('res://Battle/Spritesheet.gd'))
+		animation.set_script(load('res://Classes/Spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
 		animation.vframes = sprite['vframes']

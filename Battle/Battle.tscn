@@ -2,14 +2,14 @@
 
 [ext_resource path="res://Battle/Battle.gd" type="Script" id=1]
 [ext_resource path="res://Battle/AnimationManager.gd" type="Script" id=2]
-[ext_resource path="res://Battle/Players.gd" type="Script" id=3]
+[ext_resource path="res://Battle/UI/TargetAll.gd" type="Script" id=3]
 [ext_resource path="res://Battle/Entity_Battle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Battle/UI/Log.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Shaders/Smooth.gd" type="Script" id=6]
-[ext_resource path="res://Battle/Interface.gd" type="Script" id=7]
+[ext_resource path="res://Battle/UI/Interface.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Panels/Menu_Info_Panel.tres" type="StyleBox" id=8]
-[ext_resource path="res://Battle/Menus/ActionButton.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Battle/Menus/Player_Info.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Battle/UI/ActionButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Battle/UI/Player_Info.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Curve2D" id=1]
@@ -132,8 +132,6 @@ z_index = 25
 curve = SubResource( 1 )
 script = ExtResource( 6 )
 spline_length = 20.0
-_smooth = false
-_straighten = false
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 966.024, 518.53 )
