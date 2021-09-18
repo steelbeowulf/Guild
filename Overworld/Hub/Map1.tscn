@@ -86,3 +86,15 @@ position = Vector2( 616.549, 211.765 )
 scale = Vector2( -2, 2 )
 id = 17
 
+[node name="Maui" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 582.904, 379.429 )
+scale = Vector2( -2, 2 )
+id = 19
+
+[node name="Carolus" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 611.307, 425.435 )
+scale = Vector2( -2, 2 )
+id = 20
+

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Overworld/Map.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesets/New_Tileset_Floresta.tres" type="TileSet" id=2]
 [ext_resource path="res://Overworld/Objects/Monstro_no_mundo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Overworld/Objects/Transition.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Overworld/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Overworld/Objects/NPC_no_mundo.tscn" type="PackedScene" id=6]
 
 [node name="Map2" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,6 +18,7 @@ Doors = {
 }
 
 [node name="Tiles" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Ground" type="TileMap" parent="Tiles"]
 tile_set = ExtResource( 2 )
@@ -28,7 +30,7 @@ tile_data = PoolIntArray( 65535, 1, 65537, 0, 1, 65537, 1, 1, 65537, 2, 1, 65537
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 131085, 13, 0, 262155, 13, 0, 327697, 12, 0, 655373, 9, 0, 655378, 9, 0, 655379, 9, 0, 851979, 12, 0, 917523, 9, 0, 1179659, 12, 0 )
+tile_data = PoolIntArray( 131085, 13, 0, 262155, 13, 0, 327697, 12, 0, 393229, 2, 0, 393231, 2, 0, 458764, 2, 0, 458768, 2, 0, 524299, 2, 0, 524300, 0, 0, 524301, 2, 0, 524302, 2, 0, 524303, 2, 0, 524304, 2, 0, 524305, 2, 0, 524306, 2, 0, 524307, 0, 0, 589836, 2, 0, 589838, 2, 0, 589839, 0, 0, 589840, 2, 0, 589841, 0, 0, 589842, 0, 0, 589843, 2, 0, 589844, 2, 0, 655371, 2, 0, 655372, 0, 0, 655373, 9, 0, 655376, 2, 0, 655378, 2, 0, 655379, 0, 0, 720906, 0, 0, 720915, 2, 0, 720916, 0, 0, 786452, 2, 0, 851979, 12, 0, 917523, 9, 0, 983053, 12, 0, 1179659, 12, 0 )
 
 [node name="Overlay" type="TileMap" parent="Tiles"]
 z_index = 10
@@ -42,10 +44,12 @@ tile_data = PoolIntArray( -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0
 [node name="Party" type="Node" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 623.384, 497.048 )
 scale = Vector2( 1.2, 1.2 )
 
 [node name="Butterfly" parent="Enemies" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( -100.218, -276.861 )
 scale = Vector2( 0.5, 0.5 )
 id = 6
@@ -53,6 +57,7 @@ movement = 2
 radius = 100.0
 
 [node name="Slime" parent="Enemies" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 91.6663, -106.331 )
 scale = Vector2( 0.5, 0.5 )
 id = 2
@@ -81,4 +86,8 @@ next = 3
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="Cara" parent="." instance=ExtResource( 6 )]
+position = Vector2( 519.265, 509.992 )
+id = 18
 

@@ -199,7 +199,9 @@ func resolve(current_entity: Entity, action_result):
 
 
 func manage_hate(type, target):
-	var index = -(Enemies_img[target].data.get_target() + 1)
+	var index = Enemies_img[target].data.get_target()
+	if index < 0:
+		index = -(index + 1)
 	if type == 0:
 		$Path2D.create_curve(Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32)
 

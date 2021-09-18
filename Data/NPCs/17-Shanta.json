@@ -22,34 +22,6 @@
           "Commander, with all due respect... I don't think it would be an efficient use of my energy to babysit this moron"
         ]
       },
-    },
-    {
-      "DIALOGUE": {
-        "NAME": "Maui",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
-        "MESSAGE": [
-          "If you really wish to help this world, you need to start thinking before you act"
-        ]
-      },
-    },
-    {
-      "DIALOGUE": {
-        "NAME": "Carolus",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/ranger-f.png", "scale":[8,8]}, 
-        "MESSAGE": [
-          "I not only wish to help you... I consider it my duty to do so!",
-          "We not only have the same goals, you are also my saviors!"
-        ]
-      },
-    },
-    {
-      "DIALOGUE": {
-        "NAME": "????",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/mistery.png", "scale":[8,8]}, 
-        "MESSAGE": [
-          "Sieg... How could you..."
-        ]
-      },
     }
   ],
 	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}

@@ -1,0 +1,20 @@
+{
+	"ID":20,
+	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
+	"ANIM":{"idle": [true, "50-69"]},
+	"NAME": "Carolus",
+  "EVENTS": [
+    {
+      "DIALOGUE": {
+        "NAME": "Carolus",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "I not only wish to help you... I consider it my duty to do so!",
+          "We not only have the same goals, you are also my saviors!"
+        ]
+      },
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
+}
