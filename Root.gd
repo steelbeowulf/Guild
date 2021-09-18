@@ -65,14 +65,6 @@ func _process(delta):
 		return_menu()
 	elif Input.is_action_just_pressed("ui_cancel") and STATE == "Menu":
 		close_menu()
-	# Cheap hack to test money
-	elif Input.is_action_just_pressed("debug"):
-		GLOBAL.gold += 100
-		if(menu.get_focus_owner()):
-			print(menu.get_focus_owner().get_name())
-		elif(shop.get_focus_owner()):
-			print(shop.get_focus_owner().get_name())
-
 
 # Opens the main pause menu (pauses map)
 func open_menu():

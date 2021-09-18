@@ -17,7 +17,7 @@ const RESERVE_PLAYERS_PATH = "res://Data/Seeds/Reserve Players.json"
 # Path to load from on a new game (player data)
 const PLAYERS_PATH = "res://Data/Seeds/Players.json"
 const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
-const EQUIPAMENT_PATH = "res://Data/Seeds/Equipament.json"
+const EQUIPMENT_PATH = "res://Data/Seeds/Equipament.json"
 const JOBS_PATH = "res://Data/Seeds/Jobs.json"
 const FLAGS_PATH = "res://Data/Seeds/Flags.json"
 
@@ -25,30 +25,34 @@ const FLAGS_PATH = "res://Data/Seeds/Flags.json"
 const SAVE_PATH = "res://Save_data/"
 
 # Some shortcuts for important classes we're going to use
-var PLAYER_CLASS = load("res://Classes/Entities/Player.gd")
-var ENEMY_CLASS = load("res://Classes/Entities/Enemy.gd")
-var ITEM_CLASS = load("res://Classes/Itens.gd")
-var EQUIP_CLASS = load("res://Classes/Equip.gd")
-var NPC_CLASS = load("res://Classes/Entities/NPC.gd")
-var JOB_CLASS = load("res://Classes/Jobs.gd")
+const PLAYER_CLASS = preload("res://Classes/Entities/Player.gd")
+const ENEMY_CLASS = preload("res://Classes/Entities/Enemy.gd")
+const ITEM_CLASS = preload("res://Classes/Itens.gd")
+const EQUIP_CLASS = preload("res://Classes/Equip.gd")
+const NPC_CLASS = preload("res://Classes/Entities/NPC.gd")
+const JOB_CLASS = preload("res://Classes/Jobs.gd")
 
-var SHOP_CLASS = load("res://Classes/Events/Shop.gd")
-var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
-var STATUS_CLASS = load("res://Classes/Events/StatusEffect.gd")
-var DIALOGUE_CLASS = load("res://Classes/Events/Dialogue.gd")
+const SHOP_CLASS = preload("res://Classes/Events/Shop.gd")
+const STATS_CLASS = preload("res://Classes/Events/StatEffect.gd")
+const STATUS_CLASS = preload("res://Classes/Events/StatusEffect.gd")
+const DIALOGUE_CLASS = preload("res://Classes/Events/Dialogue.gd")
+# TODO: Cyclic reference? why?
 var OPTION_CLASS = load("res://Classes/Events/DialogueOption.gd")
-var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
-var TRANSITION_CLASS = load("res://Classes/Events/Transition.gd")
-var FLAG_CLASS = load("res://Classes/Events/Flag.gd")
-var REINFORCEMENT_CLASS = load("res://Classes/Events/Reinforcements.gd")
-var SET_ACTION_CLASS = load("res://Classes/Events/SetAction.gd")
-var SET_TARGET_CLASS = load("res://Classes/Events/SetTarget.gd")
+const BATTLE_CLASS = preload("res://Classes/Events/Battle.gd")
+const TRANSITION_CLASS = preload("res://Classes/Events/Transition.gd")
+const FLAG_CLASS = preload("res://Classes/Events/Flag.gd")
+const REINFORCEMENT_CLASS = preload("res://Classes/Events/Reinforcements.gd")
+const SET_ACTION_CLASS = preload("res://Classes/Events/SetAction.gd")
+const SET_TARGET_CLASS = preload("res://Classes/Events/SetTarget.gd")
 
+# TODO: Remove this
 var List
 
-# Helper Function: returns a list of files on a directory
-# pointed by the path argument
-func list_files_in_directory(path):
+func list_files_in_directory(path: String):
+	"""
+		Helper Function: returns a list of files on a directory
+		defined by the path argument
+	"""
 	var files = []
 	var dir = Directory.new()
 	dir.open(path)
@@ -66,9 +70,12 @@ func list_files_in_directory(path):
 	return files
 
 
-func load_area_info(name):
-	var file = File.new()		
-	file.open(AREAS_PATH+name+".json", file.READ)
+func load_area_info(area_name: String):
+	"""
+		Loads information for area area_name
+	"""
+	var file = File.new()
+	file.open(AREAS_PATH+area_name+".json", file.READ)
 	var text = file.get_as_text()
 	var result_json = JSON.parse(text)
 	if result_json.error == OK:  # If parse OK
@@ -76,9 +83,11 @@ func load_area_info(name):
 		return data
 
 
-# Returns a list with the Info.json dictionaries for each
-# save slot - used to show saved info on the save slots
 static func load_save_info():
+	"""
+		Returns a list with the Info.json dictionaries for each
+		save slot - used to show saved info on the save slots
+	"""
 	var ret = []
 	var file = File.new()
 	for i in range(4):
@@ -93,8 +102,11 @@ static func load_save_info():
 	return ret
 
 
-# Loads all enemies found in the ENEMY_PATH directory.
-func load_enemies(filter_array):
+func load_enemies(filter_array: Array):
+	"""
+		Loads enemies found in the ENEMY_PATH directory,
+		filtered by the ids on filter_array
+	"""
 	print("[LOADER] loading enemies: ", filter_array)
 	var ret = []
 	var enemies = list_files_in_directory(ENEMY_PATH)
@@ -119,13 +131,16 @@ func load_enemies(filter_array):
 				data["DEF"], data["DEFM"], 
 				data["AGI"], data["ACC"], data["EVA"], data["LCK"]],
 				data["NAME"], skills, data["RESISTANCE"]))
+		else:
+			print("Error loading enemy", result_json.error)
 	return ret
 
 
-# Loads all itens found in the ITENS_PATH directory.
-# TODO: eventually will be changed to loading only itens
-# that are in inventory/area chests, to not kill a PC's memory
+# TODO: Load only itens that are in inventory/area chests, to avoid wasting memory
 func load_all_itens():
+	"""
+		Loads all itens found in the ITENS_PATH directory.
+	"""
 	var ret = []
 	var itens = list_files_in_directory(ITENS_PATH)
 	itens.sort()
@@ -146,15 +161,16 @@ func load_all_itens():
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
 			ret.append(ITEM_CLASS.new(data["ID"], data["NAME"], data["QUANT"], data["TARGET"],
 				data["TYPE"], effects, status, data["IMG"], data["ANIM"]))
-
+		else:
+			print("Error loading item", result_json.error)
 	return [0] + ret
-	
 
-# Loads all equipament found in the ITENS_PATH directory.
-# TODO: eventually will be changed to loading only itens
-# that are in inventory/area chests, to not kill a PC's memory
-# Cloned from the item loaded
+
+# TODO: Load only equips that are in inventory/area chests, to avoid wasting memory
 func load_all_equips():
+	"""
+		Loads all equipment found in the EQUIPS_PATH directory.
+	"""
 	var ret = []
 	var equips = list_files_in_directory(EQUIPS_PATH)
 	equips.sort()
@@ -174,16 +190,16 @@ func load_all_equips():
 				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
 			ret.append(EQUIP_CLASS.new(data["ID"], data["NAME"],
 				data["TYPE"], data["LOCATION"], data["CLASS"], effects, status, data["PRICE"], data["IMG"]))
-
+		else:
+			print("Error loading equip", result_json.error)
 	return [0] + ret
 
 
-
-
-# Loads all skills found in the SKILLS_PATH directory.
-# TODO: eventually will be changed to loading only skills
-# from player characters/enemies in the area, to not kill a PC's memory
+# TODO: Load only skills from players/enemies in the area, to avoid wasting memory
 func load_all_skills():
+	"""
+		Loads all skills found in the SKILLS_PATH directory.
+	"""
 	var ret = []
 	var itens = list_files_in_directory(SKILLS_PATH)
 	itens.sort()
@@ -209,10 +225,10 @@ func load_all_skills():
 	return [0] + ret
 
 
-# Loads all skills found in the SKILLS_PATH directory.
-# TODO: eventually will be changed to loading only skills
-# from player characters/enemies in the area, to not kill a PC's memory
 func load_all_statuses():
+	"""
+		Loads all statuses found in the STATUS_PATH directory.
+	"""
 	var ret = {}
 	var statuses = list_files_in_directory(STATUS_PATH)
 	statuses.sort()
@@ -226,16 +242,14 @@ func load_all_statuses():
 		if result_json.error == OK:  # If parse OK
 			var data = result_json.result
 			ret[data["NAME"]] = [data["AURA"]["COLOR"], data["AURA"]["THICKNESS"]]
-		else:  # If parse has errors
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
-
-	print(ret)
+		else:
+			print("Error loading status", result_json.error)
 	return ret
 
-# Loads various flags related to the state of the world
-func load_flags(slot):
+func load_flags(slot: int):
+	"""
+		Loads various flags related to the state of the world
+	"""
 	var path = FLAGS_PATH
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Flags.json"
@@ -251,25 +265,32 @@ func load_flags(slot):
 		print("Error String: ", result_json.error_string)
 
 
-# Loads information regarding the players' inventory.
-# If it's a new game, loads it from Demo_Data.
-func load_inventory(slot):
+func load_inventory(slot: int):
+	"""
+		Loads information regarding the players' inventory.
+		If it's a new game, loads it from Demo_Data.
+	"""
 	var path = INVENTORY_PATH
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Inventory.json"
 	return parse_inventory(path)
 
-func load_equip(slot):
-	var path = EQUIPAMENT_PATH
-	print("LOADING EQUIPS", path)
+func load_equip(slot: int):
+	"""
+		Loads information regarding the players' equipment.
+		If it's a new game, loads it from Demo_Data.
+	"""
+	var path = EQUIPMENT_PATH
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Equipament.json"
 	return parse_equipaments(path)
 
 
-# Uses information from load_inventory to build the actual inventory,
-# TODO: Fix dependency on load_all_itens when it doesn't load everything.
-func parse_inventory(path):
+func parse_inventory(path: String):
+	"""
+		Uses information from load_inventory to build the actual inventory
+		Path contains a json with item ids and quantity in inventory
+	"""
 	var file = File.new()
 	file.open(path, file.READ)
 	var itens = []
@@ -284,8 +305,11 @@ func parse_inventory(path):
 	return itens
 
 
-func parse_equipaments(path):
-	print("PARSING EQUIP ", path)
+func parse_equipaments(path: String):
+	"""
+		Uses information from load_equips to build the actual equip inventory
+		Path contains a json with item ids and quantity in equip inventory
+	"""
 	var file = File.new()
 	file.open(path, file.READ)
 	var equips = []
@@ -299,22 +323,31 @@ func parse_equipaments(path):
 			equip_copy.quantity = equip["QUANT"]
 	return equips
 
-
-# Loads information regarding the players' characters.
-# If it's a new game, loads it from Demo_Data.
-func load_players(slot):
+func load_players(slot: int):
+	"""
+		Loads information regarding the players' characters.
+		If it's a new game, loads it from Demo_Data.
+	"""
 	var path = PLAYERS_PATH
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
 	return parse_players(path)
 
-func load_reserve_players(slot):
+func load_reserve_players(slot: int):
+	"""
+		Loads information regarding the reserve party members
+		If it's a new game, loads it from Demo_Data.
+	"""
 	var path = RESERVE_PLAYERS_PATH
 	if slot >= 0:
 		path = SAVE_PATH+"Slot"+str(slot)+"/Reserve_Players.json"
 	return parse_players(path)
 
-func load_npcs(filter_array):
+func load_npcs(filter_array: Array):
+	"""
+		Loads NPCs found in the NPCS_PATH directory,
+		filtered by the ids on filter_array
+	"""
 	print("[LOADER] loading NPCs: ", filter_array)
 	var npcs = list_files_in_directory(NPCS_PATH)
 	npcs.sort()
@@ -329,15 +362,18 @@ func load_npcs(filter_array):
 			if int(data["ID"]) in filter_array:
 				ret.append(NPC_CLASS.new(data["ID"], data["NAME"],
 				data["IMG"], data["ANIM"], parse_events(data["EVENTS"]), data["PORTRAIT"]))
-		else:  # If parse has errors
-			print("Error: ", result_json.error)
-			print("Error Line: ", result_json.error_line)
-			print("Error String: ", result_json.error_string)
-
+		else:
+			print("Error loading NPCs", result_json.error)
 	return ret
 
 
 func parse_events(events: Array, in_battle = null):
+	"""
+		Parse an array of event JSON (events) and create their
+		respective classes
+		in_battle is the instance of the battle event these events belong to
+		(used for getting reference to the entities in battle)
+	"""
 	var parsed_events = []
 	for event in events:
 		var event_instance: Event = null
@@ -411,9 +447,15 @@ func parse_events(events: Array, in_battle = null):
 		parsed_events.append(event_instance)
 	return parsed_events
 
-# Uses information from load_players to build the actual players.
+
 # TODO: Fix dependency on load_all_skills when it doesn't load everything.
-func parse_players(path):
+func parse_players(path: String):
+	"""
+		Uses information from load_skills, load_equips and load_jobs
+		to build the actual players.
+		Parses the JSON from the player's save file and create instances
+		of the Player class
+	"""
 	print("[LOADER] loading players from ", path)
 	var file = File.new()
 	file.open(path, file.READ)
@@ -453,8 +495,10 @@ func parse_players(path):
 		print("Error loading players", result_json.error)
 	return players
 
-# Get random lore (fetches just the one atm)
 func get_random_lore():
+	"""
+		Loads random lore tidbits for displaying on a load screen
+	"""
 	var lores = list_files_in_directory(LORES_PATH)
 	lores.shuffle()
 	var file = File.new()
@@ -463,13 +507,13 @@ func get_random_lore():
 	var result_json = JSON.parse(text)
 	if result_json.error == OK:
 		return result_json.result
-	else:  # If parse has errors
-		print("Error: ", result_json.error)
-		print("Error Line: ", result_json.error_line)
-		print("Error String: ", result_json.error_string)
+	else:
+		print("Error loading lore", result_json.error)
 
-# Load job info
 func load_all_jobs():
+	"""
+		Loads all jobs found in the JOBSS_PATH directory.
+	"""
 	print("[LOADER] loading jobs")
 	var file = File.new()
 	file.open(JOBS_PATH, file.READ)
