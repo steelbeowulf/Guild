@@ -23,7 +23,7 @@ func _on_All_focus_entered():
 	print("[TARGETS] All enter ", get_name())
 	for c in get_children():
 		if c.data != null and not c.dead:
-			c._on_P0_focus_entered()
+			c._on_Entity_focus_entered()
 			targets.append(c.get_id())
 	self.grab_focus()
 
@@ -31,7 +31,7 @@ func _on_All_focus_entered():
 func _on_All_focus_exited():
 	print("[TARGETS] All exit ", get_name())
 	for c in get_children():
-		c._on_P0_focus_exited()
+		c._on_Entity_focus_exited()
 	targets = []
 
 

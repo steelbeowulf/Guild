@@ -50,7 +50,7 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 font_data = ExtResource( 3 )
 
-[node name="P0" type="Button"]
+[node name="Entity" type="Button"]
 visible = false
 margin_right = 12.0
 margin_bottom = 20.0
@@ -77,7 +77,7 @@ scale = Vector2( 3, 3 )
 pause_mode = 2
 scale = Vector2( 3, 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Picker" type="Sprite" parent="."]
 visible = false
 position = Vector2( -109.29, 14.0269 )
 scale = Vector2( 1.75, 1.75 )
@@ -86,11 +86,11 @@ texture = ExtResource( 2 )
 [node name="Damage" type="Label" parent="."]
 pause_mode = 2
 visible = false
-modulate = Color( 1, 1, 1, 0.0588235 )
+modulate = Color( 1, 1, 1, 0.843137 )
 margin_left = 25.0
-margin_top = -20.0
+margin_top = -5.0
 margin_right = 79.0
-margin_bottom = 16.0
+margin_bottom = 31.0
 rect_scale = Vector2( 2, 2 )
 custom_fonts/font = SubResource( 2 )
 text = "250"
@@ -106,8 +106,7 @@ margin_bottom = 120.596
 custom_fonts/font = ExtResource( 4 )
 text = "Rat A"
 
-[connection signal="focus_entered" from="." to="." method="_on_P0_focus_entered"]
-[connection signal="focus_exited" from="." to="." method="_on_P0_focus_exited"]
-[connection signal="pressed" from="." to="." method="_on_P0_pressed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="focus_entered" from="." to="." method="_on_Entity_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_Entity_focus_exited"]
+[connection signal="pressed" from="." to="." method="_on_Entity_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

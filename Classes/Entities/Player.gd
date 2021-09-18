@@ -1,4 +1,5 @@
 extends "Entity.gd"
+class_name Player
 
 const equip_dict = {'HEAD':0, 'BODY':1, 'WEAPON':2, 'ACCESSORY1':3, 'ACCESSORY2':4}
 

@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://Battle/ActionResult.gd"
 }, {
 "base": "",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Classes/Entities/Enemy.gd"
+}, {
+"base": "",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://Classes/Entities/Entity.gd"
@@ -54,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Battle/LaneActionResult.gd"
 }, {
+"base": "",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Classes/Entities/Player.gd"
+}, {
 "base": "ActionResult",
 "class": "RunActionResult",
 "language": "GDScript",
@@ -82,6 +92,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Action": "",
 "ActionResult": "",
+"Enemy": "",
 "Entity": "",
 "Equip": "",
 "Event": "",
@@ -89,6 +100,7 @@ _global_script_class_icons={
 "Job": "",
 "LOADER": "",
 "LaneActionResult": "",
+"Player": "",
 "RunActionResult": "",
 "STATS": "",
 "SmoothPath": "",

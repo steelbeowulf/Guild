@@ -1,4 +1,5 @@
 extends "Entity.gd"
+class_name Enemy
 
 var target : int = -10
 var action: Action = null
