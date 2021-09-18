@@ -24,15 +24,6 @@
         ]
       },
     },
-    {
-      "DIALOGUE": {
-        "NAME": "????",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/mistery.png", "scale":[8,8]}, 
-        "MESSAGE": [
-          "Sieg... How could you..."
-        ]
-      },
-    }
   ],
 	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}
 }

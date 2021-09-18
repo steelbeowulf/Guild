@@ -6,23 +6,14 @@
 	"NAME": "Shanta",
   "EVENTS": [
     {
-      "DIALOGUE": {
-        "NAME": "Radostaw",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}, 
-        "MESSAGE": [
-          "The monsters are being more relentless than ever... Be careful..."
-        ]
-      },
-    },
-    {
       "DIALOGUE":  {
         "NAME": "Shanta",
         "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
         "MESSAGE": [
-          "Commander, with all due respect... I don't think it would be an efficient use of my energy to babysit this moron"
+          "Piss off..."
         ]
       },
     }
   ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}
 }
