@@ -13,19 +13,19 @@
     },
     {
       "BATTLE": {
-        "ENEMIES": [8, 8, 8],
+        "ENEMIES": [8, 8, 8, 13],
         "MUSIC": "BOSS_THEME",
         "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
         "EVENTS": [
           {
-            "CONDITION": ["on_target_death", ["Rat A"]],
+            "CONDITION": ["on_target_death", ["Rat"]],
             "REINFORCEMENTS":{
               "TYPE": "ENEMIES",
               "ENTITIES": [8, 8]
             },
           },
           {
-            "CONDITION": ["on_target_damage", ["Rat A", "Maui"]],
+            "CONDITION": ["on_target_damage", ["Rat", "Maui"]],
             "REINFORCEMENTS":{
               "TYPE": "ALLIES",
               "ENTITIES": [3]
@@ -45,7 +45,7 @@
           {
             "CONDITION": "on_begin",
             "SET_TARGET":{
-              "ENTITY": "Rat A",
+              "ENTITY": "Rat",
               "TARGET": "Rat B",
               "TURNS": 10
             },
@@ -130,7 +130,7 @@
             },
           },
           {
-            "CONDITION": ["on_target_damage", ["Rat A", "Siegfried"]],
+            "CONDITION": ["on_target_damage", ["Rat B", "Siegfried"]],
             "DIALOGUE":{
               "NAME": "Maui",
               "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 

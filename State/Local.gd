@@ -75,7 +75,7 @@ func get_events():
 # TODO: make it generic
 func load_initial_area():
 	WIN = false
-	AREA = "Forest"
+	AREA = "Intro"
 	STATE = []
 	events = {
 		"rangers_defeated": false, 

@@ -1,8 +1,8 @@
 {
 	"can_battle_attack": true,
-	"can_battle_skill": false,
-	"can_battle_itens": false,
-	"can_battle_lane": false,
+	"can_battle_skill": true,
+	"can_battle_itens": true,
+	"can_battle_lane": true,
 	"can_battle_run": true,
 	"can_open_save_menu": false,
 	"can_open_item_menu": false,

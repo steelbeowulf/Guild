@@ -187,14 +187,13 @@ func check_for_events(result: ActionResult):
 							should_play.append(event)
 	if BATTLE_MANAGER.current_battle.get_events("on_target_damage") or BATTLE_MANAGER.current_battle.get_events("on_target_critical_health"):
 		var events = BATTLE_MANAGER.current_battle.get_events("on_target_damage")
-		for event in events:
-			for target in result.get_targets():
-				if BATTLE_MANAGER.current_battle.get_events("on_target_critical_health"):
-					var critical_events = BATTLE_MANAGER.current_battle.get_events("on_target_critical_health")
-					for critical_event in critical_events:
-						if target.get_name() == critical_event.get_argument(0) and target.is_critical_health():
-							if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
-								should_play.append(critical_event)
+		var critical_events = BATTLE_MANAGER.current_battle.get_events("on_target_critical_health")
+		for target in result.get_targets():
+			for critical_event in critical_events:
+				if target.get_name() == critical_event.get_argument(0) and target.is_critical_health():
+					if critical_event.get_argument(1) == null or critical_event.get_argument(1) == actor.get_name():
+						should_play.append(critical_event)
+			for event in events:
 				if event and target.get_name() == event.get_argument(0):
 					if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
 						should_play.append(event)

@@ -83,12 +83,18 @@ func play_event(event: Event) -> bool:
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
 	elif event.type == "REINFORCEMENTS":
+		if event.sfx != '':
+			AUDIO.play_se(event.sfx)
 		if event.group == "ALLIES":
 			get_node("/root/Battle").add_players(event.entities)
 		else:
 			get_node("/root/Battle").add_enemies(event.entities)
 	elif event.type == "SET_TARGET":
-		event.entity.set_next_target(event.get_target().index, event.get_turns())
+		var target = event.get_target()
+		var index = target.index
+		if target.tipo == "Player":
+			index = -(index + 1)
+		event.entity.set_next_target(index, event.get_turns())
 		event_ended()
 	elif event.type == "SET_ACTION":
 		event.entity.set_next_action(
@@ -123,6 +129,7 @@ func event_ended():
 		play_event(self.events.pop_front())
 	else:
 		print("[EVENTS] Callback event time")
+		NODES["Dialogue"].reset()
 		caller._on_Dialogue_Ended()
 
 
@@ -134,4 +141,5 @@ func dialogue_ended(force_hide = false):
 		play_event(self.events.pop_front())
 	else:
 		print("[EVENTS] Callback dialogue time")
+		NODES["Dialogue"].reset()
 		caller._on_Dialogue_Ended()

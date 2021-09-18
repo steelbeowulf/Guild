@@ -1,0 +1,19 @@
+{
+	"ID":17,
+	"IMG":{"path": "res://Assets/Animations/Entities/cleric spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
+	"ANIM":{"idle": [true, "50-69"]},
+	"NAME": "Shanta",
+  "EVENTS": [
+    {
+      "DIALOGUE":  {
+        "NAME": "Shanta",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "Piss off..."
+        ]
+      },
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}
+}

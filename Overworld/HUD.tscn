@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Battle/Log.tscn" type="PackedScene" id=1]
-[ext_resource path="res://NPCs/Dialogue.tscn" type="PackedScene" id=2]
-[ext_resource path="res://NPCs/DialogueOptions.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Others/Guild_Map.jpeg" type="Texture" id=2]
+[ext_resource path="res://NPCs/Dialogue.tscn" type="PackedScene" id=3]
+[ext_resource path="res://NPCs/DialogueOptions.tscn" type="PackedScene" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Battle"
@@ -28,13 +30,15 @@ tracks/0/keys = {
 anims/Battle = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
-margin_left = 3.0
-margin_top = 4.0
 margin_right = 1922.0
 margin_bottom = 1090.0
-color = Color( 1, 1, 1, 0 )
+color = Color( 0, 0, 0, 1 )
 
-[node name="Dialogue" parent="." instance=ExtResource( 2 )]
+[node name="Sprite" type="Sprite" parent="Transition"]
+position = Vector2( 992.72, 467.038 )
+texture = ExtResource( 2 )
+
+[node name="Dialogue" parent="." instance=ExtResource( 3 )]
 visible = false
 margin_left = 9.80847
 margin_top = 788.147
@@ -42,7 +46,7 @@ margin_right = 9.80847
 margin_bottom = 788.147
 rect_scale = Vector2( 1.5, 1.5 )
 
-[node name="OptionsPanel" parent="." instance=ExtResource( 3 )]
+[node name="OptionsPanel" parent="." instance=ExtResource( 4 )]
 visible = false
 margin_left = 1023.54
 margin_top = 701.27
