@@ -1,13 +1,27 @@
-extends Node
+class_name StatusEffect
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var id : int
+var name : String
+var value : float
+var type : String
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _init(id_arg: int, name_arg: String, value_arg: float, type_arg: String):
+	self.id = id_arg
+	self.name = name_arg
+	self.value = value_arg
+	self.type = type_arg
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func get_id():
+	return id
+
+func get_name():
+	return name
+
+func get_type():
+	return type
+
+func get_value():
+	return value
+
+func format():
+	return "{id: "+str(id)+", value: "+str(value)+", type: "+str(type)+", name: "+str(name)+"}"

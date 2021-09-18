@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name Flag
 
 var key: String
 var value

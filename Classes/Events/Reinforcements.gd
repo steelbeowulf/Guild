@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name Reinforcements
 
 var group: String
 var entities: Array

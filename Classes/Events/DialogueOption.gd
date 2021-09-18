@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name DialogueOption
 
 var option: String
 var events: Array

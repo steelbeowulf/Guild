@@ -9,7 +9,7 @@ var waiting_for_choice = false
 func load_flags(flags_arg: Dictionary):
 	flags = flags_arg
 
-func set_flag(event: Event):
+func set_flag(event: Flag):
 	var key = event.get_key()
 	var value = event.get_value()
 	flags[key] = value
@@ -19,14 +19,14 @@ func get_flag(key: String):
 		return flags[key]
 	return null
 
-func register_node(name, node):
+func register_node(name: String, node: Node):
 	NODES[name] = node
 
 ### Events
-func get_event_status(id):
+func get_event_status(id: int):
 	return events[id]
 
-func set_event_status(id, status):
+func set_event_status(id: int, status):
 	events[id] = status
 
 ### Dialogue
@@ -114,7 +114,7 @@ func build_action(type_arg: String, action_id: int, args: Array) -> Action:
 	return Action.new(type_arg, action_id, targets)
 
 
-func start_npc_dialogue(name, portrait, events, callback):
+func start_npc_dialogue(name: String, portrait: Dictionary, events: Array, callback: Node):
 	var node = NODES["Dialogue"]
 	npc_name = name
 	npc_portrait = portrait

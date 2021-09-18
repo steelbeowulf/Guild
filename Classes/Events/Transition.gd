@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name Transition
 
 var area : String
 var map : int

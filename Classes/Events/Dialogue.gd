@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name Dialogue
 
 var name: String
 var portrait: Dictionary

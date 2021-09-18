@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name SetAction
 
 var entity: Entity
 var action_type: String

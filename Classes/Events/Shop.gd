@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name Shop
 
 var goods : Array
 var subtype : String

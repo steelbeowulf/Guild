@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name SetTarget
 
 var entity: Entity
 var target: Entity

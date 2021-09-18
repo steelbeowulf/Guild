@@ -1,4 +1,5 @@
 extends "Entity.gd"
+class_name NPC
 
 var events
 var portrait

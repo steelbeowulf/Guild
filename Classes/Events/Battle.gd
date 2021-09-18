@@ -1,4 +1,5 @@
 extends "Event.gd"
+class_name Battle
 
 var enemies : Array
 var enemy_ids : Array
