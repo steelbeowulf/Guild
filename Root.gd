@@ -23,6 +23,8 @@ onready var loader = get_node("/root/LOADER")
 # Loads the correct map
 func _ready():
 	var start = load("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
+	print("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
+	yield(get_tree(), "idle_frame")
 	self.add_child(start.instance())
 	map = get_child(get_child_count()-1)
 	set_effect(LOCAL.MAP)
