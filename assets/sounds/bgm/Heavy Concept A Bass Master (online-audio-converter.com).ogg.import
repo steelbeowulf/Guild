@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Heavy Concept A Bass Master (online-audio-converter.com).ogg-bce15a347da8fda9004f061f5c84b4fd.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/bgm/Heavy Concept A Bass Master (online-audio-converter.com).ogg"
+dest_files=[ "res://.import/Heavy Concept A Bass Master (online-audio-converter.com).ogg-bce15a347da8fda9004f061f5c84b4fd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

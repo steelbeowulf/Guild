@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Menu Error.ogg-fb0234e22e47d0d19b76b472df31c23d.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/Menu Error.ogg"
+dest_files=[ "res://.import/Menu Error.ogg-fb0234e22e47d0d19b76b472df31c23d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

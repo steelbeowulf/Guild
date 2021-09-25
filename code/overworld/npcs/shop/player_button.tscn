@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/ui/panels/Hover_Menu_Info_Panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/ui/panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/panels/Menu_Info_Panel.tres" type="StyleBox" id=3]
+[ext_resource path="res://code/overworld/npcs/shop/player_button.gd" type="Script" id=4]
+[ext_resource path="res://assets/others/shaders/grayscale.shader" type="Shader" id=5]
+[ext_resource path="res://assets/sprites/portraits/cleric.png" type="Texture" id=6]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+
+[node name="PlayerButton" type="Button"]
+margin_top = 2.0
+margin_right = 120.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 120, 110 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 1 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 3 )
+toggle_mode = true
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+use_parent_material = true
+position = Vector2( 64, 60 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 6 )
+

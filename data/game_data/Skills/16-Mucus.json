@@ -1,0 +1,12 @@
+{
+	"ID":16,	
+	"NAME":"MUCUS", 
+	"QUANT":10, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[{"BOOL":0.8, "STATUS":"SLOW"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Water/Mucus.png",
+		   "vframes": 2, "hframes":4, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0-7"]}
+}

@@ -7,15 +7,45 @@ Prove your worth to the Guild's effort in stopping the ever-growing corruption o
 Customize your characters through a job system with 12 different classes, allowing you to fight in which way you prefer and learn about their story and motivations.
 
 ### Project Structure
-- Assets
-- Battle
-- Classes
-- Config
-- Data
-- Menu
-- NPCs
-- Overworld
-- Pause
-- Save_Data
-- State
-- Root
+- assets
+	- sprites
+		- animations
+		- backgrounds
+		- portraits
+		- tilesets
+	- sound
+		- bgm
+		- sfx
+	- ui
+		- fonts
+		- panels
+	- others
+		- maps
+		- shaders
+- code
+	- battle
+		- classes
+		- menus
+		- post_battle
+	- classes
+		- entities
+		- events
+		- objects
+		- util
+	- config
+	- overworld
+		- npcs
+		- objects
+		- HUD
+	- maps
+		- forest
+		- hub
+	- ui
+		- main_menu
+		- menu
+	- state
+	- root
+- data
+	- game_data
+	- save_data
+

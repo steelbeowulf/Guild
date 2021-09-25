@@ -1,0 +1,12 @@
+{
+	"ID":24,	
+	"NAME":"EARTHQUAKE", 
+	"QUANT":130, 
+	"TARGET":"ALL", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-30, "TYPE":"EARTH", "TURNS":1}],
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Earth/Earth.png",
+		   "vframes": 1, "hframes":1, "scale":[2,2]},
+	"ANIM":{"skill": [false, "0,0,0"]}
+}

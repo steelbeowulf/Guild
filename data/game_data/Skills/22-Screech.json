@@ -1,0 +1,12 @@
+{
+	"ID":21,	
+	"NAME":"SCREECH", 
+	"QUANT":30, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-35, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[],
+	"IMG":{"path": "res://Assets/Animations/Spells/Debuff/Screech.png",
+		   "vframes": 12, "hframes":5, "scale":[0.6,0.6]},
+	"ANIM":{"skill": [false, "0-55"]}
+}

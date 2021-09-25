@@ -1,0 +1,20 @@
+{
+	"NAME": "Hub",
+	"ENEMIES": [3,7,8],
+	"ENEMIES_BY_AREA": [
+		[],
+		[]
+	],
+	"NPCS": [10, 11, 12, 13, 16, 17, 19, 20],
+	"ENCOUNTERS": [],
+	"SHOPS": [],
+	"BACKGROUNDS": [
+		"res://Assets/Backgrounds/forest.png",
+		"res://Assets/Backgrounds/forest2.png",
+		"res://Assets/Backgrounds/mud.png",
+		"res://Assets/Backgrounds/sand.png",
+	],
+	"INITIAL_AREA": 1,
+	"FINAL_AREA": 1,
+	"INITIAL_POSITION": [816, 368],
+}

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/338260__philsavlem__money-bag.wav-c36a9ee584dd38517fd412ce43c60ce7.sample"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/338260__philsavlem__money-bag.wav"
+dest_files=[ "res://.import/338260__philsavlem__money-bag.wav-c36a9ee584dd38517fd412ce43c60ce7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

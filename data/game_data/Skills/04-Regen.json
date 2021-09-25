@@ -1,0 +1,12 @@
+{
+	"ID":4,
+	"NAME":"REGEN", 
+	"QUANT":15, 
+	"TARGET":"ONE", 
+	"TYPE":"RECOVERY",
+	"EFFECTS":[{"STAT":"HP", "VALUE":25, "TYPE":"", "TURNS":1}],
+	"STATUS":[{"BOOL":1, "STATUS":"REGEN"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Buff/Regen.png",
+		   "vframes": 10, "hframes":5, "scale":[0.6,0.6]},
+	"ANIM":{"skill": [false, "0-45"]}
+}

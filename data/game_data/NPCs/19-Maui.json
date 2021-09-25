@@ -1,0 +1,19 @@
+{
+	"ID":19,
+	"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME": "Maui",
+  "EVENTS": [
+    {
+      "DIALOGUE": {
+        "NAME": "Maui",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "If you really wish to help this world, you need to start thinking before you act"
+        ]
+      },
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}
+}

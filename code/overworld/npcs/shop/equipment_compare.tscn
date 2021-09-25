@@ -1,0 +1,126 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://code/overworld/npcs/shop/equipment_compare.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/fonts/Font24.tres" type="DynamicFont" id=2]
+
+[node name="Comparison" type="Control"]
+margin_top = 350.0
+margin_right = 40.0
+margin_bottom = 390.0
+script = ExtResource( 1 )
+
+[node name="Others (unused)" type="Label" parent="."]
+visible = false
+margin_left = 9.0
+margin_top = 336.0
+margin_right = 976.0
+margin_bottom = 791.0
+custom_fonts/font = ExtResource( 2 )
+text = "HP MP
+ATK ATKM
+DEF DEFM 
+ACC EVA
+AGI LCK
+
+FIRE WATER 
+ELECTRIC ICE 
+EARTH WIND
+HOLY DARKNESS\""
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 5.0
+margin_right = 965.0
+margin_bottom = 400.0
+
+[node name="Attributes-Left" type="VBoxContainer" parent="HBoxContainer"]
+editor/display_folded = true
+margin_right = 47.0
+margin_bottom = 400.0
+
+[node name="HP" type="Label" parent="HBoxContainer/Attributes-Left"]
+visible = false
+margin_right = 48.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 2 )
+text = "HP"
+
+[node name="HP_MAX" type="Label" parent="HBoxContainer/Attributes-Left"]
+margin_right = 47.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 2 )
+text = "HP"
+
+[node name="ATK" type="Label" parent="HBoxContainer/Attributes-Left"]
+margin_top = 31.0
+margin_right = 47.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 2 )
+text = "ATK"
+
+[node name="DEF" type="Label" parent="HBoxContainer/Attributes-Left"]
+margin_top = 62.0
+margin_right = 47.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 2 )
+text = "DEF"
+
+[node name="ACC" type="Label" parent="HBoxContainer/Attributes-Left"]
+margin_top = 93.0
+margin_right = 47.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 2 )
+text = "ACC"
+
+[node name="AGI" type="Label" parent="HBoxContainer/Attributes-Left"]
+margin_top = 124.0
+margin_right = 47.0
+margin_bottom = 151.0
+custom_fonts/font = ExtResource( 2 )
+text = "AGI"
+
+[node name="Attributes-Right" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 51.0
+margin_right = 117.0
+margin_bottom = 400.0
+
+[node name="MP" type="Label" parent="HBoxContainer/Attributes-Right"]
+visible = false
+margin_right = 70.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 2 )
+text = "MP"
+
+[node name="MP_MAX" type="Label" parent="HBoxContainer/Attributes-Right"]
+margin_right = 66.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 2 )
+text = "MP"
+
+[node name="ATKM" type="Label" parent="HBoxContainer/Attributes-Right"]
+margin_top = 31.0
+margin_right = 66.0
+margin_bottom = 58.0
+custom_fonts/font = ExtResource( 2 )
+text = "ATKM"
+
+[node name="DEFM" type="Label" parent="HBoxContainer/Attributes-Right"]
+margin_top = 62.0
+margin_right = 66.0
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 2 )
+text = "DEFM"
+
+[node name="EVA" type="Label" parent="HBoxContainer/Attributes-Right"]
+margin_top = 93.0
+margin_right = 66.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 2 )
+text = "EVA"
+
+[node name="LCK" type="Label" parent="HBoxContainer/Attributes-Right"]
+margin_top = 124.0
+margin_right = 66.0
+margin_bottom = 151.0
+custom_fonts/font = ExtResource( 2 )
+text = "LCK"
+
