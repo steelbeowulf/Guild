@@ -7,6 +7,8 @@ onready var Slip_Timer = $Slip_Timer
 onready var Score_Label = get_node("CanvasLayer/Score_Label")
 onready var Camera = get_node("Player_Car/Camera2D")
 onready var Map_Timer = $Map_Timer
+onready var End_Timer = $End_Timer
+onready var End_Time_Label = get_node("CanvasLayer/End_Time_Label")
 var Block = load("res://Minigames/Racing Game/Block.tscn")
 var Fuel = load("res://Minigames/Racing Game/Fuel.tscn")
 var Hole = load("res://Minigames/Racing Game/Hole.tscn")
@@ -22,6 +24,9 @@ var score: int = 0
 
 func _on_Button_button_down():
 	get_tree().quit()
+
+func _physics_process(_delta):
+	End_Time_Label.text = "Time: " + str(End_Timer.time_left)
 
 #activate boost
 func _unhandled_key_input(event):
@@ -101,7 +106,7 @@ func get_obstacle_position() -> Vector2:
 	Matrix_Map[obstacle_index][1] + Player_Car.camera_rect_size.x/40)
 
 func _on_Map_Timer_timeout():
-	Map_Timer.wait_time *= 0.99
+	Map_Timer.wait_time *= 0.9
 	create_map()
 
 #determine the possible positions to instance a obstacle
@@ -111,3 +116,10 @@ func create_matrix_map() -> void:
 	Matrix_Map = []
 	for i in range(326):
 		Matrix_Map.push_back([Player_Car.position.x + sizex*(i%20), 100 + sizey*(i%20)])
+
+func _on_Victory_body_entered(body):
+	print("Ganhei")
+	get_tree().quit()
+
+func _on_End_Timer_timeout():
+	get_tree().quit()

@@ -22,6 +22,7 @@ position = Vector2( 100, 0 )
 current = true
 limit_left = 0
 limit_top = 0
+limit_right = 20075
 limit_smoothed = true
 offset_v = -0.86
 editor_draw_limits = true

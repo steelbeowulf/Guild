@@ -15,7 +15,6 @@ func _ready():
 	self.position.y = camera_rect_size.y/2
 	Camera2D.limit_bottom = get_viewport().size.y
 	Camera2D.limit_left = Camera2D.get_camera_screen_center().x - camera_rect_size.x/2
-	Camera2D.limit_right = regular_speed*60
 
 func _process(_delta):
 	#prevent the player to come back in the minigame
