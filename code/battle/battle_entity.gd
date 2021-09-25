@@ -16,7 +16,7 @@ onready var data: Entity = null
 onready var dead = false
 
 # Aura related variables
-const SHADER = preload("res://Assets/Shaders/outline.shader")
+const SHADER = preload("res://assets/others/shaders/outline.shader")
 const COLORS = {"RED": Color(1,0,0), "BLUE": Color(0,1,0),
 "PURPLE": Color(1,0,1), "GRAY": Color(0.25, 0.25, 0.25), 
 "PINK": Color(0.25,0,0), "YELLOW": Color(1,1,0)}
@@ -74,7 +74,7 @@ func set_spell(sprite: Dictionary, animation_data: Array, animation_name: String
 	var animation = Sprite.new()
 	animation.texture = load(sprite['path'])
 	animation.set_name(animation_name)
-	animation.set_script(load('res://Classes/Spritesheet.gd'))
+	animation.set_script(load('res://code/classes/util/spritesheet.gd'))
 	animation.loop = animation_data[0]
 	animation.physical_frames = animation_data[1]
 	animation.vframes = sprite['vframes']
@@ -107,7 +107,7 @@ func set_animations(sprite: Dictionary, animations: Dictionary, data_arg: Entity
 		mat.set_shader(SHADER)
 		animation.set_material(mat)
 		animation.set_name(k)
-		animation.set_script(load('res://Classes/Spritesheet.gd'))
+		animation.set_script(load('res://code/classes/util/spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
 		animation.vframes = sprite['vframes']

@@ -1,6 +1,6 @@
 {
 	"ID":18,
-	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/ranger spritesheet calciumtrice.png",
    "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
 	"ANIM":{"idle": [true, "50-69"]},
 	"NAME": "Carolus",
@@ -9,13 +9,13 @@
       "BATTLE": {
         "ENEMIES": [14],
         "MUSIC": "BOSS_THEME",
-        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+        "BACKGROUND": "res://assets/sprites/backgrounds/forest2.png",
         "EVENTS": [
           {
             "CONDITION": "on_begin",
             "DIALOGUE": {
               "NAME": "Shanta",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/cleric-f.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "She's infected. I can feel it from here.",
                 "I never thought it could affect humans like this",
@@ -27,7 +27,7 @@
             "CONDITION": "on_begin",
             "DIALOGUE": {
               "NAME": "Carolus",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/ranger.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "..."
               ]
@@ -45,7 +45,7 @@
             "CONDITION": ["on_target_critical_health", ["Carolus"]],
             "DIALOGUE": {
               "NAME": "Carolus",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/ranger.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Infected...? You are the infection on this planet!",
                 "Enough. I'll do this forest a favor by exterminating you!"
@@ -64,7 +64,7 @@
             "CONDITION": "on_reinforcements",
             "DIALOGUE": {
               "NAME": "Siegfried",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/warrior.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Did... did she just call a bear!?"
               ]
@@ -74,5 +74,5 @@
       }
     }
   ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/ranger.png", "scale":[8,8]}
 }

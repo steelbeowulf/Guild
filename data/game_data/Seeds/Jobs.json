@@ -1,9 +1,9 @@
 [
     {
         "ID":0,
-        "IMG":{"path": "res://Assets/Animations/warrior spritesheet calciumtrice.png",
+        "IMG":{"path": "res://assets/sprites/animations/entities/warrior spritesheet calciumtrice.png",
             "vframes": 10, "hframes":10, "scale":[2,2]},
-        "PORTRAIT": "res://Assets/Portraits/warrior.png",
+        "PORTRAIT": "res://assets/sprites/portraits/warrior.png",
         "NAME": "Paladin",
         "ANIM":{"idle": [true, "0-19"], 
                 "move": [true, "20-29"],
@@ -21,9 +21,9 @@
     },
     {
         "ID":1,
-        "IMG":{"path": "res://Assets/Animations/rogue spritesheet calciumtrice.png",
+        "IMG":{"path": "res://assets/sprites/animations/entities/rogue spritesheet calciumtrice.png",
 			"vframes": 10, "hframes":10, "scale":[2,2]},
-		"PORTRAIT": "res://Assets/Portraits/rogue.png",
+		"PORTRAIT": "res://assets/sprites/portraits/rogue.png",
         "NAME": "Rogue",
 		"ANIM":{"idle": [true, "0-19"], 
 				"move": [true, "20-29"],
@@ -41,9 +41,9 @@
     },
     {
         "ID":2,
-        "IMG":{"path": "res://Assets/Animations/cleric spritesheet calciumtrice.png",
+        "IMG":{"path": "res://assets/sprites/animations/entities/cleric spritesheet calciumtrice.png",
 			"vframes": 10, "hframes":10, "scale":[2,2]},
-		"PORTRAIT": "res://Assets/Portraits/cleric.png",
+		"PORTRAIT": "res://assets/sprites/portraits/cleric.png",
         "NAME": "Cleric",
 		"ANIM":{"idle": [true, "0-9"], 
 				"move": [true, "20-29"],
@@ -63,9 +63,9 @@
     },
     {
         "ID":3,
-        "IMG":{"path": "res://Assets/Animations/ranger spritesheet calciumtrice.png",
+        "IMG":{"path": "res://assets/sprites/animations/entities/ranger spritesheet calciumtrice.png",
 			"vframes": 10, "hframes":10, "scale":[2,2]},
-		"PORTRAIT": "res://Assets/Portraits/ranger.png",
+		"PORTRAIT": "res://assets/sprites/portraits/ranger.png",
         "NAME": "Ranger",
 		"ANIM":{"idle": [true, "0-19"], 
 				"move": [true, "20-29"],

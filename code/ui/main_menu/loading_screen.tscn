@@ -7,17 +7,6 @@
 [ext_resource path="res://assets/ui/fonts/Font24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/sprites/others/Logo.png" type="Texture" id=6]
 
-
-
-
-
-
-
-
-
-
-
-
 [node name="Loading" type="Node2D"]
 script = ExtResource( 1 )
 

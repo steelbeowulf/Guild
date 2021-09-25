@@ -7,7 +7,7 @@ export(bool) var _smooth setget smooth
 export(bool) var _straighten setget straighten
 
 var t = 0.0
-var particles_scene = load("res://Battle/UI/Particles.tscn")
+var particles_scene = load("res://code/battle/menus/particles.tscn")
 var particles = null
 
 func create_curve(begin, end, nb_points):

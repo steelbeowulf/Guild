@@ -4,12 +4,12 @@
 		"LEVEL":1,
 		"EXPERIENCE":0,
 		"IMG":{
-			"path": "res://Assets/Animations/Entities/warrior spritesheet calciumtrice.png",
+			"path": "res://assets/sprites/animations/entities/warrior spritesheet calciumtrice.png",
 			"vframes": 10, 
 			"hframes":10, 
 			"scale":[2,2]
 		},
-		"PORTRAIT": "res://Assets/Portraits/warrior.png",
+		"PORTRAIT": "res://assets/sprites/portraits/warrior.png",
 		"ANIM":{
 			"idle": [true, "0-19"], 
 			"move": [true, "20-29"],
@@ -44,9 +44,9 @@
 		"ID":1,
 		"LEVEL":1,
 		"EXPERIENCE":0,
-		"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
+		"IMG":{"path": "res://assets/sprites/animations/entities/rogue spritesheet calciumtrice.png",
 			   "vframes": 10, "hframes":10, "scale":[2,2]},
-		"PORTRAIT": "res://Assets/Portraits/rogue.png",
+		"PORTRAIT": "res://assets/sprites/portraits/rogue.png",
 		"ANIM":{
 			"idle": [true, "0-19"], 
 			"move": [true, "20-29"],
@@ -82,12 +82,12 @@
 		"LEVEL":1,
 		"EXPERIENCE":0,
 		"IMG":{
-			"path": "res://Assets/Animations/Entities/cleric spritesheet calciumtrice.png",
+			"path": "res://assets/sprites/animations/entities/cleric spritesheet calciumtrice.png",
 			"vframes": 10,
 			"hframes":10,
 			"scale":[2,2]
 		},
-		"PORTRAIT": "res://Assets/Portraits/cleric-f.png",
+		"PORTRAIT": "res://assets/sprites/portraits/cleric-f.png",
 		"ANIM":{
 			"idle": [true, "50-59"], 
 			"move": [true, "70-79"],

@@ -2,7 +2,7 @@
 	"ID":13,
 	"LEVEL":9,
 	"EXPERIENCE":90,
-	"IMG":{"path": "res://Assets/Animations/Entities/bear spritesheet.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/bear spritesheet.png",
 		   "vframes": 4, "hframes":6, "scale":[1.5,1.5]},
 	"ANIM":{"idle": [true, "0-7"], 
 			"move": [true, "0-7"],

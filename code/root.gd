@@ -8,21 +8,21 @@ onready var map = null
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
 onready var shop = get_node("Menu_Area/Shop")
-onready var save = load("res://Pause/Save.tscn")
-onready var itens = load("res://Pause/Itens.tscn")
-onready var use_itens = load("res://Pause/ItemUse.tscn")
-onready var use_skills = load("res://Pause/SkillUse.tscn")
-onready var status = load("res://Pause/Status.tscn")
-onready var options = load("res://Pause/Options.tscn")
-onready var skills = load("res://Pause/Skills.tscn")
-onready var equips = load("res://Pause/EquipMenu.tscn")
-onready var change = load("res://Pause/ChangeMenu.tscn")
+onready var save = load("res://code/ui/menu/Save.tscn")
+onready var itens = load("res://code/ui/menu/Itens.tscn")
+onready var use_itens = load("res://code/ui/menu/use_item_screen.tscn")
+onready var use_skills = load("res://code/ui/menu/use_skill_screen.tscn")
+onready var status = load("res://code/ui/menu/status_screen.tscn")
+onready var options = load("res://code/ui/menu/options_screen.tscn")
+onready var skills = load("res://code/ui/menu/skills_screen.tscn")
+onready var equips = load("res://code/ui/menu/equipment_screen.tscn")
+onready var change = load("res://code/ui/menu/party_screen.tscn")
 
 onready var loader = get_node("/root/LOADER")
 
 # Loads the correct map
 func _ready():
-	var start = load("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
+	var start = load("res://code/maps/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
 	self.add_child(start.instance())
 	map = get_child(get_child_count()-1)
 	set_effect(LOCAL.MAP)
@@ -32,7 +32,7 @@ func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0,0)):
 	print("[ROOT] Changing area! ", area_name)
 	if pos != Vector2(0,0):
 		LOCAL.POSITION = pos
-	var new = load("res://Overworld/"+area_name+"/Map"+str(next)+".tscn")
+	var new = load("res://code/maps/"+area_name+"/Map"+str(next)+".tscn")
 	LOCAL.MAP = next
 	LOCAL.AREA = area_name
 	set_effect(LOCAL.MAP)
@@ -229,7 +229,7 @@ func use_skill(skill, player):
 
 # Transitions from current area to next area
 func transition(next, fake=false):
-	var new = load("res://Overworld/"+LOCAL.AREA+"/Map"+str(next)+".tscn")
+	var new = load("res://code/maps/"+LOCAL.AREA+"/Map"+str(next)+".tscn")
 	LOCAL.MAP = next
 	set_effect(LOCAL.MAP)
 	#call_deferred("add_child", new.instance())

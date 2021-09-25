@@ -1,4 +1,4 @@
-extends "res://Battle/Apply.gd"
+extends "res://code/battle/apply.gd"
 
 onready var location = "OUTSIDE"
 var targets = []

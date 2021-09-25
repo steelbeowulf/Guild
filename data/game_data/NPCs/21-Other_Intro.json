@@ -1,6 +1,6 @@
 {
 	"ID":21,
-	"IMG":{"path": "res://Assets/Animations/Entities/warrior spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/warrior spritesheet calciumtrice.png",
    "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
 	"ANIM":{"idle": [true, "50-59"]},
 	"NAME": "",
@@ -8,7 +8,7 @@
     {
       "DIALOGUE": {
         "NAME": "",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/mistery.png", "scale":[2,2]}, 
+        "PORTRAIT": {"sprite":"res://assets/sprites/portraits/mistery.png", "scale":[2,2]}, 
         "MESSAGE": [
           "Eneria... the primal power behind all living things",
           "Yet when it becomes unstable, it can corrupt them",
@@ -20,12 +20,12 @@
     {
       "DIALOGUE": {
         "NAME": "????",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/mistery.png", "scale":[2,2]}, 
+        "PORTRAIT": {"sprite":"res://assets/sprites/portraits/mistery.png", "scale":[2,2]}, 
         "MESSAGE": [
           "Sieg... How could you...",
         ]
       },
     },
   ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/mistery.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/mistery.png", "scale":[8,8]}
 }

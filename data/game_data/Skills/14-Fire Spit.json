@@ -6,7 +6,7 @@
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-40, "TYPE":"FIRE", "TURNS":1}],
 	"STATUS":[{"BOOL":0.75, "STATUS":"BURN"}],
-	"IMG":{"path": "res://Assets/Animations/Spells/Water/Fire Spit.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Water/Fire Spit.png",
 		   "vframes": 6, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "16-23, 14-15, 0-13"]}
 }

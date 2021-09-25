@@ -6,20 +6,20 @@ var audio = []
 var prev_pos = 0.0
 
 # Loads all our songs and SFXs
-var MENU_THEME = load("res://Assets/BGM/TownTheme (online-audio-converter.com).ogg")
-var MAP_THEME = load("res://Assets/BGM/Lonely Witch (online-audio-converter.com).ogg")
-var BATTLE_THEME = load("res://Assets/BGM/Modern Castle - Tension (online-audio-converter.com).ogg")
-var GAME_OVER_THEME = load("res://Assets/BGM/Game over jingle 4.wav")
-var BOSS_THEME = load("res://Assets/BGM/Heavy Concept A Bass Master (online-audio-converter.com).ogg")
-var SPELL = load("res://Assets/SFX/Powerup 4 - Sound effects Pack 2.ogg")
-var RUN = load("res://Assets/SFX/Fantozzi-SandL1.ogg")
-var HIT = load("res://Assets/SFX/Explosion 3 - Sound effects Pack 2.ogg")
-var ENTER_MENU = load("res://Assets/SFX/Menu Confirm.ogg")
-var EXIT_MENU = load("res://Assets/SFX/Menu Error.ogg")
-var MOVE_MENU = load("res://Assets/SFX/Menu Move.ogg")
-var MONEY = load("res://Assets/SFX/338260__philsavlem__money-bag.wav")
-var GRASS = load("res://Assets/SFX/151229__owlstorm__grassy-footstep-2.wav")
-var WHISTLE = load("res://Assets/SFX/320140__owlstorm__attention-whistle.wav")
+var MENU_THEME = load("res://assets/sounds/bgm/TownTheme (online-audio-converter.com).ogg")
+var MAP_THEME = load("res://assets/sounds/bgm/Lonely Witch (online-audio-converter.com).ogg")
+var BATTLE_THEME = load("res://assets/sounds/bgm/Modern Castle - Tension (online-audio-converter.com).ogg")
+var GAME_OVER_THEME = load("res://assets/sounds/bgm/Game over jingle 4.wav")
+var BOSS_THEME = load("res://assets/sounds/bgm/Heavy Concept A Bass Master (online-audio-converter.com).ogg")
+var SPELL = load("res://assets/sounds/sfx/Powerup 4 - Sound effects Pack 2.ogg")
+var RUN = load("res://assets/sounds/sfx/Fantozzi-SandL1.ogg")
+var HIT = load("res://assets/sounds/sfx/Explosion 3 - Sound effects Pack 2.ogg")
+var ENTER_MENU = load("res://assets/sounds/sfx/Menu Confirm.ogg")
+var EXIT_MENU = load("res://assets/sounds/sfx/Menu Error.ogg")
+var MOVE_MENU = load("res://assets/sounds/sfx/Menu Move.ogg")
+var MONEY = load("res://assets/sounds/sfx/338260__philsavlem__money-bag.wav")
+var GRASS = load("res://assets/sounds/sfx/151229__owlstorm__grassy-footstep-2.wav")
+var WHISTLE = load("res://assets/sounds/sfx/320140__owlstorm__attention-whistle.wav")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,

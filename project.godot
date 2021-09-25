@@ -19,27 +19,32 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/battle/classes/action_result.gd"
 }, {
-"base": "",
+"base": "Node",
+"class": "Apply",
+"language": "GDScript",
+"path": "res://code/battle/apply.gd"
+}, {
+"base": "Event",
 "class": "Battle",
 "language": "GDScript",
 "path": "res://code/classes/events/battle.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "Dialogue",
 "language": "GDScript",
 "path": "res://code/classes/events/dialogue.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "DialogueOption",
 "language": "GDScript",
 "path": "res://code/classes/events/dialogue_option.gd"
 }, {
-"base": "",
+"base": "Entity",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://code/classes/entities/enemy.gd"
 }, {
-"base": "",
+"base": "STATS",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://code/classes/entities/entity.gd"
@@ -54,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/events/event.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "Flag",
 "language": "GDScript",
 "path": "res://code/classes/events/flag.gd"
@@ -79,17 +84,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/battle/classes/lane_action_result.gd"
 }, {
-"base": "",
+"base": "Entity",
 "class": "NPC",
 "language": "GDScript",
 "path": "res://code/classes/entities/npc.gd"
 }, {
-"base": "",
+"base": "Entity",
 "class": "Player",
 "language": "GDScript",
 "path": "res://code/classes/entities/player.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "Reinforcements",
 "language": "GDScript",
 "path": "res://code/classes/events/reinforcements.gd"
@@ -104,22 +109,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/util/stats.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "SetAction",
 "language": "GDScript",
 "path": "res://code/classes/events/set_action.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "SetTarget",
 "language": "GDScript",
 "path": "res://code/classes/events/set_target.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "Shop",
 "language": "GDScript",
 "path": "res://code/classes/events/shop.gd"
 }, {
-"base": "Reference",
+"base": "Path2D",
 "class": "SmoothPath",
 "language": "GDScript",
 "path": "res://assets/others/shaders/Smooth.gd"
@@ -139,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/events/status_effect.gd"
 }, {
-"base": "",
+"base": "Event",
 "class": "Transition",
 "language": "GDScript",
 "path": "res://code/classes/events/transition.gd"
@@ -147,6 +152,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Action": "",
 "ActionResult": "",
+"Apply": "",
 "Battle": "",
 "Dialogue": "",
 "DialogueOption": "",
@@ -178,7 +184,7 @@ _global_script_class_icons={
 
 config/name="Guild"
 run/main_scene="res://code/ui/main_menu/title_screen.tscn"
-config/icon="res://assets/Others/Logo.png"
+config/icon="res://assets/sprites/others/Logo.png"
 
 [autoload]
 

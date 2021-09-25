@@ -1,6 +1,6 @@
 {
 	"ID":5,
-	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/ranger spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-19"]},
 	"NAME": "Iris",
@@ -16,5 +16,5 @@
             ],
         }
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/ranger.png", "scale":[8,8]}
 }

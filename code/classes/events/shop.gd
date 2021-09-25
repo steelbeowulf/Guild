@@ -1,4 +1,4 @@
-extends "Event.gd"
+extends Event
 class_name Shop
 
 var goods : Array

@@ -20,7 +20,7 @@ func set_animations(sprite, animations):
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
-		animation.set_script(load('res://Classes/Spritesheet.gd'))
+		animation.set_script(load('res://code/classes/util/spritesheet.gd'))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
 		animation.vframes = vf

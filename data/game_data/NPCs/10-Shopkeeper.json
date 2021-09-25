@@ -1,6 +1,6 @@
 {
 	"ID":10,
-	"IMG":{"path": "res://Assets/Animations/Entities/wizard spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/wizard spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
 	"ANIM":{"idle": [true, "0"]},
 	"NAME":"Shopkeeper",
@@ -28,5 +28,5 @@
             }
         }
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/wizard.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/wizard.png", "scale":[8,8]}
 }

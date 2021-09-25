@@ -44,4 +44,4 @@ func set_size(ID):
 
 
 func get_font():
-	return load("res://Assets/Fonts/Font"+font_size+".tres")
+	return load("res://assets/ui/fonts/Font"+font_size+".tres")

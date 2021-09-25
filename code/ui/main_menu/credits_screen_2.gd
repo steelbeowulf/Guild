@@ -6,12 +6,12 @@ func _ready():
 
 func _on_Button_pressed():
 	AUDIO.play_se("EXIT_MENU")
-	get_tree().change_scene("res://Menu/Title Screen.tscn")
+	get_tree().change_scene("res://code/ui/main_menu/title_screen.tscn")
 
 
 func _on_More_Credits_pressed():
 	AUDIO.play_se("ENTER_MENU")
-	get_tree().change_scene("res://Menu/Credits.tscn")
+	get_tree().change_scene("res://code/ui/main_menu/credits_screen.tscn")
 
 
 func _on_Title_focus_entered():

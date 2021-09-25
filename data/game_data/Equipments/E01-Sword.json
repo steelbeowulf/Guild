@@ -7,5 +7,5 @@
 	"EFFECTS":[{"STAT":"ATK", "VALUE":25, "TYPE":"PHYSIC"}],
 	"STATUS":[],
 	"PRICE": 50,
-	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}
+	"IMG":{"path": "res://assets/sprites/animations/spells/Heal/Heal.png"}
 }

@@ -5,7 +5,7 @@ var wait_frames
 var time_max = 100 # msec
 var current_scene
 
-var ROOT_SCENE = "res://Root.tscn"
+var ROOT_SCENE = "res://code/root.tscn"
 
 func _ready(): # game requests to switch to this scene
 	var loader_class = get_tree().get_root().get_node("LOADER")

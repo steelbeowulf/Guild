@@ -2,7 +2,7 @@
 	"ID":2,
 	"LEVEL":1,
 	"EXPERIENCE":20,
-	"IMG":{"path": "res://Assets/Animations/Entities/slime spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/slime spritesheet calciumtrice.png",
 		   "vframes": 20, "hframes":10, "scale":[2,2]},
 	"ANIM":{"idle": [true, "50-69"], 
 			"move": [true, "70-79"],

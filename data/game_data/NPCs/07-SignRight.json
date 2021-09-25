@@ -1,6 +1,6 @@
 {
 	"ID":7,
-	"IMG":{"path": "res://Assets/Animations/Entities/signs.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/signs.png",
 		   "vframes": 5, "hframes":3, "scale":[2,2]},
 	"ANIM":{"idle": [true, "2"]},
 	"NAME":"Sign",
@@ -11,5 +11,5 @@
     		],
         }
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/sign.png", "scale":[4,4]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/sign.png", "scale":[4,4]}
 }

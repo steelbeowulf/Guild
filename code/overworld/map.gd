@@ -18,7 +18,7 @@ onready var Player_pos = Vector2(816, 368)
 onready var state = {}
 
 # Shortcut variables
-var cara_no_mundo = load("res://Overworld/Objects/Cara_no_mundo.tscn")
+var cara_no_mundo = load("res://code/overworld/overworld_player.tscn")
 
 
 # Returns current maps' margins (used to limit player camera)
@@ -38,7 +38,7 @@ func _ready():
 	# TODO: fix it
 	
 	#if GLOBAL.WIN:
-	#	get_tree().change_scene("res://Menu/Victory.tscn")
+	#	get_tree().change_scene("res://code/ui/victory.tscn")
 	
 	Enemies = LOCAL.ENEMIES
 	Player_pos = LOCAL.POSITION

@@ -2,48 +2,48 @@ extends Node
 class_name LOADER
 
 # Path to all persistent game data we're going to load
-const ENEMY_PATH = "res://Data/Enemies/"
-const ITENS_PATH = "res://Data/Itens/"
-const EQUIPS_PATH = "res://Data/Equipaments/"
-const SKILLS_PATH = "res://Data/Skills/"
-const STATUS_PATH = "res://Data/Status/"
-const AREAS_PATH = "res://Data/Maps/"
-const NPCS_PATH = "res://Data/NPCs/"
-const LORES_PATH = "res://Data/Lore/"
-const ENCOUNTERS_PATH = "res://Data/NPCs/Encounters/"
-const SHOPS_PATH = "res://Data/NPCs/Shops/"
-const RESERVE_PLAYERS_PATH = "res://Data/Seeds/Reserve Players.json"
+const ENEMY_PATH = "res://data/game_data/Enemies/"
+const ITENS_PATH = "res://data/game_data/Itens/"
+const EQUIPS_PATH = "res://data/game_data/Equipments/"
+const SKILLS_PATH = "res://data/game_data/Skills/"
+const STATUS_PATH = "res://data/game_data/Status/"
+const AREAS_PATH = "res://data/game_data/Maps/"
+const NPCS_PATH = "res://data/game_data/NPCs/"
+const LORES_PATH = "res://data/game_data/Lore/"
+const ENCOUNTERS_PATH = "res://data/game_data/NPCs/Encounters/"
+const SHOPS_PATH = "res://data/game_data/NPCs/Shops/"
+const RESERVE_PLAYERS_PATH = "res://data/game_data/Seeds/Reserve Players.json"
 
 # Path to load from on a new game (player data)
-const PLAYERS_PATH = "res://Data/Seeds/Players.json"
-const INVENTORY_PATH = "res://Data/Seeds/Inventory.json"
-const EQUIPMENT_PATH = "res://Data/Seeds/Equipament.json"
-const JOBS_PATH = "res://Data/Seeds/Jobs.json"
-const FLAGS_PATH = "res://Data/Seeds/Flags.json"
+const PLAYERS_PATH = "res://data/game_data/Seeds/Players.json"
+const INVENTORY_PATH = "res://data/game_data/Seeds/Inventory.json"
+const EQUIPMENT_PATH = "res://data/game_data/Seeds/Equipment.json"
+const JOBS_PATH = "res://data/game_data/Seeds/Jobs.json"
+const FLAGS_PATH = "res://data/game_data/Seeds/Flags.json"
 
 # Path where player data is saved on
-const SAVE_PATH = "res://Save_data/"
+const SAVE_PATH = "res://data/save_data/"
 
 # Some shortcuts for important classes we're going to use
-const PLAYER_CLASS = preload("res://Classes/Entities/Player.gd")
-const ENEMY_CLASS = preload("res://Classes/Entities/Enemy.gd")
-const ITEM_CLASS = preload("res://Classes/Itens.gd")
-const EQUIP_CLASS = preload("res://Classes/Equip.gd")
-const NPC_CLASS = preload("res://Classes/Entities/NPC.gd")
-const JOB_CLASS = preload("res://Classes/Jobs.gd")
+const PLAYER_CLASS = preload("res://code/classes/entities/player.gd")
+const ENEMY_CLASS = preload("res://code/classes/entities/enemy.gd")
+const ITEM_CLASS = preload("res://code/classes/objects/item.gd")
+const EQUIP_CLASS = preload("res://code/classes/objects/equipment.gd")
+const NPC_CLASS = preload("res://code/classes/entities/npc.gd")
+const JOB_CLASS = preload("res://code/classes/objects/jobs.gd")
 
-const SHOP_CLASS = preload("res://Classes/Events/Shop.gd")
-const STATS_CLASS = preload("res://Classes/Events/StatEffect.gd")
-const STATUS_CLASS = preload("res://Classes/Events/StatusEffect.gd")
-const DIALOGUE_CLASS = preload("res://Classes/Events/Dialogue.gd")
+const SHOP_CLASS = preload("res://code/classes/events/shop.gd")
+const STATS_CLASS = preload("res://code/classes/events/stat_effect.gd")
+const STATUS_CLASS = preload("res://code/classes/events/status_effect.gd")
+const DIALOGUE_CLASS = preload("res://code/classes/events/dialogue.gd")
 # TODO: Cyclic reference? why?
-var OPTION_CLASS = load("res://Classes/Events/DialogueOption.gd")
-const BATTLE_CLASS = preload("res://Classes/Events/Battle.gd")
-const TRANSITION_CLASS = preload("res://Classes/Events/Transition.gd")
-const FLAG_CLASS = preload("res://Classes/Events/Flag.gd")
-const REINFORCEMENT_CLASS = preload("res://Classes/Events/Reinforcements.gd")
-const SET_ACTION_CLASS = preload("res://Classes/Events/SetAction.gd")
-const SET_TARGET_CLASS = preload("res://Classes/Events/SetTarget.gd")
+var OPTION_CLASS = load("res://code/classes/events/dialogue_option.gd")
+const BATTLE_CLASS = preload("res://code/classes/events/battle.gd")
+const TRANSITION_CLASS = preload("res://code/classes/events/transition.gd")
+const FLAG_CLASS = preload("res://code/classes/events/flag.gd")
+const REINFORCEMENT_CLASS = preload("res://code/classes/events/reinforcements.gd")
+const SET_ACTION_CLASS = preload("res://code/classes/events/set_action.gd")
+const SET_TARGET_CLASS = preload("res://code/classes/events/set_target.gd")
 
 # TODO: Remove this
 var List
@@ -91,7 +91,7 @@ static func load_save_info():
 	var ret = []
 	var file = File.new()
 	for i in range(4):
-		file.open("res://Save_data/Slot"+str(i)+"/Info.json", file.READ)
+		file.open("res://data/save_data/slot"+str(i)+"/Info.json", file.READ)
 		var text = file.get_as_text()
 		var result_json = JSON.parse(text)
 		if result_json.error == OK:
@@ -252,7 +252,7 @@ func load_flags(slot: int):
 	"""
 	var path = FLAGS_PATH
 	if slot >= 0:
-		path = SAVE_PATH+"Slot"+str(slot)+"/Flags.json"
+		path = SAVE_PATH+"slot"+str(slot)+"/Flags.json"
 	var file = File.new()
 	file.open(path, file.READ)
 	var text = file.get_as_text()
@@ -272,7 +272,7 @@ func load_inventory(slot: int):
 	"""
 	var path = INVENTORY_PATH
 	if slot >= 0:
-		path = SAVE_PATH+"Slot"+str(slot)+"/Inventory.json"
+		path = SAVE_PATH+"slot"+str(slot)+"/Inventory.json"
 	return parse_inventory(path)
 
 func load_equip(slot: int):
@@ -282,7 +282,7 @@ func load_equip(slot: int):
 	"""
 	var path = EQUIPMENT_PATH
 	if slot >= 0:
-		path = SAVE_PATH+"Slot"+str(slot)+"/Equipament.json"
+		path = SAVE_PATH+"slot"+str(slot)+"/Equipament.json"
 	return parse_equipaments(path)
 
 
@@ -330,7 +330,7 @@ func load_players(slot: int):
 	"""
 	var path = PLAYERS_PATH
 	if slot >= 0:
-		path = SAVE_PATH+"Slot"+str(slot)+"/Players.json"
+		path = SAVE_PATH+"slot"+str(slot)+"/Players.json"
 	return parse_players(path)
 
 func load_reserve_players(slot: int):
@@ -340,7 +340,7 @@ func load_reserve_players(slot: int):
 	"""
 	var path = RESERVE_PLAYERS_PATH
 	if slot >= 0:
-		path = SAVE_PATH+"Slot"+str(slot)+"/Reserve_Players.json"
+		path = SAVE_PATH+"slot"+str(slot)+"/Reserve_Players.json"
 	return parse_players(path)
 
 func load_npcs(filter_array: Array):

@@ -32,7 +32,7 @@ func init(enemies_arg, map_arg):
 	Map = map_arg
 	LOCAL.TRANSITION = -1
 	print("[BATTLE INIT] current map: "+str(LOCAL.get_map()))
-	background = load("res://Assets/Backgrounds/forest2.png")
+	background = load("res://assets/sprites/backgrounds/forest2.png")
 
 ######### CONFIG FUCTIONS #########
 func set_battle_speed(ID):
@@ -134,10 +134,10 @@ func generate_enemies():
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
 
-const DEFAULT_BATTLE_BACKGROUND = 'res://Assets/Backgrounds/forest1.png'
+const DEFAULT_BATTLE_BACKGROUND = "res://assets/sprites/backgrounds/forest2.png"
 const DEFAULT_BATTLE_MUSIC = 'BATTLE_THEME'
 
-var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
+var BATTLE_CLASS = load("res://code/classes/events/battle.gd")
 
 var NAME = [
 	"A", "B", "C", "D", "E", "F", 
@@ -176,7 +176,7 @@ func initiate_event_battle(battle: Event):
 	background = load(battle.get_background())
 	music = battle.get_bgm()
 	current_battle = battle._duplicate()
-	get_tree().change_scene("res://Battle/Battle.tscn")
+	get_tree().change_scene("res://code/battle/battle_screen.tscn")
 
 # Generates enemies and begins the battle
 func initiate_battle():
@@ -184,7 +184,7 @@ func initiate_battle():
 	var battle = BATTLE_CLASS.new(generate_enemies(), DEFAULT_BATTLE_BACKGROUND, DEFAULT_BATTLE_MUSIC)
 	current_battle = battle._duplicate()
 	Battled_Enemies = battle.get_enemies()
-	get_tree().change_scene("res://Battle/Battle.tscn")
+	get_tree().change_scene("res://code/battle/battle_screen.tscn")
 
 
 # Finishes a battle and manages EXP, level up and game over
@@ -225,13 +225,13 @@ func end_battle(Players, Enemies, Inventory):
 	if death == len(Players):
 		print("[BM] Game over!")
 		AUDIO.play_bgm("GAME_OVER_THEME")
-		get_tree().change_scene("res://Battle/Game Over.tscn")
+		get_tree().change_scene("res://code/battle/post_battle/game_over_screen.tscn")
 	elif level_up:
 		print("[BM] Someone leveled up")
-		get_tree().change_scene("res://Battle/Level Up.tscn")
+		get_tree().change_scene("res://code/battle/post_battle/level_up_screen.tscn")
 	else:
 		print("[BM] Back to the map")
-		get_tree().change_scene("res://Root.tscn")
+		get_tree().change_scene("res://code/root.tscn")
 
 
 func _on_Dialogue_Ended():

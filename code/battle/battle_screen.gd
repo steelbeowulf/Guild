@@ -1,4 +1,4 @@
-extends "Apply.gd"
+extends Apply
 
 # Logic Stuff
 var Players
@@ -380,7 +380,7 @@ func execute_action(action: Action):
 		var target = entities[abs(target_id)]
 		
 		# Create BaseStatEffect
-		var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
+		var STATS_CLASS = load("res://code/classes/events/stat_effect.gd")
 		var attackEffect = STATS_CLASS.new(HP, "HP", -current_entity.get_atk(), "PHYSIC")
 		var hit = true
 		var crit = false

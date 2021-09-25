@@ -1,4 +1,4 @@
-extends "../Stats.gd"
+extends STATS
 class_name Entity
 
 var id

@@ -6,7 +6,7 @@
 	"TYPE":"STATUS",
 	"EFFECTS":[],
 	"STATUS":[{"BOOL":0.5, "STATUS":"ATTACK_DOWN"}],
-	"IMG":{"path": "res://Assets/Animations/Spells/Debuff/Weaken.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Debuff/Weaken.png",
 		   "vframes": 8, "hframes":5, "scale":[1,1]},
 	"ANIM":{"skill": [false, "0-37"]}
 }

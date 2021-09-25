@@ -90,7 +90,7 @@ func _on_LoadDialog_confirmed():
 	GLOBAL.load_game(chosen_slot)
 	GLOBAL.get_root().close_menu()
 	GLOBAL.get_root().transition(LOCAL.MAP, true)
-	get_tree().change_scene("res://Root.tscn")
+	get_tree().change_scene("res://code/root.tscn")
 
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")

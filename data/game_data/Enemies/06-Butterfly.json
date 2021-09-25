@@ -2,7 +2,7 @@
 	"ID":6,
 	"LEVEL":2,
 	"EXPERIENCE":30,
-	"IMG":{"path": "res://Assets/Animations/Entities/butterfly spritesheet.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/butterfly spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-7"], 
 			"move": [true, "0-7"],

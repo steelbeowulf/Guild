@@ -6,7 +6,7 @@
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-90, "TYPE":"PHYSIC", "TURNS":3}],
 	"STATUS":[],
-	"IMG":{"path": "res://Assets/Animations/Spells/Impact/Flurry Stabs.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Impact/Flurry Stabs.png",
 		   "vframes": 2, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "0-7, 0-7, 0-7"]}
 }

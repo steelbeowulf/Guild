@@ -3,7 +3,7 @@ extends Control
 var itens = []
 
 onready var item_container = $ItemList/ScrollContainer/VBoxContainer
-onready var item_button = load("res://NPCs/ItemButton.tscn")
+onready var item_button = load("res://code/overworld/npcs/shop/item_button.tscn")
 onready var dialogue = $Dialogue/Text
 onready var stock = $PlayerInfo/HBoxContainer/StockValue
 onready var money = $PlayerInfo/HBoxContainer/MoneyValue

@@ -6,7 +6,7 @@
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-40, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":0.5, "STATUS":"POISON"}],
-	"IMG":{"path": "res://Assets/Animations/Spells/Spores/Poison Spores.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Spores/Poison Spores.png",
 		   "vframes": 16, "hframes":5, "scale":[0.6,0.6]},
 	"ANIM":{"skill": [false, "40-55, 0-15"]}
 }

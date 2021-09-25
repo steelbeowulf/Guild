@@ -2,7 +2,7 @@
 	"ID":5,
 	"LEVEL":8,
 	"EXPERIENCE":80,
-	"IMG":{"path": "res://Assets/Animations/Entities/plant spritesheet.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/plant spritesheet.png",
 		   "vframes": 2, "hframes":8, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-3"], 
 			"move": [true, "0-3"],

@@ -2,12 +2,12 @@
     "LEVEL":10,
     "EXPERIENCE":1800,
     "IMG":{
-        "path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+        "path": "res://assets/sprites/animations/entities/ranger spritesheet calciumtrice.png",
         "vframes": 10,
         "hframes":10,
         "scale":[2,2]
     },
-    "PORTRAIT": "res://Assets/Portraits/ranger.png",
+    "PORTRAIT": "res://assets/sprites/portraits/ranger.png",
     "ANIM":{
         "idle": [true, "50-59"], 
         "move": [true, "70-79"],

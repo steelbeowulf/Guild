@@ -2,7 +2,7 @@ extends Control
 onready var player = null
 onready var reserve_party = null
 onready var reserve = []
-const RESERVE_PATH = "res://Data/Seeds/Reserve Players.json"
+const RESERVE_PATH = "res://data/game_data/Seeds/Reserve Players.json"
 onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
 onready var player_id = null
 

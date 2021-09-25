@@ -2,7 +2,7 @@
 	"ID":3,
 	"LEVEL":8,
 	"EXPERIENCE":80,
-	"IMG":{"path": "res://Assets/Animations/Entities/minotaur spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/minotaur spritesheet calciumtrice.png",
 		   "vframes": 5, "hframes":10, "scale":[2,2]},
 	"ANIM":{"idle": [true, "0-19"], 
 			"move": [true, "20-29"],

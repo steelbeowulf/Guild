@@ -1,6 +1,6 @@
 {
 	"ID":11,
-	"IMG":{"path": "res://Assets/Animations/Entities/warrior spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/warrior spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
 	"ANIM":{"idle": [true, "0"]},
 	"NAME":"Blacksmith",
@@ -22,5 +22,5 @@
             }
         }
     ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/warrior.png", "scale":[8,8]}
 }

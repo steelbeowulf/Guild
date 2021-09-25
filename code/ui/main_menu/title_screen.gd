@@ -18,8 +18,8 @@ func _ready():
 func _on_New_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	GLOBAL.load_game(-1)
-	#get_tree().change_scene("res://Root.tscn")
-	get_tree().change_scene("res://Menu/Loading.tscn")
+	#get_tree().change_scene("res://code/root.tscn")
+	get_tree().change_scene("res://code/ui/main_menu/loading_screen.tscn")
 
 
 func _on_Load_pressed():
@@ -31,7 +31,7 @@ func _on_Load_pressed():
 func _on_Slot_chosen(slot):
 	AUDIO.play_se("ENTER_MENU")
 	GLOBAL.load_game(slot)
-	get_tree().change_scene("res://Menu/Loading.tscn")
+	get_tree().change_scene("res://code/ui/main_menu/loading_screen.tscn")
 
 
 func _input(event: InputEvent):
@@ -48,7 +48,7 @@ func _on_Exit_pressed():
 
 func _on_Credits_pressed():
 	AUDIO.play_se("ENTER_MENU")
-	get_tree().change_scene("res://Menu/Credits.tscn")
+	get_tree().change_scene("res://code/ui/main_menu/credits_screen.tscn")
 
 
 func _on_Focus_Entered():

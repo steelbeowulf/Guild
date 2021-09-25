@@ -5,9 +5,6 @@
 [ext_resource path="res://assets/ui/fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://code/ui/main_menu/save_slots.tscn" type="PackedScene" id=4]
 
-
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 42
 outline_size = 2

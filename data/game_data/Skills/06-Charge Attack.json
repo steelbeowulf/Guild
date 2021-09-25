@@ -6,7 +6,7 @@
 	"TARGET":"ONE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-55, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[],
-	"IMG":{"path": "res://Assets/Animations/Spells/Impact/Charge Attack.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Impact/Charge Attack.png",
 		   "vframes": 2, "hframes":5, "scale":[2,2]},
 	"ANIM":{"skill": [false, "0-9"]}
 }

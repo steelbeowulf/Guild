@@ -2,7 +2,7 @@
 	"ID":7,
 	"LEVEL":2,
 	"EXPERIENCE":40,
-	"IMG":{"path": "res://Assets/Animations/Entities/rat and bat spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/rat and bat spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
 	"ANIM":{"idle": [true, "50-69"], 
 			"move": [true, "70-79"],

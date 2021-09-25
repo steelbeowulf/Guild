@@ -6,7 +6,7 @@
 	"TARGET":"ONE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":70, "TYPE":"", "TURNS":1}],
 	"STATUS":[],
-	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Heal/Heal.png",
 		   "vframes": 7, "hframes":5, "scale":[1,1]},
 	"ANIM":{"skill": [false, "0-28"]}
 }

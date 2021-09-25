@@ -1,4 +1,4 @@
-extends "Entity.gd"
+extends Entity
 class_name NPC
 
 var events

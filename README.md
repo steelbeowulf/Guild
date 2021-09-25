@@ -15,45 +15,45 @@ Coming Soon!
 ### Project Structure
 ```
 - assets -------------------> Contains all assets for the game
-	- sprites --------------> 2D sprites and textures (.png and .jpeg files)
-		- animations
-		- backgrounds
-		- portraits
-		- tilesets
-	- sound ---------------> Sound files for the project (.ogg and .wav files)
-		- bgm
-		- sfx
-	- ui ------------------> Custom panels and fonts
-		- fonts
-		- panels
-	- others --------------> Miscellaneous assets
-		- maps
-		- shaders
+  - sprites --------------> 2D sprites and textures (.png and .jpeg files)
+	- animations
+	- backgrounds
+	- portraits
+	- tilesets
+  - sound ---------------> Sound files for the project (.ogg and .wav files)
+	- bgm
+	- sfx
+  - ui ------------------> Custom panels and fonts
+	- fonts
+	- panels
+  - others --------------> Miscellaneous assets
+	- maps
+	- shaders
 - code --------------------> Contains all the code and scenes for the game (.gd and .tscn files)
-	- battle --------------> Scenes and code related to Battle
-		- classes
-		- menus
-		- post_battle
-	- classes -------------> Code defining the important game classes
-		- entities
-		- events
-		- objects
-		- util
-	- config --------------> Various global configuration code such as display, audio, etc
-	- overworld -----------> Code for the overworld objects and entities
-		- npcs
-		- objects
-	- maps ----------------> Contains the scenes for all maps in the game's overworld
-		- forest
-		- hub
-	- ui -----------------> Menus from the game
-		- main_menu
-		- menu
-	- state --------------> Singletons which contains game state on runtime
-	- root ---------------> Starter scene
+  - battle --------------> Scenes and code related to Battle
+	- classes
+	- menus
+	- post_battle
+  - classes -------------> Code defining the important game classes
+	- entities
+	- events
+	- objects
+	- util
+  - config --------------> Various global configuration code such as display, audio, etc
+  - overworld -----------> Code for the overworld objects and entities
+	- npcs
+	- objects
+  - maps ----------------> Contains the scenes for all maps in the game's overworld
+	- forest
+	- hub
+  - ui -----------------> Menus from the game
+	- main_menu
+	- menu
+  - state --------------> Singletons which contains game state on runtime
+  - root ---------------> Starter scene
 - data -------------------> Contains all files with the necessary game data (.json files)
-	- game_data ----------> Game data
-	- save_data ----------> User save data
+  - game_data ----------> Game data
+  - save_data ----------> User save data
 ```
 
 ### Contribution Guide

@@ -1,4 +1,4 @@
-extends "Event.gd"
+extends Event
 class_name Flag
 
 var key: String

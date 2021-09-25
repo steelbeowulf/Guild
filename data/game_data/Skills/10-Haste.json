@@ -6,7 +6,7 @@
 	"TYPE":"STATUS",
 	"EFFECTS":[],
 	"STATUS":[{"BOOL":1, "STATUS":"HASTE"}],
-	"IMG":{"path": "res://Assets/Animations/Spells/Buff/Haste.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Buff/Haste.png",
 		   "vframes": 3, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "0-11"]}
 }

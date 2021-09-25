@@ -6,7 +6,7 @@
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[{"BOOL":0.8, "STATUS":"SLOW"}],
-	"IMG":{"path": "res://Assets/Animations/Spells/Water/Mucus.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Water/Mucus.png",
 		   "vframes": 2, "hframes":4, "scale":[2,2]},
 	"ANIM":{"skill": [false, "0-7"]}
 }

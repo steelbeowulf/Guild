@@ -2,7 +2,7 @@
 	"ID":14,
 	"LEVEL":5,
 	"EXPERIENCE":1000,
-	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/ranger spritesheet calciumtrice.png",
 		   "vframes": 10, "hframes":10, "scale":[-2,2]},
 	"ANIM":{"idle": [true, "50-69"], 
 			"move": [true, "70-79"],

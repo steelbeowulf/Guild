@@ -6,7 +6,7 @@
 	"TYPE":"OFFENSE",
 	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
 	"STATUS":[],
-	"IMG":{"path": "res://Assets/Animations/Spells/Impact/Vine Whip.png",
+	"IMG":{"path": "res://assets/sprites/animations/spells/Impact/Vine Whip.png",
 		   "vframes": 1, "hframes":10, "scale":[2,2]},
 	"ANIM":{"skill": [false, "0-9"]}
 }

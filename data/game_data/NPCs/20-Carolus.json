@@ -1,6 +1,6 @@
 {
 	"ID":20,
-	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/ranger spritesheet calciumtrice.png",
    "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
 	"ANIM":{"idle": [true, "50-69"]},
 	"NAME": "Carolus",
@@ -8,12 +8,12 @@
     {
       "DIALOGUE": {
         "NAME": "Carolus",
-        "PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}, 
+        "PORTRAIT": {"sprite":"res://assets/sprites/portraits/ranger.png", "scale":[8,8]}, 
         "MESSAGE": [
           "I not only wish to help you... I consider it my duty to do so!",
         ]
       },
     }
   ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/ranger.png", "scale":[8,8]}
 }

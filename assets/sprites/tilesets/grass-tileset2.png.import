@@ -9,7 +9,7 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Tilesets/grass-tileset2.png"
+source_file="res://assets/sprites/tilesets/grass-tileset2.png"
 dest_files=[ "res://.import/grass-tileset2.png-ba12947b41a55cfb9af3e769b8955b47.stex" ]
 
 [params]

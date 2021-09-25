@@ -1,4 +1,4 @@
-extends "Entity.gd"
+extends Entity
 class_name Enemy
 
 var target : int = -10

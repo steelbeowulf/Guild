@@ -1,6 +1,6 @@
 {
 	"ID":14,
-	"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
+	"IMG":{"path": "res://assets/sprites/animations/entities/rogue spritesheet calciumtrice.png",
    "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
 	"ANIM":{"idle": [true, "0-19"]},
 	"NAME": "Maui",
@@ -15,7 +15,7 @@
       "BATTLE": {
         "ENEMIES": [8, 8, 8, 13],
         "MUSIC": "BOSS_THEME",
-        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+        "BACKGROUND": "res://assets/sprites/backgrounds/forest2.png",
         "EVENTS": [
           {
             "CONDITION": ["on_target_death", ["Rat"]],
@@ -35,7 +35,7 @@
             "CONDITION": "on_reinforcements",
             "DIALOGUE":{
               "NAME": "Maui",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/rogue.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Oh shit, now there's a bunch of rats!",
                 "And a cool ranger!"
@@ -67,7 +67,7 @@
             "CONDITION": "on_begin",
             "DIALOGUE":{
               "NAME": "Maui",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/rogue.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Oh look, a rat",
                 "Try attacking it!"
@@ -78,7 +78,7 @@
             "CONDITION": "on_begin",
             "DIALOGUE":{
               "NAME": "Shanta",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/cleric-f.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Don't screw this up, alright?"
               ]
@@ -94,7 +94,7 @@
             "CONDITION": ["on_target_death", ["Siegfried"]],
             "DIALOGUE":{
               "NAME": "Shanta",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/cleric-f.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Come on, man, keep it together!"
               ]
@@ -112,7 +112,7 @@
             "RECURRENCE": "ONCE",
             "DIALOGUE":{
               "NAME": "Shanta",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/cleric-f.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Don't waste potions when I can heal you!"
               ]
@@ -123,7 +123,7 @@
             "RECURRENCE": "ONCE",
             "DIALOGUE":{
               "NAME": "Shanta",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/cleric-f.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "*Sigh* you all would be doomed without me..."
               ],
@@ -133,7 +133,7 @@
             "CONDITION": ["on_target_damage", ["Rat B", "Siegfried"]],
             "DIALOGUE":{
               "NAME": "Maui",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/rogue.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "Nice one, you learn fast!"
               ]
@@ -143,7 +143,7 @@
             "CONDITION": ["on_target_critical_health", ["Maui"]],
             "DIALOGUE":{
               "NAME": "Maui",
-              "PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}, 
+              "PORTRAIT": {"sprite":"res://assets/sprites/portraits/rogue.png", "scale":[8,8]}, 
               "MESSAGE": [
                 "I'm kinda dying over here..."
               ]
@@ -153,5 +153,5 @@
       }
     }
   ],
-	"PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}
+	"PORTRAIT": {"sprite":"res://assets/sprites/portraits/rogue.png", "scale":[8,8]}
 }
