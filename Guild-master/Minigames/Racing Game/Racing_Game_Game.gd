@@ -106,7 +106,7 @@ func get_obstacle_position() -> Vector2:
 	Matrix_Map[obstacle_index][1] + Player_Car.camera_rect_size.x/40)
 
 func _on_Map_Timer_timeout():
-	Map_Timer.wait_time *= 0.9
+	Map_Timer.wait_time *= 0.955
 	create_map()
 
 #determine the possible positions to instance a obstacle

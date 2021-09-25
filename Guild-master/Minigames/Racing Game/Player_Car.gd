@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const regular_speed = 800.0
+const regular_speed = 600.0
 var velocity = Vector2(0,0)
 var speed: float = 800.0
 var slip_rotation: float = 0
