@@ -259,11 +259,13 @@ func apply_status(status, target, attacker):
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 		elif type == "RETREAT":
 			var currentlane = target.get_pos() #GET_LANE NAO EXISTE AQUI
-			if currentlane != 0:
+			if currentlane > 0:
+				target.graphics.change_lane(currentlane - 1)
 				target.set_pos(currentlane - 1)
 		elif type == "ADVANCE":
 			var currentlane = target.get_pos()
-			if currentlane != 2:
+			if currentlane < 2:
+				target.graphics.change_lane(currentlane + 1)
 				target.set_pos(currentlane + 1)
 
 	elif value == -1:
