@@ -13,7 +13,7 @@ func _ready():
 	for btn in $Panel/HBoxContainer/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
-	show_itens(GLOBAL.INVENTORY)
+	show_itens(GLOBAL.inventory)
 
 
 func just_entered():
@@ -46,7 +46,7 @@ func update_itens(bag):
 
 func _on_Item_selected(id):
 	AUDIO.play_se("ENTER_MENU")
-	item = GLOBAL.INVENTORY[id]
+	item = GLOBAL.inventory[id]
 	var nome = item.get_name()
 	print("SELECTED " + str(nome))
 	#set_description(item)
@@ -55,7 +55,7 @@ func _on_Item_selected(id):
 
 func _on_Item_hover(id):
 	AUDIO.play_se("MOVE_MENU")
-	item = GLOBAL.INVENTORY[id]
+	item = GLOBAL.inventory[id]
 	var nome = item.get_name()
 	print("SELECTED " + str(nome))
 	set_description(item)
@@ -86,7 +86,7 @@ func _on_Use_pressed():
 	for e in $Panel/HBoxContainer/Itens.get_children():
 		e.set_focus_mode(2)
 	location = "ITENS"
-	for i in range(len(GLOBAL.INVENTORY)):
+	for i in range(len(GLOBAL.inventory)):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
 		if node.disabled == false:
 			get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i)).grab_focus()
@@ -95,7 +95,7 @@ func _on_Use_pressed():
 
 
 func _process(delta):
-	update_itens(GLOBAL.INVENTORY)
+	update_itens(GLOBAL.inventory)
 	if Input.is_action_just_pressed("ui_cancel") and location == "ITENS":
 		location = "SUBMENU"
 		give_focus()

@@ -44,8 +44,8 @@ func play(name):
 
 # Initializes player on map - sets position and camera
 func _initialize():
-	if LOCAL.POSITION:
-		position = LOCAL.POSITION
+	if LOCAL.position:
+		position = LOCAL.position
 	self.set_z_index(1)
 	var margin = get_parent().get_parent().get_map_margin()
 	$Camera2D.set_limit(MARGIN_BOTTOM, margin[0])
@@ -53,7 +53,7 @@ func _initialize():
 	$Camera2D.set_limit(MARGIN_TOP, margin[2])
 	$Camera2D.set_limit(MARGIN_RIGHT, margin[3])
 	print("[PLAYER POSITION] "+str(position))
-	for p in GLOBAL.PLAYERS:
+	for p in GLOBAL.players:
 		if not p.dead:
 			set_animations(p.sprite, p.animations)
 			play("idle")

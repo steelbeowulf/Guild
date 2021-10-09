@@ -21,7 +21,7 @@ func _ready():
 
 func just_entered(id):
 	print("[EQUIP] just entered " + str(id))
-	player = GLOBAL.PLAYERS[id]
+	player = GLOBAL.players[id]
 	location = "SUBMENU"
 
 
@@ -144,7 +144,7 @@ func use_equip(equip):
 		player.equip(equip, 4)
 	else:
 		player.equip(equip)
-	show_equips(GLOBAL.EQUIP_INVENTORY, location)
+	show_equips(GLOBAL.equip_INVENTORY, location)
 
 
 func _on_Back_pressed():
@@ -161,7 +161,7 @@ func _on_Focus_Entered():
 
 func _on_Weapon_pressed():
 	location = "WEAPON"
-	show_equips(GLOBAL.EQUIP_INVENTORY, location)
+	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
@@ -174,7 +174,7 @@ func _on_Weapon_pressed():
 
 func _on_Head_pressed():
 	location = "HEAD"
-	show_equips(GLOBAL.EQUIP_INVENTORY, location)
+	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
@@ -187,7 +187,7 @@ func _on_Head_pressed():
 
 func _on_Body_pressed():
 	location = "BODY"
-	show_equips(GLOBAL.EQUIP_INVENTORY, location)
+	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
@@ -200,7 +200,7 @@ func _on_Body_pressed():
 
 func _on_Acessory1_pressed():
 	location = "ACCESSORY1"
-	show_equips(GLOBAL.EQUIP_INVENTORY, location)
+	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
@@ -213,7 +213,7 @@ func _on_Acessory1_pressed():
 
 func _on_Acessory2_pressed():
 	location = "ACCESSORY2"
-	show_equips(GLOBAL.EQUIP_INVENTORY, location)
+	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)

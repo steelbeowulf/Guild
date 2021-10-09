@@ -27,7 +27,7 @@ var SHOP_TYPE = "ITEM"
 func _ready():
 	dialogue.set_text("Welcome! How can I help you?")
 	money.set_text(str(GLOBAL.gold)+"G")
-	for i in range(len(GLOBAL.PLAYERS)):
+	for i in range(len(GLOBAL.players)):
 		$ItemInfo/PartyPortraits.get_child(i).init(i)
 		$ItemInfo/PartyPortraits.get_child(i).connect("button_down", self, "_select_player", [i])
 	set_process(false)
@@ -46,8 +46,8 @@ func enter(shop: Event):
 func load_items(item_ids: Array):
 	var count = 0
 	itens = []
-	for i in range(1, len(GLOBAL.ITENS)):
-		var item = GLOBAL.ITENS[i]
+	for i in range(1, len(GLOBAL.itens)):
+		var item = GLOBAL.itens[i]
 		if item.id in item_ids:
 			itens.append(item)
 			item_container.add_child(item_button.instance())
@@ -65,8 +65,8 @@ func load_items(item_ids: Array):
 func load_equips(item_ids: Array, sell=false):
 	var count = 0
 	itens = []
-	for i in range(1, len(GLOBAL.EQUIPAMENT)):
-		var item = GLOBAL.EQUIPAMENT[i]
+	for i in range(1, len(GLOBAL.equipment)):
+		var item = GLOBAL.equipment[i]
 		if item.id in item_ids:
 			itens.append(item)
 			item_container.add_child(item_button.instance())
@@ -149,23 +149,23 @@ func _on_Equip_Hovered(id: int):
 	selected_item.get_job()+"\n  Location: "+selected_item.get_location()
 	$ItemInfo/Description.set_text(description)
 	var first = selected_player == -1 or (
-		GLOBAL.PLAYERS[selected_player].get_job() != selected_item.get_job() 
+		GLOBAL.players[selected_player].get_job() != selected_item.get_job() 
 		and selected_item.get_job() != "ANY"
 	)
 	for p in $ItemInfo/PartyPortraits.get_children():
-		if p.visible and GLOBAL.PLAYERS[p.id].get_job() == selected_item.get_job() or selected_item.get_job() == "ANY":
+		if p.visible and GLOBAL.players[p.id].get_job() == selected_item.get_job() or selected_item.get_job() == "ANY":
 			p.make_active()
 			if first:
 				_select_player(p.id, false)
 				first = false
 		else:
 			p.make_inactive()
-	$ItemInfo/Comparison.init(GLOBAL.PLAYERS[selected_player].get_equip(selected_item.get_location()), selected_item)
+	$ItemInfo/Comparison.init(GLOBAL.players[selected_player].get_equip(selected_item.get_location()), selected_item)
 
 
 func _select_player(id: int, again=true):
 	print("Selecting player ", id, "previous is ", selected_player)
-	for i in range(len(GLOBAL.PLAYERS)):
+	for i in range(len(GLOBAL.players)):
 		print("Setando ", i, " falso")
 		$ItemInfo/PartyPortraits.get_child(i).pressed = false
 		$ItemInfo/PartyPortraits.get_child(i).set("pressed", false)
@@ -180,7 +180,7 @@ func _select_player(id: int, again=true):
 func _on_Yes_pressed():
 	AUDIO.play_se("MONEY", 4)
 	if SHOP_TYPE == "EQUIP" and should_equip:
-		GLOBAL.PLAYERS[selected_player].equip(selected_item)
+		GLOBAL.players[selected_player].equip(selected_item)
 	elif SHOP_TYPE == "EQUIP" and MODE == "BUY":
 		dialogue.set_text("Would you like to equip that?")
 		should_equip = true
@@ -198,7 +198,7 @@ func sell_item():
 		GLOBAL.add_equip(selected_item.id, -item_quantity)
 		var is_equipped = selected_item.equipped
 		if is_equipped > -1:
-			GLOBAL.PLAYERS[is_equipped].unequip(selected_item)
+			GLOBAL.players[is_equipped].unequip(selected_item)
 	elif SHOP_TYPE == "ITEM":
 		GLOBAL.add_item(selected_item.id, -item_quantity)
 	GLOBAL.gold += item_quantity*(selected_item.quantity/2)

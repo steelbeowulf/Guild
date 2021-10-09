@@ -49,7 +49,7 @@ func die():
 func ressurect():
 	print("[ENTITY] Ressurecting... ", self.nome)
 	self.dead = false
-	if LOCAL.IN_BATTLE:
+	if LOCAL.in_BATTLE:
 		self.graphics.revive()
 	self.remove_all_status()
 
@@ -124,15 +124,15 @@ func remove_status(effect):
 		ressurect()
 	if status.has(effect):
 		status.erase(effect)
-	if GLOBAL.STATUS.has(effect):
+	if GLOBAL.status.has(effect):
 		self.graphics.remove_aura()
 
 
 func add_status(effect, atkm, turns):
 	if effect == "KO":
 		self.die()
-	if GLOBAL.STATUS.has(effect) and LOCAL.IN_BATTLE:
-		self.graphics.set_aura(GLOBAL.STATUS[effect])
+	if GLOBAL.status.has(effect) and LOCAL.in_BATTLE:
+		self.graphics.set_aura(GLOBAL.status[effect])
 	status[effect] = [turns, atkm]
 
 

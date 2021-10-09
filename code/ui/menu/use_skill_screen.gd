@@ -11,9 +11,9 @@ var type = "ONE"
 func enter(item_arg, player_arg):
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
-	for i in range(len(GLOBAL.PLAYERS)):
+	for i in range(len(GLOBAL.players)):
 		var node = get_node("Panel/All/Left/Chars/Char" + str(i))
-		node.update_info(GLOBAL.PLAYERS[i])
+		node.update_info(GLOBAL.players[i])
 		node.connect("pressed", self, "_on_Char_pressed", [i])
 		node.connect("focus_entered", self, "_on_Focus_Entered")
 	item = item_arg
@@ -22,7 +22,7 @@ func enter(item_arg, player_arg):
 		$Panel/All/Right/Options_Panel/Panel/Question.set_text(
 			"Usar " + item.nome + " \nem todos os personagens?"
 		)
-		targets = GLOBAL.PLAYERS
+		targets = GLOBAL.players
 		type = "ALL"
 
 
@@ -58,9 +58,9 @@ func use_item():
 func _on_Char_pressed(id):
 	AUDIO.play_se("ENTER_MENU")
 	print("[ITEM USE] pressei " + str(id))
-	print(GLOBAL.PLAYERS[id].status)
+	print(GLOBAL.players[id].status)
 	if type != "ALL":
-		targets.append(GLOBAL.PLAYERS[id])
+		targets.append(GLOBAL.players[id])
 	use_item()
 
 

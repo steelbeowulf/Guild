@@ -51,20 +51,20 @@ onready var darkness = [
 
 # Loads the correct map
 func _ready():
-	var start = load("res://code/maps/" + str(LOCAL.AREA) + "/Map" + str(LOCAL.MAP) + ".tscn")
+	var start = load("res://code/maps/" + str(LOCAL.area) + "/Map" + str(LOCAL.map) + ".tscn")
 	self.add_child(start.instance())
 	map = get_child(get_child_count() - 1)
-	set_effect(LOCAL.MAP)
+	set_effect(LOCAL.map)
 
 
 func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0, 0)):
 	print("[ROOT] Changing area! ", area_name)
 	if pos != Vector2(0, 0):
-		LOCAL.POSITION = pos
+		LOCAL.position = pos
 	var new = load("res://code/maps/" + area_name + "/Map" + str(next) + ".tscn")
-	LOCAL.MAP = next
-	LOCAL.AREA = area_name
-	set_effect(LOCAL.MAP)
+	LOCAL.map = next
+	LOCAL.area = area_name
+	set_effect(LOCAL.map)
 	var area_info = loader.load_area_info(area_name)
 	LOCAL.load_enemies(area_info["ENEMIES"])
 	LOCAL.load_npcs(area_info["NPCS"])
@@ -73,7 +73,7 @@ func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0, 0))
 		map.hide()
 		remove_child(map)
 		map.queue_free()
-	LOCAL.TRANSITION = -1
+	LOCAL.transition = -1
 	map = get_child(len(get_children()) - 1)
 
 
@@ -103,7 +103,7 @@ func open_menu():
 	menu.show()
 	map.hide_hud()
 	get_node("Menu_Area/Camera2D").make_current()
-	menu.enter(GLOBAL.PLAYERS)
+	menu.enter(GLOBAL.players)
 	state = "Menu"
 	get_tree().paused = true
 
@@ -148,7 +148,7 @@ func return_menu():
 	for c in $Menu_Area/SubMenus.get_children():
 		print(c)
 		c.queue_free()
-	menu.enter(GLOBAL.PLAYERS)
+	menu.enter(GLOBAL.players)
 	menu.show()
 	menu.give_focus()
 	state = "Menu"
@@ -270,17 +270,17 @@ func use_skill(skill, player):
 
 # Transitions from current area to next area
 func transition(next, fake = false):
-	var new = load("res://code/maps/" + LOCAL.AREA + "/Map" + str(next) + ".tscn")
-	LOCAL.MAP = next
-	set_effect(LOCAL.MAP)
+	var new = load("res://code/maps/" + LOCAL.area + "/Map" + str(next) + ".tscn")
+	LOCAL.map = next
+	set_effect(LOCAL.map)
 	#call_deferred("add_child", new.instance())
 	self.add_child(new.instance())
 	if map:
 		remove_child(map)
 		map.queue_free()
-	LOCAL.TRANSITION = -1
+	LOCAL.transition = -1
 	if not fake:
-		LOCAL.TRANSITION = LOCAL.MAP
+		LOCAL.transition = LOCAL.map
 	map = get_node("Map" + str(next))
 
 

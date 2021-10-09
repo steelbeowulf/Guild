@@ -37,26 +37,26 @@ func _ready():
 	# Arbitrary stuff hardcoded for the demo
 	# TODO: fix it
 
-	#if GLOBAL.WIN:
+	#if GLOBAL.win:
 	#	get_tree().change_scene("res://code/ui/victory.tscn")
 
-	Enemies = LOCAL.ENEMIES
-	Player_pos = LOCAL.POSITION
+	Enemies = LOCAL.enemies
+	Player_pos = LOCAL.position
 
 	# Gets current map state from global area state
 	state = LOCAL.get_state()
 
 	# Sets player position on map
 	var pos = Player_pos
-	if LOCAL.POSITION:
-		pos = LOCAL.POSITION
-	if LOCAL.TRANSITION != -1:
-		pos = Transitions[int(LOCAL.TRANSITION)]
-		LOCAL.TRANSITION = -1
+	if LOCAL.position:
+		pos = LOCAL.position
+	if LOCAL.transition != -1:
+		pos = Transitions[int(LOCAL.transition)]
+		LOCAL.transition = -1
 	var cara = cara_no_mundo.instance()
 	$Party.add_child(cara)
 	cara.position = pos
-	LOCAL.POSITION = pos
+	LOCAL.position = pos
 	cara._initialize()
 
 	# Connects battle manager to monsters
@@ -76,7 +76,7 @@ func _ready():
 # on each frame
 # TODO: make check_doors be event driven
 func _physics_process(delta):
-	LOCAL.POSITION = $Party.get_child(0).get_global_position()
+	LOCAL.position = $Party.get_child(0).get_global_position()
 	#check_doors()
 
 
@@ -91,7 +91,7 @@ func check_doors():
 			get_node("Objects/" + str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ""
-		elif Doors[d] == "Matching puzzle" and LOCAL.MATCH:
+		elif Doors[d] == "Matching puzzle" and LOCAL.match:
 			get_node("Objects/" + str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ""

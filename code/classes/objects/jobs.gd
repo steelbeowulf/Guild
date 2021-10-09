@@ -31,5 +31,5 @@ func get_level():
 func set_level(level_arg: int):
 	self.level = level_arg
 
-func duplicate():
+func clone():
 	return self.get_script().new(self.id, self.name, self.proficiencies, self.skills)

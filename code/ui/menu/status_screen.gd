@@ -6,10 +6,10 @@ onready var location = "OUTSIDE"
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
 		AUDIO.play_se("MOVE_MENU")
-		enter(int(id + 1) % len(GLOBAL.PLAYERS))
+		enter(int(id + 1) % len(GLOBAL.players))
 	elif Input.is_action_just_pressed("ui_left"):
 		AUDIO.play_se("MOVE_MENU")
-		enter(int(id - 1) % len(GLOBAL.PLAYERS))
+		enter(int(id - 1) % len(GLOBAL.players))
 	elif Input.is_action_just_pressed("ui_cancel") and location == "SUBMENU":
 		AUDIO.play_se("EXIT_MENU")
 		location = "OUTSIDE"
@@ -21,7 +21,7 @@ func enter(player_id):
 	location = "SUBMENU"
 	print(player_id)
 	id = player_id
-	var player = GLOBAL.PLAYERS[player_id]
+	var player = GLOBAL.players[player_id]
 	# Sets player name
 	$Top_Panel/Char_name.set_text(player.get_name())
 

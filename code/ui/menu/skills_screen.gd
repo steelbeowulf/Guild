@@ -127,7 +127,7 @@ func enter():
 		c.connect("target_picked", self, "_on_Skill_selected")
 		c.connect("target_selected", self, "_on_Skill_hover")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
-	#show_skills(GLOBAL.PLAYERS)
+	#show_skills(GLOBAL.players)
 
 
 #not done yet

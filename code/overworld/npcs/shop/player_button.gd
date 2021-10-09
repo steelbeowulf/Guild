@@ -3,7 +3,7 @@ extends Button
 var id = -1
 
 func init(player_id: int):
-	var player = GLOBAL.PLAYERS[player_id]
+	var player = GLOBAL.players[player_id]
 	id = player_id
 	$Sprite.set_texture(load(player.get_portrait()))
 	$Sprite.use_parent_material = true

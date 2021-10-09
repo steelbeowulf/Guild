@@ -9,7 +9,7 @@ func show_enabled_actions():
 
 
 func _ready():
-	$AnimationManager.initialize(GLOBAL.PLAYERS, [])
+	$AnimationManager.initialize(GLOBAL.players, [])
 
 	for tex in get_tree().get_nodes_in_group("text"):
 		tex.add_font_override("font", TEXT.get_font())
@@ -20,8 +20,8 @@ func _ready():
 	show_enabled_actions()
 
 	$AnimationManager/Log.display_text("Enemies defeated!")
-	for i in range(len(GLOBAL.PLAYERS)):
-		var player = GLOBAL.PLAYERS[i]
+	for i in range(len(GLOBAL.players)):
+		var player = GLOBAL.players[i]
 		var leveled_up = BATTLE_MANAGER.leveled_up[i]
 		if leveled_up[0] > 0:
 			var current = player.get_level()

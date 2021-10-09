@@ -279,7 +279,7 @@ func level_up(level_up_dict: Dictionary):
 	return level_up_dict
 
 
-func duplicate():
+func clone():
 	var new_stats = [] + self.stats
 	return self.get_script().new(
 		self.id,

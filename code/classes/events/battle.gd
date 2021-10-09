@@ -32,7 +32,7 @@ func find_entity_by_name(name_arg: String) -> Entity:
 	for e in self.enemies:
 		if e.get_name() == name_arg:
 			return e
-	for p in GLOBAL.PLAYERS:
+	for p in GLOBAL.players:
 		if p.get_name() == name_arg:
 			return p
 	return null
@@ -71,6 +71,6 @@ func _create_event_dict(events: Array) -> Dictionary:
 	return event_dict
 
 
-func duplicate():
+func clone():
 	var new_events = self.original_events.duplicate(true)
 	return self.get_script().new(self.enemy_ids, self.background, self.bgm, new_events)

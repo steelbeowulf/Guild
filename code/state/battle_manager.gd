@@ -65,10 +65,10 @@ onready var speed_index = 0
 
 
 # Sets the possible pool of enemies to draw from and the map
-func init(enemies_arg: Array, map_arg: Array):
+func init(enemies_arg: Array, map_arg: Node):
 	enemies = enemies_arg
 	map = map_arg
-	LOCAL.TRANSITION = -1
+	LOCAL.transition = -1
 	print("[BATTLE INIT] current map: " + str(LOCAL.get_map()))
 	background = load("res://assets/sprites/backgrounds/forest2.png")
 
@@ -160,14 +160,14 @@ func generate_enemies():
 	while current <= total:
 		if encounter:
 			new_enemies.append(encounter[0])
-			#print("OLD: "+LOCAL.ENEMIES[encounter[0]].get_name())
-			#new_enemies.append(LOCAL.ENEMIES[encounter[0]].duplicate())
-			#print(LOCAL.ENEMIES[encounter.pop_front()].get_name())
+			#print("OLD: "+LOCAL.enemies[encounter[0]].get_name())
+			#new_enemies.append(LOCAL.enemies[encounter[0]].clone())
+			#print(LOCAL.enemies[encounter.pop_front()].get_name())
 		else:
 			var enemy_index = 1 + (randi() % (len(enemies) - 2))
 			new_enemies.append(enemy_index)
 			#print("NEW: "+enemies[enemy_index].get_name())
-			#new_enemies.append(enemies[enemy_index].duplicate())
+			#new_enemies.append(enemies[enemy_index].clone())
 		current += 1
 
 	encounter = []
@@ -205,7 +205,7 @@ func initiate_event_battle(battle: Event):
 	battled_enemies = battle.get_enemies()
 	background = load(battle.get_background())
 	music = battle.get_bgm()
-	current_battle = battle.duplicate()
+	current_battle = battle.clone()
 	get_tree().change_scene("res://code/battle/battle_screen.tscn")
 
 
@@ -215,14 +215,14 @@ func initiate_battle():
 	var battle = BATTLE_CLASS.new(
 		generate_enemies(), DEFAULT_BATTLE_BACKGROUND, DEFAULT_BATTLE_MUSIC
 	)
-	current_battle = battle.duplicate()
+	current_battle = battle.clone()
 	battled_enemies = battle.get_enemies()
 	get_tree().change_scene("res://code/battle/battle_screen.tscn")
 
 
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(players: Array, enemies: Array, inventory):
-	LOCAL.IN_BATTLE = false
+	LOCAL.in_BATTLE = false
 	count_in_battle = {}
 	var total_exp = 0
 

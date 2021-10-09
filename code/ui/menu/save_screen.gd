@@ -89,12 +89,12 @@ func _on_SaveDialog_confirmed():
 func _on_LoadDialog_confirmed():
 	location = "OUTSIDE"
 	AUDIO.play_se("ENTER_MENU")
-	GLOBAL.INVENTORY = loader.load_inventory(chosen_slot)
-	GLOBAL.PLAYERS = loader.load_players(chosen_slot)
+	GLOBAL.inventory = loader.load_inventory(chosen_slot)
+	GLOBAL.players = loader.load_players(chosen_slot)
 	LOCAL.reload_state()
 	GLOBAL.load_game(chosen_slot)
 	GLOBAL.get_root().close_menu()
-	GLOBAL.get_root().transition(LOCAL.MAP, true)
+	GLOBAL.get_root().transition(LOCAL.map, true)
 	get_tree().change_scene("res://code/root.tscn")
 
 

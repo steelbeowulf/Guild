@@ -143,7 +143,7 @@ func update_target(player_list: Array, enemy_list: Array):
 	self.target = -(possible_target + 1)
 
 
-func duplicate():
+func clone():
 	var new_stats = [] + self.stats
 	return self.get_script().new(
 		self.id,

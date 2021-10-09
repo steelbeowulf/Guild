@@ -11,9 +11,9 @@ func _ready():
 
 func enter(players):
 	location = "MENU"
-	for i in range(len(GLOBAL.PLAYERS)):
+	for i in range(len(GLOBAL.players)):
 		var node = get_node("All/Left/Chars/Char" + str(i))
-		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.PLAYERS[i].id])
+		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.players[i].id])
 		node.connect("focus_entered", self, "_on_Focus_Entered")
 	x = len(players)
 	give_focus()
@@ -34,7 +34,7 @@ func _on_Player_chosen(binds):
 
 func update_info():
 	var info = get_node("All/Right/Info")
-	info.get_node("Area/Area_text").set_text(LOCAL.AREA)
+	info.get_node("Area/Area_text").set_text(LOCAL.area)
 	info.get_node("Money/Money_text").set_text(format_gold(GLOBAL.gold))
 	info.get_node("Playtime/Playtime_text").set_text(format_playtime(GLOBAL.playtime))
 

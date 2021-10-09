@@ -123,7 +123,7 @@ func load_enemies(filter_array: Array):
 			if int(data["ID"]) in filter_array:
 				var skills = []
 				for id in data["SKILLS"]:
-					skills.append(GLOBAL.SKILLS[id])
+					skills.append(GLOBAL.skills[id])
 				ret.append(
 					ENEMY_CLASS.new(
 						data["ID"],
@@ -359,7 +359,7 @@ func parse_inventory(path: String):
 	if result_json.error == OK:
 		var data = result_json.result
 		for item in data:
-			var item_copy = GLOBAL.ITENS[item["ID"]].duplicate()
+			var item_copy = GLOBAL.itens[item["ID"]].clone()
 			itens.append(item_copy)
 			item_copy.quantity = item["QUANT"]
 	return itens
@@ -378,7 +378,7 @@ func parse_equipaments(path: String):
 	if result_json.error == OK:
 		var data = result_json.result
 		for equip in data:
-			var equip_copy = GLOBAL.EQUIPAMENT[equip["ID"]].duplicate()
+			var equip_copy = GLOBAL.equipment[equip["ID"]].clone()
 			equips.append(equip_copy)
 			equip_copy.quantity = equip["QUANT"]
 	return equips
@@ -541,14 +541,14 @@ func parse_players(path: String):
 			var skills = {}
 			for lv in data["SKILLS"].keys():
 				var lv_parsed = int(lv.replace("LV", ""))
-				skills[lv_parsed] = GLOBAL.SKILLS[data["SKILLS"][lv]]
+				skills[lv_parsed] = GLOBAL.skills[data["SKILLS"][lv]]
 			for id in data["EQUIPS"]:
 				if id > -1:
-					equips.append(GLOBAL.EQUIPAMENT[id])
+					equips.append(GLOBAL.equipment[id])
 				else:
 					equips.append(null)
 			for job in data["JOBS"]:
-				var job_instance = GLOBAL.JOBS[job["ID"]].duplicate()
+				var job_instance = GLOBAL.jobs[job["ID"]].clone()
 				job_instance.set_level(job["LEVEL"])
 				jobs.append(job_instance)
 			players.append(
@@ -621,7 +621,7 @@ func load_all_jobs():
 			var skills = {}
 			for lv in data["SKILLS"].keys():
 				var lv_parsed = int(lv.replace("LV", ""))
-				skills[lv_parsed] = GLOBAL.SKILLS[data["SKILLS"][lv]]
+				skills[lv_parsed] = GLOBAL.skills[data["SKILLS"][lv]]
 			jobs.append(JOB_CLASS.new(data["ID"], data["NAME"], data["PROFICIENCIES"], skills))
 	else:
 		print("Error loading jobs", result_json.error)

@@ -90,11 +90,11 @@ func add_enemies(enemies):
 
 func _ready():
 	LOCAL.entering_battle = false
-	LOCAL.IN_BATTLE = true
+	LOCAL.in_battle = true
 	battle_over = false
-	Players = GLOBAL.PLAYERS
-	Inventory = GLOBAL.INVENTORY
-	Enemies = BATTLE_MANAGER.Battled_Enemies
+	Players = GLOBAL.players
+	Inventory = GLOBAL.inventory
+	Enemies = BATTLE_MANAGER.battled_enemies
 	$Background.set_texture(BATTLE_MANAGER.background)
 
 	for tex in get_tree().get_nodes_in_group("text"):

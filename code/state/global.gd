@@ -1,20 +1,20 @@
 extends Node
 
 # Global variables containing all loaded itens, skills and enemies
-var ITENS
-var SKILLS
-var STATUS
-var EQUIPAMENT
-var JOBS
+var itens
+var skills
+var status
+var equipment
+var jobs
 
 var gold
 var playtime
 
 # Global variables containing current players info (party and inventory)
-var PLAYERS
-var INVENTORY
-var EQUIP_INVENTORY
-var RESERVE_PLAYERS
+var players
+var inventory
+var equipment_inventory
+var reserve_players
 
 onready var loader = get_node("/root/LOADER")
 
@@ -22,21 +22,21 @@ onready var loader = get_node("/root/LOADER")
 # Load global stuff
 func load_game(slot):
 	# Global data
-	STATUS = loader.load_all_statuses()
-	SKILLS = loader.load_all_skills()
-	ITENS = loader.load_all_itens()
-	EQUIPAMENT = loader.load_all_equips()
-	JOBS = loader.load_all_jobs()
+	status = loader.load_all_statuses()
+	skills = loader.load_all_skills()
+	itens = loader.load_all_itens()
+	equipment = loader.load_all_equips()
+	jobs = loader.load_all_jobs()
 
 	# Saved data
 	var saved_data = SAVE.load_game(slot)
 	print("[GLOBAL load_game] ", saved_data)
 	playtime = saved_data["Area_Info"]["Playtime"]
 	gold = saved_data["Area_Info"]["Gold"]
-	INVENTORY = saved_data["Inventory"]
-	EQUIP_INVENTORY = saved_data["Equip_Inventory"]
-	RESERVE_PLAYERS = saved_data["Reserve_Players"]
-	PLAYERS = saved_data["Players"]
+	inventory = saved_data["Inventory"]
+	equipment_inventory = saved_data["Equip_Inventory"]
+	reserve_players = saved_data["Reserve_Players"]
+	players = saved_data["Players"]
 	LOCAL.load_enemies(saved_data["Enemies_in_area"])
 	LOCAL.load_npcs(saved_data["NPCs_in_area"])
 	EVENTS.load_flags(saved_data["Flags"])
@@ -60,36 +60,36 @@ func get_gold():
 # Get item ids from inventory
 func get_item_ids():
 	var item_ids = []
-	for item in INVENTORY:
+	for item in inventory:
 		item_ids.append(item.id)
 	return item_ids
 
 
 func get_player(player_id):
-	for p in PLAYERS:
+	for p in players:
 		if p.id == player_id:
 			return p
 
 
 func get_reserve_player(player_id):
-	for p in RESERVE_PLAYERS:
+	for p in reserve_players:
 		if p.id == player_id:
 			return p
 
 
-# Get item ids from equip_inventory
+# Get item ids from equipment_inventory
 func get_equip_ids():
 	var item_ids = []
-	for item in EQUIP_INVENTORY:
+	for item in equipment_inventory:
 		item_ids.append(item.id)
 	return item_ids
 
 
 # Check if item_id is in inventory
 func check_item(item_id: int, type = "ITEM"):
-	var inventory = INVENTORY
+	var inventory = inventory
 	if type == "EQUIP":
-		inventory = EQUIP_INVENTORY
+		inventory = equipment_inventory
 	for item in inventory:
 		if item.id == item_id:
 			return item.quantity
@@ -98,28 +98,28 @@ func check_item(item_id: int, type = "ITEM"):
 
 # Adds the item with item_id to the inventory, with quantity of item_quantity
 func add_item(item_id: int, item_quantity: int):
-	for item in INVENTORY:
+	for item in inventory:
 		if item.id == item_id:
 			item.quantity += item_quantity
 			return
-	var item = ITENS[item_id].duplicate()
+	var item = itens[item_id].clone()
 	item.quantity = item_quantity
-	INVENTORY.append(item)
+	inventory.append(item)
 
 
-# Clone of the add_item function, but for equipaments
+# Clone of the add_item function, but for equipments
 func add_equip(equip_id: int, equip_quantity: int):
-	for equip in EQUIP_INVENTORY:
+	for equip in equipment_inventory:
 		if equip.id == equip_id:
 			equip.quantity += equip_quantity
 			return
-	var equip = EQUIPAMENT[equip_id].duplicate()
+	var equip = equipment[equip_id].clone()
 	equip.quantity = equip_quantity
-	EQUIP_INVENTORY.append(equip)
+	equipment_inventory.append(equip)
 
 
 # Checks if equip with equip_id is equipped on someone from the party
 func is_equipped(equip_id: int):
-	for e in EQUIP_INVENTORY:
+	for e in equipment_inventory:
 		if e.id == equip_id:
 			return e.equipped

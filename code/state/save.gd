@@ -1,17 +1,17 @@
 extends Node
 
-onready var loader = get_node("/root/LOADER")
-
 # Save file variables
 var savegame = File.new()
 var save_path = "./Save_data/Slot"
 
 
+onready var loader = get_node("/root/LOADER")
+
 # Loads all information from save_slot argument
 func load_info(save_slot):
 	if save_slot == -1:
 		LOCAL.load_initial_area()
-		return {"Gold": 100, "Playtime": 0, "Area": LOCAL.AREA}
+		return {"Gold": 100, "Playtime": 0, "Area": LOCAL.area}
 	else:
 		savegame.open(save_path + str(save_slot) + "/Info.json", File.READ)
 		var dict = parse_json(savegame.get_line())
@@ -51,7 +51,7 @@ func save(slot):
 
 	# Saves players' information
 	var players_data = []
-	for player in GLOBAL.PLAYERS:
+	for player in GLOBAL.players:
 		players_data.append(player.save_data())
 	savegame.open(save_path + str(slot) + "/Players.json", File.WRITE)
 	savegame.store_line(to_json(players_data))
@@ -59,7 +59,7 @@ func save(slot):
 
 	# Saves inventory information
 	var itens_data = []
-	for item in GLOBAL.INVENTORY:
+	for item in GLOBAL.inventory:
 		itens_data.append({"ID": item.id, "QUANT": item.quantity})
 	savegame.open(save_path + str(slot) + "/Inventory.json", File.WRITE)
 	savegame.store_line(to_json(itens_data))
@@ -67,7 +67,7 @@ func save(slot):
 
 	# Saves equip inventory information
 	var equip_data = []
-	for item in GLOBAL.INVENTORY:
+	for item in GLOBAL.inventory:
 		equip_data.append({"ID": item.id, "QUANT": item.quantity})
 	savegame.open(save_path + str(slot) + "/Equipament.json", File.WRITE)
 	savegame.store_line(to_json(equip_data))

@@ -6,7 +6,7 @@ func _ready():
 	for c in $HBoxContainer/Itens.get_children():
 		c.connect("target_picked", self, "_on_Item_selected")
 	get_node("HBoxContainer/Options/Use").grab_focus()
-	show_itens(GLOBAL.INVENTORY)
+	show_itens(GLOBAL.inventory)
 
 
 func show_itens(bag):
@@ -21,9 +21,9 @@ func show_itens(bag):
 
 func _on_Item_selected(name):
 	#Placeholder until we actually put item funcionality on the game
-	for i in range(len(GLOBAL.INVENTORY)):
-		if GLOBAL.INVENTORY[i].nome in name:  #that doesnt work, usar mega potion ou hi-potion faz usar potion regulares as well
-			GLOBAL.INVENTORY[i].quantity -= 1
+	for i in range(len(GLOBAL.inventory)):
+		if GLOBAL.inventory[i].nome in name:  #that doesnt work, usar mega potion ou hi-potion faz usar potion regulares as well
+			GLOBAL.inventory[i].quantity -= 1
 			x = 1
 
 
@@ -47,7 +47,7 @@ func _process(delta):
 
 	#another placeholder until itens can be used in menus
 	if x == 1:
-		for i in range(len(GLOBAL.INVENTORY)):
+		for i in range(len(GLOBAL.inventory)):
 			var node = get_node("HBoxContainer/Itens/ItemSlot" + str(i))
-			node.set_text(str(GLOBAL.INVENTORY[i].nome) + " x" + str(GLOBAL.INVENTORY[i].quantity))
+			node.set_text(str(GLOBAL.inventory[i].nome) + " x" + str(GLOBAL.inventory[i].quantity))
 		x = 0

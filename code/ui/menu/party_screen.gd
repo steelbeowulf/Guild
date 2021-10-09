@@ -15,11 +15,11 @@ func _ready():
 		c.connect("target_picked", self, "_on_Change_selected", [i])
 		c.connect("target_selected", self, "_on_Change_hover", [i])
 	var btns = $Panel/HBoxContainer/Options.get_children()
-	for i in len(GLOBAL.PLAYERS):
+	for i in len(GLOBAL.players):
 		btns[i + 1].connect("focus_entered", self, "_on_Focus_Entered")
 		btns[i + 1].connect("pressed", self, "_on_Player_selected", [i])
 		btns[i + 1].set_focus_mode(0)
-		btns[i + 1].set_text(GLOBAL.PLAYERS[i].get_name())
+		btns[i + 1].set_text(GLOBAL.players[i].get_name())
 		btns[i + 1].show()
 	get_node("Panel/HBoxContainer/Options/Player1").grab_focus()
 
@@ -32,7 +32,7 @@ func just_entered():
 func show_reserve():
 	reset_info()
 	# Ponto inicial da lista
-	var r_player = GLOBAL.RESERVE_PLAYERS
+	var r_player = GLOBAL.reserve_PLAYERS
 	for j in range(0, len(r_player)):
 		var node = get_node("Panel/HBoxContainer/Reserve/ReserveSlot" + str(j + 1))
 		node.set_text(str(r_player[j].get_name()))
@@ -54,8 +54,8 @@ func _on_Change_hover(id):
 # Reset info panel
 func reset_info():
 	var btns = $Panel/HBoxContainer/Options.get_children()
-	for i in len(GLOBAL.PLAYERS):
-		btns[i + 1].set_text(GLOBAL.PLAYERS[i].get_name())
+	for i in len(GLOBAL.players):
+		btns[i + 1].set_text(GLOBAL.players[i].get_name())
 
 
 # Sets description
@@ -100,9 +100,9 @@ func enter():
 func change_players(id_player, id_reserve):
 	AUDIO.play_se("ENTER_MENU")
 	var loader = GLOBAL.get_root().get_parent().get_node("/root/LOADER")
-	var a = GLOBAL.PLAYERS[id_player]
-	GLOBAL.PLAYERS[id_player] = GLOBAL.RESERVE_PLAYERS[id_reserve]
-	GLOBAL.RESERVE_PLAYERS[id_reserve] = a
+	var a = GLOBAL.players[id_player]
+	GLOBAL.players[id_player] = GLOBAL.reserve_PLAYERS[id_reserve]
+	GLOBAL.reserve_PLAYERS[id_reserve] = a
 	player_id = null
 	show_reserve()
 

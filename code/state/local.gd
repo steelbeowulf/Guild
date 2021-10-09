@@ -2,8 +2,8 @@ extends Node
 
 # State variables for the Demo_area
 # TODO: make it not hardcoded and generic
-var POSITION = Vector2(454, 446)
-var STATE = {
+var position = Vector2(454, 446)
+var state = {
 	"1": {},
 	"2": {},
 	"3": {},
@@ -33,16 +33,16 @@ var STATE = {
 }
 
 # Global state variables
-var AREA
-var ENEMIES
-var NPCs
+var area
+var enemies
+var npcs
 
-var TRANSITION = -1
-var MAP = 1
-var WIN
+var transition = -1
+var map = 1
+var win
 
 var entering_battle = false
-var IN_BATTLE = false
+var in_battle = false
 
 var events = {}
 onready var loader = get_node("/root/LOADER")
@@ -50,49 +50,49 @@ onready var loader = get_node("/root/LOADER")
 
 # Returns state from the current map
 func get_state():
-	return STATE[MAP]
+	return state[map]
 
 
 # Returns Enemies from current map
 func load_enemies(filter_array):
 	var enem = []
-	ENEMIES = loader.load_enemies(filter_array)
-	print("LOADEI INIMIGOS: ", ENEMIES)
+	enemies = loader.load_enemies(filter_array)
+	print("LOADEI INIMIGOS: ", enemies)
 
 
 # Return enemy with enemy_id (if loaded)
 func get_enemy(enemy_id):
-	for e in ENEMIES:
+	for e in enemies:
 		if e.id == enemy_id:
-			return e.duplicate()
+			return e.clone()
 
 
 # Return NPC with npc_id (if loaded)
 func get_npc(npc_id):
 	print("[LOCAL] getting npc with id ", npc_id)
-	for npc in NPCs:
+	for npc in npcs:
 		print("NPC ", npc.id, " with name ", npc.nome)
 		if npc.id == npc_id:
 			print("[LOCAL] found it!")
 			return npc
 
 
-# Returns NPCs from current map
+# Returns npcs from current map
 func load_npcs(filter_array):
-	NPCs = loader.load_npcs(filter_array)
+	npcs = loader.load_npcs(filter_array)
 
 
 # Update state on the current map
 func set_state(state_arg):
-	STATE[MAP] = state_arg
+	state[map] = state_arg
 
 
 func get_area():
-	return AREA
+	return area
 
 
 func get_map():
-	return MAP
+	return map
 
 
 func get_events():
@@ -102,37 +102,37 @@ func get_events():
 # Resets state to the default Forest state
 # TODO: make it generic
 func load_initial_area():
-	WIN = false
-	AREA = "Forest"
-	STATE = []
+	win = false
+	area = "Forest"
+	state = []
 	events = {"rangers_defeated": false, "eyeballs_defeated": 0, "boss_defeated": false}
 	for i in range(26):
-		STATE.append({})
-	TRANSITION = -1
-	MAP = 1
-	#MAP = 10
-	POSITION = Vector2(454, 446)
-	#POSITION = Vector2(300, 600)
+		state.append({})
+	transition = -1
+	map = 1
+	#map = 10
+	position = Vector2(454, 446)
+	#position = Vector2(300, 600)
 
 
 # Joins all info from the map in a saveable format
 func get_area_dict():
 	var area_dict = {}
-	area_dict["NAME"] = AREA
-	area_dict["WIN"] = WIN
-	area_dict["STATE"] = STATE
-	area_dict["MAP"] = MAP
-	area_dict["POSITION"] = POSITION
+	area_dict["NAME"] = area
+	area_dict["win"] = win
+	area_dict["state"] = state
+	area_dict["map"] = map
+	area_dict["position"] = position
 	return area_dict
 
 
 # Loads map info from an area dictionary
 func load_area(area_dict):
-	WIN = area_dict["WIN"]
-	STATE = area_dict["STATE"]
-	MAP = area_dict["MAP"]
-	POSITION = parse_position(area_dict["POSITION"])
-	AREA = area_dict["NAME"]
+	win = area_dict["win"]
+	state = area_dict["state"]
+	map = area_dict["map"]
+	position = parse_position(area_dict["position"])
+	area = area_dict["NAME"]
 
 
 # Helper function to parse a Vector2 from a string

@@ -133,7 +133,7 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit,
 			value = min(0, value)
 			final_value = affected_stat + value
 			ret = abs(value)
-			if LOCAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
+			if LOCAL.in_battle and target.classe == "boss" and who.classe != "boss":
 				who.update_hate(value, target.index)
 		# Support case: Heals HP
 		elif stat == HP:

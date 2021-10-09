@@ -1,11 +1,15 @@
 extends Node
 
-var NODES = {}
+var nodes = {}
 var flags = {}
 
 var dialogue_count = 0
 var waiting_for_choice = false
 
+var caller = null
+var events = []
+var npc_name = ""
+var npc_portrait = ""
 
 func load_flags(flags_arg: Dictionary):
 	flags = flags_arg
@@ -24,7 +28,7 @@ func get_flag(key: String):
 
 
 func register_node(name: String, node: Node):
-	NODES[name] = node
+	nodes[name] = node
 
 
 ### Events
@@ -37,11 +41,6 @@ func set_event_status(id: int, status):
 
 
 ### Dialogue
-var caller = null
-var events = []
-var npc_name = ""
-var npc_portrait = ""
-
 
 func play_events(events: Array):
 	dialogue_count = 0
@@ -56,14 +55,14 @@ func play_event(event: Event) -> bool:
 	print("[EVENTS] Playing event ", event.type)
 	print("[EVENTS] Has played: " + str(event.has_played()))
 	print("[EVENTS] Should repeat: " + str(event.should_repeat()))
-	if LOCAL.IN_BATTLE and event.has_played() and not event.should_repeat():
+	if LOCAL.in_battle and event.has_played() and not event.should_repeat():
 		event_ended()
 	event.set_played(true)
-	if LOCAL.IN_BATTLE:
+	if LOCAL.in_battle:
 		get_node("/root/Battle").pause()
 		caller = BATTLE_MANAGER
 	if event.type == "DIALOGUE":
-		var node = NODES["Dialogue"]
+		var node = nodes["Dialogue"]
 		if event.portrait and event.name:
 			node.set_talker(event.name, event.portrait)
 		else:
@@ -72,7 +71,7 @@ func play_event(event: Event) -> bool:
 			node.push_dialogue(dial)
 		node.start_dialogue()
 	elif event.type == "DIALOGUE_OPTION":
-		var node = NODES["DialogueOptions"]
+		var node = nodes["DialogueOptions"]
 		node.push_option(event)
 		for ev in events:
 			if ev.type != "DIALOGUE_OPTION":
@@ -122,7 +121,7 @@ func build_action(type_arg: String, action_id: int, args: Array) -> Action:
 
 
 func start_npc_dialogue(name: String, portrait: Dictionary, events: Array, callback: Node):
-	var node = NODES["Dialogue"]
+	var node = nodes["Dialogue"]
 	npc_name = name
 	npc_portrait = portrait
 	node.set_talker(name, portrait)
@@ -136,17 +135,17 @@ func event_ended():
 		play_event(self.events.pop_front())
 	else:
 		print("[EVENTS] Callback event time")
-		NODES["Dialogue"].reset()
+		nodes["Dialogue"].reset()
 		caller.on_dialogue_ended()
 
 
 func dialogue_ended(force_hide = false):
 	print("[EVENTS] Dialogue ended, force_hide = ", force_hide)
 	if force_hide:
-		NODES["Dialogue"].reset()
+		nodes["Dialogue"].reset()
 	if len(self.events) > 0:
 		play_event(self.events.pop_front())
 	else:
 		print("[EVENTS] Callback dialogue time")
-		NODES["Dialogue"].reset()
+		nodes["Dialogue"].reset()
 		caller.on_dialogue_ended()
