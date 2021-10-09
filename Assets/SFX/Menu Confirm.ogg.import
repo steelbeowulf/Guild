@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Menu Confirm.ogg-ebec906c0c18878361c52a6d0bfdfb20.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/Menu Confirm.ogg"
+dest_files=[ "res://.import/Menu Confirm.ogg-ebec906c0c18878361c52a6d0bfdfb20.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
