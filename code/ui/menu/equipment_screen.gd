@@ -2,7 +2,8 @@ extends Control
 onready var player = null
 onready var current_equip = null
 onready var equips = []
-onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
+onready var location = "OUTSIDE"  #this doesnt work yet, pressing esc on the menu opens the item menu
+
 
 func _ready():
 	give_focus()
@@ -17,15 +18,18 @@ func _ready():
 	for e in $Panel/HBoxContainer/Options.get_children():
 		e.set_focus_mode(0)
 
+
 func just_entered(id):
-	print("[EQUIP] just entered "+str(id))
+	print("[EQUIP] just entered " + str(id))
 	player = GLOBAL.PLAYERS[id]
 	location = "SUBMENU"
+
 
 func reset_equips():
 	equips = []
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.hide()
+
 
 func show_equips(equipaments, type):
 	reset_equips()
@@ -36,16 +40,16 @@ func show_equips(equipaments, type):
 	equipped.set_focus_mode(0)
 	var player_equip = player.get_equip(type)
 	var player_equip_name = "NONE"
-	
+
 	# Player has item equiped on this slot: show it
 	if player_equip:
 		equipped.disabled = false
 		equipped.set_focus_mode(2)
 		player_equip_name = player_equip.get_name()
 		current_equip = player_equip
-	equipped.set_text("EQUIPPED: "+player_equip_name)
+	equipped.set_text("EQUIPPED: " + player_equip_name)
 	equipped.show()
-	
+
 	# Iterate through equip_inventory and populate list
 	equips = [player_equip]
 	var i = 1
@@ -62,12 +66,14 @@ func show_equips(equipaments, type):
 			if equipaments[j].job != player.get_job():
 				node.disabled = true
 
+
 # Get first equippable item from equip list
 # Avoids giving focus to wrong job itens
 func get_first_equippable():
 	for i in range(len(equips)):
 		if equips[i] != null and equips[i].job == player.get_job():
 			return get_node("Panel/HBoxContainer/Equips/EquipSlot" + str(i))
+
 
 # Equip item with id
 func _on_Equip_selected(id):
@@ -80,20 +86,26 @@ func _on_Equip_hover(id):
 	set_description(equips[id])
 	$Panel/HBoxContainer/Options/Info/Comparison.init(current_equip, equips[id])
 
+
 # Reset info panel
 func reset_info():
 	$Panel/HBoxContainer/Options/Info/Comparison.zero()
 	$Panel/HBoxContainer/Options/Info/Description.set_text("")
 
+
 # Sets description
 func set_description(equip_hover):
 	print("Set description")
-	var description = "  "+equip_hover.name+"\n  Type: "+equip_hover.type
+	var description = "  " + equip_hover.name + "\n  Type: " + equip_hover.type
 	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
+
 
 # TODO: Arrumar location (minuscula? maiuscula? idk)
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel") and location in ["WEAPON", "HEAD", "BODY", "ACCESSORY1", "ACCESSORY2"]:
+	if (
+		Input.is_action_just_pressed("ui_cancel")
+		and location in ["WEAPON", "HEAD", "BODY", "ACCESSORY1", "ACCESSORY2"]
+	):
 		AUDIO.play_se("EXIT_MENU")
 		location = "SUBMENU"
 		give_focus()
@@ -134,15 +146,18 @@ func use_equip(equip):
 		player.equip(equip)
 	show_equips(GLOBAL.EQUIP_INVENTORY, location)
 
+
 func _on_Back_pressed():
 	AUDIO.play_se("EXIT_MENU")
 	print(location)
 	location == "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
 
+
 #not done yet
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")
+
 
 func _on_Weapon_pressed():
 	location = "WEAPON"

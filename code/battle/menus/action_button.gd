@@ -8,11 +8,12 @@ signal deactivate_targets_all
 signal player_focus
 signal enemy_focus
 
-export(String) var action_type : String
-var subaction : int = -1
-var targets : PoolIntArray = []
+export(String) var action_type: String
+var subaction: int = -1
+var targets: PoolIntArray = []
 
-var allowed : bool = false
+var allowed: bool = false
+
 
 func _ready():
 	action_type = get_name()
@@ -21,6 +22,7 @@ func _ready():
 	for c in $ScrollContainer/SubActions.get_children():
 		c.connect("subaction_picked", self, "_on_SubAction_Picked")
 		c.connect("focus_entered", self, "_on_Focus_Entered", [c])
+
 
 func _on_SubAction_Picked(subaction_arg: int) -> void:
 	subaction = subaction_arg
@@ -34,13 +36,13 @@ func _on_SubAction_Picked(subaction_arg: int) -> void:
 			e.disabled = true
 			e.set_focus_mode(0)
 		var skitem = LOADER.List[subaction_arg]
-		
+
 		var is_ress = skitem.get_type() == "RESSURECTION"
 		if skitem.get_target() == "ALL":
 			emit_signal("activate_targets_all", skitem.get_type())
 		else:
 			emit_signal("activate_targets", is_ress)
-		
+
 		if skitem.get_type() != "OFFENSE":
 			emit_signal("player_focus", is_ress)
 		else:
@@ -55,6 +57,7 @@ func hide_stuff():
 	$ScrollContainer.hide()
 	emit_signal("deactivate_targets")
 	emit_signal("deactivate_targets_all")
+
 
 func _on_Action_pressed():
 	print("[ACTION BUTTON] Action pressed: ", action_type)
@@ -75,6 +78,7 @@ func _on_Action_pressed():
 				t.grab_focus()
 				break
 
+
 func _on_Targets_Picked(target_args: PoolIntArray):
 	print("[ACTION BUTTON] subaction: ", subaction, " targets: ", targets)
 	targets = target_args
@@ -84,8 +88,9 @@ func _on_Targets_Picked(target_args: PoolIntArray):
 		emit_signal("deactivate_targets_all")
 		emit_signal("action_picked", action_type, subaction, targets)
 
+
 func connect_target_player(p: Button):
-	p.connect("target_picked", self, "_on_Targets_Picked")  
+	p.connect("target_picked", self, "_on_Targets_Picked")
 	self.connect("activate_targets", p, "_on_Activate_Targets")
 	self.connect("deactivate_targets", p, "_on_Deactivate_Targets")
 
@@ -93,24 +98,26 @@ func connect_target_player(p: Button):
 func connect_target_enemy(e: Button, manager: Node, id: int):
 	e.connect("focus_entered", manager, "manage_hate", [0, id])
 	e.connect("focus_exited", manager, "hide_hate")
-	e.connect("target_picked", self, "_on_Targets_Picked")  
+	e.connect("target_picked", self, "_on_Targets_Picked")
 	self.connect("activate_targets", e, "_on_Activate_Targets")
 	self.connect("deactivate_targets", e, "_on_Deactivate_Targets")
 
 
-func connect_targets(list_players: Array, list_enemies: Array, manager: Node, allPlayers: Button, allEnemies: Button) -> void:
+func connect_targets(
+	list_players: Array, list_enemies: Array, manager: Node, allPlayers: Button, allEnemies: Button
+) -> void:
 	var id = 0
 	var img
 	for e in list_enemies:
 		e.connect("focus_entered", manager, "manage_hate", [0, id])
 		e.connect("focus_exited", manager, "hide_hate")
-		e.connect("target_picked", self, "_on_Targets_Picked")  
+		e.connect("target_picked", self, "_on_Targets_Picked")
 		self.connect("activate_targets", e, "_on_Activate_Targets")
 		self.connect("deactivate_targets", e, "_on_Deactivate_Targets")
 		id += 1
 	id = 0
 	for p in list_players:
-		p.connect("target_picked", self, "_on_Targets_Picked")  
+		p.connect("target_picked", self, "_on_Targets_Picked")
 		self.connect("activate_targets", p, "_on_Activate_Targets")
 		self.connect("deactivate_targets", p, "_on_Deactivate_Targets")
 		id += 1
@@ -118,11 +125,12 @@ func connect_targets(list_players: Array, list_enemies: Array, manager: Node, al
 	self.connect("activate_targets_all", allEnemies, "_on_Activate_Targets")
 	self.connect("deactivate_targets_all", allPlayers, "_on_Deactivate_Targets")
 	self.connect("deactivate_targets_all", allEnemies, "_on_Deactivate_Targets")
-	
+
 	self.connect("player_focus", allPlayers, "_on_Focus_First")
 	self.connect("enemy_focus", allEnemies, "_on_Focus_First")
-	allPlayers.connect("target_picked", self, "_on_Targets_Picked") 
-	allEnemies.connect("target_picked", self, "_on_Targets_Picked") 
+	allPlayers.connect("target_picked", self, "_on_Targets_Picked")
+	allEnemies.connect("target_picked", self, "_on_Targets_Picked")
+
 
 func _on_Focus_Entered(button):
 	var num = int(button.get_name())

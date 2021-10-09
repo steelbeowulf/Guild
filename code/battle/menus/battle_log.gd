@@ -3,15 +3,19 @@ extends Node2D
 var buf = []
 var timeout = false
 
+
 func _ready():
 	hide()
 	$Label.set_text("")
 
+
 func store_text(text):
 	buf.append(text)
 
+
 func is_empty():
 	return $Label.get_text() == ""
+
 
 func display_text(text):
 	if text:
@@ -21,6 +25,7 @@ func display_text(text):
 			$Timer.start()
 		else:
 			store_text(text)
+
 
 func _on_Timer_timeout():
 	$Label.set_text("")

@@ -6,28 +6,35 @@ var flags = {}
 var dialogue_count = 0
 var waiting_for_choice = false
 
+
 func load_flags(flags_arg: Dictionary):
 	flags = flags_arg
+
 
 func set_flag(event: Flag):
 	var key = event.get_key()
 	var value = event.get_value()
 	flags[key] = value
 
+
 func get_flag(key: String):
 	if flags.has(key):
 		return flags[key]
 	return null
 
+
 func register_node(name: String, node: Node):
 	NODES[name] = node
+
 
 ### Events
 func get_event_status(id: int):
 	return events[id]
 
+
 func set_event_status(id: int, status):
 	events[id] = status
+
 
 ### Dialogue
 var caller = null
@@ -40,14 +47,15 @@ func play_events(events: Array):
 	dialogue_count = 0
 	self.events = events.duplicate(true)
 	for e in events:
-		if e.type == 'DIALOGUE':
+		if e.type == "DIALOGUE":
 			dialogue_count += 1
 	return play_event(self.events.pop_front())
 
+
 func play_event(event: Event) -> bool:
 	print("[EVENTS] Playing event ", event.type)
-	print("[EVENTS] Has played: "+str(event.has_played()))
-	print("[EVENTS] Should repeat: "+str(event.should_repeat()))
+	print("[EVENTS] Has played: " + str(event.has_played()))
+	print("[EVENTS] Should repeat: " + str(event.should_repeat()))
 	if LOCAL.IN_BATTLE and event.has_played() and not event.should_repeat():
 		event_ended()
 	event.set_played(true)
@@ -83,7 +91,7 @@ func play_event(event: Event) -> bool:
 	elif event.type == "TRANSITION":
 		GLOBAL.get_root().change_area(event.get_area(), event.get_map(), event.get_position())
 	elif event.type == "REINFORCEMENTS":
-		if event.sfx != '':
+		if event.sfx != "":
 			AUDIO.play_se(event.sfx)
 		if event.group == "ALLIES":
 			get_node("/root/Battle").add_players(event.entities)
@@ -98,8 +106,7 @@ func play_event(event: Event) -> bool:
 		event_ended()
 	elif event.type == "SET_ACTION":
 		event.entity.set_next_action(
-			build_action(event.action_type, event.action_arg, event.action_targets),
-			event.turns
+			build_action(event.action_type, event.action_arg, event.action_targets), event.turns
 		)
 		if event.is_forced():
 			get_node("/root/Battle").force_next_action(event.entity)

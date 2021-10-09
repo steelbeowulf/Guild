@@ -10,14 +10,18 @@ var speed_opts = ["Slow", "Medium", "Fast"]
 var speed_vals = [5, 10, 15]
 var speed_index = 0
 
+
 func get_size():
 	return font_size
+
 
 func get_size_id():
 	return size_index
 
+
 func get_speed_id():
 	return speed_index
+
 
 func get_speed():
 	return text_speed
@@ -44,4 +48,4 @@ func set_size(ID):
 
 
 func get_font():
-	return load("res://assets/ui/fonts/Font"+font_size+".tres")
+	return load("res://assets/ui/fonts/Font" + font_size + ".tres")

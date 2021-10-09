@@ -6,23 +6,27 @@ var item = null
 var type = "ONE"
 var whatdo = "RECOVERY"
 
+
 func enter(item_arg):
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
 	for i in range(len(GLOBAL.PLAYERS)):
-		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
+		var node = get_node("Panel/All/Left/Chars/Char" + str(i))
 		node.update_info(GLOBAL.PLAYERS[i])
 		node.connect("pressed", self, "_on_Char_pressed", [i])
 		node.connect("focus_entered", self, "_on_Focus_Entered")
 	item = item_arg
 	whatdo = item.type
 	if item.target == "ALL":
-		$Panel/All/Right/Options_Panel/Panel/Question.set_text("Usar "+item.nome+" \nem todos os personagens?")
+		$Panel/All/Right/Options_Panel/Panel/Question.set_text(
+			"Usar " + item.nome + " \nem todos os personagens?"
+		)
 		targets = GLOBAL.PLAYERS
 		type = "ALL"
 
+
 func give_focus():
-	var i = 0;
+	var i = 0
 	for c in $Panel/All/Left/Chars.get_children():
 		c.set_focus_mode(2)
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
@@ -36,6 +40,7 @@ func _process(delta):
 	#elif Input.is_action_just_pressed("ui_accept") and type=="ALL":
 	#	use_item()
 
+
 func use_item():
 	for player in targets:
 		for effect in item.get_effects():
@@ -48,9 +53,10 @@ func use_item():
 	get_parent().get_parent().get_parent().back_to_inventory()
 	queue_free()
 
+
 func _on_Char_pressed(id):
 	AUDIO.play_se("ENTER_MENU")
-	print("[ITEM USE] pressei "+str(id))
+	print("[ITEM USE] pressei " + str(id))
 	if whatdo == "RESSURECTION":
 		if GLOBAL.PLAYERS[id].status != "KO":
 			get_parent().get_parent().get_parent().back_to_inventory()
@@ -58,6 +64,7 @@ func _on_Char_pressed(id):
 	if type != "ALL":
 		targets.append(GLOBAL.PLAYERS[id])
 	use_item()
+
 
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")

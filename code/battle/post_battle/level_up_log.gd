@@ -3,14 +3,18 @@ extends Node2D
 var buf = []
 var next = false
 
+
 func _ready():
 	$Label.set_text("")
+
 
 func store_text(text):
 	buf.append(text)
 
+
 func is_empty():
 	return $Label.get_text() == ""
+
 
 func display_text(text):
 	if text:
@@ -19,6 +23,7 @@ func display_text(text):
 			$Timer.start()
 		else:
 			store_text(text)
+
 
 func next():
 	if next:
@@ -30,6 +35,7 @@ func next():
 		else:
 			return true
 	return false
+
 
 func _on_Timer_timeout():
 	next = true

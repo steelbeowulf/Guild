@@ -1,6 +1,7 @@
 extends Control
 var item = null
-onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
+onready var location = "OUTSIDE"  #this doesnt work yet, pressing esc on the menu opens the item menu
+
 
 func _ready():
 	give_focus()
@@ -14,8 +15,10 @@ func _ready():
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 	show_itens(GLOBAL.INVENTORY)
 
+
 func just_entered():
 	location = "SUBMENU"
+
 
 func show_itens(bag):
 	for i in range(len(bag)):
@@ -26,8 +29,8 @@ func show_itens(bag):
 			node.hide()
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 	for e in $Panel/HBoxContainer/Itens.get_children():
-			e.set_focus_mode(0)
-	
+		e.set_focus_mode(0)
+
 
 func update_itens(bag):
 	for i in range(len(bag)):
@@ -40,29 +43,41 @@ func update_itens(bag):
 			node.disabled = false
 			node.show()
 
+
 func _on_Item_selected(id):
 	AUDIO.play_se("ENTER_MENU")
 	item = GLOBAL.INVENTORY[id]
 	var nome = item.get_name()
-	print("SELECTED "+str(nome))
+	print("SELECTED " + str(nome))
 	#set_description(item)
 	use_item(item)
+
 
 func _on_Item_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	item = GLOBAL.INVENTORY[id]
 	var nome = item.get_name()
-	print("SELECTED "+str(nome))
+	print("SELECTED " + str(nome))
 	set_description(item)
+
 
 func set_description(item):
 	print("Set description")
 	#print(item.get_name())
-	var description = "  "+item.get_name()+"\n  Type: "+item.get_type()+"\n  Targets: "+item.get_target()
+	var description = (
+		"  "
+		+ item.get_name()
+		+ "\n  Type: "
+		+ item.get_type()
+		+ "\n  Targets: "
+		+ item.get_target()
+	)
 	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
+
 
 func use_item(item):
 	get_parent().get_parent().get_parent().use_item(item)
+
 
 func _on_Use_pressed():
 	AUDIO.play_se("ENTER_MENU")
@@ -77,6 +92,7 @@ func _on_Use_pressed():
 			get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i)).grab_focus()
 			break
 	#get_node("Panel/HBoxContainer/Itens/ItemSlot0").grab_focus()
+
 
 func _process(delta):
 	update_itens(GLOBAL.INVENTORY)
@@ -97,11 +113,13 @@ func give_focus():
 		e.set_focus_mode(0)
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 
+
 func _on_Back_pressed():
 	print(location)
 	AUDIO.play_se("EXIT_MENU")
 	location == "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
+
 
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")

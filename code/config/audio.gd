@@ -8,9 +8,13 @@ var prev_pos = 0.0
 # Loads all our songs and SFXs
 var MENU_THEME = load("res://assets/sounds/bgm/TownTheme (online-audio-converter.com).ogg")
 var MAP_THEME = load("res://assets/sounds/bgm/Lonely Witch (online-audio-converter.com).ogg")
-var BATTLE_THEME = load("res://assets/sounds/bgm/Modern Castle - Tension (online-audio-converter.com).ogg")
+var BATTLE_THEME = load(
+	"res://assets/sounds/bgm/Modern Castle - Tension (online-audio-converter.com).ogg"
+)
 var GAME_OVER_THEME = load("res://assets/sounds/bgm/Game over jingle 4.wav")
-var BOSS_THEME = load("res://assets/sounds/bgm/Heavy Concept A Bass Master (online-audio-converter.com).ogg")
+var BOSS_THEME = load(
+	"res://assets/sounds/bgm/Heavy Concept A Bass Master (online-audio-converter.com).ogg"
+)
 var SPELL = load("res://assets/sounds/sfx/Powerup 4 - Sound effects Pack 2.ogg")
 var RUN = load("res://assets/sounds/sfx/Fantozzi-SandL1.ogg")
 var HIT = load("res://assets/sounds/sfx/Explosion 3 - Sound effects Pack 2.ogg")
@@ -22,11 +26,24 @@ var GRASS = load("res://assets/sounds/sfx/151229__owlstorm__grassy-footstep-2.wa
 var WHISTLE = load("res://assets/sounds/sfx/320140__owlstorm__attention-whistle.wav")
 
 # Variables used to play sounds
-var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
-'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME}
-var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT,
-'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU,
-'MONEY': MONEY, 'GRASS': GRASS, 'WHISTLE': WHISTLE}
+var songs = {
+	"MENU_THEME": MENU_THEME,
+	"MAP_THEME": MAP_THEME,
+	"BATTLE_THEME": BATTLE_THEME,
+	"GAME_OVER_THEME": GAME_OVER_THEME,
+	"BOSS_THEME": BOSS_THEME
+}
+var sounds = {
+	"SPELL": SPELL,
+	"RUN": RUN,
+	"HIT": HIT,
+	"ENTER_MENU": ENTER_MENU,
+	"EXIT_MENU": EXIT_MENU,
+	"MOVE_MENU": MOVE_MENU,
+	"MONEY": MONEY,
+	"GRASS": GRASS,
+	"WHISTLE": WHISTLE
+}
 
 # Base volumes
 onready var base_master = -10
@@ -68,16 +85,16 @@ func recalibrate():
 
 # Stops playing a BGM
 func stop_bgm():
-	if music.stream == songs['MAP_THEME']:
+	if music.stream == songs["MAP_THEME"]:
 		prev_pos = music.get_playback_position()
 	music.stop()
 
 
 # Plays a bgm. If a keep argument is sent, it will continue playing
 # the song from current position
-func play_bgm(bgm, keep=false, loud=0):
+func play_bgm(bgm, keep = false, loud = 0):
 	var play = 0.0
-	if music.stream == songs['MAP_THEME']:
+	if music.stream == songs["MAP_THEME"]:
 		prev_pos = music.get_playback_position()
 	music.stream = songs[bgm]
 	music.volume_db = base_master + base_bgm + loud
@@ -87,7 +104,7 @@ func play_bgm(bgm, keep=false, loud=0):
 
 
 # Plays a sound effect. The loud argument is an extra to raise volume.
-func play_se(sound, loud=0):
+func play_se(sound, loud = 0):
 	sound = sounds[sound]
 	for i in range(15):
 		if get_tree().paused and i >= 3:
@@ -100,23 +117,29 @@ func play_se(sound, loud=0):
 			audio[i].play()
 			return
 
+
 ############# CONFIG FUNCTIONS ###################
 func get_master_volume():
 	return base_master
 
+
 func get_bgm_volume():
 	return base_bgm
 
+
 func get_sfx_volume():
 	return base_se
+
 
 func set_master_volume(vol):
 	base_master = vol
 	recalibrate()
 
+
 func set_sfx_volume(vol):
 	base_se = vol
 	recalibrate()
+
 
 func set_bgm_volume(vol):
 	base_bgm = vol

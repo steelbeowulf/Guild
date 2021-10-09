@@ -23,26 +23,26 @@ var cara_no_mundo = load("res://code/overworld/overworld_player.tscn")
 
 # Returns current maps' margins (used to limit player camera)
 func get_map_margin():
-	return [$Limits.margin_bottom, $Limits.margin_left,
-	$Limits.margin_top, $Limits.margin_right]
+	return [$Limits.margin_bottom, $Limits.margin_left, $Limits.margin_top, $Limits.margin_right]
 
 
 ###### PREPARATION FUNCTION #####
 
+
 func _ready():
 	# Initializes pause mode and play map music
 	self.pause_mode = Node.PAUSE_MODE_STOP
-	AUDIO.play_bgm('MAP_THEME', true)
-	
+	AUDIO.play_bgm("MAP_THEME", true)
+
 	# Arbitrary stuff hardcoded for the demo
 	# TODO: fix it
-	
+
 	#if GLOBAL.WIN:
 	#	get_tree().change_scene("res://code/ui/victory.tscn")
-	
+
 	Enemies = LOCAL.ENEMIES
 	Player_pos = LOCAL.POSITION
-	
+
 	# Gets current map state from global area state
 	state = LOCAL.get_state()
 
@@ -58,7 +58,7 @@ func _ready():
 	cara.position = pos
 	LOCAL.POSITION = pos
 	cara._initialize()
-	
+
 	# Connects battle manager to monsters
 	var BM = get_node("/root/BATTLE_MANAGER")
 	BM.init(Enemies, self)
@@ -82,22 +82,23 @@ func _physics_process(delta):
 
 ###### STATE FUNCTIONS #####
 
+
 # Check if doors' objectives has been accomplished
 # If so, opens it and sends a message on the HUD log
 func check_doors():
 	for d in Doors.keys():
-		if Doors[d] == 'Defeat all enemies' and not $Enemies.get_children():
-			get_node("Objects/"+str(d)).open()
+		if Doors[d] == "Defeat all enemies" and not $Enemies.get_children():
+			get_node("Objects/" + str(d)).open()
 			send_message("Uma nova passagem se abriu")
-			Doors[d] = ''
-		elif Doors[d] == 'Matching puzzle' and LOCAL.MATCH:
-			get_node("Objects/"+str(d)).open()
+			Doors[d] = ""
+		elif Doors[d] == "Matching puzzle" and LOCAL.MATCH:
+			get_node("Objects/" + str(d)).open()
 			send_message("Uma nova passagem se abriu")
-			Doors[d] = ''
-		elif Doors[d].split(" ")[0] == 'Activate':
-			if get_node("Objects/"+str(Doors[d].split(" ")[1])).activated:
-				get_node("Objects/"+str(d)).open()
-				Doors[d] = ''
+			Doors[d] = ""
+		elif Doors[d].split(" ")[0] == "Activate":
+			if get_node("Objects/" + str(Doors[d].split(" ")[1])).activated:
+				get_node("Objects/" + str(d)).open()
+				Doors[d] = ""
 				send_message("Uma nova passagem se abriu")
 
 
@@ -107,7 +108,7 @@ func update_objects_position():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
 	for e in get_node("Enemies").get_children():
 		if e.dead:
-			print("[MAP] Killing "+e.get_name())
+			print("[MAP] Killing " + e.get_name())
 			save_state("ENEMY_KILL", e.get_name())
 
 
@@ -116,22 +117,24 @@ func update_objects_position():
 # TREASURE -> when a treasure chest is opened
 # ENEMY_KILL -> when a enemy is killed
 # OBJ_POS -> when an object changes position
-func save_state(type, node, open=false, pos=Vector2(0,0)):
+func save_state(type, node, open = false, pos = Vector2(0, 0)):
 	if type == "TREASURE":
-		state["Treasure/"+str(node)] = true
+		state["Treasure/" + str(node)] = true
 	elif type == "ENEMY_KILL":
-		state["Enemies/"+str(node)] = [true, pos]
+		state["Enemies/" + str(node)] = [true, pos]
 	elif type == "OBJ_POS":
-		state["Objects/"+str(node)] = [open, pos]
+		state["Objects/" + str(node)] = [open, pos]
 	# Saves current map state on the game's memory (not persistent)
 	LOCAL.set_state(state)
 
 
 ###### HUD FUNCTIONS #####
 
+
 # Shows a message on the HUD log
 func send_message(text):
 	$HUD/Log.display_text(text)
+
 
 # Hides the HUD layer (currently only a log)
 func hide_hud():

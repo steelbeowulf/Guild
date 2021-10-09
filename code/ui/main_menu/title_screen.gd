@@ -2,6 +2,7 @@ extends Node
 
 signal slot_chosen
 
+
 func _ready():
 	AUDIO.initSound()
 	$New.grab_focus()
@@ -14,6 +15,7 @@ func _ready():
 		c.connect("button_down", self, "_on_Slot_chosen", [tmp])
 		c.connect("focus_entered", self, "_on_Focus_Entered")
 		tmp += 1
+
 
 func _on_New_pressed():
 	AUDIO.play_se("ENTER_MENU")
@@ -40,6 +42,7 @@ func _input(event: InputEvent):
 		$Load_Screen.hide()
 		$"Load_Screen/Save Slots".remove_focus()
 		$New.grab_focus()
+
 
 func _on_Exit_pressed():
 	AUDIO.play_se("EXIT_MENU")

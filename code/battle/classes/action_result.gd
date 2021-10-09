@@ -5,10 +5,12 @@ class_name ActionResult
 	Currently unused
 """
 
-var type : String
+var type: String
+
 
 func get_type() -> String:
 	return type
 
+
 func format() -> String:
-	return "{type: "+self.type+"}"
+	return "{type: " + self.type + "}"

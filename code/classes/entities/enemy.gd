@@ -1,10 +1,11 @@
 extends Entity
 class_name Enemy
 
-var target : int = -10
+var target: int = -10
 var action: Action = null
 
-var turns : int = 0
+var turns: int = 0
+
 
 func _init(id, lv, experience, img, animation, valores, identificacao, habilidades, resistances):
 	self.id = id
@@ -23,19 +24,20 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.tipo = "Enemy"
 	self.target = -10
 
+
 func AI(player_list: Array, enemies_list: Array) -> Action:
 	# Get previously defined target
 	var target = get_target()
-	
+
 	turns -= 1
 	if turns == 0:
 		self.action = null
-	
+
 	# Get previously defined action and execute it if exists
 	var action = get_action()
 	if action != null:
 		return action
-	
+
 	# Check if allies need healing
 	for e in enemies_list:
 		if not e.is_dead():
@@ -54,12 +56,16 @@ func AI(player_list: Array, enemies_list: Array) -> Action:
 		var sk = self.skills[i]
 		if sk.type == "OFFENSE":
 			for ef in sk.effect:
-				if ef.get_id() == HP and ef.get_value() < best_dmg and self.get_mp() >= sk.get_cost():
+				if (
+					ef.get_id() == HP
+					and ef.get_value() < best_dmg
+					and self.get_mp() >= sk.get_cost()
+				):
 					best_dmg = ef.get_value()
 					best_skill = i
 	if best_skill != -1:
 		return Action.new("Skill", best_skill, [target])
-	
+
 	# Not enough MP, simply use attack
 	return Action.new("Attack", 1, [target])
 
@@ -70,14 +76,18 @@ func sum(array: Array):
 		total += i
 	return total
 
+
 func get_xp():
 	return self.xp
+
 
 func get_target():
 	return self.target
 
+
 func get_action():
 	return self.action
+
 
 func set_next_action(action_arg: Action, number_of_turns = 1):
 	self.action = action_arg
@@ -85,9 +95,11 @@ func set_next_action(action_arg: Action, number_of_turns = 1):
 		self.action.targets[i] = -(self.action.targets[i] + 1)
 	self.turns = number_of_turns
 
+
 func set_next_target(player_id: int, number_of_turns = 1):
 	self.target = player_id
 	self.turns = number_of_turns
+
 
 func update_target(player_list: Array, enemy_list: Array):
 	turns -= 1
@@ -101,7 +113,7 @@ func update_target(player_list: Array, enemy_list: Array):
 			index = -(target + 1)
 			list = player_list
 		if not list[index].dead:
-			print("[AI "+self.nome+"] won't update target")
+			print("[AI " + self.nome + "] won't update target")
 			return
 		else:
 			turns = 0
@@ -123,14 +135,24 @@ func update_target(player_list: Array, enemy_list: Array):
 		possible_target = alternative_target
 		if possible_target == -10:
 			randomize()
-			possible_target = int(rand_range(0,player_list.size()))
+			possible_target = int(rand_range(0, player_list.size()))
 			while player_list[possible_target].is_dead():
 				randomize()
-				possible_target = int(rand_range(0,player_list.size()))
-	
+				possible_target = int(rand_range(0, player_list.size()))
+
 	self.target = -(possible_target + 1)
+
 
 func _duplicate():
 	var new_stats = [] + self.stats
-	return self.get_script().new(self.id, self.level, self.xp, 
-	self.sprite, self.animations, new_stats, self.nome, self.skills, self.resist)
+	return self.get_script().new(
+		self.id,
+		self.level,
+		self.xp,
+		self.sprite,
+		self.animations,
+		new_stats,
+		self.nome,
+		self.skills,
+		self.resist
+	)

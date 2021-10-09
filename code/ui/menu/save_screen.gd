@@ -9,6 +9,7 @@ var slots = null
 
 signal slot_chosen
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	slots = get_node("All/Left/Save Slots")
@@ -20,6 +21,7 @@ func _ready():
 		tmp += 1
 	for btn in $All/Right/Options_Panel.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
+
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel") and location == "SAVE":
@@ -36,6 +38,7 @@ func _input(event: InputEvent):
 		AUDIO.play_se("EXIT_MENU")
 		get_parent().get_parent().get_parent().return_menu()
 
+
 func _on_Slot_chosen(binds):
 	AUDIO.play_se("ENTER_MENU")
 	chosen_slot = binds
@@ -43,6 +46,7 @@ func _on_Slot_chosen(binds):
 		$SaveDialog.popup()
 	elif state == 2:
 		$LoadDialog.popup()
+
 
 func _on_Save_pressed():
 	AUDIO.play_se("ENTER_MENU")
@@ -66,6 +70,7 @@ func _on_Quit_pressed():
 func _on_QuitDialog_confirmed():
 	AUDIO.play_se("EXIT_MENU")
 	get_tree().quit()
+
 
 func remove_focus():
 	slots.remove_focus()
@@ -91,6 +96,7 @@ func _on_LoadDialog_confirmed():
 	GLOBAL.get_root().close_menu()
 	GLOBAL.get_root().transition(LOCAL.MAP, true)
 	get_tree().change_scene("res://code/root.tscn")
+
 
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")

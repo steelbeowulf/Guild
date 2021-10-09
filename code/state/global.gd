@@ -18,6 +18,7 @@ var RESERVE_PLAYERS
 
 onready var loader = get_node("/root/LOADER")
 
+
 # Load global stuff
 func load_game(slot):
 	# Global data
@@ -26,7 +27,7 @@ func load_game(slot):
 	ITENS = loader.load_all_itens()
 	EQUIPAMENT = loader.load_all_equips()
 	JOBS = loader.load_all_jobs()
-	
+
 	# Saved data
 	var saved_data = SAVE.load_game(slot)
 	print("[GLOBAL load_game] ", saved_data)
@@ -63,15 +64,18 @@ func get_item_ids():
 		item_ids.append(item.id)
 	return item_ids
 
+
 func get_player(player_id):
 	for p in PLAYERS:
 		if p.id == player_id:
 			return p
 
+
 func get_reserve_player(player_id):
 	for p in RESERVE_PLAYERS:
 		if p.id == player_id:
 			return p
+
 
 # Get item ids from equip_inventory
 func get_equip_ids():
@@ -82,7 +86,7 @@ func get_equip_ids():
 
 
 # Check if item_id is in inventory
-func check_item(item_id: int, type="ITEM"):
+func check_item(item_id: int, type = "ITEM"):
 	var inventory = INVENTORY
 	if type == "EQUIP":
 		inventory = EQUIP_INVENTORY

@@ -3,6 +3,7 @@ extends Button
 var targets = []
 signal target_picked
 
+
 # TODO: Make this work for lanes
 func _on_Activate_Targets(skill_type: String):
 	"""
@@ -17,6 +18,7 @@ func _on_Activate_Targets(skill_type: String):
 		self.grab_focus()
 	elif skill_type != "OFFENSE" and self.get_name() == "Players":
 		self.grab_focus()
+
 
 func _on_Deactivate_Targets():
 	"""
@@ -56,6 +58,7 @@ func _on_All_pressed():
 		Send target_picked signal with selected targets
 	"""
 	emit_signal("target_picked", targets)
+
 
 func _on_Focus_First(is_ress: bool):
 	"""

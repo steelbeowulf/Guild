@@ -9,17 +9,18 @@ var res_opts = []
 var res_vecs = []
 var mode_opts = ["Windowed", "Full Screen"]
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var ASPECT_RATIO = 16.0/9.0
+	var ASPECT_RATIO = 16.0 / 9.0
 	var max_res = OS.get_screen_size().y
 	var i = 0
 	while common_res[i] <= max_res:
-		var res = Vector2(ASPECT_RATIO*common_res[i], common_res[i])
+		var res = Vector2(ASPECT_RATIO * common_res[i], common_res[i])
 		res_vecs.append(res)
-		res_opts.append(str(res.x)+"x"+str(res.y))
+		res_opts.append(str(res.x) + "x" + str(res.y))
 		i += 1
-	resolution = i-1
+	resolution = i - 1
 	set_resolution(resolution)
 	set_mode(1)
 
@@ -27,18 +28,23 @@ func _ready():
 func get_current_res():
 	return resolution
 
+
 func get_current():
 	return mode
+
 
 func get_modes():
 	return mode_opts
 
+
 func get_available_resolutions():
 	return res_opts
+
 
 func set_resolution(ID):
 	resolution = ID
 	OS.set_window_size(res_vecs[ID])
+
 
 func set_mode(ID):
 	if ID == 0:

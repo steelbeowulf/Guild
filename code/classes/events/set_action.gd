@@ -8,7 +8,15 @@ var action_targets: Array
 var force: bool
 var turns: int
 
-func _init(entity_arg: Entity, action_type: String, action_arg: int, action_targets: Array, turns_arg: int, force_arg: bool):
+
+func _init(
+	entity_arg: Entity,
+	action_type: String,
+	action_arg: int,
+	action_targets: Array,
+	turns_arg: int,
+	force_arg: bool
+):
 	self.entity = entity_arg
 	self.action_type = action_type
 	self.action_arg = action_arg
@@ -17,8 +25,10 @@ func _init(entity_arg: Entity, action_type: String, action_arg: int, action_targ
 	self.turns = turns_arg
 	self.type = "SET_ACTION"
 
+
 func is_forced() -> bool:
 	return self.force
+
 
 func get_entity() -> Entity:
 	return self.entity

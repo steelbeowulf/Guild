@@ -4,7 +4,8 @@ onready var player = null
 onready var identification
 onready var skills
 onready var mpleft
-onready var location = "OUTSIDE" #this doesnt work yet, pressing esc on the menu opens the item menu
+onready var location = "OUTSIDE"  #this doesnt work yet, pressing esc on the menu opens the item menu
+
 
 func _ready():
 	give_focus()
@@ -17,8 +18,9 @@ func _ready():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 
+
 func just_entered(id):
-	print("[SKILL] just entered "+str(id))
+	print("[SKILL] just entered " + str(id))
 	player = GLOBAL.get_player(id)
 	location = "SUBMENU"
 	show_equips()
@@ -35,14 +37,15 @@ func show_equips():
 		if mpleft < skills[i].quantity:
 			node.disabled = true
 			#node.hide() #Hide por enquanto, depois vai ser so impossibilitado de usar, mas mostrando que a skill existe
-		elif skills[i].type == "OFFENSE" :
+		elif skills[i].type == "OFFENSE":
 			node.disabled = true
 		get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 		for e in $Panel/HBoxContainer/Skills.get_children():
 			e.set_focus_mode(0)
 
+
 #not done yet
-func update_skills(skills):#Ainda mantendo a solução temporaria de esconder o node quando nao houver mais mana para as skills
+func update_skills(skills):  #Ainda mantendo a solução temporaria de esconder o node quando nao houver mais mana para as skills
 	if !skills:
 		return
 	for i in range(len(skills)):
@@ -58,29 +61,40 @@ func _on_Skill_selected(id):
 	AUDIO.play_se("ENTER_MENU")
 	skill = player.get_skills()[id]
 	var nome = skill.get_name()
-	print("SELECTED "+str(nome))
+	print("SELECTED " + str(nome))
 	#set_description(item)
 	use_skill(skill)
+
 
 #not done yet
 func _on_Skill_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	skill = player.get_skills()[id]
 	var nome = skill.get_name()
-	print("SELECTED "+str(skill))
+	print("SELECTED " + str(skill))
 	set_description(skill)
+
 
 #not done yet
 func set_description(skill):
 	print("Set description")
 	#print(item.get_name())
-	var description = "  "+skill.get_name()+"\n  Type: "+skill.get_type()+"\n  Targets: "+skill.get_target()
+	var description = (
+		"  "
+		+ skill.get_name()
+		+ "\n  Type: "
+		+ skill.get_type()
+		+ "\n  Targets: "
+		+ skill.get_target()
+	)
 	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
+
 
 #not done yet
 func use_item(item):
 	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().get_parent().use_item(item)
+
 
 #not done yet
 func _process(delta):
@@ -95,6 +109,7 @@ func _process(delta):
 		location = "OUTSIDE"
 		get_parent().get_parent().get_parent().return_menu()
 
+
 #not done yet
 func give_focus():
 	$Panel/HBoxContainer/Options/SkillType1.set_focus_mode(2)
@@ -104,6 +119,7 @@ func give_focus():
 		e.set_focus_mode(0)
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 
+
 #not done yet
 func enter():
 	give_focus()
@@ -112,6 +128,7 @@ func enter():
 		c.connect("target_selected", self, "_on_Skill_hover")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 	#show_skills(GLOBAL.PLAYERS)
+
 
 #not done yet
 func use_skill(skill):
@@ -124,6 +141,7 @@ func use_skill(skill):
 	#if mpleft < 0:
 	#	mpleft = 0
 
+
 #not done yet
 func _on_Skill_Type_1_pressed():
 	AUDIO.play_se("ENTER_MENU")
@@ -134,12 +152,14 @@ func _on_Skill_Type_1_pressed():
 	location = "SKILLS"
 	get_node("Panel/HBoxContainer/Skills/SkillSlot0").grab_focus()
 
+
 #not done yet
 func _on_Back_pressed():
 	AUDIO.play_se("EXIT_MENU")
 	print(location)
 	location == "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
+
 
 #not done yet
 func _on_Focus_Entered():

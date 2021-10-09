@@ -3,6 +3,7 @@ extends Control
 onready var location = "MENU"
 onready var x
 
+
 func _ready():
 	for btn in $All/Right/Options_Panel/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
@@ -11,13 +12,13 @@ func _ready():
 func enter(players):
 	location = "MENU"
 	for i in range(len(GLOBAL.PLAYERS)):
-		var node = get_node("All/Left/Chars/Char"+str(i))
+		var node = get_node("All/Left/Chars/Char" + str(i))
 		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.PLAYERS[i].id])
 		node.connect("focus_entered", self, "_on_Focus_Entered")
 	x = len(players)
 	give_focus()
 	for i in range(len(players)):
-		var node = get_node("All/Left/Chars/Char"+str(i))
+		var node = get_node("All/Left/Chars/Char" + str(i))
 		node.update_info(players[i])
 
 
@@ -39,14 +40,14 @@ func update_info():
 
 
 func format_gold(money):
-	return str(money)+"G"
+	return str(money) + "G"
 
 
 func format_playtime(T):
 	var hours = floor(T / 3600)
-	var minutes = floor(T / 60) - hours*60
-	var seconds = (int(T) % int(60))
-	return str(hours)+"h"+str(minutes)+"m"+str(seconds)+"s" 
+	var minutes = floor(T / 60) - hours * 60
+	var seconds = int(T) % int(60)
+	return str(hours) + "h" + str(minutes) + "m" + str(seconds) + "s"
 
 
 func force_char_focus():
@@ -83,6 +84,7 @@ func give_focus():
 			l.set_focus_mode(2)
 	options[0].grab_focus()
 
+
 func change_focus():
 	print("troca foco")
 	var options = $All/Right/Options_Panel/Options.get_children()
@@ -97,6 +99,7 @@ func change_focus():
 			l.set_focus_mode(0)
 	chars[0].grab_focus()
 
+
 func _on_Item_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	get_parent().get_parent().open_inventory()
@@ -106,7 +109,7 @@ func _on_Skill_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	location = "SKILLS"
 	change_focus()
-	
+
 
 func _on_Options_pressed():
 	AUDIO.play_se("ENTER_MENU")
@@ -126,6 +129,7 @@ func _on_Status_pressed():
 
 func _on_Focus_Entered():
 	AUDIO.play_se("MOVE_MENU")
+
 
 func _on_Equip_pressed():
 	AUDIO.play_se("ENTER_MENU")

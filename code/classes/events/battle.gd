@@ -1,12 +1,13 @@
 extends Event
 class_name Battle
 
-var enemies : Array
-var enemy_ids : Array
-var bgm : String
-var background : String
-var events : Dictionary
-var original_events : Array
+var enemies: Array
+var enemy_ids: Array
+var bgm: String
+var background: String
+var events: Dictionary
+var original_events: Array
+
 
 func _init(enemies_arg: Array, background_arg: String, bgm_arg: String, events_arg = []):
 	self.enemy_ids = enemies_arg
@@ -19,7 +20,7 @@ func _init(enemies_arg: Array, background_arg: String, bgm_arg: String, events_a
 	self.events = _create_event_dict(events_arg)
 	self.played = false
 	self.recurrence = "ONCE"
-	print("[BATTLE EVENT PARSE] "+str(self.events))
+	print("[BATTLE EVENT PARSE] " + str(self.events))
 
 
 func add_events(events_arg: Array) -> void:
@@ -46,14 +47,18 @@ func get_events(key: String):
 		return events[key]
 	return []
 
+
 func get_enemies():
 	return self.enemies
+
 
 func get_background():
 	return self.background
 
+
 func get_bgm():
 	return self.bgm
+
 
 func _create_event_dict(events: Array) -> Dictionary:
 	var event_dict = {}
@@ -64,6 +69,7 @@ func _create_event_dict(events: Array) -> Dictionary:
 		else:
 			event_dict[k] = [e]
 	return event_dict
+
 
 func _duplicate():
 	var new_events = self.original_events.duplicate(true)

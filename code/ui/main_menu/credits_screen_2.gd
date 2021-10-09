@@ -1,8 +1,10 @@
 extends Node
 
+
 func _ready():
 	AUDIO.stop_bgm()
 	$Title.grab_focus()
+
 
 func _on_Button_pressed():
 	AUDIO.play_se("EXIT_MENU")

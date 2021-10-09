@@ -1,17 +1,32 @@
 extends Entity
 class_name Player
 
-const equip_dict = {'HEAD':0, 'BODY':1, 'WEAPON':2, 'ACCESSORY1':3, 'ACCESSORY2':4}
+const equip_dict = {"HEAD": 0, "BODY": 1, "WEAPON": 2, "ACCESSORY1": 3, "ACCESSORY2": 4}
 
 var hate = []
 var multiplier = [0.5, 1.0, 3.0]
-var equips = [] # Head, Body, Hands, Acc1, Acc2
+var equips = []  # Head, Body, Hands, Acc1, Acc2
 var jobs = []
 var possible_skills = {}
 
 var portrait
 
-func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, habilidades, equipamentos, resistances, classes):
+
+func _init(
+	id,
+	lv,
+	experience,
+	img,
+	port,
+	anim,
+	valores,
+	pos,
+	identificacao,
+	habilidades,
+	equipamentos,
+	resistances,
+	classes
+):
 	self.id = id
 	self.sprite = img
 	self.animations = anim
@@ -31,6 +46,7 @@ func _init(id, lv, experience, img, port, anim, valores,  pos, identificacao, ha
 	self.resist["MAGIC"] = 1.0
 	self.tipo = "Player"
 	self.jobs = classes
+
 
 func save_data():
 	var dict = {}
@@ -60,29 +76,37 @@ func save_data():
 	dict["JOBS"] = get_jobs()
 	return dict
 
+
 func get_sprite():
 	return self.sprite
+
 
 func get_animation():
 	return self.animations
 
+
 func get_portrait():
 	return self.portrait
+
 
 func get_skills():
 	return self.skills
 
+
 func get_possible_skills():
 	return self.possible_skills
 
+
 func get_equips():
 	return self.equips
+
 
 func get_skill_ids():
 	var ids = []
 	for skill in get_skills():
 		ids.append(skill.id)
 	return ids
+
 
 func get_equip_ids():
 	var ids = []
@@ -94,7 +118,7 @@ func get_equip_ids():
 	return ids
 
 
-func unequip(equipament, slot=-1):
+func unequip(equipament, slot = -1):
 	print("Unequipping ", equipament.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipament.location == "ACCESSORY":
@@ -110,7 +134,7 @@ func unequip(equipament, slot=-1):
 	self.equips[slot] = null
 
 
-func equip(equipament, slot=-1):
+func equip(equipament, slot = -1):
 	print("Equipping ", equipament.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipament.location == "ACCESSORY":
@@ -124,9 +148,10 @@ func equip(equipament, slot=-1):
 		self.unequip(self.equips[slot], slot)
 	self.equips[slot] = equipament
 	equipament.equipped = id
-	print("Agora "+str(slot)+" tem um "+self.equips[slot].get_name())
+	print("Agora " + str(slot) + " tem um " + self.equips[slot].get_name())
 	for effect in self.equips[slot].get_effects():
 		self.stats[effect.get_id()] += effect.get_value()
+
 
 func get_equip(location: String):
 	if location == "ACCESSORY":
@@ -138,55 +163,67 @@ func get_equip(location: String):
 	var slot = equip_dict[location]
 	return self.equips[slot]
 
+
 func get_resistance():
 	return self.resist
+
 
 func get_resist(type):
 	return self.resist[type]
 
+
 func get_hate():
 	return self.hate
+
 
 # Return current (active) job
 func get_job():
 	return self.jobs[0].get_name()
 
+
 func get_jobs():
 	return self.jobs
+
 
 func zero_hate():
 	for i in range(len(hate)):
 		hate[i] = 0
 
+
 func reset_hate():
 	hate = []
 
+
 func die():
-	print("[PLAYER] "+self.nome+" has died!")
+	print("[PLAYER] " + self.nome + " has died!")
 	self.set_stats(HP, 0)
 	self.remove_all_status()
 	self.status["KO"] = [9999, 9999]
 	self.dead = true
 	self.zero_hate()
 
+
 func update_hate(dmg, enemy):
-	self.hate[enemy] += multiplier[position]*abs(dmg)
+	self.hate[enemy] += multiplier[position] * abs(dmg)
 	return self.hate
+
 
 func learn_correct_skills(current_level: int, skills_arg: Dictionary):
 	for s in skills_arg.keys():
 		if s <= current_level:
 			learn_skill(skills_arg[s])
 
+
 func get_exp_to_level_up():
-	return ceil(pow(1.8, self.level)*5.0)
+	return ceil(pow(1.8, self.level) * 5.0)
+
 
 func gain_exp(experience: int):
 	var leveled_up = 0
 	var level_up_dict = {"skills": []}
 	self.xp += experience
 	var xp_to_level_up = get_exp_to_level_up()
-	
+
 	while self.xp >= xp_to_level_up:
 		level_up_dict = self.level_up(level_up_dict)
 		self.xp -= xp_to_level_up
@@ -194,16 +231,19 @@ func gain_exp(experience: int):
 		leveled_up += 1
 	return [leveled_up, level_up_dict]
 
+
 func has_skill(id: int):
 	for sk in self.skills:
 		if sk.id == id:
 			return true
 	return false
 
+
 func learn_skill(skill):
 	if not has_skill(skill.id):
 		self.skills.append(skill)
 		return skill
+
 
 func level_up(level_up_dict: Dictionary):
 	self.level += 1
@@ -234,11 +274,23 @@ func level_up(level_up_dict: Dictionary):
 		self.set_stats(stat_key, self.get_stats(stat_key) + stat_up)
 		if level_up_dict.has(stat_key):
 			level_up_dict[stat] += stat_up
-		else:	
+		else:
 			level_up_dict[stat] = stat_up
 	return level_up_dict
 
+
 func _duplicate():
 	var new_stats = [] + self.stats
-	return self.get_script().new(self.id, self.level, self.xp, 
-	self.sprite, self.animations, new_stats, self.position, self.nome, self.skills, self.equips, self.resist)
+	return self.get_script().new(
+		self.id,
+		self.level,
+		self.xp,
+		self.sprite,
+		self.animations,
+		new_stats,
+		self.position,
+		self.nome,
+		self.skills,
+		self.equips,
+		self.resist
+	)
