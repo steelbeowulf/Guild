@@ -5,7 +5,6 @@
 [ext_resource path="res://NPCs/Dialogue.tscn" type="PackedScene" id=3]
 [ext_resource path="res://NPCs/DialogueOptions.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Battle"
 length = 0.5
@@ -30,11 +29,13 @@ tracks/0/keys = {
 anims/Battle = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="Transition"]
+visible = false
 margin_right = 1922.0
 margin_bottom = 1090.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Sprite" type="Sprite" parent="Transition"]
+[node name="Map" type="Sprite" parent="Transition"]
+visible = false
 position = Vector2( 992.72, 467.038 )
 texture = ExtResource( 2 )
 
