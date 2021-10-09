@@ -12,7 +12,8 @@ var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW",
 	25:"HIDDEN", 26:"FREEZE", 27:"IMMOBILIZE", 28:"KO", 29:"VEIL", 30:"TRAPPED", 31:"ATTACK_UP",
 	32:"ATTACK_DOWN", 33:"DEFENSE_UP", 34:"DEFENSE_DOWN", 35:"MAGIC_DEFENSE_UP", 37:"MAGIC_DEFENSE_DOWN",
 	38:"MAGIC_ATTACK_UP", 39:"MAGIC_ATTACK_DOWN", 40:"MAX_HP_UP", 41:"MAX_MP_UP", 42:"ACCURACY_UP",
-	43:"ACCURACY_DOWN", 44:"AGILITY_UP", 45:"AGILITY_DOWN", 46:"LUCK_UP", 47:"LUCK_DOWN", 48:"FEAR"}
+	43:"ACCURACY_DOWN", 44:"AGILITY_UP", 45:"AGILITY_DOWN", 46:"LUCK_UP", 47:"LUCK_DOWN", 48:"FEAR",
+	49:"RETREAT", 50:"ADVANCE"}
 
 # Attack type
 enum {PHYSIC, MAGIC}
@@ -256,6 +257,14 @@ func apply_status(status, target, attacker):
 			target.set_stats(AGI, 3*agi/4)
 			target.set_stats(ATK, 3*atk/4)
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
+		elif type == "RETREAT":
+			var currentlane = target.get_pos() #GET_LANE NAO EXISTE AQUI
+			if currentlane != 0:
+				target.set_pos(currentlane - 1)
+		elif type == "ADVANCE":
+			var currentlane = target.get_pos()
+			if currentlane != 2:
+				target.set_pos(currentlane + 1)
 
 	elif value == -1:
 		print("[APPLY] Will remove status "+str(type))
