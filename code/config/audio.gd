@@ -1,29 +1,20 @@
 extends Node
 
-# Streams on which we'll play tue audio
-var music = null
-var audio = []
-var prev_pos = 0.0
-
 # Loads all our songs and SFXs
-var MENU_THEME = load("res://assets/sounds/bgm/TownTheme (online-audio-converter.com).ogg")
-var MAP_THEME = load("res://assets/sounds/bgm/Lonely Witch (online-audio-converter.com).ogg")
-var BATTLE_THEME = load(
-	"res://assets/sounds/bgm/Modern Castle - Tension (online-audio-converter.com).ogg"
-)
-var GAME_OVER_THEME = load("res://assets/sounds/bgm/Game over jingle 4.wav")
-var BOSS_THEME = load(
-	"res://assets/sounds/bgm/Heavy Concept A Bass Master (online-audio-converter.com).ogg"
-)
-var SPELL = load("res://assets/sounds/sfx/Powerup 4 - Sound effects Pack 2.ogg")
-var RUN = load("res://assets/sounds/sfx/Fantozzi-SandL1.ogg")
-var HIT = load("res://assets/sounds/sfx/Explosion 3 - Sound effects Pack 2.ogg")
-var ENTER_MENU = load("res://assets/sounds/sfx/Menu Confirm.ogg")
-var EXIT_MENU = load("res://assets/sounds/sfx/Menu Error.ogg")
-var MOVE_MENU = load("res://assets/sounds/sfx/Menu Move.ogg")
-var MONEY = load("res://assets/sounds/sfx/338260__philsavlem__money-bag.wav")
-var GRASS = load("res://assets/sounds/sfx/151229__owlstorm__grassy-footstep-2.wav")
-var WHISTLE = load("res://assets/sounds/sfx/320140__owlstorm__attention-whistle.wav")
+const MENU_THEME = preload("res://assets/sounds/bgm/TownTheme.ogg")
+const MAP_THEME = preload("res://assets/sounds/bgm/Lonely Witch.ogg")
+const BATTLE_THEME = preload("res://assets/sounds/bgm/Modern Castle - Tension.ogg")
+const GAME_OVER_THEME = preload("res://assets/sounds/bgm/Game over jingle 4.wav")
+const BOSS_THEME = preload("res://assets/sounds/bgm/Heavy Concept A Bass Master.ogg")
+const SPELL = preload("res://assets/sounds/sfx/Powerup 4 - Sound effects Pack 2.ogg")
+const RUN = preload("res://assets/sounds/sfx/Fantozzi-SandL1.ogg")
+const HIT = preload("res://assets/sounds/sfx/Explosion 3 - Sound effects Pack 2.ogg")
+const ENTER_MENU = preload("res://assets/sounds/sfx/Menu Confirm.ogg")
+const EXIT_MENU = preload("res://assets/sounds/sfx/Menu Error.ogg")
+const MOVE_MENU = preload("res://assets/sounds/sfx/Menu Move.ogg")
+const MONEY = preload("res://assets/sounds/sfx/338260__philsavlem__money-bag.wav")
+const GRASS = preload("res://assets/sounds/sfx/151229__owlstorm__grassy-footstep-2.wav")
+const WHISTLE = preload("res://assets/sounds/sfx/320140__owlstorm__attention-whistle.wav")
 
 # Variables used to play sounds
 var songs = {
@@ -45,6 +36,11 @@ var sounds = {
 	"WHISTLE": WHISTLE
 }
 
+# Streams on which we'll play tue audio
+var music = null
+var audio = []
+var prev_pos = 0.0
+
 # Base volumes
 onready var base_master = -10
 onready var base_bgm = 4
@@ -52,7 +48,7 @@ onready var base_se = 12
 
 
 # Initializes or resets the sounds system
-func initSound():
+func init_sound():
 	if audio.size() == 0:
 		for i in range(15):
 			audio.push_back(AudioStreamPlayer.new())

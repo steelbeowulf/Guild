@@ -4,7 +4,7 @@ signal slot_chosen
 
 
 func _ready():
-	AUDIO.initSound()
+	AUDIO.init_sound()
 	$New.grab_focus()
 	$New.connect("focus_entered", self, "_on_Focus_Entered")
 	$Load.connect("focus_entered", self, "_on_Focus_Entered")

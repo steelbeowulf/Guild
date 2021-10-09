@@ -59,7 +59,7 @@ func get_slot():
 func get_equipped():
 	return equipped
 
-func _duplicate():
+func duplicate():
 	var new_effects = [] + self.effect
 	var new_status = [] + self.status
 	return self.get_script().new(self.id, self.name, self.type, self.location, 

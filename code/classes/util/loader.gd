@@ -359,7 +359,7 @@ func parse_inventory(path: String):
 	if result_json.error == OK:
 		var data = result_json.result
 		for item in data:
-			var item_copy = GLOBAL.ITENS[item["ID"]]._duplicate()
+			var item_copy = GLOBAL.ITENS[item["ID"]].duplicate()
 			itens.append(item_copy)
 			item_copy.quantity = item["QUANT"]
 	return itens
@@ -378,7 +378,7 @@ func parse_equipaments(path: String):
 	if result_json.error == OK:
 		var data = result_json.result
 		for equip in data:
-			var equip_copy = GLOBAL.EQUIPAMENT[equip["ID"]]._duplicate()
+			var equip_copy = GLOBAL.EQUIPAMENT[equip["ID"]].duplicate()
 			equips.append(equip_copy)
 			equip_copy.quantity = equip["QUANT"]
 	return equips
@@ -548,7 +548,7 @@ func parse_players(path: String):
 				else:
 					equips.append(null)
 			for job in data["JOBS"]:
-				var job_instance = GLOBAL.JOBS[job["ID"]]._duplicate()
+				var job_instance = GLOBAL.JOBS[job["ID"]].duplicate()
 				job_instance.set_level(job["LEVEL"])
 				jobs.append(job_instance)
 			players.append(

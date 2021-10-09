@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1. The Market.ogg-8208670be74a65e6c498e885b916ee6e.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/bgm/1. The Market.ogg"
+dest_files=[ "res://.import/1. The Market.ogg-8208670be74a65e6c498e885b916ee6e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

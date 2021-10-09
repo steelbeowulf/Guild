@@ -137,7 +137,7 @@ func event_ended():
 	else:
 		print("[EVENTS] Callback event time")
 		NODES["Dialogue"].reset()
-		caller._on_Dialogue_Ended()
+		caller.on_dialogue_ended()
 
 
 func dialogue_ended(force_hide = false):
@@ -149,4 +149,4 @@ func dialogue_ended(force_hide = false):
 	else:
 		print("[EVENTS] Callback dialogue time")
 		NODES["Dialogue"].reset()
-		caller._on_Dialogue_Ended()
+		caller.on_dialogue_ended()

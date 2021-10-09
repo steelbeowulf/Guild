@@ -40,7 +40,7 @@ func get_effects():
 func get_status():
 	return status
 
-func _duplicate():
+func duplicate():
 	var new_effects = [] + self.effect
 	var new_status = [] + self.status
 	var new_anim = {"skill": self.anim}

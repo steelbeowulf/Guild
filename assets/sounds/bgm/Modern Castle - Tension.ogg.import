@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Modern Castle - Tension.ogg-1c9c8e0c56a70eb560d27dd3328a861b.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/bgm/Modern Castle - Tension.ogg"
+dest_files=[ "res://.import/Modern Castle - Tension.ogg-1c9c8e0c56a70eb560d27dd3328a861b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

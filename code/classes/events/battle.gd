@@ -71,6 +71,6 @@ func _create_event_dict(events: Array) -> Dictionary:
 	return event_dict
 
 
-func _duplicate():
+func duplicate():
 	var new_events = self.original_events.duplicate(true)
 	return self.get_script().new(self.enemy_ids, self.background, self.bgm, new_events)

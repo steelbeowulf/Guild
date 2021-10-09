@@ -49,7 +49,7 @@ func _physics_process(delta):
 			inbody.stop.append(self)
 
 
-func _on_Dialogue_Ended():
+func on_dialogue_ended():
 	inbody.stop.pop_front()
 	interacting = false
 	delay = 0.5

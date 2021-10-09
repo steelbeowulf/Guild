@@ -102,7 +102,7 @@ func add_item(item_id: int, item_quantity: int):
 		if item.id == item_id:
 			item.quantity += item_quantity
 			return
-	var item = ITENS[item_id]._duplicate()
+	var item = ITENS[item_id].duplicate()
 	item.quantity = item_quantity
 	INVENTORY.append(item)
 
@@ -113,7 +113,7 @@ func add_equip(equip_id: int, equip_quantity: int):
 		if equip.id == equip_id:
 			equip.quantity += equip_quantity
 			return
-	var equip = EQUIPAMENT[equip_id]._duplicate()
+	var equip = EQUIPAMENT[equip_id].duplicate()
 	equip.quantity = equip_quantity
 	EQUIP_INVENTORY.append(equip)
 

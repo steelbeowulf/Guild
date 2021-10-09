@@ -1,5 +1,7 @@
 extends Node
 
+const ASPECT_RATIO = 16.0 / 9.0
+
 var resolution = 0
 var mode = 0
 
@@ -12,7 +14,6 @@ var mode_opts = ["Windowed", "Full Screen"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var ASPECT_RATIO = 16.0 / 9.0
 	var max_res = OS.get_screen_size().y
 	var i = 0
 	while common_res[i] <= max_res:
@@ -41,15 +42,15 @@ func get_available_resolutions():
 	return res_opts
 
 
-func set_resolution(ID):
-	resolution = ID
-	OS.set_window_size(res_vecs[ID])
+func set_resolution(index: int):
+	resolution = index
+	OS.set_window_size(res_vecs[index])
 
 
-func set_mode(ID):
-	if ID == 0:
+func set_mode(index: int):
+	if index == 0:
 		mode = 0
 		OS.set_window_fullscreen(false)
-	elif ID == 1:
+	elif index == 1:
 		mode = 1
 		OS.set_window_fullscreen(true)

@@ -9,7 +9,7 @@ func start_dialogue(id):
 	var next = encounter.pop_front()
 	GLOBAL.play_dialogue(next, self)
 
-func _on_Dialogue_Ended():
+func on_dialogue_ended():
 	var next = encounter.pop_front()
 	if next:
 		GLOBAL.play_dialogue(next, self)
