@@ -23,7 +23,7 @@ func just_entered():
 func show_itens(bag):
 	for i in range(len(bag)):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
-		node.set_text(str(bag[i].nome) + " x " + str(bag[i].quantity))
+		node.set_text(str(bag[i].name) + " x " + str(bag[i].quantity))
 		node.show()
 		if bag[i].quantity <= 0:
 			node.hide()
@@ -35,7 +35,7 @@ func show_itens(bag):
 func update_itens(bag):
 	for i in range(len(bag)):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
-		node.set_text(str(bag[i].nome) + " x " + str(bag[i].quantity))
+		node.set_text(str(bag[i].name) + " x " + str(bag[i].quantity))
 		if bag[i].quantity == 0:
 			node.disabled = true
 			node.hide()
@@ -47,8 +47,8 @@ func update_itens(bag):
 func _on_Item_selected(id):
 	AUDIO.play_se("ENTER_MENU")
 	item = GLOBAL.inventory[id]
-	var nome = item.get_name()
-	print("SELECTED " + str(nome))
+	var name = item.get_name()
+	print("SELECTED " + str(name))
 	#set_description(item)
 	use_item(item)
 
@@ -56,8 +56,8 @@ func _on_Item_selected(id):
 func _on_Item_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	item = GLOBAL.inventory[id]
-	var nome = item.get_name()
-	print("SELECTED " + str(nome))
+	var name = item.get_name()
+	print("SELECTED " + str(name))
 	set_description(item)
 
 

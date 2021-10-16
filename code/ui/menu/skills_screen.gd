@@ -32,7 +32,7 @@ func show_equips():
 	mpleft = player.get_mp()
 	for i in range(len(skills)):
 		var node = get_node("Panel/HBoxContainer/Skills/SkillSlot" + str(i))
-		node.set_text(str(skills[i].nome) + " - " + str(skills[i].quantity) + "mp")
+		node.set_text(str(skills[i].name) + " - " + str(skills[i].quantity) + "mp")
 		node.show()
 		if mpleft < skills[i].quantity:
 			node.disabled = true
@@ -60,8 +60,8 @@ func update_skills(skills):  #Ainda mantendo a solução temporaria de esconder 
 func _on_Skill_selected(id):
 	AUDIO.play_se("ENTER_MENU")
 	skill = player.get_skills()[id]
-	var nome = skill.get_name()
-	print("SELECTED " + str(nome))
+	var name = skill.get_name()
+	print("SELECTED " + str(name))
 	#set_description(item)
 	use_skill(skill)
 
@@ -70,7 +70,7 @@ func _on_Skill_selected(id):
 func _on_Skill_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	skill = player.get_skills()[id]
-	var nome = skill.get_name()
+	var name = skill.get_name()
 	print("SELECTED " + str(skill))
 	set_description(skill)
 

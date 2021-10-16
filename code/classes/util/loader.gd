@@ -1,4 +1,3 @@
-extends Node
 class_name LOADER
 
 # Path to all persistent game data we're going to load
@@ -36,8 +35,8 @@ const SHOP_CLASS = preload("res://code/classes/events/shop.gd")
 const STATS_CLASS = preload("res://code/classes/events/stat_effect.gd")
 const STATUS_CLASS = preload("res://code/classes/events/status_effect.gd")
 const DIALOGUE_CLASS = preload("res://code/classes/events/dialogue.gd")
-# TODO: Cyclic reference? why?
-var OPTION_CLASS = load("res://code/classes/events/dialogue_option.gd")
+
+const OPTION_CLASS = load("res://code/classes/events/dialogue_option.gd")
 const BATTLE_CLASS = preload("res://code/classes/events/battle.gd")
 const TRANSITION_CLASS = preload("res://code/classes/events/transition.gd")
 const FLAG_CLASS = preload("res://code/classes/events/flag.gd")

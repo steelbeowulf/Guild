@@ -72,7 +72,7 @@ func add_enemies(enemies):
 	enemies.sort_custom(self, "stackagility")
 	battle_over = false
 	for e in enemies:
-		e.nome = BATTLE_MANAGER.get_next_name_in_battle(e.id)
+		e.name = BATTLE_MANAGER.get_next_name_in_battle(e.id)
 		Enemies.append(e)
 		$AnimationManager.add_enemy(e)
 		e.index = total_enemies
@@ -249,7 +249,7 @@ func rounds():
 			current_entity = next
 			next = null
 
-		print("[BATTLE] Turno de " + current_entity.nome)
+		print("[BATTLE] Turno de " + current_entity.name)
 		if i < turnorder.size() - 1:
 			next = turnorder[i + 1]
 		else:
@@ -290,7 +290,7 @@ func rounds():
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
 				block_player_input()
-				action = current_entity.AI(Players, Enemies)
+				action = current_entity.calculate_action(Enemies)
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)

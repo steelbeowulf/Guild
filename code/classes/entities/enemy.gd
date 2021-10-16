@@ -1,5 +1,5 @@
-extends Entity
 class_name Enemy
+extends Entity
 
 var target: int = -10
 var action: Action = null
@@ -7,17 +7,27 @@ var action: Action = null
 var turns: int = 0
 
 
-func _init(id, lv, experience, img, animation, valores, identificacao, habilidades, resistances):
+func _init(
+	id: int,
+	lv: int,
+	experience: int,
+	img: str,
+	animations: Array,
+	values: Array,
+	name: str,
+	skills: Array,
+	resistances: Array
+):
 	self.id = id
-	self.level = int(lv)
-	self.xp = int(experience)
+	self.level = lv
+	self.exp = experience
 	self.sprite = img
-	self.animations = animation
+	self.animations = animations
 	self.classe = "boss"
-	self.stats = valores
+	self.stats = values
 	self.position = 0
-	self.nome = identificacao
-	self.skills = habilidades
+	self.name = name
+	self.skills = skills
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
@@ -25,7 +35,7 @@ func _init(id, lv, experience, img, animation, valores, identificacao, habilidad
 	self.target = -10
 
 
-func AI(player_list: Array, enemies_list: Array) -> Action:
+func calculate_action(enemies_list: Array) -> Action:
 	# Get previously defined target
 	var target = get_target()
 
@@ -78,7 +88,7 @@ func sum(array: Array):
 
 
 func get_xp():
-	return self.xp
+	return self.exp
 
 
 func get_target():
@@ -113,7 +123,7 @@ func update_target(player_list: Array, enemy_list: Array):
 			index = -(target + 1)
 			list = player_list
 		if not list[index].dead:
-			print("[AI " + self.nome + "] won't update target")
+			print("[AI " + self.name + "] won't update target")
 			return
 		else:
 			turns = 0
@@ -148,11 +158,11 @@ func clone():
 	return self.get_script().new(
 		self.id,
 		self.level,
-		self.xp,
+		self.exp,
 		self.sprite,
 		self.animations,
 		new_stats,
-		self.nome,
+		self.name,
 		self.skills,
 		self.resist
 	)

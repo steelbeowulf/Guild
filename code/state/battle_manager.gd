@@ -187,16 +187,16 @@ func get_next_name_in_battle(index: int) -> String:
 		count_in_battle[index] = count_in_battle[index] + 1
 	else:
 		count_in_battle[index] = 0
-		return enemy.nome
-	return enemy.nome + " " + NAME[count_in_battle[index]]
+		return enemy.name
+	return enemy.name + " " + NAME[count_in_battle[index]]
 
 
-func _load_enemies(enemy_indexs: Array):
+func load_enemies(enemy_indexes: Array):
 	var enemies = []
-	enemy_indexs.sort()
-	for index in enemy_indexs:
+	enemy_indexes.sort()
+	for index in enemy_indexes:
 		var enemy = LOCAL.get_enemy(index)
-		enemy.nome = get_next_name_in_battle(index)
+		enemy.name = get_next_name_in_battle(index)
 		enemies.append(enemy)
 	return enemies
 

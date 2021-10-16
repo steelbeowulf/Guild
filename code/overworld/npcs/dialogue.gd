@@ -1,19 +1,20 @@
 extends Control
 
-var dialogues = []
-var dialogue = ""
-var max_cols = 100
-var max_lines = 3
-
 const NORMAL_SPEED = 2.0
 const FAST_SPEED = 8.0
+const MAX_COLS = 100
+const MAX_LINES = 3
+
+var dialogues = []
+var dialogue = ""
+
 
 func _ready():
 	$Text.add_font_override("font", TEXT.get_font())
 	EVENTS.register_node("Dialogue", self)
 
 
-func _process(delta):
+func _process(_delta):
 	if $AnimationPlayer.is_playing() and Input.is_action_just_pressed("ui_accept"):
 		$End.hide()
 		$AnimationPlayer.stop()
@@ -35,38 +36,40 @@ func start_dialogue():
 		EVENTS.dialogue_ended()
 
 
-func push_dialogue(text):
-	var num_lines = max(len(text)/max_cols + 1, 1)
+func push_dialogue(text: str):
+	var num_lines = max(len(text) / MAX_COLS + 1, 1)
 	var new_text = ""
 	var current_line = 0
 	var words = text.split(" ")
 	for i in range(num_lines):
 		var line_size = 0
-		while words and (line_size + len(words[0])) < max_cols:
+		while words and (line_size + len(words[0])) < MAX_COLS:
 			new_text += words[0]
 			line_size += len(words[0]) + 1
 			words.remove(0)
 			new_text += " "
 		new_text += "\n"
 		current_line += 1
-		if current_line == num_lines or current_line == max_lines:
-			num_lines -= max_lines
+		if current_line == num_lines or current_line == MAX_LINES:
+			num_lines -= MAX_LINES
 			current_line = 0
 			dialogues.append(new_text)
 			new_text = ""
 
 
-func set_talker(name, portrait):
+func set_talker(name: str, portrait: Dictionary):
 	$Id.set_text(name)
 	$Sprite.set_texture(load(portrait.sprite))
 	$Sprite.set_scale(Vector2(portrait.scale[0], portrait.scale[1]))
 
 
-func set_dialogue(text):
+func set_dialogue(text: str):
 	dialogue = text
 	if dialogue:
-		var speed = max(len(dialogue)/TEXT.get_speed(), 1.0)
-		$Tween.follow_method(self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0)
+		var speed = max(len(dialogue) / TEXT.get_speed(), 1.0)
+		$Tween.follow_method(
+			self, "set_text", 0, self, "get_length", speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0
+		)
 		$Tween.set_speed_scale(NORMAL_SPEED)
 		$Tween.start()
 	else:
@@ -77,20 +80,21 @@ func set_dialogue(text):
 			self.hide()
 			dialogue = ""
 
+
 func reset():
 	self.hide()
 	dialogue = ""
 
 
-func set_text(value):
+func set_text(value: float):
 	AUDIO.play_se("MOVE_MENU")
-	$Text.set_text(dialogue.substr(0,floor(value)))
+	$Text.set_text(dialogue.substr(0, floor(value)))
 
 
 func get_length():
 	return len(dialogue)
 
 
-func _on_Tween_tween_completed(object, key):
+func _on_Tween_tween_completed(_object, _key):
 	$End.show()
 	$AnimationPlayer.play("Float")

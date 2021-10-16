@@ -19,7 +19,7 @@ func enter(item_arg):
 	whatdo = item.type
 	if item.target == "ALL":
 		$Panel/All/Right/Options_Panel/Panel/Question.set_text(
-			"Usar " + item.nome + " \nem todos os personagens?"
+			"Usar " + item.name + " \nem todos os personagens?"
 		)
 		targets = GLOBAL.players
 		type = "ALL"

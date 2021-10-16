@@ -1,5 +1,5 @@
-extends Event
 class_name Flag
+extends Event
 
 var key: String
 var value

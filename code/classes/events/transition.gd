@@ -1,5 +1,5 @@
-extends Event
 class_name Transition
+extends Event
 
 var area: String
 var map: int

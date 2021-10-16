@@ -1,16 +1,18 @@
-extends Entity
 class_name NPC
+extends Entity
 
 var events
 var portrait
 
 
-func _init(id, name, img, anim, event, portrait):
+func _init(
+	id: int, name: str, img: str, animations: Dictionary, events: Dictionary, portrait: Dictionary
+):
 	self.id = id
-	self.nome = name
+	self.name = name
 	self.sprite = img
-	self.animations = anim
-	self.events = event
+	self.animations = animations
+	self.events = events
 	self.portrait = portrait
 	self.tipo = "NPC"
 

@@ -71,7 +71,7 @@ func get_enemy(enemy_id):
 func get_npc(npc_id):
 	print("[LOCAL] getting npc with id ", npc_id)
 	for npc in npcs:
-		print("NPC ", npc.id, " with name ", npc.nome)
+		print("NPC ", npc.id, " with name ", npc.name)
 		if npc.id == npc_id:
 			print("[LOCAL] found it!")
 			return npc

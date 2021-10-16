@@ -38,7 +38,7 @@ func set_overview_info(player):
 	node.get_node("HP").set_text(tmp)
 	tmp = str(player.get_mp()) + "/" + str(player.get_max_mp())
 	node.get_node("MP").set_text(tmp)
-	tmp = str(player.xp) + "/" + str(((18 / 10) ^ player.level) * 5)
+	tmp = str(player.exp) + "/" + str(((18 / 10) ^ player.level) * 5)
 	node.get_node("EXP").set_text(tmp)
 	# Needs a portrait
 	$Overview/Sprite.set_texture(load(player.portrait))

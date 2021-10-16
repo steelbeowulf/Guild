@@ -1,51 +1,22 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/ui/panels/Menu_Info_Panel.tres" type="StyleBox" id=1]
-[ext_resource path="res://assets/ui/panels/Hover_Menu_Info_Panel.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/ui/panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/ui/fonts/Font24.tres" type="DynamicFont" id=4]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-var options = {}
-
-func _ready():
-	for opt in $Options.get_children():
-		opt.add_font_override(\"font\", TEXT.get_font())
-	EVENTS.register_node(\"DialogueOptions\", self)
-
-func show_options():
-	$Options.get_child(0).grab_focus()
-	self.show()
-
-func push_option(opt):
-	var optionBtn = $Options.get_child(options.size())
-	options[opt.get_option()] = opt.get_results()
-	optionBtn.show()
-	optionBtn.set_text(opt.get_option())
-	optionBtn.disconnect(\"pressed\", self, \"_on_Option_Selected\")
-	optionBtn.connect(\"pressed\", self, \"_on_Option_Selected\", [opt.get_option()])
-
-func _on_Option_Selected(option: String):
-	print(\"[OPTION] \", option, \" selected!\")
-	self.hide()
-	for opt in $Options.get_children():
-		opt.hide()
-	EVENTS.play_events(options[option])
-	options = {}"
+[ext_resource path="res://code/overworld/npcs/dialogue_options.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/panels/Menu_Info_Panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/panels/Hover_Menu_Info_Panel.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/ui/panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/ui/fonts/Font24.tres" type="DynamicFont" id=5]
 
 [node name="OptionsPanel" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1.43201
 margin_bottom = -1.43201
-script = SubResource( 1 )
+script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 898.0
 margin_bottom = 86.0
-custom_styles/panel = ExtResource( 1 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Options" type="VBoxContainer" parent="."]
 margin_right = 893.0
@@ -58,11 +29,11 @@ rect_min_size = Vector2( 0, 80 )
 margin_right = 893.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 text = "Option 1"
 
 [node name="Option2" type="Button" parent="Options" groups=[
@@ -72,11 +43,11 @@ margin_top = 44.0
 margin_right = 893.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 text = "Option 1"
 
 [node name="Option3" type="Button" parent="Options" groups=[
@@ -86,11 +57,11 @@ visible = false
 margin_right = 893.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 text = "Option 1"
 
 [node name="Option4" type="Button" parent="Options" groups=[
@@ -100,10 +71,10 @@ visible = false
 margin_right = 893.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
-custom_styles/hover = ExtResource( 2 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 5 )
 text = "Option 1"
 

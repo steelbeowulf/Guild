@@ -2,6 +2,8 @@ tool
 
 extends Sprite
 
+signal animation_finished
+
 export(String) var physical_frames = "1,3,5-7" setget _set_frames_str
 export(int) var frame_count = 5 setget _set_frame_count
 export(bool) var fix_fps = true setget _set_fix_fps
@@ -13,13 +15,11 @@ export(float) var duration = 1 setget _set_duration  # duration = frame_count * 
 export var playing = true setget _set_playing
 export var loop = false
 export var current_frame = 0 setget _set_current_frame
+export var editor_preview = true
 
 var frame_sequence = PoolIntArray()
 var elapse_time = 0
-export var editor_preview = true
 var on_loading_editor = true
-
-signal animation_finished
 
 
 func _set_playing(value):
@@ -47,10 +47,6 @@ func _set_frames_str(value):
 	property_list_changed_notify()
 
 
-func _set_frame_count(value):  # read-only
-	pass
-
-
 func _set_fix_fps(value):
 	fix_fps = value
 	fix_duration = !fix_fps
@@ -75,10 +71,6 @@ func _set_fps(value):
 
 	_update_fps_and_duration()
 	property_list_changed_notify()
-
-
-func _set_frame_period(value):  # read-only
-	pass
 
 
 func _set_duration(value):

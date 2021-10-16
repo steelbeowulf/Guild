@@ -1,5 +1,5 @@
-extends Event
 class_name SetTarget
+extends Event
 
 var entity: Entity
 var target: Entity

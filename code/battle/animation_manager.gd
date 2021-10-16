@@ -61,7 +61,7 @@ func initialize(Players: Array, Enemies: Array):
 		Info.get_node("P0"), Info.get_node("P1"), Info.get_node("P2"), Info.get_node("P3")
 	]
 	for i in range(len(Players)):
-		Players_status[i].set_name(Players[i].nome)
+		Players_status[i].set_name(Players[i].name)
 		Players_status[i].set_level(Players[i].level)
 
 	return [Players, Enemies]
@@ -174,7 +174,7 @@ func resolve(current_entity: Entity, action_result):
 		emit_signal("animation_finished")
 	else:
 		var skitem = action_result.get_spell()
-		$Log.display_text(skitem.nome)
+		$Log.display_text(skitem.name)
 		var targets = action_result.get_targets()
 		var dies_on_attack = action_result.get_deaths()
 		var stats = action_result.get_stats_change()
@@ -182,8 +182,8 @@ func resolve(current_entity: Entity, action_result):
 		for i in range(len(targets)):
 			var graphics = targets[i].graphics
 			if action_type == "Skill":
-				graphics.set_spell(skitem.img, skitem.anim, skitem.nome)
-				enqueue(graphics, skitem.nome, "Skill")  # spell animation
+				graphics.set_spell(skitem.img, skitem.anim, skitem.name)
+				enqueue(graphics, skitem.name, "Skill")  # spell animation
 			enqueue(graphics, "Damage", stats[i])  # take damage
 			if dies_on_attack[i]:
 				enqueue(graphics, "death", null)  # death animation

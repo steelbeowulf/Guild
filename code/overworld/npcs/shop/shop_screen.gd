@@ -52,7 +52,7 @@ func load_items(item_ids: Array):
 			itens.append(item)
 			item_container.add_child(item_button.instance())
 			var item_btn = item_container.get_child(count)
-			item_btn.set_name(item.nome)
+			item_btn.set_name(item.name)
 			item_btn.set_cost(item.quantity)
 			if MODE == "SELL":
 				item_btn.set_cost(floor(item.quantity / 2))

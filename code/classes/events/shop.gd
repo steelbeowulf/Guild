@@ -1,5 +1,5 @@
-extends Event
 class_name Shop
+extends Event
 
 var goods: Array
 var subtype: String

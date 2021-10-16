@@ -12,7 +12,7 @@ func _ready():
 func show_itens(bag):
 	for i in range(len(bag)):
 		var node = get_node("HBoxContainer/Itens/ItemSlot" + str(i))
-		node.set_text(str(bag[i].nome) + " x" + str(bag[i].quantity))
+		node.set_text(str(bag[i].name) + " x" + str(bag[i].quantity))
 		node.show()
 	get_node("HBoxContainer/Options/Use").grab_focus()
 	for e in $HBoxContainer/Itens.get_children():
@@ -22,7 +22,7 @@ func show_itens(bag):
 func _on_Item_selected(name):
 	#Placeholder until we actually put item funcionality on the game
 	for i in range(len(GLOBAL.inventory)):
-		if GLOBAL.inventory[i].nome in name:  #that doesnt work, usar mega potion ou hi-potion faz usar potion regulares as well
+		if GLOBAL.inventory[i].name in name:  #that doesnt work, usar mega potion ou hi-potion faz usar potion regulares as well
 			GLOBAL.inventory[i].quantity -= 1
 			x = 1
 
@@ -49,5 +49,5 @@ func _process(delta):
 	if x == 1:
 		for i in range(len(GLOBAL.inventory)):
 			var node = get_node("HBoxContainer/Itens/ItemSlot" + str(i))
-			node.set_text(str(GLOBAL.inventory[i].nome) + " x" + str(GLOBAL.inventory[i].quantity))
+			node.set_text(str(GLOBAL.inventory[i].name) + " x" + str(GLOBAL.inventory[i].quantity))
 		x = 0

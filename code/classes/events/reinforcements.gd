@@ -1,5 +1,5 @@
-extends Event
 class_name Reinforcements
+extends Event
 
 var group: String
 var entities: Array

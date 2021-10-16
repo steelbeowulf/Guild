@@ -49,6 +49,7 @@ onready var darkness = [
 	.15  #25
 ]
 
+
 # Loads the correct map
 func _ready():
 	var start = load("res://code/maps/" + str(LOCAL.area) + "/Map" + str(LOCAL.map) + ".tscn")

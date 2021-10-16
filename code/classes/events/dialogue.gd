@@ -1,5 +1,5 @@
-extends Event
 class_name Dialogue
+extends Event
 
 var name: String
 var portrait: Dictionary

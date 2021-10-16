@@ -1,0 +1,17 @@
+name: CI Lint
+on: push
+
+jobs:
+  lint:
+    name: Lint GDScript Code
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - run: pip3 install gdtoolkit
+    - run: |
+        gdlint code/*.gd
+        gdlint code/**/*.gd
+        gdlint code/**/**/*.gd

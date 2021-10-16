@@ -1,5 +1,5 @@
-extends Event
 class_name SetAction
+extends Event
 
 var entity: Entity
 var action_type: String

@@ -67,7 +67,7 @@ func prepare_itens_action(inventory: Array) -> void:
 			itens.get_node(str(i)).set_focus_mode(2)
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(inventory[i].nome + " x" + str(inventory[i].quantity))
+		itens.get_node(str(i)).set_text(inventory[i].name + " x" + str(inventory[i].quantity))
 
 	get_node("Menu/Item")._on_Action_pressed()
 
@@ -87,7 +87,7 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 			itens.get_node(str(i)).set_focus_mode(2)
 			itens.get_node(str(i)).disabled = false
 		itens.get_node(str(i)).show()
-		itens.get_node(str(i)).set_text(skills[i].nome + "  " + str(skills[i].quantity))
+		itens.get_node(str(i)).set_text(skills[i].name + "  " + str(skills[i].quantity))
 
 	get_node("Menu/Skill")._on_Action_pressed()
 

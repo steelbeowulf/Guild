@@ -1,5 +1,5 @@
-extends Event
 class_name DialogueOption
+extends Event
 
 var option: String
 var events: Array
