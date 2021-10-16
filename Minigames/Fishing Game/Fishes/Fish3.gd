@@ -1,15 +1,17 @@
 extends KinematicBody2D
 
-const r: float = 100.0
+const r: float = 5000.0
 
 onready var Timer = $Timer
 var time: float
-var initial_position = Vector2(0,0)
+var initial_position = Vector2(700,700)
+var direction: int = 0  # 1 inverts axis x and y 
 
 # curve cycloid
-func _physics_process(_delta):
+func _physics_process(delta):
 	time = Timer.wait_time - Timer.time_left
-	position = initial_position + r*Vector2(time - sin(time), 1 - cos(time))
+	position[direction] = initial_position[direction] + r*(time - sin(time))*delta
+	position[(direction + 1)%2] = initial_position[(direction + 1)%2] + r*(1 - cos(time))*delta
 	
 
 func _on_Timer_timeout():

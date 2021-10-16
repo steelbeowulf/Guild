@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Minigames/Fishing Game/Fishes/Path.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/Fishing Game/Fishes/FishPath.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Portraits/cleric.png" type="Texture" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -183.399, 1062.84, -66.9124, 56.1201, 66.9124, -56.1201, 116.627, 48.3654, 0, 0, 0, 0, 1508.84, 50.5238, 15.1093, -226.639, -15.1093, 226.639, 1880.09, 404.512, 218.005, -127.349, -218.005, 127.349, 1690.15, 939.812, 0, 0, 0, 0, 742.582, 875.058, -284.917, 302.185, 284.917, -302.185, 259.086, 398.037, -60.437, -103.606, 60.437, 103.606, 112.31, 769.293, 0, 196.42, 0, -196.42, 1280.04, 421.78, 151.093, -179.153, -151.093, 179.153, 654.085, 147.655, 38.8524, 349.671, -38.8524, -349.671, 1554.17, 704.539, 0, 0, 0, 0, 628.184, 1194.51 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24.5529, 23 )
+
+[node name="Fish7" type="Path2D"]
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="PathFollow2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="PathFollow2D/KinematicBody2D"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/KinematicBody2D"]
+shape = SubResource( 2 )
