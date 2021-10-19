@@ -1,12 +1,17 @@
-extends KinematicBody2D
+extends Area2D
 
 const gama: float = -0.5
 const omega: float = 10.0
 
 onready var Timer = $Timer
 var time: float
-var initial_position = Vector2(300,300)
-var direction: int = 1   # 0 when the graphic is f(x) = y, 1 when the graphic is g(y) = x
+var initial_position = Vector2(0,0)
+var direction: int = 0   # 0 when the graphic is f(x) = y, 1 when the graphic is g(y) = x
+
+signal fish_catched
+
+func _ready():
+	connect("fish_catched",get_parent(),"Fish_catched")
 
 # damped harmonic moviment: subcritical regime
 func _physics_process(delta):
@@ -15,4 +20,8 @@ func _physics_process(delta):
 	position[(direction + 1)%2] = initial_position[(direction + 1)%2] + 10000*exp(gama*time)*cos(omega*time)*delta
 
 func _on_Timer_timeout():
+	queue_free()
+
+func _on_Fish5_area_entered(area):
+	emit_signal("fish_catched",5)
 	queue_free()

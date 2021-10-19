@@ -6,9 +6,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.0327, 33.7799 )
 
-[node name="Fish1" type="KinematicBody2D" groups=[
-"Fish",
-]]
+[node name="Fish1" type="Area2D"]
+collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -21,4 +20,5 @@ shape = SubResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 30.0
 autostart = true
+[connection signal="area_entered" from="." to="." method="_on_Fish1_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
