@@ -26,7 +26,7 @@ func _on_Area2D_area_entered(area: Area2D):
 		body_entered = true
 
 
-func update(value: bool):
+func update_state(value: bool):
 	if value:
 		closed = false
 		$Sprite.frame = 3

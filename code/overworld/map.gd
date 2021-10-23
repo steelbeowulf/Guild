@@ -68,7 +68,7 @@ func _ready():
 	if state:
 		for key in state.keys():
 			var value = state[key]
-			get_node(key).update(value)
+			get_node(key).update_state(value)
 
 
 # Updates player position and checks current map doors' conditions

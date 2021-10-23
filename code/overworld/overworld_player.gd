@@ -3,24 +3,25 @@ extends KinematicBody2D
 # Movement speed
 const SPEED = 13500
 const SCALE = 0.3
-var velocity = Vector2(0,0)
+var velocity = Vector2(0, 0)
 
 # List of objects stopping player from moving
 onready var stop = []
 
+
 func set_animations(sprite, animations):
 	$Animations.scale = Vector2(SCALE, SCALE)
-	var img = sprite['path']
-	var vf = sprite['vframes']
-	var hf = sprite['hframes']
-	var sc = sprite['scale']
-	
+	var img = sprite["path"]
+	var vf = sprite["vframes"]
+	var hf = sprite["hframes"]
+	var sc = sprite["scale"]
+
 	for k in animations.keys():
 		var v = animations[k]
 		var animation = Sprite.new()
 		animation.texture = load(img)
 		animation.set_name(k)
-		animation.set_script(load('res://code/classes/util/spritesheet.gd'))
+		animation.set_script(load("res://code/classes/util/spritesheet.gd"))
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
 		animation.vframes = vf
@@ -32,6 +33,7 @@ func set_animations(sprite, animations):
 		animation.playing = false
 		$Animations.add_child(animation)
 
+
 func play(name):
 	if $Animations.get_node(name).playing:
 		return
@@ -39,8 +41,9 @@ func play(name):
 	for c in $Animations.get_children():
 		c.playing = false
 		c.hide()
- 	node.get_node(name).show()
+	node.get_node(name).show()
 	node.get_node(name).play(true)
+
 
 # Initializes player on map - sets position and camera
 func initialize():
@@ -52,7 +55,7 @@ func initialize():
 	$Camera2D.set_limit(MARGIN_LEFT, margin[1])
 	$Camera2D.set_limit(MARGIN_TOP, margin[2])
 	$Camera2D.set_limit(MARGIN_RIGHT, margin[3])
-	print("[PLAYER POSITION] "+str(position))
+	print("[PLAYER POSITION] " + str(position))
 	for p in GLOBAL.players:
 		if not p.dead:
 			set_animations(p.sprite, p.animations)
@@ -62,7 +65,7 @@ func initialize():
 
 # Deals with input and moves player
 func _physics_process(delta):
-	velocity = Vector2(0,0)
+	velocity = Vector2(0, 0)
 	if stop == []:
 		if Input.is_action_pressed("ui_up"):
 			velocity.y = -SPEED
@@ -78,14 +81,12 @@ func _physics_process(delta):
 			velocity.x = SPEED
 			$Animations.scale.x = SCALE
 			$Head.rotation_degrees = 90
-
-	if velocity == Vector2(0,0):
+	if velocity == Vector2(0, 0):
 		play("idle")
 	else:
 		AUDIO.play_se("GRASS", -16)
 		play("move")
-
-	move_and_slide(velocity*delta)
+	move_and_slide(velocity * delta)
 
 
 # Returns direction player is facing

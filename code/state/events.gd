@@ -11,6 +11,7 @@ var events = []
 var npc_name = ""
 var npc_portrait = ""
 
+
 func load_flags(flags_arg: Dictionary):
 	flags = flags_arg
 
@@ -41,6 +42,7 @@ func set_event_status(id: int, status):
 
 
 ### Dialogue
+
 
 func play_events(events: Array):
 	dialogue_count = 0

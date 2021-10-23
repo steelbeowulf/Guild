@@ -4,8 +4,8 @@ extends Node
 var savegame = File.new()
 var save_path = "./Save_data/Slot"
 
-
 onready var loader = get_node("/root/LOADER")
+
 
 # Loads all information from save_slot argument
 func load_info(save_slot):

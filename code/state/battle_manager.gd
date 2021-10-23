@@ -177,6 +177,7 @@ func generate_enemies():
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
 
+
 func reset_count_in_battle():
 	count_in_battle = {}
 
