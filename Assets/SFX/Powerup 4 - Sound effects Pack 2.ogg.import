@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Powerup 4 - Sound effects Pack 2.ogg-405ff4c723099d9
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

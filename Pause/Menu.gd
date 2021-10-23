@@ -4,20 +4,20 @@ onready var location = "MENU"
 onready var x
 
 func _ready():
-	for btn in $Panel/All/Right/Options_Panel/Options.get_children():
+	for btn in $All/Right/Options_Panel/Options.get_children():
 		btn.connect("focus_entered", self, "_on_Focus_Entered")
 
 
 func enter(players):
 	location = "MENU"
 	for i in range(len(GLOBAL.PLAYERS)):
-		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
+		var node = get_node("All/Left/Chars/Char"+str(i))
 		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.PLAYERS[i].id])
 		node.connect("focus_entered", self, "_on_Focus_Entered")
 	x = len(players)
 	give_focus()
 	for i in range(len(players)):
-		var node = get_node("Panel/All/Left/Chars/Char"+str(i))
+		var node = get_node("All/Left/Chars/Char"+str(i))
 		node.update_info(players[i])
 
 
@@ -28,11 +28,11 @@ func _on_Player_chosen(binds):
 	elif location == "EQUIPS":
 		get_parent().get_parent().open_equips(binds)
 	else:
-		get_parent().get_parent().player_clicked(binds)
+		get_parent().get_parent().open_status(binds)
 
 
 func update_info():
-	var info = get_node("Panel/All/Right/Info")
+	var info = get_node("All/Right/Info")
 	info.get_node("Area/Area_text").set_text(LOCAL.AREA)
 	info.get_node("Money/Money_text").set_text(format_gold(GLOBAL.gold))
 	info.get_node("Playtime/Playtime_text").set_text(format_playtime(GLOBAL.playtime))
@@ -51,10 +51,10 @@ func format_playtime(T):
 
 func force_char_focus():
 	print("forço foco no char")
-	var options = $Panel/All/Right/Options_Panel/Options.get_children()
+	var options = $All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(0)
-	var chars = $Panel/All/Left/Chars.get_children()
+	var chars = $All/Left/Chars.get_children()
 	print(chars)
 	for c in chars:
 		c.set_focus_mode(2)
@@ -67,11 +67,11 @@ func force_char_focus():
 func give_focus():
 	print("deu foco")
 	var players_avaliable = x
-	var options = $Panel/All/Right/Options_Panel/Options.get_children()
+	var options = $All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(2)
 		b.disabled = false
-	var chars = $Panel/All/Left/Chars.get_children()
+	var chars = $All/Left/Chars.get_children()
 	var n = []
 	for i in range(players_avaliable):
 		n.insert(i, chars[i])
@@ -85,11 +85,11 @@ func give_focus():
 
 func change_focus():
 	print("troca foco")
-	var options = $Panel/All/Right/Options_Panel/Options.get_children()
+	var options = $All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(0)
 		b.disabled = true
-	var chars = $Panel/All/Left/Chars.get_children()
+	var chars = $All/Left/Chars.get_children()
 	for c in chars:
 		c.set_focus_mode(2)
 		c.disabled = false

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/320140__owlstorm__attention-whistle.wav-39ab82e2f8a482fcbfb130151eeccb82.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/320140__owlstorm__attention-whistle.wav"
+dest_files=[ "res://.import/320140__owlstorm__attention-whistle.wav-39ab82e2f8a482fcbfb130151eeccb82.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

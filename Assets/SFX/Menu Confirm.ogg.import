@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Menu Confirm.ogg-ebec906c0c18878361c52a6d0bfdfb20.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

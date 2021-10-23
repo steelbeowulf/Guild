@@ -15,70 +15,114 @@ var sstats = {0:"CONFUSION", 1:"POISON", 2:"BURN", 3:"SLOW",
 	43:"ACCURACY_DOWN", 44:"AGILITY_UP", 45:"AGILITY_DOWN", 46:"LUCK_UP", 47:"LUCK_DOWN", 48:"FEAR"}
 
 # Attack type
-enum {PHYSIC, MAGIC, FIRE}
-var dtype = {PHYSIC:"físico", MAGIC:"mágico"}
-var dlanes = {0:"do fundo", 1:"do meio", 2:"da frente"}
+enum {PHYSIC, MAGIC}
 
-func apply_effect(who, effect, target, t_id):
-	var ret = -1
-	var tipo = -1
-	var stat = effect[0]
-	var value = effect[1]
-	var type = effect[2]
-	var TargetStat = target.get_stats(stat)
-	var atk = who.get_stats(ATK)
-	var atkm = who.get_stats(ATKM)
-	var def = target.get_stats(DEF)
-	var defm = target.get_stats(DEFM)
-	var acc = who.get_stats(ACC)
-	var lck = who.get_stats(LCK)
-	var lv = who.level
-	print(who.position)
-	if (type == PHYSIC):
-		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
-		var maxdamage = ((value*(512-def)*basedamage)/(33*512))
-		var truedamage
-		truedamage = ceil(maxdamage)
-		truedamage = truedamage*rand_range(89, 100)/100
-		print("dano base: -" ,ceil(basedamage))
-		print("dano maximo: " , ceil(maxdamage))
-		print("resultado: " , ceil(truedamage))
-	var finalval = TargetStat + value
-	var valmax = 9999
-	if stat == HP and value < 0:
-		tipo = 0
-		var dmg = target.take_damage(type, abs(value))
-		ret = dmg
-		if LOCAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
-			who.update_hate(dmg, t_id)
-	else:
-		if stat == HP:
-			valmax = target.get_stats(HP_MAX)
+const MAX_VALUE = 9999
+
+func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit, crit):
+	var ret = 0 # Stat difference for displaying numbers
+	var tipo = -1 # 0 for HP, 1 for MP
+	
+	var stat = effect.get_id()
+	var base_value = effect.get_value()
+	var type = effect.get_type()
+	
+	# Should be HP or MP
+	var affected_stat = target.get_stats(stat)
+	var lv = who.get_level()
+	var target_lv = target.get_level()
+	#var user_luck = who.get_lck()
+	#var target_luck = target.get_lck()
+
+#	Previous calculation: commented in case we want to reuse it
+#		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
+#		var maxdamage = ((value*(512-def)*basedamage)/(33*512))
+#		var truedamage
+#		truedamage = ceil(maxdamage)
+#		truedamage = truedamage*rand_range(89, 100)/100
+#		print("[APPLY] dano base: -" ,ceil(basedamage))
+#		print("[APPLY] dano maximo: " , ceil(maxdamage))
+#		print("[APPLY] resultado: " , ceil(truedamage))
+	
+	var final_value = 0
+	var max_value = 9999
+	var value = 0
+	var atk_scalar = 1.0
+	var def_scalar = 1.0
+	
+	print("[APPLY EFFECT] "+effect.format())
+	if hit:
+		# Offensive case: Damages HP
+		if stat == HP and base_value < 0:
+			print("[APPLY EFFECT] Offensive")
 			tipo = 0
-			ret = -value
-			if finalval > valmax:
-				finalval = valmax
-				ret = -(valmax - target.get_health())
+			
+			# TODO: Make skill type consistent
+			if (typeof(type) == TYPE_STRING and type == "PHYSIC" or typeof(type) == TYPE_INT and type == PHYSIC):
+				print("[APPLY EFFECT] Physical attack")
+				atk_scalar = target.get_stats(ATK)
+				def_scalar = target.get_stats(DEF)
+			else:
+				print("[APPLY EFFECT] Magic attack")
+				atk_scalar = target.get_stats(ATKM)
+				def_scalar = target.get_stats(DEFM)
+				
+			var ceil_value = ceil(base_value*(atk_scalar/150.0 + 1.0) + (def_scalar * target_lv / 2.0))
+			value = floor(ceil_value*rand_range(89, 100)/100)
+			value = min(0, value)
+			final_value = affected_stat + value
+			ret = abs(value)
+			if LOCAL.IN_BATTLE and target.classe == "boss" and who.classe != "boss":
+				who.update_hate(value, target.index)
+		# Support case: Heals HP
+		elif stat == HP:
+			print("[APPLY EFFECT] Recovery")
+			# Cannot heal above MAX HP
+			atk_scalar = target.get_stats(ATKM)
+			var ceil_value = base_value*(atk_scalar/200.0 + 1.0)
+			value = floor(ceil_value*rand_range(89, 100)/100)
+			value = min(MAX_VALUE, value)
+			max_value = target.get_stats(HP_MAX)
+			final_value = affected_stat + value
+			tipo = 0
+			ret = -ceil(value)
+			if final_value > max_value:
+				final_value = max_value
+				ret = -ceil(max_value - target.get_health())
 		elif stat == MP:
-			valmax = target.get_stats(MP_MAX)
+			print("[APPLY EFFECT] MP")
+			# Cannot heal above MAX MP
+			max_value = target.get_stats(MP_MAX)
 			tipo = 1
-			ret = -value
-			if finalval > valmax:
-				finalval = valmax
-				ret = -(valmax - target.get_mp())
-			if finalval < 0:
-				finalval = 0
-		target.set_stats(stat, finalval)
+			final_value = affected_stat + base_value
+			if final_value > max_value:
+				final_value = max_value
+				ret = abs(max_value - target.get_mp())
+			if final_value < 0:
+				final_value = 0
+				
+		#Fix this later with the correct critical hit cap
+		#var crit_chance = min(100, floor((user_luck + lv - target_lv)/3.53))
+		#if(floor(rand_range(0,100.99)) <= crit_chance):
+		#	final_value = final_value * 2
+		#critical hit flag needed
+		
+		
+		print("[APPLY EFFECT] Final value: "+str(final_value))
+		target.set_stats(stat, final_value)
+	
 		if target.get_health() > 0.2*target.get_max_health():
 			target.remove_status("HP_CRITICAL")
-	
+	if crit:
+		ret = ret * 2
 	return [ret, tipo]
+
 
 func apply_status(status, target, attacker):
 	var type = sstats[status[1]]
 	var value = status[0]
 	var atkm = attacker.get_atkm()
-	print("[APPLY] APPLYING STATUS "+type+str(value))
+	print("[APPLY] Applying status ", type, " ", str(value), " on ", target.get_name())
 	if value > 0:
 		randomize()
 		var chance = rand_range(0, 99)
@@ -214,7 +258,7 @@ func apply_status(status, target, attacker):
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	elif value == -1:
-		print("WILL REMOVE STATUS "+str(type))
+		print("[APPLY] Will remove status "+str(type))
 		target.remove_status(type)
 		if type == "ATTACK_UP":
 			var atk = target.get_atk()

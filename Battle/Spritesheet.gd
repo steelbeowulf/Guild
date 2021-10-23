@@ -145,7 +145,6 @@ func reset():
 	elapse_time = 0
 
 func play(from_start = false):
-	print("[SPRITESHEET] Playing")
 	if from_start:
 		reset()
 	playing = true

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Explosion 3 - Sound effects Pack 2.ogg-7fbf6cd1c4e54
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -59,18 +59,42 @@ __meta__ = {
 [node name="Party" type="Node" parent="."]
 
 [node name="Shopkeeper" parent="." instance=ExtResource( 5 )]
-position = Vector2( 536.213, 222.863 )
+position = Vector2( 433.083, 370.192 )
 id = 10
 
+[node name="Radostaw" parent="." instance=ExtResource( 5 )]
+position = Vector2( 536.213, 222.863 )
+id = 16
+
 [node name="Blacksmith" parent="." instance=ExtResource( 5 )]
+visible = false
 position = Vector2( 430.763, 312.163 )
 id = 11
 
 [node name="Teleporter" parent="." instance=ExtResource( 5 )]
 position = Vector2( 566.048, 303.812 )
+scale = Vector2( -2, 2 )
 id = 12
 
 [node name="Fighter" parent="." instance=ExtResource( 5 )]
-position = Vector2( 546.568, 416.797 )
+position = Vector2( 615.321, 265.785 )
+scale = Vector2( -2, 2 )
 id = 13
+
+[node name="Cleric" parent="." instance=ExtResource( 5 )]
+position = Vector2( 616.549, 211.765 )
+scale = Vector2( -2, 2 )
+id = 17
+
+[node name="Maui" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 582.904, 379.429 )
+scale = Vector2( -2, 2 )
+id = 19
+
+[node name="Carolus" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 611.307, 425.435 )
+scale = Vector2( -2, 2 )
+id = 20
 

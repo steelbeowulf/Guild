@@ -11,7 +11,6 @@ var MAP_THEME = load("res://Assets/BGM/Lonely Witch (online-audio-converter.com)
 var BATTLE_THEME = load("res://Assets/BGM/Modern Castle - Tension (online-audio-converter.com).ogg")
 var GAME_OVER_THEME = load("res://Assets/BGM/Game over jingle 4.wav")
 var BOSS_THEME = load("res://Assets/BGM/Heavy Concept A Bass Master (online-audio-converter.com).ogg")
-var MINIGAME_THEME = load("res://Assets/BGM/happy_theme.ogg")
 var SPELL = load("res://Assets/SFX/Powerup 4 - Sound effects Pack 2.ogg")
 var RUN = load("res://Assets/SFX/Fantozzi-SandL1.ogg")
 var HIT = load("res://Assets/SFX/Explosion 3 - Sound effects Pack 2.ogg")
@@ -20,15 +19,14 @@ var EXIT_MENU = load("res://Assets/SFX/Menu Error.ogg")
 var MOVE_MENU = load("res://Assets/SFX/Menu Move.ogg")
 var MONEY = load("res://Assets/SFX/338260__philsavlem__money-bag.wav")
 var GRASS = load("res://Assets/SFX/151229__owlstorm__grassy-footstep-2.wav")
-var BELL = load("res://Assets/SFX/Bell-Sounds.wav")
-var ARROW = load("res://Assets/SFX/arrowHit01.wav")
+var WHISTLE = load("res://Assets/SFX/320140__owlstorm__attention-whistle.wav")
 
 # Variables used to play sounds
 var songs = {'MENU_THEME':MENU_THEME, 'MAP_THEME':MAP_THEME, 'BATTLE_THEME':BATTLE_THEME,
-'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME, 'MINIGAME_THEME': MINIGAME_THEME}
+'GAME_OVER_THEME':GAME_OVER_THEME, 'BOSS_THEME':BOSS_THEME}
 var sounds = {'SPELL':SPELL, 'RUN':RUN, 'HIT':HIT,
 'ENTER_MENU':ENTER_MENU, 'EXIT_MENU':EXIT_MENU, 'MOVE_MENU':MOVE_MENU,
-'MONEY': MONEY, 'GRASS': GRASS, 'BELL': BELL, 'ARROW': ARROW}
+'MONEY': MONEY, 'GRASS': GRASS, 'WHISTLE': WHISTLE}
 
 # Base volumes
 onready var base_master = -10

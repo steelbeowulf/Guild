@@ -70,8 +70,7 @@ func play(name, options=[]):
 		self.Mp = Mp - options
 		self.set_mp(Mp)
 	else:
-		print("UPDATE DUNNO WHAT")
-		print(options)
+		print("[PLAYER_INFO] Updating something weird: ", options)
 
 func _on_Tween_tween_started(object, key):
 	pass

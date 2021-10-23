@@ -59,14 +59,14 @@ func show_equips(equipaments, type):
 			node.show()
 			node.disabled = false
 			# Disable if wrong job
-			if equipaments[j].job != player.job:
+			if equipaments[j].job != player.get_job():
 				node.disabled = true
 
 # Get first equippable item from equip list
 # Avoids giving focus to wrong job itens
 func get_first_equippable():
 	for i in range(len(equips)):
-		if equips[i] != null and equips[i].job == player.job:
+		if equips[i] != null and equips[i].job == player.get_job():
 			return get_node("Panel/HBoxContainer/Equips/EquipSlot" + str(i))
 
 # Equip item with id

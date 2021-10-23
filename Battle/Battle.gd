@@ -9,6 +9,7 @@ var skill
 
 var current_entity
 var current_action
+var turnorder = []
 
 var total_enemies = 0
 var total_allies = 0
@@ -16,8 +17,73 @@ var total_allies = 0
 var boss = false
 const RUN_CHANCE = 75
 
+
+var forced_agent = null
+var next = null
+
 signal round_finished
 signal finish_anim
+signal event_finished
+
+func show_enabled_actions():
+	var menu_children = get_node("Interface/Menu").get_children()
+	menu_children.invert()
+	for action in menu_children:
+		action.hide()
+		var key = "can_battle_" + action.get_name().to_lower()
+		if EVENTS.get_flag(key):
+			action.allowed = true
+			action.disabled = false
+			action.set_focus_mode(2)
+			action.grab_focus()
+			action.show()
+
+func block_player_input():
+	var menu_children = get_node("Interface/Menu").get_children()
+	for c in menu_children:
+		c.disabled = true
+
+func update_turnorder():
+	turnorder = Players + Enemies
+	turnorder.sort_custom(self, "stackagility")
+
+func add_players(players):
+	players.sort_custom(self, "stackagility")
+	for p in players:
+		Players.append(p)
+		$AnimationManager.add_player(p)
+		for e in Enemies:
+			p.hate.append(0)
+		p.index = total_allies
+		total_allies += 1
+		turnorder.append(p)
+	print("[BATTLE REINFORCEMENTS] awaiting animations")
+	yield($AnimationManager, "animation_finished")
+	print("[BATTLE REINFORCEMENTS] animations finished")
+	$AnimationManager.entering = false
+	if(len(EVENTS.events) > 0 or !call_deferred("trigger_event", "on_reinforcements")):
+		EVENTS.event_ended()
+
+
+func add_enemies(enemies):
+	enemies.sort_custom(self, "stackagility")
+	battle_over = false
+	for e in enemies:
+		e.nome = BATTLE_MANAGER.get_next_name_in_battle(e.id)
+		Enemies.append(e)
+		$AnimationManager.add_enemy(e)
+		e.index = total_enemies
+		total_enemies += 1
+		for p in Players:
+			p.hate.append(0)
+		turnorder.append(e)
+	print("[BATTLE REINFORCEMENTS] awaiting animations")
+	yield($AnimationManager, "animation_finished")
+	print("[BATTLE REINFORCEMENTS] animations finished")
+	$AnimationManager.entering = false
+	if(len(EVENTS.events) > 0 or !call_deferred("trigger_event", "on_reinforcements")):
+		EVENTS.event_ended()
+
 
 func _ready():
 	LOCAL.entering_battle = false
@@ -58,29 +124,119 @@ func _ready():
 	
 	AUDIO.play_bgm(BATTLE_MANAGER.music)
 
+	# Hide actions that are still locked
+	show_enabled_actions()
+	block_player_input()
+
+	print("[BATTLE] waiting for entrance animations")
+	yield($AnimationManager, "animation_finished")
+	$AnimationManager.entering = false
+	print("[BATTLE] entrance animations finished")
+
 	# Main battle loop: calls rounds() while the battle isn't battle_over
+	if(call_deferred("trigger_event", "on_begin")):
+		yield(self, "event_finished")
+		if forced_agent != null:
+			next = forced_agent
+			forced_agent = null
 	while (not battle_over):
 		rounds()
 		yield(self, "round_finished")
+	if(call_deferred("trigger_event", "on_end")):
+		yield(self, "event_finished")
 	end_battle()
+
+
+func trigger_event(condition: String):
+	if BATTLE_MANAGER.current_battle.get_events(condition):
+		EVENTS.play_events(BATTLE_MANAGER.current_battle.get_events(condition))
+		return true
+	return false
+
+
+func force_next_action(agent: Entity):
+	forced_agent = agent
+
+
+func check_for_events(result: ActionResult):
+	print("[BATTLE EVENT CHECK] "+result.format())
+	var should_play = []
+	if result.get_type() == "Pass" or result.get_type() == "Lane":
+		return false
+	if result.get_type() == "Item" and BATTLE_MANAGER.current_battle.get_events("on_item_use"):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_item_use")
+		for event in events:
+			if result.get_spell().get_name() == event.get_argument(0):
+				should_play.append(event)
+	if result.get_type() == "Skill" and BATTLE_MANAGER.current_battle.get_events("on_skill_use"):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_skill_use")
+		for event in events:
+			if result.get_spell().get_name() == event.get_argument(0):
+				should_play.append(event)
+	
+	var deaths = result.get_deaths()
+	var actor = result.get_actor()
+	if BATTLE_MANAGER.current_battle.get_events("on_target_death") and deaths.has(true):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_target_death")
+		for event in events:
+			for i in range(len(deaths)):
+				if deaths[i]:
+					var target: Entity = result.get_targets()[i]
+					if target.get_name() == event.get_argument(0):
+						if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
+							should_play.append(event)
+	if BATTLE_MANAGER.current_battle.get_events("on_target_damage") or BATTLE_MANAGER.current_battle.get_events("on_target_critical_health"):
+		var events = BATTLE_MANAGER.current_battle.get_events("on_target_damage")
+		var critical_events = BATTLE_MANAGER.current_battle.get_events("on_target_critical_health")
+		for target in result.get_targets():
+			for critical_event in critical_events:
+				if target.get_name() == critical_event.get_argument(0) and target.is_critical_health():
+					if critical_event.get_argument(1) == null or critical_event.get_argument(1) == actor.get_name():
+						should_play.append(critical_event)
+			for event in events:
+				if event and target.get_name() == event.get_argument(0):
+					if event.get_argument(1) == null or event.get_argument(1) == actor.get_name():
+						should_play.append(event)
+	if len(should_play) == 0:
+		return false
+	print("[BATTLE EVENTS] Will try to play: ", format_events(should_play))
+	return EVENTS.play_events(should_play)
+
+func format_events(events):
+	var formatted = ""
+	for e in events:
+		formatted += e.get_type() + str(e.get_arguments()) + "\n"
+	return formatted 
+
+
+func pause():
+	get_tree().paused = true
+
+func resume():
+	get_tree().paused = false
 
 # A round is comprised of the turns of all entities participating in battle
 func rounds():
 	# The status "AGILITY" is used to determine the turn order
-	var turnorder = Players + Enemies
-	turnorder.sort_custom(self, "stackagility")
+	update_turnorder()
 	
 	# Each iteration on this loop is a turn in the game
 	for i in range(turnorder.size()):
 		for e in Enemies:
-			e.update_target(Players)
+			e.update_target(Players, Enemies)
+		
 		current_entity = turnorder[i]
+		
+		if next != null:
+			current_entity = next
+			next = null
+		
 		print("[BATTLE] Turno de "+current_entity.nome)
-		var next = null
 		if i < turnorder.size() - 1:
 			next = turnorder[i+1]
 		else:
 			next = turnorder[0]
+		
 		var id = current_entity.index
 
 		# TODO: Refactor all this
@@ -90,8 +246,7 @@ func rounds():
 		var status = current_entity.get_status()
 		LOADER.List = Enemies
 		if status:
-			print("STATUS")
-			print(status)
+			print("[BATTLE] " + current_entity.get_name() + " status: "+ str(status))
 			var result
 			for st in status.keys():
 				result = result_status(st, status[st], current_entity, $AnimationManager/Log)
@@ -111,12 +266,12 @@ func rounds():
 		var result = null
 		var bounds = []
 
-		print("CAN YOU MOVE??")
-		print(can_actually_move)
+		print("[BATTLE] " + current_entity.get_name() + " can move? "+ str(can_actually_move))
 		if can_actually_move == 0:
 			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.classe == "boss":
+				block_player_input()
 				action = current_entity.AI(Players, Enemies)
 				emit_signal("turn_finished")
 
@@ -131,9 +286,7 @@ func rounds():
 				
 				# Show the Menu and wait until action is selected
 				get_node("Interface/Menu").show()
-				for c in get_node("Interface/Menu").get_children():
-					c.show()
-				$Interface/Menu/Attack.grab_focus()
+				show_enabled_actions()
 				yield($Interface, "turn_finished")
 				action = current_action
 				
@@ -164,19 +317,21 @@ func rounds():
 				emit_signal("round_finished")
 				return
 		$AnimationManager.resolve(current_entity, result)
-		print("WAITING FOR ANIMATIONS")
+		print("[BATTLE] Waiting for animations...")
 		yield($AnimationManager, "animation_finished")
-		print("ANIMATIONS HAVE FINISHED")
+		print("[BATTLE] Animations have finished!")
+		if call_deferred("check_for_events", result):
+			print("[BATTLE] Waiting for events...")
+			yield(self, "event_finished")
+			if forced_agent != null:
+				next = forced_agent
+				forced_agent = null
+			print("[BATTLE] Events have finished!")
 		
-		get_node("Interface/Menu/Attack").grab_focus()
-		get_node("Interface/Menu/Attack").disabled = false
-		get_node("Interface/Menu/Attack").set_focus_mode(2)
-		
-		get_node("Interface/Menu/Skill").disabled = false
-		get_node("Interface/Menu/Skill").set_focus_mode(2)
-		
-		get_node("Interface/Menu/Item").disabled = false
-		get_node("Interface/Menu/Item").set_focus_mode(2)
+		# Hide actions that are still locked
+		for action in $Interface/Menu.get_children():
+			action.hide()
+		show_enabled_actions()
 		
 		# Check if all players or enemies are dead
 		if check_battle_end():
@@ -194,7 +349,12 @@ func check_battle_end():
 	for e in Enemies:
 		if e.is_dead():
 			dead_enemies += 1
-	return dead_allies == total_allies or dead_enemies == total_enemies
+	var death_events = BATTLE_MANAGER.current_battle.get_events("on_target_death")
+	var can_end = true
+	for e in death_events:
+		if e.get_type() == "REINFORCEMENTS" and !e.has_played():
+			can_end = false
+	return (dead_allies == total_allies) or (can_end and dead_enemies == total_enemies)
 
 # Auxiliary function to sort the turnorder vector
 func stackagility(a,b):
@@ -206,27 +366,62 @@ func execute_action(action: Action):
 	print("[BATTLE] Executing action "+str(action.get_type()))
 	# Attack: the target takes PHYSICAL damage
 	if action_type == "Attack":
-		AUDIO.play_se("HIT")
 		var death = false
 		var entities = []
 		var target_id = action.get_targets()[0]
-		print("TARGET ID")
-		print(target_id)
+		
+		# Get target from entity list
+		print("[BATTLE] Target_id: ", target_id)
 		if target_id < 0:
 			target_id += 1
 			entities = Players
 		else:
 			entities = Enemies
 		var target = entities[abs(target_id)]
-		var atk = current_entity.get_atk()
-		var dmg = target.take_damage(PHYSIC, atk)
-		if target.classe == "boss" and current_entity.classe != "boss":
-			var hate = current_entity.update_hate(dmg, target.index)
+		
+		# Create BaseStatEffect
+		var STATS_CLASS = load("res://Classes/Events/StatEffect.gd")
+		var attackEffect = STATS_CLASS.new(HP, "HP", -current_entity.get_atk(), "PHYSIC")
+		var hit = true
+		var crit = false
+		var dmg = 0
+		var result = 0
+		var hate = 0
+		var accuracy = current_entity.get_acc()
+		var evasion = target.get_eva()
+		var entityluck = current_entity.get_lck()
+		var targetluck = target.get_lck()
+		var critchance = min((entityluck - targetluck), 100)
+		if(floor(rand_range(0, 100)) < critchance):
+			crit = true
+		print("[BATTLE] Attacker ACC = " + str(accuracy) + "Target EVA = " + str(evasion))
+		
+		#TO DO: REALMENTE CALCULAR ACERTO
+		if(evasion < accuracy):
+			hit = true
+		elif(floor(rand_range(0, 101)) > 80):
+			hit = true
+		else:
+			print("[BATTLE] Missed!")
+			hit = false
+		
+		if hit:
+			result = apply_effect(current_entity, attackEffect, target, action_type, hit, crit)
+			dmg = result[0]
+			if target.classe == "boss" and current_entity.classe != "boss":
+				hate = current_entity.update_hate(dmg, target.index)
+		else:
+			# TODO: Add sound effect
+			# AUDIO.play_se("MISS")
+			return StatsActionResult.new("Miss", current_entity, [target], [dmg], [death])
 		if target.get_health() <= 0:
 			death = true
 			target.die()
 		print("[BATTLE] alvo="+str(target.get_name())+", dies="+str(death)+", dmg="+str(dmg))
-		return StatsActionResult.new("Attack", [target], [dmg], [death])
+		if not crit:
+			return StatsActionResult.new("Attack", current_entity, [target], [dmg], [death])
+		else:
+			return StatsActionResult.new("Critical Attack", current_entity, [target], [dmg], [death])
 	
 	# Lane: only the player characters may change lanes
 	elif action_type == "Lane":
@@ -242,20 +437,21 @@ func execute_action(action: Action):
 		var targets = action.get_targets()
 		var item_id = action.get_action()
 		var item = Inventory[item_id]
-#
 		var dead = []
 		var stat_change = []
 		var ailments = []
 		var valid_targets = []
 		# Apply the effect on all affected
 		for target_id in targets:
+			# Get correct target
 			var target
 			if target_id < 0:
 				target_id += 1
 				target = Players[abs(target_id)]
 			else:
 				target = Enemies[target_id]
-			# Checks if alvo may be targeted by the item
+			
+			# Checks if target may be targeted by the item
 			var result
 			var ret
 			var type
@@ -263,19 +459,20 @@ func execute_action(action: Action):
 				item.quantity = item.quantity - 1
 				valid_targets.append(target)
 				stat_change.append([])
-				if (item.effect != []):
-					for eff in item.effect:
-						var times = eff[3]
-						for i in range(times):
-							result = apply_effect(current_entity, eff, target,  target.index)
-							if result[0] != -1:
-								ret = result[0]
-								type = result[1]
-								stat_change[-1].append([ret, type])
-				if (item.status != []):
-					for st in item.status:
-						var ailment = apply_status(st, target, current_entity)
-						ailments.append(ailment)
+
+				for eff in item.effect:
+					# TODO: Add times attribute back to StatEffect
+					var times = 1#eff[3]
+					for i in range(times):
+						result = apply_effect(current_entity, eff, target, action_type, true, false)
+						if result[0] != -1:
+							ret = result[0]
+							type = result[1]
+							stat_change[-1].append([ret, type])
+
+				for st in item.status:
+					var ailment = apply_status(st, target, current_entity)
+					ailments.append(ailment)
 				var dies = target.get_health() <= 0
 				if dies:
 					target.die()
@@ -286,7 +483,7 @@ func execute_action(action: Action):
 		if item.quantity == 0:
 			Inventory.remove(item_id)
 		
-		return StatsActionResult.new("Item", valid_targets, stat_change, dead, item)
+		return StatsActionResult.new("Item", current_entity, valid_targets, stat_change, dead, item)
 
 	elif action_type == "Skill":
 		AUDIO.play_se("SPELL", -12)
@@ -298,6 +495,7 @@ func execute_action(action: Action):
 		var stat_change = []
 		var ailments = []
 		var valid_targets = []
+		var hit = true
 		# Apply the effect on all affected
 		for target_id in targets:
 			var target
@@ -313,19 +511,19 @@ func execute_action(action: Action):
 			if not target.is_dead() or skill.type == "RESSURECTION":
 				valid_targets.append(target)
 				stat_change.append([])
-				if (skill.effect != []):
-					for eff in skill.effect:
-						var times = eff[3]
-						for i in range(times):
-							result = apply_effect(current_entity, eff, target,  target.index)
-							if result[0] != -1:
-								ret = result[0]
-								type = result[1]
-								stat_change[-1].append([ret, type])
-				if (skill.status != []):
-					for st in skill.status:
-						var ailment = apply_status(st, target, current_entity)
-						ailments.append(ailment)
+
+				for eff in skill.effect:
+					var times = 1#eff[3]
+					for i in range(times):
+						result = apply_effect(current_entity, eff, target, action_type, hit, false)
+						if result[0] != -1:
+							ret = result[0]
+							type = result[1]
+							stat_change[-1].append([ret, type])
+
+				for st in skill.status:
+					var ailment = apply_status(st, target, current_entity)
+					ailments.append(ailment)
 				var dies = target.get_health() <= 0
 				if dies:
 					target.die()
@@ -335,7 +533,7 @@ func execute_action(action: Action):
 		# Spends the MP
 		var mp = current_entity.get_mp()
 		current_entity.set_stats(MP, mp-skill.quantity)
-		return StatsActionResult.new("Skill", valid_targets, stat_change, dead, skill)
+		return StatsActionResult.new("Skill", current_entity, valid_targets, stat_change, dead, skill)
 	
 	elif action_type == "Run":
 		AUDIO.play_se("RUN")
@@ -349,8 +547,8 @@ func execute_action(action: Action):
 		var passAction = ActionResult.new()
 		passAction.type = "Pass"
 		return passAction
-	
-	
+
+
 # Auxiliary functions for the action selection
 func set_current_action(action):
 	current_action = action

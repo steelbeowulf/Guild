@@ -10,20 +10,10 @@ onready var Map = null
 onready var Battled_Enemies = []
 onready var background
 onready var music = "BATTLE_THEME"
+onready var current_battle = null
 
-# Level up variables
-onready var leveled_up = [0,0,0,0]
-onready var levelup = 0
-onready var lvup_max_hp = 0
-onready var lvup_max_mp = 0
-onready var lvup_agi = 0
-onready var lvup_atk = 0 
-onready var lvup_atkm = 0 
-onready var lvup_def = 0 
-onready var lvup_defm = 0 
-onready var lvup_acc = 0
-onready var lvup_eva = 0  
-onready var lvup_lck = 0 
+# Level up variable
+onready var leveled_up = []
 
 # Config variables
 onready var cursor_default = 0
@@ -90,7 +80,8 @@ func generate_enemies():
 	var newEnemy = []
 	
 	# Randomizes the number of monsters on the encounter
-	var total = 1 + (randi() % 4)
+	# TODO: uncomment this (it was tiring testing things with 4-5 enemies every battle)
+	var total = 1 #+ (randi() % 4)
 	
 	# Checks if it's the demo boss
 	# TODO: Make this not hardcoded
@@ -125,13 +116,15 @@ func generate_enemies():
 	Encounter.shuffle()
 	while current <= total:
 		if Encounter:
-			print("OLD: "+LOCAL.ENEMIES[Encounter[0]].get_name())
-			newEnemy.append(LOCAL.ENEMIES[Encounter[0]]._duplicate())
-			print(LOCAL.ENEMIES[Encounter.pop_front()].get_name())
+			newEnemy.append(Encounter[0])
+			#print("OLD: "+LOCAL.ENEMIES[Encounter[0]].get_name())
+			#newEnemy.append(LOCAL.ENEMIES[Encounter[0]]._duplicate())
+			#print(LOCAL.ENEMIES[Encounter.pop_front()].get_name())
 		else:
 			var enemy_id = 1 + (randi() % (len(Enemies)-2))
-			print("NEW: "+Enemies[enemy_id].get_name())
-			newEnemy.append(Enemies[enemy_id]._duplicate())
+			newEnemy.append(enemy_id)
+			#print("NEW: "+Enemies[enemy_id].get_name())
+			#newEnemy.append(Enemies[enemy_id]._duplicate())
 		current+=1
 
 	Encounter = []
@@ -141,30 +134,63 @@ func generate_enemies():
 
 ###### BATTLE MANAGEMENT FUNCTIONS #####
 
+const DEFAULT_BATTLE_BACKGROUND = 'res://Assets/Backgrounds/forest1.png'
+const DEFAULT_BATTLE_MUSIC = 'BATTLE_THEME'
+
+var BATTLE_CLASS = load("res://Classes/Events/Battle.gd")
+
+var NAME = [
+	"A", "B", "C", "D", "E", "F", 
+	"G", "H", "I", "J", "K", "L", 
+	"M", "N", "O", "P", "Q", "R",
+	"S", "T", "U", "V", "W", "X",
+	"Y", "Z"
+]
+
+# Dictionary: { enemy_id: count on current battle }
+var COUNT_IN_BATTLE = {}
+
+func reset_count_in_battle():
+	COUNT_IN_BATTLE = {}
+
+func get_next_name_in_battle(id: int) -> String:
+	var enemy = LOCAL.get_enemy(id)
+	if COUNT_IN_BATTLE.has(id):
+		COUNT_IN_BATTLE[id] = COUNT_IN_BATTLE[id] + 1
+	else:
+		COUNT_IN_BATTLE[id] = 0
+		return enemy.nome
+	return enemy.nome + " " + NAME[COUNT_IN_BATTLE[id]]
+
 func _load_enemies(enemy_ids: Array):
 	var enemies = []
+	enemy_ids.sort()
 	for id in enemy_ids:
-		enemies.append(LOCAL.get_enemy(id))
+		var enemy = LOCAL.get_enemy(id)
+		enemy.nome = get_next_name_in_battle(id)
+		enemies.append(enemy)
 	return enemies
 
 func initiate_event_battle(battle: Event):
-	Battled_Enemies = _load_enemies(battle.get_enemies())
-	leveled_up = [0,0,0,0]
+	Battled_Enemies = battle.get_enemies()
 	background = load(battle.get_background())
 	music = battle.get_bgm()
+	current_battle = battle._duplicate()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
 # Generates enemies and begins the battle
 func initiate_battle():
 	print("[BATTLE INIT] initiating battle")
-	leveled_up = [0,0,0,0]
-	Battled_Enemies = generate_enemies()
+	var battle = BATTLE_CLASS.new(generate_enemies(), DEFAULT_BATTLE_BACKGROUND, DEFAULT_BATTLE_MUSIC)
+	current_battle = battle._duplicate()
+	Battled_Enemies = battle.get_enemies()
 	get_tree().change_scene("res://Battle/Battle.tscn")
 
 
 # Finishes a battle and manages EXP, level up and game over
 func end_battle(Players, Enemies, Inventory):
 	LOCAL.IN_BATTLE = false
+	COUNT_IN_BATTLE = {}
 	var total_exp = 0
 	
 	# Calculates total EXP based on the enemies killed
@@ -175,118 +201,39 @@ func end_battle(Players, Enemies, Inventory):
 			total_exp += e.get_xp()
 	
 	# Level up alive players and resets status/hate
-	var Play = []
+	var level_up = false
+	var death = 0
 	for p in Players:
 		print("[BM] "+p.get_name())
 		if not p.is_dead():
-			# Resets battle stuff
-			print("is alive")
 			p.remove_all_status()
 			p.zero_hate()
 			p.reset_hate()
+			var levelup_data = p.gain_exp(total_exp)
+			if levelup_data[0] > 0:
+				level_up = true
+			leveled_up.append(levelup_data)
+		else:
+			leveled_up.append([0, {}])
+			death += 1
 
-			# Level up logic
-			p.xp += total_exp
-			p.xp = floor(p.xp)
-			var up = ceil(pow(1.8, p.level)*5.0)
-			while p.xp >= up:
-				print("[BM] LEVEL UP: "+str(p.xp)+" > "+str(up))
-				levelup = 1
-				leveled_up[p.id] = 1
-				p.xp = p.xp - up
-				p.level += 1
-				var max_hp = p.get_max_health()
-				var max_mp = p.get_max_mp()
-				var agi = p.get_agi()
-				var atk = p.get_atk()
-				var atkm = p.get_atkm()
-				var def = p.get_def()
-				var defm = p.get_defm()
-				var acc = p.get_acc()
-				var eva = p.get_eva()
-				var lck = p.get_lck()
-				up = ceil(pow(1.8, p.level)*5.0)
-
-				#HP MAX UP
-				randomize()
-				var stat_up = int(floor(rand_range(0,3.99)))
-				p.set_stats(1, max_hp + stat_up)
-				lvup_max_hp += stat_up
-
-				#MP MAX UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(3, max_mp + stat_up)
-				lvup_max_mp += stat_up
-
-				#ATK UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(4, atk + stat_up)
-				lvup_atk += stat_up
-
-				#ATKM UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(5, atkm + stat_up)
-				lvup_atkm += stat_up
-
-				#DEF UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(6, def + stat_up)
-				lvup_def += stat_up
-
-				#DEFM UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(7, defm + stat_up)
-				lvup_defm += stat_up
-
-				#AGI UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(8, agi + stat_up)
-				lvup_agi += stat_up
-
-				#ACC UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(9, acc + stat_up)
-				lvup_acc += stat_up
-
-				#EVA UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(9, eva + stat_up)
-				lvup_eva += stat_up
-
-				#LCK UP
-				randomize()
-				stat_up = floor(rand_range(0,3.99))
-				p.set_stats(10, lck + stat_up)
-				lvup_lck += stat_up
-
-		Play.append(p)
-
-	GLOBAL.PLAYERS = Play
+	GLOBAL.PLAYERS = Players
 	GLOBAL.INVENTORY = Inventory
 	
 	# Goes to game over, level up scenes or back to the map
 	# depending on the outcome of the battle
-	var death = 0
-	for i in range(len(Play)):
-		if Play[i].is_dead():
-			 death+=1
-	print(len(Play))
-	print(death)
-	if death == len(Play):
-		print("morreu")
+	if death == len(Players):
+		print("[BM] Game over!")
 		AUDIO.play_bgm("GAME_OVER_THEME")
 		get_tree().change_scene("res://Battle/Game Over.tscn")
-	elif levelup == 1:
-		death = 0
+	elif level_up:
+		print("[BM] Someone leveled up")
 		get_tree().change_scene("res://Battle/Level Up.tscn")
 	else:
-		death = 0
+		print("[BM] Back to the map")
 		get_tree().change_scene("res://Root.tscn")
+
+
+func _on_Dialogue_Ended():
+	get_node("/root/Battle").resume()
+	get_node("/root/Battle").emit_signal("event_finished")

@@ -1,0 +1,29 @@
+{
+	"ID":16,
+	"IMG":{"path": "res://Assets/Animations/Entities/warrior spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.5,2.5]},
+	"ANIM":{"idle": [true, "0-9"]},
+	"NAME": "Radostaw",
+  "EVENTS": [
+    {
+      "DIALOGUE": {
+        "NAME": "Radostaw",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "You shall accompany these two on their mission",
+          "The monsters are being more relentless than ever... Be careful..."
+        ]
+      },
+    },
+    {
+      "DIALOGUE":  {
+        "NAME": "Shanta",
+        "PORTRAIT": {"sprite":"res://Assets/Portraits/cleric-f.png", "scale":[8,8]}, 
+        "MESSAGE": [
+          "Commander, with all due respect... I don't think it would be an efficient use of my energy to babysit this moron"
+        ]
+      },
+    },
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/warrior.png", "scale":[8,8]}
+}

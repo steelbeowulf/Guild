@@ -22,3 +22,6 @@ func get_type():
 
 func get_value():
 	return value
+
+func format():
+	return "{id: "+str(id)+", value: "+str(value)+", type: "+str(type)+", name: "+str(name)+"}"

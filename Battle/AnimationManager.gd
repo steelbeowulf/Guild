@@ -13,10 +13,44 @@ var last = false
 var queue = []
 var can_play = true
 var global_animations = null
+var entering = true
 signal animation_finished
 
+func add_player(p):
+	var last_index = Players_img.size()
+	var node = get_node("Players").get_child(last_index)
+	Players_img.append(node)
+	node.change_lane(p.get_pos())
+	node.set_animations(p.sprite, p.animations, p)
+	entering = true
+	node.connect("finish_anim", self, "_on_animation_finished")
+	p.graphics = node
+	p.info = Info.get_node("P"+str(last_index))
+	p.info.set_initial_hp(p.get_health(), p.get_max_health())
+	p.info.set_initial_mp(p.get_mp(), p.get_max_mp())
+	p.info.connect("finish_anim", self, "_on_animation_finished")
+	Players_status[last_index].set_name(p.get_name())
+	Players_status[last_index].set_level(p.get_level())
+	Menu.get_node("Attack").connect_target_player(node)
+	Menu.get_node("Skill").connect_target_player(node)
+	Menu.get_node("Item").connect_target_player(node)
+	node.enter_scene()
+
+func add_enemy(e):
+	var last_index = Enemies_img.size()
+	var node = get_node("Enemies").get_child(last_index)
+	Enemies_img.append(node)
+	node.set_animations(e.sprite, e.animations, e)
+	entering = true
+	node.connect("finish_anim", self, "_on_animation_finished")
+	e.graphics = node
+	Menu.get_node("Attack").connect_target_enemy(node, self, last_index)
+	Menu.get_node("Skill").connect_target_enemy(node, self, last_index)
+	Menu.get_node("Item").connect_target_enemy(node, self, last_index)
+	node.enter_scene()
+
 func initialize(Players, Enemies):
-# Graphics stuff
+	# Graphics stuff
 	Menu = self.get_parent().get_node("Interface/Menu")
 	Info = self.get_parent().get_node("Interface/Info")
 	var i = 0
@@ -27,11 +61,11 @@ func initialize(Players, Enemies):
 			node.change_lane(lane)
 			node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
 			
-			if not Players[i].is_dead():
-				node.play("idle")
-			else:
-				node.play("dead")
-			node.show()
+			#if not Players[i].is_dead():
+			#	node.play("move")
+			#else:
+			#	node.play("dead")
+			#node.show()
 			node.connect("finish_anim", self, "_on_animation_finished")
 			Players[i].graphics = node
 			Players[i].info = Info.get_node("P"+str(i))
@@ -39,21 +73,22 @@ func initialize(Players, Enemies):
 			Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
 			Players[i].info.connect("finish_anim", self, "_on_animation_finished")
 			i += 1
+			node.enter_scene()
 		else:
-			node.queue_free()
+			node.hide()
 	i = 0
 	for node in get_node("Enemies").get_children():
 		if i < len(Enemies):
-			var lane = Enemies[i].get_pos()
 			Enemies_img.append(node)
 			node.set_animations(Enemies[i].sprite, Enemies[i].animations, Enemies[i])
-			node.play("idle")
+			node.play("move")
 			node.show()
 			node.connect("finish_anim", self, "_on_animation_finished")
 			Enemies[i].graphics = node
 			i += 1
+			node.enter_scene()
 		else:
-			node.queue_free()
+			node.hide()
 	
 	# Link target buttons with visual targets
 	var allPlayers = get_node("Players")
@@ -74,7 +109,7 @@ func initialize(Players, Enemies):
 func _on_animation_finished(anim):
 	print("[ANIMATION MANAGER] finished animation "+anim)
 	can_play = true
-	if last:
+	if last or anim == "Entrance":
 		emit_signal("animation_finished")
 
 func play(anim):
@@ -82,7 +117,6 @@ func play(anim):
 	var scope = anim[0]
 	var animation_name = anim[1]
 	var info = anim[2]
-	print("[ANIMATION MANAGER] info "+str(info))
 	if typeof(info) == TYPE_STRING and (info == "ALL" or info == "LANE"):
 		can_play = true
 	scope.play(animation_name, info)
@@ -96,7 +130,7 @@ func _physics_process(delta):
 		var current_animation = queue.pop_back()
 		can_play = false
 		play(current_animation)
-	elif not queue and last:
+	elif not queue and last and not entering:
 		last = false
 		emit_signal("animation_finished")
 	elif not queue:
@@ -109,13 +143,18 @@ func resolve(current_entity: Entity, action_result):
 	# TODO Deal with ailments
 	if action_type == "Pass":
 		pass
-	elif action_type == "Attack":
+	elif action_type == "Attack" || action_type == "Miss" || action_type == "Critical Attack":
 		$Log.display_text("Attack")
 		var target = action_result.get_targets()[0]
 		var dies = action_result.get_deaths()[0]
 		var dmg = action_result.get_stats_change()[0]
 		enqueue(current_entity.graphics, "attack", null) # ataque do current_entity
-		enqueue(target.graphics, "Damage", dmg) # dano no alvo
+		if action_type == "Attack":
+			enqueue(target.graphics, "Damage", dmg) # dano no alvo
+		elif action_type == "Miss":
+			enqueue(target.graphics, "Miss", dmg) # erro no alvo
+		elif action_type == "Critical Attack":
+			enqueue(target.graphics, "Critical", dmg) # critico no alvo
 		if target.tipo == 'Player':
 			enqueue(target.info, "UpdateHP", dmg) # lifebar
 		if dies:
@@ -160,7 +199,9 @@ func resolve(current_entity: Entity, action_result):
 
 
 func manage_hate(type, target):
-	var index = -(Enemies_img[target].data.get_target() + 1)
+	var index = Enemies_img[target].data.get_target()
+	if index < 0:
+		index = -(index + 1)
 	if type == 0:
 		$Path2D.create_curve(Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32)
 

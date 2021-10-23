@@ -1,0 +1,12 @@
+{
+	"can_battle_attack": true,
+	"can_battle_skill": true,
+	"can_battle_itens": true,
+	"can_battle_lane": true,
+	"can_battle_run": true,
+	"can_open_save_menu": false,
+	"can_open_item_menu": false,
+	"can_open_skill_menu": false,
+	"can_open_options": false,
+	"can_open_status_menu": false
+}

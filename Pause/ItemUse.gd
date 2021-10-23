@@ -39,7 +39,7 @@ func _process(delta):
 func use_item():
 	for player in targets:
 		for effect in item.get_effects():
-			apply_effect(player, effect, player, 0)
+			apply_effect(player, effect, player, "Item", true, false)
 		for status in item.get_status():
 			apply_status(status, player, player)
 	location = "OUTSIDE"

@@ -35,7 +35,6 @@ func set_animations(sprite, animations):
 func play(name):
 	if $Animations.get_node(name).playing:
 		return
-	print("[CARA MUNDO] playing animation "+name)
 	var node = $Animations
 	for c in $Animations.get_children():
 		c.playing = false
@@ -54,9 +53,11 @@ func _initialize():
 	$Camera2D.set_limit(MARGIN_TOP, margin[2])
 	$Camera2D.set_limit(MARGIN_RIGHT, margin[3])
 	print("[PLAYER POSITION] "+str(position))
-	var Play = GLOBAL.PLAYERS[0]
-	set_animations(Play.sprite, Play.animations)
-	play("idle")
+	for p in GLOBAL.PLAYERS:
+		if not p.dead:
+			set_animations(p.sprite, p.animations)
+			play("idle")
+			return
 
 
 # Deals with input and moves player
@@ -93,10 +94,7 @@ func dir():
 
 
 func _on_Battle_body_entered(body):
-	print("BODY ENTERED")
-	print(body)
 	if body.is_in_group("enemy"):
-		print("ENEMY")
 		body.in_encounter()
 
 

@@ -23,6 +23,8 @@ onready var loader = get_node("/root/LOADER")
 # Loads the correct map
 func _ready():
 	var start = load("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
+	print("res://Overworld/"+str(LOCAL.AREA)+"/Map"+str(LOCAL.MAP)+".tscn")
+	yield(get_tree(), "idle_frame")
 	self.add_child(start.instance())
 	map = get_child(get_child_count()-1)
 	set_effect(LOCAL.MAP)
@@ -37,8 +39,8 @@ func change_area(area_name: String, next: int = 1, pos: Vector2 = Vector2(0,0)):
 	LOCAL.AREA = area_name
 	set_effect(LOCAL.MAP)
 	var area_info = loader.load_area_info(area_name)
-	LOCAL.load_npcs(area_info["NPCS"])
 	LOCAL.load_enemies(area_info["ENEMIES"])
+	LOCAL.load_npcs(area_info["NPCS"])
 	self.add_child(new.instance())
 	if map:
 		map.hide()
@@ -94,6 +96,7 @@ func open_shop(shop_event: Event):
 	shop.enter(shop_event)
 	STATE = "Shop"
 	get_tree().paused = true
+	shop.set_process(true)
 
 # Closes shop menu(unpauses map)
 func close_shop():
@@ -103,6 +106,7 @@ func close_shop():
 	map.show_hud()
 	STATE = "Map"
 	get_tree().paused = false
+	shop.set_process(false)
 
 # Closes the main pause menu (unpauses map)
 func close_menu():
@@ -235,7 +239,7 @@ func use_skill(skill, player):
 
 # Transitions from current area to next area
 func transition(next, fake=false):
-	var new = load("res://Overworld/Forest/Map"+str(next)+".tscn")
+	var new = load("res://Overworld/"+LOCAL.AREA+"/Map"+str(next)+".tscn")
 	LOCAL.MAP = next
 	set_effect(LOCAL.MAP)
 	#call_deferred("add_child", new.instance())

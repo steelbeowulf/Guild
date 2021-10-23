@@ -49,14 +49,6 @@ stream = ExtResource( 4 )
 volume_db = -14.0
 autoplay = true
 
-[node name="Label" type="Label" parent="."]
-visible = false
-margin_left = 287.738
-margin_top = 117.337
-margin_right = 327.738
-margin_bottom = 131.337
-text = "Strength Test Theme:  happy_theme Author: gilzoide Link:https://opengameart.org/content/party-and-gameover-loop
-Bell SFX: Bell Sounds Author: marcelofg55 https://opengameart.org/content/bell-sounds"
 [connection signal="focus_entered" from="Title" to="." method="_on_Title_focus_entered"]
 [connection signal="pressed" from="Title" to="." method="_on_Button_pressed"]
 [connection signal="focus_entered" from="More Credits" to="." method="_on_More_Credits_focus_entered"]

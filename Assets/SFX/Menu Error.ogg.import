@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Menu Error.ogg-942f3ece28f846564718d5bb13f2c85f.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

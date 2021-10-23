@@ -41,7 +41,7 @@ func load_enemies(filter_array):
 func get_enemy(enemy_id):
 	for e in ENEMIES:
 		if e.id == enemy_id:
-			return e
+			return e._duplicate()
 
 
 # Return NPC with npc_id (if loaded)
@@ -56,7 +56,6 @@ func get_npc(npc_id):
 
 # Returns NPCs from current map
 func load_npcs(filter_array):
-	var enem = []
 	NPCs = loader.load_npcs(filter_array)
 
 # Update state on the current map
