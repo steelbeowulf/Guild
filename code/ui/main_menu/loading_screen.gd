@@ -1,11 +1,12 @@
 extends Node
-var loader
-var resource
-var wait_frames
-var time_max = 100  # msec
-var current_scene
 
-var ROOT_SCENE = "res://code/root.tscn"
+const ROOT_SCENE = "res://code/root.tscn"
+const TIME_MAX = 100  # ms
+
+var loader
+var wait_frames
+
+onready var resource = ROOT_SCENE
 
 
 func _ready():  # game requests to switch to this scene
@@ -23,7 +24,7 @@ func _ready():  # game requests to switch to this scene
 	wait_frames = 10
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if loader == null:
 		update_progress(100)
 		if Input.is_action_just_pressed("ui_accept"):
@@ -31,17 +32,18 @@ func _physics_process(delta):
 			set_new_scene(resource)
 		return
 
-	if wait_frames > 0:  # wait for frames to let the "loading" animation to show up
+	# wait for frames to let the "loading" animation to show up
+	if wait_frames > 0:
 		wait_frames -= 1
 		return
 
 	var t = OS.get_ticks_msec()
-	while OS.get_ticks_msec() < t + time_max:  # use "time_max" to control how much time we block this thread
+	# use "time_max" to control how much time we block this thread
+	while OS.get_ticks_msec() < t + TIME_MAX:
 		# poll your loader
 		var err = loader.poll()
 
 		if err == ERR_FILE_EOF:  # load finished
-			#print("Loading finished!")
 			update_progress(100)
 			$Panel/Prompt.show()
 			resource = loader.get_resource()
@@ -51,14 +53,13 @@ func _physics_process(delta):
 			var progress = (float(loader.get_stage()) / loader.get_stage_count()) * 100
 			update_progress(progress)
 		else:  # error during loading
-			#print("LOADER - deu ruim")
 			loader = null
 			break
 
 
-func update_progress(progress):
+func update_progress(progress: float):
 	get_node("Progress").set_value(progress)
 
 
-func set_new_scene(scene_resource):
-	get_tree().change_scene(ROOT_SCENE)
+func set_new_scene(scene_resource: String):
+	get_tree().change_scene(scene_resource)

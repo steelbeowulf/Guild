@@ -14,7 +14,7 @@ func remove_focus():
 		c.disabled = true
 
 
-func enable_focus(saving):
+func enable_focus(saving: bool):
 	for c in get_children():
 		if c.get_node("Area").text != "UNUSED" or saving == true:
 			c.set_focus_mode(2)
@@ -22,24 +22,23 @@ func enable_focus(saving):
 	$Slot0.grab_focus()
 
 
-func format_gold(money):
+func format_gold(money: int):
 	return str(money) + "G"
 
 
-func format_playtime(T):
-	var hours = floor(T / 3600)
-	var minutes = floor(T / 60) - hours * 60
-	var seconds = int(T) % 60
+func format_playtime(time: int):
+	var hours = floor(time / 3600)
+	var minutes = floor(time / 60) - hours * 60
+	var seconds = int(time) % 60
 	return str(hours) + "h" + str(minutes) + "m" + str(seconds) + "s"
 
 
-func load_saves(saves):
-	var tmp = 0
+func load_saves(saves: Array):
+	var i = 0
 	for slot in get_children():
-		if saves[tmp].has("area"):
+		if saves[i].has("area"):
 			slot.get_node("Area").set_text(saves[tmp]["area"]["NAME"])
 			slot.get_node("Playtime").set_text(format_playtime(saves[tmp]["playtime"]))
 			slot.get_node("Gold").set_text(format_gold(saves[tmp]["gold"]))
 			# TODO: Set screenshot
-			#slot.get_node("Area").set_text(saves[tmp]["area"]
-		tmp += 1
+		i += 1

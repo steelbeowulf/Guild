@@ -254,4 +254,4 @@ flat = true
 [connection signal="item_selected" from="Overview/Values/Text_size" to="." method="_on_Text_size_item_selected"]
 [connection signal="item_selected" from="Overview/Values/Text_speed" to="." method="_on_Text_speed_item_selected"]
 [connection signal="item_selected" from="Overview/Values/Battle_speed" to="." method="_on_Battle_speed_item_selected"]
-[connection signal="item_selected" from="Overview/Values/Battle_cursor" to="." method="_on_Battle_Cursor_item_selected"]
+[connection signal="item_selected" from="Overview/Values/Battle_cursor" to="." method="_on_Battle_cursor_item_selected"]

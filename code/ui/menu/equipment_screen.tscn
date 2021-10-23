@@ -8,21 +8,6 @@
 [ext_resource path="res://code/overworld/npcs/shop/equipment_compare.tscn" type="PackedScene" id=6]
 [ext_resource path="res://code/ui/menu/item_slot_0.gd" type="Script" id=7]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [node name="Equips" type="Control"]
 rect_scale = Vector2( 1.865, 1.4 )
 script = ExtResource( 1 )
@@ -43,12 +28,12 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
+[node name="Slots" type="VBoxContainer" parent="Panel/HBoxContainer"]
 margin_right = 300.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 300, 50 )
 
-[node name="CurrentMenu" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="CurrentMenu" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_right = 300.0
@@ -60,7 +45,7 @@ custom_fonts/font = ExtResource( 3 )
 enabled_focus_mode = 0
 text = "Equipaments"
 
-[node name="Weapon" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Weapon" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_top = 74.0
@@ -74,7 +59,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Weapon"
 
-[node name="Head" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Head" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_top = 148.0
@@ -88,7 +73,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Head"
 
-[node name="Body" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Body" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_top = 222.0
@@ -102,7 +87,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Body"
 
-[node name="Accessory1" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Accessory1" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_top = 296.0
@@ -116,7 +101,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Accessory"
 
-[node name="Accessory2" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Accessory2" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_top = 370.0
@@ -130,7 +115,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Accessory"
 
-[node name="Back" type="Button" parent="Panel/HBoxContainer/Options" groups=[
+[node name="Back" type="Button" parent="Panel/HBoxContainer/Slots" groups=[
 "text",
 ]]
 margin_top = 444.0
@@ -144,13 +129,13 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Back"
 
-[node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Options"]
+[node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Slots"]
 margin_top = 518.0
 margin_right = 300.0
 margin_bottom = 738.0
 rect_min_size = Vector2( 0, 220 )
 
-[node name="Description" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
+[node name="Description" type="Label" parent="Panel/HBoxContainer/Slots/Info" groups=[
 "text",
 ]]
 margin_right = 300.0
@@ -161,7 +146,7 @@ custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
 text = " 
 "
 
-[node name="Comparison" parent="Panel/HBoxContainer/Options/Info" instance=ExtResource( 6 )]
+[node name="Comparison" parent="Panel/HBoxContainer/Slots/Info" instance=ExtResource( 6 )]
 margin_top = 84.0
 margin_right = 300.0
 margin_bottom = 84.0
@@ -488,12 +473,12 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 7 )
 
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Weapon" to="." method="_on_Weapon_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Head" to="." method="_on_Head_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Body" to="." method="_on_Body_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Accessory1" to="." method="_on_Acessory1_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Accessory2" to="." method="_on_Acessory2_pressed"]
-[connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Slots/Weapon" to="." method="_on_Weapon_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Slots/Head" to="." method="_on_Head_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Slots/Body" to="." method="_on_Body_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Slots/Accessory1" to="." method="_on_Acessory1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Slots/Accessory2" to="." method="_on_Acessory2_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Slots/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Equips/EquipSlot0" to="Panel/HBoxContainer/Equips/EquipSlot0" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Equips/EquipSlot0" to="Panel/HBoxContainer/Equips/EquipSlot0" method="_on_ItemSlot0_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Equips/EquipSlot1" to="Panel/HBoxContainer/Equips/EquipSlot1" method="_on_ItemSlot0_focus_entered"]

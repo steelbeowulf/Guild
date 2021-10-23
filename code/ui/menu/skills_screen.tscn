@@ -7,17 +7,6 @@
 [ext_resource path="res://assets/ui/panels/Disabled_Menu_Info_Panel.tres" type="StyleBox" id=5]
 [ext_resource path="res://code/ui/menu/item_slot_0.gd" type="Script" id=6]
 
-
-
-
-
-
-
-
-
-
-
-
 [node name="Skills" type="Control"]
 rect_scale = Vector2( 1.865, 1.4 )
 script = ExtResource( 1 )
@@ -39,14 +28,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Options" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_right = 448.0
+margin_right = 416.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 250, 50 )
 
 [node name="CurrentMenu" type="Button" parent="Panel/HBoxContainer/Options" groups=[
 "text",
 ]]
-margin_right = 448.0
+margin_right = 416.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 400, 70 )
 focus_mode = 0
@@ -59,7 +48,7 @@ text = "Skills"
 "text",
 ]]
 margin_top = 74.0
-margin_right = 448.0
+margin_right = 416.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 400, 70 )
 custom_styles/hover = ExtResource( 4 )
@@ -88,7 +77,7 @@ text = "SkillType 2"
 "text",
 ]]
 margin_top = 148.0
-margin_right = 448.0
+margin_right = 416.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 400, 70 )
 custom_styles/hover = ExtResource( 4 )
@@ -100,15 +89,15 @@ text = "Back"
 
 [node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer/Options"]
 margin_top = 222.0
-margin_right = 448.0
+margin_right = 416.0
 margin_bottom = 442.0
 rect_min_size = Vector2( 400, 220 )
 
 [node name="Description" type="Label" parent="Panel/HBoxContainer/Options/Info" groups=[
 "text",
 ]]
-margin_right = 448.0
-margin_bottom = 80.0
+margin_right = 416.0
+margin_bottom = 87.0
 rect_min_size = Vector2( 0, 80 )
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 0.996078, 1 )
@@ -117,8 +106,8 @@ text = " This is where the skill effect should appear
  has its own description"
 
 [node name="Skills" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 452.0
-margin_right = 1032.0
+margin_left = 420.0
+margin_right = 1000.0
 margin_bottom = 771.0
 rect_min_size = Vector2( 580, 0 )
 
@@ -317,7 +306,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 6 )
 
-[connection signal="pressed" from="Panel/HBoxContainer/Options/SkillType1" to="." method="_on_Skill_Type_1_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Options/SkillType1" to="." method="_on_SkillType1_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Skills/SkillSlot0" to="Panel/HBoxContainer/Skills/SkillSlot0" method="_on_ItemSlot0_pressed"]

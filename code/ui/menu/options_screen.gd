@@ -1,15 +1,15 @@
 extends Control
 
-const options_text = [
-	"Configura resolução da tela",
-	"Modo de display",
-	"Volume base",
-	"Volume dos efeitos sonoros",
-	"Volume da música",
-	"Tamanho da fonte",
-	"Velocidade do texto",
-	"Velocidade das animações de batalha",
-	"Posição padrão do cursor em batalha"
+const OPTIONS_TEXT = [
+	"Configures screen resolution",
+	"Display mode",
+	"Base volume",
+	"Sound effects volume",
+	"Music volume",
+	"Font size",
+	"Dialogue text speed",
+	"Battle animations speed",
+	"Default battle cursor behaviour"
 ]
 
 
@@ -56,40 +56,40 @@ func _ready():
 
 
 func set_text(index):
-	$Top_Panel/Description.set_text(options_text[index])
+	$Top_Panel/Description.set_text(OPTIONS_TEXT[index])
 
 
-func _on_Resolution_item_selected(ID):
-	DISPLAY.set_resolution(ID)
+func _on_Resolution_item_selected(index: int):
+	DISPLAY.set_resolution(index)
 
 
-func _on_Display_item_selected(ID):
-	DISPLAY.set_mode(ID)
+func _on_Display_item_selected(index: int):
+	DISPLAY.set_mode(index)
 
 
-func _on_Volume_value_changed(value):
+func _on_Volume_value_changed(value: float):
 	AUDIO.set_master_volume(value)
 
 
-func _on_SFX_value_changed(value):
+func _on_SFX_value_changed(value: float):
 	AUDIO.set_sfx_volume(value)
 
 
-func _on_BGM_value_changed(value):
+func _on_BGM_value_changed(value: float):
 	AUDIO.set_bgm_volume(value)
 
 
-func _on_Text_size_item_selected(ID):
-	TEXT.set_size(ID)
+func _on_Text_size_item_selected(index: int):
+	TEXT.set_size(index)
 
 
-func _on_Text_speed_item_selected(ID):
-	TEXT.set_speed(ID)
+func _on_Text_speed_item_selected(index: int):
+	TEXT.set_speed(index)
 
 
-func _on_Battle_speed_item_selected(ID):
-	BATTLE_MANAGER.set_battle_speed(ID)
+func _on_Battle_speed_item_selected(index: int):
+	BATTLE_MANAGER.set_battle_speed(index)
 
 
-func _on_Battle_Cursor_item_selected(ID):
-	BATTLE_MANAGER.set_cursor_default(ID)
+func _on_Battle_cursor_item_selected(index: int):
+	BATTLE_MANAGER.set_cursor_default(index)

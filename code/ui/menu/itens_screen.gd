@@ -1,17 +1,17 @@
 extends Control
 var item = null
-onready var location = "OUTSIDE"  #this doesnt work yet, pressing esc on the menu opens the item menu
+onready var location = "OUTSIDE"  # TODO: fix this
 
 
 func _ready():
 	give_focus()
-	var itemNodes = $Panel/HBoxContainer/Itens.get_children()
-	for i in range(len(itemNodes)):
-		var c = itemNodes[i]
-		c.connect("target_picked", self, "_on_Item_selected", [i])
-		c.connect("target_selected", self, "_on_Item_hover", [i])
+	var item_nodes = $Panel/HBoxContainer/Itens.get_children()
+	for i in range(len(item_nodes)):
+		var node = item_nodes[i]
+		node.connect("target_picked", self, "_on_Item_selected", [i])
+		node.connect("target_selected", self, "_on_Item_hover", [i])
 	for btn in $Panel/HBoxContainer/Options.get_children():
-		btn.connect("focus_entered", self, "_on_Focus_Entered")
+		btn.connect("focus_entered", self, "_on_focus_entered")
 	get_node("Panel/HBoxContainer/Options/Use").grab_focus()
 	show_itens(GLOBAL.inventory)
 
@@ -20,7 +20,7 @@ func just_entered():
 	location = "SUBMENU"
 
 
-func show_itens(bag):
+func show_itens(bag: Array):
 	for i in range(len(bag)):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
 		node.set_text(str(bag[i].name) + " x " + str(bag[i].quantity))
@@ -32,7 +32,7 @@ func show_itens(bag):
 		e.set_focus_mode(0)
 
 
-func update_itens(bag):
+func update_itens(bag: Array):
 	for i in range(len(bag)):
 		var node = get_node("Panel/HBoxContainer/Itens/ItemSlot" + str(i))
 		node.set_text(str(bag[i].name) + " x " + str(bag[i].quantity))
@@ -44,12 +44,11 @@ func update_itens(bag):
 			node.show()
 
 
-func _on_Item_selected(id):
+func _on_Item_selected(id: int):
 	AUDIO.play_se("ENTER_MENU")
 	item = GLOBAL.inventory[id]
 	var name = item.get_name()
-	print("SELECTED " + str(name))
-	#set_description(item)
+	print("[Itens] Selected " + str(name))
 	use_item(item)
 
 
@@ -57,13 +56,12 @@ func _on_Item_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	item = GLOBAL.inventory[id]
 	var name = item.get_name()
-	print("SELECTED " + str(name))
+	print("[Itens] Hovered " + str(name))
 	set_description(item)
 
 
-func set_description(item):
+func set_description(item: Item):
 	print("Set description")
-	#print(item.get_name())
 	var description = (
 		"  "
 		+ item.get_name()
@@ -75,7 +73,7 @@ func set_description(item):
 	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
 
 
-func use_item(item):
+func use_item(item: Item):
 	get_parent().get_parent().get_parent().use_item(item)
 
 
@@ -94,7 +92,7 @@ func _on_Use_pressed():
 	#get_node("Panel/HBoxContainer/Itens/ItemSlot0").grab_focus()
 
 
-func _process(delta):
+func _process(_delta):
 	update_itens(GLOBAL.inventory)
 	if Input.is_action_just_pressed("ui_cancel") and location == "ITENS":
 		location = "SUBMENU"
@@ -117,9 +115,9 @@ func give_focus():
 func _on_Back_pressed():
 	print(location)
 	AUDIO.play_se("EXIT_MENU")
-	location == "OUTSIDE"
+	location = "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
 
 
-func _on_Focus_Entered():
+func _on_focus_entered():
 	AUDIO.play_se("MOVE_MENU")

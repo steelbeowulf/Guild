@@ -1,25 +1,26 @@
 extends Control
+
 onready var player = null
 onready var current_equip = null
 onready var equips = []
-onready var location = "OUTSIDE"  #this doesnt work yet, pressing esc on the menu opens the item menu
+onready var location = "OUTSIDE"  #TODO: fix this
 
 
 func _ready():
 	give_focus()
-	var itemNodes = $Panel/HBoxContainer/Equips.get_children()
-	for i in range(len(itemNodes)):
-		var c = itemNodes[i]
-		c.connect("target_picked", self, "_on_Equip_selected", [i])
-		c.connect("target_selected", self, "_on_Equip_hover", [i])
-	for btn in $Panel/HBoxContainer/Options.get_children():
-		btn.connect("focus_entered", self, "_on_Focus_Entered")
-	get_node("Panel/HBoxContainer/Options/Weapon").grab_focus()
-	for e in $Panel/HBoxContainer/Options.get_children():
+	var item_nodes = $Panel/HBoxContainer/Equips.get_children()
+	for i in range(len(item_nodes)):
+		var node = item_nodes[i]
+		node.connect("target_picked", self, "_on_Equip_selected", [i])
+		node.connect("target_selected", self, "_on_Equip_hover", [i])
+	for btn in $Panel/HBoxContainer/Slots.get_children():
+		btn.connect("focus_entered", self, "_on_focus_entered")
+	get_node("Panel/HBoxContainer/Slots/Weapon").grab_focus()
+	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
 
 
-func just_entered(id):
+func just_entered(id: int):
 	print("[EQUIP] just entered " + str(id))
 	player = GLOBAL.players[id]
 	location = "SUBMENU"
@@ -84,24 +85,24 @@ func _on_Equip_selected(id):
 func _on_Equip_hover(id):
 	AUDIO.play_se("MOVE_MENU")
 	set_description(equips[id])
-	$Panel/HBoxContainer/Options/Info/Comparison.init(current_equip, equips[id])
+	$Panel/HBoxContainer/Slots/Info/Comparison.init(current_equip, equips[id])
 
 
 # Reset info panel
 func reset_info():
-	$Panel/HBoxContainer/Options/Info/Comparison.zero()
-	$Panel/HBoxContainer/Options/Info/Description.set_text("")
+	$Panel/HBoxContainer/Slots/Info/Comparison.zero()
+	$Panel/HBoxContainer/Slots/Info/Description.set_text("")
 
 
 # Sets description
 func set_description(equip_hover):
 	print("Set description")
 	var description = "  " + equip_hover.name + "\n  Type: " + equip_hover.type
-	$Panel/HBoxContainer/Options/Info/Description.set_text(description)
+	$Panel/HBoxContainer/Slots/Info/Description.set_text(description)
 
 
 # TODO: Arrumar location (minuscula? maiuscula? idk)
-func _process(delta):
+func _process(_delta):
 	if (
 		Input.is_action_just_pressed("ui_cancel")
 		and location in ["WEAPON", "HEAD", "BODY", "ACCESSORY1", "ACCESSORY2"]
@@ -116,23 +117,22 @@ func _process(delta):
 
 
 func give_focus():
-	print("Giving focus...")
-	$Panel/HBoxContainer/Options/Weapon.set_focus_mode(2)
-	$Panel/HBoxContainer/Options/Head.set_focus_mode(2)
-	$Panel/HBoxContainer/Options/Body.set_focus_mode(2)
-	$Panel/HBoxContainer/Options/Accessory1.set_focus_mode(2)
-	$Panel/HBoxContainer/Options/Accessory2.set_focus_mode(2)
-	$Panel/HBoxContainer/Options/Back.set_focus_mode(2)
+	$Panel/HBoxContainer/Slots/Weapon.set_focus_mode(2)
+	$Panel/HBoxContainer/Slots/Head.set_focus_mode(2)
+	$Panel/HBoxContainer/Slots/Body.set_focus_mode(2)
+	$Panel/HBoxContainer/Slots/Accessory1.set_focus_mode(2)
+	$Panel/HBoxContainer/Slots/Accessory2.set_focus_mode(2)
+	$Panel/HBoxContainer/Slots/Back.set_focus_mode(2)
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.set_focus_mode(0)
 		e.hide()
-	get_node("Panel/HBoxContainer/Options/Weapon").grab_focus()
+	get_node("Panel/HBoxContainer/Slots/Weapon").grab_focus()
 	reset_info()
 
 
 func enter():
 	give_focus()
-	get_node("Panel/HBoxContainer/Options/Weapon").grab_focus()
+	get_node("Panel/HBoxContainer/Slots/Weapon").grab_focus()
 
 
 # Can't unequip for now
@@ -149,13 +149,11 @@ func use_equip(equip):
 
 func _on_Back_pressed():
 	AUDIO.play_se("EXIT_MENU")
-	print(location)
-	location == "OUTSIDE"
+	location = "OUTSIDE"
 	get_parent().get_parent().get_parent().return_menu()
 
 
-#not done yet
-func _on_Focus_Entered():
+func _on_focus_entered():
 	AUDIO.play_se("MOVE_MENU")
 
 
@@ -163,7 +161,7 @@ func _on_Weapon_pressed():
 	location = "WEAPON"
 	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
-	for e in $Panel/HBoxContainer/Options.get_children():
+	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.set_focus_mode(2)
@@ -176,7 +174,7 @@ func _on_Head_pressed():
 	location = "HEAD"
 	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
-	for e in $Panel/HBoxContainer/Options.get_children():
+	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.set_focus_mode(2)
@@ -189,7 +187,7 @@ func _on_Body_pressed():
 	location = "BODY"
 	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
-	for e in $Panel/HBoxContainer/Options.get_children():
+	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.set_focus_mode(2)
@@ -202,7 +200,7 @@ func _on_Acessory1_pressed():
 	location = "ACCESSORY1"
 	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
-	for e in $Panel/HBoxContainer/Options.get_children():
+	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.set_focus_mode(2)
@@ -215,7 +213,7 @@ func _on_Acessory2_pressed():
 	location = "ACCESSORY2"
 	show_equips(GLOBAL.equip_INVENTORY, location)
 	AUDIO.play_se("ENTER_MENU")
-	for e in $Panel/HBoxContainer/Options.get_children():
+	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
 	for e in $Panel/HBoxContainer/Equips.get_children():
 		e.set_focus_mode(2)

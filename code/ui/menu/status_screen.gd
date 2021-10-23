@@ -1,9 +1,10 @@
 extends Control
+
 onready var id = -1
 onready var location = "OUTSIDE"
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_right"):
 		AUDIO.play_se("MOVE_MENU")
 		enter(int(id + 1) % len(GLOBAL.players))
@@ -16,7 +17,7 @@ func _process(delta):
 		get_parent().get_parent().get_parent().return_menu()
 
 
-func enter(player_id):
+func enter(player_id: int):
 	print("hello")
 	location = "SUBMENU"
 	print(player_id)
@@ -31,7 +32,7 @@ func enter(player_id):
 
 
 # Sets name, exp, lv and hp info
-func set_overview_info(player):
+func set_overview_info(player: Player):
 	var node = $Overview/Values
 	node.get_node("LV").set_text(str(player.level))
 	var tmp = str(player.get_health()) + "/" + str(player.get_max_health())

@@ -54,5 +54,5 @@ func _on_Credits_pressed():
 	get_tree().change_scene("res://code/ui/main_menu/credits_screen.tscn")
 
 
-func _on_Focus_Entered():
+func _on_Focus_entered():
 	AUDIO.play_se("MOVE_MENU")

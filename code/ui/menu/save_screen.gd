@@ -1,13 +1,13 @@
 extends Control
 
+signal slot_chosen
+
+var slots = null
+
 onready var state = 0
 onready var chosen_slot = -1
 onready var loader = get_node("/root/LOADER")
 onready var location = "OUTSIDE"
-
-var slots = null
-
-signal slot_chosen
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,10 +17,10 @@ func _ready():
 	var tmp = 0
 	for c in slots.get_children():
 		c.connect("button_down", self, "_on_Slot_chosen", [tmp])
-		c.connect("focus_entered", self, "_on_Focus_Entered")
+		c.connect("focus_entered", self, "_on_focus_entered")
 		tmp += 1
 	for btn in $All/Right/Options_Panel.get_children():
-		btn.connect("focus_entered", self, "_on_Focus_Entered")
+		btn.connect("focus_entered", self, "_on_focus_entered")
 
 
 func _input(event: InputEvent):
@@ -98,5 +98,5 @@ func _on_LoadDialog_confirmed():
 	get_tree().change_scene("res://code/root.tscn")
 
 
-func _on_Focus_Entered():
+func _on_focus_entered():
 	AUDIO.play_se("MOVE_MENU")

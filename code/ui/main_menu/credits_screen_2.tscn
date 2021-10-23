@@ -3,7 +3,7 @@
 [ext_resource path="res://code/ui/main_menu/credits_screen_2.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/others/Credits2.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/fonts/alagard_by_pix3m-d6awiwp.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/sounds/bgm/1. The Market (online-audio-converter.com).ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/bgm/1. The Market.ogg" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 37
@@ -31,7 +31,7 @@ custom_colors/font_color_hover = Color( 0.996078, 0, 0, 1 )
 text = "Return to the Title Screen"
 flat = true
 
-[node name="More Credits" type="Button" parent="."]
+[node name="Credits" type="Button" parent="."]
 margin_left = 4.49389
 margin_top = 475.45
 margin_right = 494.494
@@ -50,6 +50,6 @@ volume_db = -14.0
 autoplay = true
 
 [connection signal="focus_entered" from="Title" to="." method="_on_Title_focus_entered"]
-[connection signal="pressed" from="Title" to="." method="_on_Button_pressed"]
-[connection signal="focus_entered" from="More Credits" to="." method="_on_More_Credits_focus_entered"]
-[connection signal="pressed" from="More Credits" to="." method="_on_More_Credits_pressed"]
+[connection signal="pressed" from="Title" to="." method="_on_Title_pressed"]
+[connection signal="focus_entered" from="Credits" to="." method="_on_Credits_focus_entered"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]

@@ -1,21 +1,22 @@
 extends "res://code/battle/apply.gd"
 
-onready var location = "OUTSIDE"
 var targets = []
 var item = null
 var player = null
 var target = null
 var type = "ONE"
 
+onready var location = "OUTSIDE"
 
-func enter(item_arg, player_arg):
+
+func enter(item_arg: Item, player_arg: Player):
 	location = "TARGETS"
 	get_node("Panel/All/Left/Chars/Char0").grab_focus()
 	for i in range(len(GLOBAL.players)):
 		var node = get_node("Panel/All/Left/Chars/Char" + str(i))
 		node.update_info(GLOBAL.players[i])
 		node.connect("pressed", self, "_on_Char_pressed", [i])
-		node.connect("focus_entered", self, "_on_Focus_Entered")
+		node.connect("focus_entered", self, "_on_focus_entered")
 	item = item_arg
 	player = player_arg
 	if item.target == "ALL":
@@ -33,7 +34,7 @@ func give_focus():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("ui_cancel") and location == "TARGETS":
 		get_parent().get_parent().get_parent().back_to_skills(player.id)
 		queue_free()
@@ -43,7 +44,7 @@ func _process(delta):
 
 func use_item():
 	var mp = player.get_mp()
-	player.set_stats(2, mp - item.quantity)
+	player.set_stats(MP, mp - item.quantity)
 	for target in targets:
 		for effect in item.get_effects():
 			apply_effect(player, effect, target, "Skill", true, false)
@@ -55,7 +56,7 @@ func use_item():
 	queue_free()
 
 
-func _on_Char_pressed(id):
+func _on_Char_pressed(id: int):
 	AUDIO.play_se("ENTER_MENU")
 	print("[ITEM USE] pressei " + str(id))
 	print(GLOBAL.players[id].status)
@@ -64,5 +65,5 @@ func _on_Char_pressed(id):
 	use_item()
 
 
-func _on_Focus_Entered():
+func _on_focus_entered():
 	AUDIO.play_se("MOVE_MENU")

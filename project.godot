@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/events/flag.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Item",
 "language": "GDScript",
 "path": "res://code/classes/objects/item.gd"
@@ -74,7 +74,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/objects/jobs.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "LOADER",
 "language": "GDScript",
 "path": "res://code/classes/util/loader.gd"
@@ -104,7 +104,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/battle/classes/run_action_result.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "STATS",
 "language": "GDScript",
 "path": "res://code/classes/util/stats.gd"

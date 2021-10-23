@@ -1,35 +1,35 @@
 extends Control
 
 onready var location = "MENU"
-onready var x
+onready var total_players
 
 
 func _ready():
 	for btn in $All/Right/Options_Panel/Options.get_children():
-		btn.connect("focus_entered", self, "_on_Focus_Entered")
+		btn.connect("focus_entered", self, "_on_focus_entered")
 
 
-func enter(players):
+func enter(players: Array):
 	location = "MENU"
 	for i in range(len(GLOBAL.players)):
 		var node = get_node("All/Left/Chars/Char" + str(i))
 		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.players[i].id])
 		node.connect("focus_entered", self, "_on_Focus_Entered")
-	x = len(players)
+	total_players = len(players)
 	give_focus()
 	for i in range(len(players)):
 		var node = get_node("All/Left/Chars/Char" + str(i))
 		node.update_info(players[i])
 
 
-func _on_Player_chosen(binds):
+func _on_Player_chosen(player_id: int):
 	AUDIO.play_se("ENTER_MENU")
 	if location == "SKILLS":
-		get_parent().get_parent().open_skills(binds)
+		get_parent().get_parent().open_skills(player_id)
 	elif location == "EQUIPS":
-		get_parent().get_parent().open_equips(binds)
+		get_parent().get_parent().open_equips(player_id)
 	else:
-		get_parent().get_parent().open_status(binds)
+		get_parent().get_parent().open_status(player_id)
 
 
 func update_info():
@@ -39,19 +39,18 @@ func update_info():
 	info.get_node("Playtime/Playtime_text").set_text(format_playtime(GLOBAL.playtime))
 
 
-func format_gold(money):
+func format_gold(money: int):
 	return str(money) + "G"
 
 
-func format_playtime(T):
-	var hours = floor(T / 3600)
-	var minutes = floor(T / 60) - hours * 60
-	var seconds = int(T) % int(60)
+func format_playtime(time: int):
+	var hours = floor(time / 3600)
+	var minutes = floor(time / 60) - hours * 60
+	var seconds = int(time) % int(60)
 	return str(hours) + "h" + str(minutes) + "m" + str(seconds) + "s"
 
 
 func force_char_focus():
-	print("forço foco no char")
 	var options = $All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(0)
@@ -66,17 +65,14 @@ func force_char_focus():
 
 
 func give_focus():
-	print("deu foco")
-	var players_avaliable = x
 	var options = $All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(2)
 		b.disabled = false
 	var chars = $All/Left/Chars.get_children()
 	var n = []
-	for i in range(players_avaliable):
+	for i in range(total_players):
 		n.insert(i, chars[i])
-	print(n)
 	for c in n:
 		c.set_focus_mode(0)
 		c.disabled = true
@@ -86,7 +82,6 @@ func give_focus():
 
 
 func change_focus():
-	print("troca foco")
 	var options = $All/Right/Options_Panel/Options.get_children()
 	for b in options:
 		b.set_focus_mode(0)
@@ -127,7 +122,7 @@ func _on_Status_pressed():
 	get_parent().get_parent().toggle_status()
 
 
-func _on_Focus_Entered():
+func _on_focus_entered():
 	AUDIO.play_se("MOVE_MENU")
 
 
