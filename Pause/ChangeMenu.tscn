@@ -296,10 +296,7 @@ custom_styles/normal = ExtResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ppau Kweh"
 script = ExtResource( 7 )
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 [connection signal="pressed" from="Panel/HBoxContainer/Options/Back" to="." method="_on_Back_pressed"]
 [connection signal="focus_entered" from="Panel/HBoxContainer/Reserve/ReserveSlot1" to="Panel/HBoxContainer/Reserve/ReserveSlot1" method="_on_ItemSlot0_focus_entered"]
 [connection signal="pressed" from="Panel/HBoxContainer/Reserve/ReserveSlot1" to="Panel/HBoxContainer/Reserve/ReserveSlot1" method="_on_ItemSlot0_pressed"]
