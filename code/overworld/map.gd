@@ -12,13 +12,13 @@ export var Doors = {}
 
 export var Battle_BG = 1
 
-# State variables
-onready var Enemies = []
-onready var Player_pos = Vector2(816, 368)
-onready var state = {}
-
 # Shortcut variables
 var cara_no_mundo = load("res://code/overworld/overworld_player.tscn")
+
+# State variables
+onready var enemie_on_map = []
+onready var initial_player_position = Vector2(816, 368)
+onready var state = {}
 
 
 # Returns current maps' margins (used to limit player camera)
@@ -40,14 +40,14 @@ func _ready():
 	#if GLOBAL.win:
 	#	get_tree().change_scene("res://code/ui/victory.tscn")
 
-	Enemies = LOCAL.enemies
-	Player_pos = LOCAL.position
+	enemie_on_map = LOCAL.enemies
+	initial_player_position = LOCAL.position
 
 	# Gets current map state from global area state
 	state = LOCAL.get_state()
 
 	# Sets player position on map
-	var pos = Player_pos
+	var pos = initial_player_position
 	if LOCAL.position:
 		pos = LOCAL.position
 	if LOCAL.transition != -1:
@@ -57,25 +57,24 @@ func _ready():
 	$Party.add_child(cara)
 	cara.position = pos
 	LOCAL.position = pos
-	cara._initialize()
+	cara.initialize()
 
 	# Connects battle manager to monsters
-	var BM = get_node("/root/BATTLE_MANAGER")
-	BM.init(Enemies, self)
-	for e in get_node("Enemies").get_children():
-		e.connect("battle_notifier", BM, "_encounter_management")
+	BATTLE_MANAGER.init(enemie_on_map, self)
+	for e in get_node("enemie_on_map").get_children():
+		e.connect("battle_notifier", BATTLE_MANAGER, "_encounter_management")
 
 	# Updates objects and enemies on the map according to loaded state
 	if state:
 		for key in state.keys():
 			var value = state[key]
-			get_node(key)._update(value)
+			get_node(key).update(value)
 
 
 # Updates player position and checks current map doors' conditions
 # on each frame
 # TODO: make check_doors be event driven
-func _physics_process(delta):
+func _physics_process(_delta):
 	LOCAL.position = $Party.get_child(0).get_global_position()
 	#check_doors()
 
@@ -87,7 +86,7 @@ func _physics_process(delta):
 # If so, opens it and sends a message on the HUD log
 func check_doors():
 	for d in Doors.keys():
-		if Doors[d] == "Defeat all enemies" and not $Enemies.get_children():
+		if Doors[d] == "Defeat all enemies" and not $enemie_on_map.get_children():
 			get_node("Objects/" + str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ""
@@ -106,7 +105,7 @@ func check_doors():
 func update_objects_position():
 	for e in get_node("Objects").get_children():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
-	for e in get_node("Enemies").get_children():
+	for e in get_node("enemie_on_map").get_children():
 		if e.dead:
 			print("[MAP] Killing " + e.get_name())
 			save_state("ENEMY_KILL", e.get_name())
@@ -121,7 +120,7 @@ func save_state(type, node, open = false, pos = Vector2(0, 0)):
 	if type == "TREASURE":
 		state["Treasure/" + str(node)] = true
 	elif type == "ENEMY_KILL":
-		state["Enemies/" + str(node)] = [true, pos]
+		state["enemie_on_map/" + str(node)] = [true, pos]
 	elif type == "OBJ_POS":
 		state["Objects/" + str(node)] = [open, pos]
 	# Saves current map state on the game's memory (not persistent)

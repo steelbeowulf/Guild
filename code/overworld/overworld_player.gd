@@ -43,7 +43,7 @@ func play(name):
 	node.get_node(name).play(true)
 
 # Initializes player on map - sets position and camera
-func _initialize():
+func initialize():
 	if LOCAL.position:
 		position = LOCAL.position
 	self.set_z_index(1)

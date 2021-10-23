@@ -213,7 +213,7 @@ func norm(vec):
 
 
 # Updates itself according to map state
-func _update(value):
+func update(value):
 	var pos = LOCAL.parse_position(value[1])
 	value = value[0]
 	if value:

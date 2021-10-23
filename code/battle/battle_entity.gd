@@ -186,12 +186,12 @@ func _on_Entity_pressed():
 
 
 # Show target picker
-func on_Entity_focus_entered():
+func on_entity_focus_entered():
 	$Picker.show()
 
 
 # Hide target picker
-func on_Entity_focus_exited():
+func on_entity_focus_exited():
 	$Picker.hide()
 
 
