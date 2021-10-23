@@ -1,0 +1,43 @@
+{
+	"ID":12,
+	"IMG":{"path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME": "Teleporter",
+  "EVENTS": [
+    {
+      "DIALOGUE":[
+        "Hey there!",
+        "Where do you want to go?"
+      ]
+    },
+    {
+      "OPTIONS": [
+        {
+          "OPTION": "Forest", 
+          "RESULTS": [
+            {
+              "DIALOGUE": [ "Kay, here we go! :D" ]
+            },
+            {
+              "TRANSITION": {
+                "AREA": "Forest",
+                "MAP": 1,
+                "POSITION": "(455, 445)"
+              }
+            }
+          ]
+        },
+        {
+          "OPTION": "Stay here",
+          "RESULTS": [
+            {
+              "DIALOGUE": [ "Aww, what a bummer >:("]
+            },
+          ]
+        }
+      ]
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/ranger.png", "scale":[8,8]}
+}

@@ -1,0 +1,67 @@
+{
+	"ID":13,
+	"IMG":{"path": "res://Assets/Animations/Entities/rogue spritesheet calciumtrice.png",
+   "vframes": 10, "hframes":10, "scale":[2.25,2.25]},
+	"ANIM":{"idle": [true, "0-19"]},
+	"NAME": "Fighter",
+  "EVENTS": [
+    {
+      "DIALOGUE":[
+        "Hey there!",
+        "How about a fight with some weak enemies?",
+        "It's great for practice!"
+      ]
+    },
+    {
+      "OPTIONS": [
+        {
+          "OPTION": "Ok", 
+          "RESULTS": [
+            {
+              "DIALOGUE": [ "Cool, time to pick your enemies" ]
+            },
+            {
+              "OPTIONS": [
+                {
+                  "OPTION": "Bats and rats", 
+                  "RESULTS": [
+                    {
+                      "BATTLE": {
+                        "ENEMIES": [7,8],
+                        "MUSIC": "BOSS_THEME",
+                        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+                        "EVENTS": []
+                      }
+                    }
+                  ]
+                },
+                {
+                  "OPTION": "Minotaur",
+                  "RESULTS": [
+                    {
+                      "BATTLE": {
+                        "ENEMIES": [3],
+                        "MUSIC": "BOSS_THEME",
+                        "BACKGROUND": "res://Assets/Backgrounds/forest2.png",
+                        "EVENTS": []
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OPTION": "No",
+          "RESULTS": [
+            {
+              "DIALOGUE": [ "Aww, what a bummer >:("]
+            },
+          ]
+        }
+      ]
+    }
+  ],
+	"PORTRAIT": {"sprite":"res://Assets/Portraits/rogue.png", "scale":[8,8]}
+}

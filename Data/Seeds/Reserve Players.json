@@ -1,0 +1,42 @@
+[{"ID":3,
+    "LEVEL":10,
+    "EXPERIENCE":1800,
+    "IMG":{
+        "path": "res://Assets/Animations/Entities/ranger spritesheet calciumtrice.png",
+        "vframes": 10,
+        "hframes":10,
+        "scale":[2,2]
+    },
+    "PORTRAIT": "res://Assets/Portraits/ranger.png",
+    "ANIM":{
+        "idle": [true, "50-59"], 
+        "move": [true, "70-79"],
+        "attack": [false, "80-89"],
+        "death":[false, "90-99"],
+        "dead":[true, "99"],
+        "skill": [false, "60-65,66,67,65,66,67,65,66,67,65,66,67-69"],
+        "Run": [false, "70-79,71-79,71-79"]
+    },
+    "HP":250,
+    "HP_MAX":250,
+    "MP":150,
+    "MP_MAX":150,
+    "ATK":80, 
+    "ATKM":55, 
+    "DEF":15, 
+    "DEFM":22, 
+    "AGI":40,
+    "ACC":100,
+    "EVA":20, 
+    "LCK":30,
+    "LANE":1,
+    "NAME":"Carolus",
+    "JOBS": [{"ID": 3, "LEVEL": 10}],
+    "SKILLS":{
+        "LV1": 11,
+        "LV5": 13,
+        "LV10": 12,
+    },
+    "EQUIPS":[-1, -1, -1, -1, -1],
+    "RESISTANCE":{"FIRE":1, "WATER":1, "ELECTRIC":1, "ICE":1, "EARTH":1, "WIND":1, "HOLY":1, "DARKNESS":1}}
+]

@@ -1,0 +1,12 @@
+{
+	"ID":27,
+	"NAME":"FURIOUS SWIPE", 
+	"QUANT":20, 
+	"TARGET":"ONE", 
+	"TYPE":"OFFENSE",
+	"EFFECTS":[{"STAT":"HP", "VALUE":-50, "TYPE":"PHYSIC", "TURNS":1}],
+	"STATUS":[{"BOOL":1.0, "STATUS":"RETREAT"}],
+	"IMG":{"path": "res://Assets/Animations/Spells/Water/Fire Spit.png",
+		   "vframes": 6, "hframes":4, "scale":[2,2]},
+	"ANIM":{"skill": [false, "16-23, 14-15, 0-13"]}
+}

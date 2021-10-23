@@ -1,0 +1,11 @@
+{	
+	"ID":3,	
+	"NAME":"IRON HELMET",
+	"TYPE":"NORMAL",
+	"LOCATION": "HEAD",
+	"CLASS": "Paladin",
+	"EFFECTS":[{"STAT":"DEF", "VALUE":25, "TYPE":"PHYSIC"}],
+	"STATUS":[],
+	"PRICE": 50,
+	"IMG":{"path": "res://Assets/Animations/Spells/Heal/Heal.png"}
+}
