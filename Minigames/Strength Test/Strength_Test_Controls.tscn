@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Minigames/ControlsMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Minigames/Strength Test/Strength_Test_Controls.gd" type="Script" id=2]
+
+[node name="Strength_Test_Controls" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Controls_Description" parent="." index="2"]
+margin_left = 240.0
+margin_top = 470.0
+margin_right = 540.0
+margin_bottom = 484.0
+text = "Click on the button with the left mouse button "
+[connection signal="button_down" from="Quit" to="." method="_on_Quit_button_down"]

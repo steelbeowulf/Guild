@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Minigames/Fishing Game/Fishes/Path.gd" type="Script" id=1]
+[ext_resource path="res://Minigames/Fishing Game/Fishes/FishPath.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Portraits/cleric.png" type="Texture" id=3]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1728.55, 1155.84, 0, 0, 0, 0, 1967.12, 890.004, -28.7076, 235.812, 28.7076, -235.812, 1853.52, 612.812, 0, 0, 0, 0, 1962.58, 440.135, 0, 0, 0, 0, 1848.97, 324.259, 34.8592, 166.094, -34.8592, -166.094, 1901.23, 215.2, 0, 0, 0, 0, 1719.47, 74.3314, -313.733, 79.9712, 313.733, -79.9712, 1387.74, 74.3314, 0, 0, 0, 0, 1037.04, -19.0171, 147.639, 147.639, -147.639, -147.639, 535.747, 78.076, 0, 0, 0, 0, 174.852, 96.5308, 6.15163, -139.437, -6.15163, 139.437, -151.184, 244.17, -45.1119, -301.43, 45.1119, 301.43, 53.8699, 469.73, 0, 0, 0, 0, -28.1517, 666.582, 0, 0, 0, 0, 68.2238, 723.997, -41.0109, -143.538, 41.0109, 143.538, 16.9602, 959.809, 0, 0, 0, 0, 183.054, 1047.98, 0, 0, 0, 0, 230.217, 1138.21, -127.134, 145.589, 127.134, -145.589, 716.195, 1019.28, 0, 0, 0, 0, 869.986, 1101.3, -145.589, 0, 145.589, 0, 1161.16, 1015.17, 0, 0, 0, 0, 1241.13, 1138.21, 47.1625, -125.083, -47.1625, 125.083, 1530.26, 1031.58, 0, 0, 0, 0, 1567.17, 1144.36 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22.8793, 22.3277 )
+
+[node name="Fish8" type="Path2D"]
+position = Vector2( -6.15161, 4.10107 )
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2( 1728.55, 1155.84 )
+rotation = -0.839369
+
+[node name="Fish" type="Area2D" parent="PathFollow2D"]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="PathFollow2D/Fish"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Fish"]
+shape = SubResource( 2 )
+[connection signal="area_entered" from="PathFollow2D/Fish" to="PathFollow2D/Fish" method="_on_Fish_area_entered"]

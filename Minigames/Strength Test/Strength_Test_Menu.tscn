@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Minigames/MiniGame_Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Minigames/Strength Test/Strength_Test_Menu.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+[node name="Strength_Test_Menu" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" parent="." index="0"]
+margin_left = 730.0
+margin_top = 360.0
+margin_right = 783.0
+margin_bottom = 410.0
+
+[node name="Start" parent="VBoxContainer" index="0"]
+custom_styles/hover = SubResource( 1 )
+
+[node name="Controls" parent="VBoxContainer" index="1"]
+custom_styles/hover = SubResource( 2 )
+
+[node name="Quit" parent="VBoxContainer" index="2"]
+custom_styles/hover = SubResource( 3 )
+
+[node name="Title" parent="." index="1"]
+margin_left = 520.0
+margin_right = 606.0
+text = "Strength Test"

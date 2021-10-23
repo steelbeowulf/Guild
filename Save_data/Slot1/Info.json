@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+{"area":{"MAP":2,"NAME":"Forest","POSITION":"(419.979553, 333.789978)","STATE":[{},{},{"Enemies/Slime":[true,"(0, 0)"]},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],"WIN":false},"events":{"boss_defeated":false,"eyeballs_defeated":0,"rangers_defeated":false},"gold":100,"playtime":13}
+=======
 {"area":{"MAP":2,"NAME":"Forest","POSITION":"(563.75, 457.539978)","STATE":[{},{},{"Enemies/Slime":[true,"(0, 0)"]},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],"WIN":false},"events":{"boss_defeated":false,"eyeballs_defeated":0,"rangers_defeated":false},"gold":100,"playtime":15}
+>>>>>>> master

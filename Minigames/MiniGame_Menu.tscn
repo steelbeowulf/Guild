@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="MiniGame_Menu" type="Node2D"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 690.0
+margin_top = 330.0
+margin_right = 743.0
+margin_bottom = 380.0
+rect_scale = Vector2( 8, 8 )
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+margin_right = 53.0
+margin_bottom = 14.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/normal = SubResource( 1 )
+text = "Start"
+flat = true
+
+[node name="Controls" type="Button" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 53.0
+margin_bottom = 32.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/normal = SubResource( 1 )
+text = "Controls"
+flat = true
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 53.0
+margin_bottom = 50.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/normal = SubResource( 2 )
+text = "Quit"
+flat = true
+
+[node name="Title" type="Label" parent="."]
+margin_left = 710.0
+margin_top = 100.0
+margin_right = 750.0
+margin_bottom = 114.0
+rect_scale = Vector2( 10, 10 )
+[connection signal="button_down" from="VBoxContainer/Start" to="." method="_on_Start_button_down"]
+[connection signal="button_down" from="VBoxContainer/Controls" to="." method="_on_Controls_button_down"]
+[connection signal="button_down" from="VBoxContainer/Quit" to="." method="_on_Quit_button_down"]

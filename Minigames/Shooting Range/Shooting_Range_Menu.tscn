@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Minigames/MiniGame_Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Minigames/Shooting Range/Shooting_Range_Menu.gd" type="Script" id=2]
+
+[node name="Shooting_Range_Menu" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Title" parent="." index="1"]
+margin_left = 470.0
+margin_top = 110.0
+margin_right = 567.0
+margin_bottom = 124.0
+text = "Shooting Range"

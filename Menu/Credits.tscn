@@ -48,7 +48,6 @@ flat = true
 stream = ExtResource( 4 )
 volume_db = -14.0
 autoplay = true
-
 [connection signal="focus_entered" from="Title" to="." method="_on_Title_focus_entered"]
 [connection signal="pressed" from="Title" to="." method="_on_Button_pressed"]
 [connection signal="focus_entered" from="More Credits" to="." method="_on_More_Credits_focus_entered"]
