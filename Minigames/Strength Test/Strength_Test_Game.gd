@@ -2,6 +2,7 @@ extends Node2D
 
 # with this var and these 2 functions I control the quantify the strength 
 var strength_value = 0
+onready var Strength_Button = $Strength_Button
 
 func _ready():
 	# test
@@ -12,7 +13,7 @@ func _ready():
 func _process(_delta):
 	#$Bar_color.animation = "Idle" + "strength_value"
 	# To calibrate
-	$Strength_Button.text = str(strength_value)
+	Strength_Button.text = str(strength_value)
 
 func _on_Strength_Button_button_down():
 	strength_value += 1

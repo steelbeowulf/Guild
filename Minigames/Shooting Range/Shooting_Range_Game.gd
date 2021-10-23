@@ -6,7 +6,7 @@ var counter : int = 0  #number of targets in the scene
 var hit_counter: int = 0
 var positionx_array = []
 var positiony_array = []
-const timer_speed: float = 0.99
+const timer_speed: float = 0.976
 onready var Bow_Position = $Bow_Position
 onready var Time = $Time
 onready var Target_Timer = $Target_Timer
@@ -70,8 +70,8 @@ func Calculate_Target_Position(positionx: float, positiony: float):
 	var target_position = Vector2(0,0)
 	# check if exists another target in the same position
 	for i in range(counter):
-		if positionx_array[i] - 60 <= positionx and positionx <= positionx_array[i] + 60:
-			if positiony_array[i] - 60 <= positiony and positiony <= positiony_array[i] + 60:
+		if positionx_array[i] - 80 <= positionx and positionx <= positionx_array[i] + 80:
+			if positiony_array[i] - 80 <= positiony and positiony <= positiony_array[i] + 80:
 					#exists a target in same position so choose another random position and try again 
 					var positionx_ : float = 0
 					var positiony_ : float = 0
