@@ -1,23 +1,24 @@
 extends Control
 
-const lanes_text = ["BACK", "MID", "FRONT"]
-onready var Battle: Node = get_parent()
-onready var menu_state: String = ""
-
 signal turn_finished
+
+const LANES_TEXT = ["BACK", "MID", "FRONT"]
+
+onready var battle_node: Node = get_parent()
+onready var menu_state: String = ""
 
 
 func _ready():
 	for c in $Menu.get_children():
-		c.connect("action_picked", self, "_on_Action_Picked")
+		c.connect("action_picked", self, "_on_Action_picked")
 
 
 # Repass info to parent
-func _on_Action_Picked(action_type: String, action_id: int, targets: PoolIntArray) -> void:
+func _on_Action_picked(action_type: String, action_id: int, targets: PoolIntArray) -> void:
 	if action_type != menu_state:
 		return
 	var action = Action.new(action_type, action_id, targets)
-	Battle.set_current_action(action)
+	battle_node.set_current_action(action)
 	menu_state = ""
 	emit_signal("turn_finished")
 
@@ -35,22 +36,22 @@ func _input(event: InputEvent):
 # Prepare actions UI
 func prepare_run_action() -> void:
 	menu_state = "Run"
-	get_node("Menu/Run")._on_Action_pressed()
+	get_node("Menu/Run").on_action_pressed()
 
 
 func prepare_lane_action(current_lane: int) -> void:
 	menu_state = "Lane"
 
-	for i in range(len(lanes_text)):
+	for i in range(len(LANES_TEXT)):
 		get_node("Menu/Lane/ScrollContainer/SubActions/" + str(i)).hide()
 		if current_lane != i:
 			var lane = get_node("Menu/Lane/ScrollContainer/SubActions/" + str(i))
 			lane.show()
 			lane.grab_focus()
-			lane.set_text(lanes_text[i])
+			lane.set_text(LANES_TEXT[i])
 
 	get_node("Menu/Lane/ScrollContainer/SubActions").show()
-	get_node("Menu/Lane")._on_Action_pressed()
+	get_node("Menu/Lane").on_action_pressed()
 
 
 func prepare_itens_action(inventory: Array) -> void:
@@ -69,7 +70,7 @@ func prepare_itens_action(inventory: Array) -> void:
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(inventory[i].name + " x" + str(inventory[i].quantity))
 
-	get_node("Menu/Item")._on_Action_pressed()
+	get_node("Menu/Item").on_action_pressed()
 
 
 func prepare_skills_action(skills: Array, current_mp: int) -> void:
@@ -89,7 +90,7 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(skills[i].name + "  " + str(skills[i].quantity))
 
-	get_node("Menu/Skill")._on_Action_pressed()
+	get_node("Menu/Skill").on_action_pressed()
 
 
 func disable_all_except(exception: String) -> void:
@@ -108,12 +109,12 @@ func prepare_attack_action() -> void:
 		players.get_node(str(-i)).hide()
 	for i in range(5):
 		enemies.get_node(str(i)).hide()
-	for i in range(1, Battle.Players.size() + 1):
+	for i in range(1, battle_node.Players.size() + 1):
 		players.get_node(str(-i)).show()
 		players.get_node(str(-i)).disabled = false
 		players.get_node(str(-i)).set_text("")
-	for i in range(Battle.Enemies.size()):
-		if not Battle.Enemies[i].is_dead():
+	for i in range(battle_node.Enemies.size()):
+		if not battle_node.Enemies[i].is_dead():
 			if unfocus:
 				enemies.get_node(str(i)).grab_focus()
 				unfocus = false
@@ -121,5 +122,5 @@ func prepare_attack_action() -> void:
 			enemies.get_node(str(i)).disabled = false
 			enemies.get_node(str(i)).set_text("")
 	enemies.get_node("0").grab_focus()
-	get_node("Menu/Attack")._on_Action_pressed()
+	get_node("Menu/Attack").on_action_pressed()
 	get_node("Menu/Attack").set_pressed(true)

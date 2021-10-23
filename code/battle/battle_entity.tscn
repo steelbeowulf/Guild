@@ -114,7 +114,7 @@ margin_bottom = 120.596
 custom_fonts/font = ExtResource( 4 )
 text = "Rat A"
 
-[connection signal="focus_entered" from="." to="." method="_on_Entity_focus_entered"]
-[connection signal="focus_exited" from="." to="." method="_on_Entity_focus_exited"]
+[connection signal="focus_entered" from="." to="." method="on_Entity_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="on_Entity_focus_exited"]
 [connection signal="pressed" from="." to="." method="_on_Entity_pressed"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

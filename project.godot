@@ -9,17 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Reference",
 "class": "Action",
 "language": "GDScript",
 "path": "res://code/battle/classes/action.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "ActionResult",
 "language": "GDScript",
 "path": "res://code/battle/classes/action_result.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "Apply",
 "language": "GDScript",
 "path": "res://code/battle/apply.gd"

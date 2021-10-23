@@ -20,11 +20,11 @@ func _ready():
 	self.text = get_name()
 	self.set_focus_next(NodePath("SubActions/0"))
 	for c in $ScrollContainer/SubActions.get_children():
-		c.connect("subaction_picked", self, "_on_SubAction_Picked")
-		c.connect("focus_entered", self, "_on_Focus_Entered", [c])
+		c.connect("subaction_picked", self, "_on_SubAction_picked")
+		c.connect("focus_entered", self, "_on_Focus_entered", [c])
 
 
-func _on_SubAction_Picked(subaction_arg: int) -> void:
+func _on_SubAction_picked(subaction_arg: int) -> void:
 	subaction = subaction_arg
 	$ScrollContainer.hide()
 	if action_type == "Lane":
@@ -59,7 +59,7 @@ func hide_stuff():
 	emit_signal("deactivate_targets_all")
 
 
-func _on_Action_pressed():
+func on_action_pressed():
 	print("[ACTION BUTTON] Action pressed: ", action_type)
 	if action_type == "Run":
 		emit_signal("action_picked", action_type, 0, [])
@@ -79,7 +79,7 @@ func _on_Action_pressed():
 				break
 
 
-func _on_Targets_Picked(target_args: PoolIntArray):
+func _on_Targets_picked(target_args: PoolIntArray):
 	print("[ACTION BUTTON] subaction: ", subaction, " targets: ", targets)
 	targets = target_args
 	if subaction != -1 and action_type == get_parent().get_parent().menu_state:
@@ -90,48 +90,52 @@ func _on_Targets_Picked(target_args: PoolIntArray):
 
 
 func connect_target_player(p: Button):
-	p.connect("target_picked", self, "_on_Targets_Picked")
-	self.connect("activate_targets", p, "_on_Activate_Targets")
-	self.connect("deactivate_targets", p, "_on_Deactivate_Targets")
+	p.connect("target_picked", self, "_on_Targets_picked")
+	self.connect("activate_targets", p, "_on_Targets_activated")
+	self.connect("deactivate_targets", p, "_on_Targets_deactivated")
 
 
 func connect_target_enemy(e: Button, manager: Node, id: int):
 	e.connect("focus_entered", manager, "manage_hate", [0, id])
 	e.connect("focus_exited", manager, "hide_hate")
-	e.connect("target_picked", self, "_on_Targets_Picked")
-	self.connect("activate_targets", e, "_on_Activate_Targets")
-	self.connect("deactivate_targets", e, "_on_Deactivate_Targets")
+	e.connect("target_picked", self, "_on_Targets_picked")
+	self.connect("activate_targets", e, "_on_Targets_activated")
+	self.connect("deactivate_targets", e, "_on_Targets_deactivated")
 
 
 func connect_targets(
-	list_players: Array, list_enemies: Array, manager: Node, allPlayers: Button, allEnemies: Button
+	list_players: Array,
+	list_enemies: Array,
+	manager: Node,
+	all_players: Button,
+	all_enemies: Button
 ) -> void:
 	var id = 0
 	var img
 	for e in list_enemies:
 		e.connect("focus_entered", manager, "manage_hate", [0, id])
 		e.connect("focus_exited", manager, "hide_hate")
-		e.connect("target_picked", self, "_on_Targets_Picked")
-		self.connect("activate_targets", e, "_on_Activate_Targets")
-		self.connect("deactivate_targets", e, "_on_Deactivate_Targets")
+		e.connect("target_picked", self, "_on_Targets_picked")
+		self.connect("activate_targets", e, "_on_Targets_activated")
+		self.connect("deactivate_targets", e, "_on_Targets_deactivated")
 		id += 1
 	id = 0
 	for p in list_players:
-		p.connect("target_picked", self, "_on_Targets_Picked")
-		self.connect("activate_targets", p, "_on_Activate_Targets")
-		self.connect("deactivate_targets", p, "_on_Deactivate_Targets")
+		p.connect("target_picked", self, "_on_Targets_picked")
+		self.connect("activate_targets", p, "_on_Targets_activated")
+		self.connect("deactivate_targets", p, "_on_Targets_deactivated")
 		id += 1
-	self.connect("activate_targets_all", allPlayers, "_on_Activate_Targets")
-	self.connect("activate_targets_all", allEnemies, "_on_Activate_Targets")
-	self.connect("deactivate_targets_all", allPlayers, "_on_Deactivate_Targets")
-	self.connect("deactivate_targets_all", allEnemies, "_on_Deactivate_Targets")
+	self.connect("activate_targets_all", all_players, "_on_Targets_activated")
+	self.connect("activate_targets_all", all_enemies, "_on_Targets_activated")
+	self.connect("deactivate_targets_all", all_players, "_on_Targets_deactivated")
+	self.connect("deactivate_targets_all", all_enemies, "_on_Targets_deactivated")
 
-	self.connect("player_focus", allPlayers, "_on_Focus_First")
-	self.connect("enemy_focus", allEnemies, "_on_Focus_First")
-	allPlayers.connect("target_picked", self, "_on_Targets_Picked")
-	allEnemies.connect("target_picked", self, "_on_Targets_Picked")
+	self.connect("player_focus", all_players, "_on_first_focus")
+	self.connect("enemy_focus", all_enemies, "_on_first_focus")
+	all_players.connect("target_picked", self, "_on_Targets_picked")
+	all_enemies.connect("target_picked", self, "_on_Targets_picked")
 
 
-func _on_Focus_Entered(button):
+func _on_Focus_entered(button):
 	var num = int(button.get_name())
 	$ScrollContainer.scroll_vertical = num * 30

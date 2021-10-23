@@ -14,7 +14,7 @@ func enter(players: Array):
 	for i in range(len(GLOBAL.players)):
 		var node = get_node("All/Left/Chars/Char" + str(i))
 		node.connect("pressed", self, "_on_Player_chosen", [GLOBAL.players[i].id])
-		node.connect("focus_entered", self, "_on_Focus_Entered")
+		node.connect("focus_entered", self, "_on_Focus_entered")
 	total_players = len(players)
 	give_focus()
 	for i in range(len(players)):

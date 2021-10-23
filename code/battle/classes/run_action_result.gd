@@ -1,5 +1,5 @@
-extends ActionResult
 class_name RunActionResult
+extends ActionResult
 
 var boss: bool
 var successful: bool

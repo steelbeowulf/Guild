@@ -1,19 +1,11 @@
+# Button representing a target in battle
 extends Button
-"""
-	Button representing a target in battle
-"""
-export(bool) var Player = false
 
-# Position related variables
+signal target_picked
+signal finish_anim
+
+const SPRITE_SCRIPT = preload("res://code/classes/util/spritesheet.gd")
 const OFFSET_LANE = Vector2(140, 0)
-onready var current_lane = 0
-onready var initial_position = Vector2(0, 0)
-
-# State related variables
-onready var my_turn = false
-onready var bounds = [0, 0, 0, 0, 0]
-onready var data: Entity = null
-onready var dead = false
 
 # Aura related variables
 const SHADER = preload("res://assets/others/shaders/outline.shader")
@@ -26,24 +18,31 @@ const COLORS = {
 	"YELLOW": Color(1, 1, 0)
 }
 
-signal target_picked
-signal finish_anim
+export(bool) var is_player = false
+
+# Position related variables
+onready var current_lane = 0
+onready var initial_position = Vector2(0, 0)
+
+# State related variables
+onready var my_turn = false
+onready var bounds = [0, 0, 0, 0, 0]
+onready var data: Entity = null
+onready var dead = false
 
 
+# Sets initial position and turn indicator color
 func _ready():
-	"""
-		Sets initial position and turn indicator color
-	"""
 	initial_position = self.get_global_position()
-	if not Player:
+	if not is_player:
 		$Turn.set_color(Color(1, 0, 0))
 
 
 ############## Animations
+
+
+# Callback for when a sprite animation finishes
 func _on_Sprite_animation_finished(animation_name: String):
-	"""
-		Callback for when a sprite animation finishes
-	"""
 	emit_signal("finish_anim", animation_name)
 	$Animations.get_node(animation_name).hide()
 	if animation_name == "death":
@@ -63,27 +62,23 @@ func _on_Sprite_animation_finished(animation_name: String):
 		$Animations.get_node("idle").play(true)
 
 
+# Callback for when a spell animation finishes
 func _on_Spell_animation_finished(animation_name: String):
-	"""
-		Callback for when a spell animation finishes
-	"""
 	emit_signal("finish_anim", animation_name)
 	$Spells.get_node(animation_name).hide()
 	$Spells.get_node(animation_name).playing = false
 
 
+# Setup spell animations for this entity
+# Sprite parameter has a path, frames and scale option
+# Animation_data has [loop, frame] as value
 func set_spell(sprite: Dictionary, animation_data: Array, animation_name: String):
-	"""
-		Setup spell animations for this entity
-		Sprite parameter has a path, frames and scale option
-		Animation_data has [loop, frame] as value
-	"""
 	print("[ENTITY BATTLE] Setting Spell " + str(animation_name))
 	var scale = sprite["scale"]
 	var animation = Sprite.new()
 	animation.texture = load(sprite["path"])
 	animation.set_name(animation_name)
-	animation.set_script(load("res://code/classes/util/spritesheet.gd"))
+	animation.set_script(SPRITE_SCRIPT)
 	animation.loop = animation_data[0]
 	animation.physical_frames = animation_data[1]
 	animation.vframes = sprite["vframes"]
@@ -99,13 +94,11 @@ func set_spell(sprite: Dictionary, animation_data: Array, animation_name: String
 	$Spells.add_child(animation)
 
 
+# Setup animations for this entity
+# Sprite parameter has a path, frames and scale option
+# Animations is a dictionary of animation_names as key and [loop, frame] as value
+# Data_arg is a reference to the entity this node represents
 func set_animations(sprite: Dictionary, animations: Dictionary, data_arg: Entity):
-	"""
-		Setup animations for this entity
-		Sprite parameter has a path, frames and scale option
-		Animations is a dictionary of animation_names as key and [loop, frame] as value
-		Data_arg is a reference to the entity this node represents
-	"""
 	self.data = data_arg
 	var scale = sprite["scale"]
 
@@ -117,7 +110,7 @@ func set_animations(sprite: Dictionary, animations: Dictionary, data_arg: Entity
 		mat.set_shader(SHADER)
 		animation.set_material(mat)
 		animation.set_name(k)
-		animation.set_script(load("res://code/classes/util/spritesheet.gd"))
+		animation.set_script(SPRITE_SCRIPT)
 		animation.loop = v[0]
 		animation.physical_frames = v[1]
 		animation.vframes = sprite["vframes"]
@@ -132,12 +125,10 @@ func set_animations(sprite: Dictionary, animations: Dictionary, data_arg: Entity
 		$Animations.add_child(animation)
 
 
+# Plays an animation from the current sprite and/or other animations
+# such as the damage/critical/miss indicators
+# Called by the animation_manager on the end of a turn
 func play(animation_name: String, options = []):
-	"""
-		Plays an animation from the current sprite and/or other animations
-		such as the damage/critical/miss indicators
-		Called by the animation_manager on the end of a turn
-	"""
 	print("[ENTITY BATTLE] playing animation " + animation_name)
 	var node = $Animations
 	if animation_name == "end_turn":
@@ -173,92 +164,72 @@ func play(animation_name: String, options = []):
 ############## Targetting
 
 
-func _on_Activate_Targets(is_ress: bool):
-	"""
-		Makes this entity targetable for current action
-		is_ress flag is true when action is a ressurection spell,
-		thus making a dead player targetable for a ressurection spell
-	"""
-	if (not dead and not is_ress) or (dead and self.data.tipo == "Player" and is_ress):
+# Makes this entity targetable for current action
+# is_ress flag is true when action is a ressurection spell,
+# thus making a dead player targetable for a ressurection spell
+func _on_Targets_activated(is_ress: bool):
+	if (not dead and not is_ress) or (dead and self.data.tipo == "is_player" and is_ress):
 		self.disabled = false
 		self.set_focus_mode(2)
 		self.grab_focus()
 
 
-func _on_Deactivate_Targets():
-	"""
-		Makes this entity not targetable for current action
-	"""
+# Makes this entity not targetable for current action
+func _on_Targets_deactivated():
 	self.disabled = true
 	self.set_focus_mode(0)
 
 
+# Emit target_picked signal with target_id
 func _on_Entity_pressed():
-	"""
-		Emit target_picked signal with target_id
-	"""
 	emit_signal("target_picked", [get_id()])
 
 
-func _on_Entity_focus_entered():
-	"""
-		Show target picker
-	"""
+# Show target picker
+func on_Entity_focus_entered():
 	$Picker.show()
 
 
-func _on_Entity_focus_exited():
-	"""
-		Hide target picker
-	"""
+# Hide target picker
+func on_Entity_focus_exited():
 	$Picker.hide()
 
 
 ############## Getters/Setters
 
 
+# Return position on Enemies/Players array from Battle state
 func get_id():
-	"""
-		Return position on Enemies/Players array from Battle state
-	"""
-	if Player:
+	if is_player:
 		return -(int(get_name()[1]) + 1)
 	else:
 		return int(get_name()[1])
 
 
 # TODO: Make status class
+# Sets this sprite's outline color
+# status_effect = [outline_width: float, outline_color: String]
 func set_aura(status_effect: Array):
-	"""
-		Sets this sprite's outline color
-		status_effect = [outline_width: float, outline_color: String]
-	"""
 	for anim in $Animations.get_children():
 		anim.material.set_shader_param("outline_width", status_effect[1])
 		anim.material.set_shader_param("outline_color", COLORS[status_effect[0]])
 
 
+# Remove this sprite's outline
 func remove_aura():
-	"""
-		Remove this sprite's outline
-	"""
 	for anim in $Animations.get_children():
 		anim.material.set_shader_param("outline_width", 0)
 		anim.material.set_shader_param("outline_color", "")
 
 
+# Show/hide turn indicator
 func set_turn(visible: bool):
-	"""
-		Show/hide turn indicator
-	"""
 	$Turn.visible = visible
 
 
+# Change this entity current lane
+# And moves accordingly
 func change_lane(lane: int):
-	"""
-		Change this entity current lane
-		And moves accordingly
-	"""
 	var new_pos = initial_position
 	if lane == 0:  # Back
 		self.set_position(new_pos)
@@ -269,22 +240,18 @@ func change_lane(lane: int):
 
 
 # TODO: Should this be here?
+# Updates this entity current hate
 func update_bounds(bounds: Array):
-	"""
-		Updates this entity current hate
-	"""
 	bounds = bounds
 
 
 ############## Specific actions
 
 
+# Revive entity represented by this node
+# Stops dead and plays idle animation
+# Makes entity targetable again
 func revive():
-	"""
-		Revive entity represented by this node
-		Stops dead and plays idle animation
-		Makes entity targetable again
-	"""
 	print("[Entity Battle] Reviving...")
 	dead = false
 	$Animations.get_node("dead").stop()
@@ -293,15 +260,12 @@ func revive():
 	$Animations.get_node("idle").play()
 
 
+# Called when entity enters battle
+# Moves sprite until its designated spot and emits finish_anim signal
 func enter_scene():
-	"""
-		Called when entity enters battle
-		Moves sprite until its designated spot and emits
-		finish_anim signal
-	"""
 	var final_pos = get_position()
 	$Name.set_text(data.get_name())
-	if Player:
+	if is_player:
 		self.set_position(Vector2(0, final_pos.y))
 	else:
 		self.set_position(Vector2(1080, final_pos.y))
@@ -316,11 +280,9 @@ func enter_scene():
 	$Tween.start()
 
 
-func _on_Tween_tween_completed(object, key):
-	"""
-		Currently only used for when entrance animation finishes
-		Stops the move animation and plays idle
-	"""
+# Currently only used for when entrance animation finishes
+# Stops the move animation and plays idle
+func _on_Tween_tween_completed(_object: Node, _key: String):
 	$Animations.get_node("move").hide()
 	$Animations.get_node("move").stop()
 	$Animations.get_node("idle").show()
@@ -329,11 +291,9 @@ func _on_Tween_tween_completed(object, key):
 
 
 # TODO: Refactor this
+# Display correct numbers when this entity takes damage
+# Or heals HP or heals MP or both
 func take_damage(value, type):
-	"""
-		Display correct numbers when this entity takes damage
-		Or heals HP or heals MP or both
-	"""
 	print("[ENTITY BATTLE] Taking damage, value=" + str(value) + ", type=" + str(type))
 	if type == -1:
 		$Damage.text = "MISS"

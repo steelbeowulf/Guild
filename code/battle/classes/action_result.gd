@@ -1,9 +1,6 @@
-extends Node
+# Represents the result of an Action that might be taken by an Entity during Battle
+# Currently unused
 class_name ActionResult
-"""
-	Represents the result of an Action that might be taken by an Entity during Battle
-	Currently unused
-"""
 
 var type: String
 

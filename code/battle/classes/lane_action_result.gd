@@ -1,5 +1,5 @@
-extends ActionResult
 class_name LaneActionResult
+extends ActionResult
 
 var lane: int
 

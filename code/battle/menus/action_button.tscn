@@ -138,4 +138,4 @@ visible = false
 
 [node name="4" parent="EnemyContainer" instance=ExtResource( 7 )]
 
-[connection signal="pressed" from="." to="." method="_on_Action_pressed"]
+[connection signal="pressed" from="." to="." method="on_action_pressed"]

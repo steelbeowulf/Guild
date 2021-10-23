@@ -6,14 +6,14 @@ signal slot_chosen
 func _ready():
 	AUDIO.init_sound()
 	$New.grab_focus()
-	$New.connect("focus_entered", self, "_on_Focus_Entered")
-	$Load.connect("focus_entered", self, "_on_Focus_Entered")
-	$Credits.connect("focus_entered", self, "_on_Focus_Entered")
-	$Exit.connect("focus_entered", self, "_on_Focus_Entered")
+	$New.connect("focus_entered", self, "_on_Focus_entered")
+	$Load.connect("focus_entered", self, "_on_Focus_entered")
+	$Credits.connect("focus_entered", self, "_on_Focus_entered")
+	$Exit.connect("focus_entered", self, "_on_Focus_entered")
 	var tmp = 0
 	for c in get_node("Load_Screen/Save Slots").get_children():
 		c.connect("button_down", self, "_on_Slot_chosen", [tmp])
-		c.connect("focus_entered", self, "_on_Focus_Entered")
+		c.connect("focus_entered", self, "_on_Focus_entered")
 		tmp += 1
 
 

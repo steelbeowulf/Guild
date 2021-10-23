@@ -1,5 +1,5 @@
-extends ActionResult
 class_name StatsActionResult
+extends ActionResult
 
 var stats_change: Array
 var deaths: Array

@@ -1,16 +1,15 @@
 extends Button
 
-var targets = []
 signal target_picked
+
+var targets = []
 
 
 # TODO: Make this work for lanes
-func _on_Activate_Targets(skill_type: String):
-	"""
-		Current selected skill has target of 'ALL'
-		If offensive, targets all enemies by default
-		If not, targets all players
-	"""
+# Current selected skill has target of 'ALL'
+# If offensive, targets all enemies by default
+# If not, targets all players
+func _on_Targets_activated(skill_type: String):
 	print("[TARGETS] Activating all")
 	self.disabled = false
 	self.set_focus_mode(2)
@@ -20,51 +19,41 @@ func _on_Activate_Targets(skill_type: String):
 		self.grab_focus()
 
 
-func _on_Deactivate_Targets():
-	"""
-		Untargets entity
-	"""
+# Untargets entity
+func _on_Targets_deactivated():
 	print("[TARGETS] Deactivating all")
 	self.disabled = true
 	self.set_focus_mode(0)
 	_on_All_focus_exited()
 
 
+# Invisible button has focus: targets all children of this node
 func _on_All_focus_entered():
-	"""
-		Invisible button has focus: targets all children of this node
-	"""
 	print("[TARGETS] All enter ", get_name())
 	for c in get_children():
 		if c.data != null and not c.dead:
-			c._on_Entity_focus_entered()
+			c.on_Entity_focus_entered()
 			targets.append(c.get_id())
 	self.grab_focus()
 
 
+# Invisible button lost focus: remove all childrens of this node from target
 func _on_All_focus_exited():
-	"""
-		Invisible button lost focus: remove all childrens of this node from target
-	"""
 	print("[TARGETS] All exit ", get_name())
 	for c in get_children():
-		c._on_Entity_focus_exited()
+		c.on_Entity_focus_exited()
 	targets = []
 
 
+# Invisible button has been pressed:
+# Send target_picked signal with selected targets
 func _on_All_pressed():
-	"""
-		Invisible button has been pressed:
-		Send target_picked signal with selected targets
-	"""
 	emit_signal("target_picked", targets)
 
 
-func _on_Focus_First(is_ress: bool):
-	"""
-		Decides which of the children should be the default target for an action
-		If it is a ressurection skill, targets the first dead player by default
-	"""
+# Decides which of the children should be the default target for an action
+# If it is a ressurection skill, targets the first dead player by default
+func _on_first_focus(is_ress: bool):
 	for c in get_children():
 		if c.data != null and (not c.dead or (c.dead and c.data.tipo == "Player" and is_ress)):
 			c.grab_focus()

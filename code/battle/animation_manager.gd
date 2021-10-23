@@ -1,88 +1,94 @@
+# Manages the animation of all 2D sprites on battle
+# Also responsible for making the path between an enemy and its
+# current target
 extends Node2D
-"""
-	Manages the animation of all 2D sprites on battle
-	Also responsible for making the path between an enemy and its
-	current target
-"""
 
-# Initialization and shortcuts
-var Players_img = []
-var Enemies_img = []
-var Players_status = []
-onready var Menu = self.get_parent().get_node("Interface/Menu")
-onready var Info = self.get_parent().get_node("Interface/Info")
+signal animation_finished
+
+# Initialization
+var players_graphics = []
+var enemies_graphics = []
+var players_statuses = []
+
+# Animation Queue
+var queue = []
+var last = false
+var can_play = true
+var entering = true
+
+# Shortcuts
+onready var menu_node = self.get_parent().get_node("Interface/menu_node")
+onready var info_node = self.get_parent().get_node("Interface/info_node")
 
 
-func initialize(Players: Array, Enemies: Array):
-	"""
-		Initializes players and enemies sprites on battle, loads their animation,
-		sets themselves as targets for actions setup player info on the bottom menu
-	"""
+# Initializes players and enemies sprites on battle, loads their animation,
+# sets themselves as targets for actions setup player info on the bottom menu
+func initialize(players: Array, enemies: Array):
 	var i = 0
 	for node in get_node("Players").get_children():
-		if i < len(Players):
-			var lane = Players[i].get_pos()
-			Players_img.append(node)
+		if i < len(players):
+			var lane = players[i].get_pos()
+			players_graphics.append(node)
 			node.change_lane(lane)
-			node.set_animations(Players[i].sprite, Players[i].animations, Players[i])
+			node.set_animations(players[i].sprite, players[i].animations, players[i])
 			node.connect("finish_anim", self, "_on_animation_finished")
-			Players[i].graphics = node
-			Players[i].info = Info.get_node("P" + str(i))
-			Players[i].info.set_initial_hp(Players[i].get_health(), Players[i].get_max_health())
-			Players[i].info.set_initial_mp(Players[i].get_mp(), Players[i].get_max_mp())
-			Players[i].info.connect("finish_anim", self, "_on_animation_finished")
+			players[i].graphics = node
+			players[i].info = info_node.get_node("P" + str(i))
+			players[i].info.set_initial_hp(players[i].get_health(), players[i].get_max_health())
+			players[i].info.set_initial_mp(players[i].get_mp(), players[i].get_max_mp())
+			players[i].info.connect("finish_anim", self, "_on_animation_finished")
 			i += 1
 			node.enter_scene()
 		else:
 			node.hide()
 	i = 0
 	for node in get_node("Enemies").get_children():
-		if i < len(Enemies):
-			Enemies_img.append(node)
-			node.set_animations(Enemies[i].sprite, Enemies[i].animations, Enemies[i])
+		if i < len(enemies):
+			enemies_graphics.append(node)
+			node.set_animations(enemies[i].sprite, enemies[i].animations, enemies[i])
 			node.play("move")
 			node.show()
 			node.connect("finish_anim", self, "_on_animation_finished")
-			Enemies[i].graphics = node
+			enemies[i].graphics = node
 			i += 1
 			node.enter_scene()
 		else:
 			node.hide()
 
 	# Link target buttons with visual targets
-	var allPlayers = get_node("Players")
-	var allEnemies = get_node("Enemies")
-	Menu.get_node("Attack").connect_targets(Players_img, Enemies_img, self, allPlayers, allEnemies)
-	Menu.get_node("Skill").connect_targets(Players_img, Enemies_img, self, allPlayers, allEnemies)
-	Menu.get_node("Item").connect_targets(Players_img, Enemies_img, self, allPlayers, allEnemies)
+	var all_players = get_node("Players")
+	var all_enemies = get_node("Enemies")
+	menu_node.get_node("Attack").connect_targets(
+		players_graphics, enemies_graphics, self, all_players, all_enemies
+	)
+	menu_node.get_node("Skill").connect_targets(
+		players_graphics, enemies_graphics, self, all_players, all_enemies
+	)
+	menu_node.get_node("Item").connect_targets(
+		players_graphics, enemies_graphics, self, all_players, all_enemies
+	)
 
 	# Initializes player info on the UI
-	Players_status = [
-		Info.get_node("P0"), Info.get_node("P1"), Info.get_node("P2"), Info.get_node("P3")
+	players_statuses = [
+		info_node.get_node("P0"),
+		info_node.get_node("P1"),
+		info_node.get_node("P2"),
+		info_node.get_node("P3")
 	]
-	for i in range(len(Players)):
-		Players_status[i].set_name(Players[i].name)
-		Players_status[i].set_level(Players[i].level)
+	for i in range(len(players)):
+		players_statuses[i].set_name(players[i].name)
+		players_statuses[i].set_level(players[i].level)
 
-	return [Players, Enemies]
+	return [players, enemies]
 
 
 ################ Animation Queue
 
-var queue = []
-var last = false
-var can_play = true
-var entering = true
 
-signal animation_finished
-
-
-func _physics_process(delta: float):
-	"""
-		Called every frame: processes the animation queue
-		Plays next animation on queue if there is one, or
-		sends the animation_finished signal
-	"""
+# Called every frame: processes the animation queue
+# Plays next animation on queue if there is one, or
+# sends the animation_finished signal
+func _physics_process(_delta: float):
 	if queue and can_play:
 		var current_animation = queue.pop_back()
 		can_play = false
@@ -94,10 +100,8 @@ func _physics_process(delta: float):
 		last = true
 
 
+# Called when an animation finishes
 func _on_animation_finished(animation_name: String):
-	"""
-		Called when an animation finishes
-	"""
 	print("[ANIMATION MANAGER] finished animation " + animation_name)
 	can_play = true
 	if last or animation_name == "Entrance":
@@ -105,14 +109,12 @@ func _on_animation_finished(animation_name: String):
 
 
 # TODO: Make anim class
+# Plays an animation
+# Anim parameter has three elements:
+# anim[0] = scope = Node that has a play method
+# anim[1] = animation_name = Animation name
+# anim[2] = info = Additional animation parameters
 func play(anim: Array):
-	"""
-		Plays an animation
-		Anim parameter has three elements:
-		anim[0] = scope = Node that has a play method
-		anim[1] = animation_name = Animation name
-		anim[2] = info = Additional animation parameters
-	"""
 	print("[ANIMATON MANAGER] playing animation " + anim[1])
 	var scope = anim[0]
 	var animation_name = anim[1]
@@ -123,19 +125,15 @@ func play(anim: Array):
 
 
 # TODO: Use anim class
+# Adds an animation to the queue
 func enqueue(scope: Node, animation_name: String, additional_info):
-	"""
-		Adds an animation to the queue
-	"""
 	print("[ANIMATION PLAYER] Adding " + animation_name + " to queue")
 	queue.push_front([scope, animation_name, additional_info])
 
 
-func resolve(current_entity: Entity, action_result):
-	"""
-		Resolves a turn from battle according to the action taken
-		Enqueues all necessary animations
-	"""
+# Resolves a turn from battle according to the action taken
+# Enqueues all necessary animations
+func resolve(current_entity: Entity, action_result: ActionResult):
 	print("[ANIMATION PLAYER] Resolving current turn")
 	last = false
 	var action_type = action_result.get_type()
@@ -199,67 +197,61 @@ func resolve(current_entity: Entity, action_result):
 ################ Reinforcements
 
 
+# Adds new player sprite into current battle
 func add_player(p: Player):
-	"""
-		Adds new player sprite into current battle
-	"""
-	var last_index = Players_img.size()
+	var last_index = players_graphics.size()
 	var node = get_node("Players").get_child(last_index)
-	Players_img.append(node)
+	players_graphics.append(node)
 	node.change_lane(p.get_pos())
 	node.set_animations(p.sprite, p.animations, p)
 	entering = true
 	node.connect("finish_anim", self, "_on_animation_finished")
 	p.graphics = node
-	p.info = Info.get_node("P" + str(last_index))
+	p.info = info_node.get_node("P" + str(last_index))
 	p.info.set_initial_hp(p.get_health(), p.get_max_health())
 	p.info.set_initial_mp(p.get_mp(), p.get_max_mp())
 	p.info.connect("finish_anim", self, "_on_animation_finished")
-	Players_status[last_index].set_name(p.get_name())
-	Players_status[last_index].set_level(p.get_level())
-	Menu.get_node("Attack").connect_target_player(node)
-	Menu.get_node("Skill").connect_target_player(node)
-	Menu.get_node("Item").connect_target_player(node)
+	players_statuses[last_index].set_name(p.get_name())
+	players_statuses[last_index].set_level(p.get_level())
+	menu_node.get_node("Attack").connect_target_player(node)
+	menu_node.get_node("Skill").connect_target_player(node)
+	menu_node.get_node("Item").connect_target_player(node)
 	node.enter_scene()
 
 
+# Adds new enemy sprite into current battle
 func add_enemy(e: Enemy):
-	"""
-		Adds new enemy sprite into current battle
-	"""
-	var last_index = Enemies_img.size()
+	var last_index = enemies_graphics.size()
 	var node = get_node("Enemies").get_child(last_index)
-	Enemies_img.append(node)
+	enemies_graphics.append(node)
 	node.set_animations(e.sprite, e.animations, e)
 	entering = true
 	node.connect("finish_anim", self, "_on_animation_finished")
 	e.graphics = node
-	Menu.get_node("Attack").connect_target_enemy(node, self, last_index)
-	Menu.get_node("Skill").connect_target_enemy(node, self, last_index)
-	Menu.get_node("Item").connect_target_enemy(node, self, last_index)
+	menu_node.get_node("Attack").connect_target_enemy(node, self, last_index)
+	menu_node.get_node("Skill").connect_target_enemy(node, self, last_index)
+	menu_node.get_node("Item").connect_target_enemy(node, self, last_index)
 	node.enter_scene()
 
 
 ################ Hate
 
 
+# Updates visual representation of enemy targetting
+# type: Attack type (?) 0 if HP damage
+# target: Enemy index currently selected by player
 func manage_hate(type: int, target: int):
-	"""
-		Updates visual representation of enemy targetting
-		type: Attack type (?) 0 if HP damage
-		target: Enemy index currently selected by player
-	"""
-	var index = Enemies_img[target].data.get_target()
+	var index = enemies_graphics[target].data.get_target()
 	if index < 0:
 		index = -(index + 1)
 	if type == 0:
 		$Path2D.create_curve(
-			Enemies_img[target].get_global_position(), Players_img[index].get_global_position(), 32
+			enemies_graphics[target].get_global_position(),
+			players_graphics[index].get_global_position(),
+			32
 		)
 
 
+# Hides visual representation of enemy targetting
 func hide_hate():
-	"""
-		Hides visual representation of enemy targetting
-	"""
 	$Path2D.destroy_curve()

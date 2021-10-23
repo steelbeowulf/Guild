@@ -1,8 +1,12 @@
-extends Node
-
 class_name Apply
 
-var dstats = {
+# Stats
+enum { HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK }
+
+# Attack type
+enum { PHYSIC, MAGIC }
+
+const DSTATS = {
 	HP: "HP",
 	HP_MAX: "HP máximo",
 	MP: "MP",
@@ -15,10 +19,8 @@ var dstats = {
 	ACC: "ACC",
 	LCK: "LCK"
 }
-# Stats
-enum { HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK }
 
-var sstats = {
+const SSTATS = {
 	0: "CONFUSION",
 	1: "POISON",
 	2: "BURN",
@@ -41,7 +43,7 @@ var sstats = {
 	19: "REFLECT",
 	20: "CONTROL",
 	21: "CHARM",
-	22: "HP_CRITICAL",
+	22: "HP_is_criticalICAL",
 	23: "CURSE",
 	24: "STOP",
 	25: "HIDDEN",
@@ -69,13 +71,17 @@ var sstats = {
 	48: "FEAR"
 }
 
-# Attack type
-enum { PHYSIC, MAGIC }
-
 const MAX_VALUE = 9999
 
 
-func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit, crit):
+func apply_effect(
+	who: Entity,
+	effect: StatEffect,
+	target: Entity,
+	action_type: String,
+	is_hit: bool,
+	is_critical: bool
+):
 	var ret = 0  # Stat difference for displaying numbers
 	var tipo = -1  # 0 for HP, 1 for MP
 
@@ -106,8 +112,8 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit,
 	var atk_scalar = 1.0
 	var def_scalar = 1.0
 
-	print("[APPLY EFFECT] " + effect.format())
-	if hit:
+	print("[APPLY EFFECT] " + action_type + effect.format())
+	if is_hit:
 		# Offensive case: Damages HP
 		if stat == HP and base_value < 0:
 			print("[APPLY EFFECT] Offensive")
@@ -162,27 +168,29 @@ func apply_effect(who: Entity, effect: StatEffect, target: Entity, what_is, hit,
 			if final_value < 0:
 				final_value = 0
 
-		#Fix this later with the correct critical hit cap
-		#var crit_chance = min(100, floor((user_luck + lv - target_lv)/3.53))
-		#if(floor(rand_range(0,100.99)) <= crit_chance):
+		#Fix this later with the correct is_criticalical is_hit cap
+		#var is_critical_chance = min(100, floor((user_luck + lv - target_lv)/3.53))
+		#if(floor(rand_range(0,100.99)) <= is_critical_chance):
 		#	final_value = final_value * 2
-		#critical hit flag needed
+		#is_criticalical is_hit flag needed
 
 		print("[APPLY EFFECT] Final value: " + str(final_value))
 		target.set_stats(stat, final_value)
 
 		if target.get_health() > 0.2 * target.get_max_health():
-			target.remove_status("HP_CRITICAL")
-	if crit:
+			target.remove_status("HP_is_criticalICAL")
+	if is_critical:
 		ret = ret * 2
 	return [ret, tipo]
 
 
-func apply_status(status, target, attacker):
-	var type = sstats[status[1]]
-	var value = status[0]
+# TODO: Status class
+# TODO: Add back log functionality
+func apply_status(status_type: Array, target: Entity, attacker: Entity):
+	var type = SSTATS[status_type[1]]
+	var value = status_type[0]
 	var atkm = attacker.get_atkm()
-	print("[APPLY] Applying status ", type, " ", str(value), " on ", target.get_name())
+	print("[APPLY] Applying status_type ", type, " ", str(value), " on ", target.get_name())
 	if value > 0:
 		randomize()
 		var chance = rand_range(0, 99)
@@ -282,7 +290,7 @@ func apply_status(status, target, attacker):
 		elif type == "BLIND":
 			var acc = target.get_acc()
 			target.set_stats(ACC, acc / 10)
-			#logs.display_text(target.get_name()+" teve a visão comprometida, não consegue acertar seus alvos")
+			#logs.display_text(target.get_name()+" teve a visão comprometida")
 		elif type == "BERSERK":
 			var atk = target.get_atk()
 			target.set_stats(ATK, atk + 40)
@@ -301,7 +309,7 @@ func apply_status(status, target, attacker):
 			target.set_stats(DEF, def / 2)
 			target.set_stats(DEFM, defm / 2)
 			target.set_stats(ACC, acc / 2)
-			#logs.display_text(target.get_name()+" foi amaldiçoado. todos seus status foram reduzidos pela metade")
+			#logs.display_text(target.get_name()+" foi amaldiçoado")
 		elif type == "HASTE":
 			var agi = target.get_agi()
 			target.set_stats(AGI, agi * 2)
@@ -318,7 +326,7 @@ func apply_status(status, target, attacker):
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	elif value == -1:
-		print("[APPLY] Will remove status " + str(type))
+		print("[APPLY] Will remove status_type " + str(type))
 		target.remove_status(type)
 		if type == "ATTACK_UP":
 			var atk = target.get_atk()
@@ -419,64 +427,66 @@ func apply_status(status, target, attacker):
 		#logs.display_text(target.get_name()+" não está mais sob o efeito de "+type)
 
 
-func result_status(status, values, target, logs):
+# TODO: Status class
+# TODO: Add back log functionality
+func result_status(status_type: String, values: Array, target: Entity, _logs: Node):
 	var can_move = 0
 	var result = -1
-	if status == "POISON":
+	if status_type == "POISON":
 		var hp = target.get_health()
 		var dmg = values[1] - target.get_defm()
 		target.set_stats(HP, hp - dmg)
 		result = dmg
 		#logs.display_text(target.get_name()+" levou "+str(dmg)+" de dano de Poison")
-	elif status == "REGEN":
+	elif status_type == "REGEN":
 		var hp = target.get_health()
 		var max_hp = target.get_max_health()
 		result = target.set_stats(HP, hp + floor(max_hp * 0.05))
 		#logs.display_text(target.get_name()+" recuperou "+str(-result)+" de HP")
-	elif status == "BURN":
+	elif status_type == "BURN":
 		var hp = target.get_health()
 		target.set_stats(HP, hp - 10)
 		result = 10
 		#logs.display_text(target.get_name()+" levou 10 de dano de Burn")
-	elif status == "PARALYSIS":
+	elif status_type == "PARALYSIS":
 		randomize()
 		var chance = rand_range(0, 99)
 		if chance < 50:
 			#target.execute_action("Pass", 0)
 			#logs.display_text(target.get_name()+" esta paralisado, não consegue atacar")
 			can_move = -1
-	elif status == "FEAR":
+	elif status_type == "FEAR":
 		randomize()
 		var chance = rand_range(0, 99)
 		if chance < 26:
 			#target.execute_action("Pass", 0)
 			#logs.display_text(target.get_name()+" esta apavorado, não consegue atacar")
 			can_move = -1
-	elif status == "FREEZE":
+	elif status_type == "FREEZE":
 		#target.execute_action("Pass", 0)
 		#logs.display_text(target.get_name()+" esta congelado, não consegue atacar")
 		can_move = -1
-	elif status == "BERSERK":
+	elif status_type == "BERSERK":
 		#var atk = target.get_atk()
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 0)
 		#target.execute_action("Attack", rand)
 		#logs.display_text(target.get_name()+" esta fora de controle, atacará qualquer um em sua frente")
 		can_move = -2
-	elif status == "UNDEAD":
+	elif status_type == "UNDEAD":
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 3)
 		#target.execute_action("Attack", rand)
 		#logs.display_text(target.get_name()+" atacará qualquer alvo")
 		can_move = -2
-	elif status == "PETRIFY":
+	elif status_type == "PETRIFY":
 		#target.execute_action("Pass", 0)
 		#logs.display_text(target.get_name()+" esta petrificado, não consegue atacar")
 		can_move = -1
-	elif status == "KO":
+	elif status_type == "KO":
 		can_move = -1
 		#target.execute_action("Pass", 0)
-	elif status == "SLEEP":
+	elif status_type == "SLEEP":
 		var hp = target.get_health()
 		target.set_stats(HP, hp + floor(hp * 0.05))
 		result = floor(hp * 0.05)

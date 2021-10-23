@@ -20,14 +20,14 @@ func _on_Target_focus_exited():
 	$Sprite.hide()
 
 
-func _on_Activate_Targets():
+func _on_Targets_activated():
 	self.disabled = false
 	self.set_focus_mode(2)
 	self.show()
 	self.grab_focus()
 
 
-func _on_Deactivate_Targets():
+func _on_Targets_deactivated():
 	self.disabled = true
 	self.set_focus_mode(0)
 	self.hide()

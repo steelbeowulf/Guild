@@ -16,7 +16,7 @@ func _ready():
 		node.connect("target_picked", self, "_on_Skill_selected", [i])
 		node.connect("target_selected", self, "_on_Skill_hover", [i])
 	for btn in $Panel/HBoxContainer/Options.get_children():
-		btn.connect("focus_entered", self, "_on_Focus_Entered")
+		btn.connect("focus_entered", self, "_on_Focus_entered")
 	get_node("Panel/HBoxContainer/Options/SkillType1").grab_focus()
 
 

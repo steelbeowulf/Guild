@@ -1,9 +1,6 @@
-extends Node
+# Represents an Action that might be taken by an Entity during Battle
+# Action types: ATTACK, LANE, SKILL, ITEM, RUN
 class_name Action
-"""
-	Represents an Action that might be taken by an Entity during Battle
-	Action types: ATTACK, LANE, SKILL, ITEM, RUN
-"""
 
 var type: String
 var action: int

@@ -50,7 +50,7 @@ func _ready():
 	BATTLE_MANAGER.leveled_up = []
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		if $LevelUpLog.next():
 			AUDIO.play_bgm("MAP_THEME", false)
