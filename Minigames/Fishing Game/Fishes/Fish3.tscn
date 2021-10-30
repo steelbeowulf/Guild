@@ -7,6 +7,7 @@
 extents = Vector2( 25.286, 23.7304 )
 
 [node name="Fish3" type="Area2D"]
+collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

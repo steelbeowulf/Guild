@@ -6,8 +6,8 @@ onready var Strength_Button = $Strength_Button
 
 func _ready():
 	# test
-	AUDIO.initSound()
-	AUDIO.play_bgm("MINIGAME_THEME")
+	#AUDIO.initSound()
+	#AUDIO.play_bgm("MINIGAME_THEME")
 	get_tree().paused = true
 
 func _process(_delta):
@@ -24,7 +24,7 @@ func _on_Decrease_Strength_timeout():
 		strength_value -= 1
 
 func _on_Exit_button_down():
-	AUDIO.play_se("EXIT_MENU")
+	#AUDIO.play_se("EXIT_MENU")
 	get_tree().quit()
 
 # the game starts

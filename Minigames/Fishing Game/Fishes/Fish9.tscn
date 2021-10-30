@@ -31,4 +31,4 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Fish"]
 scale = Vector2( 3, 3 )
 shape = SubResource( 2 )
-[connection signal="area_entered" from="PathFollow2D/Fish" to="." method="_on_Fish_area_entered"]
+[connection signal="area_entered" from="PathFollow2D/Fish" to="PathFollow2D/Fish" method="_on_Fish_area_entered"]

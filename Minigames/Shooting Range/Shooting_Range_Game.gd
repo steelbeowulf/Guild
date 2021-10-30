@@ -10,8 +10,10 @@ const timer_speed: float = 0.976
 onready var Bow_Position = $Bow_Position
 onready var Time = $Time
 onready var Target_Timer = $Target_Timer
+onready var RNG = RandomNumberGenerator.new()
 
 func _ready():
+	RNG.randomize()
 	get_tree().paused = true
 
 #print the time left in the screen
@@ -23,13 +25,13 @@ func _process(delta):
 func _on_Start_Timer_timeout():
 	get_tree().paused = false
 	$GO.visible = true
-	AUDIO.initSound()
-	AUDIO.play_bgm("MINIGAME_THEME")
+	#AUDIO.initSound()
+	#AUDIO.play_bgm("MINIGAME_THEME")
 
 func _unhandled_input(event):
 	var Shot_Timer = $Shot_Timer
 	var Bow_Timer = $Bow_Timer
-	var speed = 500.0
+	var speed = 700.0
 	var projectile = arrow.instance()
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("shot"):
@@ -58,8 +60,8 @@ func _on_Target_Timer_timeout():
 	var positiony : float = 0
 	var target_ = target.instance()
 	#random position
-	positionx = rand_range(40,1880)
-	positiony = rand_range(40,1040)
+	positionx = RNG.randf_range(40.0,1880.0)
+	positiony = RNG.randf_range(40.0,1040.0)
 	target_.global_position = Calculate_Target_Position(positionx, positiony)
 	#store the array_position of the target in positionx(y)_array
 	target_.array_position = counter - 1
@@ -73,11 +75,10 @@ func Calculate_Target_Position(positionx: float, positiony: float):
 		if positionx_array[i] - 80 <= positionx and positionx <= positionx_array[i] + 80:
 			if positiony_array[i] - 80 <= positiony and positiony <= positiony_array[i] + 80:
 					#exists a target in same position so choose another random position and try again 
-					var positionx_ : float = 0
-					var positiony_ : float = 0
-					positionx_ = rand_range(40,1880)
-					positiony_ = rand_range(40,1040)
-					Calculate_Target_Position(positionx_,positiony_)
+					positionx = RNG.randf_range(40.0,1880.0)
+					positiony = RNG.randf_range(40.0,1040.0)
+					target_position = Calculate_Target_Position(positionx,positiony)
+					return target_position
 	counter += 1
 	#put the new position in the array
 	positionx_array.push_back(positionx)
