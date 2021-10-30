@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/187569__evinawer__fall-on-the-floor-v.wav-ac99fa8caa0a68649d7a6c52c6437423.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/187569__evinawer__fall-on-the-floor-v.wav"
+dest_files=[ "res://.import/187569__evinawer__fall-on-the-floor-v.wav-ac99fa8caa0a68649d7a6c52c6437423.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -24,7 +24,7 @@ func _on_Decrease_Strength_timeout():
 		strength_value -= 1
 
 func _on_Exit_button_down():
-	#AUDIO.play_se("EXIT_MENU")
+	AUDIO.play_se("EXIT_MENU")
 	get_tree().quit()
 
 # the game starts
@@ -36,7 +36,6 @@ func _on_Start_Timer_timeout():
 
 # the game finishes
 func _on_Game_Timer_timeout():
-	get_tree().paused = true
 	var End_MiniGame = $End_MiniGame
 	End_MiniGame.visible = true
 	End_MiniGame._end(strength_value)

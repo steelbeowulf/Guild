@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tire_squeal.wav-e98a3f6f95f3ba33db0bfb9012759f85.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/tire_squeal.wav"
+dest_files=[ "res://.import/tire_squeal.wav-e98a3f6f95f3ba33db0bfb9012759f85.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
