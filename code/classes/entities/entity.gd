@@ -1,5 +1,4 @@
 class_name Entity
-extends STATS
 
 enum { PHYSIC, MAGIC, FIRE, WATER, ELECTRIC, ICE, EARTH, WIND, HOLY, DARKNESS }
 enum { HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, EVA, LCK }
@@ -14,7 +13,7 @@ var name: String setget , get_name
 var stats: Array
 var position setget set_position, get_position
 var skills: Array setget , get_skills
-var graphics: BattleEntity setget set_graphics, get_graphics
+var graphics: Node setget set_graphics, get_graphics
 var status: Dictionary = {} setget , get_status
 var dead: bool = false
 var resist: Dictionary = {}
@@ -37,41 +36,41 @@ var elem = {
 ########### Getters/Setters
 
 func get_name():
-	return self.name
+	return name
 
 func get_position():
-	return self.position
+	return position
 
 func set_position(pos):
-	self.position = pos
+	position = pos
 
 func set_level(lv: int):
-	self.level = lv
+	level = lv
 
 func get_level():
 	return level
 
 func set_experience(xp: int):
-	self.experience = xp
+	experience = xp
 
 func get_experience():
 	return experience
 
-func set_graphics(graphics: BattleEntity):
-	self.graphics = graphics
+func set_graphics(battle_graphics: Node):
+	graphics = battle_graphics
 
 func get_graphics():
-	return self.graphics
+	return graphics
 
 func get_skills():
-	return self.skills
+	return skills
 
 func get_skill(id: int):
 	return self.skills[id]
 
 func get_stat(stat):
 	if typeof(stat) == TYPE_STRING:
-		stat = DSTAT[stat]
+		stat = CONSTANTS.DSTAT[stat]
 	return self.stats[stat]
 
 func set_stat(stat, value):
@@ -97,14 +96,14 @@ func die():
 	self.status["KO"] = [9999, 9999]
 	self.dead = true
 
-func add_status(effect: str, atkm: int, turns: int):
+func add_status(effect: String, atkm: int, turns: int):
 	if effect == "KO":
 		self.die()
 	if GLOBAL.status.has(effect) and LOCAL.in_BATTLE:
 		self.graphics.set_aura(GLOBAL.status[effect])
 	status[effect] = [turns, atkm]
 
-func remove_status(effect: str):
+func remove_status(effect: String):
 	print("Will remove status " + str(effect) + " on " + str(self.name))
 	if effect == "SLOW":
 		var agi = self.get_stat("AGI")
@@ -150,7 +149,7 @@ func remove_status(effect: str):
 		var acc = self.get_stat("ACC")
 		self.set_stat(ACC, acc * 10)
 	elif effect == "KO":
-		ressurect()
+		self.dead = false
 	if status.has(effect):
 		status.erase(effect)
 	if GLOBAL.status.has(effect):

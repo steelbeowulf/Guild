@@ -8,44 +8,62 @@ var multiplier = [0.5, 1.0, 3.0]
 var equipments = []
 var jobs = []
 var possible_skills = {}
+var possible_jobs = {}
 
 var portrait
+var info: Node
 
 
 func _init(
 	id: int,
 	lv: int,
 	experience: int,
-	img: str,
-	portrait: str,
+	img: Dictionary,
+	portrait: String,
 	animations: Dictionary,
 	stats: Array,
 	position: int,
-	name: str,
-	skills: Array,
+	name: String,
+	skills: Dictionary,
 	equipments: Array,
 	resistances: Dictionary,
-	jobs: Dictionary
+	jobs: Array
 ):
 	self.id = id
 	self.sprite = img
-	self.animations = anim
+	self.animations = animations
 	self.portrait = portrait
 	self.level = lv
 	self.experience = experience
 	self.stats = stats
 	self.position = position
-	self.name = nome
+	self.name = name
 	self.skills = []
-	learn_correct_skills(classes[0].get_level(), classes[0].get_skills())
-	learn_correct_skills(self.level, skills)
+	
+	var learned_skills = {}
+	for lv in skills.keys():
+		var lv_parsed = int(lv.replace("LV", ""))
+		learned_skills[lv_parsed] = GLOBAL.skills[skills[lv]]
+	
+	var actual_jobs = []
+	
+	for job in jobs:
+		var job_instance = GLOBAL.jobs[job["ID"]].clone()
+		job_instance.set_level(job["LEVEL"])
+		actual_jobs.append(job_instance)
+	
+	learn_correct_skills(actual_jobs[0].get_level(), actual_jobs[0].get_skills())
+	learn_correct_skills(self.level, learned_skills)
+	
 	self.possible_skills = skills
+	self.possible_jobs = jobs
+
 	self.equipments = equipments
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
 	self.type = "Player"
-	self.jobs = jobs
+	self.jobs = actual_jobs
 
 
 func save_data():
@@ -70,10 +88,10 @@ func save_data():
 	dict["LCK"] = get_stat("LCK")
 	dict["LANE"] = 0
 	dict["NAME"] = get_name()
-	dict["SKILLS"] = get_skill_ids()
+	dict["SKILLS"] = possible_skills
 	dict["EQUIPS"] = get_equip_ids()
 	dict["RESISTANCE"] = get_resistance()
-	dict["JOBS"] = get_jobs()
+	dict["JOBS"] = possible_jobs
 	return dict
 
 
@@ -90,7 +108,7 @@ func get_portrait():
 
 
 func get_skills():
-	return self.skills
+	return skills
 
 
 func get_possible_skills():
@@ -118,7 +136,7 @@ func get_equip_ids():
 	return ids
 
 
-func unequip(equipment: Equiment, slot = -1):
+func unequip(equipment: Equip, slot = -1):
 	print("Unequipping ", equipment.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipment.location == "ACCESSORY":
@@ -134,7 +152,7 @@ func unequip(equipment: Equiment, slot = -1):
 	self.equipments[slot] = null
 
 
-func equip(equipment: Equipment, slot = -1):
+func equip(equipment: Equip, slot = -1):
 	print("Equipping ", equipment.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipment.location == "ACCESSORY":
@@ -239,7 +257,7 @@ func has_skill(id: int):
 	return false
 
 
-func learn_skill(skill: Skill):
+func learn_skill(skill: Item):
 	if not has_skill(skill.id):
 		self.skills.append(skill)
 		return skill
@@ -265,13 +283,13 @@ func level_up(level_up_dict: Dictionary):
 	var stat_raise_chance = self.jobs[0].get_proficiencies()
 	randomize()
 	for stat in stat_raise_chance.keys():
-		var stat_key = DSTAT[stat]
+		var stat_key = CONSTANTS.DSTAT[stat]
 		var stat_up = 0
 		if stat_raise_chance[stat]:
 			stat_up += floor(rand_range(2, 5))
 		else:
 			stat_up += floor(rand_range(1, 3))
-		self.set_stat(stat_key, self.get_stats(stat_key) + stat_up)
+		self.set_stat(stat_key, self.get_stat(stat_key) + stat_up)
 		if level_up_dict.has(stat_key):
 			level_up_dict[stat] += stat_up
 		else:

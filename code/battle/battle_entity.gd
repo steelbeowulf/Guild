@@ -1,5 +1,4 @@
 # Button representing a target in battle
-class_name BattleEntity
 extends Button
 
 signal target_picked

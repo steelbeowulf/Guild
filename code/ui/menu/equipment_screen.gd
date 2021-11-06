@@ -51,7 +51,7 @@ func show_equips(equipaments, type):
 	equipped.set_text("EQUIPPED: " + player_equip_name)
 	equipped.show()
 
-	# Iterate through equip_inventory and populate list
+	# Iterate through equipment_inventory and populate list
 	equips = [player_equip]
 	var i = 1
 	for j in range(len(equipaments)):
@@ -144,7 +144,7 @@ func use_equip(equip):
 		player.equip(equip, 4)
 	else:
 		player.equip(equip)
-	show_equips(GLOBAL.equip_INVENTORY, location)
+	show_equips(GLOBAL.equipment_inventory, location)
 
 
 func _on_Back_pressed():
@@ -159,7 +159,7 @@ func _on_focus_entered():
 
 func _on_Weapon_pressed():
 	location = "WEAPON"
-	show_equips(GLOBAL.equip_INVENTORY, location)
+	show_equips(GLOBAL.equipment_inventory, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
@@ -172,7 +172,7 @@ func _on_Weapon_pressed():
 
 func _on_Head_pressed():
 	location = "HEAD"
-	show_equips(GLOBAL.equip_INVENTORY, location)
+	show_equips(GLOBAL.equipment_inventory, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
@@ -185,7 +185,7 @@ func _on_Head_pressed():
 
 func _on_Body_pressed():
 	location = "BODY"
-	show_equips(GLOBAL.equip_INVENTORY, location)
+	show_equips(GLOBAL.equipment_inventory, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
@@ -198,7 +198,7 @@ func _on_Body_pressed():
 
 func _on_Acessory1_pressed():
 	location = "ACCESSORY1"
-	show_equips(GLOBAL.equip_INVENTORY, location)
+	show_equips(GLOBAL.equipment_inventory, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)
@@ -211,7 +211,7 @@ func _on_Acessory1_pressed():
 
 func _on_Acessory2_pressed():
 	location = "ACCESSORY2"
-	show_equips(GLOBAL.equip_INVENTORY, location)
+	show_equips(GLOBAL.equipment_inventory, location)
 	AUDIO.play_se("ENTER_MENU")
 	for e in $Panel/HBoxContainer/Slots.get_children():
 		e.set_focus_mode(0)

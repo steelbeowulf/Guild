@@ -1,1 +1,1 @@
-{"area":{"MAP":1,"NAME":"Forest","POSITION":"(454, 337.25)","STATE":[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],"WIN":false},"events":{"boss_defeated":false,"eyeballs_defeated":0,"rangers_defeated":false},"gold":100,"playtime":7}
+{"area":{"NAME":"Hub","map":1,"position":"(432.5, 282.301208)","state":[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}],"win":false},"events":{"boss_defeated":false,"eyeballs_defeated":0,"rangers_defeated":false},"gold":100,"playtime":12}

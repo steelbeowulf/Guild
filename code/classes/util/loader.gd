@@ -1,4 +1,5 @@
 class_name LOADER
+extends Node
 
 # Path to all persistent game data we're going to load
 const ENEMY_PATH = "res://data/game_data/Enemies/"
@@ -36,7 +37,7 @@ const STATS_CLASS = preload("res://code/classes/events/stat_effect.gd")
 const STATUS_CLASS = preload("res://code/classes/events/status_effect.gd")
 const DIALOGUE_CLASS = preload("res://code/classes/events/dialogue.gd")
 
-const OPTION_CLASS = load("res://code/classes/events/dialogue_option.gd")
+const OPTION_CLASS = preload("res://code/classes/events/dialogue_option.gd")
 const BATTLE_CLASS = preload("res://code/classes/events/battle.gd")
 const TRANSITION_CLASS = preload("res://code/classes/events/transition.gd")
 const FLAG_CLASS = preload("res://code/classes/events/flag.gd")
@@ -155,12 +156,12 @@ func load_all_itens():
 			var effects = []
 			for ef in data["EFFECTS"]:
 				var eff = STATS_CLASS.new(
-					STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"]
+					CONSTANTS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"]
 				)
 				effects.append(eff)
 			var status = []
 			for st in data["STATUS"]:
-				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
+				status.append([st["BOOL"], CONSTANTS.DSTATUS[st["STATUS"]]])
 			ret.append(
 				ITEM_CLASS.new(
 					data["ID"],
@@ -195,12 +196,12 @@ func load_all_equips():
 			var effects = []
 			for ef in data["EFFECTS"]:
 				var eff = STATS_CLASS.new(
-					STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"]
+					CONSTANTS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"]
 				)
 				effects.append(eff)
 			var status = []
 			for st in data["STATUS"]:
-				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
+				status.append([st["BOOL"], CONSTANTS.DSTATUS[st["STATUS"]]])
 			ret.append(
 				EQUIP_CLASS.new(
 					data["ID"],
@@ -237,12 +238,12 @@ func load_all_skills():
 			var effects = []
 			for ef in data["EFFECTS"]:
 				var eff = STATS_CLASS.new(
-					STATS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"]
+					CONSTANTS.DSTAT[ef["STAT"]], ef["STAT"], int(ef["VALUE"]), ef["TYPE"]
 				)
 				effects.append(eff)
 			var status = []
 			for st in data["STATUS"]:
-				status.append([st["BOOL"], STATS.DSTATUS[st["STATUS"]]])
+				status.append([st["BOOL"], CONSTANTS.DSTATUS[st["STATUS"]]])
 			ret.append(
 				ITEM_CLASS.new(
 					data["ID"],
@@ -482,20 +483,11 @@ func parse_players(path: String):
 		var datas = result_json.result
 		for data in datas:
 			var equips = []
-			var jobs = []
-			var skills = {}
-			for lv in data["SKILLS"].keys():
-				var lv_parsed = int(lv.replace("LV", ""))
-				skills[lv_parsed] = GLOBAL.skills[data["SKILLS"][lv]]
 			for id in data["EQUIPS"]:
 				if id > -1:
 					equips.append(GLOBAL.equipment[id])
 				else:
 					equips.append(null)
-			for job in data["JOBS"]:
-				var job_instance = GLOBAL.jobs[job["ID"]].clone()
-				job_instance.set_level(job["LEVEL"])
-				jobs.append(job_instance)
 			players.append(
 				PLAYER_CLASS.new(
 					data["ID"],
@@ -520,10 +512,10 @@ func parse_players(path: String):
 					],
 					data["LANE"],
 					data["NAME"],
-					skills,
+					data["SKILLS"],
 					equips,
 					data["RESISTANCE"],
-					jobs
+					data["JOBS"]
 				)
 			)
 			for i in range(len(equips)):

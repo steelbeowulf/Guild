@@ -111,12 +111,12 @@ func prepare_attack_action() -> void:
 		players.get_node(str(-i)).hide()
 	for i in range(5):
 		enemies.get_node(str(i)).hide()
-	for i in range(1, battle_node.Players.size() + 1):
+	for i in range(1, battle_node.players.size() + 1):
 		players.get_node(str(-i)).show()
 		players.get_node(str(-i)).disabled = false
 		players.get_node(str(-i)).set_text("")
-	for i in range(battle_node.Enemies.size()):
-		if not battle_node.Enemies[i].is_dead():
+	for i in range(battle_node.enemies.size()):
+		if not battle_node.enemies[i].is_dead():
 			if unfocus:
 				enemies.get_node(str(i)).grab_focus()
 				unfocus = false

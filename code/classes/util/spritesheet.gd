@@ -5,10 +5,10 @@ extends Sprite
 signal animation_finished
 
 export(String) var physical_frames = "1,3,5-7" setget _set_frames_str
-export(int) var frame_count = 5 setget _set_frame_count
+export(int) var frame_count = 5
 export(bool) var fix_fps = true setget _set_fix_fps
 export(float) var fps = 5 setget _set_fps
-export(float) var frame_period = 0.2 setget _set_frame_period  # frame_period = 1/fps
+export(float) var frame_period = 0.2 # frame_period = 1/fps
 export(bool) var fix_duration = false setget _set_fix_duration
 export(float) var duration = 1 setget _set_duration  # duration = frame_count * frame_period
 

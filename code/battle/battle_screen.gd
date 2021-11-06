@@ -286,7 +286,7 @@ func rounds():
 
 		print("[BATTLE] " + current_entity.get_name() + " can move? " + str(can_actually_move))
 		if can_actually_move == 0:
-			current_entity.graphics.set_turn(true)
+			current_entity.get_graphics().set_turn(true)
 			# If the entity is an enemy, leave it to the AI
 			if current_entity.type == "Enemy":
 				block_player_input()
@@ -452,7 +452,7 @@ func execute_action(action: Action):
 	elif action_type == "Lane":
 		AUDIO.play_se("RUN")
 		var lane = action.get_action()
-		current_entity.set_pos(lane)
+		current_entity.set_position(lane)
 		print("[BATTLE] lane=" + str(lane))
 		return LaneActionResult.new(lane)
 
@@ -628,7 +628,7 @@ func _on_Run_button_down():
 
 
 func _on_Lane_button_down():
-	$Interface.prepare_lane_action(current_entity.get_pos())
+	$Interface.prepare_lane_action(current_entity.get_position())
 
 
 func _on_Itens_button_down():

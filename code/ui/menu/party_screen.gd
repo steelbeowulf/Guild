@@ -34,7 +34,7 @@ func just_entered():
 func show_reserve():
 	reset_info()
 	# Ponto inicial da lista
-	var r_player = GLOBAL.reserve_PLAYERS
+	var r_player = GLOBAL.reserve_players
 	for j in range(0, len(r_player)):
 		var node = get_node("Panel/HBoxContainer/Reserve/ReserveSlot" + str(j + 1))
 		node.set_text(str(r_player[j].get_name()))
@@ -94,8 +94,8 @@ func change_players(id_player: int, id_reserve: int):
 	AUDIO.play_se("ENTER_MENU")
 	var loader = GLOBAL.get_root().get_parent().get_node("/root/LOADER")
 	var a = GLOBAL.players[id_player]
-	GLOBAL.players[id_player] = GLOBAL.reserve_PLAYERS[id_reserve]
-	GLOBAL.reserve_PLAYERS[id_reserve] = a
+	GLOBAL.players[id_player] = GLOBAL.reserve_players[id_reserve]
+	GLOBAL.reserve_players[id_reserve] = a
 	player_id = null
 	show_reserve()
 

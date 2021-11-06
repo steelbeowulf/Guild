@@ -1,4 +1,5 @@
 class_name Apply
+extends Node
 
 # Stats
 enum { HP, HP_MAX, MP, MP_MAX, ATK, ATKM, DEF, DEFM, AGI, ACC, LCK }
@@ -87,10 +88,10 @@ func apply_effect(
 
 	var stat = effect.get_id()
 	var base_value = effect.get_value()
-	var type = effect.get_type()
+	var effect_type = effect.get_type()
 
 	# Should be HP or MP
-	var affected_stat = target.get_stats(stat)
+	var affected_stat = target.get_stat(stat)
 	var lv = who.get_level()
 	var target_lv = target.get_level()
 	#var user_luck = who.get_stat("LCK")
@@ -121,16 +122,16 @@ func apply_effect(
 
 			# TODO: Make skill type consistent
 			if (
-				typeof(type) == TYPE_STRING and type == "PHYSIC"
-				or typeof(type) == TYPE_INT and type == PHYSIC
+				typeof(effect_type) == TYPE_STRING and effect_type == "PHYSIC"
+				or typeof(effect_type) == TYPE_INT and effect_type == PHYSIC
 			):
 				print("[APPLY EFFECT] Physical attack")
-				atk_scalar = target.get_stats(ATK)
-				def_scalar = target.get_stats(DEF)
+				atk_scalar = target.get_stat(ATK)
+				def_scalar = target.get_stat(DEF)
 			else:
 				print("[APPLY EFFECT] Magic attack")
-				atk_scalar = target.get_stats(ATKM)
-				def_scalar = target.get_stats(DEFM)
+				atk_scalar = target.get_stat(ATKM)
+				def_scalar = target.get_stat(DEFM)
 
 			var ceil_value = ceil(
 				base_value * (atk_scalar / 150.0 + 1.0) + (def_scalar * target_lv / 2.0)
@@ -145,11 +146,11 @@ func apply_effect(
 		elif stat == HP:
 			print("[APPLY EFFECT] Recovery")
 			# Cannot heal above MAX HP
-			atk_scalar = target.get_stats(ATKM)
+			atk_scalar = target.get_stat(ATKM)
 			var ceil_value = base_value * (atk_scalar / 200.0 + 1.0)
 			value = floor(ceil_value * rand_range(89, 100) / 100)
 			value = min(MAX_VALUE, value)
-			max_value = target.get_stats(HP_MAX)
+			max_value = target.get_stat(HP_MAX)
 			final_value = affected_stat + value
 			type = 0
 			ret = -ceil(value)
@@ -159,7 +160,7 @@ func apply_effect(
 		elif stat == MP:
 			print("[APPLY EFFECT] MP")
 			# Cannot heal above MAX MP
-			max_value = target.get_stats(MP_MAX)
+			max_value = target.get_stat(MP_MAX)
 			type = 1
 			final_value = affected_stat + base_value
 			if final_value > max_value:

@@ -22,12 +22,12 @@ func _ready():
 
 func just_entered(id: int):
 	print("[SKILL] just entered " + str(id))
-	player = GLOBAL.get_player(id)
+	player = GLOBAL.players[id]
 	location = "SUBMENU"
-	show_equips()
+	show_skills()
 
 
-func show_equips():
+func show_skills():
 	skills = player.get_skills()
 	mpleft = player.get_stat("MP")
 	for i in range(len(skills)):

@@ -11,12 +11,12 @@ func _init(
 	id: int,
 	lv: int,
 	experience: int,
-	img: str,
-	animations: Array,
+	img: Dictionary,
+	animations: Dictionary,
 	values: Array,
-	name: str,
+	name: String,
 	skills: Array,
-	resistances: Array
+	resistances: Dictionary
 ):
 	self.id = id
 	self.level = lv

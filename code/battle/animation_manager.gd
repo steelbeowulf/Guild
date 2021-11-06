@@ -17,8 +17,8 @@ var can_play = true
 var entering = true
 
 # Shortcuts
-onready var menu_node = self.get_parent().get_node("Interface/menu_node")
-onready var info_node = self.get_parent().get_node("Interface/info_node")
+onready var menu_node = self.get_parent().get_node("Interface/Menu")
+onready var info_node = self.get_parent().get_node("Interface/Info")
 
 
 # Initializes players and enemies sprites on battle, loads their animation,
@@ -27,12 +27,12 @@ func initialize(players: Array, enemies: Array):
 	var i = 0
 	for node in get_node("Players").get_children():
 		if i < len(players):
-			var lane = players[i].get_pos()
+			var lane = players[i].get_position()
 			players_graphics.append(node)
 			node.change_lane(lane)
 			node.set_animations(players[i].sprite, players[i].animations, players[i])
 			node.connect("finish_anim", self, "_on_animation_finished")
-			players[i].graphics = node
+			players[i].set_graphics(node)
 			players[i].info = info_node.get_node("P" + str(i))
 			players[i].info.set_initial_hp(players[i].get_stat("HP"), players[i].get_stat("HP_MAX"))
 			players[i].info.set_initial_mp(players[i].get_stat("MP"), players[i].get_stat("MP_MAX"))
@@ -49,7 +49,7 @@ func initialize(players: Array, enemies: Array):
 			node.play("move")
 			node.show()
 			node.connect("finish_anim", self, "_on_animation_finished")
-			enemies[i].graphics = node
+			enemies[i].set_graphics(node)
 			i += 1
 			node.enter_scene()
 		else:
@@ -202,7 +202,7 @@ func add_player(p: Player):
 	var last_index = players_graphics.size()
 	var node = get_node("Players").get_child(last_index)
 	players_graphics.append(node)
-	node.change_lane(p.get_pos())
+	node.change_lane(p.get_position())
 	node.set_animations(p.sprite, p.animations, p)
 	entering = true
 	node.connect("finish_anim", self, "_on_animation_finished")
@@ -221,7 +221,7 @@ func add_player(p: Player):
 
 # Adds new enemy sprite into current battle
 func add_enemy(e: Enemy):
-	var last_index = enemies_graphics.size()
+	var last_index = len(get_parent().enemies)
 	var node = get_node("Enemies").get_child(last_index)
 	enemies_graphics.append(node)
 	node.set_animations(e.sprite, e.animations, e)

@@ -2,7 +2,7 @@ extends Node
 
 # Save file variables
 var savegame = File.new()
-var save_path = "./Save_data/Slot"
+var save_path = "./data/save_data/slot"
 
 onready var loader = get_node("/root/LOADER")
 
@@ -37,7 +37,7 @@ func load_game(save_slot):
 
 
 # Saves all information on the argument slot
-func save(slot):
+func save(slot: int):
 	# Saves the map information
 	var save_dict = {
 		"area": LOCAL.get_area_dict(),

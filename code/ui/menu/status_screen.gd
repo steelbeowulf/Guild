@@ -50,7 +50,7 @@ func set_overview_info(player: Player):
 func set_stats_info(player):
 	var node = $Columns/Stats/Values.get_children()
 	for i in range(len(node)):
-		node[i].set_text(str(player.get_stats(i + 4)) + "\n")
+		node[i].set_text(str(player.get_stat(i + 4)) + "\n")
 
 
 # Sets elemental resistance info

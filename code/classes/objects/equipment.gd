@@ -22,7 +22,7 @@ func _init(
 	classe: String,
 	efeito: Array,
 	status_effects: Array,
-	preco: int,
+	price: int,
 	img: Dictionary
 ):
 	self.id = id
@@ -30,7 +30,7 @@ func _init(
 	self.type = type
 	self.job = classe
 	self.location = local
-	self.quantity = preco
+	self.quantity = price
 	self.effect = efeito
 	self.status = status_effects
 	self.img = img

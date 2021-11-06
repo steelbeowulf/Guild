@@ -37,7 +37,7 @@ func _ready():
 			for stat in leveled_up[1].keys():
 				if stat == "skills":
 					continue
-				var stat_value = player.get_stats(stat)
+				var stat_value = player.get_stat(stat)
 				var stat_up = leveled_up[1][stat]
 				level_up_text += (stat + ": " + str(stat_value) + " + " + str(stat_up) + "\n")
 

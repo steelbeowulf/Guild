@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/battle/classes/action_result.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "Apply",
 "language": "GDScript",
 "path": "res://code/battle/apply.gd"
@@ -29,10 +29,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/events/battle.gd"
 }, {
-"base": "Button",
-"class": "BattleEntity",
+"base": "Reference",
+"class": "CONSTANTS",
 "language": "GDScript",
-"path": "res://code/battle/battle_entity.gd"
+"path": "res://code/classes/util/constants.gd"
 }, {
 "base": "Event",
 "class": "Dialogue",
@@ -49,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/entities/enemy.gd"
 }, {
-"base": "STATS",
+"base": "Reference",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://code/classes/entities/entity.gd"
@@ -79,7 +79,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/objects/jobs.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "LOADER",
 "language": "GDScript",
 "path": "res://code/classes/util/loader.gd"
@@ -108,11 +108,6 @@ _global_script_classes=[ {
 "class": "RunActionResult",
 "language": "GDScript",
 "path": "res://code/battle/classes/run_action_result.gd"
-}, {
-"base": "Reference",
-"class": "STATS",
-"language": "GDScript",
-"path": "res://code/classes/util/stats.gd"
 }, {
 "base": "Event",
 "class": "SetAction",
@@ -159,7 +154,7 @@ _global_script_class_icons={
 "ActionResult": "",
 "Apply": "",
 "Battle": "",
-"BattleEntity": "",
+"CONSTANTS": "",
 "Dialogue": "",
 "DialogueOption": "",
 "Enemy": "",
@@ -175,7 +170,6 @@ _global_script_class_icons={
 "Player": "",
 "Reinforcements": "",
 "RunActionResult": "",
-"STATS": "",
 "SetAction": "",
 "SetTarget": "",
 "Shop": "",
@@ -194,7 +188,6 @@ config/icon="res://assets/sprites/others/Logo.png"
 
 [autoload]
 
-STATS="*res://code/classes/util/stats.gd"
 LOADER="*res://code/classes/util/loader.gd"
 AUDIO="*res://code/config/audio.gd"
 DISPLAY="*res://code/config/display.gd"
@@ -204,6 +197,7 @@ GLOBAL="*res://code/state/global.gd"
 BATTLE_MANAGER="*res://code/state/battle_manager.gd"
 EVENTS="*res://code/state/events.gd"
 SAVE="*res://code/state/save.gd"
+CONSTANTS="*res://code/classes/util/constants.gd"
 
 [debug]
 
@@ -215,6 +209,8 @@ gdscript/completion/autocomplete_setters_and_getters=true
 window/size/width=1920
 window/size/height=1080
 window/size/resizable=false
+window/size/borderless=true
+window/size/fullscreen=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

@@ -36,7 +36,7 @@ func _on_SubAction_picked(subaction_arg: int) -> void:
 		for e in $ScrollContainer/SubActions.get_children():
 			e.disabled = true
 			e.set_focus_mode(0)
-		var skitem = LOADER.List[subaction_arg]
+		var skitem = skitems[subaction_arg]
 
 		var is_ress = skitem.get_type() == "RESSURECTION"
 		if skitem.get_target() == "ALL":

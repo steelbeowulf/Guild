@@ -87,9 +87,9 @@ func get_equip_ids():
 
 # Check if item_id is in inventory
 func check_item(item_id: int, type = "ITEM"):
-	var inventory = inventory
+	var inventory = self.inventory
 	if type == "EQUIP":
-		inventory = equipment_inventory
+		inventory = self.equipment_inventory
 	for item in inventory:
 		if item.id == item_id:
 			return item.quantity

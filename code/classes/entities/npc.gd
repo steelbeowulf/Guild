@@ -6,7 +6,7 @@ var portrait
 
 
 func _init(
-	id: int, name: str, img: str, animations: Dictionary, events: Dictionary, portrait: Dictionary
+	id: int, name: String, img: Dictionary, animations: Dictionary, events: Array, portrait: Dictionary
 ):
 	self.id = id
 	self.name = name

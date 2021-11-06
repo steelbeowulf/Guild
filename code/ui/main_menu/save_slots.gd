@@ -37,8 +37,8 @@ func load_saves(saves: Array):
 	var i = 0
 	for slot in get_children():
 		if saves[i].has("area"):
-			slot.get_node("Area").set_text(saves[tmp]["area"]["NAME"])
-			slot.get_node("Playtime").set_text(format_playtime(saves[tmp]["playtime"]))
-			slot.get_node("Gold").set_text(format_gold(saves[tmp]["gold"]))
+			slot.get_node("Area").set_text(saves[i]["area"]["NAME"])
+			slot.get_node("Playtime").set_text(format_playtime(saves[i]["playtime"]))
+			slot.get_node("Gold").set_text(format_gold(saves[i]["gold"]))
 			# TODO: Set screenshot
 		i += 1

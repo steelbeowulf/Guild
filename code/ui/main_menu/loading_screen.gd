@@ -61,5 +61,5 @@ func update_progress(progress: float):
 	get_node("Progress").set_value(progress)
 
 
-func set_new_scene(scene_resource: String):
-	get_tree().change_scene(scene_resource)
+func set_new_scene(scene_resource: Resource):
+	get_tree().change_scene(scene_resource.resource_path)

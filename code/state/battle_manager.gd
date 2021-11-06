@@ -31,7 +31,8 @@ const NAME = [
 	"W",
 	"X",
 	"Y",
-	"Z"
+	"Z",
+	""
 ]
 
 # Dictionary: { enemy_index: count on current battle }
@@ -185,7 +186,7 @@ func reset_count_in_battle():
 func get_next_name_in_battle(index: int) -> String:
 	var enemy = LOCAL.get_enemy(index)
 	if count_in_battle.has(index):
-		count_in_battle[index] = count_in_battle[index] + 1
+		count_in_battle[index] = min(26, count_in_battle[index] + 1)
 	else:
 		count_in_battle[index] = 0
 		return enemy.name

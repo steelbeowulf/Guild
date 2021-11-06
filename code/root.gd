@@ -8,8 +8,8 @@ onready var map = null
 # Shortcut variables
 onready var menu = get_node("Menu_Area/Menu")
 onready var shop = get_node("Menu_Area/Shop")
-onready var save = load("res://code/ui/menu/Save.tscn")
-onready var itens = load("res://code/ui/menu/Itens.tscn")
+onready var save = load("res://code/ui/menu/save_screen.tscn")
+onready var itens = load("res://code/ui/menu/itens_screen.tscn")
 onready var use_itens = load("res://code/ui/menu/use_item_screen.tscn")
 onready var use_skills = load("res://code/ui/menu/use_skill_screen.tscn")
 onready var status = load("res://code/ui/menu/status_screen.tscn")

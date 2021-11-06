@@ -1,5 +1,5 @@
 extends Control
-var stats = STATS.DSTAT.values()
+var stats = CONSTANTS.DSTAT.values()
 
 const WHITE = Color(1.0, 1.0, 1.0)
 const GREEN = Color(0.0, 1.0, 0.0)
@@ -17,7 +17,7 @@ func init(current_equip, new_equip):
 		set_diff(stat_id, diff)
 
 func set_diff(stat: int, diff: int):
-	var stat_name = STATS.ISTAT[stat]
+	var stat_name = CONSTANTS.ISTAT[stat]
 	var node = $"HBoxContainer/Attributes-Left".get_node(stat_name)
 	if not node:
 		node = $"HBoxContainer/Attributes-Right".get_node(stat_name)

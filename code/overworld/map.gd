@@ -16,7 +16,7 @@ export var Battle_BG = 1
 var cara_no_mundo = load("res://code/overworld/overworld_player.tscn")
 
 # State variables
-onready var enemie_on_map = []
+onready var enemies_on_map = []
 onready var initial_player_position = Vector2(816, 368)
 onready var state = {}
 
@@ -40,7 +40,7 @@ func _ready():
 	#if GLOBAL.win:
 	#	get_tree().change_scene("res://code/ui/victory.tscn")
 
-	enemie_on_map = LOCAL.enemies
+	enemies_on_map = LOCAL.enemies
 	initial_player_position = LOCAL.position
 
 	# Gets current map state from global area state
@@ -60,8 +60,8 @@ func _ready():
 	cara.initialize()
 
 	# Connects battle manager to monsters
-	BATTLE_MANAGER.init(enemie_on_map, self)
-	for e in get_node("enemie_on_map").get_children():
+	BATTLE_MANAGER.init(enemies_on_map, self)
+	for e in get_node("Enemies").get_children():
 		e.connect("battle_notifier", BATTLE_MANAGER, "_encounter_management")
 
 	# Updates objects and enemies on the map according to loaded state
@@ -86,7 +86,7 @@ func _physics_process(_delta):
 # If so, opens it and sends a message on the HUD log
 func check_doors():
 	for d in Doors.keys():
-		if Doors[d] == "Defeat all enemies" and not $enemie_on_map.get_children():
+		if Doors[d] == "Defeat all enemies" and not $enemies_on_map.get_children():
 			get_node("Objects/" + str(d)).open()
 			send_message("Uma nova passagem se abriu")
 			Doors[d] = ""
@@ -105,7 +105,7 @@ func check_doors():
 func update_objects_position():
 	for e in get_node("Objects").get_children():
 		save_state("OBJ_POS", e.get_name(), e.open, e.get_global_position())
-	for e in get_node("enemie_on_map").get_children():
+	for e in get_node("enemies_on_map").get_children():
 		if e.dead:
 			print("[MAP] Killing " + e.get_name())
 			save_state("ENEMY_KILL", e.get_name())
@@ -120,7 +120,7 @@ func save_state(type, node, open = false, pos = Vector2(0, 0)):
 	if type == "TREASURE":
 		state["Treasure/" + str(node)] = true
 	elif type == "ENEMY_KILL":
-		state["enemie_on_map/" + str(node)] = [true, pos]
+		state["enemies_on_map/" + str(node)] = [true, pos]
 	elif type == "OBJ_POS":
 		state["Objects/" + str(node)] = [open, pos]
 	# Saves current map state on the game's memory (not persistent)

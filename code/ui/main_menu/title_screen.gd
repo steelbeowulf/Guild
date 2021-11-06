@@ -20,7 +20,6 @@ func _ready():
 func _on_New_pressed():
 	AUDIO.play_se("ENTER_MENU")
 	GLOBAL.load_game(-1)
-	#get_tree().change_scene("res://code/root.tscn")
 	get_tree().change_scene("res://code/ui/main_menu/loading_screen.tscn")
 
 
@@ -30,7 +29,7 @@ func _on_Load_pressed():
 	$Load_Screen.show()
 
 
-func _on_Slot_chosen(slot):
+func _on_Slot_chosen(slot: int):
 	AUDIO.play_se("ENTER_MENU")
 	GLOBAL.load_game(slot)
 	get_tree().change_scene("res://code/ui/main_menu/loading_screen.tscn")
