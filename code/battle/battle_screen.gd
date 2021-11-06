@@ -263,7 +263,6 @@ func rounds():
 		var can_move = []
 		var can_actually_move = 0
 		var status = current_entity.get_status()
-		LOADER.List = enemies
 		if status:
 			print("[BATTLE] " + current_entity.get_name() + " status: " + str(status))
 			var result
@@ -289,14 +288,14 @@ func rounds():
 		if can_actually_move == 0:
 			current_entity.graphics.set_turn(true)
 			# If the entity is an enemy, leave it to the AI
-			if current_entity.classe == "boss":
+			if current_entity.type == "Enemy":
 				block_player_input()
 				action = current_entity.calculate_action(enemies)
 				emit_signal("turn_finished")
 
 			# If it's a player, check valid actions (has itens, has MP)
 			else:
-				if not current_entity.skills or current_entity.get_mp() == 0:
+				if not current_entity.skills or current_entity.get_stat("MP") == 0:
 					get_node("Interface/Menu/Skill").disabled = true
 				else:
 					get_node("Interface/Menu/Skill").disabled = false
@@ -322,7 +321,7 @@ func rounds():
 		# Current entity is forced to attack a random enemy
 		elif can_actually_move == -2:
 			randomize()
-			if current_entity.classe == "boss":
+			if current_entity.type == "Enemy":
 				target = rand_range(0, players.size())
 			else:
 				target = rand_range(0, enemies.size())
@@ -379,7 +378,7 @@ func check_battle_end():
 
 # Auxiliary function to sort the turnorder vector
 func stackagility(a: Entity, b: Entity):
-	return a.get_agi() > b.get_agi()
+	return a.get_stat("AGI") > b.get_stat("AGI")
 
 
 # Executes an action on a given target
@@ -403,16 +402,16 @@ func execute_action(action: Action):
 
 		# Create BaseStatEffect
 		var STATS_CLASS = load("res://code/classes/events/stat_effect.gd")
-		var attack_effect = STATS_CLASS.new(HP, "HP", -current_entity.get_atk(), "PHYSIC")
+		var attack_effect = STATS_CLASS.new(HP, "HP", -current_entity.get_stat("ATK"), "PHYSIC")
 		var hit = true
 		var crit = false
 		var dmg = 0
 		var result = 0
 		var hate = 0
-		var accuracy = current_entity.get_acc()
-		var evasion = target.get_eva()
-		var entityluck = current_entity.get_lck()
-		var targetluck = target.get_lck()
+		var accuracy = current_entity.get_stat("ACC")
+		var evasion = target.get_stat("EVA")
+		var entityluck = current_entity.get_stat("LCK")
+		var targetluck = target.get_stat("LCK")
 		var critchance = min(entityluck - targetluck, 100)
 		if floor(rand_range(0, 100)) < critchance:
 			crit = true
@@ -430,13 +429,13 @@ func execute_action(action: Action):
 		if hit:
 			result = apply_effect(current_entity, attack_effect, target, action_type, hit, crit)
 			dmg = result[0]
-			if target.classe == "boss" and current_entity.classe != "boss":
+			if target.type == "Enemy" and current_entity.type != "Enemy":
 				hate = current_entity.update_hate(dmg, target.index)
 		else:
 			# TODO: Add sound effect
 			# AUDIO.play_se("MISS")
 			return StatsActionResult.new("Miss", current_entity, [target], [dmg], [death])
-		if target.get_health() <= 0:
+		if target.get_stat("HP") <= 0:
 			death = true
 			target.die()
 		print(
@@ -500,7 +499,7 @@ func execute_action(action: Action):
 				for st in item.status:
 					var ailment = apply_status(st, target, current_entity)
 					ailments.append(ailment)
-				var dies = target.get_health() <= 0
+				var dies = target.get_stat("HP") <= 0
 				if dies:
 					target.die()
 				dead.append(dies)
@@ -562,7 +561,7 @@ func execute_action(action: Action):
 				for st in skill.status:
 					var ailment = apply_status(st, target, current_entity)
 					ailments.append(ailment)
-				var dies = target.get_health() <= 0
+				var dies = target.get_stat("HP") <= 0
 				if dies:
 					target.die()
 				dead.append(dies)
@@ -580,8 +579,8 @@ func execute_action(action: Action):
 				)
 
 		# Spends the MP
-		var mp = current_entity.get_mp()
-		current_entity.set_stats(MP, mp - skill.quantity)
+		var mp = current_entity.get_stat("MP")
+		current_entity.set_stat(MP, mp - skill.quantity)
 		return StatsActionResult.new(
 			"Skill", current_entity, valid_targets, stat_change, dead, skill
 		)
@@ -633,14 +632,12 @@ func _on_Lane_button_down():
 
 
 func _on_Itens_button_down():
-	LOADER.List = inventory
 	$Interface.prepare_itens_action(inventory)
 
 
 func _on_Skills_button_down():
 	var skills = current_entity.get_skills()
-	LOADER.List = skills
-	$Interface.prepare_skills_action(skills, current_entity.get_mp())
+	$Interface.prepare_skills_action(skills, current_entity.get_stat("MP"))
 
 
 func _on_Attack_button_down():

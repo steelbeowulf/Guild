@@ -11,6 +11,7 @@ signal enemy_focus
 export(String) var action_type: String
 var subaction: int = -1
 var targets: PoolIntArray = []
+var skitems: Array = []
 
 var allowed: bool = false
 

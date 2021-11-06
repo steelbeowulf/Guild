@@ -17,7 +17,7 @@ var equipped = -1
 func _init(
 	id: int,
 	name: String,
-	tipo: String,
+	type: String,
 	local: String,
 	classe: String,
 	efeito: Array,
@@ -27,7 +27,7 @@ func _init(
 ):
 	self.id = id
 	self.name = name
-	self.type = tipo
+	self.type = type
 	self.job = classe
 	self.location = local
 	self.quantity = preco

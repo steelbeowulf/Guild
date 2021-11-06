@@ -34,8 +34,8 @@ func initialize(players: Array, enemies: Array):
 			node.connect("finish_anim", self, "_on_animation_finished")
 			players[i].graphics = node
 			players[i].info = info_node.get_node("P" + str(i))
-			players[i].info.set_initial_hp(players[i].get_health(), players[i].get_max_health())
-			players[i].info.set_initial_mp(players[i].get_mp(), players[i].get_max_mp())
+			players[i].info.set_initial_hp(players[i].get_stat("HP"), players[i].get_stat("HP_MAX"))
+			players[i].info.set_initial_mp(players[i].get_stat("MP"), players[i].get_stat("MP_MAX"))
 			players[i].info.connect("finish_anim", self, "_on_animation_finished")
 			i += 1
 			node.enter_scene()
@@ -152,7 +152,7 @@ func resolve(current_entity: Entity, action_result: ActionResult):
 			enqueue(target.graphics, "Miss", dmg)  # target missed
 		elif action_type == "Critical Attack":
 			enqueue(target.graphics, "Critical", dmg)  # target critical hit
-		if target.tipo == "Player":
+		if target.type == "Player":
 			enqueue(target.info, "UpdateHP", dmg)  # HP bar
 		if dies:
 			enqueue(target.graphics, "death", null)  # Death animation
@@ -185,10 +185,10 @@ func resolve(current_entity: Entity, action_result: ActionResult):
 			enqueue(graphics, "Damage", stats[i])  # take damage
 			if dies_on_attack[i]:
 				enqueue(graphics, "death", null)  # death animation
-			if targets[i].tipo == "Player":
+			if targets[i].type == "Player":
 				for st in stats[i]:
 					enqueue(targets[i].info, "UpdateHP", st[0])  # HP bar
-		if current_entity.tipo == "Player" and action_type == "Skill":
+		if current_entity.type == "Player" and action_type == "Skill":
 			var mp = skitem.get_cost()
 			enqueue(current_entity.info, "UpdateMP", mp)  # MP bar
 	enqueue(current_entity.graphics, "end_turn", [])
@@ -208,8 +208,8 @@ func add_player(p: Player):
 	node.connect("finish_anim", self, "_on_animation_finished")
 	p.graphics = node
 	p.info = info_node.get_node("P" + str(last_index))
-	p.info.set_initial_hp(p.get_health(), p.get_max_health())
-	p.info.set_initial_mp(p.get_mp(), p.get_max_mp())
+	p.info.set_initial_hp(p.get_stat("HP"), p.get_stat("HP_MAX"))
+	p.info.set_initial_mp(p.get_stat("MP"), p.get_stat("MP_MAX"))
 	p.info.connect("finish_anim", self, "_on_animation_finished")
 	players_statuses[last_index].set_name(p.get_name())
 	players_statuses[last_index].set_level(p.get_level())

@@ -32,7 +32,7 @@ func _init(
 	self.animations = anim
 	self.portrait = portrait
 	self.level = lv
-	self.exp = experience
+	self.experience = experience
 	self.stats = stats
 	self.position = position
 	self.name = nome
@@ -44,7 +44,7 @@ func _init(
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
-	self.tipo = "Player"
+	self.type = "Player"
 	self.jobs = jobs
 
 
@@ -52,22 +52,22 @@ func save_data():
 	var dict = {}
 	dict["ID"] = id
 	dict["LEVEL"] = level
-	dict["EXPERIENCE"] = exp
+	dict["EXPERIENCE"] = experience
 	dict["IMG"] = get_sprite()
 	dict["ANIM"] = get_animation()
 	dict["PORTRAIT"] = get_portrait()
-	dict["HP"] = get_health()
-	dict["HP_MAX"] = get_max_health()
-	dict["MP"] = get_mp()
-	dict["MP_MAX"] = get_max_mp()
-	dict["ATK"] = get_atk()
-	dict["ATKM"] = get_atkm()
-	dict["DEF"] = get_def()
-	dict["DEFM"] = get_defm()
-	dict["AGI"] = get_agi()
-	dict["ACC"] = get_acc()
-	dict["EVA"] = get_eva()
-	dict["LCK"] = get_lck()
+	dict["HP"] = get_stat("HP")
+	dict["HP_MAX"] = get_stat("HP_MAX")
+	dict["MP"] = get_stat("MP")
+	dict["MP_MAX"] = get_stat("MP_MAX")
+	dict["ATK"] = get_stat("ATK")
+	dict["ATKM"] = get_stat("ATKM")
+	dict["DEF"] = get_stat("DEF")
+	dict["DEFM"] = get_stat("DEFM")
+	dict["AGI"] = get_stat("AGI")
+	dict["ACC"] = get_stat("ACC")
+	dict["EVA"] = get_stat("EVA")
+	dict["LCK"] = get_stat("LCK")
 	dict["LANE"] = 0
 	dict["NAME"] = get_name()
 	dict["SKILLS"] = get_skill_ids()
@@ -118,7 +118,7 @@ func get_equip_ids():
 	return ids
 
 
-func unequip(equipment, slot = -1):
+func unequip(equipment: Equiment, slot = -1):
 	print("Unequipping ", equipment.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipment.location == "ACCESSORY":
@@ -134,7 +134,7 @@ func unequip(equipment, slot = -1):
 	self.equipments[slot] = null
 
 
-func equip(equipment, slot = -1):
+func equip(equipment: Equipment, slot = -1):
 	print("Equipping ", equipment.get_name(), " on ", self.get_name())
 	if slot == -1:
 		if equipment.location == "ACCESSORY":
@@ -196,7 +196,7 @@ func reset_hate():
 
 func die():
 	print("[PLAYER] " + self.name + " has died!")
-	self.set_stats(HP, 0)
+	self.set_stat(HP, 0)
 	self.remove_all_status()
 	self.status["KO"] = [9999, 9999]
 	self.dead = true
@@ -214,20 +214,20 @@ func learn_correct_skills(current_level: int, skills_arg: Dictionary):
 			learn_skill(skills_arg[s])
 
 
-func get_exp_to_level_up():
+func get_experience_to_level_up():
 	return ceil(pow(1.8, self.level) * 5.0)
 
 
-func gain_exp(experience: int):
+func gain_experience(experience: int):
 	var leveled_up = 0
 	var level_up_dict = {"skills": []}
-	self.exp += experience
-	var xp_to_level_up = get_exp_to_level_up()
+	self.experience += experience
+	var xp_to_level_up = get_experience_to_level_up()
 
-	while self.exp >= xp_to_level_up:
+	while self.experience >= xp_to_level_up:
 		level_up_dict = self.level_up(level_up_dict)
-		self.exp -= xp_to_level_up
-		xp_to_level_up = get_exp_to_level_up()
+		self.experience -= xp_to_level_up
+		xp_to_level_up = get_experience_to_level_up()
 		leveled_up += 1
 	return [leveled_up, level_up_dict]
 
@@ -271,7 +271,7 @@ func level_up(level_up_dict: Dictionary):
 			stat_up += floor(rand_range(2, 5))
 		else:
 			stat_up += floor(rand_range(1, 3))
-		self.set_stats(stat_key, self.get_stats(stat_key) + stat_up)
+		self.set_stat(stat_key, self.get_stats(stat_key) + stat_up)
 		if level_up_dict.has(stat_key):
 			level_up_dict[stat] += stat_up
 		else:
@@ -284,7 +284,7 @@ func clone():
 	return self.get_script().new(
 		self.id,
 		self.level,
-		self.exp,
+		self.experience,
 		self.sprite,
 		self.animations,
 		new_stats,

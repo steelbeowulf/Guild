@@ -1,4 +1,5 @@
 # Button representing a target in battle
+class_name BattleEntity
 extends Button
 
 signal target_picked
@@ -168,7 +169,7 @@ func play(animation_name: String, options = []):
 # is_ress flag is true when action is a ressurection spell,
 # thus making a dead player targetable for a ressurection spell
 func _on_Targets_activated(is_ress: bool):
-	if (not dead and not is_ress) or (dead and self.data.tipo == "is_player" and is_ress):
+	if (not dead and not is_ress) or (dead and self.data.type == "is_player" and is_ress):
 		self.disabled = false
 		self.set_focus_mode(2)
 		self.grab_focus()

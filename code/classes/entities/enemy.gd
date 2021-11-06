@@ -20,10 +20,9 @@ func _init(
 ):
 	self.id = id
 	self.level = lv
-	self.exp = experience
+	self.experience = experience
 	self.sprite = img
 	self.animations = animations
-	self.classe = "boss"
 	self.stats = values
 	self.position = 0
 	self.name = name
@@ -31,7 +30,7 @@ func _init(
 	self.resist = resistances
 	self.resist["PHYSIC"] = 1.0
 	self.resist["MAGIC"] = 1.0
-	self.tipo = "Enemy"
+	self.type = "Enemy"
 	self.target = -10
 
 
@@ -56,7 +55,7 @@ func calculate_action(enemies_list: Array) -> Action:
 				if st == "HP_CRITICAL":
 					for i in range(self.skills.size()):
 						var sk = self.skills[i]
-						if sk.type == "RECOVERY" and self.get_mp() >= sk.get_cost():
+						if sk.type == "RECOVERY" and self.get_stat("MP") >= sk.get_cost():
 							return Action.new("Skill", i, [e.index])
 
 	# Try to use skill with highest damage
@@ -69,7 +68,7 @@ func calculate_action(enemies_list: Array) -> Action:
 				if (
 					ef.get_id() == HP
 					and ef.get_value() < best_dmg
-					and self.get_mp() >= sk.get_cost()
+					and self.get_stat("MP") >= sk.get_cost()
 				):
 					best_dmg = ef.get_value()
 					best_skill = i
@@ -88,7 +87,7 @@ func sum(array: Array):
 
 
 func get_xp():
-	return self.exp
+	return self.experience
 
 
 func get_target():
@@ -158,7 +157,7 @@ func clone():
 	return self.get_script().new(
 		self.id,
 		self.level,
-		self.exp,
+		self.experience,
 		self.sprite,
 		self.animations,
 		new_stats,

@@ -55,6 +55,6 @@ func _on_All_pressed():
 # If it is a ressurection skill, targets the first dead player by default
 func _on_first_focus(is_ress: bool):
 	for c in get_children():
-		if c.data != null and (not c.dead or (c.dead and c.data.tipo == "Player" and is_ress)):
+		if c.data != null and (not c.dead or (c.dead and c.data.type == "Player" and is_ress)):
 			c.grab_focus()
 			break

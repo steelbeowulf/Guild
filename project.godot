@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://code/classes/events/battle.gd"
 }, {
+"base": "Button",
+"class": "BattleEntity",
+"language": "GDScript",
+"path": "res://code/battle/battle_entity.gd"
+}, {
 "base": "Event",
 "class": "Dialogue",
 "language": "GDScript",
@@ -154,6 +159,7 @@ _global_script_class_icons={
 "ActionResult": "",
 "Apply": "",
 "Battle": "",
+"BattleEntity": "",
 "Dialogue": "",
 "DialogueOption": "",
 "Enemy": "",

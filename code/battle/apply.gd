@@ -83,7 +83,7 @@ func apply_effect(
 	is_critical: bool
 ):
 	var ret = 0  # Stat difference for displaying numbers
-	var tipo = -1  # 0 for HP, 1 for MP
+	var type = -1  # 0 for HP, 1 for MP
 
 	var stat = effect.get_id()
 	var base_value = effect.get_value()
@@ -93,8 +93,8 @@ func apply_effect(
 	var affected_stat = target.get_stats(stat)
 	var lv = who.get_level()
 	var target_lv = target.get_level()
-	#var user_luck = who.get_lck()
-	#var target_luck = target.get_lck()
+	#var user_luck = who.get_stat("LCK")
+	#var target_luck = target.get_stat("LCK")
 
 #	Previous calculation: commented in case we want to reuse it
 #		var basedamage = atk + ((atk*lv/32)*(atk*lv/32))
@@ -117,7 +117,7 @@ func apply_effect(
 		# Offensive case: Damages HP
 		if stat == HP and base_value < 0:
 			print("[APPLY EFFECT] Offensive")
-			tipo = 0
+			type = 0
 
 			# TODO: Make skill type consistent
 			if (
@@ -139,7 +139,7 @@ func apply_effect(
 			value = min(0, value)
 			final_value = affected_stat + value
 			ret = abs(value)
-			if LOCAL.in_battle and target.classe == "boss" and who.classe != "boss":
+			if LOCAL.in_battle and target.type == "Enemy" and who.type != "Enemy":
 				who.update_hate(value, target.index)
 		# Support case: Heals HP
 		elif stat == HP:
@@ -151,20 +151,20 @@ func apply_effect(
 			value = min(MAX_VALUE, value)
 			max_value = target.get_stats(HP_MAX)
 			final_value = affected_stat + value
-			tipo = 0
+			type = 0
 			ret = -ceil(value)
 			if final_value > max_value:
 				final_value = max_value
-				ret = -ceil(max_value - target.get_health())
+				ret = -ceil(max_value - target.get_stat("HP"))
 		elif stat == MP:
 			print("[APPLY EFFECT] MP")
 			# Cannot heal above MAX MP
 			max_value = target.get_stats(MP_MAX)
-			tipo = 1
+			type = 1
 			final_value = affected_stat + base_value
 			if final_value > max_value:
 				final_value = max_value
-				ret = abs(max_value - target.get_mp())
+				ret = abs(max_value - target.get_stat("MP"))
 			if final_value < 0:
 				final_value = 0
 
@@ -175,13 +175,13 @@ func apply_effect(
 		#is_criticalical is_hit flag needed
 
 		print("[APPLY EFFECT] Final value: " + str(final_value))
-		target.set_stats(stat, final_value)
+		target.set_stat(stat, final_value)
 
-		if target.get_health() > 0.2 * target.get_max_health():
-			target.remove_status("HP_is_criticalICAL")
+		if target.get_stat("HP") > 0.2 * target.get_stat("HP_MAX"):
+			target.remove_status("HP_CRITICAL")
 	if is_critical:
 		ret = ret * 2
-	return [ret, tipo]
+	return [ret, type]
 
 
 # TODO: Status class
@@ -189,7 +189,7 @@ func apply_effect(
 func apply_status(status_type: Array, target: Entity, attacker: Entity):
 	var type = SSTATS[status_type[1]]
 	var value = status_type[0]
-	var atkm = attacker.get_atkm()
+	var atkm = attacker.get_stat("ATKM")
 	print("[APPLY] Applying status_type ", type, " ", str(value), " on ", target.get_name())
 	if value > 0:
 		randomize()
@@ -202,226 +202,226 @@ func apply_status(status_type: Array, target: Entity, attacker: Entity):
 		#logs.display_text(target.get_name()+" agora está sob o efeito de "+type)
 		target.add_status(type, atkm, 3)
 		if type == "ATTACK_UP":
-			var atk = target.get_atk()
-			target.set_stats(ATK, 6 * atk / 5)
+			var atk = target.get_stat("ATK")
+			target.set_stat(ATK, 6 * atk / 5)
 			#logs.display_text(target.get_name()+" aumentou seu ataque fisico")
 		elif type == "ATTACK_DOWN":
-			var atk = target.get_atk()
-			target.set_stats(ATK, 5 * atk / 6)
+			var atk = target.get_stat("ATK")
+			target.set_stat(ATK, 5 * atk / 6)
 			#logs.display_text(target.get_name()+" teve seu ataque fisico diminuido")
 		elif type == "MAGIC_ATTACK_UP":
-			#var atkm = target.get_atkm()
-			target.set_stats(ATKM, 6 * atkm / 5)
+			#var atkm = target.get_stat("ATKM")
+			target.set_stat(ATKM, 6 * atkm / 5)
 			#logs.display_text(target.get_name()+" aumentou seu ataque magico")
 		elif type == "MAGIC_ATTACK_DOWN":
-			#var atkm = target.get_atkm()
-			target.set_stats(ATKM, 5 * atkm / 6)
+			#var atkm = target.get_stat("ATKM")
+			target.set_stat(ATKM, 5 * atkm / 6)
 			#logs.display_text(target.get_name()+" teve seu ataque magico diminuida")
 		elif type == "DEFENSE_UP":
-			var def = target.get_def()
-			target.set_stats(DEF, 6 * def / 5)
+			var def = target.get_stat("DEF")
+			target.set_stat(DEF, 6 * def / 5)
 			#logs.display_text(target.get_name()+" aumentou sua defesa fisica")
 		elif type == "DEFENSE_DOWN":
-			var def = target.get_def()
-			target.set_stats(DEF, 5 * def / 6)
+			var def = target.get_stat("DEF")
+			target.set_stat(DEF, 5 * def / 6)
 			#logs.display_text(target.get_name()+" teve sua defesa fisica diminuida")
 		elif type == "MAGIC_DEFENSE_UP":
-			var defm = target.get_def()
-			target.set_stats(DEFM, 6 * defm / 5)
+			var defm = target.get_stat("DEF")
+			target.set_stat(DEFM, 6 * defm / 5)
 			#logs.display_text(target.get_name()+" aumentou sua defesa magica")
 		elif type == "MAGIC_DEFENSE_DOWN":
-			var defm = target.get_def()
-			target.set_stats(DEFM, 5 * defm / 6)
+			var defm = target.get_stat("DEF")
+			target.set_stat(DEFM, 5 * defm / 6)
 			#logs.display_text(target.get_name()+" teve sua defesa magica diminuida")
 		elif type == "ACCURACY_UP":
-			var acc = target.get_acc()
-			target.set_stats(ACC, 6 * acc / 5)
+			var acc = target.get_stat("ACC")
+			target.set_stat(ACC, 6 * acc / 5)
 			#logs.display_text(target.get_name()+" aumentou sua acurácia")
 		elif type == "ACCURACY_DOWN":
-			var acc = target.get_acc()
-			target.set_stats(ACC, 5 * acc / 6)
+			var acc = target.get_stat("ACC")
+			target.set_stat(ACC, 5 * acc / 6)
 			#logs.display_text(target.get_name()+" teve sua acurácia diminuida")
 		elif type == "AGILITY_UP":
-			var agi = target.get_agi()
-			target.set_stats(AGI, 6 * agi / 5)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, 6 * agi / 5)
 			#logs.display_text(target.get_name()+" aumentou sua agilidade")
 		elif type == "AGILITY_DOWN":
-			var agi = target.get_agi()
-			target.set_stats(AGI, 5 * agi / 6)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, 5 * agi / 6)
 			#logs.display_text(target.get_name()+" teve sua agilidade diminuida")
 		elif type == "LUCK_UP":
-			var luck = target.get_lck()
-			target.set_stats(LCK, 6 * luck / 5)
+			var luck = target.get_stat("LCK")
+			target.set_stat(LCK, 6 * luck / 5)
 			#logs.display_text(target.get_name()+" aumentou sua sorte fisica")
 		elif type == "LUCK_DOWN":
-			var luck = target.get_lck()
-			target.set_stats(LCK, 5 * luck / 6)
+			var luck = target.get_stat("LCK")
+			target.set_stat(LCK, 5 * luck / 6)
 			#logs.display_text(target.get_name()+" teve sua sorte diminuida")
 		elif type == "MAX_HP_UP":
-			var hp_max = target.get_max_health()
-			var hp = target.get_health()
+			var hp_max = target.get_stat("HP_MAX")
+			var hp = target.get_stat("HP")
 			var diferenca = hp_max
-			target.set_stats(HP_MAX, 3 * hp_max / 2)
-			var increase = target.get_max_health()
-			target.set_stats(HP, hp + (increase - diferenca))
+			target.set_stat(HP_MAX, 3 * hp_max / 2)
+			var increase = target.get_stat("HP_MAX")
+			target.set_stat(HP, hp + (increase - diferenca))
 			#logs.display_text(target.get_name()+" ganhou vida maxima excedente")
 		elif type == "MAX_MP_UP":
-			var mp_max = target.get_max_mp()
-			var mp = target.get_health()
+			var mp_max = target.get_stat("MP_MAX")
+			var mp = target.get_stat("HP")
 			var diferenca = mp_max
-			target.set_stats(MP_MAX, 3 * mp_max / 2)
-			var increase = target.get_max_mp()
-			target.set_stats(MP, mp + (increase - diferenca))
+			target.set_stat(MP_MAX, 3 * mp_max / 2)
+			var increase = target.get_stat("MP_MAX")
+			target.set_stat(MP, mp + (increase - diferenca))
 			#logs.display_text(target.get_name()+" ganhou mp maximo excedente")
 		elif type == "MAX_HP_DOWN":
-			var hp_max = target.get_max_health()
-			var hp = target.get_health()
-			target.set_stats(HP_MAX, 2 * hp_max / 3)
+			var hp_max = target.get_stat("HP_MAX")
+			var hp = target.get_stat("HP")
+			target.set_stat(HP_MAX, 2 * hp_max / 3)
 			if hp > hp_max:
-				target.set_stats(HP, HP_MAX)
+				target.set_stat(HP, HP_MAX)
 			#logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
 		elif type == "MAX_MP_DOWN":
-			var mp_max = target.get_max_mp()
-			var mp = target.get_mp()
-			target.set_stats(MP_MAX, 2 * mp_max / 3)
+			var mp_max = target.get_stat("MP_MAX")
+			var mp = target.get_stat("MP")
+			target.set_stat(MP_MAX, 2 * mp_max / 3)
 			if mp > mp_max:
-				target.set_stats(MP, MP_MAX)
+				target.set_stat(MP, MP_MAX)
 			#logs.display_text(target.get_name()+" Perdeu um terço da vida maxima")
 		elif type == "BLIND":
-			var acc = target.get_acc()
-			target.set_stats(ACC, acc / 10)
+			var acc = target.get_stat("ACC")
+			target.set_stat(ACC, acc / 10)
 			#logs.display_text(target.get_name()+" teve a visão comprometida")
 		elif type == "BERSERK":
-			var atk = target.get_atk()
-			target.set_stats(ATK, atk + 40)
+			var atk = target.get_stat("ATK")
+			target.set_stat(ATK, atk + 40)
 		elif type == "CURSE":
-			var hp = target.get_health()
-			var agi = target.get_agi()
-			var atk = target.get_atk()
-			#var atkm = target.get_atkm()
-			var def = target.get_def()
-			var defm = target.get_defm()
-			var acc = target.get_acc()
-			target.set_stats(HP, hp / 2)
-			target.set_stats(AGI, agi / 2)
-			target.set_stats(ATK, atk / 2)
-			target.set_stats(ATKM, atkm / 2)
-			target.set_stats(DEF, def / 2)
-			target.set_stats(DEFM, defm / 2)
-			target.set_stats(ACC, acc / 2)
+			var hp = target.get_stat("HP")
+			var agi = target.get_stat("AGI")
+			var atk = target.get_stat("ATK")
+			#var atkm = target.get_stat("ATKM")
+			var def = target.get_stat("DEF")
+			var defm = target.get_stat("DEFM")
+			var acc = target.get_stat("ACC")
+			target.set_stat(HP, hp / 2)
+			target.set_stat(AGI, agi / 2)
+			target.set_stat(ATK, atk / 2)
+			target.set_stat(ATKM, atkm / 2)
+			target.set_stat(DEF, def / 2)
+			target.set_stat(DEFM, defm / 2)
+			target.set_stat(ACC, acc / 2)
 			#logs.display_text(target.get_name()+" foi amaldiçoado")
 		elif type == "HASTE":
-			var agi = target.get_agi()
-			target.set_stats(AGI, agi * 2)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, agi * 2)
 			#logs.display_text(target.get_name()+" ganhou o dobro de agilidade")
 		elif type == "SLOW":
-			var agi = target.get_agi()
-			target.set_stats(AGI, agi / 2)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, agi / 2)
 			#logs.display_text(target.get_name()+" perdeu metade de sua agilidade")
 		elif type == "FEAR":
-			var agi = target.get_agi()
-			var atk = target.get_atk()
-			target.set_stats(AGI, 3 * agi / 4)
-			target.set_stats(ATK, 3 * atk / 4)
+			var agi = target.get_stat("AGI")
+			var atk = target.get_stat("ATK")
+			target.set_stat(AGI, 3 * agi / 4)
+			target.set_stat(ATK, 3 * atk / 4)
 			#logs.display_text(target.get_name()+" esta amedrontado. perdeu agilidade e ataque")
 
 	elif value == -1:
 		print("[APPLY] Will remove status_type " + str(type))
 		target.remove_status(type)
 		if type == "ATTACK_UP":
-			var atk = target.get_atk()
-			target.set_stats(ATK, 5 * atk / 6)
+			var atk = target.get_stat("ATK")
+			target.set_stat(ATK, 5 * atk / 6)
 		elif type == "ATTACK_DOWN":
-			var atk = target.get_atk()
-			target.set_stats(ATK, 6 * atk / 5)
+			var atk = target.get_stat("ATK")
+			target.set_stat(ATK, 6 * atk / 5)
 		elif type == "MAGIC_ATTACK_UP":
-			#var atkm = target.get_atkm()
-			target.set_stats(ATKM, 5 * atkm / 6)
+			#var atkm = target.get_stat("ATKM")
+			target.set_stat(ATKM, 5 * atkm / 6)
 		elif type == "MAGIC_ATTACK_DOWN":
-			#var atkm = target.get_atkm()
-			target.set_stats(ATKM, 6 * atkm / 5)
+			#var atkm = target.get_stat("ATKM")
+			target.set_stat(ATKM, 6 * atkm / 5)
 		elif type == "DEFENSE_UP":
-			var def = target.get_def()
-			target.set_stats(DEF, 5 * def / 6)
+			var def = target.get_stat("DEF")
+			target.set_stat(DEF, 5 * def / 6)
 		elif type == "DEFENSE_DOWN":
-			var def = target.get_def()
-			target.set_stats(DEF, 6 * def / 5)
+			var def = target.get_stat("DEF")
+			target.set_stat(DEF, 6 * def / 5)
 		elif type == "MAGIC_DEFENSE_UP":
-			var defm = target.get_def()
-			target.set_stats(DEFM, 5 * defm / 6)
+			var defm = target.get_stat("DEF")
+			target.set_stat(DEFM, 5 * defm / 6)
 		elif type == "MAGIC_DEFENSE_DOWN":
-			var defm = target.get_def()
-			target.set_stats(DEFM, 6 * defm / 5)
+			var defm = target.get_stat("DEF")
+			target.set_stat(DEFM, 6 * defm / 5)
 		elif type == "ACCURACY_UP":
-			var acc = target.get_acc()
-			target.set_stats(ACC, 5 * acc / 6)
+			var acc = target.get_stat("ACC")
+			target.set_stat(ACC, 5 * acc / 6)
 		elif type == "ACCURACY_DOWN":
-			var acc = target.get_acc()
-			target.set_stats(ACC, 6 * acc / 5)
+			var acc = target.get_stat("ACC")
+			target.set_stat(ACC, 6 * acc / 5)
 		elif type == "AGILITY_UP":
-			var agi = target.get_agi()
-			target.set_stats(AGI, 5 * agi / 6)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, 5 * agi / 6)
 		elif type == "AGILITY_DOWN":
-			var agi = target.get_agi()
-			target.set_stats(AGI, 6 * agi / 5)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, 6 * agi / 5)
 		elif type == "LUCK_UP":
-			var luck = target.get_lck()
-			target.set_stats(LCK, 5 * luck / 6)
+			var luck = target.get_stat("LCK")
+			target.set_stat(LCK, 5 * luck / 6)
 		elif type == "LUCK_DOWN":
-			var luck = target.get_lck()
-			target.set_stats(LCK, 6 * luck / 5)
+			var luck = target.get_stat("LCK")
+			target.set_stat(LCK, 6 * luck / 5)
 		elif type == "MAX_HP_UP":
-			var hp_max = target.get_max_health()
-			var hp = target.get_health()
-			target.set_stats(HP_MAX, 2 * hp_max / 3)
+			var hp_max = target.get_stat("HP_MAX")
+			var hp = target.get_stat("HP")
+			target.set_stat(HP_MAX, 2 * hp_max / 3)
 			if hp > hp_max:
-				target.set_stats(HP, HP_MAX)
+				target.set_stat(HP, HP_MAX)
 		elif type == "MAX_MP_UP":
-			var mp_max = target.get_max_mp()
-			var mp = target.get_health()
-			target.set_stats(MP_MAX, 2 * mp_max / 3)
+			var mp_max = target.get_stat("MP_MAX")
+			var mp = target.get_stat("HP")
+			target.set_stat(MP_MAX, 2 * mp_max / 3)
 			if mp > mp_max:
-				target.set_stats(MP, MP_MAX)
+				target.set_stat(MP, MP_MAX)
 		elif type == "MAX_HP_DOWN":
-			var hp_max = target.get_max_health()
-			var hp = target.get_health()
-			target.set_stats(HP_MAX, 3 * hp_max / 2)
+			var hp_max = target.get_stat("HP_MAX")
+			var hp = target.get_stat("HP")
+			target.set_stat(HP_MAX, 3 * hp_max / 2)
 		elif type == "MAX_MP_DOWN":
-			var mp_max = target.get_max_mp()
-			var mp = target.get_mp()
-			target.set_stats(MP_MAX, 3 * mp_max / 2)
+			var mp_max = target.get_stat("MP_MAX")
+			var mp = target.get_stat("MP")
+			target.set_stat(MP_MAX, 3 * mp_max / 2)
 		elif type == "BLIND":
-			var acc = target.get_acc()
-			target.set_stats(ACC, acc * 10)
+			var acc = target.get_stat("ACC")
+			target.set_stat(ACC, acc * 10)
 		elif type == "BERSERK":
-			var atk = target.get_atk()
-			target.set_stats(ATK, atk - 40)
+			var atk = target.get_stat("ATK")
+			target.set_stat(ATK, atk - 40)
 		elif type == "CURSE":
-			var hp = target.get_health()
-			var agi = target.get_agi()
-			var atk = target.get_atk()
-			#var atkm = target.get_atkm()
-			var def = target.get_def()
-			var defm = target.get_defm()
-			var acc = target.get_acc()
-			target.set_stats(HP, hp * 2)
-			target.set_stats(AGI, agi * 2)
-			target.set_stats(ATK, atk * 2)
-			target.set_stats(ATKM, atkm * 2)
-			target.set_stats(DEF, def * 2)
-			target.set_stats(DEFM, defm * 2)
-			target.set_stats(ACC, acc * 2)
+			var hp = target.get_stat("HP")
+			var agi = target.get_stat("AGI")
+			var atk = target.get_stat("ATK")
+			#var atkm = target.get_stat("ATKM")
+			var def = target.get_stat("DEF")
+			var defm = target.get_stat("DEFM")
+			var acc = target.get_stat("ACC")
+			target.set_stat(HP, hp * 2)
+			target.set_stat(AGI, agi * 2)
+			target.set_stat(ATK, atk * 2)
+			target.set_stat(ATKM, atkm * 2)
+			target.set_stat(DEF, def * 2)
+			target.set_stat(DEFM, defm * 2)
+			target.set_stat(ACC, acc * 2)
 		elif type == "HASTE":
-			var agi = target.get_agi()
-			target.set_stats(AGI, agi / 2)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, agi / 2)
 		elif type == "SLOW":
-			var agi = target.get_agi()
-			target.set_stats(AGI, agi * 2)
+			var agi = target.get_stat("AGI")
+			target.set_stat(AGI, agi * 2)
 		elif type == "FEAR":
-			var agi = target.get_agi()
-			var atk = target.get_atk()
-			target.set_stats(AGI, 4 * agi / 3)
-			target.set_stats(ATK, 4 * atk / 3)
+			var agi = target.get_stat("AGI")
+			var atk = target.get_stat("ATK")
+			target.set_stat(AGI, 4 * agi / 3)
+			target.set_stat(ATK, 4 * atk / 3)
 		elif type == "KO":
 			target.remove_all_status()
 		#logs.display_text(target.get_name()+" não está mais sob o efeito de "+type)
@@ -433,19 +433,19 @@ func result_status(status_type: String, values: Array, target: Entity, _logs: No
 	var can_move = 0
 	var result = -1
 	if status_type == "POISON":
-		var hp = target.get_health()
-		var dmg = values[1] - target.get_defm()
-		target.set_stats(HP, hp - dmg)
+		var hp = target.get_stat("HP")
+		var dmg = values[1] - target.get_stat("DEFM")
+		target.set_stat(HP, hp - dmg)
 		result = dmg
 		#logs.display_text(target.get_name()+" levou "+str(dmg)+" de dano de Poison")
 	elif status_type == "REGEN":
-		var hp = target.get_health()
-		var max_hp = target.get_max_health()
-		result = target.set_stats(HP, hp + floor(max_hp * 0.05))
+		var hp = target.get_stat("HP")
+		var max_hp = target.get_stat("HP_MAX")
+		result = target.set_stat(HP, hp + floor(max_hp * 0.05))
 		#logs.display_text(target.get_name()+" recuperou "+str(-result)+" de HP")
 	elif status_type == "BURN":
-		var hp = target.get_health()
-		target.set_stats(HP, hp - 10)
+		var hp = target.get_stat("HP")
+		target.set_stat(HP, hp - 10)
 		result = 10
 		#logs.display_text(target.get_name()+" levou 10 de dano de Burn")
 	elif status_type == "PARALYSIS":
@@ -467,7 +467,7 @@ func result_status(status_type: String, values: Array, target: Entity, _logs: No
 		#logs.display_text(target.get_name()+" esta congelado, não consegue atacar")
 		can_move = -1
 	elif status_type == "BERSERK":
-		#var atk = target.get_atk()
+		#var atk = target.get_stat("ATK")
 		#randomize()
 		#var rand = rand_range(-LOADER.List.size(), 0)
 		#target.execute_action("Attack", rand)
@@ -487,8 +487,8 @@ func result_status(status_type: String, values: Array, target: Entity, _logs: No
 		can_move = -1
 		#target.execute_action("Pass", 0)
 	elif status_type == "SLEEP":
-		var hp = target.get_health()
-		target.set_stats(HP, hp + floor(hp * 0.05))
+		var hp = target.get_stat("HP")
+		target.set_stat(HP, hp + floor(hp * 0.05))
 		result = floor(hp * 0.05)
 		#target.execute_action("Pass", 0)
 		#logs.display_text(target.get_name()+" esta dormindo, não consegue atacar")

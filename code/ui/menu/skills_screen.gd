@@ -29,7 +29,7 @@ func just_entered(id: int):
 
 func show_equips():
 	skills = player.get_skills()
-	mpleft = player.get_mp()
+	mpleft = player.get_stat("MP")
 	for i in range(len(skills)):
 		var node = get_node("Panel/HBoxContainer/Skills/SkillSlot" + str(i))
 		node.set_text(str(skills[i].name) + " - " + str(skills[i].quantity) + "mp")
@@ -48,7 +48,7 @@ func update_skills(skills: Array):
 		return
 	for i in range(len(skills)):
 		var node = get_node("Panel/HBoxContainer/Skills/SkillSlot" + str(i))
-		mpleft = player.get_mp()
+		mpleft = player.get_stat("MP")
 		if mpleft < skills[i].quantity:
 			node.disabled = true
 
@@ -117,7 +117,7 @@ func use_skill(skill: Item):
 	#for i in range(skills):#The MP spend will be made here instead of on the other menu
 	#	if namex == skills[i].name:
 	#		player.set_mp(mpleft - skills[i].quantity)
-	#		mpleft = player.get_mp()
+	#		mpleft = player.get_stat("MP")
 	#if mpleft < 0:
 	#	mpleft = 0
 

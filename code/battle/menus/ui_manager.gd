@@ -70,6 +70,7 @@ func prepare_itens_action(inventory: Array) -> void:
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(inventory[i].name + " x" + str(inventory[i].quantity))
 
+	get_node("Menu/Item").skitems = inventory
 	get_node("Menu/Item").on_action_pressed()
 
 
@@ -90,6 +91,7 @@ func prepare_skills_action(skills: Array, current_mp: int) -> void:
 		itens.get_node(str(i)).show()
 		itens.get_node(str(i)).set_text(skills[i].name + "  " + str(skills[i].quantity))
 
+	get_node("Menu/Skill").skitems = skills
 	get_node("Menu/Skill").on_action_pressed()
 
 

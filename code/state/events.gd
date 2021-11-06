@@ -101,7 +101,7 @@ func play_event(event: Event) -> bool:
 	elif event.type == "SET_TARGET":
 		var target = event.get_target()
 		var index = target.index
-		if target.tipo == "Player":
+		if target.type == "Player":
 			index = -(index + 1)
 		event.entity.set_next_target(index, event.get_turns())
 		event_ended()

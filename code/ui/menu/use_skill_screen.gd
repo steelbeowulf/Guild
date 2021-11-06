@@ -43,8 +43,8 @@ func _process(_delta):
 
 
 func use_item():
-	var mp = player.get_mp()
-	player.set_stats(MP, mp - item.quantity)
+	var mp = player.get_stat("MP")
+	player.set_stat(MP, mp - item.quantity)
 	for target in targets:
 		for effect in item.get_effects():
 			apply_effect(player, effect, target, "Skill", true, false)

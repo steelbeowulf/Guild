@@ -130,9 +130,9 @@ func generate_enemies():
 	# TODO: Make this not hardcoded
 	if encounter:
 		if encounter[0] == 11:
-			var max_hp = GLOBAL.ENEMIES[11].get_max_health()
+			var max_hp = GLOBAL.ENEMIES[11].get_stat("HP_MAX")
 			var num_defeated = GLOBAL.get_event_status("eyeballs_defeated")
-			GLOBAL.ENEMIES[11].set_stats(0, max_hp - max_hp * 0.1 * num_defeated)
+			GLOBAL.ENEMIES[11].set_stat(0, max_hp - max_hp * 0.1 * num_defeated)
 			total = 0
 			GLOBAL.WIN = true
 		elif encounter[0] == 9:
@@ -225,14 +225,14 @@ func initiate_battle():
 func end_battle(players: Array, enemies: Array, inventory):
 	LOCAL.in_BATTLE = false
 	count_in_battle = {}
-	var total_exp = 0
+	var total_experience = 0
 
 	# Calculates total EXP based on the enemies killed
 	for e in enemies:
 		print("[BM] " + e.get_name())
 		if e.is_dead():
 			print("is dead")
-			total_exp += e.get_xp()
+			total_experience += e.get_xp()
 
 	# Level up alive players and resets status/hate
 	var level_up = false
@@ -243,7 +243,7 @@ func end_battle(players: Array, enemies: Array, inventory):
 			p.remove_all_status()
 			p.zero_hate()
 			p.reset_hate()
-			var levelup_data = p.gain_exp(total_exp)
+			var levelup_data = p.gain_experience(total_experience)
 			if levelup_data[0] > 0:
 				level_up = true
 			leveled_up.append(levelup_data)

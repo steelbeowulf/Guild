@@ -31,15 +31,15 @@ func enter(player_id: int):
 	set_resist_info(player)
 
 
-# Sets name, exp, lv and hp info
+# Sets name, experience, lv and hp info
 func set_overview_info(player: Player):
 	var node = $Overview/Values
 	node.get_node("LV").set_text(str(player.level))
-	var tmp = str(player.get_health()) + "/" + str(player.get_max_health())
+	var tmp = str(player.get_stat("HP")) + "/" + str(player.get_stat("HP_MAX"))
 	node.get_node("HP").set_text(tmp)
-	tmp = str(player.get_mp()) + "/" + str(player.get_max_mp())
+	tmp = str(player.get_stat("MP")) + "/" + str(player.get_stat("MP_MAX"))
 	node.get_node("MP").set_text(tmp)
-	tmp = str(player.exp) + "/" + str(((18 / 10) ^ player.level) * 5)
+	tmp = str(player.experience) + "/" + str(((18 / 10) ^ player.level) * 5)
 	node.get_node("EXP").set_text(tmp)
 	# Needs a portrait
 	$Overview/Sprite.set_texture(load(player.portrait))

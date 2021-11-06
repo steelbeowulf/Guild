@@ -14,7 +14,7 @@ func _init(
 	self.animations = animations
 	self.events = events
 	self.portrait = portrait
-	self.tipo = "NPC"
+	self.type = "NPC"
 
 
 func save_data():

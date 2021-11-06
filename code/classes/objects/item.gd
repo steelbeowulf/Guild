@@ -11,12 +11,12 @@ var img
 var anim
 
 
-func _init(id, name, quant, targ, tipo, efeito, status_effects, img, anim):
+func _init(id, name, quant, targ, type, efeito, status_effects, img, anim):
 	self.id = id
 	self.name = name
 	self.quantity = quant
 	self.target = targ
-	self.type = tipo
+	self.type = type
 	self.effect = efeito
 	self.status = status_effects
 	self.img = img

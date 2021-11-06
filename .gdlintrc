@@ -24,7 +24,7 @@ excluded_directories: !!set
   .git: null
 expression-not-assigned: null
 function-argument-name: _?[a-z][a-z0-9]*(_[a-z0-9]+)*
-function-arguments-number: 10
+function-arguments-number: 15
 function-name: (_on_([A-Z][a-z0-9]*)+(_[a-z0-9]+)*|_?[a-z][a-z0-9]*(_[a-z0-9]+)*)
 function-preload-variable-name: ([A-Z][a-z0-9]*)+
 function-variable-name: '[a-z][a-z0-9]*(_[a-z0-9]+)*'
@@ -32,7 +32,7 @@ load-constant-name: (([A-Z][a-z0-9]*)+|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)
 loop-variable-name: _?[a-z][a-z0-9]*(_[a-z0-9]+)*
 max-file-lines: 1000
 max-line-length: 100
-max-public-methods: 20
+max-public-methods: 30
 mixed-tabs-and-spaces: null
 private-method-call: null
 signal-name: '[a-z][a-z0-9]*(_[a-z0-9]+)*'
