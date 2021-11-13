@@ -5,9 +5,6 @@ var strength_value = 0
 onready var Strength_Button = $Strength_Button
 
 func _ready():
-	# test
-	#AUDIO.initSound()
-	#AUDIO.play_bgm("MINIGAME_THEME")
 	get_tree().paused = true
 
 func _process(_delta):
@@ -29,6 +26,8 @@ func _on_Exit_button_down():
 
 # the game starts
 func _on_Start_Timer_timeout():
+	AUDIO.initSound()
+	AUDIO.play_bgm("MINIGAME_THEME")
 	get_tree().paused = false
 	$GO.visible = true
 	$Game_Timer.start()
@@ -36,6 +35,7 @@ func _on_Start_Timer_timeout():
 
 # the game finishes
 func _on_Game_Timer_timeout():
+	AUDIO.play_se("BELL_SOUND", 2)
 	var End_MiniGame = $End_MiniGame
 	End_MiniGame.visible = true
 	End_MiniGame._end(strength_value)

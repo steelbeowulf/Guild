@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
-[sub_resource type="StyleBoxEmpty" id=3]
-
 [sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="MiniGame_Menu" type="Node2D"]
 
@@ -22,8 +22,8 @@ rect_scale = Vector2( 8, 8 )
 [node name="Start" type="Button" parent="VBoxContainer"]
 margin_right = 53.0
 margin_bottom = 14.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/normal = SubResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 text = "Start"
 flat = true
 
@@ -31,8 +31,8 @@ flat = true
 margin_top = 18.0
 margin_right = 53.0
 margin_bottom = 32.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/normal = SubResource( 1 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/normal = SubResource( 2 )
 text = "Controls"
 flat = true
 
@@ -40,8 +40,8 @@ flat = true
 margin_top = 36.0
 margin_right = 53.0
 margin_bottom = 50.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/normal = SubResource( 2 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 text = "Quit"
 flat = true
 

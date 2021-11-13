@@ -21,6 +21,8 @@ var bait_on_the_hook: int = 0 # when 1 you can throw a bait
 var RNG = RandomNumberGenerator.new()
 
 func _ready():
+	AUDIO.initSound()
+	AUDIO.play_bgm("MINIGAME_THEME")
 	fish_vector = [fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8, fish9, fish10]
 	RNG.randomize()
 
@@ -55,6 +57,7 @@ func _on_Throw_Timer_timeout():
 	new_bait = bait.instance()
 	new_bait.global_position = get_global_mouse_position()
 	add_child(new_bait)
+	AUDIO.play_se("BAIT_SPLASH")
 
 func bait_timer_start() -> void:
 	Bait_Timer.start()
@@ -64,6 +67,7 @@ func _on_Bait_Timer_timeout():
 
 # generate the score based on the fish difficult
 func Fish_catched(fish_code: int) -> void:
+	AUDIO.play_se("BAIT_EATED")
 	if fish_code < 7:
 		score += fish_code*5
 	else:

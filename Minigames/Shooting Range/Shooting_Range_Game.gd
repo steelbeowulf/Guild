@@ -10,7 +10,7 @@ const timer_speed: float = 0.976
 onready var Bow_Position = $Bow_Position
 onready var Time = $Time
 onready var Target_Timer = $Target_Timer
-onready var RNG = RandomNumberGenerator.new()
+onready var RNG = RandomNumberGenerator.new()  #generate pseudo-random numbers
 
 func _ready():
 	RNG.randomize()
@@ -25,8 +25,8 @@ func _process(delta):
 func _on_Start_Timer_timeout():
 	get_tree().paused = false
 	$GO.visible = true
-	#AUDIO.initSound()
-	#AUDIO.play_bgm("MINIGAME_THEME")
+	AUDIO.initSound()
+	AUDIO.play_bgm("MINIGAME_THEME")
 
 func _unhandled_input(event):
 	var Shot_Timer = $Shot_Timer
@@ -88,6 +88,7 @@ func Calculate_Target_Position(positionx: float, positiony: float):
 
 # for each hit the hits_counter increase in one
 func change_hits_counter():
+	AUDIO.play_se("ARROW_HIT")
 	var Hits_counter = $Hits_counter
 	hit_counter += 1
 	Hits_counter.text = "Hits: " + str(hit_counter)

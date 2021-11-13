@@ -22,6 +22,10 @@ var Obstacle_counter: int = 0 #number of obstacles
 var fuel: int = 0
 var score: int = 0
 
+func _ready():
+	AUDIO.initSound()
+	AUDIO.play_bgm("MINIGAME_THEME")
+
 func _on_Button_button_down():
 	get_tree().quit()
 
@@ -32,7 +36,8 @@ func _physics_process(_delta):
 func _unhandled_key_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.is_action_pressed("Boost") and fuel != 0:
-			Player_Car.speed = Player_Car.regular_speed*3
+			Player_Car.speed = Player_Car.regular_speed*4.5
+			AUDIO.play_se("FUEL_BOOST", -4)
 			Boost_Timer.start()
 			fuel -= 1
 			Fuel_Label.text = "Fuel: " + str(fuel)
@@ -46,6 +51,7 @@ func _on_Boost_Timer_timeout():
 
 #when the player entered in the fuel's area he gets more 1 fuel to use the boost
 func fuel_plus() -> void:
+	AUDIO.play_se("FUEL_CATCH")
 	print("Eba mais gasolina!")
 	fuel += 1
 	Fuel_Label.text = "Fuel: " + str(fuel)
@@ -55,6 +61,7 @@ func fuel_plus() -> void:
 func car_slipped() -> void:
 	# rotation in radians of the velocity
 	var slip_rotation: float
+	AUDIO.play_se("TIRE_SQUEAL", -6)
 	print("Vish estou escorregando!")
 	#is the boost or the slip mode is active the slip effect will be different
 	if !Boost_Timer.is_stopped() or !Slip_Timer.is_stopped():
@@ -71,6 +78,7 @@ func _on_Slip_Timer_timeout():
 	Player_Car.slip_rotation = 0.0
 
 func player_death() -> void:
+	AUDIO.play_se("HOLE")
 	#get_node("CanvasLayer/Death_Label").visible = true
 	#get_tree().paused = true
 	get_tree().quit()

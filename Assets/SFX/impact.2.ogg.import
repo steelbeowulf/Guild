@@ -11,5 +11,5 @@ dest_files=[ "res://.import/impact.2.ogg-2566f7e7e3916f4435e56d08ca5ec6e5.oggstr
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -1,5 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Minigames/ControlsMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Minigames/Fishing Game/FishingGame_ControlsMenu.gd" type="Script" id=2]
 
 [node name="FishingGame_ControlsMenu" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Controls_Description" parent="." index="2"]
+margin_left = 390.101
+margin_top = 444.964
+margin_right = 616.101
+margin_bottom = 475.964
+text = "Use the left mouse button to shoot
+Hit the targets to get points"
+[connection signal="button_down" from="Quit" to="." method="_on_Quit_button_down"]
